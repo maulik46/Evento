@@ -1,0 +1,183 @@
+*{
+margin:0px;
+padding:0px;
+font-family:  'Open Sans', Roboto,calibri, sans-serif!important;
+}
+::selection{
+    background: #1ce1ac;
+    color: white;
+}
+img{
+    vertical-align: unset;
+}
+.custom-select {
+    background: url(../images/arrow-down.svg) no-repeat right .75rem center/8px 10px;
+}
+
+.new-shadow{
+   box-shadow: 0 5px 6px -6px #777;
+}
+.new-shadow-sm{
+    box-shadow: 0 3px 6px -5px #777;
+}
+
+.navbar-nav li:hover .nav-link
+{
+    color: #5369f8 !important;
+}
+/* .left-side-menu .user-profile img{
+   background: #dde1fc;
+   border-radius: 8px;
+} */
+.left-side-menu .user-profile .user-link:hover {
+    color: #5369f8!important;
+}
+#event-box .card .card-body{
+    font-family: Comfortaa, Roboto,'Open Sans', sans-serif!important;
+    
+}
+#event-box .card .card-body a{
+    color: #625858;
+}
+#event-box .card .card-body a:hover{
+    color: #000;
+}
+#event-box .card .card-body:hover .bg-color {
+    background-color: #dde1fc;
+    
+}
+
+#event-box .card .card-body .bg-color{
+    background-color: #ffe2e6;
+}
+
+.light-bg1{
+    background-color: #dde1fc;
+}
+.light-bg2 {
+    background-color: #ffe2e6;
+}
+
+#close-btn:hover {
+    color: #ff5c75!important;
+}
+#nav-menu-btn:hover {
+    color: #43d39e;
+}
+
+.left-side-menu-condensed .user-profile {
+    padding: 8px;
+}
+
+
+
+
+/* hover effect */
+
+.hover-me,
+.hover-me-sm{
+        transition: transform .3s cubic-bezier(.34,2,.6,1),box-shadow .2s ease,-webkit-transform .3s cubic-bezier(.34,2,.6,1);
+}
+.hover-me:hover{
+        -webkit-transform: translateY(-3px);
+        transform: translateY(-3px);
+        box-shadow: 0 2px 8px 0 rgba(0,0,0,.12), 0 2px 2px 0 rgba(0,0,0,.08);
+}
+.hover-me-sm:hover {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .12), 0 1px 1px 0 rgba(0, 0, 0, .08);
+}
+.hover-me:active{
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+        box-shadow: none;
+}
+
+/* hover effect end */
+
+ /* icon with input tag */
+ .has-icon .form-control {
+     padding-left: 2.375rem;
+ }
+
+ .has-icon .form-control-icon {
+     position: absolute;
+     z-index: 2;
+     display: block;
+     line-height: 2.375rem;
+     text-align: center;
+     color: #80858a;
+ }
+
+ /* icon with input tag over */
+
+/* particular div scrollbar css start */
+
+.my-scroll::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}   
+
+.my-scroll::-webkit-scrollbar-track{
+    box-shadow: none;
+     
+}
+.my-scroll::-webkit-scrollbar-thumb {
+    background-color: lightgrey;
+    outline: 1px solid slategrey;
+    border-radius: 10px;
+    transition:opacity 0.25s linear;
+}
+
+.my-scroll:hover::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+   
+}
+.my-scroll::-webkit-scrollbar-thumb:active{
+    background-color: grey;
+
+}
+
+/* particular div scrollbar css  end */
+/* ---------------------------------------------- */
+/* body tag scrollbar css */
+
+.body-scroll::-webkit-scrollbar {
+    width: 15px;
+}
+
+.body-scroll::-webkit-scrollbar-track {
+    box-shadow: none;
+    background: #e2e2e2;
+
+}
+
+.body-scroll::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+    border-radius: 10px;
+    transition: opacity 0.25s linear;
+}
+
+.body-scroll::-webkit-scrollbar-thumb:active {
+    background-color: gray;
+}
+
+/* body tag scrollbar css end*/
+
+/* right inbox sidebar */
+
+    .right-bar-enabled .right-bar {
+            right: 0;
+            min-width: 450px;
+        }
+
+    @media(max-width: 600px) {
+        .right-bar-enabled .right-bar {
+            right: 0;
+            min-width: 100%;
+            }
+        }
+
+/* end right inbox sidebar */
