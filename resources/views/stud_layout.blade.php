@@ -102,7 +102,7 @@
                                 <li class="my-3">
                                     <a href="{{url('/winner-list')}}">
                                         <i data-feather="award"></i>
-                                        <span> Winnerss List </span>
+                                        <span>My Winner List </span>
                                     </a>
                                 </li>
                                 <li class="my-3">
