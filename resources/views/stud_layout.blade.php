@@ -108,7 +108,7 @@
                                 <li class="my-3">
                                     <a href="{{url('/notice')}}">
                                         <i data-feather="clipboard"></i>
-                                        <span> Notice </span>
+                                        <span>My Notice </span>
                                     </a>
                                 </li>
                             </ul>
