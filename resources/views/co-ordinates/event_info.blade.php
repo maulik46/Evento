@@ -1,3 +1,4 @@
+
 @extends('co-ordinates/cod_layout')
 
 @section('title','Event Information')
