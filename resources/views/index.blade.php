@@ -24,6 +24,9 @@
             color: #000;
             box-shadow: none;
         }
+        .event-link:hover{
+            color:#1ac1ae!important;
+        }
     </style>
     @endsection
  
@@ -92,7 +95,6 @@
                                 <div class="card-body pt-2">
                                     <h6 class="font-size-24 mb-0 pb-1 ml-3 text-center">Events</h6>
                                     <hr>
-                                    <!-- stat 1 -->
                                     <?php $a=0?>
                                     @foreach($events as $e)
                                     <?php $c=\DB::table('tblparticipant')->where([['senrl','LIKE','%'.Session::get('senrl').'%'],['eid',$e['eid']]])->count();
@@ -105,10 +107,10 @@
                                             <div class="text-muted">{{$e['edate']}}</div>
                                             <span
                                                 class="text-muted badge rounded-pill 
-                                                @if ($e['category'] == 'cultural')                  badge-soft-primary 
+                                                @if ($e['category'] == 'cultural')badge-soft-primary 
                                                 @endif 
-                                                @if ($e['category'] == 'it')                        badge-soft-warning @endif
-                                                @if ($e['category'] == 'sports')                    badge-soft-success 
+                                                @if ($e['category'] == 'it')badge-soft-warning @endif
+                                                @if ($e['category'] == 'sports')badge-soft-success 
                                                 @endif 
                                                 px-3">{{$e['category']}}
                                             </span>
@@ -118,7 +120,7 @@
                                         
                                                 <a href="{{url('/team-insert')}}/{{encrypt($e['eid'])}}">
                                                 <i data-feather="external-link"
-                                                class="align-self-center icon-dual icon-md">
+                                                class="align-self-center text-dark event-link">
                                                 </i>
                                                 </a>
                                         @else
@@ -134,7 +136,6 @@
                                     @if($a==0)
                                         no new events available
                                     @endif
-                                    <!-- stat 2 -->
                                    
                                 </div>
                             </div>
