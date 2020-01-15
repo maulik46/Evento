@@ -25,6 +25,11 @@
             margin-top: 50px!important;
 
         }
+        .notification-list .noti-icon-badge{
+            position: relative;
+            top:-4px;
+            right: 12px;
+        }
     </style>
 </head>
 
@@ -102,9 +107,10 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Inbox">
+                    <li class="nav-item notification-list" data-toggle="tooltip" data-placement="bottom" title="Inbox">
                         <a href="#" class="text-dark right-bar-toggle">
                             <i data-feather="mail" height="19px" id="nav-menu-btn"></i>
+                            <span class="noti-icon-badge"></span>
                         </a>
                     </li>
                 </ul>
