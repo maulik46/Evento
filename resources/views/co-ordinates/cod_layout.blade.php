@@ -30,6 +30,9 @@
             top:-4px;
             right: 12px;
         }
+        .left-red-border{
+            border-left: 4px solid #ff5c75;
+        }
     </style>
 </head>
 
@@ -140,7 +143,7 @@
              </div>
 
              <div class="my-scroll px-2">
-                 <div class="card new-shadow-sm my-2 rounded-0" style="border-left: 4px solid #43d39e;">
+                 <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm left-red-border">
                      <div class="card-body py-2">
                          <div class="d-flex justify-content-between align-items-center flex-wrap">
                              <span class="badge badge-soft-primary px-3 py-1 badge-pill">28/12/2019</span>
@@ -155,7 +158,7 @@
                          </div>
                      </div>
                  </div>
-                 <div class="card new-shadow-sm my-2 rounded-0" style="border-left: 4px solid #ff5c75;">
+                 <div class="card new-shadow-sm my-2  hover-me-sm rounded-0">
                      <div class="card-body py-2">
                          <div class="d-flex justify-content-between align-items-center flex-wrap">
                              <span class="badge badge-soft-primary px-3 py-1 badge-pill">28/12/2019</span>
