@@ -17,7 +17,7 @@
     <!-- this section is for extra css links in some particuler page but not in all page -->
 
     @show
-</head>
+</head> 
 
 <body class="body-scroll">
 
@@ -109,6 +109,7 @@
                                     <a href="{{url('/notice')}}">
                                         <i data-feather="clipboard"></i>
                                         <span> Notice </span>
+                                        <span class="badge badge-soft-danger badge-pill ml-2">4</span>
                                     </a>
                                 </li>
                             </ul>
