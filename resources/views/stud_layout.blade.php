@@ -105,12 +105,15 @@
                                         <span>Winner List </span>
                                     </a>
                                 </li>
-                                <li class="my-3">
-                                    <a href="{{url('/notice')}}">
+                                <li class="mt-3">
+                                    <a href="{{url('/notice')}}" class="d-flex align-items-center justify-content-between">
+                                    <div>
                                         <i data-feather="clipboard"></i>
                                         <span> Notice </span>
-                                        <span class="badge badge-soft-danger badge-pill ml-2">4</span>
+                                    </div>
+                                        <span class="badge badge-danger rounded-lg">4</span>
                                     </a>
+                                    
                                 </li>
                             </ul>
                         </div>
