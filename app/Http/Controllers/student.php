@@ -15,8 +15,6 @@ use App\participant;
 class student extends Controller
 {
  
- 
-
     public function logout()//destroy cookies and session
     {
             Session::flush(); 
@@ -24,30 +22,11 @@ class student extends Controller
             \Cookie::queue(\Cookie::forget('senrl'));
             return redirect('/login');
     }
-    //check for cookies Exist or not or values
-    // public function getc(Request $req) 
-    // {
-    //         $value=$req->cookie('clgcode');
-    //         $value2=$req->cookie('senrl');
-    //     $login_details = tblstudent::where([
-    //         ['clgcode', '=',$value],
-    //         ['senrl', '=',$value2]
-    //     ])->count();
-    //     session()->put('sno',$value2);
-    //     echo $value."-".$value2;
-    //     if (Cookie::get('clgcode') !== null)
-    //     {
-    //         echo "-cookie set";
-    //     }                
-    //     else
-    //     {
-    //         echo "-not set";
-    //     }   
-    // }
+  
     public function getevents()
     {
         $events=tblevent::where([['clgcode',Session::get('clgcode')],
-        ['reg_end_date','>',date('Y-m-d H:i:s')],
+        ['reg_end_date','>=',date('Y-m-d')],
         ['reg_start_date','<=',date('Y-m-d')]])
         ->where(function($q){
             $q->where('gallow',Session::get('gender'))
@@ -263,27 +242,10 @@ class student extends Controller
             $st=participant::where([['senrl','LIKE','%'.$enr.'%'],['eid',$request->eid]])->get()->count();
             if($st>0)
             {
-                $e="*Player".$i." Already participated";
+                ${'e'.$i}="*Player".$i." Already participated";
                 return back()->with('error'."$i",${'e'.$i});
             }
         }
-        // $enr="";
-        // foreach($request->enrl as $e)
-        // {
-        //     $enr.=$e."-";
-        // }
-        
-        // $participant=new participant;
-        // $participant->eid=$request->eid;
-        // $participant->senrl=$enr;
-        // $participant->class=Session::get('class');
-        // $participant->division=Session::get('div');
-        // $participant->clgcode=Session::get('clgcode');
-        // $participant->rank="p";
-        // $participant->reg_date=date("Y:m:d");
-        // $participant->save();
-        // session()->flash('alert-success', 'insert successfully!');
-        // $einfo=tblevent::where('eid',decrypt($eid))->first();
         return view('participate-now-team',['req'=>$request]);
     	// return redirect()->to('/index');
     }   
@@ -304,8 +266,31 @@ class student extends Controller
         $activity=participant::join('tblevents','tblevents.eid','=','tblparticipant.eid')->where([['senrl','LIKE','%'.Session::get('senrl').'%'],['edate','<',date('Y-m-d')]])->orderby('edate','DESC')->get()->toarray();
         return view('profile',['activity'=>$activity]);
     }
-
-       public function winnerlist()
+    // public function part()
+    // {
+    //     $activity=participant::join('tblevents','tblevents.eid','=','tblparticipant.eid')->where([['senrl','LIKE','%'.Session::get('senrl').'%'],['edate','>',date('Y-m-d')]])->orderby('edate','DESC')->get()->toarray();
+    //     print_r($activity);
+    // }
+    //  public function participatename()
+    // {
+    //     $st=\DB::table('tblparticipant')->select('senrl')->get()->toarray();
+       
+    //     $ab=$st;
+    //     foreach($st as $s)
+    //     {
+    //         $b=(explode("-",$s->senrl));
+    //         foreach($b as $c)
+    //         {
+    //             $info=tblstudent::where('senrl',$c)->first();
+    //             echo $info['sname'];
+    //             echo "---";
+    //             echo $info['senrl'];
+    //             echo "---";
+    //         }
+    //     }
+    // print_r($st);
+    // }
+    public function winnerlist()
     {
         $student_name = DB::table('tblstudent')
                 ->join('tblparticipant', 'tblstudent.senrl', '=', 'tblparticipant.senrl')
@@ -319,180 +304,227 @@ class student extends Controller
         $count = DB::table('tblevents')
                 ->where('clgcode',Session::get('clgcode'))//session insert of clgcode
                 ->get()->count();
-
-        $st=DB::table('tblparticipant')
-            ->join('tblevents', 'tblparticipant.eid', '=', 'tblevents.eid')
-            ->select('tblparticipant.*','tblevents.*')
-            ->where('tblparticipant.rank', '!=', 'P')
-            ->where('tblevents.e_type','team')
-            ->orderBy('tblparticipant.rank','asc')
-            ->get()->toArray();
-        $ab=$st;
-        $teamdata = collect([]);
-        $counts=0;
-        $counta = collect([]);
-        $rankpos = collect([]);
-        $merged = collect([]);
-        foreach($st as $s)
-        {
-            // echo $s->ename;
-            // echo $s->rank."-";
-            $b=(explode("-",$s->senrl));
-            foreach($b as $c)
-            {
-                $info=DB::table('tblstudent')
-                ->where('senrl',$c)->get()->first();
-                $rank=DB::table('tblparticipant')
-                ->select('rank','eid')
-                ->where('eid','3')
-                ->where('senrl','like','%'.$c.'%')
-                ->get()->first();
-                $collection = collect($info);
-
-                $merged->push($collection->merge($rank));
-
-                //$alldata = $info->merge(['yash'=>1]);
-                
-                echo "<br>";
-                // $teamdata->push($info);
-                // $rankpos->push($rank);
-                // $rankpos2 = collect([$rankpos,$teamdata]);
-                // $r=$rankpos2->collapse();
-                //print_r($info);
-                //echo $info->sname;
-                $counts+=1;
-                
-                // echo "-";
-                // echo $info->senrl;
-                // echo "<br>";
-                
-            }
-            $counta->push($counts);
-            
-            $counts=0;
-        }
-        
-        $merge=$merged->toArray();
-        //$rankpos2 = array_merge($info);
-       // $c = array_combine($teamdata, $b);
-        //print_r($r);
-        // foreach($rankpos as $c)
-        //     {
-        //         $y=$rankpos['0']['eid'];
-        //         echo $y;
-        //     }
-            //echo $counta[0];
-       return view('winner-list',['stud'=>$student_name,'count'=>$count,"merge"=>$merge]);
+        $team=DB::table('tblparticipant')->select('eid')->groupBy('eid')->get();
+        $ddename=DB::table('tblevents')->select('ename')->groupBy('ename')->get()->toArray();
+        $ddcategory=DB::table('tblevents')->select('category')->groupBy('category')->get()->toArray();
+        $ddclass=DB::table('tblstudent')->select('class')->groupBy('class')->get()->toArray();
+        // print_r($ddename);
+        // echo "<br>";
+        // print_r($ddcategory);
+    return view('winner-list',['stud'=>$student_name,'count'=>$count,'team'=>$team,'ddename'=>$ddename,'ddcategory'=>$ddcategory,'ddclass'=>$ddclass]);
                       
     }
-    public function action(Request $req)
+    // public function democ(Request $req)
+    // {
+    //     if($req->ajax())
+    //     {
+    //         $clas=$req->get('name');
+            
+    //         $data="<h1>".$clas."</h1>";
+    //         echo json_encode($data);
+    //     }
+    // }
+    public function action_division(Request $req)
     {
         if($req->ajax())
         {
+            $clas=$req->get('clas');
+            $data=DB::table('tblstudent')->select('division')->where('class',$clas)->groupBy('division')->get();  
+            $total_row=$data->count();
+            $set="<option value=''>Select Division</option>";
+            if ($total_row > 0) {
+                foreach ($data as $show) {                
+                $set.="<option value='$show->division'>$show->division</option>";
+                }
+            }
+            else{
+                $set.="";
+            }
+            $data=$set;
+            echo json_encode($data);
+        }
+    }
+    public function filter(Request $req)
+    {
+        if($req->ajax())
+        {
+            $c=0;
+            $team="";
             $sname=$req->get('sname');
             $rno=$req->get('rno');
             $clas=$req->get('clas');
             $division=$req->get('division');
             $ename=$req->get('ename');
             $category=$req->get('category');
-            if($sname=="")
-            {
-                $sname='%';
+            
+            if (strlen($sname)<=0) {
+                $c++;
             }
-            else
+            if(strlen($sname)>=0)
             {
                 $sname='%'.$sname.'%';
+                
             }
-            if($clas=="")
-            {
-                $clas='%';
+            if (strlen($clas)<=0) {
+                $c++;
             }
-            else
+            if(strlen($clas)>=0)
             {
                 $clas='%'.$clas.'%';
+                
             }
-            if($division=="")
+            if (strlen($division)<=0) {
+                $c++;
+            }
+            if(strlen($division)>=0)
             {
-                $division='%';
-            }
-            else{
                 $division='%'.$division.'%';
+                
             }
-            if($rno=="")
+            if (strlen($rno)<=0) {
+                $c++;
+            }
+            if(strlen($rno)>=0)
             {
-                $rno='%';
-            } 
-            else{
                 $rno='%'.$rno.'%';
+               
             }
-            if($ename=="")
-            {
-                $ename='%';
+            if (strlen($ename)<=0) {
+                $c++;
             }
-            else
+            if(strlen($ename)>=0)
             {
                 $ename='%'.$ename.'%';
+                
             }
-            if($category=="")
-            {
-                $category='%';
+            if (strlen($category)<=0) {
+                $c++;
             }
-            else
+            if(strlen($category)>=0)
             {
                 $category='%'.$category.'%';
-            }
-
-                // $dataset=DB::table('tblstudent')
-                // ->select('senrl')
-                // ->where('sname', 'like',$search)
-                // ->get();
-                // foreach($dataset as $d)
-                // {
-                //     $content=$d->senrl;
-                // }
-
-            $data=DB::table('tblstudent')
-                ->join('tblparticipant', 'tblstudent.senrl', '=', 'tblparticipant.senrl')
-                ->join('tblevents', 'tblparticipant.eid', '=', 'tblevents.eid')
-                ->select('tblstudent.*', 'tblparticipant.*', 'tblevents.*')
-                ->where('tblstudent.sname', 'like',$sname)
-                ->where('tblstudent.rno', 'like',$rno)
-                ->where('tblstudent.class','like',$clas)
-                ->where('tblstudent.division','like',$division)
-                ->where('tblevents.category','like',$category)
-                ->where('tblevents.ename','like',$ename)
-                //->where('tblparticipant.senrl', 'like','%tblstudent.senrl%')
-                ->where('tblstudent.clgcode','sbccas')//session insert of clgcode
-                ->where('tblparticipant.rank', '!=', 'P')
-                ->orderBy('tblstudent.senrl','asc')
-                ->get();
-            $set="";
-            $total_row=$data->count();
-            if ($total_row > 0) {
-                foreach ($data as $show) {
-                    if ($show->rank==1) {
-                        $set.="<tr><td><img src='assets/images/svg-icons/student-dash/winner/1.svg' height='22px' alt='1'></td>";
-                    } elseif ($show->rank==2) {
-                        $set.="<tr><td><img src='assets/images/svg-icons/student-dash/winner/2.svg' height='22px' alt='2'></td>";
-                    } elseif ($show->rank==3) {
-                        $set.="<tr><td><img src='assets/images/svg-icons/student-dash/winner/3.svg' height='22px' alt='3'></td>";
-                    }
                 
-                    $set.="<td>".$show->sname."</td><td>"
-                .$show->class."</td><td>".
-                $show->division."</td><td>".
-                $show->rno."</td><td>".
-                $show->ename."</td><td>".
-                $show->category."</td><td>".
-                $show->edate."</td></tr>";
+            }
+
+            // $data=DB::table('tblstudent')
+            //     ->join('tblparticipant', 'tblstudent.senrl', '=', 'tblparticipant.senrl')
+            //     ->join('tblevents', 'tblparticipant.eid', '=', 'tblevents.eid')
+            //     ->select('tblstudent.*', 'tblparticipant.*', 'tblevents.*')
+            //     ->where('tblstudent.sname', 'like',$sname)
+            //     ->where('tblstudent.rno', 'like',$rno)
+            //     ->where('tblstudent.class','like',$clas)
+            //     ->where('tblstudent.division','like',$division)
+            //     ->where('tblevents.category','like',$category)
+            //     ->where('tblevents.ename','like',$ename)
+            //     //->where('tblparticipant.senrl', 'like','%tblstudent.senrl%')
+            //     ->where('tblstudent.clgcode',Session::get('clgcode'))
+            //     ->where('tblparticipant.rank', '!=', 'P')
+            //     ->orderBy('tblstudent.senrl','asc')
+            //     ->get();
+
+                // start team code
+                $st=participant::join('tblevents', 'tblparticipant.eid', '=', 'tblevents.eid')
+                                ->where('tblparticipant.rank', '!=', 'P')
+                                //->where('tblevents.e_type', '=', 'team')                                
+                                ->where('tblevents.category','like',$category)
+                                ->where('tblparticipant.clgcode',Session::get('clgcode'))
+                                ->where('tblevents.ename','like',$ename)
+                                ->get()->toArray();
+                                //print_r($st);
+                              
+                                foreach ($st as $s) {
+                                    $enrl=explode("-", $s['senrl']);
+                                               
+                                        foreach ($enrl as $sen) {
+                                            $tbls=tblstudent::where('senrl', $sen)
+                                            ->where('sname', 'like',$sname)
+                                            ->where('rno', 'like',$rno)
+                                            ->where('class','like',$clas)
+                                            ->where('clgcode',Session::get('clgcode'))
+                                            ->where('division','like',$division)
+                                                ->get()->toArray();
+                                                
+                                            foreach ($tbls as $t) {    
+                                                    if($s['rank']=='1')
+                                                    {
+                                                        $team.= "<tr><td><img src='assets/images/svg-icons/student-dash/winner/1.svg' height='22px' alt='1'></td>";
+                                                    }
+                                                    elseif($s['rank']=='2')
+                                                    {
+                                                        $team.= "<tr><td><img src='assets/images/svg-icons/student-dash/winner/2.svg' height='22px' alt='2'></td>";
+                                                    }
+                                                    elseif($s['rank']=='3')
+                                                    {
+                                                        $team.= "<tr><td><img src='assets/images/svg-icons/student-dash/winner/3.svg' height='22px' alt='3'></td>";
+                                                    }
+                                                    $team.= "<td> ".$t['sname']."</td><td>".$t['class']."</td><td>".$t['division']."</td><td>".$t['rno']."</td><td>".$s['ename']."</td><td>".$s['category']."</td><td>".$s['edate']."</td></tr>";
+                                                    // echo $e                                  
+                                            //print_r($tbls);
+                                            }
+                                        
+                                        
+                                        }
+                                
+                                }     
+                // team code over
+            $set="";
+            //$total_row=$data->count();
+        
+                // foreach ($data as $show) {
+                //     if ($show->rank==1) {
+                //         $set.="<tr><td><img src='assets/images/svg-icons/student-dash/winner/1.svg' height='22px' alt='1'></td>";
+                //     } elseif ($show->rank==2) {
+                //         $set.="<tr><td><img src='assets/images/svg-icons/student-dash/winner/2.svg' height='22px' alt='2'></td>";
+                //     } elseif ($show->rank==3) {
+                //         $set.="<tr><td><img src='assets/images/svg-icons/student-dash/winner/3.svg' height='22px' alt='3'></td>";
+                //     }
+                
+                //     $set.="<td>".$show->sname."</td><td>"
+                // .$show->class."</td><td>".
+                // $show->division."</td><td>".
+                // $show->rno."</td><td>".
+                // $show->ename."</td><td>".
+                // $show->category."</td><td>".
+                // $show->edate."</td></tr>";
+                // }
+                if($c==6)
+                {
+                    $team="<tr><td>No Data Found....!</td></tr>";
                 }
-            }
-            else{
-                $set.="<tr><td>No data Found</td></tr>";
-            }
+                if($team=="")
+                {
+                    $team="<tr><td>No Data Found....!</td></tr>";
+                }
+            $set=$team;
             $data=$set;
             echo json_encode($data);
         }
     }
-   
+
+    // public function part()
+    // {
+    //     $activity=participant::join('tblevents','tblevents.eid','=','tblparticipant.eid')->where([['senrl','LIKE','%'.Session::get('senrl').'%'],['edate','>',date('Y-m-d')]])->orderby('edate','DESC')->get()->toarray();
+    //     print_r($activity);
+    // }
+    //  public function participatename()
+    // {
+    //     $st=\DB::table('tblparticipant')->select('senrl')->get()->toarray();
+       
+    //     $ab=$st;
+    //     foreach($st as $s)
+    //     {
+    //         $b=(explode("-",$s->senrl));
+    //         foreach($b as $c)
+    //         {
+    //             $info=tblstudent::where('senrl',$c)->first();
+    //             echo $info['sname'];
+    //             echo "---";
+    //             echo $info['senrl'];
+    //             echo "---";
+    //         }
+    //     }
+    //     // print_r($st);
+    // }
+
+
 }
