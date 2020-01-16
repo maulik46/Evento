@@ -104,7 +104,7 @@
                                     <div class="media px-3 py-2 new-shadow-sm">
                                         <div class="media-body">
                                             <h4 class="mt-0 mb-1 header-title  ">{{$e['ename']}}</h4>
-                                            <div class="text-muted">{{$e['edate']}}</div>
+                                            <div class="text-muted">{{date('d/m/Y',strtotime($e['edate']))}}</div>
                                             <span
                                                 class="text-muted badge rounded-pill 
                                                 @if ($e['category'] == 'cultural')badge-soft-primary 
