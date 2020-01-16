@@ -66,19 +66,27 @@ Route::post('/checklogin','student@checklogin')->middleware(['ValidCheck', 'Cook
 // co-ordinator dashboard routes start
 // ==========================================================================
 
-Route::view('/cindex','co-ordinates/newindex');
+// Route::view('/cindex','co-ordinates/newindex');
 
-Route::view('/cnotice','co-ordinates/create_notice');
+// Route::view('/cnotice','co-ordinates/create_notice');
 
-Route::view('/change_pass','co-ordinates/change_pass');
+// Route::view('/change_pass','co-ordinates/change_pass');
 
-Route::view('/event_info','co-ordinates/event_info');
+// Route::view('/event_info','co-ordinates/event_info');
 
-Route::view('/create_event','co-ordinates/newevent');
+// Route::view('/create_event','co-ordinates/newevent');
 
-Route::view('/view_candidates','co-ordinates/view_candidates');
+// Route::view('/view_candidates','co-ordinates/view_candidates');
 
-Route::view('/clogin','co-ordinates/coordinate_login');
+// Route::view('/clogin','co-ordinates/coordinate_login');
+
+Route::get('/co-ordinate','co_ordinate@index');
+Route::get('/view_candidates/{eid}','co_ordinate@view_can');
+Route::get('/newevent',function(){
+    return view('co-ordinates/newevent');    
+});   
+Route::post('/create_event','co_ordinate@create_event');
+Route::post('/msg','co_ordinate@err');
 
 // ==========================================================================
 // co-ordinator dashboard routes finished
