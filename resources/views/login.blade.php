@@ -82,7 +82,7 @@
                                           <div class="form-group has-icon d-flex align-items-center">
                                             <img src="{{asset('assets/images/svg-icons/student-dash/clg1.svg')}}" class="form-control-icon ml-2" height="20px" alt="">
                                             <select class="form-control w-100 py-1" name="clgcode" style="cursor:pointer!important;">
-                                                <option data-display="Select College" hidden>Select College</option>
+                                                <option data-display="Select College" value="">Select College</option>
                                                 @foreach($clg as $c)
                                                 <option value="{{$c->clgcode}}">
                                                     {{$c->clgname}}
