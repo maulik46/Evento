@@ -85,11 +85,11 @@
                               </div>
                              
                              <div class="dropdown-divider d-sm-none d-md-none"></div>
-                             <a href="{{url('/cindex')}}" class="dropdown-item notify-item mb-2">
+                             <a href="{{url('/co-ordinate')}}" class="dropdown-item notify-item mb-2">
                                  <i data-feather="home" class="icon-dual-primary icon-xs mr-2"></i>
                                  <span>Home</span>
                              </a>
-                            <a href="{{url('/create_event')}}" class="dropdown-item notify-item my-2">
+                            <a href="{{url('/newevent')}}" class="dropdown-item notify-item my-2">
                                 <i data-feather="calendar" class="icon-dual-success icon-xs mr-2"></i>
                                 <span>Create Event</span>
                             </a>
