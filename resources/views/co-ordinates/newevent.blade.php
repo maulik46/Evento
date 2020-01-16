@@ -25,7 +25,9 @@
         height: 50px;
         cursor: text!important;
         }
-
+         .form-group{
+            margin-bottom:0.4rem!important;
+        }
 
         .form-control:focus{
         border: 1px solid #d1d1d1!important;
@@ -107,37 +109,43 @@
                            <span> Create new event</span>
                       </h3>
 
-                      <form class="form-horizontal">
+                                <form class="form-horizontal" method="post" onsubmit="return getMessage()" action="{{url('create_event')}}">
+                          @csrf
                           <div class="card border-form">
                               <div class="card-body py-0 pb-1">
-                                  <div class="form-group mt-2">
+                                  <div class="form-group mt-2 " >
                                       <label class="col-form-label font-size-15">Event Name</label>
-                                       <div class="form-group has-icon d-flex align-items-center">
+                                       <div id="enamediv" class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="edit-3" class="form-control-icon ml-2" height="19px"></i>
-                                          <input type="text" class="form-control" placeholder="Enter Event Name..."
-                                             />
+                                          <input type="text" id="ename" onkeyup="return echeck()" name="ename" class="form-control" placeholder="Enter Event Name..."/>
                                       </div>
+                                       <span id="erevent" class="text-danger font-weight-bold"></span>
+                                       
                                   </div>
                               </div>
                           </div>
-
                           <div class="card border-form my-4">
                               <div class="card-body py-0 pb-1">
                                   <div class="row">
                                       <div class="col-xl-6 form-group mt-2" >
                                           <label class="col-form-label font-size-15">Event Date</label>
-                                           <div class="form-group has-icon d-flex align-items-center">
+                                           <div id="edatediv" class="form-group has-icon d-flex align-items-center">
                                              <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                              <input type="text" class="form-control basicDate"
+                                              <input type="text" id="edate" name="edate" class="form-control basicDate"
                                                   placeholder="Event Date..." data-input />
                                           </div>
+                                          <span id="erevent" class="text-danger font-weight-bold"></span>
+                                       
                                       </div>
                                       <div class="col-xl-6 form-group mt-2">
                                           <label class="col-form-label font-size-15" >Event Time</label>
-                                          <div class="form-group has-icon d-flex align-items-center">
+                                          <div id="etimediv" class="form-group has-icon d-flex align-items-center">
                                             <i data-feather="clock" class="form-control-icon ml-2" height="19px"></i>
-                                              <input type="text" class="form-control timePicker" placeholder="Event Time..."/>
+                                              <input type="text" id="etime" name="etime" class="form-control timePicker" placeholder="Event Time..." autocomplete="off"/>
                                           </div>
+                                        
+                                          <span class="text-danger font-weight-bold"></span>
+                                        
                                       </div>
                                  
                                   </div>
@@ -147,16 +155,20 @@
                                              </label>
                                              <div class="form-group has-icon d-flex align-items-center">
                                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                                 <input type="text" class="form-control basicDate" placeholder="Starting Date Of Registraion..." data-input />
+                                                 <input type="text" id="sdate" name="sdate" class="form-control basicDate" placeholder="Starting Date Of Registraion..." data-input />
                                              </div>
+                                             
+                                             <span class="text-danger font-weight-bold"></span>
+                                        
                                          </div>
                                          <div class="col-xl-6 form-group mt-2">
                                              <label class=" col-form-label font-size-15">Last Date Of Registraion
                                              </label>
                                              <div class="form-group has-icon d-flex align-items-center">
                                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                                 <input type="text" class="form-control basicDate" placeholder="Last Date Of Registraion..." data-input />
+                                                 <input type="text" id="ldate" name="ldate" class="form-control basicDate" placeholder="Last Date Of Registraion..." data-input />
                                              </div>
+                                             <span class="text-danger font-weight-bold"></span>
                                          </div>
                                   </div>
 
@@ -170,26 +182,27 @@
                                           <label class="col-form-label font-size-15">Event Type</label>
                                           <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
-                                              <select id="event-type" class="form-control w-100 py-1">
-                                                  <option hidden>Select Type</option>
-                                                  <option value="Solo">Solo</option>
-                                                  <option value="Team">Team</option>
+                                              <select id="event-type" name="etype" class="form-control w-100 pt-1">
+                                                  <option hidden value="">Select Type</option>
+                                                  <option value="solo">Solo</option>
+                                                  <option value="team">Team</option>
                                               </select>
                                           </div>
-                                          
+                                          <span class="text-danger font-weight-bold"></span>
 
                                       </div>
                                       <div class="col-xl-6 form-group mt-2">
                                           <label class="col-form-label font-size-15">Event for</label>
                                           <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                                              <select class="form-control w-100 py-1">
-                                                  <option hidden>Select Gender</option>
-                                                  <option value="Male">Male</option>
-                                                  <option value="Female">Female</option>
-                                                  <option value="For both">For both</option>
+                                              <select id="gen" onchange="return echeck()" name="efor" class="form-control w-100 pt-1">
+                                                  <option value="" hidden>Select Gender</option>
+                                                  <option value="male">Male</option>
+                                                  <option value="female">Female</option>
+                                                  <option value="both">For both</option>
                                               </select>
                                           </div>
+                                          <span class="text-danger font-weight-bold"></span>
                                       </div>
                                   
                                      
@@ -198,19 +211,20 @@
                                        <div class="col-xl-6 col-md-6 col-sm-6 form-group mt-2">
                                            <label id="team-size-label" class="col-form-label font-size-15">Team size
                                            </label>
-                                           <div class="form-group has-icon d-flex align-items-center">
+                                           <div id="t-size" class="form-group has-icon d-flex align-items-center">
                                              <i data-feather="user-plus" class="form-control-icon ml-2" height="19px"></i>
-                                               <input id="team-size" type="number" class="form-control"
+                                               <input id="team-size" name="tsize" type="number" class="form-control"
                                                    placeholder="Team size" />
                                            </div>
+                                           <span class="text-danger font-weight-bold"></span>
                                        </div>
                                        <div class="col-xl-6 col-md-6 col-sm-6 form-group mt-sm-5 mt-2">
                                            <div class="custom-control custom-switch mb-2">
-                                               <input type="checkbox" class="custom-control-input" id="diff-class">
+                                               <input type="checkbox" name="alw_diff_class" value="yes" class="custom-control-input" id="diff-class">
                                                <label class="custom-control-label" for="diff-class" id="diff-class-label">Allow Different Class</label>
                                            </div>
                                             <div class="custom-control custom-switch mb-2">
-                                               <input type="checkbox" class="custom-control-input" id="diff-div">
+                                               <input type="checkbox" name="alw_diff_div" value="yes" class="custom-control-input" id="diff-div">
                                                <label class="custom-control-label" for="diff-div" id="diff-div-label">Allow Different Division</label>
                                            </div>
                                        </div>
@@ -221,8 +235,9 @@
                                           </label>
                                           <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="map" class="form-control-icon ml-2" height="19px"></i>
-                                              <input type="text" class="form-control" placeholder="Event Location..." />
+                                              <input id="loc" type="text" name="loc" class="form-control" placeholder="Event Location..." />
                                           </div>
+                                          <span class="text-danger font-weight-bold"></span>
                                       </div>
                                   </div>
 
@@ -236,27 +251,28 @@
                                       <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
                                           <input type="text" style="background-color: #f3f4f7;"
-                                              class="form-control font-size-15" disabled value="Dr. Akki Maniya" />
+                                              class="form-control font-size-15" disabled value="<?=Session::get('cname')?>" />
                                       </div>
                                   </div>
                                   <div class="form-group mt-2">
-                                      <label class="col-form-label font-size-15">Message <span class="font-weight-light">(Optional)</span></label>
+                                      <label class="col-form-label font-size-15">Other rules <span
+                                              class="font-weight-light">(optional)</span></label>
                                          
                                       <div class="form-group has-icon d-flex">
-                                          <i data-feather="edit" class="form-control-icon ml-2" height="19px" style="margin-top: 13px;"></i>
-                                          <textarea class="form-control" rows="5" id="example-textarea" placeholder="Enter any message or rule.."></textarea>
+                                          <i data-feather="edit" class="form-control-icon ml-2" height="19px" style="margin-top: 13px;"s></i>
+                                          <textarea name="rules" class="form-control" rows="5" id="example-textarea" placeholder="Enter any message or rule.."></textarea>
                                       </div>
                                       <span class="help-block">
-                                          <span>Add any message</span>
+                                          <span>Rules seprated by <b>;</b></span>
                                       </span>
                                   </div>
 
-                                  <button type="submit"
+                                  <button type="submit" 
                                       class="hover-me-sm m-2 btn btn-success px-4  rounded-sm new-shadow font-weight-bold font-size-15">
                                       <span class="mr-1">Create Event</span>
                                       <i data-feather="check-square" height="20px"></i>
                                   </button>
-                                  <button type="reset"
+                                  <button type="reset" 
                                       class="hover-me-sm m-2 btn btn-danger px-4  rounded-sm new-shadow font-weight-bold font-size-15">
                                       <span class="mr-1">Reset form</span>
                                       <i data-feather="x-circle" height="20px"></i>
@@ -365,6 +381,181 @@
  
 
 </script>
+<script>
+         function getMessage() {
+             var f=0;
+             var d=new Date();
+             var today=d.getDate()+"-"+(d.getMonth()+1)+"-"+d.getFullYear();
+             var edate=$('#edate').val();
+             var sdate=$('#sdate').val();
+             var ldate=$('#ldate').val();
+             var ename=$('#ename').val();
+             var gen=$('#gen').val();
+             
+            
+             $('*').removeClass('border border-danger');
+             
+             if($('#ename').val()=="")
+             {
+                $('#ename').parent().addClass('border border-danger');
+                $('#ename').parent().next().text("Please enter event Name");
+                f=1;
+             }
+             else if($('#ename').parent().next().text()=="Event already exist")
+             {
+                $('#ename').parent().addClass('border border-danger');
+                $('#ename').parent().next().text("Event already exist");
+                f=1;
+             }
+             else{
+                $('#ename').parent().next().text(""); 
+             }
+             
 
+             if($('#etime').val()=="")
+             {
+                 $('#etime').parent().addClass('border border-danger');
+                 $('#etime').parent().next().text("Please enter event time");
+                 f=1;
+             }
+             else{
+                $('#etime').parent().next().text("");
+             }
+
+
+             if(edate=="")
+             {
+                 $('#edate').parent().addClass('border border-danger');
+                 $('#edate').parent().next().text("Please enter event Date");
+                 f=1;
+             }
+             else if(edate<today)
+            {
+                $('#edate').parent().addClass('border border-danger');
+                $('#edate').parent().next().text("Event date is invalid ");
+                f=1;
+            }
+             else{
+                $('#edate').parent().next().text("");
+                }
+             
+
+
+             if(sdate=="")
+             {
+                 $('#sdate').parent().addClass('border border-danger');
+                 $('#sdate').parent().next().text("Please enter Registration Start Date");
+                 f=1;
+             }
+             else if(edate<sdate || sdate<today)
+             {
+                 $('#sdate').parent().addClass('border border-danger');
+                 $('#sdate').parent().next().text("Starting date of registration should be before the event date and after today ");
+                 f=1;
+             }
+             else{
+                $('#sdate').parent().next().text("");
+             }
+
+
+             if(ldate=="")
+             {
+                 $('#ldate').parent().addClass('border border-danger');
+                 $('#ldate').parent().next().text("Please enter Last date of Registration ");
+                 f=1;
+             }
+             else if(ldate<sdate || edate<ldate)
+             {
+                 $('#ldate').parent().addClass('border border-danger');
+                 $('#ldate').parent().next().text("End date of registration should be before the event date  and after start date of registration");
+                 f=1;
+             }
+             else{
+                $('#ldate').parent().next().text("");
+             }
+
+             
+             if($('#event-type').val()=="")
+             {
+                 $('#event-type').parent().addClass('border border-danger');
+                 $('#event-type').parent().next().text("Please Select event type");
+                 f=1;
+             }
+             else{
+                $('#event-type').parent().next().text("");
+             }
+
+             if($('#gen').val()=="")
+             {
+                 $('#gen').parent().addClass('border border-danger');
+                 $('#gen').parent().next().text("Please select gender");
+                 f=1;
+             }
+             else{
+                $('#gen').parent().next().text("");
+             }
+
+             if($('#event-type').val()=="team")
+             {
+                    if($('#team-size').val()=="")
+                    {
+                        $('#team-size').parent().addClass('border border-danger');
+                        $('#team-size').parent().next().text("Please insert team size");
+                        f=1;
+                    }
+                    else{
+                        $('#team-size').parent().next().text("");
+                    }
+             }
+             else{
+                        $('#team-size').parent().next().text("");
+            }
+            
+
+            
+            if($('#loc').val()=="")
+             {
+                 $('#loc').parent().addClass('border border-danger');
+                 $('#loc').parent().next().text("Please insert event location");
+                 f=1;
+             }
+             else{
+                $('#loc').parent().next().text("");
+             }
+            if(f==1)
+            {
+                return false;
+            }
+         }
+         function echeck()
+         {
+            var ename=$('#ename').val();
+             var gen=$('#gen').val();
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+            $.ajax({
+               type:'POST',
+               url:'msg',
+               data:{ename:ename,gen:gen},
+               success:function(data) {
+                   if(data.msg>0)
+                   {
+                    $('#ename').addClass('border border-danger');
+                    $('#ename').parent().next().text("Event already exist");
+                   }
+                   else{
+                    $('#ename').parent().next().text("");
+                    $('erename').removeClass('border border-danger');
+                   }
+               },
+               error:function(data){
+               console.log(data);
+               }
+            })
+         }
+      </script>
 
 @endsection
