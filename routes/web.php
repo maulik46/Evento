@@ -83,3 +83,23 @@ Route::view('/clogin','co-ordinates/coordinate_login');
 // ==========================================================================
 // co-ordinator dashboard routes finished
 // ==========================================================================
+
+// ==========================================================================
+// super admin dashboard routes start
+// ==========================================================================
+
+route::view('/sindex','super-admin/index');
+
+route::view('/snotice','super-admin/new_notice');
+
+route::view('/new_cod','super-admin/new_cordinate');
+
+route::view('/slogin','super-admin/superadmin_login');
+
+route::view('/s_change_pass','super-admin/change_password');
+
+route::view('/sbanner','super-admin/create_banner');
+
+// ==========================================================================
+// super admin dashboard routes end
+// ==========================================================================
