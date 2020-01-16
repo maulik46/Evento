@@ -120,7 +120,7 @@
 
                                         <div class="form-group mt-4 mb-0">
                                             <button class="hover-me-sm btn btn-info  rounded-sm new-shadow font-size-15 px-3" type="submit"> 
-                                            <span class="font-weight-bold">Log In</span>
+                                            <span class="font-weight-bold">submit</span>
                                             <i data-feather="log-in" height="20px"></i>
                                             </button>
                                         </div>
