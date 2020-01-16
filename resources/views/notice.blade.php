@@ -37,7 +37,7 @@
                                         adipisci?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis explicabo itaque fugit pariatur adipisci. Quod, pariatur corrupti, laborum eius quaerat eos vero, necessitatibus inventore nihil provident ut consequuntur soluta magnam.
                                     </div>
                                     <div class="card-action my-2">
-                                        <a href="#" class="btn btn-soft-success rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">XYZ.txt</a>
+                                        <a href="#" class="btn btn-soft-danger rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">XYZ.txt</a>
 
                                         <a href="#" class="btn btn-soft-success rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">XYZ.pdf</a>
                                     </div>
