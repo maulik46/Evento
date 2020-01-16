@@ -329,7 +329,7 @@
 
 // disable max-person field on select solo option from event catagory---------
     $('#event-type').change(function() {
-        if($(this).val()=="Solo")
+        if($(this).val()=="solo")
         {
         $('#team-size').prop( "disabled", true );
         $('#team-size').prop( "placeholder", "" );

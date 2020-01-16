@@ -119,7 +119,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <!-- <tr>
                                             <td>#1</td>
                                             <td>Cricket compititon</td>
                                             <td>5</td>
@@ -181,7 +181,28 @@
                                             <td>
                                                 <span class="badge badge-soft-info badge-pill px-2">Finished</span>
                                             </td>
+                                        </tr> -->
+                                         <?php $c=0 ?>
+                                    @foreach($events as $e)
+                                    <?php $c++;
+                                        $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
+                                    ?>
+                                        <tr>
+                                            <td>#{{$c}}</td>
+                                            <td>{{ucfirst($e['ename'])}} compition</td>
+                                            <td>{{$p}}</td>
+                                            <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
+                                            <td>
+                                                @if($e['edate'] == date('Y-m-d'))
+                                                <span class="badge badge-soft-success badge-pill px-2">Running</span>
+                                                @elseif($e['edate'] > date('Y-m-d'))
+                                                <span class="badge badge-soft-warning badge-pill px-2">Upcoming</span>
+                                                @elseif($e['edate'] < date('Y-m-d'))
+                                                <span class="badge badge-soft-info badge-pill px-2">Finished</span>
+                                                @endif
+                                            </td>
                                         </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div> <!-- end table-responsive-->
@@ -204,14 +225,19 @@
                         </div>
                     </div>
                     <div class="row" id="event-list">
-                        <div class="col-md-6 col-xl-4 col-sm-6">
-                            <div class="card new-shadow-sm hover-me-sm">
+                    @foreach($events as $e)
+                        @if($e['cid']==Session::get('cid'))
+                        <div class="col-md-6 col-xl-4 col-sm-6 mt-1">
+                            <div class="card new-shadow-sm">
                                 <div class="card-body p-0">
                                     <div class="media p-3">
                                         <div class="media-body">
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <span
-                                                    class="text-muted badge rounded-pill badge-soft-warning  px-3">Team
+                                            @if($e['e_type']=='team')
+                                                <span class="text-muted badge rounded-pill badge-soft-warning  px-3">{{ucfirst($e['e_type'])}}
+                                            @else
+                                                <span class="text-muted badge rounded-pill badge-soft-success  px-3">{{ucfirst($e['e_type'])}}
+                                            @endif
                                                 </span>
                                                 <div>
                                                 <a  href="#" 
@@ -226,17 +252,17 @@
 
                                                 </a>
                                                 <div class="dropdown-menu event-option profile-dropdown-items dropdown-menu-right ">
-                                                    <a href="{{url('/event_info')}}" class="dropdown-item">
+                                                    <a href="event_info.html" class="dropdown-item">
                                                         <i data-feather="info"
                                                             class="icon-dual-info icon-xs mr-2"></i>
                                                         <span>About Event</span>
                                                     </a>
-                                                    <a href="{{url('/event_info')}}" class="dropdown-item my-1">
+                                                    <a href="{{url('newevent')}}" class="dropdown-item my-1">
                                                         <i data-feather="edit-3"
                                                             class="icon-dual-warning icon-xs mr-2"></i>
                                                         <span>Update Event</span>
                                                     </a>
-                                                    <a href="{{url('/event_info')}}" class="dropdown-item">
+                                                    <a href="#" class="dropdown-item">
                                                         <i data-feather="trash-2"
                                                             class="icon-dual-danger icon-xs mr-2"></i>
                                                         <span class="text-danger">Delete Event</span>
@@ -247,12 +273,12 @@
 
 
                                             </div>
-                                            <h4 class="mb-0 mt-3">Cricket</h4>
-                                            <span class="text-muted1">21/12/2019</span>
+                                            <h4 class="mb-0 mt-3">{{ucfirst($e['ename'])}}</h4>
+                                            <span class="text-muted1">{{date('d/m/Y', strtotime($e['edate']))}}</span>
                                         </div>
                                     </div>
                                     <div class="bg-light">
-                                        <a href="{{url('/view_candidates')}}"
+                                        <a href="{{url('view_candidates')}}/{{$e['eid']}}"
                                             class="text-center btn btn-light btn-block rounded-0 text-dark d-flex align-items-center justify-content-center view-candidate">
                                             <i data-feather="eye" height="18px"></i>
                                             <span>View Candidates</span>
@@ -261,6 +287,8 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
+                    @endforeach
                         <div class="col-md-6 col-xl-4 col-sm-6">
                             <div class="card new-shadow-sm" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom" title="This Event is Currently disabled. You need approval from Administrator to delete it.">
                                 <div class="card-body p-0">
@@ -316,64 +344,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-xl-4 col-sm-6">
-                            <div class="card new-shadow-sm hover-me-sm">
-                                <div class="card-body p-0">
-                                    <div class="media p-3">
-                                        <div class="media-body">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <span
-                                                    class="text-muted badge rounded-pill badge-soft-warning  px-3">Team
-                                                </span>
-                                                <div>
-                                                    <a href="#" data-toggle="dropdown" href="#" role="button"
-                                                        aria-haspopup="false" aria-expanded="false"
-                                                        class="dropdown-toggle">
-
-                                                        <i id="event-info" data-feather="more-vertical"
-                                                            class="text-dark" height="20px"></i>
-
-                                                    </a>
-                                                    <div
-                                                        class="dropdown-menu event-option profile-dropdown-items dropdown-menu-right ">
-                                                        <a href="{{url('/event_info')}}" class="dropdown-item">
-                                                            <i data-feather="info"
-                                                                class="icon-dual-info icon-xs mr-2"></i>
-                                                            <span>About Event</span>
-                                                        </a>
-                                                        <a href="{{url('/event_info')}}" class="dropdown-item my-1">
-                                                            <i data-feather="edit-3"
-                                                                class="icon-dual-warning icon-xs mr-2"></i>
-                                                            <span>Update Event</span>
-                                                        </a>
-                                                        <a href="{{url('/event_info')}}" class="dropdown-item">
-                                                            <i data-feather="trash-2"
-                                                                class="icon-dual-danger icon-xs mr-2"></i>
-                                                            <span class="text-danger">Delete Event</span>
-                                                        </a>
-
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <h4 class="mb-0 mt-3">Cricket</h4>
-                                            <span class="text-muted1">21/12/2019</span>
-                                        </div>
-                                    </div>
-                                    <div class="bg-light">
-                                        <a href="{{url('/view_candidates')}}"
-                                            class="text-center btn btn-light btn-block rounded-0 text-dark d-flex align-items-center justify-content-center">
-                                            <i data-feather="eye" height="18px"></i>
-                                            <span>View Candidates</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                        
-
-                     
                     </div>
 
 

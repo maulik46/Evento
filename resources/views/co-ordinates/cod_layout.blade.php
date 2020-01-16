@@ -61,7 +61,7 @@
                                 <img src="{{asset('assets/images/svg-icons/co-ordinate/man.svg')}}" alt="user-image" class="align-self-center" />
                                 <div class="media-body text-left d-none d-sm-block">
                                     <h6 class="ml-2 my-0" id="nav-menu-btn">
-                                        <span>Dr.Akki Maniya</span>
+                                        <span><?=Session::get('cname')?></span>
                                         <span class="text-muted d-block font-size-12 mt-1">
                                             Co-ordinator
                                         </span>
@@ -76,7 +76,7 @@
                                   <img src="{{asset('assets/images/svg-icons/co-ordinate/man.svg')}}" alt="user-image" height="40px" class="align-self-center" />
                                   <div class="media-body text-left">
                                       <h6 class="ml-2 my-0">
-                                          <span>Dr.Akki Maniya</span>
+                                          <span><?=Session::get('cname')?></span>
                                           <span class="text-muted d-block font-size-12 mt-1">
                                               Co-ordinator
                                           </span>
@@ -85,11 +85,11 @@
                               </div>
                              
                              <div class="dropdown-divider d-sm-none d-md-none"></div>
-                             <a href="{{url('/co-ordinate')}}" class="dropdown-item notify-item mb-2">
+                             <a href="{{url('/cindex')}}" class="dropdown-item notify-item mb-2">
                                  <i data-feather="home" class="icon-dual-primary icon-xs mr-2"></i>
                                  <span>Home</span>
                              </a>
-                            <a href="{{url('/newevent')}}" class="dropdown-item notify-item my-2">
+                            <a href="{{url('/create_event')}}" class="dropdown-item notify-item my-2">
                                 <i data-feather="calendar" class="icon-dual-success icon-xs mr-2"></i>
                                 <span>Create Event</span>
                             </a>
