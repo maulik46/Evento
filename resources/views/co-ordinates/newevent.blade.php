@@ -3,6 +3,7 @@
 @section('title','Create Event')
 
 @section('head-tag-links')
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('assets/libs/clockpicker/clockpicker-gh-pages/dist/jquery-clockpicker.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/libs/flatpickr/flatpickr.min.css')}}">
@@ -109,7 +110,7 @@
                            <span> Create new event</span>
                       </h3>
 
-                                <form class="form-horizontal" method="post" onsubmit="return getMessage()" action="{{url('create_event')}}">
+                                <form class="form-horizontal" method="post"  onsubmit="return getMessage()" action="{{url('newevent')}}">
                           @csrf
                           <div class="card border-form">
                               <div class="card-body py-0 pb-1">
@@ -117,7 +118,7 @@
                                       <label class="col-form-label font-size-15">Event Name</label>
                                        <div id="enamediv" class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="edit-3" class="form-control-icon ml-2" height="19px"></i>
-                                          <input type="text" id="ename" onkeyup="return echeck()" name="ename" class="form-control" placeholder="Enter Event Name..."/>
+                                          <input type="text" onkeyup="this.value = this.value.toLowerCase()" id="ename" onkeyup="return echeck()" name="ename" class="form-control" placeholder="Enter Event Name..."/>
                                       </div>
                                        <span id="erevent" class="text-danger font-weight-bold"></span>
                                        
@@ -321,8 +322,7 @@
 // nice-select js ------------------------------------------------------------
 
     $(document).ready(function() {
-        $('#event-type').niceSelect();
-        $('#gen').niceSelect();
+        $('select').niceSelect();
     });
 
 // nice-select js end --------------------------------------------------------
@@ -448,7 +448,7 @@
                  $('#sdate').parent().next().text("Please enter Registration Start Date");
                  f=1;
              }
-             else if(edate<sdate || sdate<today)
+             else if(edate<sdate || today>sdate)
              {
                  $('#sdate').parent().addClass('border border-danger');
                  $('#sdate').parent().next().text("Starting date of registration should be before the event date and after today ");
@@ -528,28 +528,28 @@
                 return false;
             }
          }
-         function echeck()
-         {
+        function echeck()
+        {
             var ename=$('#ename').val();
-             var gen=$('#gen').val();
+            var gen=$('#gen').val();
             $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+                headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
             $.ajax({
                type:'POST',
                url:'msg',
                data:{ename:ename,gen:gen},
                success:function(data) {
-                   if(data.msg>0)
+                if(data.msg>0)
                    {
                     $('#ename').addClass('border border-danger');
                     $('#ename').parent().next().text("Event already exist");
                    }
                    else{
                     $('#ename').parent().next().text("");
-                    $('erename').removeClass('border border-danger');
+                    $('#ename').parent().next().removeClass('border border-danger');
                    }
                },
                error:function(data){
