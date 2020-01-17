@@ -91,8 +91,8 @@
                         </div> <!-- carousal end -->
                         <div class="col-xl-4 rounded overflow-auto my-scroll bg-white mt-4 new-shadow"
                             style="height: 300px;">
-                            <div class="card">
-                                <div class="card-body pt-2">
+                            <div class="card ">
+                                <div class="card-body pt-2 p-0">
                                     <h6 class="font-size-24 mb-0 pb-1 ml-3 text-center">Events</h6>
                                     <hr>
                                     <?php $a=0?>
