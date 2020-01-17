@@ -1,13 +1,13 @@
 @extends('stud_layout')
 
-@section('title','Home')
+@section('title','About Event')
 
 @section('my-content')
 <div class="d-flex justify-content-center mt-5">
-                <div class="container-fluid col-lg-8">
+                <div class="container-fluid col-lg-10">
                     <div class="card new-shadow rounded-lg">
-                        <div class="card-body px-sm-5">
-                            <a href="{{url('/profile')}}" class="float-right text-dark">
+                        <div class="card-body px-md-4 px-1">
+                            <a href="{{url('/profile')}}" class="float-right text-dark mr-1">
                                 <i data-feather="x-circle" id="close-btn"></i>
                             </a>
                             <br>
@@ -19,39 +19,93 @@
                             </p>
                             </div>
                             <hr>
-                            <div id="event-info" class="p-1  text-dark font-size-15">
-                                <p class="d-flex justify-content-between mx-5">
-                                    <span class="font-weight-bold">Event date</span>
-                                    <span>12/12/2019</span>
-                                </p>
-                                <p class="d-flex justify-content-between mx-5">
-                                    <span class="font-weight-bold text-right">Event time</span>
-                                    <span>09:30 am</span>
-                                </p>
-                                
-                                <p class="d-flex justify-content-between mx-5">
-                                    <span class="font-weight-bold">Event Type</span>
-                                    <span>Team</span>
-                                </p>
-                                <p class="d-flex justify-content-between mx-5">
-                                    <span class="font-weight-bold">Gender</span>
-                                    <span>Male</span>
-                                </p>
-                                <p class="d-flex justify-content-between mx-5">
-                                    <span class="font-weight-bold">Team Size</span>
-                                    <span>12</span>
-                                </p>
-                                <p class="d-flex justify-content-between mx-5">
-                                    <span class="font-weight-bold">Event Location</span>
-                                    <span>J.k Ground</span>
-                                </p>
+                            <div class=" d-flex justify-content-center">
+                                <div id="event-info" class="col-lg-7 col-md-8 col-sm-10 p-2 text-dark font-size-15 ">
+                                    <p class="d-flex justify-content-between">
+                                        <span class="font-weight-bold">Event date</span>
+                                        <span>12/12/2019</span>
+                                    </p>
+                                    <p class="d-flex justify-content-between">
+                                        <span class="font-weight-bold text-right">Event time</span>
+                                        <span>09:30 am</span>
+                                    </p>
+                                    
+                                    <p class="d-flex justify-content-between">
+                                        <span class="font-weight-bold">Event Type</span>
+                                        <span>Team</span>
+                                    </p>
+                                    <p class="d-flex justify-content-between">
+                                        <span class="font-weight-bold">Gender</span>
+                                        <span>Male</span>
+                                    </p>
+                                    <p class="d-flex justify-content-between">
+                                        <span class="font-weight-bold">Team Size</span>
+                                        <span>12</span>
+                                    </p>
+                                    <p class="d-flex justify-content-between">
+                                        <span class="font-weight-bold">Event Location</span>
+                                        <span>J.k Ground</span>
+                                    </p>
+                                </div>
+                            </div>    
+                            <div class="mt-3">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-light new-shadow-sm rounded-sm">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3"
+                                                    style="background-color: #dde1fc;">
+                                                    <div class="font-size-18">
+                                                        Team Members
+                                                    </div>
+                                                    <div class="font-size-13 mt-1 badge badge-light px-3 rounded-pill">
+                                                        Team XYZ
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Class</th>
+                                                <th scope="col">Division</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    1
+                                                </th>
+                                                <td>Piyush Monpara</td>
+                                                <td>TYBCA</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    2
+                                                </th>
+                                                <td>Dishant Sakariya</td>
+                                                <td>TYBCA</td>
+                                                <td>3</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    3
+                                                </th>
+                                                <td>Yash Parmar</td>
+                                                <td>TYBCA</td>
+                                                <td>3</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
                                 <p class="mx-5 text-muted font-size-13">
                                     <br>
                                     <span>
                                         **All the team members have to reach at the J.K ground on 09:00 clock without being late
                                     </span>
                                 </p>
-                            </div>
                         </div>
                         
                     </div>
