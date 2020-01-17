@@ -6,8 +6,8 @@
 <div class="d-flex justify-content-center mt-5">
                 <div class="container-fluid col-lg-8">
                     <div class="card new-shadow rounded-lg">
-                        <div class="card-body px-5">
-                            <a href="{{url('/cindex')}}" class="float-right text-dark">
+                        <div class="card-body px-sm-5">
+                            <a href="{{url('/profile')}}" class="float-right text-dark">
                                 <i data-feather="x-circle" id="close-btn"></i>
                             </a>
                             <br>
@@ -28,20 +28,13 @@
                                     <span class="font-weight-bold text-right">Event time</span>
                                     <span>09:30 am</span>
                                 </p>
-                                 <p class="d-flex justify-content-between mx-5">
-                                    <span class="font-weight-bold">Registraion start date</span>
-                                    <span>1/12/2019</span>
-                                </p>
-                                <p class="d-flex justify-content-between mx-5">
-                                    <span class="font-weight-bold">Registraion last date</span>
-                                    <span>8/12/2019</span>
-                                </p>
+                                
                                 <p class="d-flex justify-content-between mx-5">
                                     <span class="font-weight-bold">Event Type</span>
                                     <span>Team</span>
                                 </p>
                                 <p class="d-flex justify-content-between mx-5">
-                                    <span class="font-weight-bold">Event Catagory</span>
+                                    <span class="font-weight-bold">Gender</span>
                                     <span>Male</span>
                                 </p>
                                 <p class="d-flex justify-content-between mx-5">
