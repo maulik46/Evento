@@ -4,6 +4,12 @@
 
     @section('head-tag-links')
         <?php use Carbon\Carbon;?>
+        <style>
+        #event-info:hover{
+            color: #43d39e!important;
+        }
+        </style>
+        
     @endsection
  
 
@@ -79,47 +85,22 @@
                             <!-- messages -->
                         <div class="tab-pane fade show active overflow-auto my-scroll" id="pills-participated" role="tabpanel" aria-labelledby="pills-participated-tab" style="height: 60vh;">
                     <!-- 1st event -->
-                            <div class="card bg-light rounded mx-2 hover-me-sm">
-                                <div class="card-body pt-3 py-0">
+                            <div class="card bg-light rounded mx-2 new-shadow-sm">
+                                <div class="card-body pt-3 pb-1">
                                     <div class="d-flex justify-content-between align-items-center flex-wrap">
-                                        <span class="badge badge-soft-warning badge-pill px-3 py-1 mb-1 font-size-13">Team Event</span>
+                                        <span class="badge badge-soft-warning badge-pill px-3 mb-1 font-size-13">Team Event</span>
                                         <div>
-                                            <span class="text-muted font-weight-bold mr-2">Date:</span>
-                                            <span>28/12/2019</span>
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="About Event">
+                                            <i data-feather="info" height="20px" class="text-dark" id="event-info"></i>
+                                        </a>
                                         </div>         
                                     </div>
                                     <div class="card-text">
-                                        <h4>Cricket Compitition</h4>    
-                                    </div>
-                                </div>
-                            </div>
-                    <!-- 2nd event -->
-                            <div class="card bg-light rounded mx-2 hover-me-sm">
-                                <div class="card-body pt-3 py-0">
-                                    <div class="d-flex justify-content-between align-items-center flex-wrap">
-                                        <span class="badge badge-soft-warning badge-pill px-3 py-1 mb-1 font-size-13">Team Event</span>
-                                        <div>
+                                        <div class="mt-1">
                                             <span class="text-muted font-weight-bold mr-2">Date:</span>
                                             <span>28/12/2019</span>
-                                        </div>         
-                                    </div>
-                                    <div class="card-text">
-                                        <h4>Cricket Compitition</h4>
-                                    </div>
-                                </div>
-                            </div>
-                    <!-- 3rd event  -->
-                            <div class="card bg-light rounded mx-2 hover-me-sm">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center flex-wrap">
-                                        <span class="badge badge-soft-warning badge-pill px-3 py-1 mb-1 font-size-13">Team Event</span>
-                                        <div>
-                                            <span class="text-muted font-weight-bold mr-2">Date:</span>
-                                            <span>28/12/2019</span>
-                                        </div>         
-                                    </div>                                    
-                                    <div class="card-text">
-                                        <h4>Cricket Compitition</h4>
+                                        </div>
+                                        <h4>Cricket Compitition</h4> 
                                     </div>
                                 </div>
                             </div>
