@@ -52,6 +52,8 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'SessionCheck' => \App\Http\Middleware\SessionCheck::class,
+        'co_valid_check' => \App\Http\Middleware\co_valid_check::class,
+        'co_session_check' => \App\Http\Middleware\co_session_check::class,
         'ValidCheck'=> \App\Http\Middleware\ValidCheck::class,
         'CookieCheck'=> \App\Http\Middleware\CookieCheck::class,
         'auth' => \App\Http\Middleware\Authenticate::class,

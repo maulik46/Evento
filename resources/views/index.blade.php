@@ -103,7 +103,7 @@
                                     <?php $a=1;?>
                                     <div class="media px-3 py-2 new-shadow-sm">
                                         <div class="media-body">
-                                            <h4 class="mt-0 mb-1 header-title  ">{{$e['ename']}}</h4>
+                                            <h4 class="mt-0 mb-1 header-title  ">{{ucfirst($e['ename'])}}</h4>
                                             <div class="text-muted">{{date('d/m/Y',strtotime($e['edate']))}}</div>
                                             <span
                                                 class="text-muted badge rounded-pill 
@@ -112,7 +112,7 @@
                                                 @if ($e['category'] == 'it')badge-soft-warning @endif
                                                 @if ($e['category'] == 'sports')badge-soft-success 
                                                 @endif 
-                                                px-3">{{$e['category']}}
+                                                px-3">{{ucfirst($e['category'])}}
                                             </span>
 
                                         </div>
