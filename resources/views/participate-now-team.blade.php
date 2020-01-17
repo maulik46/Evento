@@ -124,7 +124,7 @@
                                         <i data-feather="check-square" height="20px"></i>   
                                         </a>
                                         <br>
-                                        <a href="" class="my-3 px-4 font-weight-bold btn btn-info new-shadow rounded-sm">
+                                        <a href="{{url('/index')}}" class="my-3 px-4 font-weight-bold btn btn-info new-shadow rounded-sm">
                                             <span>Back</span>
                                             <i data-feather="arrow-left-circle"></i>
                                         </a>
