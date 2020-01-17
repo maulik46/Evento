@@ -35,7 +35,7 @@
                         <div class="mb-3 mt-4 justify-content-between d-flex align-items-center ">
                             <div class="d-flex align-items-center">
                                 <img src="{{asset('/assets/images/svg-icons/co-ordinate/team.svg')}}" height="35px" alt="">
-                                <span class="h4 ml-2"> Participated Candidates</span>
+                                <span class="h4 ml-2">Participated Candidates</span>
                             </div>
                             <div class="font-weight-bold mr-4 font-size-15">
                             <?php $c=participant::where('eid',$einfo['eid'])->count()?>
