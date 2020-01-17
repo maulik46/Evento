@@ -108,12 +108,12 @@
                                 </div>
 
                                 <div class="mt-5 mb-1 ml-4">
-                                    <a href="#" class="px-4 btn btn-success new-shadow rounded-sm" data-toggle="modal" data-target="#modal-success">
+                                    <a href="#" class="px-4 btn btn-success new-shadow rounded-sm hover-me-sm" data-toggle="modal" data-target="#modal-success">
                                         <span class="font-weight-bold font-size-15">Confirm participation</span>
                                        <i data-feather="check-square" height="20px"></i>   
                                     </a>
                                     <br>
-                                    <a href="" class="my-3 px-4 font-weight-bold btn btn-info new-shadow rounded-sm">
+                                    <a href="{{url('/index')}}" class="my-3 px-4 font-weight-bold btn btn-info new-shadow rounded-sm hover-me-sm">
                                         <span>Back</span>
                                         <i data-feather="arrow-left-circle"></i>
                                     </a>
