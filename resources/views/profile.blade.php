@@ -85,12 +85,18 @@
                             <!-- messages -->
                         <div class="tab-pane fade show active overflow-auto my-scroll" id="pills-participated" role="tabpanel" aria-labelledby="pills-participated-tab" style="height: 60vh;">
                     <!-- 1st event -->
+                    @foreach($activity as $act)
+                    @if($act['edate'] > date('Y-m-d'))
                             <div class="card bg-light rounded mx-2 new-shadow-sm">
                                 <div class="card-body pt-3 pb-1">
                                     <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                        @if($act['e_type']=='team')
                                         <span class="badge badge-soft-warning badge-pill px-3 mb-1 font-size-13">Team Event</span>
+                                        @else
+                                        <span class="badge badge-soft-success badge-pill px-3 mb-1 font-size-13">Solo Event</span>
+                                        @endif
                                         <div>
-                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="About Event">
+                                        <a href="{{url('about_event')}}/{{$act['pid']}}" data-toggle="tooltip" data-placement="bottom" title="About Event">
                                             <i data-feather="info" height="20px" class="text-dark" id="event-info"></i>
                                         </a>
                                         </div>         
@@ -98,12 +104,15 @@
                                     <div class="card-text">
                                         <div class="mt-1">
                                             <span class="text-muted font-weight-bold mr-2">Date:</span>
-                                            <span>28/12/2019</span>
+                                            <span>{{date('d/m/Y', strtotime($act['edate']))}}</span>
                                         </div>
-                                        <h4>Cricket Compitition</h4> 
+                                        <h4>{{ucfirst($act['ename'])}}</h4> 
                                     </div>
                                 </div>
                             </div>
+                    @endif
+                    @endforeach
+                            
                         </div>
 
                         <div class="tab-pane fade show" id="pills-activity" role="tabpanel" aria-labelledby="pills-activity-tab">
@@ -115,8 +124,9 @@
                                 <ul class="list-unstyled events">
                                     <?php $a=0;?>
                                     @foreach($activity as $act)
-                                    <?php $a=1;
-                                
+                                    @if($act['edate'] < date('Y-m-d'))
+                                    <?php 
+                                        $a=1;
                                     ?>
                                     <li class="event-list ">
                                         <div>
@@ -161,6 +171,7 @@
                                             </div>
                                         </div>
                                     </li>
+                                    @endif
                                     @endforeach
                                     
                                 </ul>
