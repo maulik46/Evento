@@ -263,7 +263,7 @@ class student extends Controller
     }
     public function activity()
     {
-        $activity=participant::join('tblevents','tblevents.eid','=','tblparticipant.eid')->where([['senrl','LIKE','%'.Session::get('senrl').'%'],['edate','<',date('Y-m-d')]])->orderby('edate','DESC')->get()->toarray();
+        $activity=participant::join('tblevents','tblevents.eid','=','tblparticipant.eid')->where([['senrl','LIKE','%'.Session::get('senrl').'%']])->orderby('edate','DESC')->get()->toarray();
         return view('profile',['activity'=>$activity]);
     }
     // public function part()
