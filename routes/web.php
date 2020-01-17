@@ -23,6 +23,10 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
     route::get('/profile','student@activity');
     
+    route::get('/about_event/{pid}',function(){
+        return view('/about_event');
+    });
+    
     route::get('/winner-list',function(){
         return view('winner-list');    
     });   
