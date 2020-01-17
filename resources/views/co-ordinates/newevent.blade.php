@@ -321,7 +321,8 @@
 // nice-select js ------------------------------------------------------------
 
     $(document).ready(function() {
-        $('select').niceSelect();
+        $('#event-type').niceSelect();
+        $('#gen').niceSelect();
     });
 
 // nice-select js end --------------------------------------------------------
