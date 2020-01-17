@@ -112,7 +112,7 @@ class student extends Controller
             session()->put('address',$user_details['address']);
             session()->put('clgcode', $req->clgcode);
             $events=$this->getevents();
-            return view('/index',['events'=>$events]);
+            return redirect(url('/index'));
         } 
         else
         {
