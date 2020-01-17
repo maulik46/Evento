@@ -55,7 +55,7 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
     Route::POST('/insertteam/{galw}/{alw_dif_class}/{a_d_d}','student@insert_team');
 
-  
+
 });
 //Route::get('/getc','student@getc');
 Route::get('/login','student@login');
