@@ -49,14 +49,14 @@
                                 </div>
                             </div>    
                             <div class="mt-3">
-                                <div class="table-responsive">
+                                <div class="table-responsive overfloaw-auto my-scroll">
                                     <table class="table table-hover table-light new-shadow-sm rounded-sm">
                                         <thead class="thead-light">
                                             <tr>
                                                 <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3"
                                                     style="background-color: #dde1fc;">
                                                     <div class="font-size-18">
-                                                        Team Members
+                                                        Your Team Members
                                                     </div>
                                                     <div class="font-size-13 mt-1 badge badge-light px-3 rounded-pill">
                                                         Team XYZ
