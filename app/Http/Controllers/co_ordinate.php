@@ -56,6 +56,16 @@ class co_ordinate extends Controller
         $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
         return view('co-ordinates/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
     }
+    public function delete_event($eid)
+    {
+    }
+    public function update_event($eid)
+    {
+        // echo $eid;
+        $tble=tblevent::where('eid',$eid)->get()->first()->toArray();
+       // print_r($tble);
+        return view('co-ordinates/updateevent',['e_data'=>$tble]);
+    }
     public function create_event(Request $req)
     {
         $edate=date('Y-m-d',strtotime($req->edate));
