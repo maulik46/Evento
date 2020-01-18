@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -110,10 +111,17 @@
                             </a>
                         </div>
                     </li>
+                      <?php
+                        $notice=\DB::table('tblnotice')->where([['receiver','coordinator'],['clgcode',Session::get('clgcode')]])->get()->toarray();
+                        $lastevent=App\tblcoordinater::select('last_noti')->where('cid',Session::get('cid'))->first();
+                        $count=\DB::table('tblnotice')->select('nid')->where([['nid','>',$lastevent->last_noti],['receiver','coordinator'],['clgcode',Session::get('clgcode')]])->count();
+                    ?>
                     <li class="nav-item notification-list" data-toggle="tooltip" data-placement="bottom" title="Inbox">
-                        <a href="#" class="text-dark right-bar-toggle">
+                        <a href="#" class="text-dark right-bar-toggle" id="mail">
                             <i data-feather="mail" height="19px" id="nav-menu-btn"></i>
-                            <span class="noti-icon-badge"></span>
+                            @if($count>0)
+                            <span class="noti-icon-badge" id="noti"></span>
+                            @endif
                         </a>
                     </li>
                 </ul>
@@ -143,22 +151,36 @@
              </div>
 
              <div class="my-scroll px-2">
-                 <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm left-red-border">
-                     <div class="card-body py-2">
-                         <div class="d-flex justify-content-between align-items-center flex-wrap">
-                             <span class="badge badge-soft-primary px-3 py-1 badge-pill">28/12/2019</span>
-                             <h6>Dr.Rohit Radadiya</h6>
-                         </div>
-                         <div>
-                             <h5 class="mt-0">Picnic Notice</h5>
-                             <div class="card-text mb-1">
-                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Non tenetur possimus
-                                 adipisci?
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card new-shadow-sm my-2  hover-me-sm rounded-0">
+             <?php $c=0;?>
+            @foreach($notice as $nt)
+            <?php $c++;
+                if($c=1)
+                {
+                    $lastnotice=$nt->nid;
+                }
+            ?>
+            <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm" style="border-left: 4px solid #ff5c75;">
+                           <div class="card-body py-2">
+                               <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                    <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
+                                    <h6>{{ucfirst($nt->sender)}}</h6>
+                               </div>
+                               <div>
+                                    <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
+                                    <div class="card-text mb-1"> 
+                                        {{ucfirst($nt->message)}}
+                                    </div>
+                                    @if($nt->attechment)
+                                    <div class="card-action my-2">
+                                        <a href="{{asset('attechment')}}/{{$nt->attechment}}" class="btn btn-soft-danger rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">{{$nt->attechment}}</a>
+                                        
+                                    </div> 
+                                    @endif
+                               </div>
+                           </div>
+                       </div>
+            @endforeach
+                 <!-- <div class="card new-shadow-sm my-2  hover-me-sm rounded-0">
                      <div class="card-body py-2">
                          <div class="d-flex justify-content-between align-items-center flex-wrap">
                              <span class="badge badge-soft-primary px-3 py-1 badge-pill">28/12/2019</span>
@@ -183,7 +205,7 @@
                          </div>
 
                      </div>
-                 </div>
+                 </div> -->
              </div>
          </div>
          <!-- inbox Right-bar -->
@@ -204,7 +226,27 @@
     @show   
     <!-- App js -->
     <script src="{{asset('assets/js/app.min.js')}}"></script>
-   
+    <script>
+        $('#mail').click(function(){
+            var last=<?php echo $lastnotice ;?>;
+            $.ajaxSetup({
+                    headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+            $.ajax({
+                type:'POST',
+                url:'lastnotice',
+                data:{"lastnote":last},
+                success:function(data) {
+                    $("#noti").removeClass('noti-icon-badge');
+                },
+                error:function(data){
+                console.log(data);
+                }
+                })
+        });
+    </script>
 
 </body>
 
