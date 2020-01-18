@@ -98,6 +98,8 @@ Route::get('/create_event',function(){
 });   
 Route::post('/newevent','co_ordinate@create_event');
 Route::post('/msg','co_ordinate@err');
+    
+Route::get('/event_info/{id}','co_ordinate@event_info');
 
 });
 
