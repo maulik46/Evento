@@ -103,7 +103,7 @@
                                 <p class="mx-5 text-muted font-size-13">
                                     <br>
                                     <span>
-                                        **All the team members have to reach at the J.K ground on 09:00 clock without being late
+                                        **All the team members have to reach at <b>{{ucfirst($list_event_d['place'])}}</b> before <b>{{date('h:i A', strtotime($list_event_d['time']))}}</b> without being late!!
                                     </span>
                                 </p>
                         </div>
