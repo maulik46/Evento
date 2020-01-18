@@ -87,7 +87,6 @@
                     <!-- 1st event -->
                     @foreach($activity as $act)
                     @if($act['edate'] > date('Y-m-d'))
-                    <?php $a=1; ?>
                             <div class="card bg-light rounded mx-2 new-shadow-sm">
                                 <div class="card-body pt-3 pb-1">
                                     <div class="d-flex justify-content-between align-items-center flex-wrap">
@@ -97,14 +96,14 @@
                                         <span class="badge badge-soft-success badge-pill px-3 mb-1 font-size-13">Solo Event</span>
                                         @endif
                                         <div>
-                                        <a href="{{url('about_event')}}/{{$act['pid']}}" data-toggle="tooltip" data-placement="bottom" title="About Event">
+                                        <a href="{{url('about_event')}}/{{encrypt($act['pid'])}}" data-toggle="tooltip" data-placement="bottom" title="About Event">
                                             <i data-feather="info" height="20px" class="text-dark" id="event-info"></i>
                                         </a>
                                         </div>         
                                     </div>
                                     <div class="card-text">
                                         <div class="mt-1">
-                                            <span class="text-muted font-weight-bold mr-2">Event Date:</span>
+                                            <span class="text-muted font-weight-bold mr-2">Date:</span>
                                             <span>{{date('d/m/Y', strtotime($act['edate']))}}</span>
                                         </div>
                                         <h4>{{ucfirst($act['ename'])}}</h4> 
@@ -113,12 +112,6 @@
                             </div>
                     @endif
                     @endforeach
-                    @if($a==0)
-                        <div class="font-size-14 font-weight-bold d-flex align-items-center justify-content-center">
-                            <span>You haven't participated in any event yet!!</span> 
-                        </div>                    
-                    @endif
-                    
                             
                         </div>
 
@@ -138,10 +131,10 @@
                                     <li class="event-list ">
                                         <div>
                                             <div class="media">
-                                                <div class="event-date text-center mr-2">
-                                                    <div class=" px-2 bg-soft-primary rounded">
+                                                <div class="event-date text-center mr-4">
+                                                    <div class="py-1 px-3 bg-soft-primary rounded">
                                                         <span
-                                                            class="font-size-14 avatar-title text-primary font-weight-bold ">
+                                                            class="font-size-16 avatar-title text-primary font-weight-semibold ">
                                                             @if(date('d/m/Y', strtotime($act['edate']))===date('d/m/Y', strtotime('-1 day')))
                                                             Yesterday
                                                             @else
@@ -151,7 +144,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="media-body ">
-                                                    <div class="card bg-light rounded-lg new-shadow-sm">
+                                                    <div class="card bg-light rounded-lg">
                                                         <div class="card-body p-2">
                                                             <h5 class="mt-0">{{ucfirst($act['ename'])}}</h5>
                                                             <p class="text-muted">
