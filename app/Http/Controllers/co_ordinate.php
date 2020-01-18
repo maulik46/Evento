@@ -35,7 +35,7 @@ class co_ordinate extends Controller
             session()->put('clgcode', $clg->clgcode);
             session()->put('cname',$clg->cname);
             session()->put('email',$clg->email);
-            session()->put('category',$clg->category);
+            session()->put('cat',$clg->category);
             
             return redirect(url('cindex'));
         } 
@@ -46,10 +46,6 @@ class co_ordinate extends Controller
     }
     public function index()
     {
-        session()->put('cid','1');
-        session()->put('cname','Akki');
-        session()->put('clgcode','sbccas');
-        session()->put('cat','sports');
         $events=tblevent::where([['clgcode',Session::get('clgcode')]
         ])->orderby('edate','desc')->get()->toarray();//change
         return view('co-ordinates/newindex',['events'=>$events]);
