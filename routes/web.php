@@ -35,7 +35,7 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
     Route::get('/logout','student@logout');
     
-    Route::view('/notice','notice');
+    Route::get('/notice','student@notice');
 
     Route::get('/explore/{name}','student@explore');
 
@@ -100,6 +100,8 @@ Route::group(['middleware' => 'co_session_check'], function () {
         Route::get('/event_info/{id}','co_ordinate@event_info');
 
         Route::get('/result/{id}','co_ordinate@event_result');
+    
+        route::post('/lastnotice','co_ordinate@last_noti');
 
 });
 
