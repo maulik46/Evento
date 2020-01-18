@@ -213,7 +213,7 @@
     <div class="card mb-3">
         <div class="card-body py-2 d-flex justify-content-between align-items-center">
             <div class="h4 d-flex align-items-center">
-                <i data-feather="calendar"></i>
+                <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">My Events</span>
             </div>
             <a href="{{url('/create_event')}}" class="text-success d-none d-sm-block ">
@@ -342,7 +342,7 @@
     <div class="card mb-3">
         <div class="card-body py-2">
             <div class="h4 d-flex align-items-center">
-                <i data-feather="calendar"></i>
+                <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">My Running Events</span>
             </div>
         </div>
@@ -365,33 +365,12 @@
                                         class="text-muted badge rounded-pill badge-soft-success  px-3">{{ucfirst($e['e_type'])}}
                                         @endif
                                     </span>
+                                  
                                     <div>
-                                        <a href="#" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                                            aria-expanded="false" class="dropdown-toggle">
-
-                                            <i id="event-info" data-feather="more-vertical" class="text-dark"
-                                                height="20px"></i>
-
+                                        <a href="{{url('event_info')}}">
+                                            <i data-feather="info" class="icon-dual-success"></i>
                                         </a>
-                                        <div
-                                            class="dropdown-menu event-option profile-dropdown-items dropdown-menu-right ">
-                                            <a href="{{url('event_info')}}" class="dropdown-item">
-                                                <i data-feather="info" class="icon-dual-info icon-xs mr-2"></i>
-                                                <span>About Event</span>
-                                            </a>
-                                            <a href="{{url('create_event')}}" class="dropdown-item my-1">
-                                                <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
-                                                <span>Update Event</span>
-                                            </a>
-                                            <a href="#" class="dropdown-item">
-                                                <i data-feather="trash-2" class="icon-dual-danger icon-xs mr-2"></i>
-                                                <span class="text-danger">Delete Event</span>
-                                            </a>
-
-                                        </div>
                                     </div>
-
-
                             </div>
                             <h4 class="mb-0 mt-3">{{ucfirst($e['ename'])}}</h4>
                             <span class="text-muted1">{{date('d/m/Y', strtotime($e['edate']))}}</span>
