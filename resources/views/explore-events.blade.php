@@ -99,7 +99,9 @@
                         
                         @endforeach
                         @if($a==0)
-                                no new events available
+                        <div class="p-4 w-100 d-flex align-items-center justify-content-center font-size-18" style="min-height: 50vh;">
+                            No new events available!!
+                        </div>
                         @endif
                     @endif
                    
