@@ -103,5 +103,15 @@ class co_ordinate extends Controller
             $einfo=tblevent::where('eid',$id)->first();
             return view("co-ordinates/event_info",['einfo'=>$einfo]);
      }
+     public function event_result($id)
+     {     
+        
+        $participate=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
+        $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
+        return view('co-ordinates/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
+        
+        return view("co-ordinates/result",['eresult'=>$eresult]);
+     }
+
 }
 
