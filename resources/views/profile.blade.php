@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="card-text">
                                         <div class="mt-1">
-                                            <span class="text-muted font-weight-bold mr-2">Date:</span>
+                                            <span class="text-muted font-weight-bold mr-2">Event Date:</span>
                                             <span>{{date('d/m/Y', strtotime($act['edate']))}}</span>
                                         </div>
                                         <h4>{{ucfirst($act['ename'])}}</h4> 
@@ -131,10 +131,10 @@
                                     <li class="event-list ">
                                         <div>
                                             <div class="media">
-                                                <div class="event-date text-center mr-4">
-                                                    <div class="py-1 px-3 bg-soft-primary rounded">
+                                                <div class="event-date text-center mr-2">
+                                                    <div class=" px-2 bg-soft-primary rounded">
                                                         <span
-                                                            class="font-size-16 avatar-title text-primary font-weight-semibold ">
+                                                            class="font-size-14 avatar-title text-primary font-weight-bold ">
                                                             @if(date('d/m/Y', strtotime($act['edate']))===date('d/m/Y', strtotime('-1 day')))
                                                             Yesterday
                                                             @else
@@ -144,7 +144,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="media-body ">
-                                                    <div class="card bg-light rounded-lg">
+                                                    <div class="card bg-light rounded-lg new-shadow-sm">
                                                         <div class="card-body p-2">
                                                             <h5 class="mt-0">{{ucfirst($act['ename'])}}</h5>
                                                             <p class="text-muted">
