@@ -210,7 +210,7 @@
         </div> <!-- end card-body-->
     </div> <!-- end card-->
 
-    <div class="card mb-3">
+    <div class="card mb-0  new-shadow-sm">
         <div class="card-body py-2 d-flex justify-content-between align-items-center">
             <div class="h4 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
@@ -225,11 +225,13 @@
             </a>
         </div>
     </div>
+
     <div class="row" id="event-list">
         @foreach($events as $e)
         @if($e['cid']==Session::get('cid'))
+
         <div class="col-md-6 col-xl-4 col-sm-6">
-            <div class="card new-shadow-sm hover-me-sm">
+            <div class="card new-shadow-sm hover-me-sm mb-3 mt-2">
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
@@ -284,6 +286,7 @@
                 </div>
             </div>
         </div>
+        
         @endif
         @endforeach
         <div class="col-md-6 col-xl-4 col-sm-6">
@@ -336,10 +339,8 @@
                 </div>
             </div>
         </div>
-
-
     </div><!-- end row -->
-    <div class="card mb-3">
+    <div class="card mt-2 mb-0 new-shadow-sm">
         <div class="card-body py-2">
             <div class="h4 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
@@ -352,7 +353,7 @@
         @if($e['cid']==Session::get('cid'))
         @if($e['edate']==date('Y-m-d'))
         <div class="col-md-6 col-xl-4 col-sm-6">
-            <div class="card new-shadow-sm hover-me-sm">
+            <div class="card new-shadow-sm hover-me-sm mt-2" >
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
@@ -377,10 +378,10 @@
                         </div>
                     </div>
                     <div class="bg-light">
-                        <a href="{{url('view_candidates')}}/{{$e['eid']}}"
+                        <a href="{{url('result')}}/{{$e['eid']}}"
                             class="text-center btn btn-light btn-block rounded-0 text-dark d-flex align-items-center justify-content-center view-candidate">
-                            <i data-feather="eye" height="18px"></i>
-                            <span>View Candidates</span>
+                            <i data-feather="award" height="18px"></i>
+                            <span>Announce Result</span>
                         </a>
                     </div>
                 </div>
