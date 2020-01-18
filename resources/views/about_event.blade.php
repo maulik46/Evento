@@ -53,12 +53,12 @@
                                     <table class="table table-hover table-light new-shadow-sm rounded-sm">
                                         <thead class="thead-light">
                                             <tr>
-                                                <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3"
-                                                    style="background-color: #dde1fc;">
-                                                    <div class="font-size-18">
-                                                        Your Team Members
+                                                <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3" style="background-color: #dde1fc;">
+                                                    <div class="font-size-18 d-flex align-items-center">
+                                                        <img src="{{asset('assets\images\svg-icons\co-ordinate\team.svg')}}" height="30px" alt="">
+                                                        <span class="ml-2">Your Team Members</span> 
                                                     </div>
-                                                    <div class="font-size-13 mt-1 badge badge-light px-3 rounded-pill">
+                                                    <div class="font-size-13 mt-2 badge badge-light px-3 rounded-pill">
                                                         Team XYZ
                                                     </div>
                                                 </td>
