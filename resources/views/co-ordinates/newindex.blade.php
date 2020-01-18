@@ -252,7 +252,7 @@
                                         </a>
                                         <div
                                             class="dropdown-menu event-option profile-dropdown-items dropdown-menu-right ">
-                                            <a href="{{url('event_info')}}" class="dropdown-item">
+                                            <a href="{{url('event_info')}}/{{$e['eid']}}" class="dropdown-item">
                                                 <i data-feather="info" class="icon-dual-info icon-xs mr-2"></i>
                                                 <span>About Event</span>
                                             </a>
