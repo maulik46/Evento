@@ -61,7 +61,7 @@
                                 <img src="{{asset('assets/images/svg-icons/co-ordinate/man.svg')}}" alt="user-image" class="align-self-center" />
                                 <div class="media-body text-left d-none d-sm-block">
                                     <h6 class="ml-2 my-0" id="nav-menu-btn">
-                                        <span><?=Session::get('cname')?></span>
+                                        <span>{{ucfirst(Session::get('cname'))}}</span>
                                         <span class="text-muted d-block font-size-12 mt-1">
                                             Co-ordinator
                                         </span>
@@ -76,7 +76,7 @@
                                   <img src="{{asset('assets/images/svg-icons/co-ordinate/man.svg')}}" alt="user-image" height="40px" class="align-self-center" />
                                   <div class="media-body text-left">
                                       <h6 class="ml-2 my-0">
-                                          <span><?=Session::get('cname')?></span>
+                                          <span>{{ucfirst(Session::get('cname'))}}</span>
                                           <span class="text-muted d-block font-size-12 mt-1">
                                               Co-ordinator
                                           </span>
@@ -104,7 +104,7 @@
 
                             <div class="dropdown-divider"></div>
 
-                            <a href="{{url('/clogout')}}" class="dropdown-item notify-item">
+                            <a href="{{url('/logout')}}" class="dropdown-item notify-item">
                                 <i data-feather="log-out" class="icon-dual-danger icon-xs mr-2"></i>
                                 <span>Logout</span>
                             </a>
