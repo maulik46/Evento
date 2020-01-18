@@ -367,8 +367,8 @@
                                     </span>
                                   
                                     <div>
-                                        <a href="{{url('event_info')}}">
-                                            <i data-feather="info" class="icon-dual-success"></i>
+                                        <a href="{{url('event_info')}}" data-toggle="tooltip" data-placement="bottom" title="About">
+                                            <i data-feather="info" class="text-dark" height="20px"></i>
                                         </a>
                                     </div>
                             </div>
