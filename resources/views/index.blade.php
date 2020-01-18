@@ -36,9 +36,18 @@
         
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
         @if(Session::has('alert-' . $msg))
-           <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-           </p>
+           
+    <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:20px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+        <div class="toast-body text-white alert mb-1">
+            <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                <i data-feather="x-circle" id="close-btn" height="18px" ></i>
+            </a>
+            <div class="mt-2 font-weight-bold font-size-14">
+                You successfully participated.
+            </div> 
+            
+        </div>
+    </div>
         @endif
         @endforeach
                     <!-- carousal Start -->
@@ -91,7 +100,7 @@
                         </div> <!-- carousal end -->
                         <div class="col-xl-4 rounded overflow-auto my-scroll bg-white mt-4 new-shadow"
                             style="height: 300px;">
-                            <div class="card ">
+                            <div class="card shadow-none">
                                 <div class="card-body pt-2 p-0">
                                     <h6 class="font-size-24 mb-0 pb-1 ml-3 text-center">Events</h6>
                                     <hr>
@@ -125,7 +134,7 @@
                                                 </a>
                                         @else
                                             <a href="{{url('/participate-now')}}/{{encrypt($e['eid'])}}">
-                                            <i data-feather="external-link" class="align-self-center icon-dual icon-md">
+                                            <i data-feather="external-link" class="align-self-center text-dark event-link">
                                             </i>
                                             </a>
                                         @endif
@@ -134,9 +143,10 @@
                                     @endif
                                     @endforeach
                                     @if($a==0)
-                                        no new events available
+                                    <div class="p-4 font-weight-bold text-center">
+                                        No new events available!!
+                                    </div>
                                     @endif
-                                   
                                 </div>
                             </div>
                         </div>
