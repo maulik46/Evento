@@ -27,7 +27,9 @@
                         </div>
                     </div>
                     @if(isset($massege))
-                        {{$massege}}
+                    <div class="p-4 w-100 d-flex align-items-center justify-content-center font-size-18" style="min-height: 50vh;">
+                       No new events available!!
+                    </div>
                     @endif
                     @if(isset($events))
                          <?php $a=0 ?>   
