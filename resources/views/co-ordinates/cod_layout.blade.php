@@ -104,7 +104,7 @@
 
                             <div class="dropdown-divider"></div>
 
-                            <a href="{{url('/clogin')}}" class="dropdown-item notify-item">
+                            <a href="{{url('/logout')}}" class="dropdown-item notify-item">
                                 <i data-feather="log-out" class="icon-dual-danger icon-xs mr-2"></i>
                                 <span>Logout</span>
                             </a>

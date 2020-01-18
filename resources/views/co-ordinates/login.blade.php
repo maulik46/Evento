@@ -66,7 +66,7 @@
                                <span>Log-in</span>
                                <span class="font-size-12 text-muted">for Co-ordinator</span>
                            </h4>
-                           <form action="{{ url('co-ordinates/checklogin') }}" method="post">
+                           <form action="{{ url('c_checklogin') }}" method="post">
                            @csrf
                                <div class="form-group mt-2">
                                    <label class="col-form-label font-size-14">Co-ordinator ID</label>

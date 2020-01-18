@@ -17,7 +17,7 @@ class co_session_check
     {
         if (!$request->session()->exists('cname')) {
             // user value cannot be found in session
-            return redirect('co-ordinates/login');
+            return redirect('/clogin');
         }
         return $next($request);
     }

@@ -72,11 +72,13 @@ Route::post('/checklogin','student@checklogin')->middleware(['ValidCheck', 'Cook
 
 // Route::view('/cindex','co-ordinates/newindex');
 
-Route::get('co-ordinates/login','co_ordinate@login');
-Route::post('co-ordinates/checklogin','co_ordinate@checklogin')->middleware('co_valid_check');
+Route::get('/clogin','co_ordinate@login');
+Route::post('/c_checklogin','co_ordinate@checklogin')->middleware('co_valid_check');
 
 
 Route::group(['middleware' => 'co_session_check'], function () {
+
+Route::get('/logout','co_ordinate@logout');
 
 Route::view('/cnotice','co-ordinates/create_notice');
 
