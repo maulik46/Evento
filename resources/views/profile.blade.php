@@ -87,6 +87,7 @@
                     <!-- 1st event -->
                     @foreach($activity as $act)
                     @if($act['edate'] > date('Y-m-d'))
+                    <?php $a=1; ?>
                             <div class="card bg-light rounded mx-2 new-shadow-sm">
                                 <div class="card-body pt-3 pb-1">
                                     <div class="d-flex justify-content-between align-items-center flex-wrap">
@@ -112,6 +113,12 @@
                             </div>
                     @endif
                     @endforeach
+                    @if($a==0)
+                        <div class="font-size-14 font-weight-bold d-flex align-items-center justify-content-center">
+                            <span>You haven't participated in any event yet!!</span> 
+                        </div>                    
+                    @endif
+                    
                             
                         </div>
 
