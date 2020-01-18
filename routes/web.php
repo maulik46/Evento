@@ -82,7 +82,6 @@ Route::view('/cnotice','co-ordinates/create_notice');
 
 Route::view('/change_pass','co-ordinates/change_pass');
 
-Route::view('/event_info','co-ordinates/event_info');
 
 // Route::view('/create_event','co-ordinates/newevent');
 
