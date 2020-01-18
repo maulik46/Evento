@@ -105,13 +105,19 @@
                                         <span>Winner List </span>
                                     </a>
                                 </li>
+                                <?php
+                                    $lastevent=App\tblstudent::select('last_noti')->where('senrl',Session::get('senrl'))->first();
+                                    $count=\DB::table('tblnotice')->select('nid')->where([['nid','>',$lastevent->last_noti],['receiver','student'],['clgcode',Session::get('clgcode')]])->count();
+                                ?>
                                 <li class="mt-3">
                                     <a href="{{url('/notice')}}" class="d-flex align-items-center justify-content-between">
                                     <div>
                                         <i data-feather="clipboard"></i>
-                                        <span> Notice </span>
+                                        <span>Notice </span>
                                     </div>
-                                        <span class="badge badge-danger rounded-lg">4</span>
+                                    @if($count>0)
+                                        <span class="badge badge-danger rounded-lg">{{$count}}</span>
+                                    @endif
                                     </a>
                                     
                                 </li>
