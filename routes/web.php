@@ -96,7 +96,7 @@ Route::group(['middleware' => 'co_session_check'], function () {
             
         Route::get('/event_info/{id}','co_ordinate@event_info');
 
-        Route::view('/result','co_ordinates/result');
+        Route::get('/result/{id}','co_ordinate@event_result');
 
 });
 
