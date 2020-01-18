@@ -3,7 +3,7 @@ use  App\tblstudent;
 ?>
 @extends('stud_layout')
 
-@section('title','Home')
+@section('title','Winner List')
 
 @section('my-content')
             <div class="container-fluid my-5">

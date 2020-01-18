@@ -93,14 +93,19 @@
                                                 <ol>
                                                 <?php
                                                 $rules=(explode(";",$einfo->rules));
+                                                $c=0;
                                                ?>
                                                 @foreach($rules as $rule)
                                                     @if(strlen($rule)>0)
-                                                    <li>
+                                                    <li class="font-weight-bold">
                                                         {{$rule}}
+                                                        <?php $c=1;?>
                                                     </li>
                                                     @endif
                                                 @endforeach
+                                                @if($c==0)
+                                                    <div class="font-weight-bold text-center p-1">There are no particular rules for {{ucfirst($einfo->ename)}} Competition!! </div>
+                                                @endif
                                                 </ol>
                                             </div>
                                         </div>
@@ -134,16 +139,16 @@
                  </button>
              </div>
              <div class="modal-body text-center">
-                 <img src="{{asset('assets/images/svg-icons/student-dash/check-square.svg')}}" alt="successfull" height="50px">
-                 <h5 class="text-dark mt-4">Your Have Successfully Registered in <br>
-                 {{$einfo->ename}}
-                </h5>
-                 <p class="w-75 mx-auto text-dark">You can download your recipt by clicking 
-                     <br> following button
-                 </p>
+                 <h1 class="display-3 text-warning">?</h1>
+                 <h3 class="text-dark">
+                 Confirm Your Action
+                </h3>
+                <h5  class="text-dark mt-3 font-weight-normal">
+                Are you sure you want to participate in this event?
+                </h5> 
                  <div class="my-4">
-                     <a href="{{url('confirm-reg')}}/{{encrypt($einfo->eid)}}" class="px-3 btn btn-danger rounded-sm new-shadow">
-                         <i data-feather="printer" height="20px"></i> Confirm Registration
+                     <a href="{{url('confirm-reg')}}/{{encrypt($einfo->eid)}}" class="px-3 btn btn-success rounded-sm new-shadow font-weight-bold">
+                         <i data-feather="check-circle" height="20px"></i> Confirm Registration
                     </a>
                  </div>
              </div>
