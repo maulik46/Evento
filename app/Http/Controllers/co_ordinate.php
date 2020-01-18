@@ -108,6 +108,12 @@ class co_ordinate extends Controller
         ])->count();
             return response()->json(array('msg'=> $events),200);
      }
+     public function last_noti(Request $req)
+     {
+         $las_notice=$req->lastnote;
+         \DB::table('tblcoordinaters')->where('cid',Session::get('cid'))->update(['last_noti'=>$las_notice]);
+         return response()->json(array('msg'=> $las_notice),200);
+     }
      public function event_info($id)
      {      
             $einfo=tblevent::where('eid',$id)->first();
