@@ -2,11 +2,48 @@
 
 namespace App\Http\Controllers;
 use Session;
+use DB;
 use Illuminate\Http\Request;
 use App\tblevent;
 use App\participant;
 class co_ordinate extends Controller
 {
+    public function logout()//destroy session
+    {
+            Session::flush(); 
+            return redirect('/login');
+    }
+    public function login()
+    {
+        return view('co-ordinates/login');
+    }
+    public function checklogin(Request $req)//check coordinate data for login other wise return error
+    {
+        $login_details = DB::table('tblcoordinaters')->where([
+            ['email', '=', $req->cuser],
+            ['password', '=', $req->password]
+        ])
+        ->orwhere([
+            ['cname', '=', $req->cuser],
+            ['password', '=', $req->password]
+        ])
+        ->count();
+        if ($login_details==1) 
+        {
+            $clg= DB::table('tblcoordinaters')->where('password', $req->password)->first();
+            session()->put('cid', $clg->cid);
+            session()->put('clgcode', $clg->clgcode);
+            session()->put('cname',$clg->cname);
+            session()->put('email',$clg->email);
+            session()->put('category',$clg->category);
+            
+            return redirect(url('cindex'));
+        } 
+        else
+        {
+            return back()->with('error','Invalid Co-ordinate ID or Password');
+        }
+    }
     public function index()
     {
         session()->put('cid','1');
