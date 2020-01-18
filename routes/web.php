@@ -72,6 +72,12 @@ Route::post('/checklogin','student@checklogin')->middleware(['ValidCheck', 'Cook
 
 // Route::view('/cindex','co-ordinates/newindex');
 
+Route::get('co-ordinates/login','co_ordinate@login');
+Route::post('co-ordinates/checklogin','co_ordinate@checklogin')->middleware('co_valid_check');
+
+
+Route::group(['middleware' => 'co_session_check'], function () {
+
 Route::view('/cnotice','co-ordinates/create_notice');
 
 Route::view('/change_pass','co-ordinates/change_pass');
@@ -85,12 +91,15 @@ Route::view('/event_info','co-ordinates/event_info');
 // Route::view('/clogin','co-ordinates/coordinate_login');
 
 Route::get('/cindex','co_ordinate@index');
+
 Route::get('/view_candidates/{eid}','co_ordinate@view_can');
 Route::get('/create_event',function(){
     return view('co-ordinates/newevent');    
 });   
 Route::post('/newevent','co_ordinate@create_event');
 Route::post('/msg','co_ordinate@err');
+
+});
 
 // ==========================================================================
 // co-ordinator dashboard routes finished
