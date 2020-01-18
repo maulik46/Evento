@@ -14,7 +14,23 @@ use App\tblevent;
 use App\participant;
 class student extends Controller
 {
- 
+     public function about_event($pid)
+    {
+        $pid=decrypt($pid);
+        //echo $pid;
+        $list_about_event=participant::where('tblparticipant.pid',$pid)
+            ->join('tblevents', 'tblparticipant.eid', '=', 'tblevents.eid')
+            ->join('tblcoordinaters', 'tblevents.cid', '=', 'tblcoordinaters.cid')
+            ->join('tblcolleges', 'tblparticipant.clgcode', '=', 'tblcolleges.clgcode')
+            ->get()->first()->toArray();
+       
+        //print_r($list_about_event);
+        // echo "<br>";
+        // print_r($tble);
+        // echo "<br>";
+        //print_r($tblcollege);
+        return view('about_event',['list_event_d'=>$list_about_event]);
+    }
     public function logout()//destroy cookies and session
     {
             Session::flush(); 
