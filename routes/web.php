@@ -55,14 +55,13 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
 
 });
-//Route::get('/getc','student@getc');
+
 Route::get('/login','student@login');
 Route::post('/checklogin','student@checklogin')->middleware(['ValidCheck', 'CookieCheck']);
 
 
-// ==========================================================================
-// Student dashboard routes finished
-// ==========================================================================
+// xxxxxxxxxxxxxxx Student dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
+
 
 // ==========================================================================
 // co-ordinator dashboard routes start
@@ -76,35 +75,31 @@ Route::post('/c_checklogin','co_ordinate@checklogin')->middleware('co_valid_chec
 
 Route::group(['middleware' => 'co_session_check'], function () {
 
-Route::get('/clogout','co_ordinate@logout');
+        Route::get('/clogout','co_ordinate@logout');
 
-Route::view('/cnotice','co-ordinates/create_notice');
+        Route::view('/cnotice','co-ordinates/create_notice');
 
-Route::view('/change_pass','co-ordinates/change_pass');
+        Route::view('/change_pass','co-ordinates/change_pass');
 
 
-// Route::view('/create_event','co-ordinates/newevent');
+        Route::get('/cindex','co_ordinate@index');
 
-// Route::view('/view_candidates','co-ordinates/view_candidates');
+        Route::get('/view_candidates/{eid}','co_ordinate@view_can');
 
-// Route::view('/clogin','co-ordinates/coordinate_login');
+        Route::get('/create_event',function(){
+            return view('co-ordinates/newevent');    
+        });   
 
-Route::get('/cindex','co_ordinate@index');
-
-Route::get('/view_candidates/{eid}','co_ordinate@view_can');
-Route::get('/create_event',function(){
-    return view('co-ordinates/newevent');    
-});   
-Route::post('/newevent','co_ordinate@create_event');
-Route::post('/msg','co_ordinate@err');
-    
-Route::get('/event_info/{id}','co_ordinate@event_info');
+        Route::post('/newevent','co_ordinate@create_event');
+        
+        Route::post('/msg','co_ordinate@err');
+            
+        Route::get('/event_info/{id}','co_ordinate@event_info');
 
 });
 
-// ==========================================================================
-// co-ordinator dashboard routes finished
-// ==========================================================================
+// xxxxxxxxxxxxxxx co_ordinator dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
+
 
 // ==========================================================================
 // super admin dashboard routes start
@@ -122,6 +117,5 @@ route::view('/s_change_pass','super-admin/change_password');
 
 route::view('/sbanner','super-admin/create_banner');
 
-// ==========================================================================
-// super admin dashboard routes end
-// ==========================================================================
+
+// xxxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
