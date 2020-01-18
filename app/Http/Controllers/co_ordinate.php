@@ -98,5 +98,10 @@ class co_ordinate extends Controller
         ])->count();
             return response()->json(array('msg'=> $events),200);
      }
+     public function event_info($id)
+     {      
+            $einfo=tblevent::where('eid',$id)->first();
+            return view("co-ordinates/event_info",['einfo'=>$einfo]);
+     }
 }
 
