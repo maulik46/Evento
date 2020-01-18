@@ -11,7 +11,7 @@ class co_ordinate extends Controller
     public function logout()//destroy session
     {
             Session::flush(); 
-            return redirect('/login');
+            return view('co-ordinates/login');
     }
     public function login()
     {
