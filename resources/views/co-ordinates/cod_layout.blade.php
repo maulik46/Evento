@@ -113,7 +113,7 @@
                     </li>
                       <?php
                         $notice=\DB::table('tblnotice')->where([['receiver','coordinator'],['clgcode',Session::get('clgcode')]])->get()->toarray();
-                        $lastevent=App\tblcoordinater::select('last_noti')->where('cid',Session::get('cid'))->first();
+                        $lastevent=App\tblcoordinaters::select('last_noti')->where('cid',Session::get('cid'))->first();
                         $count=\DB::table('tblnotice')->select('nid')->where([['nid','>',$lastevent->last_noti],['receiver','coordinator'],['clgcode',Session::get('clgcode')]])->count();
                     ?>
                     <li class="nav-item notification-list" data-toggle="tooltip" data-placement="bottom" title="Inbox">
