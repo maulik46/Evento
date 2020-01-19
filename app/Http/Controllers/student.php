@@ -516,7 +516,11 @@ class student extends Controller
             echo json_encode($data);
         }
     }
-
+    public function notice()
+    {
+        $notice=\DB::table('tblnotice')->where([['clgcode',Session::get('clgcode')],['receiver',"student"]])->orderby('nid','desc')->get()->toarray();
+        return view('notice',['notice'=>$notice]);
+    }
     // public function part()
     // {
     //     $activity=participant::join('tblevents','tblevents.eid','=','tblparticipant.eid')->where([['senrl','LIKE','%'.Session::get('senrl').'%'],['edate','>',date('Y-m-d')]])->orderby('edate','DESC')->get()->toarray();
