@@ -7,7 +7,7 @@
         background-color: #f3f4f7 !important;
         padding: 10px 15px;
         border: 1px solid #f3f4f7;
-        font-size: 1.1em;
+        font-size: 16px;
         color: #333 !important;
         height: 50px;
         letter-spacing: 3px;
@@ -19,8 +19,8 @@
     }
 
     .form-control:focus {
-        border: 1px solid #d1d1d1 !important;
-        background-color: #f3f4f7c9 !important;
+        border: 1px solid #fff !important;
+        background-color: #f3f4f79a !important;
     }
 
     ol li {
@@ -35,11 +35,10 @@
 
 <div class="col-12 mt-5">
     <div class="card new-shadow rounded-lg">
-        <div class="px-2 py-4">
-            <div class="mt-4">
-                <div class="col-12">
+        <div class="px-2 pb-2 pt-0">
+                <div class="col-xl-12">
                     <h2
-                        class="d-flex justify-content-center align-items-center font-weight-normal text-center text-dark my-3">
+                        class="d-flex justify-content-center align-items-center font-weight-normal text-center text-dark my-3 mt-4s">
                         <img src="{{asset('assets/images/svg-icons/student-dash/flag.svg')}}" height="30px" alt="">
                         <span class="ml-2">{{ucfirst($einfo['ename'])}} Compitition</span>
                     </h2>
@@ -57,10 +56,10 @@
                             <li>
                                 This event is only for
                                 @if(Session::get('gender')=='male')
-                                {{'Boys'}}
+                                {{'Boys'}}.
                                 @else
-                                {{'Girls'}}
-                                @endif.
+                                {{'Girls'}}.
+                                @endif
                             </li>
 
                             @endif
@@ -112,7 +111,7 @@
                                 <input type="hidden" value="{{$einfo['eid']}}" name="eid">
                         <div id="part1">
                                     <label class="form-control-label">Team name</label>
-                                    <input type="text" class="form-control" name="" id="" placeholder="Enter Team Name" style="letter-spacing: 0;padding:25px">
+                                    <input type="text" class="form-control" name="" id="" placeholder="Enter Team Name" style="letter-spacing: 0;padding:25px;">
                                     <span style="color:red"></span>
                         </div>
                         <div id="part2">
@@ -140,11 +139,10 @@
                         </form>
                         
                     </div>
-                </div>
-            </div> <!-- end col -->
+                </div> <!-- end col -->
         </div>
 
-        <div class="d-flex justify-content-end mt-3">
+        <div class="d-flex justify-content-end mt-3 pb-3 px-2">
             <button class="hover-me-sm mx-2 px-3 btn btn-success new-shadow-sm" id="next-part">
                 <span class="font-size-14 font-weight-bold">Next</span>
                 <i data-feather="arrow-right-circle" height="22px"></i>
