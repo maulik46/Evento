@@ -5,6 +5,7 @@ use Session;
 use DB;
 use Illuminate\Http\Request;
 use App\tblevent;
+use App\tblcoordinaters;
 use App\participant;
 class co_ordinate extends Controller
 {
