@@ -210,7 +210,7 @@ class co_ordinate extends Controller
             return redirect()->back();
             
         }
-        session()->flash('success', 'Password updated successfully');
+        session()->flash('success', 'Password updated successfully..!');
         return redirect(url('cindex'));
      }
 
