@@ -269,12 +269,12 @@
 
                                   <button type="submit" 
                                       class="hover-me-sm m-2 btn btn-success px-4  rounded-sm new-shadow font-weight-bold font-size-15">
-                                      <span class="mr-1">Create Event</span>
+                                      <span class="mr-1">Update</span>
                                       <i data-feather="check-square" height="20px"></i>
                                   </button>
                                   <button type="reset" 
                                       class="hover-me-sm m-2 btn btn-danger px-4  rounded-sm new-shadow font-weight-bold font-size-15">
-                                      <span class="mr-1">Reset form</span>
+                                      <span class="mr-1">Cancel</span>
                                       <i data-feather="x-circle" height="20px"></i>
                                   </button>
 
