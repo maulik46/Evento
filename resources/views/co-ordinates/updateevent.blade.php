@@ -110,12 +110,12 @@
                            <span> Update Event</span>
                       </h3>
 
-                                <form class="form-horizontal" method="post"  onsubmit="return getMessage()" action="{{url('newevent')}}">
+                                <form class="form-horizontal" method="post"  onsubmit="return getMessage()" action="{{url('action_update')}}/{{encrypt($e_data['eid'])}}">
                           @csrf
                           <div class="card border-form">
                               <div class="card-body py-0 pb-1">
                                   <div class="form-group mt-2 " >
-                                      <label class="col-form-label font-size-15">Event Name</label>
+                                      <label class="col-form-label font-size-15">Event Name  </label>
                                        <div id="enamediv" class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="edit-3" class="form-control-icon ml-2" height="19px"></i>
                                           <input type="text" onkeyup="this.value = this.value.toLowerCase()" id="ename" onkeyup="return echeck()" name="ename" class="form-control" value="{{$e_data['ename']}}" placeholder="Enter Event Name..." />
@@ -385,9 +385,11 @@
          function getMessage() {
              var f=0;
              var d=new Date();
-             var today=d.getDate()+"-"+(d.getMonth()+1)+"-"+d.getFullYear();
+             var today=d.getDate()+"-"+("0" + (d.getMonth() + 1)).slice(-2)+"-"+d.getFullYear();
+             
              var edate=$('#edate').val();
              var sdate=$('#sdate').val();
+             
              var ldate=$('#ldate').val();
              var ename=$('#ename').val();
              var gen=$('#gen').val();
