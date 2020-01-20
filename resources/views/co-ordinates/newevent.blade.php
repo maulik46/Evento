@@ -34,8 +34,8 @@
     }
 
     .form-control:focus {
-        border: 1px solid #d1d1d1 !important;
-        background-color: #f3f4f7 !important;
+        border: 1px solid #d1d1d180 !important;
+        background-color: #f3f4f79e !important;
     }
 
     .border-form {
@@ -195,7 +195,7 @@
                 <div class="card border-form my-4">
                     <div class="card-body py-0 pb-1">
                         <div class="row">
-                            <div class="col-xl-6 form-group mt-2">
+                            <div class="col-md-4 form-group mt-2">
                                 <label class="col-form-label font-size-15">Event Type</label>
                                 <div class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
@@ -208,8 +208,8 @@
                                 <span class="text-danger font-weight-bold"></span>
 
                             </div>
-                            <div class="col-xl-6 form-group mt-2">
-                                <label class="col-form-label font-size-15">Event for</label>
+                            <div class="col-md-4 form-group mt-2">
+                                <label class="col-form-label font-size-15">Gender</label>
                                 <div class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
                                     <select id="gen" onchange="return echeck()" name="efor"
@@ -222,11 +222,28 @@
                                 </div>
                                 <span class="text-danger font-weight-bold"></span>
                             </div>
-
+                            <div class="col-md-4 form-group mt-2">
+                                <label class="col-form-label font-size-15">Event for</label>
+                                <div class="form-group has-icon d-flex align-items-center justify-content-between p-3" style="border:1px solid #f1f1f1;margin-top:-2px;">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" value="1" id="c1">
+                                        <label class="custom-control-label" for="c1">F.Y</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" value="2" id="c2">
+                                        <label class="custom-control-label" for="c2">S.Y</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" value="3" id="c3">
+                                        <label class="custom-control-label" for="c3">T.Y</label>
+                                    </div>
+                                </div>
+                                <span class="text-danger font-weight-bold"></span>
+                            </div>
 
                         </div>
                         <div class="row">
-                            <div class="col-xl-6 col-md-6 col-sm-6 form-group mt-2">
+                            <div class="col-md-4 form-group mt-2">
                                 <label id="team-size-label" class="col-form-label font-size-15">Team size
                                 </label>
                                 <div id="t-size" class="form-group has-icon d-flex align-items-center">
@@ -236,7 +253,17 @@
                                 </div>
                                 <span class="text-danger font-weight-bold"></span>
                             </div>
-                            <div class="col-xl-6 col-md-6 col-sm-6 form-group mt-sm-5 mt-2">
+                            <div class="col-md-4 form-group mt-2">
+                                <label id="max-team-label" class="col-form-label font-size-15">Maximum Team
+                                </label>
+                                <div id="max-team" class="form-group has-icon d-flex align-items-center">
+                                    <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
+                                    <input id="team-size" name="tsize" type="number" class="form-control"
+                                        placeholder="Maximum Team" />
+                                </div>
+                                <span class="text-danger font-weight-bold"></span>
+                            </div>
+                            <div class="col-md-4 form-group mt-sm-5 mt-2">
                                 <div class="custom-control custom-switch mb-2">
                                     <input type="checkbox" name="alw_diff_class" value="yes"
                                         class="custom-control-input" id="diff-class">
