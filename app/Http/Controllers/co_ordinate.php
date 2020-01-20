@@ -124,7 +124,7 @@ class co_ordinate extends Controller
         }
         if($update_event)
         {
-            session()->flash('success','Your Event is Successfully Updated...!');
+            session()->flash('success','Your Event is Successfully Updated..!');
         }
         return redirect(url('cindex'));
     }
