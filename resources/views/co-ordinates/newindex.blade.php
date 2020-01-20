@@ -268,15 +268,15 @@
                                         </a>
                                         <div
                                             class="dropdown-menu event-option profile-dropdown-items dropdown-menu-right ">
-                                            <a href="{{url('event_info')}}/{{$e['eid']}}" class="dropdown-item">
+                                            <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="dropdown-item">
                                                 <i data-feather="info" class="icon-dual-info icon-xs mr-2"></i>
                                                 <span>About Event</span>
                                             </a>
-                                            <a href="{{url('update_event')}}/{{$e['eid']}}" class="dropdown-item my-1">
+                                            <a href="{{url('update_event')}}/{{encrypt($e['eid'])}}" class="dropdown-item my-1">
                                                 <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
                                                 <span>Update Event</span>
                                             </a>
-                                            <a href="{{url('delete_event')}}/{{$e['eid']}}" class="dropdown-item">
+                                            <a href="{{url('delete_event')}}/{{encrypt($e['eid'])}}" class="dropdown-item">
                                                 <i data-feather="trash-2" class="icon-dual-danger icon-xs mr-2"></i>
                                                 <span class="text-danger">Delete Event</span>
                                             </a>
