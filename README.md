@@ -1,5 +1,4 @@
-<div style="display:flex;justify-content: center;align-items: center;" align="center">
-      <img src="public/assets/images/logo.svg" height="200px">
-      <h1 style="font-family: calibri; font-size: 100px;margin-left: -50px;">Evento</h1>
+<div align="center">
+      <h1 style="font-family: calibri; font-size: 100px>Evento is a Event management web application for College/University student to participate in various events which are created by their co-ordinators of College/University.</h1>
 </div>
 
