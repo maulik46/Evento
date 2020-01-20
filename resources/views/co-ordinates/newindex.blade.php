@@ -30,6 +30,20 @@
 
 @section('my-content')
 <div class="container-fluid">
+@if(Session::has('msg'))
+           
+    <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:20px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+        <div class="toast-body text-white alert mb-1">
+            <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                <i data-feather="x-circle" id="close-btn" height="18px" ></i>
+            </a>
+            <div class="mt-2 font-weight-bold font-size-14">
+                Your Event are Successfully Updated.....!
+            </div> 
+            
+        </div>
+    </div>
+        @endif
     <div class="row">
         <div class="col-md-6 col-xl-3">
             <div class="card new-shadow-sm">
@@ -254,15 +268,15 @@
                                         </a>
                                         <div
                                             class="dropdown-menu event-option profile-dropdown-items dropdown-menu-right ">
-                                            <a href="{{url('event_info')}}/{{$e['eid']}}" class="dropdown-item">
+                                            <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="dropdown-item">
                                                 <i data-feather="info" class="icon-dual-info icon-xs mr-2"></i>
                                                 <span>About Event</span>
                                             </a>
-                                            <a href="{{url('update_event')}}/{{$e['eid']}}" class="dropdown-item my-1">
+                                            <a href="{{url('update_event')}}/{{encrypt($e['eid'])}}" class="dropdown-item my-1">
                                                 <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
                                                 <span>Update Event</span>
                                             </a>
-                                            <a href="{{url('delete_event')}}/{{$e['eid']}}" class="dropdown-item">
+                                            <a href="{{url('delete_event')}}/{{encrypt($e['eid'])}}" class="dropdown-item">
                                                 <i data-feather="trash-2" class="icon-dual-danger icon-xs mr-2"></i>
                                                 <span class="text-danger">Delete Event</span>
                                             </a>

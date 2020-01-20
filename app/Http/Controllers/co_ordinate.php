@@ -62,9 +62,70 @@ class co_ordinate extends Controller
     public function update_event($eid)
     {
         // echo $eid;
+        $eid=decrypt($eid);
         $tble=tblevent::where('eid',$eid)->get()->first()->toArray();
        // print_r($tble);
         return view('co-ordinates/updateevent',['e_data'=>$tble]);
+    }
+    public function action_update(Request $req,$eid)
+    {
+        $eid=decrypt($eid);
+       // echo $eid;
+        $req_edate=$req->edate;
+        $req_sdate=$req->sdate;
+        $req_ldate=$req->ldate;
+        $req_etime=$req->etime;
+        $req_ename=$req->ename;
+        $req_loc=$req->loc;
+        $req_rules=$req->rules;
+        $edate=date('Y-m-d',strtotime($req_edate));
+        $sdate=date('Y-m-d',strtotime($req_sdate));
+        $ldate=date('Y-m-d',strtotime($req_ldate));
+        $etime=date('h:i:s',strtotime($req_etime));
+        $message="";
+        $tble=tblevent::where('eid',$eid)->get()->first();
+        if($tble['ename']!=$req_ename)
+        {
+            $message.="Event Rename <b>".ucfirst($tble['ename'])."</b> to <b>".ucfirst($req_ename)."</b><br/>";
+        }
+        if($tble['edate']!=$edate)
+        {
+            $message.="Event Date changed <b>".date('d-m-Y',strtotime($tble['edate']))."</b> to <b>".$req_edate."</b></br>";
+        }
+        if($tble['time']!=$etime)
+        {
+            $message.="Event time changed <b>".date('h:i A',strtotime($tble['time']))."</b> to <b>".$etime."</b></br>";
+        }
+        if($tble['reg_start_date']!=$sdate)
+        {
+            $message.="Registration starting date changed <b>".date('d-m-Y',strtotime($tble['reg_start_date']))."</b> to <b>".$req_sdate."</b></br>";
+        }
+        if($tble['reg_end_date']!=$ldate)
+        {
+            $message.="Registration end date changed <b>".date('d-m-Y',strtotime($tble['reg_end_date']))."</b> to <b>".$req_ldate."</b></br>";
+        }
+        if($tble['place']!=$req->loc)
+        {
+            $message.="Event Location changed <b>".ucfirst($tble['place'])."</b> to <b>".$req_loc."</b></br>";
+        }
+        if($tble['rules']!=$req->rules)
+        {
+            $message.="Event Rules changed <b>".ucfirst($tble['rules'])."</b> to <b>".$req_rules."</b></br>";
+        }
+        $update_event=tblevent::where('eid',$eid)
+            ->update(['ename' =>$req_ename,'edate' =>$edate,'time' => $etime,'reg_start_date' => $sdate,'reg_end_date' => $ldate,'place' => $req_loc,'rules' => $req_rules]);
+        $topic="Update Event ".$req_ename;
+        
+        if ($message!="") {
+            $notice=DB::table('tblnotice')->insert(
+                ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','ndate'=>date('Y-m-d'),'clgcode'=>Session::get('clgcode')]
+            );
+        }
+        if($update_event)
+        {
+            session()->flash('msg','Your Event is Successfully Updated...!');
+        }
+        return redirect(url('cindex'));
     }
     public function create_event(Request $req)
     {

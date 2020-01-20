@@ -518,7 +518,7 @@ class student extends Controller
     }
     public function notice()
     {
-        $notice=\DB::table('tblnotice')->where([['clgcode',Session::get('clgcode')],['receiver',"student"]])->orderby('nid','desc')->get()->toarray();
+        $notice=\DB::table('tblnotice')->where([['clgcode',Session::get('clgcode')],['receiver','like','%student%']])->orderby('nid','desc')->get()->toarray();
         return view('notice',['notice'=>$notice]);
     }
     // public function part()

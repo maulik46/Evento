@@ -29,7 +29,7 @@
                                <div>
                                     <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
                                     <div class="card-text mb-1"> 
-                                        {{ucfirst($nt->message)}}
+                                       {!! ucfirst($nt->message) !!}
                                     </div>
                                     @if($nt->attechment)
                                     <div class="card-action my-2">
@@ -50,7 +50,7 @@
                                <div>
                                     <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
                                     <div class="card-text mb-1"> 
-                                        {{ucfirst($nt->message)}}
+                                       {!! ucfirst($nt->message) !!}
                                     </div>
                                     @if($nt->attechment)
                                     <div class="card-action my-2">
