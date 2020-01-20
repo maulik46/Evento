@@ -38,7 +38,7 @@
                 <i data-feather="x-circle" id="close-btn" height="18px" ></i>
             </a>
             <div class="mt-2 font-weight-bold font-size-14">
-                Your Event are Successfully Updated.....!
+                Your Event is Successfully Updated.....!
             </div> 
             
         </div>
