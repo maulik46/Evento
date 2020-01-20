@@ -189,6 +189,29 @@ class co_ordinate extends Controller
         
         return view("co-ordinates/result",['eresult'=>$eresult]);
      }
+     public function update_pass(Request $req)
+     {
+        $c=tblcoordinaters::where([['cid',Session::get('cid')],['password',$req->current_pass]])->count();
+        if($c==1)
+        {
+            if($req->npass == $req->cpass)
+            {
+                tblcoordinaters::where('cid',Session::get('cid'))->update(['password'=>$req->npass]);
+            }
+            else{
+                session()->flash('error', 'Newpassword and confirm password not match');
+                return redirect()->back();
+            }
+        }
+        else
+        {
+            session()->flash('error', 'Invalid password');
+            return redirect()->back();
+            
+        }
+        session()->flash('success', 'Password updated successfully');
+        return redirect(url('cindex'));
+     }
 
 }
 
