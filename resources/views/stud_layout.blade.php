@@ -107,7 +107,7 @@
                                 </li>
                                 <?php
                                     $lastevent=App\tblstudent::select('last_noti')->where('senrl',Session::get('senrl'))->first();
-                                    $count=\DB::table('tblnotice')->select('nid')->where([['nid','>',$lastevent->last_noti],['receiver','student'],['clgcode',Session::get('clgcode')]])->count();
+                                    $count=\DB::table('tblnotice')->select('nid')->where([['nid','>',$lastevent->last_noti],['receiver','like','%student%'],['clgcode',Session::get('clgcode')]])->count();
                                 ?>
                                 <li class="mt-3">
                                     <a href="{{url('/notice')}}" class="d-flex align-items-center justify-content-between">
