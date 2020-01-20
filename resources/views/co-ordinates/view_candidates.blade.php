@@ -49,9 +49,10 @@
 
                         </div>
                         @if($einfo['e_type']=="team")
+                        @if($c>0)
                         @foreach($participate as $p)
                         <div class="table-responsive my-scroll">
-                            <table id=""  class="table table-hover table-light rounded">
+                            <table class="table table-hover table-light rounded">
                                 <thead class="thead-light">
                                     <tr>
                                         <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3"
@@ -88,7 +89,14 @@
 
                         </div>
                         @endforeach
+                        @else
+                        <hr>
+                        <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p>
+                        @endif
+                          
+
                         @elseif($einfo['e_type']=="solo")
+                        @if($c>0)
                         <div class="table-responsive my-scroll">
                             <table   class="table table-hover table-light rounded">
                                 <thead class="thead-light">
@@ -121,11 +129,17 @@
                                     </tr>
                                    
                                    @endforeach
+                                   
                                 </tbody>
                             </table>
 
                         </div>
+                        @else
+                            <hr>
+                            <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p>
                         @endif
+                        @endif
+                        
                     </div>
 
                 </div>
