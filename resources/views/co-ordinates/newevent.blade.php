@@ -405,7 +405,7 @@
     function getMessage() {
         var f = 0;
         var d = new Date();
-        var today = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
+        var today = d.getDate() + "-"+("0" + (d.getMonth() + 1)).slice(-2)+"-" + d.getFullYear();
         var edate = $('#edate').val();
         var sdate = $('#sdate').val();
         var ldate = $('#ldate').val();
