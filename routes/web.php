@@ -85,6 +85,8 @@ Route::group(['middleware' => 'co_session_check'], function () {
     
         Route::get('/update_event/{eid}','co_ordinate@update_event');
     
+        Route::post('/action_update/{eid}','co_ordinate@action_update');
+    
         Route::get('/cindex','co_ordinate@index');
 
         Route::get('/view_candidates/{eid}','co_ordinate@view_can');
