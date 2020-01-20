@@ -176,7 +176,7 @@ class co_ordinate extends Controller
          return response()->json(array('msg'=> $las_notice),200);
      }
      public function event_info($id)
-     {      
+     {      $id=decrypt($id);
             $einfo=tblevent::where('eid',$id)->first();
             return view("co-ordinates/event_info",['einfo'=>$einfo]);
      }
