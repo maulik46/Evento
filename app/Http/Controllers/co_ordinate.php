@@ -59,6 +59,23 @@ class co_ordinate extends Controller
     }
     public function delete_event($eid)
     {
+        $eid=decrypt($eid);
+        $tblename=tblevent::where('eid',$eid)->get()->first();;
+        $tble=tblevent::where('eid',$eid)->delete();
+        $tblp=participant::where('eid',$eid)->delete();
+        if(isset($tble) && isset($tblp))
+        {
+            $topic=ucfirst($tblename['ename'])." Event has been Cancelled..!";
+            $message="Reason !!!!!!!!";
+            $notice=DB::table('tblnotice')->insert(
+                ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','ndate'=>date('Y-m-d'),'clgcode'=>Session::get('clgcode')]
+            );
+            if(isset($notice))
+            {
+                session()->flash("success","Event Deleted Successfully..!");
+            }
+        }
+        return redirect(url('cindex'));
     }
     public function update_event($eid)
     {

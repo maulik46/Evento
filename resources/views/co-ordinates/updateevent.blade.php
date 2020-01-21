@@ -31,8 +31,8 @@
         }
 
         .form-control:focus{
-        border: 1px solid #d1d1d180 !important;
-        background-color: #f3f4f79e !important;
+        border: 1px solid #d1d1d1!important;
+        background-color: #f3f4f7!important;
         }
        .border-form{
            border: 1px solid #d1d1d152;
@@ -101,9 +101,9 @@
             <div class="row justify-content-center">
               <div class="col-lg-8 col-md-10 col-sm-10 mx-2 p-0">
                  
-                  <div class="bg-white new-shadow rounded-lg p-3 pb-5">
+                  <div class="bg-white new-shadow rounded-lg p-4 pb-5">
                        <a href="{{url('/cindex')}}" class="float-right text-dark">
-                           <i data-feather="x-circle" height="20px" id="close-btn"></i>
+                           <i data-feather="x-circle" id="close-btn"></i>
                        </a>
                       <h3 class="my-4 text-center text-dark">
                           <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="25px" alt="">
@@ -250,7 +250,8 @@
                                       <label class="col-form-label font-size-15">Event Co-ordinate</label>
                                       <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                          <input type="text" style="background-color: #f3f4f7;" class="form-control font-size-15" disabled value="{{ucfirst(Session::get('cname'))}}" />
+                                          <input type="text" style="background-color: #f3f4f7;"
+                                              class="form-control font-size-15" disabled value="<?=Session::get('cname')?>" />
                                       </div>
                                   </div>
                                   <div class="form-group mt-2">
@@ -380,15 +381,18 @@
  
 
 </script>
+<?php
+$startdate=App\tblevent::select('reg_start_date')->where('eid',$e_data['eid'])->get()->first();
+$stdate=date('d-m-Y',strtotime($startdate['reg_start_date']));
+?>
 <script>
          function getMessage() {
              var f=0;
              var d=new Date();
              var today=d.getDate()+"-"+("0" + (d.getMonth() + 1)).slice(-2)+"-"+d.getFullYear();
-             
+             var old_sdate="<?=$stdate?>";
              var edate=$('#edate').val();
              var sdate=$('#sdate').val();
-             
              var ldate=$('#ldate').val();
              var ename=$('#ename').val();
              var gen=$('#gen').val();
@@ -448,7 +452,7 @@
                  $('#sdate').parent().next().text("Please enter Registration Start Date");
                  f=1;
              }
-             else if(edate<sdate || today>sdate)
+             else if(edate<sdate || old_sdate>sdate && today>sdate)
              {
                  $('#sdate').parent().addClass('border border-danger');
                  $('#sdate').parent().next().text("Starting date of registration should be before the event date and after today ");

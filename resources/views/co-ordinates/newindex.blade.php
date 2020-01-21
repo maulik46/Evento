@@ -44,20 +44,6 @@
                </div>
            </div>
 @endif
-@if(Session::has('success'))
-           
-    <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:20px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
-        <div class="toast-body text-white alert mb-1">
-            <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
-                <i data-feather="x-circle" id="close-btn" height="18px" ></i>
-            </a>
-            <div class="mt-2 font-weight-bold font-size-14">
-                {{Session::get('success')}}
-            </div> 
-            
-        </div>
-    </div>
-        @endif
     <div class="row">
         <div class="col-md-6 col-xl-3">
             <div class="card new-shadow-sm">
