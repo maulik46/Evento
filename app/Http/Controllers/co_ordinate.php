@@ -5,6 +5,7 @@ use Session;
 use DB;
 use Illuminate\Http\Request;
 use App\tblevent;
+use App\notice;
 use App\tblcoordinaters;
 use App\participant;
 class co_ordinate extends Controller
@@ -259,7 +260,7 @@ class co_ordinate extends Controller
         $notice->clgcode=Session::get('clgcode');
         $notice->attechment=$filename;
         $notice->save();
-        session()->flash('success', 'Notice send successfully');
+        session()->flash('success', 'Notice send successfully..!');
         return redirect(url('cindex'));
      }
 }
