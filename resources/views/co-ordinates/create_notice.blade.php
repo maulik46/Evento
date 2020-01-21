@@ -46,50 +46,81 @@
                     <div class="card mt-5 new-shadow rounded-lg">
                         <div class="card-body px-lg-4">
                             <a href="{{url('/cindex')}}" class="float-right text-dark">
-                                <i data-feather="x-circle" id="close-btn"></i>
+                                <i data-feather="x-circle" id="close-btn" height="20px"></i>
                             </a>
                             <h3 class="my-4 text-center text-dark">
                                 <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="25px" alt="">
                                 <span> Create new notice</span>
+                                
                             </h3>
-                           <form action="#">
-                               <div class="form-group mt-2">
-                                   <label class="col-form-label font-size-14">Notice Title</label>
-                                   <div class="form-group has-icon d-flex align-items-center">
-                                       <i data-feather="info" class="form-control-icon ml-2" height="19px"></i>
-                                       <input type="text" class="form-control" placeholder="Enter Notice Title..." />
-                                   </div>
-                               </div>
-                               <div class="form-group mt-2">
-                                   <label class="col-form-label font-size-14">Notice Content</label>
-                                   <div class="form-group has-icon d-flex">
-                                       <i data-feather="edit" class="form-control-icon ml-2" height="19px" style="margin-top: 13px;"></i>
-                                       <textarea class="form-control" rows="6" placeholder="Enter Notice Content..."></textarea>
-                                   </div>
-                               </div>
-                               <div class="row justify-content-start align-items-center">
-
-                                <button type="submit" class="hover-me-sm btn btn-success new-shadow-sm rounded-sm px-4 font-size-15 font-weight-bold ml-3">
-                                   <span>Send</span>
-                                   <i data-feather="send" height="20px"></i>
-                                </button>
-                                <div class="ml-2 mt-2">
-                                    <!-- file upload button -->
-                                    <label for="file-upload" class="hover-me-sm custom-file-upload rounded-sm" data-toggle="tooltip" data-placement="right" title="Attachment">
-                                        <i data-feather="paperclip"></i>
-                                    </label>
-
-                                    <input id="file-upload" type="file" />
-                                    <!-- file upload end -->
+                            <div class="text-center font-weight-bold text-danger" id="error">{{$errors->first('attachment')}}</div>
+                            <form action="noticesend" method="post" onsubmit="return check()" enctype="multipart/form-data">
+                            @csrf
+                                <div class="row justify-content-center" style="margin-bottom: -10px;">
+                                    <div class="form-group mt-2 col-lg-12">
+                                        <label class="col-form-label font-size-14">Notice Title</label>
+                                         <div class="form-group has-icon d-flex align-items-center">
+                                        <i data-feather="info" class="form-control-icon ml-2" height="19px"></i>
+                                            <input type="text" name="title" id="title" class="form-control" placeholder="Enter Notice Title..." />
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                                 
-                               </div>
-                               
-                           </form>
+                                <div class="form-group">
+                                    <label class="col-form-label font-size-14">Notice Content</label>
+                                    <div class="form-group has-icon d-flex">
+                                          <i data-feather="edit" class="form-control-icon ml-2" height="19px" style="margin-top: 13px;"></i>
+                                        <textarea class="form-control" name="message" id="message" rows="6" maxlength=550
+                                            placeholder="Enter Notice Content..."></textarea>
+                                            
+                                    </div>
+                                </div>
+                                <div class="row justify-content-start align-items-center">
+
+                                    <button type="submit"
+                                        class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-4 font-size-15
+                                        font-weight-bold
+                                        ml-3" style="background-color: #35bbca;">
+                                        <span>Send</span>
+                                        <i data-feather="send" height="20px"></i>
+                                    </button>
+                                    <div class="ml-2 mt-1">
+                                        <!-- file upload button -->
+                                        <label for="file-upload" class="hover-me-sm custom-file-upload rounded-sm"
+                                            data-toggle="tooltip" data-placement="right" title="Attachment">
+                                            <i data-feather="paperclip"></i>
+                                        </label>
+
+                                        <input id="file-upload" name="attachment" type="file" />
+                                        <!-- file upload end -->
+                                    </div>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
         </div>
 @endsection        
-
+@section('extra-scripts')
+<script>
+    function check()
+    {
+        if($('#title').val()=="")
+        {
+            $('#error').text("Please enter notice title..");
+            return false;
+        }
+        
+        if($('#message').val()=="")
+        {
+            $('#error').text("Please enter put your message");
+            return false;
+        }
+        
+        
+    }
+</script>
+@endsection
 
 
