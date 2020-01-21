@@ -232,6 +232,35 @@ class co_ordinate extends Controller
         session()->flash('success', 'Password updated successfully..!');
         return redirect(url('cindex'));
      }
-
+     public function send_notice(Request $req)
+     {
+        $topic=$req->title;
+        $message=$req->message;
+        $receiver=$req->receiver;
+        $filename="";
+        if($file=$req->file('attachment'))
+        {
+            $req->validate([
+                'attachment' => 'max:50',
+            ],
+        [
+            'attachment.max'=>"The file size should be less then 50 Kb"
+        ]);
+            $destinationPath=public_path('attachment/');
+            $filename=$file->getClientOriginalName().time();
+            $file->move($destinationPath,$filename);
+        }
+        $notice=new notice;
+        $notice->topic=$topic;
+        $notice->message=$message;
+        $notice->sender=Session::get('cname');
+        $notice->receiver="student";
+        $notice->ndate=date('Y-m-d');
+        $notice->clgcode=Session::get('clgcode');
+        $notice->attechment=$filename;
+        $notice->save();
+        session()->flash('success', 'Notice send successfully');
+        return redirect(url('cindex'));
+     }
 }
 
