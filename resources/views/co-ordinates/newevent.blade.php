@@ -224,19 +224,8 @@
                             </div>
                             <div class="col-md-4 form-group mt-2">
                                 <label class="col-form-label font-size-15">Event for</label>
-                                <div class="form-group has-icon d-flex align-items-center justify-content-between p-3" style="border:1px solid #f1f1f1;margin-top:-2px;">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" value="1" id="c1">
-                                        <label class="custom-control-label" for="c1">F.Y</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" value="2" id="c2">
-                                        <label class="custom-control-label" for="c2">S.Y</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" value="3" id="c3">
-                                        <label class="custom-control-label" for="c3">T.Y</label>
-                                    </div>
+                                <div class="form-group has-icon">
+                                    <input type="text" class="form-control" id="dropdown1" />
                                 </div>
                                 <span class="text-danger font-weight-bold"></span>
                             </div>
@@ -577,6 +566,34 @@
             }
         })
     }
+</script>
+<script>
+$(function() {
+        var items = [{
+            text: "ListItem 1",
+            value: "item1"
+        }, {
+            text: "ListItem 2",
+            value: "item2"
+        }, {
+            text: "ListItem 3",
+            value: "item3"
+        }, {
+            text: "ListItem 4",
+            value: "item4"
+        }, {
+            text: "ListItem 5",
+            value: "item5"
+        }];
+        $('#dropdown1').ejDropDownList({
+            dataSource: items,
+            fields: {
+                text: "text",
+                value: "value"
+            },
+            showCheckbox: true
+        });
+    });
 </script>
 
 @endsection
