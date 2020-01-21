@@ -106,6 +106,8 @@ Route::group(['middleware' => 'co_session_check'], function () {
         route::post('/lastnotice','co_ordinate@last_noti');
     
         Route::post('/update_pass','co_ordinate@update_pass');
+    
+        Route::post('/noticesend','co_ordinate@send_notice');
 
 });
 
