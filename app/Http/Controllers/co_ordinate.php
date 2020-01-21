@@ -188,7 +188,7 @@ class co_ordinate extends Controller
         $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
         return view('co-ordinates/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
         
-        return view("co-ordinates/result",['eresult'=>$eresult]);
+        
      }
      public function update_pass(Request $req)
      {
