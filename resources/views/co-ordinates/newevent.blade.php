@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" href="{{asset('assets/libs/flatpickr/flatpickr.min.css')}}">
 <link href="{{asset('assets/libs/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" type="text/css" />
-
+<link href="{{asset('assets/libs/multicheckbox/multiselect.css')}}" rel="stylesheet" type="text/css" />
 <style>
     .disable-me {
         border: .1rem solid #e2e2e2 !important;
@@ -18,7 +18,8 @@
         margin-bottom: 0px;
     }
 
-    .form-control {
+    .form-control,
+    .ms-options-wrap {
         border-radius: .15rem;
         background-color: #f3f4f7 !important;
         padding: 10px 15px;
@@ -105,6 +106,60 @@
     }
 
     /* nice select css end */
+    /* multi-select checkbox css */
+    .ms-options{
+        height:auto!important;
+        overflow:auto;
+        display:none;
+        padding: 10px;
+        margin-top:10px!important;
+        z-index:10!important;
+        border: 1px solid #d1d1d1!important;
+        transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out!important;
+    }
+    .ms-options-wrap{
+        width:100%;
+    }
+    .ms-options ul{
+        margin-bottom:0px;
+        transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out!important;
+        list-style: none;
+    }
+    
+    .ms-options ul li label:hover{
+        background:#f3f4f7!important;
+    }
+  
+     .ms-options-wrap  button{
+        margin-top:-2px;
+        font-size: 1em;
+        color: #333 !important;
+        margin-left:16px;
+     }
+   .ms-options-wrap > button:focus, .ms-options-wrap > button {
+        border: 1px solid #aaa0;
+        background-color: #fff0;
+    }
+
+.ms-options-wrap > button:after  {
+    
+    content: '';
+    display: block;
+    margin-top: -4px;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+
+    border-bottom: 3px solid #999;
+    border-right: 3px solid #999;
+    height: 8px;
+    right: 15px;
+    width: 8px;
+    }
+    /* multi-select checkbox css end*/
 </style>
 @endsection
 
@@ -199,7 +254,7 @@
                                 <label class="col-form-label font-size-15">Event Type</label>
                                 <div class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
-                                    <select id="event-type" name="etype" class="form-control w-100 pt-1">
+                                    <select id="event-type" name="etype" class="form-control w-100 pt-1 nice-select">
                                         <option hidden value="">Select Type</option>
                                         <option value="solo">Solo</option>
                                         <option value="team">Team</option>
@@ -212,8 +267,7 @@
                                 <label class="col-form-label font-size-15">Gender</label>
                                 <div class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                                    <select id="gen" onchange="return echeck()" name="efor"
-                                        class="form-control w-100 pt-1">
+                                    <select id="gen" onchange="return echeck()" name="efor" class="form-control w-100 pt-1 nice-select">
                                         <option value="" hidden>Select Gender</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
@@ -224,8 +278,14 @@
                             </div>
                             <div class="col-md-4 form-group mt-2">
                                 <label class="col-form-label font-size-15">Event for</label>
-                                <div class="form-group has-icon">
-                                    <input type="text" class="form-control" id="dropdown1" />
+                                <div class="form-group has-icon d-flex align-items-center">
+                                    <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
+                                    <select  multiple="multiple" class="form-control active w-100" id="scripts">
+                                        <option value="FY">FY</option>
+                                        <option value="SY">SY</option>
+                                        <option value="TY">TY</option>
+                                    </select>
+
                                 </div>
                                 <span class="text-danger font-weight-bold"></span>
                             </div>
@@ -247,7 +307,7 @@
                                 </label>
                                 <div id="max-team" class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
-                                    <input id="team-size" name="tsize" type="number" class="form-control"
+                                    <input id="max-team" name="mteam" type="number" class="form-control"
                                         placeholder="Maximum Team" />
                                 </div>
                                 <span class="text-danger font-weight-bold"></span>
@@ -362,7 +422,7 @@
     // nice-select js ------------------------------------------------------------
 
     $(document).ready(function () {
-        $('select').niceSelect();
+        $('.nice-select').niceSelect();
     });
 
     // nice-select js end --------------------------------------------------------
@@ -567,33 +627,15 @@
         })
     }
 </script>
+<script src="{{asset('assets/libs/multicheckbox/multiselect.js')}}"></script>
 <script>
-$(function() {
-        var items = [{
-            text: "ListItem 1",
-            value: "item1"
-        }, {
-            text: "ListItem 2",
-            value: "item2"
-        }, {
-            text: "ListItem 3",
-            value: "item3"
-        }, {
-            text: "ListItem 4",
-            value: "item4"
-        }, {
-            text: "ListItem 5",
-            value: "item5"
-        }];
-        $('#dropdown1').ejDropDownList({
-            dataSource: items,
-            fields: {
-                text: "text",
-                value: "value"
-            },
-            showCheckbox: true
-        });
-    });
+$('select[multiple]').multiselect({
+    columns: 1,
+    placeholder: 'Select Class'
+});
+$('.ms-options').removeAttr('style');
+$('.ms-options').addClass('my-scroll');
+
 </script>
 
 @endsection
