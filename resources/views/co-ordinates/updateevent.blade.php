@@ -103,7 +103,7 @@
                  
                   <div class="bg-white new-shadow rounded-lg p-4 pb-5">
                        <a href="{{url('/cindex')}}" class="float-right text-dark">
-                           <i data-feather="x-circle" id="close-btn"></i>
+                           <i data-feather="x-circle" id="close-btn" height="20px"></i>
                        </a>
                       <h3 class="my-4 text-center text-dark">
                           <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="25px" alt="">
@@ -183,7 +183,7 @@
                                           <label class="col-form-label font-size-15">Event Type</label>
                                           <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
-                                              <select id="event-type" name="etype" class="form-control w-100 pt-1" disabled>
+                                              <select id="event-type" name="etype" class="form-control w-100 pt-1 nice-select" disabled>
                                                         <option selected value="{{$e_data['e_type']}}">{{ucfirst($e_data['e_type'])}}</option>
                                               </select>
                                           </div>
@@ -194,7 +194,7 @@
                                           <label class="col-form-label font-size-15">Event for</label>
                                           <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                                              <select id="gen" onchange="return echeck()" name="efor" class="form-control w-100 pt-1" disabled>
+                                              <select id="gen" onchange="return echeck()" name="efor" class="form-control w-100 pt-1 nice-select" disabled>
                                                     <option selected value="{{$e_data['gallow']}}">{{ucfirst($e_data['gallow'])}}</option>
                                               </select>
                                           </div>
@@ -321,7 +321,7 @@
 // nice-select js ------------------------------------------------------------
 
     $(document).ready(function() {
-        $('select').niceSelect();
+        $('.nice-select').niceSelect();
     });
 
 // nice-select js end --------------------------------------------------------
