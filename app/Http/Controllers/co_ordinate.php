@@ -115,7 +115,7 @@ class co_ordinate extends Controller
         }
         $update_event=tblevent::where('eid',$eid)
             ->update(['ename' =>$req_ename,'edate' =>$edate,'time' => $etime,'reg_start_date' => $sdate,'reg_end_date' => $ldate,'place' => $req_loc,'rules' => $req_rules]);
-        $topic="Update Event ".$req_ename;
+        $topic="Update of Event ".$req_ename;
         
         if ($message!="") {
             $notice=DB::table('tblnotice')->insert(
