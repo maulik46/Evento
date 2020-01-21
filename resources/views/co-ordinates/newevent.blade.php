@@ -112,9 +112,9 @@
 <div class="row justify-content-center">
     <div class="col-lg-8 col-md-10 col-sm-10 mx-2 p-0">
 
-        <div class="bg-white new-shadow rounded-lg p-4 pb-5">
+        <div class="bg-white new-shadow rounded-lg p-3 pb-5">
             <a href="{{url('/cindex')}}" class="float-right text-dark">
-                <i data-feather="x-circle" id="close-btn"></i>
+                <i data-feather="x-circle" height="20px" id="close-btn"></i>
             </a>
             <h3 class="my-4 text-center text-dark">
                 <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="25px" alt="">

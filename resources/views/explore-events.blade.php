@@ -28,7 +28,7 @@
                     </div>
                     @if(isset($massege))
                     <div class="p-4 w-100 d-flex align-items-center justify-content-center font-size-18" style="min-height: 50vh;">
-                       No new events available!!
+                       No new events are available!!
                     </div>
                     @endif
                     @if(isset($events))
@@ -82,16 +82,17 @@
                                                 
                                                         <a href="{{url('/team-insert')}}/{{encrypt($e['eid'])}}"
                                                         class="text-center btn btn-light btn-block rounded-0 text-dark font-weight-bold ">
+                                                        Participate Now</a>
+                                                
                                                 
                                                 @else
                                                 
                                                     <a href="{{url('/participate-now')}}/{{encrypt($e['eid'])}}"
                                                         class="text-center btn btn-light btn-block rounded-0 text-dark font-weight-bold ">
+                                                        Participate Now</a>
                                                 
                                                 @endif
-                                                    Participate
-                                                    Now
-                                                </a>
+                                                    
                                             </div>
                                         </div>
                                     </div>

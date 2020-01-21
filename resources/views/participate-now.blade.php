@@ -13,9 +13,14 @@
 <div class="">
                     <div class="col-12 mt-5">
                         <div class="card new-shadow rounded-lg">
-                            <div class="px-2 py-4">
+                        <div class="text-right p-2">
+                            <a href="{{url('/index')}}" class="text-dark" id="close-btn">
+                                    <i data-feather="x-circle" height="20px"></i>
+                            </a>
+                        </div>
+                            <div class="px-2">
+                            
                                 <!-- Logo & title -->
-                                <div class="mt-4">
                                     <div class="col-12">
                                         <h2 class="d-flex justify-content-center align-items-center font-weight-normal text-center text-dark my-3"> 
                                             <img src="{{asset('assets/images/svg-icons/student-dash/flag.svg')}}" height="30px" alt="">
@@ -75,10 +80,6 @@
                                             </div>
                                         </div>
                                     </div> <!-- end col -->
-                                </div>
-                                <!-- end row -->
-                                
-                            
                                 <div class="mt-4">
                                     <div class="col-12">
                                         

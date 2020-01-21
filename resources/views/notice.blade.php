@@ -54,7 +54,7 @@
                                     </div>
                                     @if($nt->attechment)
                                     <div class="card-action my-2">
-                                        <a href="{{asset('attechment')}}/{{$nt->attechment}}" class="btn btn-soft-danger rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">{{$nt->attechment}}</a>
+                                        <a href="{{asset('attechment')}}/{{$nt->attechment}}" class="btn btn-soft-warning rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">{{$nt->attechment}}</a>
                                         
                                     </div> 
                                     @endif

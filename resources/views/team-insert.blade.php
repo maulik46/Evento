@@ -35,7 +35,14 @@
 
 <div class="col-12 mt-5">
     <div class="card new-shadow rounded-lg">
+    
         <div class="px-2 pb-2 pt-0">
+        <div class="my-2 text-right">
+             <a href="{{url('/index')}}" class="text-dark" id="close-btn">
+                <i data-feather="x-circle" height="20px"></i>
+            </a>
+        </div>
+           
                 <div class="col-xl-12">
                     <h2
                         class="d-flex justify-content-center align-items-center font-weight-normal text-center text-dark my-3 mt-4s">
