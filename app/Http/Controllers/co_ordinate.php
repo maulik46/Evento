@@ -162,6 +162,8 @@ class co_ordinate extends Controller
         $tblevent->rules=$req->rules;
         $tblevent->cid=Session::get('cid');
         $tblevent->save();
+        session()->flash('success', 'Event created successfully..!');
+        return redirect(url('cindex'));
     }
     public function err(Request $req){
         $ename = $req->ename;
