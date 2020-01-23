@@ -87,16 +87,24 @@
                                     </button>
                                     <div class="ml-2 mt-1">
                                         <!-- file upload button -->
-                                        <label for="file-upload" class="hover-me-sm custom-file-upload rounded-sm"
+                                        <label for="file-upload" class="custom-file-upload rounded-sm"
                                             data-toggle="tooltip" data-placement="right" title="Attachment">
                                             <i data-feather="paperclip"></i>
                                         </label>
 
-                                        <input id="file-upload" name="attachment" type="file" />
+                                        <input id="file-upload" name="attachment" type="file" multiple />
                                         <!-- file upload end -->
                                     </div>
+                                    
                                 </div>
-
+                                <div class="pt-2">
+                                    <div class="alert font-weight-bold rounded-sm p-1 px-2 font-size-15 mb-1" style="background-color:#25c2e340;">
+                                       file1.txt
+                                    </div> 
+                                    <div class="alert font-weight-bold rounded-sm p-1 px-2 font-size-15" style="background-color:#25c2e340;">
+                                       file2.txt
+                                    </div>                               
+                                </div>
                             </form>
                         </div>
                     </div>
