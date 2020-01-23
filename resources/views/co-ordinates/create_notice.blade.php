@@ -85,7 +85,7 @@
                                         <span>Send</span>
                                         <i data-feather="send" height="20px"></i>
                                     </button>
-                                    <div class="ml-2 mt-1">
+                                    <div class="ml-2 mt-2">
                                         <!-- file upload button -->
                                         <label for="file-upload" class="custom-file-upload rounded-sm"
                                             data-toggle="tooltip" data-placement="right" title="Attachment">
@@ -97,14 +97,25 @@
                                     </div>
                                     
                                 </div>
-                                <div class="pt-2">
-                                    <div class="alert font-weight-bold rounded-sm p-1 px-2 font-size-15 mb-1" style="background-color:#25c2e340;">
-                                       file1.txt
-                                    </div> 
-                                    <div class="alert font-weight-bold rounded-sm p-1 px-2 font-size-15" style="background-color:#25c2e340;">
-                                       file2.txt
-                                    </div>                               
+                            <div class="mt-3 p-1" style="border: 1px solid #d2d8de;">
+                                <div class="d-flex justify-content-center align-items-center smr-2" style="margin-top:-12px;">
+                                    <span class="badge badge-dark px-3 py-1 badge-pill">Total Files: 3</span>
                                 </div>
+                                <div class="mt-2 d-flex justify-content-between align-items-center">
+
+                                    <div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:#25c2e340;border-right:4px solid #fff;border-left:4px solid #fff;">
+                                       <span class="text-dark ml-2">file1.txt</span>
+                                       <span class="badge badge-light px-3 badge-pill mr-2">12mb</span>
+                                    </div> 
+
+                                    <div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:#25c2e340;border-right:4px solid #fff;border-left:4px solid #fff;">
+                                       <span class="text-dark ml-2">file1.txt</span>
+                                       <span class="badge badge-light px-3 badge-pill mr-2">12mb</span>
+                                    </div>
+                                                                   
+                                </div>
+                            </div>
+                                
                             </form>
                         </div>
                     </div>
