@@ -30,7 +30,7 @@
                  <div class="card mt-5 new-shadow-sm">
                     <div class="card-body">
                         <a href="{{url('cindex')}}" class="float-right text-dark">
-                            <i data-feather="x-circle" id="close-btn"></i>
+                            <i data-feather="x-circle" id="close-btn" height="20px"></i>
                         </a>    
                         <div class="mb-3 mt-4 justify-content-between d-flex align-items-center ">
                             <div class="d-flex align-items-center">
