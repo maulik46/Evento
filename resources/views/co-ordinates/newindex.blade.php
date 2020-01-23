@@ -23,9 +23,11 @@
             background: #43d39e;
             color: #fff !important;
         }
-        .past-about:hover,
-        .past-result:hover{
-            color:red!important;
+        .btn-p-about:hover{
+            background-color:rgba(37,194,227,.15);
+        }
+        .btn-p-result:hover{
+            background-color:rgba(67,211,158,.15);
         }
             
 </style>
@@ -141,91 +143,30 @@
                             <th scope="col">Event</th>
                             <th scope="col">Total Participator</th>
                             <th scope="col">Date</th>
+                            <th scope="col">Venue</th>
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr>
-                                            <td>#1</td>
-                                            <td>Cricket compititon</td>
-                                            <td>5</td>
-                                            <td>20/12/2019</td>
-                                            <td>
-                                                <span class="badge badge-soft-success badge-pill px-2">Running</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#2</td>
-                                            <td>PHP Quiz compititon</td>
-                                            <td>12</td>
-                                            <td>28/12/2019</td>
-                                            <td>
-                                                <span class="badge badge-soft-warning badge-pill px-2">Upcoming</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#3</td>
-                                            <td>Drawing compititon</td>
-                                            <td>16</td>
-                                            <td>12/12/2019</td>
-                                            <td>
-                                                <span class="badge badge-soft-info badge-pill px-2">Finished</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#2</td>
-                                            <td>PHP Quiz compititon</td>
-                                            <td>12</td>
-                                            <td>28/12/2019</td>
-                                            <td>
-                                                <span class="badge badge-soft-warning badge-pill px-2">Upcoming</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#3</td>
-                                            <td>Drawing compititon</td>
-                                            <td>16</td>
-                                            <td>12/12/2019</td>
-                                            <td>
-                                                <span class="badge badge-soft-info badge-pill px-2">Finished</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#2</td>
-                                            <td>PHP Quiz compititon</td>
-                                            <td>12</td>
-                                            <td>28/12/2019</td>
-                                            <td>
-                                                <span class="badge badge-soft-warning badge-pill px-2">Upcoming</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#3</td>
-                                            <td>Drawing compititon</td>
-                                            <td>16</td>
-                                            <td>12/12/2019</td>
-                                            <td>
-                                                <span class="badge badge-soft-info badge-pill px-2">Finished</span>
-                                            </td>
-                                        </tr> -->
                         <?php $c=0 ?>
                         @foreach($events as $e)
                         <?php $c++;
-                                        $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
-                                    ?>
+                            $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
+                        ?>
                         <tr>
                             <td>#{{$c}}</td>
                             <td>{{ucfirst($e['ename'])}} compition</td>
-                            <td>{{$p}}</td>
+                             <td>{{$p}}</td> <!--total Participator -->
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
+                            <td>{{ucfirst($e['place'])}}</td>
                             <td>
                                 @if($e['edate'] == date('Y-m-d'))
-                                <span class="badge badge-soft-success badge-pill px-2">Running</span>
+                                <span class="badge badge-soft-success badge-pill px-3 py-1">Running</span>
                                 @elseif($e['edate'] > date('Y-m-d'))
-                                <span class="badge badge-soft-warning badge-pill px-2">Upcoming</span>
-                                @elseif($e['edate'] < date('Y-m-d')) <span
-                                    class="badge badge-soft-info badge-pill px-2">Finished</span>
-                                    @endif
+                                <span class="badge badge-soft-warning badge-pill px-3 py-1">Upcoming</span>
+                                @elseif($e['edate'] < date('Y-m-d')) 
+                                <span class="badge badge-soft-info badge-pill px-3 py-1">Finished</span>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -287,12 +228,14 @@
                                                 <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
                                                 <span>Update Event</span>
                                             </a>
-                                            <a href="{{url('delete_event')}}/{{encrypt($e['eid'])}}" class="dropdown-item">
+                                            <!-- <a href="{{url('delete_event')}}/{{encrypt($e['eid'])}}" class="dropdown-item"> -->
+                                             <a href="#" class="dropdown-item" onclick="alert('hello');">
                                                 <i data-feather="trash-2" class="icon-dual-danger icon-xs mr-2"></i>
                                                 <span class="text-danger">Delete Event</span>
                                             </a>
 
                                         </div>
+        
                                     </div>
 
 
@@ -314,6 +257,7 @@
         
         @endif
         @endforeach
+        
         <div class="col-md-6 col-xl-4 col-sm-6">
             <div class="card new-shadow-sm" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
                 title="This Event is Currently disabled. You need approval from Administrator to delete it.">
@@ -340,7 +284,7 @@
                                             <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
                                             <span>Update Event</span>
                                         </a>
-                                        <a href="{{url('/event_info')}}" class="dropdown-item">
+                                        <a href="#">
                                             <i data-feather="trash-2" class="icon-dual-danger icon-xs mr-2"></i>
                                             <span class="text-danger">Delete Event</span>
                                         </a>
@@ -435,24 +379,31 @@
                             <th scope="col">Total Participator</th>
                             <th scope="col">Date</th>
                             <th scope="col">Venue</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $c=0 ?>
+                        @foreach($events as $e)
+                        <?php $c++;
+                            $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
+                        ?>
                         <tr>
-                            <td>#1</td>
-                            <td>Cricket compititon</td>
-                            <td>5</td>
-                            <td>20/12/2019</td>
-                            <td>J.K ground</td>
-                            <td class="d-flex justify-content-around">
-                                <a href="#" data-placement="top" data-toggle="tooltip" title="About">
-                                    <i data-feather="info" height="20px" class="text-info past-about" id="close-btn"></i>
+                            <td>#{{$c}}</td>
+                            <td>{{ucfirst($e['ename'])}} compition</td>
+                             <td>{{$p}}</td> <!--total Participator -->
+                            <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
+                            <td>{{ucfirst($e['place'])}}</td>
+                            <td  class="d-flex justify-content-start align-items-center pt-1 mb-0">
+                                <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about py-1 px-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
+                                    <i data-feather="info" height="20px" class=" text-info"></i>
                                 </a>
-                                <a href="#" data-placement="top" data-toggle="tooltip" title="Result">
-                                    <i data-feather="award" height="20px" class="text-success past-result"></i>
+                                <a href="{{url('view_candidates')}}/{{$e['eid']}}" class="btn btn-p-result py-1 px-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Result">
+                                    <i data-feather="award" height="20px" class=" text-success"></i>
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div> 
