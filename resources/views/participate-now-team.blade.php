@@ -141,18 +141,18 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">
-                                <i data-feather="x-circle"></i>
+                                <i data-feather="x-circle" id="close-btn"></i>
                             </span>
                         </button>
                     </div>
                     <div class="modal-body text-center">
-                        <img src="{{asset('assets/images/svg-icons/student-dash/check-square.svg')}}" alt="successfull" height="50px">
-                        <h5 class="text-dark mt-4">Are sure you want to register <br>
-                        {{$einfo->ename}}
-                        </h5>
-                        <p class="w-75 mx-auto text-dark">Click for registration 
-                            <br> following button
-                        </p>
+                        <h1 class="display-3 text-warning">?</h1>
+                        <h3 class="text-dark">
+                        Confirm Your Action
+                        </h3>
+                        <h5  class="text-dark mt-3 font-weight-normal">
+                        Are you sure you want to participate in this event?
+                        </h5> 
                         <div class="my-4">
                             <a href="{{url('confirm-reg')}}/{{encrypt($einfo->eid)}}/{{encrypt($enr)}}" class="px-3 btn btn-danger rounded-sm new-shadow">
                                 <i data-feather="printer" height="20px"></i> Confirm Registration
