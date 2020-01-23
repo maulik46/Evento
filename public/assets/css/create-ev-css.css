@@ -95,46 +95,42 @@
 
     /* nice select css end */
     /* multi-select checkbox css */
-    .ms-options {
-        height: auto !important;
-        overflow: auto;
-        display: none;
+    .ms-options{
+        height:auto!important;
+        overflow:auto;
+        display:none;
         padding: 10px;
-        margin-top: 10px !important;
-        z-index: 10 !important;
-        border: 1px solid #d1d1d1 !important;
-        transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out !important;
+        margin-top:10px!important;
+        z-index:10!important;
+        border: 1px solid #d1d1d1!important;
+        transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out!important;
     }
-
-    .ms-options-wrap {
-        width: 100%;
+    .ms-options-wrap{
+        width:100%;
     }
-
-    .ms-options ul {
-        margin-bottom: 0px;
-        transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out !important;
+    .ms-options ul{
+        margin-bottom:0px;
+        transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out!important;
         list-style: none;
     }
-
-    .ms-options ul li label:hover {
-        background: #f3f4f7 !important;
+    
+    .ms-options ul li label:hover{
+        background:#f3f4f7!important;
     }
-
-    .ms-options-wrap button {
-        margin-top: -2px;
+  
+     .ms-options-wrap  button{
+        margin-top:-2px;
         font-size: 1em;
         color: #333 !important;
-        margin-left: 16px;
-    }
-
-    .ms-options-wrap>button:focus,
-    .ms-options-wrap>button {
+        margin-left:16px;
+     }
+   .ms-options-wrap > button:focus, .ms-options-wrap > button {
         border: 1px solid #aaa0;
         background-color: #fff0;
     }
 
-    .ms-options-wrap>button:after {
-
+    .ms-options-wrap > button:after  {
+        
         content: '';
         display: block;
         margin-top: -4px;
@@ -150,6 +146,5 @@
         height: 8px;
         right: 15px;
         width: 8px;
-    }
-
+        }
     /* multi-select checkbox css end*/
