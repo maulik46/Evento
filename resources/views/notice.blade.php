@@ -23,9 +23,13 @@
                        <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm" style="border-left: 4px solid #ff5c75;">
                            <div class="card-body py-2">
                                <div class="d-flex justify-content-between align-items-center flex-wrap">
-                                    <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
+                                    <div>
+                                        <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
+                                        <span class="badge badge-soft-info px-3 py-1 badge-pill">12:25 pm</span>
+                                   </div>
                                     <h6>{{ucfirst($nt->sender)}}</h6>
                                </div>
+                            
                                <div>
                                     <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
                                     <div class="card-text mb-1"> 
@@ -44,9 +48,13 @@
                        <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm" style="border-left: 4px solid #1AE1AC;">
                            <div class="card-body py-2">
                                <div class="d-flex justify-content-between align-items-center flex-wrap">
-                                    <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
+                                    <div>
+                                        <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
+                                        <span class="badge badge-soft-info px-3 py-1 badge-pill">12:25 pm</span>
+                                   </div>
                                     <h6>{{ucfirst($nt->sender)}}</h6>
                                </div>
+                               <hr style="margin: 0.5em 0em;">
                                <div>
                                     <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
                                     <div class="card-text mb-1"> 
@@ -54,7 +62,7 @@
                                     </div>
                                     @if($nt->attechment)
                                     <div class="card-action my-2">
-                                        <a href="{{asset('attechment')}}/{{$nt->attechment}}" class="btn btn-soft-warning rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">{{$nt->attechment}}</a>
+                                        <a href="{{asset('attechment')}}/{{$nt->attechment}}" class="btn btn-soft-dark rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">{{$nt->attechment}}</a>
                                         
                                     </div> 
                                     @endif
