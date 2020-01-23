@@ -13,7 +13,7 @@
         top: 25% !important;
         right: 2% !important;
         width: 150px;
-
+    }
         .toast {
             width: 400px !important;
             max-width: none;
@@ -23,6 +23,11 @@
             background: #43d39e;
             color: #fff !important;
         }
+        .past-about:hover,
+        .past-result:hover{
+            color:red!important;
+        }
+            
 </style>
 @endsection
 
@@ -118,9 +123,15 @@
             </div>
         </div>
     </div>
-
-    <div class="card new-shadow-sm" style="max-height: 350px;">
-        <h5 class="card-title mt-4 px-4 mb-1 header-title">Recent Event</h5>
+    <div class="card mt-2 mb-0 new-shadow-sm">
+        <div class="card-body py-2">
+            <div class="h4 d-flex align-items-center">
+                <i data-feather="calendar" class="icon-dual-dark"></i>
+                <span class="ml-1">Recent Events</span>
+            </div>
+        </div>
+    </div> 
+    <div class="card new-shadow-sm mt-2" style="max-height: 350px;">
         <div class="card-body overflow-auto my-scroll">
             <div class="table-responsive overflow-auto my-scroll">
                 <table class="table table-hover table-nowrap mb-0">
@@ -358,7 +369,7 @@
         <div class="card-body py-2">
             <div class="h4 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
-                <span class="ml-1">My Running Events</span>
+                <span class="ml-1">Running Events</span>
             </div>
         </div>
     </div>   
@@ -405,6 +416,50 @@
         @endif
         @endforeach
     </div> 
+    <div class="card mt-2 mb-0 new-shadow-sm">
+        <div class="card-body py-2">
+            <div class="h4 d-flex align-items-center">
+                <i data-feather="calendar" class="icon-dual-dark"></i>
+                <span class="ml-1">Past Events</span>
+            </div>
+        </div>
+    </div> 
+     <div class="card new-shadow-sm mt-2" style="max-height: 350px;">
+        <div class="card-body overflow-auto my-scroll">
+            <div class="table-responsive overflow-auto my-scroll">
+                <table class="table table-hover table-nowrap mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Event</th>
+                            <th scope="col">Total Participator</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Venue</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1</td>
+                            <td>Cricket compititon</td>
+                            <td>5</td>
+                            <td>20/12/2019</td>
+                            <td>J.K ground</td>
+                            <td class="d-flex justify-content-around">
+                                <a href="#" data-placement="top" data-toggle="tooltip" title="About">
+                                    <i data-feather="info" height="20px" class="text-info past-about" id="close-btn"></i>
+                                </a>
+                                <a href="#" data-placement="top" data-toggle="tooltip" title="Result">
+                                    <i data-feather="award" height="20px" class="text-success past-result"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+            <!-- end table-responsive -->
+           
+        </div> <!-- end card-body-->
+    </div>
 
     <!-- plus button right side for create events -->
     <div class="position-fixed plus-btn" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left"
