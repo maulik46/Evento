@@ -61,6 +61,15 @@
         }
 
     </style>
+    <script type="text/javascript"> 
+        function preventBack() { 
+            window.history.forward();  
+        } 
+          
+        setTimeout("preventBack()", 0); 
+          
+        window.onunload = function () { null }; 
+    </script>
 </head>
 
 <body class="authentication-bg bg-info">
@@ -158,15 +167,7 @@
     });
     </script>
 
-    <script type="text/javascript"> 
-        function preventBack() { 
-            window.history.forward();  
-        } 
-          
-        setTimeout("preventBack()", 0); 
-          
-        window.onunload = function () { null }; 
-    </script>
+    
 </body>
 
 
