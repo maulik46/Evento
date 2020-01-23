@@ -179,8 +179,8 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-xl-4">
-                            <div class="card new-shadow">
-                                <div class="card-body p-0 hover-me-sm">
+                            <div class="card new-shadow hover-me-sm">
+                                <div class="card-body p-0">
                                     <div class="media px-3 py-5">
                                         <div class="media-body">
                                             <span
