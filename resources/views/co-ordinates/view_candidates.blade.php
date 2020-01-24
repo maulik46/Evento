@@ -40,11 +40,11 @@
                             <div class="font-weight-bold mr-4 font-size-15">
                             <?php $c=participant::where('eid',$einfo['eid'])->count()?>
                             @if($einfo['e_type']=="team")
-                                <span class="">Total Team:</span>
+                                <span class="text-muted">Total Team:</span>
                             @else
-                                <span class="">Total Candidates:</span>
+                                <span class="text-muted">Total Candidates:</span>
                             @endif
-                                <span class="text-dark font-size-18 ml-1">{{$c}}</span class="text-muted">
+                                <span class="text-dark font-size-18 ml-1">{{$c}}</span>
                             </div>
 
                         </div>
