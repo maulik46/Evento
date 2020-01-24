@@ -180,3 +180,10 @@ img{
         }
 
 /* end right inbox sidebar */
+
+/* left sidebar collapse css */
+@media (min-width: 769px) {
+    body.left-side-menu-condensed {
+        min-height: 0px;
+    }
+}
