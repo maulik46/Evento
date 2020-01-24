@@ -4,16 +4,19 @@
 
 @section('my-content')
 <div class="container-fluid">
-    <div class="mb-2 pt-2 card">
+    <div class="mb-0 pt-2 card new-shadow-sm">
+         <a href="{{url('cindex')}}" class="text-right text-dark px-2">
+            <i data-feather="x-circle" id="close-btn" height="20px"></i>
+        </a> 
         <h2 class="font-weight-normal text-dark text-center">Rangoli making Competiton</h2>
         <h6 class="font-weight-normal text-dark text-center">Sutex bank college of computer applications and science</h6>
         <h6 class="font-weight-normal text-dark text-center">
             <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">12/12/2019</span>
             <span class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">Monday</span>
         </h6>
-        
+        <hr class=" my-1">
     </div>
-<div class="mt-3">
+<div class="mt-0">
     <div class="card mb-0 rounded-sm">
         <div class="card-body py-2">
             <div class="h5 d-flex align-items-center">
