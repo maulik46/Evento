@@ -15,7 +15,7 @@
     <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/my-extra.css')}}">
     @section('head-tag-links')
-    
+
     @show
     <style>
         .profile-dropdown-items {
@@ -42,7 +42,7 @@
     <div class="wrapper">
 
         <!-- Topbar Start -->
-        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom position-fixed w-100 new-shadow-sm" style="z-index:99999999999!important;">
+        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom position-fixed w-100 new-shadow-sm" style="z-index:99!important;">
             <div class="container-fluid">
                 <!-- LOGO -->
                 <a href="{{ url('/cindex') }}" class="navbar-brand mx-2">
@@ -71,7 +71,7 @@
                                 <i data-feather="chevron-down" id="nav-menu-btn" class="ml-sm-3 ml-1 align-self-center"></i>
                             </div>
                         </a>
-                        
+
                         <div class="dropdown-menu profile-dropdown-items dropdown-menu-right">
                               <div class="media dropdown-item d-sm-none d-md-none">
                                   <img src="{{asset('assets/images/svg-icons/co-ordinate/man.svg')}}" alt="user-image" height="40px" class="align-self-center" />
@@ -84,7 +84,7 @@
                                       </h6>
                                   </div>
                               </div>
-                             
+
                              <div class="dropdown-divider d-sm-none d-md-none"></div>
                              <a href="{{url('/cindex')}}" class="dropdown-item notify-item mb-2">
                                  <i data-feather="home" class="icon-dual-primary icon-xs mr-2"></i>
@@ -111,11 +111,11 @@
                             </a>
                         </div>
                     </li>
-                      <?php
-                        $notice=\DB::table('tblnotice')->where([['receiver','coordinator'],['clgcode',Session::get('clgcode')]])->orderby('nid','desc')->get()->toarray();
-                        $lastevent=App\tblcoordinaters::select('last_noti')->where('cid',Session::get('cid'))->first();
-                        $count=\DB::table('tblnotice')->select('nid')->where([['nid','>',$lastevent->last_noti],['receiver','coordinator'],['clgcode',Session::get('clgcode')]])->count();
-                    ?>
+                <?php
+                    $notice = \DB::table('tblnotice')->where([['receiver', 'coordinator'], ['clgcode', Session::get('clgcode')]])->orderby('nid', 'desc')->get()->toarray();
+                    $lastevent = App\tblcoordinaters::select('last_noti')->where('cid', Session::get('cid'))->first();
+                    $count = \DB::table('tblnotice')->select('nid')->where([['nid', '>', $lastevent->last_noti], ['receiver', 'coordinator'], ['clgcode', Session::get('clgcode')]])->count();
+                ?>
                     <li class="nav-item notification-list" data-toggle="tooltip" data-placement="bottom" title="Inbox">
                         <a href="#" class="text-dark right-bar-toggle" id="mail">
                             <i data-feather="mail" height="19px" id="nav-menu-btn"></i>
@@ -137,7 +137,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <!-- end wrapper -->
 
@@ -151,15 +151,14 @@
              </div>
 
              <div class="my-scroll px-2">
-             <?php $c=0;           
-             ?>
+             <?php $c = 0;
+?>
             @foreach($notice as $nt)
             <?php $c++;
-                if($c==1)
-                {
-                    $lastnotice=$nt->nid;
-                }
-            ?>
+if ($c == 1) {
+    $lastnotice = $nt->nid;
+}
+?>
             @if($c<=$count)
             <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm" style="border-left: 4px solid #ff5c75;">
             @else
@@ -172,13 +171,13 @@
                                </div>
                                <div>
                                     <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
-                                    <div class="card-text mb-1"> 
+                                    <div class="card-text mb-1">
                                         {{ucfirst($nt->message)}}
                                     </div>
                                     @if($nt->attechment)
                                     <div class="card-action my-2">
                                         <a href="{{asset('attechment')}}/{{$nt->attechment}}" class="btn btn-soft-danger rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">{{$nt->attechment}}</a>
-                                    </div> 
+                                    </div>
                                     @endif
                                </div>
                            </div>
@@ -226,13 +225,13 @@
     <!-- optional plugins -->
     <script src="{{asset('assets/libs/moment/moment.min.js')}}"></script>
     @section('extra-scripts')
-    
-    @show   
+
+    @show
     <!-- App js -->
     <script src="{{asset('assets/js/app.min.js')}}"></script>
     <script>
         $('#mail').click(function(){
-            var last=<?php echo $lastnotice ;?>;
+            var last=<?php echo $lastnotice; ?>;
             $.ajaxSetup({
                     headers: {
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
