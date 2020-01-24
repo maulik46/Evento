@@ -48,9 +48,20 @@ class co_ordinate extends Controller
     }
     public function index()
     {
+        $date_string="";
+        $today_date=date("d-m-Y");
+        $date_array=array();
+        for($i=0;$i<5;$i++)
+        {
+            $date_v=date("d-m-Y", strtotime("-1 day", strtotime($today_date)));
+            $date_array[]=$date_v;
+            $date_string.="'".$date_v."'".",";
+            $today_date=$date_v;
+        }
+        $tble=tblevent::where('clgcode',session::get('clgcode'))->get()->toArray();
         $events=tblevent::where([['clgcode',Session::get('clgcode')]
         ])->orderby('edate','desc')->get()->toarray();//change
-        return view('co-ordinates/newindex',['events'=>$events]);
+        return view('co-ordinates/newindex',['events'=>$events,'date_string'=>$date_string,'tble'=>$tble]);
     }
     public function view_can($id)
     {
