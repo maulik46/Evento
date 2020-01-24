@@ -229,7 +229,7 @@
                                                 <span>Update Event</span>
                                             </a>
                                             <!-- <a href="{{url('delete_event')}}/{{encrypt($e['eid'])}}" class="dropdown-item"> -->
-                                             <a href="#" class="dropdown-item" onclick="alert('hello');">
+                                             <a href="#" class="dropdown-item" onclick="return deleteEvent()">
                                                 <i data-feather="trash-2" class="icon-dual-danger icon-xs mr-2"></i>
                                                 <span class="text-danger">Delete Event</span>
                                             </a>
@@ -259,7 +259,7 @@
         @endforeach
         
         <div class="col-md-6 col-xl-4 col-sm-6">
-            <div class="card new-shadow-sm" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
+            <div class="card new-shadow-sm mt-2 mb-3" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
                 title="This Event is Currently disabled. You need approval from Administrator to delete it.">
                 <div class="card-body p-0">
                     <div class="media p-3">
@@ -452,4 +452,35 @@
 
 <!-- page js -->
 <script src="../assets/js/pages/dashboard.init.js"></script>
+<script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
+<script>
+function deleteEvent(){
+    var id = $(this).data('id');
+
+    Swal.fire({
+    title: 'Are you sure you want to delete?',
+    text: 'You need to approval from super admin to delete..!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#1ce1ac',
+    confirmButtonText: 'Delete',
+    preConfirm: function() {
+     return new Promise(function(resolve) {
+     /*
+     Ajax code will be here
+     */
+        $.ajax({
+            url: '{{url('delete_event')}}/{{encrypt($e['eid'])}}',
+            type: 'POST',           
+            data: '{id:eid}'
+           
+        })
+     });
+   },
+   allowOutsideClick: false 
+    })
+
+}
+</script>
 @endsection
