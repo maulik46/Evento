@@ -8,7 +8,11 @@
         color: #43d39e !important;
         fill: #fff;
     }
-
+    canvas{
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
     .event-option.show {
         top: 25% !important;
         right: 2% !important;
@@ -51,6 +55,14 @@
                </div>
            </div>
 @endif
+<!-- charts -->
+<div class="card" >
+<div style="width:75%;">
+        <canvas id="canvas"></canvas>
+</div>
+</div>
+
+<!-- charts over -->
     <div class="row">
         <div class="col-md-6 col-xl-3">
             <div class="card new-shadow-sm">
@@ -453,7 +465,98 @@
 <!-- page js -->
 <script src="../assets/js/pages/dashboard.init.js"></script>
 <script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
+<script src="{{asset('assets/js/Chart.min.js')}}"></script>
+<script src="{{asset('assets/js/utils.js')}}"></script>
 <script>
+// var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var dynamicColors = function() {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            return "rgb(" + r + "," + g + "," + b + ")";
+        }
+        var config = {
+			type: 'line',
+			data: {
+				labels: [<?php echo $date_string; ?>],
+				datasets: [
+                    <?php
+                foreach ($tble as $t)
+                 {
+                 ?>
+                
+                {
+	            label:'<?php echo $t['ename']; ?>',
+                backgroundColor: dynamicColors(),
+                fill: false,
+				borderColor:dynamicColors(),
+                data: [
+                    <?php
+                    $date_str="";
+                    $today_dat=date("d-m-Y");
+                    for($i=0;$i<5;$i++)
+                        {
+                            $date_v=date("Y-m-d", strtotime("-1 day", strtotime($today_dat)));
+                            $line=App\participant::where('reg_date',$date_v)->where('eid',$t['eid'])->count();
+                            $date_str.=$line.",";
+                            $today_dat=$date_v;
+                        }
+                        echo $date_str;
+                	?>
+					]
+                },
+                <?php
+                }
+                ?>
+                ]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+					text: 'Student Registration DateWise'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Date'
+						}
+					}],
+					yAxes: [{
+                        ticks: {
+                                beginAtZero: true,
+                                userCallback: function(label, index, labels) {
+                                // when the floored value is the same as the value we have a whole number
+                                if (Math.floor(label) === label) {
+                                     return label;
+                                }
+
+                                },
+                            },
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Register student'
+						}
+					}]
+				}
+			}
+		};
+        
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myLine = new Chart(ctx, config);
+		};
 function deleteEvent(){
     var id = $(this).data('id');
 
