@@ -42,7 +42,7 @@
     <div class="wrapper">
 
         <!-- Topbar Start -->
-        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom position-fixed w-100 new-shadow-sm">
+        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom position-fixed w-100 new-shadow-sm" style="z-index:99999999999!important;">
             <div class="container-fluid">
                 <!-- LOGO -->
                 <a href="{{ url('/cindex') }}" class="navbar-brand mx-2">
