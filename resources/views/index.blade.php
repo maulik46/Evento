@@ -126,17 +126,16 @@
 
                                         </div>
                                         @if($e['e_type']=='team')
-                                        
-                                                <a href="{{url('/team-insert')}}/{{encrypt($e['eid'])}}">
-                                                <i data-feather="external-link"
-                                                class="align-self-center text-dark event-link">
-                                                </i>
-                                                </a>
-                                        @else
-                                            <a href="{{url('/participate-now')}}/{{encrypt($e['eid'])}}">
-                                            <i data-feather="external-link" class="align-self-center text-dark event-link">
+                                        <a href="{{url('/team-insert')}}/{{encrypt($e['eid'])}}">
+                                            <i data-feather="external-link"
+                                                class="align-self-center text-dark event-link" height="20px">
                                             </i>
-                                            </a>
+                                        </a>
+                                        @else
+                                        <a href="{{url('/participate-now')}}/{{encrypt($e['eid'])}}">
+                                            <i data-feather="external-link" class="align-self-center text-dark event-link" height="20px">
+                                            </i>
+                                        </a>
                                         @endif
                                         
                                     </div>
