@@ -3,10 +3,10 @@
 @section('my-content')
             <div class="d-flex justify-content-center">
                 <div class="container-fluid col-lg-7">
-                  <div class="card mt-5 new-shadow rounded-lg">
+                  <div class="card mt-5 new-shadow rounded">
                         <div class="card-body px-5">
                             <a href="{{url('cindex')}}" class="float-right text-dark">
-                                <i data-feather="x-circle" id="close-btn"></i>
+                                <i data-feather="x-circle" id="close-btn" height="20px"></i>
                             </a>
                             <br>
                             <div class="text-center mt-4">
