@@ -25,6 +25,10 @@
         background:#ff5c751a;
         color: #e34960!important;
     }
+    .btn-logout:focus{
+        background:#ff5c75;
+        color: #fff!important;
+    }
     .button-menu-mobile:hover{
         color: gray!important;
     }
