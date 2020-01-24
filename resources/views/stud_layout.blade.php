@@ -17,6 +17,19 @@
     <!-- this section is for extra css links in some particuler page but not in all page -->
 
     @show
+    <style>
+    .btn-logout{
+        color:#000;
+    }
+    .btn-logout:hover{
+        background:#ff5c751a;
+        color: #e34960!important;
+    }
+    .button-menu-mobile:hover{
+        color: gray!important;
+    }
+    
+    </style>
 </head> 
 
 <body class="body-scroll">
@@ -24,40 +37,42 @@
     <!-- Begin page -->
     <div id="wrapper">
             <div class="navbar navbar-expand flex-column align-items-center flex-md-row navbar-custom new-shadow-sm">
-                    <div class="container-fluid">
-                        <!-- LOGO -->
-                        <a href="/index" class="navbar-brand mr-0 mr-md-2 logo">
-                            <span class="logo-lg">
-                                <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
-                                <span class="d-inline h2 font-weight-bold">Evento</span>
-                            </span>
-                            <span class="logo-sm">
-                                <img src="{{asset('assets/images/logo.png')}}" alt="" height="24">
-                            </span>
-                        </a>
-                        <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
+                     <div class="container-fluid">
+                      <ul class="list-unstyled  mb-0">
                             <li class="nav-item">
-                                <button class="button-menu-mobile open-left disable-btn">
-
+                                <button class="button-menu-mobile open-left mr-4 text-dark position-fixed" style="top:0;left:10px;">
                                     <i data-feather="menu" class="menu-icon"></i>
-                                    <!-- <i data-feather="x" class="close-icon"></i> -->
-
                                 </button>
 
                             </li>
+                            <li class="nav-item">
+                                <a href="/index" class="navbar-brand logo align-items-center pb-0">
+                                    <span class="position-fixed" style="top:20px;left:75px;">
+                                        <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
+                                        <span class="d-inline h2 text-dark font-weight-bold">Evento</span>
+                                    </span>
+                                    <!-- <span class="logo-sm mt-1 mr-3">
+                                        <img src="{{asset('assets/images/logo.png')}}" alt="" height="24">
+                                    </span> -->
+                                </a>
+                            </li>
+                            
                         </ul>
-                        <ul class="navbar-nav  ml-auto list-unstyled topnav-menu mb-0 d-lg-none d-sm-flex">
-                            <li class="mr-5">
-                                <img src="{{asset('assets/images/logo.png')}}" height="20px" alt="Evento" />
-                                <span class="d-inline h4 font-weight-bold">Evento</span>
+                        <!-- LOGO -->
+                        
+                      
+                        <ul class="ml-auto list-unstyled topnav-menu d-lg-none d-sm-flex align-items-center">
+                            <li class="ml-5" style="margin-top:20px;">
+                                <img src="{{asset('assets/images/logo.png')}}" height="22px" alt="Evento" />
+                                <span class="d-inline h3 font-weight-bold">Evento</span>
                             </li>
                         </ul>
 
                         
-                        <ul class="navbar-nav  ml-auto list-unstyled topnav-menu mb-0">
-                            <li data-toggle="tooltip" data-placement="bottom" title="Log-out" class="nav-item">
-                                <a href="/logout" class="nav-link">
-                                    <i data-feather="log-out"></i>
+                        <ul class="ml-auto list-unstyled mb-0">
+                            <li class="nav-item">
+                                <a href="/logout" class="nav-link btn btn-logout  p-2 btn-rounded px-md-3">
+                                    <i data-feather="log-out" height="18px"></i>
                                     <span class="d-none d-md-inline-flex d-lg-inline-flex">Log Out</span>
                                 </a>
                             </li>
