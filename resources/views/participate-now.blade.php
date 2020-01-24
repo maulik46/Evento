@@ -162,6 +162,7 @@
 @endsection            
 
 @section('extra-scripts')
+
     <script type="text/javascript"> 
         function preventBack() { 
             window.history.forward();  
