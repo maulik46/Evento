@@ -198,7 +198,7 @@
                             <label class="col-form-label font-size-15">Event Co-ordinate</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" style="background-color: #f3f4f7;" class="form-control font-size-15"
+                                <input type="text" style="background-color: #f3f4f7;color: #737373!important;" class="form-control font-size-15 font-weight-bold" 
                                     disabled value="{{ucfirst(Session::get('cname'))}}" />
                             </div>
                         </div>
@@ -250,6 +250,12 @@
 <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('assets/libs/multicheckbox/multiselect.js')}}"></script>
 <script src="{{asset('assets/js/create-ev-js.js')}}"></script>
-
+<!-- <script>
+$(document).ready(function(){
+    $('#select-all').change(function(){
+         $(this).parents('li:first').siblings('li').find('input:checkbox').attr("checked","checked");
+    })
+})
+</script> -->
 
 @endsection
