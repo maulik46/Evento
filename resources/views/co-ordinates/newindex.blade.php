@@ -57,35 +57,56 @@
 @endif
 <!-- charts -->
     <div class="row justify-content-between align-items-center">
-        <div class="col-lg-7">
+        <div class="col-md-7 col-sm-12">
             <div class="card pr-4 new-shadow-sm">
                 <div id="chart-1"></div>
             </div>
         </div>
-        <div class="col-lg-5">
-            <div class="card new-shadow-sm p-1 px-2 overflow-auto my-scroll" style="height:350px;">
-            <h4 class="text-center">Running Events</h4>
+        <div class="col-md-5 col-sm-12">
+            <div class="card new-shadow-sm p-1 px-3 overflow-auto my-scroll" style="height:350px;">
+            <div class="h4 d-flex align-items-center justify-content-center">
+                <i data-feather="calendar" class="icon-dual-dark"></i>
+                <span class="ml-1">My Running Events</span>
+            </div>
             <hr class="mt-0 mb-2">
-                <div class="card bg-light new-shadow-sm pt-2 px-2 rounded-0">
+            <?php $c = 0?>
+            @foreach($events as $e)
+            <?php $c++;
+            $p = \DB::table('tblparticipant')->select('senrl')->where('eid', $e['eid'])->count();
+            ?>
+            @if($e['cid']==Session::get('cid'))
+            @if($e['edate']==date('Y-m-d'))
+                <div class="card bg-light new-shadow-sm mb-2 my-1 px-2 rounded-0 hover-me-sm">
                     <div class="d-flex justify-content-between align-items-center px-1">
-                        <div >
-                            <span class="badge badge-soft-success px-3 badge-pill">Solo</span>
-                            <span class="badge badge-soft-dark px-3 badge-pill">25/1/2020</span>
+                        <div>
+                        @if($e['e_type']=='team')
+                            <span class="badge badge-soft-warning px-3 badge-pill">Team</span>
+                        @else
+                            <span class="badge badge-soft-warning px-3 badge-pill">Solo</span>
+                        @endif    
+                            <span class="badge badge-soft-dark px-3 badge-pill">
+                            {{date('d/m/Y', strtotime($e['edate']))}}
+                            </span>
+                       
                         </div>
-                        <a href="#" class=" p-0">
-                            <a href="#" class="btn btn-light p-1 btn-p-about">
-                                <i data-feather="info" height="18px" class="text-info"></i>
+                        <div>
+                            <a href="{{url('result')}}/{{$e['eid']}}" class="btn btn-p-result btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="Announce Result">
+                                <i data-feather="award" height="18px" class="text-dark"></i>
                             </a>
-                           
-                         </a>
+                            <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="About">
+                                <i data-feather="info" height="18px" class="text-dark"></i>
+                            </a>
+                         </div>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center px-1" style="margin-top:-5px;">
-                         <h5 class="pl-1">Kho-Kho</h5>
-                         <a href="#" class="btn btn-light  p-1 btn-p-result">
-                            <i data-feather="award" height="18px" class="text-success"></i>
-                         </a>
-                    </div>
+                    <div style="margin-top:-5px;">
+                        <h5>{{ucfirst($e['ename'])}} competition</h5>
+                        </div>
+                    
                 </div>
+               @endif
+               @endif
+               @endforeach 
+              
             </div>
         </div>    
             
@@ -354,57 +375,8 @@
             </div>
         </div>
     </div><!-- end row -->
-    <div class="card mt-2 mb-0 new-shadow-sm">
-        <div class="card-body py-2">
-            <div class="h4 d-flex align-items-center">
-                <i data-feather="calendar" class="icon-dual-dark"></i>
-                <span class="ml-1">Running Events</span>
-            </div>
-        </div>
-    </div>   
-    <div class="row">
-        @foreach($events as $e)
-        @if($e['cid']==Session::get('cid'))
-        @if($e['edate']==date('Y-m-d'))
-        <div class="col-md-6 col-xl-4 col-sm-6">
-            <div class="card new-shadow-sm hover-me-sm mt-2" >
-                <div class="card-body p-0">
-                    <div class="media p-3">
-                        <div class="media-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                @if($e['e_type']=='team')
-                                <span
-                                    class="text-muted badge rounded-pill badge-soft-warning  px-3">{{ucfirst($e['e_type'])}}
-                                    @else
-                                    <span
-                                        class="text-muted badge rounded-pill badge-soft-success  px-3">{{ucfirst($e['e_type'])}}
-                                        @endif
-                                    </span>
-                                  
-                                    <div>
-                                        <a href="{{url('event_info')}}" data-toggle="tooltip" data-placement="bottom" title="About">
-                                            <i data-feather="info" class="text-dark" height="20px"></i>
-                                        </a>
-                                    </div>
-                            </div>
-                            <h4 class="mb-0 mt-3">{{ucfirst($e['ename'])}}</h4>
-                            <span class="text-muted1">{{date('d/m/Y', strtotime($e['edate']))}}</span>
-                        </div>
-                    </div>
-                    <div class="bg-light">
-                        <a href="{{url('result')}}/{{$e['eid']}}"
-                            class="text-center btn btn-light btn-block rounded-0 text-dark d-flex align-items-center justify-content-center view-candidate">
-                            <i data-feather="award" height="18px"></i>
-                            <span>Announce Result</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
-        @endif
-        @endforeach
-    </div> 
+   
+  
     <div class="card mt-2 mb-0 new-shadow-sm">
         <div class="card-body py-2">
             <div class="h4 d-flex align-items-center">
@@ -423,7 +395,7 @@
                             <th scope="col">Event</th>
                             <th scope="col">Total Participator</th>
                             <th scope="col">Date</th>
-                            <th scope="col">Venue</th>
+                            <th scope="col">Co-ordinator</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -438,7 +410,7 @@
                             <td>{{ucfirst($e['ename'])}} compition</td>
                              <td>{{$p}}</td> <!--total Participator -->
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
-                            <td>{{ucfirst($e['place'])}}</td>
+                            <td>{{ucfirst($e['cid'])}}</td>
                             <td  class="d-flex justify-content-start align-items-center pt-1 mb-0">
                                 <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about py-1 px-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
                                     <i data-feather="info" height="20px" class=" text-info"></i>
