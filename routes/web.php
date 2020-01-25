@@ -50,8 +50,10 @@ Route::group(['middleware' => 'SessionCheck'], function () {
     Route::get('/action','student@action');
     
     Route::get('/teamvalidation','student@teamvalidation');
+    
+    Route::get('/confirm-reg/{eid}/{enrl}/{tname}','student@confirm_reg');
 
-    Route::post('/insertteam','student@confirm_team');
+    Route::post('/insertteam','student@team_confirm');
 
 
 });
