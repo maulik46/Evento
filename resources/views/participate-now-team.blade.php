@@ -102,6 +102,7 @@
                                                     <ol>
                                                     <?php
                                                     $rules=(explode(";",$einfo->rules));
+                                                    $c=0;
                                                 ?>
                                                     @foreach($rules as $rule)
                                                         @if(strlen($rule)>0)
@@ -110,6 +111,9 @@
                                                         </li>
                                                         @endif
                                                     @endforeach
+                                                    @if($c==0)
+                                                    <div class="font-weight-bold text-center p-1">There are no particular rules for {{ucfirst($einfo->ename)}} Competition!! </div>
+                                                    @endif
                                                         
                                                     </ol>
                                                 </div>
@@ -119,12 +123,12 @@
 
                                 
                                     <div class="mt-5 mb-1 ml-4">
-                                        <a href="#" class="px-4 btn btn-success new-shadow rounded-sm" data-toggle="modal" data-target="#modal-success">
+                                        <a href="#" class="px-4 btn btn-success new-shadow-sm hover-me-sm rounded-sm" data-toggle="modal" data-target="#modal-success">
                                             <span class="font-weight-bold font-size-15">Confirm participation</span>
                                         <i data-feather="check-square" height="20px"></i>   
                                         </a>
                                         <br>
-                                        <a href="{{url('/index')}}" class="my-3 px-4 font-weight-bold btn btn-info new-shadow rounded-sm">
+                                        <a href="{{url('/team-insert')}}/{{$einfo->eid}}'" class="my-3 px-4 font-weight-bold btn btn-info new-shadow-sm rounded-sm hover-me-sm">
                                             <span>Back</span>
                                             <i data-feather="arrow-left-circle"></i>
                                         </a>
@@ -141,7 +145,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">
-                                <i data-feather="x-circle" id="close-btn"></i>
+                                <i data-feather="x-circle" id="close-btn" height="20px"></i>
                             </span>
                         </button>
                     </div>
@@ -154,8 +158,8 @@
                         Are you sure you want to participate in this event?
                         </h5> 
                         <div class="my-4">
-                            <a href="{{url('confirm-reg')}}/{{encrypt($einfo->eid)}}/{{encrypt($enr)}}/{{$req->tname}}" class="px-3 btn btn-danger rounded-sm new-shadow">
-                                <i data-feather="printer" height="20px"></i> Confirm Registration
+                            <a href="{{url('confirm-reg')}}/{{encrypt($einfo->eid)}}/{{encrypt($enr)}}/{{$req->tname}}" class="px-3 btn btn-success rounded-sm new-shadow font-weight-bold">
+                                <i data-feather="check-square" height="20px"></i> Confirm Registration
                             </a>
                         </div>
                     </div>
