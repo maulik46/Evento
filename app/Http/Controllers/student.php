@@ -137,12 +137,12 @@ class student extends Controller
     }
     public function explore($cat)//function for explore event
     {
-        $n=tblevent::where([['clgcode',Session::get('clgcode')],['category',$cat],['reg_end_date','>',date('Y-m-d')]])->count();
+        $n=tblevent::where([['clgcode',Session::get('clgcode')],['category',$cat],['reg_end_date','>=',date('Y-m-d')]])->count();
         if($n>0)
         {
             $events=tblevent::where([['clgcode',Session::get('clgcode')],
                                             ['category',$cat],
-                                            ['reg_end_date','>',date('Y-m-d')],
+                                            ['reg_end_date','>=',date('Y-m-d')],
                                             ['reg_start_date','<=',date('Y-m-d')]])
                                             ->where(function($q){
                                                 $q->where('gallow',Session::get('gender'))
