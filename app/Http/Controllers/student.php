@@ -256,18 +256,17 @@ class student extends Controller
         return response()->json(array('msg'=> $msg),200);
     }
       
-   public function confirm_team(Request $req)//confirm the team registration
+    public function team_confirm(Request $req)
     {
-        
-        $senr="";
-        foreach($req->enrl as $enr)
-        {
-            $senr.=$enr."-";
-        }
+        return view('participate-now-team',['req'=>$req]);
+
+    }
+    public function confirm_reg($eid,$enrl,$tname)//confirm the team registration
+    {
         $participant=new participant;
-        $participant->eid=$req->eid;
-        $participant->senrl=$senr;
-        $participant->tname=$req->tname;
+        $participant->eid=decrypt($eid);
+        $participant->senrl=decrypt($enrl);
+        $participant->tname=$tname;
         $participant->clgcode=Session::get('clgcode');
         $participant->rank="p";
         $participant->reg_date=date("Y:m:d");
