@@ -77,10 +77,14 @@
 </div>
 
     <div class="card mb-0 rounded-sm">
-        <div class="card-body py-2">
+        <div class="card-body py-2 d-flex justify-content-between align-items-center">
             <div class="h5 d-flex align-items-center">
                 <i data-feather="users" class="icon-dual-info"></i>
                 <span class="ml-1">Other Candidates</span>
+            </div>
+            <div class="h6 d-flex align-items-center">
+                <span>Total</span>
+                <span class="ml-2">3</span>
             </div>
         </div>
         <hr class=" my-1">
