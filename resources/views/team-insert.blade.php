@@ -1,6 +1,7 @@
 @extends('stud_layout')
 @section('title','Insert Team')
 @section('head-tag-links')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
     .form-control {
         border-radius: .15rem;
@@ -70,7 +71,7 @@
                             </li>
 
                             @endif
-                            @if($einfo['alw_diff_class']=="yes")
+                            @if($einfo['alw_dif_class']=="yes")
 
                             <li>Students from different class allowed.</li>
 
@@ -79,7 +80,7 @@
                             <li>Students from different class are not allowed.</li>
 
                             @endif
-                            @if($einfo['alw_diff_div']=="yes")
+                            @if($einfo['alw_dif_div']=="yes")
 
                             <li>Students from different Division allowed.</li>
 
@@ -111,23 +112,30 @@
                         <br>
 
                         <div class="row justify-content-center mt-2">
-                            <form id="add-player" class="col-xl-6 col-md-8 col-sm-10 " method="post"
-                                action="{{ url('insertteam') }}/{{encrypt($einfo['gallow'])}}/{{encrypt($einfo['alw_dif_class'])}}/{{encrypt($einfo['alw_dif_div'])}}">
+                            <form id="add-player" action="{{url('insertteam')}}" class="col-xl-6 col-md-8 col-sm-10 " method="post" onsubmit="return check()">
                                 <?php $n=$einfo['tsize']; ?>
                                 @csrf
-                                <input type="hidden" value="{{$einfo['eid']}}" name="eid">
+                                <input type="hidden" id="eid" value="{{$einfo['eid']}}" name="eid">
                         <div id="part1">
                                     <label class="form-control-label">Team name</label>
-                                    <input type="text" class="form-control" name="" id="" placeholder="Enter Team Name" style="letter-spacing: 0;padding:25px;">
-                                    <span style="color:red"></span>
+                                    <input type="text" id="tname" onkeyup="return checktname()" class="form-control" name="tname" id="" placeholder="Enter Team Name" style="letter-spacing: 0;padding:25px;">
+                                    <span id="tnameerr" style="color:red"></span>
                         </div>
                         <div id="part2">
-                                @for($i=0;$i<$n;$i++) 
+                        <script>a=0 ;</script>
+                        @for($i=0;$i<$n;$i++) 
                                 <div class="form-group">
                                     <label class="form-control-label">Player {{$i+1}}</label>
-                                    <input type="text" class="form-control" name="enrl[]" id="enrl{{$i}}"
-                                        placeholder="Enter Enrollment ID" @if($i==0) value="{{Session::get('senrl')}}"
-                                        readonly @endif>
+                                    @if($i==0)
+                                    <input type="text" class="form-control" name="enrl[]" id="enrl{{$i}}" 
+                                        placeholder="Enter Enrollment ID" value="{{Session::get('senrl')}}"
+                                        readonly >
+                                        <script>a++ ;</script>
+                                    @else
+                                    <input type="text" class="form-control" onkeyup="return checkplayer(this.id)" name="enrl[]" id="enrl{{$i}}"
+                                        placeholder="Enter Enrollment ID">
+                                        <script> a++ ;</script>
+                                    @endif
                                     <span style="color:red">{{$errors->first('enrl.'. $i)}}</span>
                                     <?php $a=$i+1 ?>
                                     @if(Session::get('error'."$a"))
@@ -136,7 +144,7 @@
                                 </div>
                                  @endfor
 
-                            <button type="submit" class="hover-me-sm mt-2 px-4 btn btn-success new-shadow-sm rounded-sm">
+                            <button type="submit" onclick="return sameplayer()" class="hover-me-sm mt-2 px-4 btn btn-success new-shadow-sm rounded-sm">
                                 <span class="font-weight-bold font-size-15">Participate Now</span>
                                 <i data-feather="check-circle" height="22px"></i>
                             </button>
@@ -169,14 +177,125 @@
 <script>
 $(document).ready(function(){
     $('#part2,#title1,.id-msg,#back-part').hide();
-    $('#next-part').click(function(){
-        $('#part2,#title1,.id-msg,#back-part').show();
-        $('#part1,#title2,#next-part').hide();
-    });
+    
     $('#back-part').click(function(){
         $('#part2,#title1,.id-msg,#back-part').hide();
         $('#part1,#title2,#next-part').show();
     });
+  
+    $('#next-part').click(function(){
+        if($('#tname').val().length > 5 && $('#tnameerr').text().length==""){
+        $('#part2,#title1,.id-msg,#back-part').show();
+        $('#part1,#title2,#next-part').hide();
+    }
+    });
+    
+    
 })
+
+function checktname(){
+    var tname=$('#tname').val();
+    var eid=$('#eid').val();
+    if($('#tname').val().length <= 5)
+    {
+        $('#tnameerr').text("Team name must be greater then 5 charecter");
+    }
+    else
+    {
+        $('#tnameerr').text("");
+    }
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/tnameexist',
+            data: {
+                tname: tname,
+                eid:eid,
+            },
+            success: function (data) {
+                if (data.msg > 0) {
+                    $('#tnameerr').text("*This name is already taken");
+                } 
+                else{
+                    $('#tnameerr').text();
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        })
+}
+function check(){
+    var c=0;
+    for(i=0;i<a;i++)
+    {
+        var enrl=$('#enrl'+i).val();
+        if($('#enrl'+i).val()=="")
+        {
+            $('#enrl'+i).next().next().text("Enter enrollment no of player "+(i+1));
+            c++;
+        }
+        else{
+        }
+       
+    }
+    $( "input[name^='news']" ).val( "news here!" );
+    if(!$("input[id^='enrl']").next().next().text()=="")
+    {
+    return false;
+    }
+}
+function sameplayer()
+{
+    var c=0;
+    for(i=0;i<a;i++)
+    {
+        var enrl=$('#enrl'+i).val();
+        for(j=0;j<i;j++)
+        {
+            var enrl2=$('#enrl'+j).val();
+            if(enrl==enrl2)
+            {
+                $('#enrl'+i).next().next().text("This Enrollment number is same as player "+(j+1));
+            }
+        }
+    }
+}
+function checkplayer(id)
+{
+    var enrl=$('#'+id).val();
+    var eid=$('#eid').val();
+    var galw='<?php echo $einfo['gallow'] ?>';
+    var alw_diff_class='<?php echo $einfo['alw_dif_class'] ?>';
+    var a_d_d='<?php echo $einfo['alw_dif_div'] ?>';
+    $.ajax({
+            type: 'GET',
+            url: '/teamvalidation',
+            data: {
+                enrl: enrl,
+                eid:eid,
+                galw:galw,
+                alw_diff_class:alw_diff_class,
+                a_d_d:a_d_d,
+            },
+            success: function (data) {
+                if(data.msg.length==0)
+                {
+                    $('#'+id).next().next().text("");
+                }
+                else
+                {
+                    $('#'+id).next().next().text(data.msg);
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        })
+}
 </script>
 @endsection
