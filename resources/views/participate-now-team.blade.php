@@ -154,7 +154,7 @@
                         Are you sure you want to participate in this event?
                         </h5> 
                         <div class="my-4">
-                            <a href="{{url('confirm-reg')}}/{{encrypt($einfo->eid)}}/{{encrypt($enr)}}" class="px-3 btn btn-danger rounded-sm new-shadow">
+                            <a href="{{url('confirm-reg')}}/{{encrypt($einfo->eid)}}/{{encrypt($enr)}}/{{$req->tname}}" class="px-3 btn btn-danger rounded-sm new-shadow">
                                 <i data-feather="printer" height="20px"></i> Confirm Registration
                             </a>
                         </div>
