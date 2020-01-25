@@ -75,6 +75,8 @@ Route::post('/c_checklogin','co_ordinate@checklogin')->middleware('co_valid_chec
 
 Route::group(['middleware' => 'co_session_check'], function () {
         
+        Route::view('/create_result', 'co-ordinates/create_result');
+
         Route::view('/view_result', 'co-ordinates/view_result');
 
         Route::get('/clogout','co_ordinate@logout');
