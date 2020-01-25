@@ -60,7 +60,7 @@
                                                     <div class="text-muted">
                                                         <p class="d-flex justify-content-between my-2">
                                                             <span class="font-weight-bold">Date</span>
-                                                            <span class="mr-2">{{$e['edate']}}</span>
+                                                            <span class="mr-2">{{date('d/m/Y',strtotime($e['edate']))}}</span>
                                                         </p>
                                                         <p class="d-flex justify-content-between my-2">
                                                             <span class="font-weight-bold">Time</span>
@@ -68,7 +68,7 @@
                                                         </p>
                                                         <p class="d-flex justify-content-between my-2">
                                                             <span class="font-weight-bold">Registration Last-Date</span>
-                                                            <span class="mr-2">{{$e['reg_end_date']}}</span>
+                                                            <span class="mr-2">{{date('d/m/Y',strtotime($e['reg_end_date']))}}</span>
                                                         </p>
                                                         <p class="d-flex justify-content-between my-2">
                                                             <span class="font-weight-bold">Venue</span>
