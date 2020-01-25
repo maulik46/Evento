@@ -56,14 +56,45 @@
            </div>
 @endif
 <!-- charts -->
-<div class="card" >
-<div style="width:75%;">
-        <canvas id="canvas"></canvas>
-</div>
-</div>
+    <div class="row justify-content-between align-items-center">
+        <div class="col-lg-7">
+            <div class="card pr-4 new-shadow-sm">
+                <div id="chart-1"></div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card new-shadow-sm p-1 px-2 overflow-auto my-scroll" style="height:350px;">
+            <h4 class="text-center">Running Events</h4>
+            <hr class="mt-0 mb-2">
+                <div class="card bg-light new-shadow-sm pt-2 px-2 rounded-0">
+                    <div class="d-flex justify-content-between align-items-center px-1">
+                        <div >
+                            <span class="badge badge-soft-success px-3 badge-pill">Solo</span>
+                            <span class="badge badge-soft-dark px-3 badge-pill">25/1/2020</span>
+                        </div>
+                        <a href="#" class=" p-0">
+                            <a href="#" class="btn btn-light p-1 btn-p-about">
+                                <i data-feather="info" height="18px" class="text-info"></i>
+                            </a>
+                           
+                         </a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center px-1" style="margin-top:-5px;">
+                         <h5 class="pl-1">Kho-Kho</h5>
+                         <a href="#" class="btn btn-light  p-1 btn-p-result">
+                            <i data-feather="award" height="18px" class="text-success"></i>
+                         </a>
+                    </div>
+                </div>
+            </div>
+        </div>    
+            
+                <!-- <canvas id="canvas"></canvas> -->
+                
+    </div>
 
 <!-- charts over -->
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-6 col-xl-3">
             <div class="card new-shadow-sm">
                 <div class="card-body p-0">
@@ -136,12 +167,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+
+
     <div class="card mt-2 mb-0 new-shadow-sm">
         <div class="card-body py-2">
             <div class="h4 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
-                <span class="ml-1">Recent Events</span>
+                <span class="ml-1">All Events</span>
             </div>
         </div>
     </div> 
@@ -155,7 +188,7 @@
                             <th scope="col">Event</th>
                             <th scope="col">Total Participator</th>
                             <th scope="col">Date</th>
-                            <th scope="col">Venue</th>
+                            <th scope="col">Co-ordinator</th>
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
@@ -170,7 +203,7 @@
                             <td>{{ucfirst($e['ename'])}} compition</td>
                              <td>{{$p}}</td> <!--total Participator -->
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
-                            <td>{{ucfirst($e['place'])}}</td>
+                            <td>{{ucfirst($e['cid'])}}</td>
                             <td>
                                 @if($e['edate'] == date('Y-m-d'))
                                 <span class="badge badge-soft-success badge-pill px-3 py-1">Running</span>
@@ -459,104 +492,16 @@
 
 
 @section('extra-scripts')
-<script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
-<script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+<script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
+<script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
 
 <!-- page js -->
-<script src="../assets/js/pages/dashboard.init.js"></script>
+<script src="{{asset('assets/js/pages/dashboard.init.js')}}"></script>
 <script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
-<script src="{{asset('assets/js/Chart.min.js')}}"></script>
-<script src="{{asset('assets/js/utils.js')}}"></script>
+<!-- <script src="{{asset('assets/js/Chart.min.js')}}"></script> -->
+<!-- <script src="{{asset('assets/js/utils.js')}}"></script> -->
 <script>
-// var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        var dynamicColors = function() {
-            var r = Math.floor(Math.random() * 255);
-            var g = Math.floor(Math.random() * 255);
-            var b = Math.floor(Math.random() * 255);
-            return "rgb(" + r + "," + g + "," + b + ")";
-        }
-        var config = {
-			type: 'line',
-			data: {
-				labels: [<?php echo $date_string; ?>],
-				datasets: [
-                    <?php
-                foreach ($tble as $t)
-                 {
-                 ?>
-                
-                {
-	            label:'<?php echo $t['ename']; ?>',
-                backgroundColor: dynamicColors(),
-                fill: false,
-				borderColor:dynamicColors(),
-                data: [
-                    <?php
-                    $date_str="";
-                    $today_dat=date("d-m-Y");
-                    for($i=0;$i<5;$i++)
-                        {
-                            $date_v=date("Y-m-d", strtotime("-1 day", strtotime($today_dat)));
-                            $line=App\participant::where('reg_date',$date_v)->where('eid',$t['eid'])->count();
-                            $date_str.=$line.",";
-                            $today_dat=$date_v;
-                        }
-                        echo $date_str;
-                	?>
-					]
-                },
-                <?php
-                }
-                ?>
-                ]
-			},
-			options: {
-				responsive: true,
-				title: {
-					display: true,
-					text: 'Student Registration DateWise'
-				},
-				tooltips: {
-					mode: 'index',
-					intersect: false,
-				},
-				hover: {
-					mode: 'nearest',
-					intersect: true
-				},
-				scales: {
-					xAxes: [{
-						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Date'
-						}
-					}],
-					yAxes: [{
-                        ticks: {
-                                beginAtZero: true,
-                                userCallback: function(label, index, labels) {
-                                // when the floored value is the same as the value we have a whole number
-                                if (Math.floor(label) === label) {
-                                     return label;
-                                }
 
-                                },
-                            },
-						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Register student'
-						}
-					}]
-				}
-			}
-		};
-        
-		window.onload = function() {
-			var ctx = document.getElementById('canvas').getContext('2d');
-			window.myLine = new Chart(ctx, config);
-		};
 function deleteEvent(){
     var id = $(this).data('id');
 
@@ -585,5 +530,70 @@ function deleteEvent(){
     })
 
 }
+</script>
+<script>
+var area = {
+          series: [{
+          name: 'series1',
+          data: [31, 40, 28, 51, 42, 109, 100]
+        }, {
+          name: 'series2',
+          data: [11, 32, 45, 32, 34, 52, 41]
+        }],
+          chart: {
+          height: 350,
+          type: 'area'
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        xaxis: {
+          type: 'datetime',
+          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+        },
+        tooltip: {
+          x: {
+            format: 'dd/MM/yy HH:mm'
+          },
+        },
+        };
+
+ var pie = {
+          series: [44, 55, 13, 43, 22],
+          chart: {
+          width: 480,
+          height: 300,
+          type: 'donut',
+        },
+        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart1 = new ApexCharts(
+            document.querySelector("#chart-1"), 
+            area
+            
+        );
+        chart1.render();
+
+        var chart2 = new ApexCharts( 
+            document.querySelector("#chart-2"),
+            pie
+        );
+        chart2.render();
+
 </script>
 @endsection
