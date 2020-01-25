@@ -110,7 +110,7 @@
                                             <div class="s-group has-icon d-flex align-items-center">
                                                 <img src="assets/images/svg-icons/student-dash/id.svg" class="ml-2 form-control-icon" height="20px" alt="">
 
-                                                <input type="text" class="form-control" id="password" placeholder="Enter your Enrollment number" name="senrl">
+                                                <input type="text" class="form-control" id="password" placeholder="Enter your Enrollment number" onblur="this.value=this.value.toUpperCase()" name="senrl">
                                             </div>
                                         </div>
                                         @error('senrl')
