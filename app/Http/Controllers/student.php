@@ -177,99 +177,97 @@ class student extends Controller
         $einfo=tblevent::where('eid',decrypt($eid))->first();
         return view('team-insert',['einfo'=>$einfo]);
     }
-    public function insert_team(Request $request,$galw,$awl_diff_class,$a_d_d)//validation for team insert
+    public function teamvalidation(Request $req)
     {
-        $i=0; 
-        $request->validate([
-            'enrl.*' => 'required|distinct',
-        ],
-        [
-            'enrl.*.required' => '* Please Enter player enrollment no',
-            'enrl.*.distinct' => '* You Enter same enrollment number more then ones'
-        ]);
-        $galw=decrypt($galw);
-        $awl_diff_class=decrypt($awl_diff_class);
-        $a_d_d=decrypt($a_d_d);
-        foreach($request->enrl as $enr)
-		{
-            $i++;
-            if($galw=="both" && $awl_diff_class=="yes")
+        $enr=$req->enrl;
+        $eid=$req->eid;
+        $galw=$req->galw;
+        $awl_diff_class=$req->alw_diff_class;
+        $a_d_d=$req->a_d_d;
+        if($galw=="both" && $awl_diff_class=="yes")
+        {
+            $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr]])->get()->toArray();
+            if(!$st)
             {
-                $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr]])->get()->toArray();
-                if(!$st)
-                {
-                    ${'e'.$i}="*Invalid Enrollment Id of player".$i;
-                    return back()->with('error'."$i",${'e'.$i});
-                }
-               
+                $msg="*Invalid Enrollment Id of player";
+                return response()->json(array('msg'=> $msg),200);
             }
-            elseif($galw=="both" && $awl_diff_class=="no" && $a_d_d=="yes")
+           
+        }
+        elseif($galw=="both" && $awl_diff_class=="no" && $a_d_d=="yes")
+        {
+            $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')]])->get()->toArray();
+            
+            if(!$st)
             {
-                $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')]])->get()->toArray();
-                
-                if(!$st)
-                {
-                     $e="*player ".$i." is not from ".Session::get('class') . "class or invalid Enrollment" ;
-                     return back()->with('error'."$i",${'e'.$i});
-                }
-            }
-            elseif($galw=="both" && $awl_diff_class=="no" && $a_d_d=="no")
-            {
-                $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')],['division',Session::get('div')]])->get()->toArray();
-                
-                if(!$st)
-                {
-                     $e="*player ".$i." is not from ".Session::get('class') . "class or invalid Enrollment" ;
-                     return back()->with('error'."$i",${'e'.$i});
-                }
-            }
-            elseif($galw==Session::get('gender') && $awl_diff_class=="yes" )
-            {
-                $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw]])->get()->toArray();
-                
-                if(!$st)
-                {
-                    $e="*player ".$i." is not ". Session::get('gender')." or invalid enrollment number";
-                    // echo $e;
-                    return back()->with('error'."$i",${'e'.$i});
-
-                }
-            }
-            elseif($galw==Session::get('gender') && $awl_diff_class=="no" && $a_d_d=="yes")
-            {
-                $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')]])->get()->toArray();
-                
-                if(!$st)
-                {
-                  $e="*player ".$i." is not ".Session::get('gender') . " or not from class ".Session::get('class') . " or invalid Enrollment" ;
-                  return back()->with('error'."$i",${'e'.$i});
-                }
-            }
-            elseif($galw==Session::get('gender') && $awl_diff_class=="no" && $a_d_d=="no")
-            {
-                $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')],['division',Session::get('div')]])->get()->toArray();
-                
-                if(!$st)
-                {
-                    ${'e'.$i}="*player ".$i." is not ".Session::get('gender') . " or not from class ".Session::get('class') . " or invalid Enrollment" ;
-                    return back()->with('error'."$i",${'e'.$i});
-                }
-            }
-            $st=participant::where([['senrl','LIKE','%'.$enr.'%'],['eid',$request->eid]])->get()->count();
-            if($st>0)
-            {
-                ${'e'.$i}="*Player".$i." Already participated";
-                return back()->with('error'."$i",${'e'.$i});
+                $msg="This player not from ".Session::get('class') . " class or invalid Enrollment" ;
+                return response()->json(array('msg'=> $msg),200);
             }
         }
-        return view('participate-now-team',['req'=>$request]);
-    	// return redirect()->to('/index');
-    }   
-    public function confirm_team($eid,$enrl)//confirm the team registration
+        elseif($galw=="both" && $awl_diff_class=="no" && $a_d_d=="no")
+        {
+            $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')],['division',Session::get('div')]])->get()->toArray();
+            
+            if(!$st)
+            {
+                $msg="This player not from ".Session::get('class') ." class or invalid Enrollment" ;
+                return response()->json(array('msg'=> $msg),200);
+            }
+        }
+        elseif($galw==Session::get('gender') && $awl_diff_class=="yes" )
+        {
+            $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw]])->get()->toArray();
+            
+            if(!$st)
+            {
+                $msg="*This player is not ". Session::get('gender')." or invalid enrollment number";
+                // echo $e;
+                return response()->json(array('msg'=> $msg),200);
+
+            }
+        }
+        elseif($galw==Session::get('gender') && $awl_diff_class=="no" && $a_d_d=="yes")
+        {
+            $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')]])->get()->toArray();
+            
+            if(!$st)
+            {
+                $msg="This player not ".Session::get('gender') . " or not from class ".Session::get('class') . " or invalid Enrollment" ;
+                return response()->json(array('msg'=> $msg),200);
+            }
+        }
+        elseif($galw==Session::get('gender') && $awl_diff_class=="no" && $a_d_d=="no")
+        {
+            $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')],['division',Session::get('div')]])->get()->toArray();
+            
+            if(!$st)
+            {
+                $msg="This player not ".Session::get('gender') . " or not from class ".Session::get('class') ." or not from Division ". Session::get('div'). " or invalid Enrollment" ;
+                return response()->json(array('msg'=> $msg),200);
+            }
+        }
+        $st=participant::where([['senrl','LIKE','%'.$enr.'%'],['eid',$eid]])->get()->count();
+        if($st>0)
+        {
+            $msg="*Player"." Already participated";
+            return response()->json(array('msg'=> $msg),200);
+        }
+        $msg="";
+        return response()->json(array('msg'=> $msg),200);
+    }
+      
+   public function confirm_team(Request $req)//confirm the team registration
     {
+        
+        $senr="";
+        foreach($req->enrl as $enr)
+        {
+            $senr.=$enr."-";
+        }
         $participant=new participant;
-        $participant->eid=decrypt($eid);
-        $participant->senrl=decrypt($enrl);
+        $participant->eid=$req->eid;
+        $participant->senrl=$senr;
+        $participant->tname=$req->tname;
         $participant->clgcode=Session::get('clgcode');
         $participant->rank="p";
         $participant->reg_date=date("Y:m:d");
