@@ -132,7 +132,7 @@
                                         readonly >
                                         <script>a++ ;</script>
                                     @else
-                                    <input type="text" class="form-control" onkeyup="return checkplayer(this.id)" name="enrl[]" id="enrl{{$i}}"
+                                    <input type="text" class="form-control" onkeyup="return checkplayer(this.id)" onblur="this.value=this.value.toUpperCase()" name="enrl[]" id="enrl{{$i}}"
                                         placeholder="Enter Enrollment ID">
                                         <script> a++ ;</script>
                                     @endif
@@ -184,6 +184,10 @@ $(document).ready(function(){
     });
   
     $('#next-part').click(function(){
+        if($('#tname').val()=="")
+        {
+            $('#tnameerr').text("Plase enter team name");   
+        }
         if($('#tname').val().length > 5 && $('#tnameerr').text().length==""){
         $('#part2,#title1,.id-msg,#back-part').show();
         $('#part1,#title2,#next-part').hide();
