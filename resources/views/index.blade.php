@@ -109,19 +109,26 @@
                                     ?>
                                     @if($c==0)
                                     <?php $a=1;?>
-                                    <div class="media px-3 py-2 new-shadow-sm">
+                                    <div class="media my-1 px-2 py-2 new-shadow-sm bg-light hover-me-sm">
                                         <div class="media-body">
-                                            <h4 class="mt-0 mb-1 header-title  ">{{ucfirst($e['ename'])}}</h4>
-                                            <div class="text-muted">{{date('d/m/Y',strtotime($e['edate']))}}</div>
                                             <span
-                                                class="text-muted badge rounded-pill 
+                                                class="text-muted badge badge-pill  
                                                 @if ($e['category'] == 'cultural')badge-soft-primary 
                                                 @endif 
-                                                @if ($e['category'] == 'it')badge-soft-warning @endif
+                                                @if ($e['category'] == 'it')badge-soft-warning 
+                                                @endif
                                                 @if ($e['category'] == 'sports')badge-soft-success 
                                                 @endif 
                                                 px-3">{{ucfirst($e['category'])}}
                                             </span>
+                                            <span class="text-muted badge badge-pill badge-soft-dark px-3">
+                                                {{date('d/m/Y',strtotime($e['edate']))}}
+                                            </span>
+                                            <div class="ml-1 mt-2 header-title text-dark">
+                                                {{ucfirst($e['ename'])}}
+                                            </div>
+                                            <div class="text-muted"></div>
+                                            
 
                                         </div>
                                         @if($e['e_type']=='team')
@@ -136,8 +143,7 @@
                                             </i>
                                         </a>
                                         @endif
-                                        
-                                    </div>
+                                    </div> 
                                     @endif
                                     @endforeach
                                     @if($a==0)
