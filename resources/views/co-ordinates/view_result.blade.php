@@ -43,7 +43,7 @@
                                     <tbody class="text-dark">
                                         <tr>
                                             <th scope="row">
-                                                <img src="assets/images/svg-icons/student-dash/winner/1.svg" height="25px" alt="1">
+                                                <img src="{{asset('assets/images/svg-icons/student-dash/winner/1.svg')}}" height="25px" alt="1">
                                             </th>
                                             <td>E12345</td>
                                             <td>Piyush Monpara</td>
@@ -52,7 +52,7 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">
-                                                <img src="assets/images/svg-icons/student-dash/winner/2.svg" height="25px" alt="2">
+                                                <img src="{{asset('assets/images/svg-icons/student-dash/winner/2.svg')}}" height="25px" alt="2">
                                             </th>
                                             <td>E12345</td>
                                             <td>Dishant Sakariya</td>
@@ -61,7 +61,7 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">
-                                                <img src="assets/images/svg-icons/student-dash/winner/3.svg" height="25px" alt="3">
+                                                <img src="{{asset('assets/images/svg-icons/student-dash/winner/3.svg')}}" height="25px" alt="3">
                                             </th>
                                             <td>E12345</td>
                                             <td>Yash Parmar</td>
