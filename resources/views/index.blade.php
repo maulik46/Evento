@@ -37,17 +37,16 @@
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
         @if(Session::has('alert-' . $msg))
            
-    <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:20px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
-        <div class="toast-body text-white alert mb-1">
-            <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
-                <i data-feather="x-circle" id="close-btn" height="18px" ></i>
-            </a>
-            <div class="mt-2 font-weight-bold font-size-14">
-                You successfully participated.
-            </div> 
-            
+        <div class=" bg-success fade show border-0 new-shadow rounded-0 position-fixed w-100" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="z-index:99999;top:73px;left:0px">
+            <div class="text-white alert mb-1">
+                <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                    <i data-feather="x-circle"  height="20px" ></i>
+                </a>
+                <div class="font-weight-bold font-size-16 text-center">
+                    You have successfully participated..!
+                </div> 
+            </div>
         </div>
-    </div>
         @endif
         @endforeach
                     <!-- carousal Start -->
@@ -110,19 +109,26 @@
                                     ?>
                                     @if($c==0)
                                     <?php $a=1;?>
-                                    <div class="media px-3 py-2 new-shadow-sm">
+                                    <div class="media my-1 px-2 py-2 new-shadow-sm bg-light hover-me-sm">
                                         <div class="media-body">
-                                            <h4 class="mt-0 mb-1 header-title  ">{{ucfirst($e['ename'])}}</h4>
-                                            <div class="text-muted">{{date('d/m/Y',strtotime($e['edate']))}}</div>
                                             <span
-                                                class="text-muted badge rounded-pill 
+                                                class="text-muted badge badge-pill  
                                                 @if ($e['category'] == 'cultural')badge-soft-primary 
                                                 @endif 
-                                                @if ($e['category'] == 'it')badge-soft-warning @endif
+                                                @if ($e['category'] == 'it')badge-soft-warning 
+                                                @endif
                                                 @if ($e['category'] == 'sports')badge-soft-success 
                                                 @endif 
                                                 px-3">{{ucfirst($e['category'])}}
                                             </span>
+                                            <span class="text-muted badge badge-pill badge-soft-dark px-3">
+                                                {{date('d/m/Y',strtotime($e['edate']))}}
+                                            </span>
+                                            <div class="ml-1 mt-2 header-title text-dark">
+                                                {{ucfirst($e['ename'])}}
+                                            </div>
+                                            <div class="text-muted"></div>
+                                            
 
                                         </div>
                                         @if($e['e_type']=='team')
@@ -137,8 +143,7 @@
                                             </i>
                                         </a>
                                         @endif
-                                        
-                                    </div>
+                                    </div> 
                                     @endif
                                     @endforeach
                                     @if($a==0)

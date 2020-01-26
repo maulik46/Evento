@@ -33,8 +33,9 @@
 
                              <!-- profile  -->
 
-                             <div class="mt-3 pt-2 border-top">
-                                 <h4 class="mb-3 font-size-15 ml-2">Information</h4>
+                                <div class="mt-1 pt-2">
+                                 <h4 class="font-size-15 text-center">My Information</h4>
+                                 <hr class="mt-1 mb-1">
                                  <div class="table-responsive my-scroll overflow-auto">
                                      <table class="table table-borderless mb-0 text-muted">
                                          <tbody>

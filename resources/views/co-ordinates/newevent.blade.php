@@ -154,7 +154,7 @@
                             <div class="col-md-4 form-group mt-2">
                                 <label id="max-team-label" class="col-form-label font-size-15">Maximum Team
                                 </label>
-                                <div id="max-team" class="form-group has-icon d-flex align-items-center">
+                                <div id="m-team" class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
                                     <input id="max-team" name="mteam" type="number" class="form-control"
                                         placeholder="Maximum Team" />

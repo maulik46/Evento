@@ -69,13 +69,14 @@
                 <span class="ml-1">My Running Events</span>
             </div>
             <hr class="mt-0 mb-2">
-            <?php $c = 0?>
+            <?php $c = 0;$a=0;?>
             @foreach($events as $e)
             <?php $c++;
             $p = \DB::table('tblparticipant')->select('senrl')->where('eid', $e['eid'])->count();
             ?>
             @if($e['cid']==Session::get('cid'))
             @if($e['edate']==date('Y-m-d'))
+             <?php $a=1;?>
                 <div class="card bg-light new-shadow-sm mb-2 my-1 px-2 rounded-0 hover-me-sm">
                     <div class="d-flex justify-content-between align-items-center px-1">
                         <div>
@@ -106,7 +107,11 @@
                @endif
                @endif
                @endforeach 
-              
+               @if($a==0)
+                    <div class="p-4 font-weight-bold text-center">
+                            No new events available!!
+                    </div>
+                @endif
             </div>
         </div>    
             
