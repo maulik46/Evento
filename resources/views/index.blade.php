@@ -37,17 +37,16 @@
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
         @if(Session::has('alert-' . $msg))
            
-    <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:20px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
-        <div class="toast-body text-white alert mb-1">
-            <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
-                <i data-feather="x-circle" id="close-btn" height="18px" ></i>
-            </a>
-            <div class="mt-2 font-weight-bold font-size-14">
-                You successfully participated.
-            </div> 
-            
+        <div class=" bg-success fade show border-0 new-shadow rounded-0 position-fixed w-100" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="z-index:99999;top:73px;left:0px">
+            <div class="text-white alert mb-1">
+                <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                    <i data-feather="x-circle"  height="20px" ></i>
+                </a>
+                <div class="font-weight-bold font-size-16 text-center">
+                    You have successfully participated..!
+                </div> 
+            </div>
         </div>
-    </div>
         @endif
         @endforeach
                     <!-- carousal Start -->
