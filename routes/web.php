@@ -107,8 +107,6 @@ Route::group(['middleware' => 'co_session_check'], function () {
             
         Route::get('/event_info/{id}','co_ordinate@event_info');
 
-        Route::get('/result/{id}','co_ordinate@event_result');
-    
         route::post('/lastnotice','co_ordinate@last_noti');
     
         Route::post('/update_pass','co_ordinate@update_pass');
