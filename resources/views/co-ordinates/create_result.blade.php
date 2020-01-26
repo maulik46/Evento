@@ -1,7 +1,24 @@
 @extends('co-ordinates/cod_layout')
 
 @section('title','Create Result')
-
+@section('head-tag-links')
+<style>
+    .form-control{
+        border-radius: .1rem;
+        background-color: #fff !important;
+        padding: 5px 10px;
+        border: 1px solid #d1d1d1;
+        font-size: 1.1em;
+        color: #333;
+        height: 40px;
+        cursor: text !important;
+    }
+    .form-control:focus {
+        border: 1px solid #d1d1d180 !important;
+        background-color: #f9f9f9e1 !important;
+    }
+</style>
+@endsection
 @section('my-content')
 <div class="container-fluid">
     <div class="mb-0 pt-2 card new-shadow-sm">
@@ -22,7 +39,7 @@
         <div class="card-body py-2 d-flex justify-content-between align-items-center">
             <div class="h5 d-flex align-items-center">
                 <i data-feather="users" class="icon-dual-info"></i>
-                <span class="ml-1">Other Candidates</span>
+                <span class="ml-1">All Candidates</span>
             </div>
             <div class="h6 d-flex align-items-center">
                 <span>Total</span>
@@ -33,6 +50,9 @@
     </div>
     <div class="card new-shadow-sm" style="max-height: 350px;">
         <div class="card-body overflow-auto my-scroll">
+
+        <input id="myInput" class="form-control col-lg-3 col-md-4 col-sm-6 mb-2" type="text" placeholder="Search Candidate Name..">
+
             <div class="table-responsive overflow-auto my-scroll">
                 <table class="table table-hover table-nowrap mb-0">
                     <thead style="background-color:#25c2e340;color:#000;">
@@ -43,7 +63,7 @@
                             <th scope="col">Division</th>
                         </tr>
                     </thead>
-                    <tbody class="text-dark">
+                    <tbody class="text-dark" id="my-record">
                         <tr>
                             <td>E123</td>
                             <td>Maulik Paghdal</td>
@@ -70,4 +90,18 @@
         </div> <!-- end card-body-->
     </div>
 </div>
+@endsection
+
+@section('extra-scripts')
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#my-record tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      
+    });
+  });
+});
+</script>
 @endsection
