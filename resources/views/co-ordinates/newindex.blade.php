@@ -300,7 +300,7 @@
                                                 <span>Update Event</span>
                                             </a>
                                             <!-- <a href="{{url('delete_event')}}/{{encrypt($e['eid'])}}" class="dropdown-item"> -->
-                                             <a href="#" class="dropdown-item" onclick="return deleteEvent()">
+                                             <a href="#" class="dropdown-item" onclick="deleteEvent({{$e['eid']}})">
                                                 <i data-feather="trash-2" class="icon-dual-danger icon-xs mr-2"></i>
                                                 <span class="text-danger">Delete Event</span>
                                             </a>
@@ -480,32 +480,44 @@
 <!-- <script src="{{asset('assets/js/utils.js')}}"></script> -->
 <script>
 
-function deleteEvent(){
-    var id = $(this).data('id');
-
-    Swal.fire({
+async function deleteEvent(eid){
+  
+   	var id=eid;
+    const { value: formValues } = await Swal.fire({
     title: 'Are you sure you want to delete?',
     text: 'You need to approval from super admin to delete..!',
     icon: 'warning',
-    showCancelButton: true,
+    showCancelButton: false,
+    html:
+    '<input id="swal-input1" class="swal2-input" placeholder="Reason..!" required>',
+    focusConfirm: false,
+    showCloseButton: true,
     confirmButtonColor: '#d33',
     cancelButtonColor: '#1ce1ac',
     confirmButtonText: 'Delete',
+    
+    showLoaderOnConfirm: true,
     preConfirm: function() {
-     return new Promise(function(resolve) {
-     /*
-     Ajax code will be here
-     */
+      if (document.getElementById('swal-input1').value) {
+         var reason=document.getElementById('swal-input1').value
         $.ajax({
-            url: '{{url('delete_event')}}/{{encrypt($e['eid'])}}',
-            type: 'POST',           
-            data: '{id:eid}'
-           
+            url: "delete_event",
+            method:'GET',    
+            dataType:'json',       
+            data: {"id":id,"reason":reason},
+            success:function(data)
+                    {
+                        window.location.href = "cindex";
+                    }
+
         })
-     });
+      } else {
+        Swal.showValidationMessage('Reason Required.. :)')   
+      }
+    
+     
    },
-   allowOutsideClick: false 
-    })
+})
 
 }
 </script>

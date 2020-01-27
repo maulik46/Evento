@@ -69,25 +69,32 @@ class co_ordinate extends Controller
         $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
         return view('co-ordinates/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
     }
-    public function delete_event($eid)
+    public function delete_event(Request $req)
     {
-        $eid=decrypt($eid);
-        $tblename=tblevent::where('eid',$eid)->get()->first();;
-        $tble=tblevent::where('eid',$eid)->delete();
-        $tblp=participant::where('eid',$eid)->delete();
-        if(isset($tble) && isset($tblp))
+        if($req->ajax())
         {
-            $topic=ucfirst($tblename['ename'])." Event has been Cancelled..!";
-            $message="Reason !!!!!!!!";
-            $notice=DB::table('tblnotice')->insert(
-                ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','ndate'=>date('Y-m-d'),'clgcode'=>Session::get('clgcode')]
-            );
-            if(isset($notice))
+            $eid=$req->get('id');
+            $reason=$req->get('reason');
+            
+            $tblename=tblevent::where('eid',$eid)->get()->first();;
+            $tble=tblevent::where('eid',$eid)->delete();
+            $tblp=participant::where('eid',$eid)->delete();
+            if(isset($tble) && isset($tblp))
             {
-                session()->flash("success","Event Deleted Successfully..!");
+                $topic=ucfirst($tblename['ename'])." Event has been Cancelled..!";
+                $message=$reason;
+                $notice=DB::table('tblnotice')->insert(
+                ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('clgcode')]
+            );
+                if(isset($notice))
+                {
+                    session()->flash("success","Event Deleted Successfully..!");
+                }
             }
+                $data="success";
+            // //return redirect(url("/index"));
+            echo json_encode($data);
         }
-        return redirect(url('cindex'));
     }
     public function update_event($eid)
     {

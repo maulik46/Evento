@@ -87,7 +87,7 @@ Route::group(['middleware' => 'co_session_check'], function () {
 
         Route::view('/change_pass','co-ordinates/change_pass');
 
-        Route::get('/delete_event/{eid}','co_ordinate@delete_event');
+        Route::get('/delete_event','co_ordinate@delete_event');
     
         Route::get('/update_event/{eid}','co_ordinate@update_event');
     
