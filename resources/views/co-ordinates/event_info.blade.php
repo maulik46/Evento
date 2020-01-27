@@ -2,18 +2,17 @@
 @section('title','Event Information')
 @section('my-content')
             <div class="d-flex justify-content-center">
-                <div class="container-fluid col-lg-7">
-                  <div class="card mt-5 new-shadow rounded">
-                        <div class="card-body px-5">
-                            <a href="{{url('cindex')}}" class="float-right text-dark">
-                                <i data-feather="x-circle" id="close-btn" height="20px"></i>
-                            </a>
-                            <br>
-                            <div class="text-center mt-4">
+                <div class="container-fluid col-lg-6 col-md-9 col-sm-10">
+                  <div class="card new-shadow-2 rounded">
+                        <a href="{{url('cindex')}}" class="text-right text-dark p-2">
+                            <i data-feather="x-circle" id="close-btn" height="20px"></i>
+                        </a>
+                        <div class="card-body px-2">
+                            <div class="text-center">
                               <h2 class="font-weight-light"> {{ucfirst($einfo['ename'])}}</h2>
                              <span>{{ucfirst(Session::get('clgname'))}}</span>
                              <p class="my-2">
-                                 <span class="font-weight-bold">{{ucfirst(Session::get('cname'))}}</span>(Co-ordinate)
+                                 <span class="font-weight-bold">{{ucfirst(Session::get('cname'))}}</span>(Co-ordinator)
                             </p>
                             </div>
                             <hr>
@@ -59,8 +58,8 @@
                                 </p>
                                 <p class="mx-5 text-muted font-size-13">
                                     <br>
-                                    <span>
-                                        **All the team members have to reach at the {{ucfirst($einfo['place'])}} on {{date('h:i A',strtotime($einfo['etime']))}}  without being late
+                                    <span class="font-size-14">
+                                        **All the team members have to reach at the {{ucfirst($einfo['place'])}} on {{date('h:i A',strtotime($einfo['etime']))}}  without being late..!
                                     </span>
                                 </p>
                             </div>
