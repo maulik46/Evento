@@ -300,7 +300,7 @@
                                                 <span>Update Event</span>
                                             </a>
                                             <!-- <a href="{{url('delete_event')}}/{{encrypt($e['eid'])}}" class="dropdown-item"> -->
-                                             <a href="#" class="dropdown-item" onclick="return deleteEvent()">
+                                             <a href="#" class="dropdown-item" onclick="deleteEvent({{$e['eid']}})">
                                                 <i data-feather="trash-2" class="icon-dual-danger icon-xs mr-2"></i>
                                                 <span class="text-danger">Delete Event</span>
                                             </a>
