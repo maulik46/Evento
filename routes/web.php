@@ -47,7 +47,7 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
     Route::get('/winner-list','student@winnerlist');
 
-    Route::get('/action','student@action');
+    Route::get('/filter','student@filter');
     
     Route::get('/teamvalidation','student@teamvalidation');
     
