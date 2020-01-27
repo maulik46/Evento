@@ -42,16 +42,14 @@
                                         $c=count($att);
                                         $a=0;
                                         ?>
-                                        <div class="card-action my-2">
                                             @foreach($att as $attachment)
                                             <?php $a++;?>
                                             @if($a<$c)
-                                                    <a href="{{asset('attachment')}}/{{$attachment}}" class="btn btn-soft-danger rounded-sm new-shadow-sm font-weight-bold px-3 mr-1 my-2" download="{{substr($attachment, strpos($attachment, 'N') + 1)}}">{{substr($attachment, strpos($attachment, "N") + 1)}}</a> 
-                                                    
+                                                <div class="card-action my-2">
+                                                    <a href="{{asset('attachment')}}/{{$attachment}}" class="btn btn-soft-danger rounded-sm new-shadow-sm font-weight-bold px-3 mr-1" download="{{substr($attachment, strpos($attachment, 'N') + 1)}}">{{substr($attachment, strpos($attachment, "N") + 1)}}</a> 
+                                                </div> 
                                             @endif
                                             @endforeach
-                                        </div> 
-                                            
                                     @endif
                                </div>
                            </div>
