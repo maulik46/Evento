@@ -40,6 +40,8 @@ Route::group(['middleware' => 'SessionCheck'], function () {
     Route::get('/explore/{name}','student@explore');
 
     Route::get('/team-insert/{eid}','student@team_ins');
+    
+    Route::post('/tnameexist','student@tnamecheck');
 
     Route::get('/participate-now/{eid}','student@participate');
 
