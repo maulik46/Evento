@@ -92,10 +92,10 @@
                         </div>
                         <div>
                             <a href="{{url('/create_result')}}" class="btn btn-p-result btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="Announce Result">
-                                <i data-feather="award" height="18px" class="text-dark"></i>
+                                <i data-feather="award" height="18px" class="text-success"></i>
                             </a>
                             <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="About">
-                                <i data-feather="info" height="18px" class="text-dark"></i>
+                                <i data-feather="info" height="18px" class="text-info"></i>
                             </a>
                          </div>
                     </div>
@@ -109,7 +109,7 @@
                @endforeach 
                @if($a==0)
                     <div class="p-4 font-weight-bold text-center">
-                            No new events available!!
+                            No running events available!!
                     </div>
                 @endif
             </div>
@@ -204,10 +204,10 @@
             </div>
         </div>
     </div> 
-    <div class="card new-shadow-sm mt-2" style="max-height: 350px;">
-        <div class="card-body overflow-auto my-scroll">
-            <div class="table-responsive overflow-auto my-scroll">
-                <table class="table table-hover table-nowrap mb-0">
+    <div class="card new-shadow-sm mt-2" >
+        <div class="card-body">
+            <div class="table-responsive overflow-auto my-scroll" style="max-height: 350px;">
+                <table class="table table-hover table-nowrap mb-0" >
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -417,12 +417,13 @@
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
                             <td>{{ucfirst($e['cid'])}}</td>
                             <td  class="d-flex justify-content-start align-items-center pt-1 mb-0">
-                                <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about py-1 px-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
-                                    <i data-feather="info" height="20px" class=" text-info"></i>
+                                <a href="{{url('view_candidates')}}/{{$e['eid']}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Result">
+                                    <i data-feather="award" height="18px" class=" text-success"></i>
                                 </a>
-                                <a href="{{url('view_candidates')}}/{{$e['eid']}}" class="btn btn-p-result py-1 px-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Result">
-                                    <i data-feather="award" height="20px" class=" text-success"></i>
+                                <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
+                                    <i data-feather="info" height="18px" class=" text-info"></i>
                                 </a>
+                                
                             </td>
                         </tr>
                         @endforeach
@@ -519,7 +520,7 @@ var area = {
         }],
           chart: {
           height: 350,
-          type: 'area'
+          type: 'bar'
         },
         dataLabels: {
           enabled: false
