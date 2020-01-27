@@ -28,7 +28,7 @@
                                <div class="d-flex justify-content-between align-items-center flex-wrap">
                                     <div>
                                             <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
-                                            <span class="badge badge-soft-info px-3 py-1 badge-pill">12:25 pm</span>
+                                            <span class="badge badge-soft-info px-3 py-1 badge-pill">{{date('h:i A',strtotime($nt->ntime))}}</span>
                                     </div>
                                         <h6>{{ucfirst($nt->sender)}}</h6>
                                 </div>
