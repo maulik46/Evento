@@ -92,18 +92,17 @@
                                             <i data-feather="paperclip"></i>
                                         </label>
 
-                                        <input id="file-upload" name="attachment" type="file" multiple />
+                                        <input id="file-upload" name="attachment" type="file" multiple onChange="FileDetails()"/>
                                         <!-- file upload end -->
                                     </div>
                                     
                                 </div>
-                            <div class="mt-3 p-1" style="border: 1px solid #d2d8de;">
-                                <div class="d-flex justify-content-center align-items-center smr-2" style="margin-top:-12px;">
+                            <div class="mt-3 p-1" id="fc" >
+                                <!-- <div class="d-flex justify-content-center align-items-center smr-2" style="margin-top:-12px;">
                                     <span class="badge badge-dark px-3 py-1 badge-pill">Total Files: 3</span>
-                                </div>
-                                <div class="mt-2 d-flex justify-content-between align-items-center">
+                                </div> -->
 
-                                    <div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:#25c2e340;border-right:4px solid #fff;border-left:4px solid #fff;">
+                                    <!-- <div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:#25c2e340;border-right:4px solid #fff;border-left:4px solid #fff;">
                                        <span class="text-dark ml-2">file1.txt</span>
                                        <span class="badge badge-light px-3 badge-pill mr-2">12mb</span>
                                     </div> 
@@ -111,10 +110,9 @@
                                     <div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:#25c2e340;border-right:4px solid #fff;border-left:4px solid #fff;">
                                        <span class="text-dark ml-2">file1.txt</span>
                                        <span class="badge badge-light px-3 badge-pill mr-2">12mb</span>
-                                    </div>
-                                                                   
+                                    </div> -->
+                                      </div>                             
                                 </div>
-                            </div>
                                 
                             </form>
                         </div>
@@ -139,6 +137,36 @@
         
         
     }
+</script>
+<script>
+   function FileDetails() {
+
+// GET THE FILE INPUT.
+var fi = document.getElementById('file-upload');
+
+// VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+if (fi.files.length > 0) {
+
+    // THE TOTAL FILE COUNT.
+    $('#fc').css("border","1px solid #d2d8de");
+    document.getElementById('fc').innerHTML =
+        '<div class="d-flex justify-content-center align-items-center mr-2" style="margin-top:-12px;"><span class="badge badge-dark px-3 py-1 badge-pill">Total Files: <b>' + fi.files.length + '</b></span></div>';
+
+    // RUN A LOOP TO CHECK EACH SELECTED FILE.
+    document.getElementById('fc').innerHTML =
+            document.getElementById('fc').innerHTML + ' <div class="mt-2 col-xl-12 row" id="fl">';
+    for (var i = 0; i <= fi.files.length - 1; i++) {
+
+        var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+        var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+
+        // SHOW THE EXTRACTED DETAILS OF THE FILE.
+        document.getElementById('fl').innerHTML =
+            document.getElementById('fl').innerHTML + '<div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:#25c2e340;border-right:4px solid #fff;border-left:4px solid #fff;"> <span class="text-dark col-8">'+ fname +'</span><span class="badge badge-light px-3 badge-pill mr-2 col-4">' + (fsize/1024).toFixed(2) + 'KB</span></div>';
+        }
+     
+    }
+}
 </script>
 @endsection
 
