@@ -92,7 +92,7 @@
                                             <i data-feather="paperclip"></i>
                                         </label>
 
-                                        <input id="file-upload" name="attachment" type="file" multiple onChange="FileDetails()"/>
+                                        <input id="file-upload" name="attachment[]" type="file" multiple onChange="FileDetails()"/>
                                         <!-- file upload end -->
                                     </div>
                                     
