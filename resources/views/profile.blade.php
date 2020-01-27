@@ -132,10 +132,10 @@
                                     <li class="event-list ">
                                         <div>
                                             <div class="media">
-                                                <div class="event-date text-center mr-4">
-                                                    <div class="py-1 px-3 bg-soft-primary rounded">
+                                                <div class="event-date text-center mr-2">
+                                                    <div class="badge badge-soft-primary rounded px-3">
                                                         <span
-                                                            class="font-size-16 avatar-title text-primary font-weight-semibold ">
+                                                            class="font-size-14">
                                                             @if(date('d/m/Y', strtotime($act['edate']))===date('d/m/Y', strtotime('-1 day')))
                                                             Yesterday
                                                             @else
@@ -145,24 +145,26 @@
                                                     </div>
                                                 </div>
                                                 <div class="media-body ">
-                                                    <div class="card bg-light rounded-lg">
+                                                    <div class="card bg-light rounded new-shadow-sm">
                                                         <div class="card-body p-2">
                                                             <h5 class="mt-0">{{ucfirst($act['ename'])}}</h5>
                                                             <p class="text-muted">
                                                                 On this day you took a part in {{ucfirst($act['ename'])}} Compitition.
                                                             </p>
-                                                            
+                                                                <span class="font-size-12 badge badge-soft-dark px-3 rounded-0" style="margin-right:-2px;">
+                                                                Result
+                                                                </span>
                                                                 @if(($act['rank'])=='p')
-                                                                <span class="font-size-14 badge badge-pill badge-soft-danger px-3">
+                                                                <span class="font-size-12 badge badge-soft-danger px-3">
                                                                     You Lose
                                                                 @elseif(($act['rank'])==1)
-                                                                <span class="font-size-14 badge badge-pill badge-soft-success px-3">
+                                                                <span class="font-size-12 badge badge-soft-success px-3 rounded-0">
                                                                     First
                                                                 @elseif(($act['rank'])==2)
-                                                                <span class="font-size-14 badge badge-pill badge-soft-info px-3">
+                                                                <span class="font-size-12 badge badge-soft-info px-3">
                                                                     Second
                                                                 @elseif(($act['rank'])==3)
-                                                                <span class="font-size-14 badge badge-pill badge-soft-warning px-3">
+                                                                <span class="font-size-12 badge badge-soft-warning px-3">
                                                                     Third
                                                                 @endif
                                                                 </span>
