@@ -20,6 +20,9 @@ img{
 .new-shadow-sm{
     box-shadow: 0 3px 6px -5px #777;
 }
+.new-shadow-2{
+    box-shadow: 0 .1rem 0.6rem rgba(0, 0, 0, .15) !important;
+}
 
 .navbar-nav li:hover .nav-link
 {
