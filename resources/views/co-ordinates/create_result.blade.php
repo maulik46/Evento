@@ -31,9 +31,31 @@
             <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">12/12/2019</span>
             <span class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">Monday</span>
         </h6>
-        <hr class=" my-1">
     </div>
-  
+    <div class="card mb-0">
+        <div class="card-body">
+            <div class="d-flex align-items-center ">
+                <i data-feather="award" class="text-success"></i>
+                <h5>Create Result</h5>
+            </div>
+        </div>
+        <hr class="my-0">
+    </div>    
+    <div class="card">
+        <div class="card-body">
+            <div>
+                <div class="card bg-soft-success p-2 px-3" style="border:2px dashed gray;">
+                   <h3>Rank 1</h3> 
+                </div>
+                <div class="card bg-soft-info p-2 px-3" style="border:2px dashed gray;">
+                    <h4>Rank 2</h4> 
+                </div>
+                <div class="card bg-soft-dark p-2 px-3" style="border:2px dashed gray;">
+                    <h5>Rank 3</h5> 
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="card mb-0 rounded-sm">
         <div class="card-body py-2 d-flex justify-content-between align-items-center">
@@ -43,7 +65,7 @@
             </div>
             <div class="h6 d-flex align-items-center">
                 <span>Total</span>
-                <span class="ml-2">3</span>
+                <span class="ml-2 badge badge-soft-primary badge-pill font-size-14">3</span>
             </div>
         </div>
         <hr class=" my-1">
@@ -63,7 +85,7 @@
                             <th scope="col">Division</th>
                         </tr>
                     </thead>
-                    <tbody class="text-dark" id="my-record">
+                    <tbody class="text-dark" id="task-list-one" class="task-list-items">
                         <tr>
                             <td>E123</td>
                             <td>Maulik Paghdal</td>
@@ -94,6 +116,7 @@
 
 @section('extra-scripts')
 <script>
+  
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
