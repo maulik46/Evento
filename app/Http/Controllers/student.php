@@ -513,6 +513,13 @@ class student extends Controller
             echo json_encode($data);
         }
     }
+    public function tnamecheck(Request $req){
+        $tname = $req->tname;
+        $eid = $req->eid;
+        $tcount=participant::where([['eid',$eid],['tname',$tname]
+        ])->count();
+            return response()->json(array('msg'=> $tcount),200);
+     }
     public function notice()
     {
         $notice=\DB::table('tblnotice')->where([['clgcode',Session::get('clgcode')],['receiver','like','%student%']])->orderby('nid','desc')->get()->toarray();
