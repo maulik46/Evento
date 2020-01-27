@@ -8,6 +8,7 @@ use App\tblevent;
 use App\notice;
 use App\tblcoordinaters;
 use App\participant;
+date_default_timezone_set("Asia/Kolkata"); 
 class co_ordinate extends Controller
 {
     public function logout()//destroy session
