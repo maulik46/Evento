@@ -147,4 +147,13 @@
         right: 15px;
         width: 8px;
         }
+        .ms-selectall{
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase!important;
+        }
+        .ms-selectall:hover{
+            color: #1ae1ac;
+        }
+
     /* multi-select checkbox css end*/
