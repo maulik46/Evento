@@ -28,10 +28,10 @@
     }
 
     .border-form {
-        border: 1px solid #d1d1d152;
+        border: 1px solid #d1d1d180;
         border-radius: .5rem;
     }
-
+ 
     .custom-control-input:checked~.custom-control-label::before {
         color: #fff;
         border-color: #1ae1ac;
