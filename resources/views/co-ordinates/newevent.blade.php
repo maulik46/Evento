@@ -42,10 +42,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="card border-form my-4">
+                <div class="card border-form my-5">
                     <div class="card-body py-0 pb-1">
                         <div class="row">
-                            <div class="col-xl-6 form-group mt-2">
+                            <div class="col-xl-4 form-group mt-2">
                                 <label class="col-form-label font-size-15">Event Date</label>
                                 <div id="edatediv" class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
@@ -55,7 +55,17 @@
                                 <span id="erevent" class="text-danger font-weight-bold"></span>
 
                             </div>
-                            <div class="col-xl-6 form-group mt-2">
+                             <div class="col-xl-4 form-group mt-2">
+                                <label class="col-form-label font-size-15">Event End Date</label>
+                                <div id="enddatediv" class="form-group has-icon d-flex align-items-center">
+                                    <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
+                                    <input type="text" id="enddate" name="enddate" class="form-control basicDate"
+                                        placeholder="Event End Date..." data-input />
+                                </div>
+                                <span id="erevent" class="text-danger font-weight-bold"></span>
+
+                            </div>
+                            <div class="col-xl-4 form-group mt-2">
                                 <label class="col-form-label font-size-15">Event Time</label>
                                 <div id="etimediv" class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="clock" class="form-control-icon ml-2" height="19px"></i>
@@ -96,7 +106,7 @@
                     </div>
                 </div>
 
-                <div class="card border-form my-4">
+                <div class="card border-form my-5">
                     <div class="card-body py-0 pb-1">
                         <div class="row">
                             <div class="col-md-4 form-group mt-2">
@@ -250,12 +260,5 @@
 <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('assets/libs/multicheckbox/multiselect.js')}}"></script>
 <script src="{{asset('assets/js/create-ev-js.js')}}"></script>
-<!-- <script>
-$(document).ready(function(){
-    $('#select-all').change(function(){
-         $(this).parents('li:first').siblings('li').find('input:checkbox').attr("checked","checked");
-    })
-})
-</script> -->
 
 @endsection
