@@ -181,8 +181,7 @@
 <script>
     $(function () {
         $('.stud-info').draggable({
-            revert: true,
-            containment: "#div4"
+            revert: true
         });
         $('.droppable-rank').droppable({
             hoverClass: 'active',
