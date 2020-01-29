@@ -34,7 +34,7 @@
         cursor: pointer;
         }
         .custom-file-upload:hover{
-            color: #43d39e;
+            color: var(--info);
         }
     </style>
 @endsection
