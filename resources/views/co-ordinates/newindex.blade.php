@@ -54,12 +54,12 @@
 <!-- charts -->
     <div class="row justify-content-between align-items-center">
         <div class="col-md-7 col-sm-12">
-            <div class="card pr-4 new-shadow-sm">
-                <div id="chart-1"></div>
+            <div class="card pr-4 py-2 new-shadow-sm">
+                <div id="chart-2"></div>
             </div>
         </div>
         <div class="col-md-5 col-sm-12">
-            <div class="card new-shadow-sm p-1 px-3 overflow-auto my-scroll" style="height:350px;">
+            <div class="card new-shadow-sm p-1 px-3 overflow-auto my-scroll" style="height:340px;">
             <div class="h4 d-flex align-items-center justify-content-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">My Running Events</span>
@@ -104,8 +104,8 @@
                @endif
                @endforeach 
                @if($a==0)
-                    <div class="p-4 font-weight-bold text-center">
-                            No running events available!!
+                    <div class="font-size-15 font-weight-bold text-dark d-flex align-items-center justify-content-center" style="height:200px;">
+                            No running events available..!
                     </div>
                 @endif
             </div>
@@ -361,7 +361,7 @@
         title="Create Event">
         <a href="{{url('/create_event')}}">
             <img src="{{asset('assets/images/svg-icons/co-ordinate/plus.svg')}}" class="hover-me-sm rounded-circle"
-                height="55px" alt="">
+                height="60px" alt="">
         </a>
 
     </div>
@@ -494,8 +494,7 @@ var area = {
  var pie = {
           series: [<?php echo $part_count; ?>],
           chart: {
-          width: 480,
-          height: 300,
+          height: 350,
           type: 'donut',
         },
         labels: [<?php echo $ename_string; ?>],
