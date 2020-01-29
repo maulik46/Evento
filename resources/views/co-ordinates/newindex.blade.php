@@ -8,11 +8,7 @@
         color: #43d39e !important;
         fill: #fff;
     }
-    canvas{
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-	}
+    
     .event-option.show {
         top: 25% !important;
         right: 2% !important;
@@ -120,81 +116,6 @@
     </div>
 
 <!-- charts over -->
-    <!-- <div class="row">
-        <div class="col-md-6 col-xl-3">
-            <div class="card new-shadow-sm">
-                <div class="card-body p-0">
-                    <div class="media p-3">
-                        <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Today
-                                Revenue</span>
-                            <h2 class="mb-0">$2189</h2>
-                        </div>
-                        <div class="align-self-center">
-                            <div id="today-revenue-chart" class="apex-charts">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-xl-3 ">
-            <div class="card new-shadow-sm">
-                <div class="card-body p-0">
-                    <div class="media p-3">
-                        <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Product
-                                Sold</span>
-                            <h2 class="mb-0">1065</h2>
-                        </div>
-                        <div class="align-self-center">
-                            <div id="today-product-sold-chart" class="apex-charts"></div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-xl-3">
-            <div class="card new-shadow-sm">
-                <div class="card-body p-0">
-                    <div class="media p-3">
-                        <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">New
-                                Customers</span>
-                            <h2 class="mb-0">11</h2>
-                        </div>
-                        <div class="align-self-center">
-                            <div id="today-new-customer-chart" class="apex-charts"></div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-xl-3">
-            <div class="card new-shadow-sm">
-                <div class="card-body p-0">
-                    <div class="media p-3">
-                        <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">New
-                                Visitors</span>
-                            <h2 class="mb-0">750</h2>
-                        </div>
-                        <div class="align-self-center">
-                            <div id="today-new-visitors-chart" class="apex-charts"></div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
 
     <div class="card mt-2 mb-0 new-shadow-sm">
         <div class="card-body py-2">
@@ -290,7 +211,7 @@
 
                                         </a>
                                         <div
-                                            class="dropdown-menu event-option profile-dropdown-items dropdown-menu-right ">
+                                            class="dropdown-menu event-option profile-dropdown-items dropdown-menu-right" style="z-index:10;">
                                             <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="dropdown-item">
                                                 <i data-feather="info" class="icon-dual-info icon-xs mr-2"></i>
                                                 <span>About Event</span>
