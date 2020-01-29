@@ -267,7 +267,8 @@ function echeck() {
 $(document).ready(function() {
     $('select[multiple]').multiselect({
         columns: 1,
-        placeholder: 'Select Class'
+        placeholder: 'Select Class',
+        selectAll: true
     });
 
     $('.ms-options').removeAttr('style');
@@ -275,3 +276,5 @@ $(document).ready(function() {
 });
     
 // checkbox select js end
+
+
