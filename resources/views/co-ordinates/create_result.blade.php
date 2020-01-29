@@ -74,7 +74,18 @@
                     <img src="{{asset('assets/images/svg-icons/student-dash/winner/3.svg')}}" height="35px" alt="3">
                 </div>
             </div>
+            <div class="text-center pt-3">
+                <a href="#" class="btn btn-success px-4 new-shadow-sm rounded-sm font-weight-bold hover-me-sm">
+                Done
+                <i data-feather="check-square" height="19px"></i>
+                </a>
+                <a href="#" class="btn btn-danger px-4 new-shadow-sm rounded-sm font-weight-bold hover-me-sm" onclick="window.location.reload();">
+                Clear
+                <i data-feather="refresh-cw" height="19px"></i>
+                </a>
+            </div>
         </div>
+        
     </div>
 
     <div class="card mb-2 pb-1 rounded-sm new-shadow-sm">
