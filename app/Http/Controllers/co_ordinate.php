@@ -252,12 +252,13 @@ class co_ordinate extends Controller
         session()->flash('success', 'Password updated successfully..!');
         return redirect(url('cindex'));
      }
-     public function send_notice(Request $req)
+      public function send_notice(Request $req)
      {
         $topic=$req->title;
         $message=$req->message;
         $receiver=$req->receiver;
         $filename="";
+        $fname="";
         if($file=$req->file('attachment'))
         {
             $req->validate([
@@ -266,9 +267,13 @@ class co_ordinate extends Controller
         [
             'attachment.max'=>"The file size should be less then 50 Kb"
         ]);
-            $destinationPath=public_path('attachment/');
-            $filename=$file->getClientOriginalName().time();
-            $file->move($destinationPath,$filename);
+            foreach($file as $att)
+            {
+                $destinationPath=public_path('attachment/');
+                $filename=time()."N".$att->getClientOriginalName();
+                $att->move($destinationPath,$filename);
+                $fname.=$filename."-";
+            }
         }
         $notice=new notice;
         $notice->topic=$topic;
@@ -277,9 +282,9 @@ class co_ordinate extends Controller
         $notice->receiver="student";
         $notice->ndate=date('Y-m-d');
         $notice->clgcode=Session::get('clgcode');
-        $notice->attechment=$filename;
+        $notice->attechment=$fname;
         $notice->save();
-        session()->flash('success', 'Notice send successfully..!');
+        session()->flash('success', 'Notice send successfully');
         return redirect(url('cindex'));
      }
 }
