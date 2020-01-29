@@ -444,13 +444,33 @@ async function deleteEvent(eid){
 </script>
 <script>
 var area = {
-          series: [{
-          name: 'series1',
-          data: [31, 40, 28, 51, 42, 109, 100]
-        }, {
-          name: 'series2',
-          data: [11, 32, 45, 32, 34, 52, 41]
-        }],
+          series: [
+        <?php
+                foreach ($tble as $t)
+                 {
+                 ?>
+                
+                {
+	            name:'<?php echo $t['ename']; ?>',
+                data: [
+                    <?php
+                    $date_str="";
+                    $today_dat=date("d-m-Y");
+                    for($i=0;$i<5;$i++)
+                        {
+                            $date_v=date("Y-m-d", strtotime("-1 day", strtotime($today_dat)));
+                            $line=App\participant::where('reg_date',$date_v)->where('eid',$t['eid'])->count();
+                            $date_str.=$line.",";
+                            $today_dat=$date_v;
+                        }
+                        echo $date_str;
+                	?>
+					]
+                },
+                <?php
+                }
+                ?>
+        ],
           chart: {
           height: 350,
           type: 'bar'
@@ -462,24 +482,23 @@ var area = {
           curve: 'smooth'
         },
         xaxis: {
-          type: 'datetime',
-          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+          categories:[<?php echo $date_string; ?>]
         },
         tooltip: {
           x: {
-            format: 'dd/MM/yy HH:mm'
+            format: 'dd/MM/yy'
           },
         },
         };
 
  var pie = {
-          series: [44, 55, 13, 43, 22],
+          series: [<?php echo $part_count; ?>],
           chart: {
           width: 480,
           height: 300,
           type: 'donut',
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+        labels: [<?php echo $ename_string; ?>],
         responsive: [{
           breakpoint: 480,
           options: {

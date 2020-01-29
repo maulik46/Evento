@@ -47,7 +47,7 @@ class co_ordinate extends Controller
             return back()->with('error','Invalid Co-ordinate ID or Password');
         }
     }
-    public function index()
+   public function index()
     {
         $date_string="";
         $today_date=date("d-m-Y");
@@ -60,9 +60,21 @@ class co_ordinate extends Controller
             $today_date=$date_v;
         }
         $tble=tblevent::where('clgcode',session::get('clgcode'))->get()->toArray();
+        $tblp=participant::select('eid',DB::raw('COUNT(eid) AS count_par'))->where('clgcode',session::get('clgcode'))->groupBy('eid')->get()->toarray();
         $events=tblevent::where([['clgcode',Session::get('clgcode')]
         ])->orderby('edate','desc')->get()->toarray();//change
-        return view('co-ordinates/newindex',['events'=>$events,'date_string'=>$date_string,'tble'=>$tble]);
+        $ename_string="";
+        $part_count="";
+        foreach($tblp as $p)
+        {
+            $ename=tblevent::where('eid',$p['eid'])->first();
+            $ename_string.="'".$ename['ename']."'".",";
+            $part_count.=$p['eid'].",";
+        }
+    //     echo $ename_string;
+    //     echo $part_count;
+    //    print_r($tblp);
+        return view('co-ordinates/newindex',['events'=>$events,'date_string'=>$date_string,'tble'=>$tble,'ename_string'=>$ename_string,'part_count'=>$part_count]);
     }
     public function view_can($id)
     {
