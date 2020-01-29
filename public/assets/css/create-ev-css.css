@@ -57,6 +57,7 @@
         box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08) !important;
         border: 0;
         border-radius: 5px;
+        z-index: 10;
     }
 
     .clockpicker-popover .arrow {
@@ -69,6 +70,9 @@
 
     .popover .popover-content {
         background-color: #fff;
+    }
+    .flatpickr-calendar{
+        z-index: 10!important;
     }
 
     /* end calander and clock extra css */
@@ -151,9 +155,18 @@
             color: #333;
             font-weight: bold;
             text-transform: uppercase!important;
+            border:1px solid lightgray;
+            border-radius: 2px;
+            width:100%;
+            text-align: center;
+            margin:0px!important;
+            margin-bottom: 10px !important;
         }
         .ms-selectall:hover{
-            color: #1ae1ac;
+            background-color: #1ae1ac;
+            border-color: #1ae1ac;
+            color:#fff;
+            transition: 0.2s ease;
         }
 
     /* multi-select checkbox css end*/
