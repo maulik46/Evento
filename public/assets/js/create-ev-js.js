@@ -96,14 +96,13 @@
 function getMessage() {
         var f = 0;
         var d = new Date();
-        var today = d.getDate() + "-"+("0" + (d.getMonth() + 1)).slice(-2)+"-" + d.getFullYear();
-        var edate = $('#edate').val();
-        var sdate = $('#sdate').val();
-        var ldate = $('#ldate').val();
+        var today =d.getFullYear() + "-"+("0" + (d.getMonth() + 1)).slice(-2)+"-" + d.getDate();
+        var edate = $('#edate').val().split("-").reverse().join("-");
+        var sdate = $('#sdate').val().split("-").reverse().join("-");
+        var ldate = $('#ldate').val().split("-").reverse().join("-");
+        var enddate=$('#enddate').val().split("-").reverse().join("-");
         var ename = $('#ename').val();
         var gen = $('#gen').val();
-
-
         $('*').removeClass('border border-danger');
 
         if ($('#ename').val() == "") {
@@ -121,6 +120,7 @@ function getMessage() {
         }
 
 
+        
         if ($('#etime').val() == "") {
             $('#etime').parent().addClass('border border-danger');
             $('#etime').parent().next().text("Please enter event time");
@@ -128,6 +128,21 @@ function getMessage() {
         } 
         else {
             $('#etime').parent().next().text("");
+        }
+
+
+        if (enddate == "") {
+            $('#enddate').parent().addClass('border border-danger');
+            $('#enddate').parent().next().text("Please enter event end Date");
+            f = 1;
+        } 
+        else if (edate > enddate) {
+            $('#enddate').parent().addClass('border border-danger');
+            $('#enddate').parent().next().text("Event end date must be after the event start date");
+             f = 1;
+        } 
+        else {
+            $('#enddate').parent().next().text("");
         }
 
 
@@ -144,7 +159,6 @@ function getMessage() {
         else {
             $('#edate').parent().next().text("");
         }
-
 
 
         if (sdate == "") {
@@ -211,6 +225,16 @@ function getMessage() {
         }
 
 
+        if($('#efor').val()=="")
+        {
+            $('#efor').parent().addClass('border border-danger');
+            $('#efor').parent().next().text("Please select class");
+        }
+        else {
+            $('#efor').parent().next().text("");
+        }
+
+
 
         if ($('#loc').val() == "") {
             $('#loc').parent().addClass('border border-danger');
@@ -245,13 +269,14 @@ function echeck() {
                 gen: gen
             },
             success: function (data) {
+                
                 if (data.msg > 0) {
                     $('#ename').addClass('border border-danger');
                     $('#ename').parent().next().text("Event already exist");
                 } 
                 else {
                     $('#ename').parent().next().text("");
-                    $('#ename').parent().next().removeClass('border border-danger');
+                    $('#ename').removeClass('border border-danger');
                 }
             },
             error: function (data) {
@@ -276,5 +301,3 @@ $(document).ready(function() {
 });
     
 // checkbox select js end
-
-
