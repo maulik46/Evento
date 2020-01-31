@@ -29,6 +29,20 @@
     .droppable.active {
         background-color: red;
     }
+    body{
+        margin-bottom:1000px;
+    }
+    .sticky {
+        position: fixed;
+        top: 72px;
+        left:0px;
+        width:100%;
+        border-top:1px solid lightgray;
+        border-radius:0px!important;
+        z-index:99;
+        box-shadow: 0 3px 6px -5px #777;
+        }
+        
 </style>
 <link href="{{asset('assets/libs/jquery-ui/jquery-ui.min.css')}}" rel="stylesheet">
 @endsection
@@ -56,7 +70,7 @@
         </div>
         <hr class="my-0">
     </div>
-    <div class="card">
+    <!-- <div class="card">
         <div class="card-body">
             <div>
                 <span class="badge badge-success px-5 mb-1">Rank 1</span>
@@ -86,6 +100,12 @@
             </div>
         </div>
         
+    </div> -->
+
+    <div class="card" id="myHeader">
+    <div class="card-body">
+        <h1>rank</h1>
+    </div>
     </div>
 
     <div class="card mb-2 pb-1 rounded-sm new-shadow-sm">
@@ -114,7 +134,7 @@
                 Piyush Mukeshbhai Monpara
             </div>
             <div class="d-flex flex-wrap align-items-center justify-content-between p-1">
-                <div>
+                <div class="eid">
                     <span class="text-dark">EID</span>
                     <span class="font-weight-bold mx-2">E12345677890</span>
                 </div>
@@ -192,5 +212,25 @@
             }
         });
     });
+
+    $('.stud-info').hover(function(){
+        $(this).css("z-index","100");
+    })
+</script>
+
+<script>
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+    
+  } else {
+    header.classList.remove("sticky");
+  }
+}
 </script>
 @endsection
