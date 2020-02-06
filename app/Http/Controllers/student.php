@@ -103,6 +103,22 @@ class student extends Controller
         return view('/index',['events'=>$events]);
 
     }
+    public function otp(Request $req)
+    {
+            $req->validate([
+            'otp' => 'required | max:6 | min:6 ',
+            ], [
+            'otp.required' => '* Please Enter OTP Number',
+            'otp.max' => '* Enter Proper OTP Number',
+            'otp.min' => '* Enter Proper OTP Number'
+            ]);
+                $otp=$req->otp;
+                if (session::get('otp')==$otp) {
+                    return redirect(url('/index'));
+                } else {
+                    return back()->with('error','Invalid OTP Number');
+                }
+    }
     public function checklogin(Request $req)//check student data for login other wise return error
     {
         $login_details = tblstudent::where([
@@ -128,8 +144,18 @@ class student extends Controller
             session()->put('div',$user_details['division']);
             session()->put('address',$user_details['address']);
             session()->put('clgcode', $req->clgcode);
+            $rand_num=rand(111111,999999);
+            session()->put('otp',$rand_num);
             $events=$this->getevents();
-            return redirect(url('/index'));
+            $to_name=Session::get('sname');
+            $to_email=Session::get('email');
+            $data=array('name'=>'OTP :'.$rand_num,'body'=>Session::get('clgname'));
+            // \Mail::send('email',$data,function($message) use ($to_name,$to_email){
+            //     $message->to($to_email)
+            //     ->subject('Log Authentication');
+            // });
+            //echo "email send";
+            return redirect(url('/otpview'));
         } 
         else
         {
