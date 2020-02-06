@@ -150,10 +150,10 @@ class student extends Controller
             $to_name=Session::get('sname');
             $to_email=Session::get('email');
             $data=array('name'=>'OTP :'.$rand_num,'body'=>Session::get('clgname'));
-            // \Mail::send('email',$data,function($message) use ($to_name,$to_email){
-            //     $message->to($to_email)
-            //     ->subject('Log Authentication');
-            // });
+            \Mail::send('email',$data,function($message) use ($to_name,$to_email){
+                $message->to($to_email)
+                ->subject('Log Authentication');
+            });
             //echo "email send";
             return redirect(url('/otpview'));
         } 
