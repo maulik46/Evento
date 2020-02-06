@@ -38,7 +38,6 @@ class student extends Controller
             \Cookie::queue(\Cookie::forget('senrl'));
             return redirect('/login');
     }
-  
     public function getevents()
     {
         $events=tblevent::where([['clgcode',Session::get('clgcode')],
@@ -307,18 +306,28 @@ class student extends Controller
         return view('participate-now-team',['req'=>$req]);
 
     }
-    public function confirm_reg($eid,$enrl,$tname)//confirm the team registration
+      public function confirm_reg($eid,$enrl,$tname)//confirm the team registration
     {
-        $participant=new participant;
-        $participant->eid=decrypt($eid);
-        $participant->senrl=decrypt($enrl);
-        $participant->tname=$tname;
-        $participant->clgcode=Session::get('clgcode');
-        $participant->rank="p";
-        $participant->reg_date=date("Y:m:d");
-        $participant->save();
-        session()->flash('alert-success', 'insert successfully!');
-    	return redirect()->to('/index');
+        $eid=decrypt($eid);
+        $maxteam=tblevent::select('maxteam')->where('eid',$eid)->first();
+        $team_avl=\DB::table('tblparticipant')->where('eid',$eid)->count();
+        if($maxteam['maxteam'] > $team_avl)
+        {
+            $participant=new participant;
+            $participant->eid=$eid;
+            $participant->senrl=decrypt($enrl);
+            $participant->tname=$tname;
+            $participant->clgcode=Session::get('clgcode');
+            $participant->rank="p";
+            $participant->reg_date=date("Y:m:d");
+            $participant->save();
+            session()->flash('alert-success', 'You have successfully participated..!');
+        }
+        else{
+             session()->flash('alert-danger', 'Maximum team already participated..!');
+        }
+        
+             return redirect()->to('/index');
     }
     public function activity()
     {

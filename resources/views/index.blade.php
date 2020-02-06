@@ -37,7 +37,7 @@
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
         @if(Session::has('alert-' . $msg))
            
-        <div class=" bg-success fade show border-0 new-shadow rounded-0 position-fixed w-100" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="z-index:99999;top:73px;left:0px">
+        <div class="bg-{{$msg}} fade show border-0 new-shadow rounded-0 position-fixed w-100" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="z-index:99999;top:73px;left:0px">
             <div class="text-white alert mb-1">
                 <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
                     <i data-feather="x-circle"  height="20px" ></i>
