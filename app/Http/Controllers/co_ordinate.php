@@ -59,7 +59,7 @@ class co_ordinate extends Controller
             $date_string.="'".$date_v."'".",";
             $today_date=$date_v;
         }
-        $tble=tblevent::where('clgcode',session::get('clgcode'))->get()->toArray();
+        $tble=tblevent::where('clgcode',session::get('clgcode'))->where('cid',session::get('cid'))->get()->toArray();
         $tblp=participant::select('eid',DB::raw('COUNT(eid) AS count_par'))->where('clgcode',session::get('clgcode'))->groupBy('eid')->get()->toarray();
         $events=tblevent::where([['clgcode',Session::get('clgcode')]
         ])->orderby('edate','desc')->get()->toarray();//change
