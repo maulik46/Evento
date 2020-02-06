@@ -125,7 +125,8 @@
                 </div>
                 <div>
                     <span class="text-dark">EID</span>
-                    <span class="font-weight-bold mx-2 eid">E12345677890</span>
+                    <span class="font-weight-bold mx-2">E12345677890</span>
+                    <span id="pid" style="display:none;"></span>
                 </div>
             </div>
             <div class="col-md-8 d-flex px-0">
@@ -153,7 +154,8 @@
 
 @section('extra-scripts')
 <script src="{{asset('assets/libs/jquery-ui/jquery-ui.min.js')}}"></script>
-
+<script src="{{asset('assets/js/jQueryUITouchPunch.js')}}"></script>
+<script>$('.drag-me').draggable();</script>
 <script>
     $(document).ready(function () {
         $("#myInput").on("keyup", function () {
