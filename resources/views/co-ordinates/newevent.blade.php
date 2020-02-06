@@ -19,7 +19,7 @@ background-color: var(--green);
 
 @section('my-content')
 <div class="row justify-content-center">
-    <!-- <div class="col-lg-8 col-md-10 col-sm-10 mx-2 p-0">
+    <div class="col-lg-8 col-md-10 col-sm-10 mx-2 p-0">
 
         <div class="bg-white new-shadow rounded-lg p-3 pb-5">
             <a href="{{url('/cindex')}}" class="float-right text-dark">
@@ -251,7 +251,7 @@ background-color: var(--green);
 
         </div> 
 
-    </div> -->
+    </div>
     <!-- end container-fluid -->
     <div>
         <label for="1" class="ck" style="height:200px;width:200px;border:1px solid #333;">
