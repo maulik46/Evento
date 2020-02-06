@@ -16,9 +16,7 @@
         .form-control:focus {
             border: 1px solid #d1d1d190 !important;
         }
-        body{
-            margin-bottom:1000px;
-        }
+       
         .sticky {
             position: fixed;
             top: 72px;
