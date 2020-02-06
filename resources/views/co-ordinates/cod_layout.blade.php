@@ -152,14 +152,14 @@
 
              <div class="my-scroll px-2">
              <?php $c = 0;
+             $lastnotice=0;
 ?>
             @foreach($notice as $nt)
             <?php $c++;
 if ($c == 1) {
     $lastnotice = $nt->nid;
 }
-?>
-            @if($c<=$count)
+?>            @if($c<=$count)
             <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm" style="border-left: 4px solid #ff5c75;">
             @else
             <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm" style="border-left: 4px solid #1AE1AC;">

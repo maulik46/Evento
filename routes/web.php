@@ -57,6 +57,11 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
     Route::post('/insertteam','student@team_confirm');
 
+    Route::any('/otp_check', 'student@otp');
+    
+    Route::get('/otpview',function(){    
+        return view('/otp');
+    });
 
 });
 
@@ -98,10 +103,11 @@ Route::group(['middleware' => 'co_session_check'], function () {
         Route::get('/cindex','co_ordinate@index');
 
         Route::get('/view_candidates/{eid}','co_ordinate@view_can');
-
+      
         Route::get('/create_event',function(){
-            return view('co-ordinates/newevent');    
-        });   
+            $class=App\tblstudent::select('class')->where('clgcode',Session::get('clgcode'))->groupby('class')->orderby('class')->get();
+            return view('co-ordinates/newevent',['class'=>$class]);    
+        });  
 
         Route::post('/newevent','co_ordinate@create_event');
 
