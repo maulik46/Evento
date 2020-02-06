@@ -10,11 +10,6 @@
 <link href="{{asset('assets/libs/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/libs/multicheckbox/multiselect.css')}}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="{{asset('assets/css/create-ev-css.css')}}">
-<style>
-.green{
-background-color: var(--green);
-}
-</style>
 @endsection
 
 @section('my-content')
@@ -144,10 +139,10 @@ background-color: var(--green);
                                 <label class="col-form-label font-size-15">Event for</label>
                                 <div class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                                    <select  multiple="multiple" name="class[]"  class="form-control active w-100" id="efor">
-                                    @foreach($class as $cls)
-                                        <option value="{{$cls['class']}}">{{ucfirst($cls['class'])}}</option>
-                                    @endforeach
+                                    <select  multiple="multiple" class="form-control active w-100" id="scripts">
+                                        <option value="FY">FY</option>
+                                        <option value="SY">SY</option>
+                                        <option value="TY">TY</option>
                                     </select>
 
                                 </div>
@@ -249,16 +244,9 @@ background-color: var(--green);
             </form>
 
 
-        </div> 
+        </div> <!-- end col -->
 
-    </div>
-    <!-- end container-fluid -->
-    <div>
-        <label for="1" class="ck" style="height:200px;width:200px;border:1px solid #333;">
-            
-            <input id="1" type="checkbox" class="p-5" style="display:block">
-        </label>
-    </div>
+    </div><!-- end container-fluid -->
 </div>
 @endsection
 
@@ -272,11 +260,5 @@ background-color: var(--green);
 <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('assets/libs/multicheckbox/multiselect.js')}}"></script>
 <script src="{{asset('assets/js/create-ev-js.js')}}"></script>
-<script>
-    $(document).ready(function(){
-        $('label').click(function(){
-            $('#1').parent().toggleClass("green");
-        });
-    })
-</script>
+
 @endsection
