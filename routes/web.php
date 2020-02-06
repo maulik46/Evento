@@ -57,6 +57,11 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
     Route::post('/insertteam','student@team_confirm');
 
+    Route::any('/otp_check', 'student@otp');
+    
+    Route::get('/otpview',function(){    
+        return view('/otp');
+    });
 
 });
 
