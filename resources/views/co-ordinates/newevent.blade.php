@@ -10,11 +10,16 @@
 <link href="{{asset('assets/libs/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/libs/multicheckbox/multiselect.css')}}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="{{asset('assets/css/create-ev-css.css')}}">
+<style>
+.green{
+background-color: var(--green);
+}
+</style>
 @endsection
 
 @section('my-content')
 <div class="row justify-content-center">
-    <div class="col-lg-8 col-md-10 col-sm-10 mx-2 p-0">
+    <!-- <div class="col-lg-8 col-md-10 col-sm-10 mx-2 p-0">
 
         <div class="bg-white new-shadow rounded-lg p-3 pb-5">
             <a href="{{url('/cindex')}}" class="float-right text-dark">
@@ -244,9 +249,16 @@
             </form>
 
 
-        </div> <!-- end col -->
+        </div> 
 
-    </div><!-- end container-fluid -->
+    </div> -->
+    <!-- end container-fluid -->
+    <div>
+        <label for="1" class="ck" style="height:200px;width:200px;border:1px solid #333;">
+            
+            <input id="1" type="checkbox" class="p-5" style="display:block">
+        </label>
+    </div>
 </div>
 @endsection
 
@@ -260,5 +272,11 @@
 <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('assets/libs/multicheckbox/multiselect.js')}}"></script>
 <script src="{{asset('assets/js/create-ev-js.js')}}"></script>
-
+<script>
+    $(document).ready(function(){
+        $('label').click(function(){
+            $('#1').parent().toggleClass("green");
+        });
+    })
+</script>
 @endsection
