@@ -141,16 +141,17 @@
                     </thead>
                     <tbody>
                         <?php $c=0 ?>
-                        @foreach($events as $e)
+                         @foreach($events as $e)
                         <?php $c++;
                             $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
+                            $co=\DB::table('tblcoordinaters')->select('cname')->where('cid',$e['cid'])->first();
                         ?>
                         <tr>
                             <td>#{{$c}}</td>
                             <td>{{ucfirst($e['ename'])}} compition</td>
                              <td>{{$p}}</td> <!--total Participator -->
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
-                            <td>{{ucfirst($e['cid'])}}</td>
+                            <td>{{Session::get('cname')}}</td>
                             <td>
                                 @if($e['edate'] == date('Y-m-d'))
                                 <span class="badge badge-soft-success badge-pill px-3 py-1">Running</span>
