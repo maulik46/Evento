@@ -32,7 +32,11 @@
     .button-menu-mobile:hover{
         color: gray!important;
     }
-    
+    @media (max-width: 767.98px){
+        .pro-user-name {
+            display: block;
+        }
+    }
     </style>
 </head> 
 
@@ -93,7 +97,7 @@
                         <img src="{{asset('assets/images/avatars/woman.svg')}}" class="avatar-md d-block mx-auto" alt="User" />
                     @endif
 
-                        <div class="media-body mx-auto mt-3" data-toggle="tooltip" data-placement="bottom" title="Profile">
+                        <div class="media-body mx-auto mt-3 font-weight-bold" data-toggle="tooltip" data-placement="bottom" title="Profile">
                             <a href="#" class="pro-user-name text-dark user-link font-size-16">
                                 {{ucfirst(Session::get('sname'))}}
                             </a>
