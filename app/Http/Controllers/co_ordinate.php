@@ -33,7 +33,8 @@ class co_ordinate extends Controller
         ->count();
         if ($login_details==1) 
         {
-            $clg= DB::table('tblcoordinaters')->where('password', $req->password)->first();
+            $clg= DB::table('tblcoordinaters')->where([['password', $req->password],['cname',$req->cuser]])
+            ->orwhere([['password', $req->password],['email',$req->cuser]])->first();
             session()->put('cid', $clg->cid);
             session()->put('clgcode', $clg->clgcode);
             session()->put('cname',$clg->cname);
