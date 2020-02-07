@@ -8,11 +8,19 @@ use App\tblevent;
 use App\notice;
 use App\tblcoordinaters;
 use App\participant;
+use App\log;
 date_default_timezone_set("Asia/Kolkata"); 
 class co_ordinate extends Controller
 {
     public function logout()//destroy session
     {
+            
+            $log=new log;
+            $log->cid=Session::get('cid');
+            $log->action_on="logout";
+            $log->action_type="logout";
+            $log->time=time();
+            $log->save();
             Session::flush(); 
             return redirect(url('/clogin'));
     }
@@ -41,6 +49,12 @@ class co_ordinate extends Controller
             session()->put('email',$clg->email);
             session()->put('cat',$clg->category);
             
+            $log=new log;
+            $log->cid=Session::get('cid');
+            $log->action_on="login";
+            $log->action_type="login";
+            $log->time=time();
+            $log->save();
             return redirect(url('cindex'));
         } 
         else
@@ -72,9 +86,6 @@ class co_ordinate extends Controller
             $ename_string.="'".$ename['ename']."'".",";
             $part_count.=$p['eid'].",";
         }
-    //     echo $ename_string;
-    //     echo $part_count;
-    //    print_r($tblp);
         return view('co-ordinates/newindex',['events'=>$events,'date_string'=>$date_string,'tble'=>$tble,'ename_string'=>$ename_string,'part_count'=>$part_count]);
     }
     public function view_can($id)
@@ -174,6 +185,13 @@ class co_ordinate extends Controller
         }
         if($update_event)
         {
+            
+            $log=new log;
+            $log->cid=Session::get('cid');
+            $log->action_on="event " .$req_ename;
+            $log->action_type="update";
+            $log->time=time();
+            $log->save();
             session()->flash('success','Your Event is Successfully Updated..!');
         }
         return redirect(url('cindex'));
@@ -182,8 +200,10 @@ class co_ordinate extends Controller
     {
         $edate=date('Y-m-d',strtotime($req->edate));
         $sdate=date('Y-m-d',strtotime($req->sdate));
+        $enddate=date('Y-m-d',strtotime($req->enddate));
         $ldate=date('Y-m-d',strtotime($req->ldate));
         $alw_diff_class="no";
+        $class="";
         if($req->alw_diff_class==="yes")
         {
             $alw_diff_class="yes";
@@ -195,17 +215,24 @@ class co_ordinate extends Controller
             $alw_diff_div="yes";
 
         }
+        foreach($req->class as $cls)
+        {
+            $class.=$cls."-";
+        }
         $tblevent=new tblevent;
         $tblevent->ename=$req->ename;
         $tblevent->category=Session::get('cat');
         $tblevent->edate=$edate;
+        $tblevent->enddate=$enddate;
         $tblevent->time=$req->etime;        
         $tblevent->reg_start_date=$sdate;
         $tblevent->reg_end_date=$ldate;
         $tblevent->clgcode=Session::get('clgcode');
         $tblevent->gallow=$req->efor;
+        $tblevent->efor=$class;
         $tblevent->e_type=$req->etype;
         $tblevent->tsize=$req->tsize;
+        $tblevent->maxteam=$req->mteam;
         $tblevent->place=$req->loc;
         $tblevent->alw_dif_class=$alw_diff_class;
         $tblevent->alw_dif_div=$alw_diff_div;
@@ -213,6 +240,12 @@ class co_ordinate extends Controller
         $tblevent->cid=Session::get('cid');
         $tblevent->save();
         session()->flash('success', 'Event created successfully..!');
+        $log=new log;
+            $log->cid=Session::get('cid');
+            $log->action_on="event " .$req->ename;
+            $log->action_type="insert";
+            $log->time=time();
+            $log->save();
         return redirect(url('cindex'));
     }
     public function err(Request $req){
@@ -262,6 +295,12 @@ class co_ordinate extends Controller
             return redirect()->back();
             
         }
+        $log=new log;
+        $log->cid=Session::get('cid');
+        $log->action_on="password ";
+        $log->action_type="update";
+        $log->time=time();
+        $log->save();
         session()->flash('success', 'Password updated successfully..!');
         return redirect(url('cindex'));
      }
@@ -298,6 +337,12 @@ class co_ordinate extends Controller
         $notice->attechment=$fname;
         $notice->save();
         session()->flash('success', 'Notice send successfully');
+        $log=new log;
+        $log->cid=Session::get('cid');
+        $log->action_on="Notice";
+        $log->action_type="insert";
+        $log->time=time();
+        $log->save();
         return redirect(url('cindex'));
      }
 }
