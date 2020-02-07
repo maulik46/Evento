@@ -12,6 +12,7 @@
     <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- extra css  -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/my-extra.css')}}">
+
     <style>
         form h6{
             color:#f8435f;
@@ -49,8 +50,8 @@
         window.onunload=function(){null};
     </script>
 </head>
-<body data-layout="topnav" class="body-scroll" style="height: 90vh!important;">
-    <div class="wrapper">
+<body data-layout="topnav" class="body-scroll" style="height: 90vh!important;"> 
+    <div class="wrapper ">
         <div class="navbar navbar-expand flex-column flex-md-row navbar-custom position-fixed w-100 new-shadow-sm" style="height: 60px;">
             <div class="container-fluid">
                 <a href="#" class="navbar-brand mx-auto">
