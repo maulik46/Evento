@@ -22,14 +22,14 @@
 
 @section('my-content')
 <div class="container-fluid">
-    <div class="col-md-3 mb-0">
+    <!-- <div class="col-md-3 mb-0">
         <div class="card new-shadow">
             <label for="s1" class="btn">
             <input type="checkbox" onclick="sell(this.id);" class="" style="display: none" id="s1" name="">
             <h4 class="course-name p-3">BCA</h4>
              </label>
         </div>
-    </div>
+    </div> -->
    
 </div>
 <div class="row justify-content-center">
