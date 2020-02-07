@@ -387,15 +387,17 @@ $stdate=date('d-m-Y',strtotime($startdate['reg_start_date']));
 ?>
 <script>
          function getMessage() {
-             var f=0;
+           var f=0;
              var d=new Date();
-             var today=d.getDate()+"-"+("0" + (d.getMonth() + 1)).slice(-2)+"-"+d.getFullYear();
              var old_sdate="<?=$stdate?>";
-             var edate=$('#edate').val();
-             var sdate=$('#sdate').val();
-             var ldate=$('#ldate').val();
-             var ename=$('#ename').val();
-             var gen=$('#gen').val();
+             var today =d.getFullYear() + "-"+("0" + (d.getMonth() + 1)).slice(-2)+"-"+"0"+ d.getDate();
+            var edate = $('#edate').val().split("-").reverse().join("-");
+            var sdate = $('#sdate').val().split("-").reverse().join("-");
+            var ldate = $('#ldate').val().split("-").reverse().join("-");
+            var enddate=$('#enddate').val().split("-").reverse().join("-");
+            var ename = $('#ename').val();
+            var gen = $('#gen').val();
+             
              
             
              $('*').removeClass('border border-danger');
