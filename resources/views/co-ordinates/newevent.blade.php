@@ -10,9 +10,28 @@
 <link href="{{asset('assets/libs/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/libs/multicheckbox/multiselect.css')}}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="{{asset('assets/css/create-ev-css.css')}}">
+<style>
+    .course-name{
+        display:flex;
+        align-items:center;
+        justify-content: center;
+        margin-top:0px;
+    }
+</style>
 @endsection
 
 @section('my-content')
+<div class="container-fluid">
+    <div class="col-md-3 mb-0">
+        <div class="card new-shadow">
+            <label for="s1" class="btn">
+            <input type="checkbox" onclick="sell(this.id);" class="" style="display: none" id="s1" name="">
+            <h4 class="course-name p-3">BCA</h4>
+             </label>
+        </div>
+    </div>
+   
+</div>
 <div class="row justify-content-center">
     <div class="col-lg-8 col-md-10 col-sm-10 mx-2 p-0">
 
@@ -161,16 +180,6 @@
                                 </div>
                                 <span class="text-danger font-weight-bold"></span>
                             </div>
-                            <div class="col-md-4 form-group mt-2">
-                                <label id="max-team-label" class="col-form-label font-size-15">Maximum Team
-                                </label>
-                                <div id="m-team" class="form-group has-icon d-flex align-items-center">
-                                    <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
-                                    <input id="max-team" name="mteam" type="number" class="form-control"
-                                        placeholder="Maximum Team" />
-                                </div>
-                                <span class="text-danger font-weight-bold"></span>
-                            </div>
                             <div class="col-md-4 form-group mt-sm-5 mt-2">
                                 <div class="custom-control custom-switch mb-2">
                                     <input type="checkbox" name="alw_diff_class" value="yes"
@@ -184,6 +193,16 @@
                                     <label class="custom-control-label" for="diff-div" id="diff-div-label">Allow
                                         Different Division</label>
                                 </div>
+                            </div>
+                             <div class="col-md-4 form-group mt-2">
+                                <label id="max-team-label" class="col-form-label font-size-15">Maximum Team
+                                </label>
+                                <div id="m-team" class="form-group has-icon d-flex align-items-center">
+                                    <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
+                                    <input id="max-team" name="mteam" type="number" class="form-control"
+                                        placeholder="Maximum Team" />
+                                </div>
+                                <span class="text-danger font-weight-bold"></span>
                             </div>
                         </div>
                         <div class="row">
@@ -244,9 +263,9 @@
             </form>
 
 
-        </div> <!-- end col -->
+        </div> 
 
-    </div><!-- end container-fluid -->
+    </div>
 </div>
 @endsection
 
@@ -260,5 +279,11 @@
 <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('assets/libs/multicheckbox/multiselect.js')}}"></script>
 <script src="{{asset('assets/js/create-ev-js.js')}}"></script>
-
+<script>
+         function sell(id)
+        {
+	        $("#"+id).parent().toggleClass("bg-info");
+        
+        };
+</script>
 @endsection
