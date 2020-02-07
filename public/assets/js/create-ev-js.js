@@ -85,7 +85,7 @@
 function getMessage() {
         var f = 0;
         var d = new Date();
-        var today =d.getFullYear() + "-"+("0" + (d.getMonth() + 1)).slice(-2)+"-" + d.getDate();
+        var today =d.getFullYear() + "-"+("0" + (d.getMonth() + 1)).slice(-2)+"-"+"0"+ d.getDate();
         var edate = $('#edate').val().split("-").reverse().join("-");
         var sdate = $('#sdate').val().split("-").reverse().join("-");
         var ldate = $('#ldate').val().split("-").reverse().join("-");
