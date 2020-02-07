@@ -15,6 +15,7 @@
     <link href="{{asset('assets/libs/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" type="text/css" />
     
     <link href="{{asset('assets/css/my-extra.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/login_background.css')}}" rel="stylesheet" type="text/css" />
     
     <style>
         form h6{
@@ -72,83 +73,99 @@
     </script>
 </head>
 
-<body class="authentication-bg bg-info">
-    <div class=" vh-100 d-flex justify-content-center align-items-center">
-        <div class="container col-xl-5 col-lg-6 col-md-8 ">
-                    <div class="card shadow rounded-lg">
-                        <div class="card-body">
-                                <div class="pb-4 pt-2 px-3">
-                                    <a href="#" class="d-flex justify-content-center align-items-center">
-                                            <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
-                                            <h2 class="ml-1">Evento</h3>
-                                    </a>
-                                    <p class="font-size-12 text-muted font-weight-bold text-center mt-2 mb-4">Select your College and Enter Your Enrollment number</p>
+<body class="authentication-bg bg-white">
+ 
+    
+    <div class="waveWrapper waveAnimation">
 
-                                    <form action="{{ url('checklogin') }}" class="authentication-form" method="post">
-                                    @csrf
-                                        <div class="form-group">
-                                        <label class="col-form-label font-size-15">Select College</label>
-                                          <div class="form-group has-icon d-flex align-items-center">
-                                            <img src="{{asset('assets/images/svg-icons/student-dash/clg1.svg')}}" class="form-control-icon ml-2" height="20px" alt="">
-                                            <select class="form-control w-100 py-1" name="clgcode" style="cursor:pointer!important;">
-                                                <option data-display="Select College" value="">Select College</option>
-                                                @foreach($clg as $c)
-                                                <option value="{{$c->clgcode}}">
-                                                    {{$c->clgname}}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                          </div>
-                                            
-                                        </div>
-                                        @error('clgcode')
-                                        <h6 style>{{$message}}</h6>
-                                        @enderror
-                                        <div class="form-group" style="margin-top:30px;">
-                                            <label class="form-control-label">Enrollment number</label>
+      <div class="waveWrapperInner bgTop">
+        <div class="wave waveTop" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png')"></div>
+      </div>
 
-                                            <div class="s-group has-icon d-flex align-items-center">
-                                                <img src="assets/images/svg-icons/student-dash/id.svg" class="ml-2 form-control-icon" height="20px" alt="">
+      <div class="waveWrapperInner bgMiddle">
+        <div class="wave waveMiddle" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png')"></div>
+      </div>
 
-                                                <input type="text" class="form-control" id="password" placeholder="Enter your Enrollment number" onblur="this.value=this.value.toUpperCase()" name="senrl">
-                                            </div>
-                                        </div>
-                                        @error('senrl')
-                                        <h6>{{$message}}</h6>
-                                        @enderror
-                                        @if(Session::get('error'))
-                                        <h6>Invalid College name or Enrollment Number</h6>
-                                        @endif
-                                        <div class="form-group" style="margin-top:20px;">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" name="remainder" value="1" id="checkbox-signin"
-                                                    checked>
-                                                <label class="custom-control-label" for="checkbox-signin">Remember me</label>
-                                            </div>
-                                        </div>
+      <div class="waveWrapperInner bgBottom">
+        <div class="wave waveBottom" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-bot.png')"></div>
+      </div>
 
-                                        <div class="form-group mt-4 mb-0">
-                                            <button class="hover-me-sm btn btn-info  rounded-sm new-shadow font-size-15 px-3" type="submit"> 
-                                            <span class="font-weight-bold">Login</span>
-                                            <i data-feather="log-in" height="20px"></i>
-                                            </button>
-                                        </div>
-                                    </form>
-                                    
-                                   
-                                </div> 
-                        </div> <!-- end card-body -->
-                    </div>
-                    <!-- end card -->
-
-                    
-                    <!-- end row -->
-            <!-- end row -->
-        </div>
-        <!-- end container -->
     </div>
-    <!-- end page -->
+    <div style="z-index:999;position:relative;">
+        <div class=" vh-100 d-flex justify-content-center align-items-center">
+            <div class="container col-xl-5 col-lg-6 col-md-8 ">
+                        <div class="card shadow rounded-lg">
+                            <div class="card-body">
+                                    <div class="pb-4 pt-2 px-3">
+                                        <a href="#" class="d-flex justify-content-center align-items-center">
+                                                <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
+                                                <h2 class="ml-1">Evento</h3>
+                                        </a>
+                                        <p class="font-size-12 text-muted font-weight-bold text-center mt-2 mb-4">Select your College and Enter Your Enrollment number</p>
 
+                                        <form action="{{ url('checklogin') }}" class="authentication-form" method="post">
+                                        @csrf
+                                            <div class="form-group">
+                                            <label class="col-form-label font-size-15">Select College</label>
+                                            <div class="form-group has-icon d-flex align-items-center">
+                                                <img src="{{asset('assets/images/svg-icons/student-dash/clg1.svg')}}" class="form-control-icon ml-2" height="20px" alt="">
+                                                <select class="form-control w-100 py-1" name="clgcode" style="cursor:pointer!important;">
+                                                    <option data-display="Select College" value="">Select College</option>
+                                                    @foreach($clg as $c)
+                                                    <option value="{{$c->clgcode}}">
+                                                        {{$c->clgname}}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                                
+                                            </div>
+                                            @error('clgcode')
+                                            <h6 style>{{$message}}</h6>
+                                            @enderror
+                                            <div class="form-group" style="margin-top:30px;">
+                                                <label class="form-control-label">Enrollment number</label>
+
+                                                <div class="s-group has-icon d-flex align-items-center">
+                                                    <img src="assets/images/svg-icons/student-dash/id.svg" class="ml-2 form-control-icon" height="20px" alt="">
+
+                                                    <input type="text" class="form-control" id="password" placeholder="Enter your Enrollment number" onblur="this.value=this.value.toUpperCase()" name="senrl">
+                                                </div>
+                                            </div>
+                                            @error('senrl')
+                                            <h6>{{$message}}</h6>
+                                            @enderror
+                                            @if(Session::get('error'))
+                                            <h6>Invalid College name or Enrollment Number</h6>
+                                            @endif
+                                            <div class="form-group" style="margin-top:20px;">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" name="remainder" value="1" id="checkbox-signin"
+                                                        checked>
+                                                    <label class="custom-control-label" for="checkbox-signin">Remember me</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group mt-4 mb-0">
+                                                <button class="hover-me-sm btn btn-info  rounded-sm new-shadow font-size-15 px-3" type="submit"> 
+                                                <span class="font-weight-bold">Login</span>
+                                                <i data-feather="log-in" height="20px"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                        
+                                    
+                                    </div> 
+                            </div> <!-- end card-body -->
+                        </div>
+                        <!-- end card -->
+                        <!-- end row -->
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end page -->
+    </div>
 
     <!-- jquery -->
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>   
