@@ -34,12 +34,6 @@
         $('#team-size').addClass("disable-me");
         $('#team-size').val('');
         $('#team-size-label').css("color", "lightgray");
-
-        $('#max-team').prop("disabled", true);
-        $('#max-team').prop("placeholder", "");
-        $('#max-team').addClass("disable-me");
-        $('#max-team').val('');
-        $('#max-team-label').css("color", "lightgray");
             
         $('#diff-class').prop("disabled", true);
         $('#diff-class').addClass("disable-me");
@@ -58,12 +52,7 @@
         $('#team-size').prop("placeholder", "Team size");
         $('#team-size').removeClass("disable-me");
         $('#team-size-label').css("color", "#6c757d");
-
-        $('#max-team').prop("disabled", false);
-        $('#max-team').prop("placeholder", "Team size");
-        $('#max-team').removeClass("disable-me");
-        $('#max-team-label').css("color", "#6c757d");    
-            
+         
         $('#diff-class').prop("disabled", false);
         $('#diff-class').removeClass("disable-me");
         $('#diff-class-label').css("color", "#6c757d");
