@@ -151,7 +151,7 @@
                             <td>{{ucfirst($e['ename'])}} compition</td>
                              <td>{{$p}}</td> <!--total Participator -->
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
-                            <td>{{Session::get('cname')}}</td>
+                            <td>{{ucfirst($co->cname)}}</td>
                             <td>
                                 @if($e['edate'] == date('Y-m-d'))
                                 <span class="badge badge-soft-success badge-pill px-3 py-1">Running</span>
@@ -337,7 +337,7 @@
                             <td>{{ucfirst($e['ename'])}} compition</td>
                              <td>{{$p}}</td> <!--total Participator -->
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
-                            <td>{{ucfirst($e['cid'])}}</td>
+                             <td>{{ucfirst(Session::get('cname'))}}</td>
                             <td  class="d-flex justify-content-start align-items-center pt-1 mb-0">
                                 <a href="{{url('view_candidates')}}/{{$e['eid']}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Result">
                                     <i data-feather="award" height="18px" class=" text-success"></i>
