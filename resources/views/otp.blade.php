@@ -15,7 +15,7 @@
     <link href="{{asset('assets/libs/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" type="text/css" />
     
     <link href="{{asset('assets/css/my-extra.css')}}" rel="stylesheet" type="text/css" />
-    
+    <link href="{{asset('assets/css/login_background.css')}}" rel="stylesheet" type="text/css" />
     <style>
         form h6{
             color:#f8435f;
@@ -72,9 +72,23 @@
     </script>
 </head>
 
-<body class="authentication-bg bg-info">
+<body class="authentication-bg bg-white">
+    <div class="waveWrapper waveAnimation">
 
-    <div class=" vh-100 d-flex justify-content-center align-items-center">
+      <div class="waveWrapperInner bgTop">
+        <div class="wave waveTop" style="background-image: url('{{asset('assets/images/wave-top1.png')}}')"></div>
+      </div>
+
+      <div class="waveWrapperInner bgMiddle">
+        <div class="wave waveMiddle" style="background-image: url('{{asset('assets/images/wave-mid2.png')}}')"></div>
+      </div>
+
+      <div class="waveWrapperInner bgBottom">
+        <div class="wave waveBottom" style="background-image: url('{{asset('assets/images/wave-bot3.png')}}')"></div>
+      </div>
+
+    </div>    
+    <div class=" vh-100 d-flex justify-content-center align-items-center" style="position:relative;z-index:9999;">
         <div class="container col-xl-5 col-lg-6 col-md-8 ">
                     <div class="card shadow rounded-lg">
                         <div class="card-body">
@@ -96,6 +110,13 @@
 
                                                 <input type="text" class="form-control" id="otp" placeholder="Enter OTP Number" onblur="this.value=this.value.toUpperCase()" name="otp">
                                             </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <span>Didn't get a security code? We can <a href="" class="font-weight-bold" style="color:#1582b3;">resend it</a>
+                                            </span>
+                                            <span style="color:#1582b3;" class="font-weight-bold" id="demo">
+                                                
+                                            </span>
                                         </div>
                                         <?php echo Session::get('otp') ?>
                                         @error('otp')
@@ -143,7 +164,34 @@
         $('select').niceSelect();
     });
     </script>
+<script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
 
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+    // Get today's date and time
+    var now = new Date().getTime();
+        
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+        
+    // Time calculations for days, hours, minutes and seconds
+    
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+    // Output the result in an element with id="demo"
+    document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
+        
+    // If the count down is over, write some text 
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "EXPIRED";
+    }
+    }, 1000);
+</script>
     
 </body>
 
