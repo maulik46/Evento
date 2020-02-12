@@ -346,7 +346,7 @@
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
                              <td>{{ucfirst(Session::get('cname'))}}</td>
                             <td  class="d-flex justify-content-start align-items-center pt-1 mb-0">
-                                <a href="{{url('view_candidates')}}/{{$e['eid']}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Result">
+                                <a href="/view_result" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Result">
                                     <i data-feather="award" height="18px" class=" text-success"></i>
                                 </a>
                                 <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
