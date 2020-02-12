@@ -57,16 +57,11 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
     Route::post('/insertteam','student@team_confirm');
 
-    Route::any('/otp_check', 'student@otp');
-    
-    Route::get('/otpview',function(){    
-        return view('/otp');
-    });
-
 });
-
+Route::get('/otpview/{senrl}/{clgcode}/{check?}','student@otpview');
+Route::post('/otp_check/{senrl}/{clgcode}/{check?}','student@otp_check');
 Route::get('/login','student@login');
-Route::post('/checklogin','student@checklogin')->middleware(['ValidCheck', 'CookieCheck']);
+Route::post('/checklogin','student@checklogin')->middleware('ValidCheck');
 
 
 // xxxxxxxxxxxxxxx Student dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
