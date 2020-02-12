@@ -57,6 +57,7 @@
                                     <tr>
                                         <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3"
                                             style="background-color: #dde1fc;">
+                                            Team
                                             {{ucfirst($p['tname'])}}
                                             <br>
                                             <!-- <span class="font-size-14">Date: 03/11/2019</span> -->
