@@ -21,7 +21,7 @@
         <div class="card-body py-2">
             <div class="h5 d-flex align-items-center">
                 <i data-feather="award" class="icon-dual-success"></i>
-                <span class="ml-1">Top 3 Candidates</span>
+                <span class="ml-1">Top 3 Winner Candidate</span>
             </div>
         </div>
         <hr class=" my-1">
