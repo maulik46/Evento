@@ -2,37 +2,43 @@
 
 @section('title','Create Result')
 @section('head-tag-links')
-    <style>
-        .form-control {
-            border-radius: .1rem;
-            background-color: #fff !important;
-            padding: 5px 10px;
-            border: 1px solid #d1d1d1;
-            font-size: 1.1em;
-            color: #333;
-            height: 40px;
-            cursor: text !important;
-        }
-        .form-control:focus {
-            border: 1px solid #d1d1d190 !important;
-        }
-       
-        .sticky {
-            position: fixed;
-            top: 72px;
-            left:0px;
-            width:100%;
-            border-top:1px solid lightgray;
-            border-radius:0px!important;
-            z-index:99;
-            box-shadow: 0 3px 6px -5px #777;
-            }
-        .stud-info:hover .drag-me{
-            -webkit-transform: translateY(-2px);
-            transform: translateY(-2px);
-            box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .12), 0 1px 1px 0 rgba(0, 0, 0, .08);
-        } 
-    </style>
+<style>
+    .form-control {
+        border-radius: .1rem;
+        background-color: #fff !important;
+        padding: 5px 10px;
+        border: 1px solid #d1d1d1;
+        font-size: 1.1em;
+        color: #333;
+        height: 40px;
+        cursor: text !important;
+    }
+
+    .form-control:focus {
+        border: 1px solid #d1d1d190 !important;
+    }
+
+    body {
+        margin-bottom: 1000px;
+    }
+
+    .sticky {
+        position: fixed;
+        top: 72px;
+        left: 0px;
+        width: 100%;
+        border-top: 1px solid lightgray;
+        border-radius: 0px !important;
+        z-index: 99;
+        box-shadow: 0 3px 6px -5px #777;
+    }
+
+    .stud-info:hover .drag-me {
+        -webkit-transform: translateY(-2px);
+        transform: translateY(-2px);
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .12), 0 1px 1px 0 rgba(0, 0, 0, .08);
+    }
+</style>
 <link href="{{asset('assets/libs/jquery-ui/jquery-ui.min.css')}}" rel="stylesheet">
 @endsection
 @section('my-content')
@@ -59,7 +65,7 @@
         </div>
         <hr class="my-0">
     </div>
-   
+
 
     <div class="card" id="myHeader">
         <div class="card-body py-2">
@@ -67,10 +73,10 @@
                 <div class="col-md-4">
                     <span class="badge badge-success px-5 mb-1">Rank 1</span>
                     <div class="card bg-soft-success p-2 px-3 droppable-rank" style="border:2px dashed #333;">
-                    <img src="{{asset('assets/images/svg-icons/student-dash/winner/1.svg')}}" height="35px" alt="1">
+                        <img src="{{asset('assets/images/svg-icons/student-dash/winner/1.svg')}}" height="35px" alt="1">
                     </div>
                 </div>
-                    
+
                 <div class="col-md-4">
                     <span class="badge badge-primary px-4 mb-1">Rank 2</span>
                     <div class="card bg-soft-primary p-2 px-3 droppable-rank" style="border:2px dashed #333;">
@@ -87,11 +93,12 @@
             <div class="text-center">
                 <a href="#" class="btn btn-success px-4 new-shadow-sm rounded-sm font-weight-bold hover-me-sm mx-1">
                     Done
-                <i data-feather="check-square" height="19px"></i>
+                    <i data-feather="check-square" height="19px"></i>
                 </a>
-                <a href="#" class="btn btn-danger px-4 new-shadow-sm rounded-sm font-weight-bold hover-me-sm mx-1" onclick="window.location.reload();">
+                <a href="#" class="btn btn-danger px-4 new-shadow-sm rounded-sm font-weight-bold hover-me-sm mx-1"
+                    onclick="window.location.reload();">
                     Clear
-                <i data-feather="refresh-cw" height="19px"></i>
+                    <i data-feather="refresh-cw" height="19px"></i>
                 </a>
             </div>
         </div>
@@ -114,39 +121,39 @@
     </div>
 
 
-    <div id="my-record">    
-        <div class="card p-1 mb-2 px-3 pb-1 new-shadow-sm stud-info">
-            <div class="row p-1">
-            <div class="col-md-4 drag-me hover-me-sm rounded bg-white" style="border: 1px dashed lightgray;">
-                <div class="font-size-16 font-weight-bold text-dark">
-                Piyush Mukeshbhai Monpara
+    <div id="my-record" class="accordion custom-accordionwitharrow">
+
+        <div class="card p-1 mb-2 pl-3 pr-1 pb-1 new-shadow-sm stud-info">
+                <div class="col-md-12 font-size-16 font-weight-bold text-dark d-flex justify-content-between align-items-center">
+                    <span>Piyush Mukeshbhai Monpara</span>
+                    <div class="">
+                        <a href="#" class="text-dark" data-toggle="collapse" data-target="#c1" aria-expanded="true" aria-controls="c1">
+                            <i data-feather="chevron-down"></i>
+                        </a>
+                    </div>
                 </div>
-                <div>
+                <div class="col-md-12">
                     <span class="text-dark">EID</span>
-                    <span class="font-weight-bold mx-2">E12345677890</span>
+                    <span class="font-weight-bold">E12345677890</span>
                     <span id="pid" style="display:none;"></span>
                 </div>
-            </div>
-            <div class="col-md-8 d-flex px-0">
-                <div class="col-sm-4 d-flex align-items-end">
-                    <span class="text-dark">Class</span>
-                    <span class="font-weight-bold mx-2">Fybca</span>
+                <div class="col-md-12 row collapse" id="c1" aria-labelledby="headingOne" data-parent="#my-record">
+                    <div class="col-sm-4  d-flex align-items-end">
+                        <span class="text-dark">Class</span>
+                        <span class="font-weight-bold mx-2">Fybca</span>
+                    </div>
+                    <div class="col-sm-4  d-flex align-items-end">
+                        <span class="text-dark">Division</span>
+                        <span class="font-weight-bold mx-2">1</span>
+                    </div>
+                    <div class="col-sm-4  d-flex align-items-end">
+                        <span class="text-dark">Gender</span>
+                        <span class="font-weight-bold mx-2">Male</span>
+                    </div>
                 </div>
-                <div class="col-sm-4 d-flex align-items-end">
-                    <span class="text-dark">Division</span>
-                    <span class="font-weight-bold mx-2">1</span>
-                </div>
-                <div class="col-sm-4 d-flex align-items-end">
-                    <span class="text-dark">Gender</span>
-                    <span class="font-weight-bold mx-2">Male</span>
-                </div>
-            </div>
-            </div>
         </div>
+
     </div>
-
-
-
 </div>
 @endsection
 
@@ -166,7 +173,7 @@
     });
 </script>
 
-<script>
+<!-- <script>
     $(function () {
         $('.drag-me').draggable({
             revert: true
@@ -188,24 +195,24 @@
     $('.stud-info').mouseleave(function(){
         $(this).css("z-index","0");
     })
-</script>
+</script> -->
 
-<script>
+<!-- <script>
 window.onscroll = function() {myFunction()};
 
 var header = document.getElementById("myHeader");
 var sticky = header.offsetTop;
-var allCandidate=document . getElementById("all-candidate");
+var allCandidate=document.getElementById("all-candidate");
 
 function myFunction() {
   if (window.pageYOffset > sticky) {
     header.classList.add("sticky");
-    allCandidate.style.marginTop="250px";
+    allCandidate.style.marginTop="300px";
     
   } else {
     header.classList.remove("sticky");
     allCandidate.style.marginTop="0px";
   }
 }
-</script>
+</script> -->
 @endsection
