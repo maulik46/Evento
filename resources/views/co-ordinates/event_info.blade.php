@@ -56,12 +56,6 @@
                                     <span class="font-weight-bold">Event Location</span>
                                     <span>{{ucfirst($einfo['place'])}}</span>
                                 </p>
-                                <p class="mx-5 text-muted font-size-13">
-                                    <br>
-                                    <span class="font-size-14">
-                                        **All the team members have to reach at the {{ucfirst($einfo['place'])}} on {{date('h:i A',strtotime($einfo['etime']))}}  without being late..!
-                                    </span>
-                                </p>
                             </div>
                         </div>
                         
