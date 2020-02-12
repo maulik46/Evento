@@ -158,9 +158,6 @@
 @endsection
 
 @section('extra-scripts')
-<script src="{{asset('assets/libs/jquery-ui/jquery-ui.min.js')}}"></script>
-<script src="{{asset('assets/js/jQueryUITouchPunch.js')}}"></script>
-<script>$('.drag-me').draggable();</script>
 <script>
     $(document).ready(function () {
         $("#myInput").on("keyup", function () {
