@@ -102,21 +102,51 @@ class student extends Controller
         return view('/index',['events'=>$events]);
 
     }
-    public function otp(Request $req)
+    public function otp_check(Request $req,$senrl,$clgcode,$check)
     {
-            $req->validate([
-            'otp' => 'required | max:6 | min:6 ',
-            ], [
-            'otp.required' => '* Please Enter OTP Number',
-            'otp.max' => '* Enter Proper OTP Number',
-            'otp.min' => '* Enter Proper OTP Number'
-            ]);
-                $otp=$req->otp;
+        $senrl=decrypt($senrl);
+        $check=decrypt($check);
+        $clgcode=decrypt($clgcode);
+
+        $check=$this->validate($req,[
+            'otp'=>'required|max:6|min:6'
+        ],[
+            'otp.required' => 'Please Enter Your OTP',
+            'otp.max' => 'Invalid OTP Number',
+            'otp.min' => 'Invalid OTP Number',
+        ]);
+         if($check)
+         {
+            $otp=$req->otp;
                 if (session::get('otp')==$otp) {
+                    if ($check==1) {
+                        cookie()->queue('clgcode', $clgcode);
+                        cookie()->queue('senrl', $senrl);
+                    }                 
+                    session()->put('senrl',$senrl);
+                    session()->put('clgcode', $clgcode);
+                    $user_details=tblstudent::where('senrl',$senrl)->where('clgcode',$clgcode)->get()->first();
+                    $clg=\DB::table('tblcolleges')->where('clgcode', $clgcode)->first();
+                    session()->put('sname',$user_details['sname']);
+                    session()->put('rno',$user_details['rno']);
+                    session()->put('email',$user_details['email']);
+                    session()->put('mobile',$user_details['mobile']);
+                    session()->put('dob',$user_details['dob']);
+                    session()->put('class',$user_details['class']);
+                    session()->put('gender',$user_details['gender']);
+                    session()->put('clgname',$clg->clgname);
+                    session()->put('div',$user_details['division']);
+                    session()->put('address',$user_details['address']);
                     return redirect(url('/index'));
                 } else {
                     return back()->with('error','Invalid OTP Number');
                 }
+         }
+    }
+    public function otpview($senrl,$clgcode,$check)
+    {
+        //echo $senrl;
+        return view('otp',['senrl'=>$senrl,'clgcode'=>$clgcode,'check'=>$check]);
     }
     public function checklogin(Request $req)//check student data for login other wise return error
     {
@@ -131,30 +161,19 @@ class student extends Controller
                 ['senrl', '=', $req->senrl]
             ])->first();
             $clg=\DB::table('tblcolleges')->where('clgcode', $req->clgcode)->first();
-            session()->put('senrl', $req->senrl);
-            session()->put('sname',$user_details['sname']);
-            session()->put('rno',$user_details['rno']);
-            session()->put('email',$user_details['email']);
-            session()->put('mobile',$user_details['mobile']);
-            session()->put('dob',$user_details['dob']);
-            session()->put('class',$user_details['class']);
-            session()->put('gender',$user_details['gender']);
-            session()->put('clgname',$clg->clgname);
-            session()->put('div',$user_details['division']);
-            session()->put('address',$user_details['address']);
-            session()->put('clgcode', $req->clgcode);
             $rand_num=rand(111111,999999);
             session()->put('otp',$rand_num);
             $events=$this->getevents();
             $to_name=Session::get('sname');
             $to_email=Session::get('email');
             $data=array('name'=>'OTP :'.$rand_num,'body'=>Session::get('clgname'));
-            \Mail::send('email',$data,function($message) use ($to_name,$to_email){
-                $message->to($to_email)
-                ->subject('Log Authentication');
-            });
+            // \Mail::send('email',$data,function($message) use ($to_name,$to_email){
+            //     $message->to($to_email)
+            //     ->subject('Log Authentication');
+            // });
             //echo "email send";
-            return redirect(url('/otpview'));
+           $remainder = $req->get('remainder') ?? 0;
+           return redirect(url('otpview/'.encrypt($req->senrl).'/'.encrypt($req->clgcode).'/'.encrypt($remainder)));
         } 
         else
         {
