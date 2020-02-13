@@ -1,3 +1,7 @@
+<?php 
+    use App\tblstudent;
+    use App\participant;
+?>
 @extends('co-ordinates/cod_layout')
 
 @section('title','Create Result')
@@ -10,7 +14,7 @@
         border: 1px solid #d1d1d1;
         font-size: 1.1em;
         color: #333;
-        height: 40px;
+        height: 35px;
         cursor: text !important;
     }
 
@@ -67,7 +71,7 @@
     </div>
 
 
-    <div class="card" id="myHeader">
+    <div class="card new-shadow-sm" id="myHeader">
         <div class="card-body py-2">
             <div class="row align-items-center" style="margin-bottom:-15px;">
                 <div class="col-md-4">
@@ -105,7 +109,7 @@
     </div>
 
     <div class="card mb-2 pb-2 rounded-sm new-shadow-sm" id="all-candidate">
-        <div class="card-body pt-2 pb-0 row justify-content-between">
+        <div class="card-body pt-2 pb-2 row justify-content-between">
             <div class="h5 ml-2 d-flex align-items-center">
                 <i data-feather="users" class="icon-dual-info"></i>
                 <span class="ml-1">All Candidates</span>
@@ -116,43 +120,86 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <input id="myInput" class="form-control rounded" type="text" placeholder="Search Candidate Name..">
+            <input id="myInput" class="form-control" type="text" placeholder="Search Candidate..">
         </div>
     </div>
 
 
     <div id="my-record" class="accordion custom-accordionwitharrow">
+    @foreach($candidates as $p)
+    <?php $enrl=explode("-",$p['senrl'])?>
+        @foreach($enrl as $e)
+            <?php $sinfo = tblstudent::select('senrl', 'sname', 'class', 'division')->where('senrl', $p['senrl'])->first(); ?>
 
-        <div class="card p-1 mb-2 pl-3 pr-1 pb-1 new-shadow-sm stud-info">
-                <div class="col-md-12 font-size-16 font-weight-bold text-dark d-flex justify-content-between align-items-center">
-                    <span>Piyush Mukeshbhai Monpara</span>
-                    <div class="">
-                        <a href="#" class="text-dark" data-toggle="collapse" data-target="#c1" aria-expanded="true" aria-controls="c1">
-                            <i data-feather="chevron-down"></i>
-                        </a>
+        <div class="card p-1 mb-0 px-1 pb-1  stud-info">
+                <a href="#" class="text-dark" data-toggle="collapse" data-target="#c1" aria-expanded="true" aria-controls="c1">
+                    <div class="col-md-12 font-size-16 font-weight-bold text-dark d-flex justify-content-between align-items-center">
+                        <span>{{ucfirst($sinfo['sname'])}}</span>
+                        <i data-feather="chevron-down"></i>
                     </div>
-                </div>
+                </a>
                 <div class="col-md-12">
-                    <span class="text-dark">EID</span>
-                    <span class="font-weight-bold">E12345677890</span>
+                    <span class="text-dark badge badge-soft-primary px-3 mr-2">EID</span>
+                    <span class="font-weight-bold">{{ucfirst($sinfo['senrl'])}}</span>
                     <span id="pid" style="display:none;"></span>
                 </div>
-                <div class="col-md-12 row collapse" id="c1" aria-labelledby="headingOne" data-parent="#my-record">
+
+                <div class="col-md-12 row collapse pt-1" id="c1" data-parent="#my-record">
                     <div class="col-sm-4  d-flex align-items-end">
-                        <span class="text-dark">Class</span>
-                        <span class="font-weight-bold mx-2">Fybca</span>
+                        <span class="text-dark badge badge-soft-dark px-3 mr-2">Class</span>
+                        <span class="font-weight-bold mx-2">{{ucfirst($sinfo['class'])}}</span>
                     </div>
                     <div class="col-sm-4  d-flex align-items-end">
-                        <span class="text-dark">Division</span>
-                        <span class="font-weight-bold mx-2">1</span>
+                        <span class="text-dark badge badge-soft-dark px-3 mr-2">Division</span>
+                        <span class="font-weight-bold mx-2">{{ucfirst($sinfo['division'])}}</span>
                     </div>
                     <div class="col-sm-4  d-flex align-items-end">
-                        <span class="text-dark">Gender</span>
-                        <span class="font-weight-bold mx-2">Male</span>
+                        <span class="text-dark badge badge-soft-dark px-3 mr-2">Gender</span>
+                        <span class="font-weight-bold mx-2">{{ucfirst($sinfo['gender'])}}</span>
                     </div>
                 </div>
         </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <button class="btn btn-block btn-success rounded-sm p-0 font-weight-bold" >1st</button>
+            </div>
+             <div class="col-sm-4">
+                <button class="btn btn-block btn-soft-primary rounded-sm p-0 font-weight-bold">2nd</button>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-block btn-soft-warning rounded-sm p-0 font-weight-bold">3rd</button>
+            </div>
+        </div>
+    @endforeach
+    @endforeach
+         <!-- <div class="card p-1 mb-2 px-1 pb-1 new-shadow-sm stud-info">
+                <a href="#" class="text-dark" data-toggle="collapse" data-target="#c2" aria-expanded="true" aria-controls="c2">
+                    <div class="col-md-12 font-size-16 font-weight-bold text-dark d-flex justify-content-between align-items-center">
+                        <span>Piyush Mukeshbhai Monpara</span>
+                        <i data-feather="chevron-down"></i>
+                    </div>
+                </a>
+                <div class="col-md-12">
+                    <span class="text-dark badge badge-soft-primary px-3 mr-2">EID</span>
+                    <span class="font-weight-bold">E12345677890</span>
+                    <span id="pid" style="display:none;"></span>
+                </div>
 
+                <div class="col-md-12 row collapse" id="c2" data-parent="#my-record">
+                    <div class="col-sm-4  d-flex align-items-end">
+                        <span class="text-dark badge badge-soft-dark px-3 mr-2">Class</span>
+                        <span class="font-weight-bold mx-2">Fybca</span>
+                    </div>
+                    <div class="col-sm-4  d-flex align-items-end">
+                        <span class="text-dark badge badge-soft-dark px-3 mr-2">Division</span>
+                        <span class="font-weight-bold mx-2">1</span>
+                    </div>
+                    <div class="col-sm-4  d-flex align-items-end">
+                        <span class="text-dark badge badge-soft-dark px-3 mr-2">Gender</span>
+                        <span class="font-weight-bold mx-2">Male</span>
+                    </div>
+                </div>
+        </div> -->
     </div>
 </div>
 @endsection
