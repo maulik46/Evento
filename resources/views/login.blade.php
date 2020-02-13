@@ -113,7 +113,7 @@
                                                     <option data-display="Select College" value="">Select College</option>
                                                     @foreach($clg as $c)
                                                     <option value="{{$c->clgcode}}">
-                                                        {{$c->clgname}}
+                                                        {{ucfirst($c->clgname)}}
                                                     </option>
                                                     @endforeach
                                                 </select>
