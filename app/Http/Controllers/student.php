@@ -166,6 +166,7 @@ class student extends Controller
             $events=$this->getevents();
             session()->put('sname',$user_details['sname']);
             session()->put('email',$user_details['email']);
+            session()->put('clgname',$clg->clgname);
             $to_name=Session::get('sname');
             $to_email=Session::get('email');
             $data=array('name'=>'OTP :'.$rand_num,'body'=>Session::get('clgname'));
