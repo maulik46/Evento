@@ -12,6 +12,11 @@ use App\log;
 date_default_timezone_set("Asia/Kolkata"); 
 class co_ordinate extends Controller
 {
+    public function create_result($id)
+    {
+        $candidates=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
+        return view('co-ordinates/create_result',['candidates'=>$candidates]);
+    }
     public function logout()//destroy session
     {
             
