@@ -21,11 +21,23 @@
     .form-control:focus {
         border: 1px solid #d1d1d190 !important;
     }
-
-    body {
-        margin-bottom: 1000px;
+    .custom-control-input.switch-1:checked~.custom-control-label::before {
+        color: #fff;
+        border-color: #1ae1ac;
+        background-color: #1ae1ac;
+    }
+    .custom-control-input.switch-2:checked~.custom-control-label::before {
+        color: #fff;
+        border-color: var(--info);
+        background-color: var(--info);
+    }
+    .custom-control-input.switch-3:checked~.custom-control-label::before {
+        color: #fff;
+        border-color: var(--warning);
+        background-color: var(--warning);
     }
 
+ 
     .sticky {
         position: fixed;
         top: 72px;
@@ -159,47 +171,49 @@
                     </div>
                 </div>
         </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <button class="btn btn-block btn-success rounded-sm p-0 font-weight-bold" >1st</button>
-            </div>
-             <div class="col-sm-4">
-                <button class="btn btn-block btn-soft-primary rounded-sm p-0 font-weight-bold">2nd</button>
-            </div>
-            <div class="col-sm-4">
-                <button class="btn btn-block btn-soft-warning rounded-sm p-0 font-weight-bold">3rd</button>
-            </div>
+        
+    @endforeach
+    @endforeach
+         <div class="card p-1 mb-2 px-1 pb-1 new-shadow-sm stud-info">
+                <div class="col-md-12 font-size-16 font-weight-bold text-dark d-flex justify-content-between align-items-center flex-wrap">
+                    <div class="col-md-6 row">Piyush Mukeshbhai Monpara</div>
+                    <div class="row col-md-6 justify-content-md-end justify-content-around">
+                        <div class="custom-control custom-switch  mx-2">
+                            <input type="checkbox" name="1" class="switch-1 custom-control-input" id="r1">
+                            <label class="custom-control-label" for="r1">1st</label>
+                        </div>   
+                        <div class="custom-control custom-switch mx-2">
+                            <input type="checkbox" name="1" class="switch-2 custom-control-input" id="r2">
+                            <label class="custom-control-label" for="r2">2nd</label>
+                        </div>
+                        <div class="custom-control custom-switch  mx-2">
+                            <input type="checkbox" name="1" class="switch-3 custom-control-input" id="r3">
+                            <label class="custom-control-label" for="r3">3rd</label>
+                        </div>  
+                    </div>
+                </div>
+                <div class="dropdown-divider m-1"></div>
+                <div class="col-sm-12 row">
+                    <div class="col-6 col-sm-3 d-flex align-items-end">
+                        <span class="text-dark pr-1">EID</span>
+                        <span class="font-weight-bold">E12345677890</span>
+                        <span id="pid" style="display:none;"></span>
+                    </div>
+                    <div class="col-6 col-sm-3 d-flex align-items-end">
+                        <span class="text-dark pr-3">Class</span>
+                        <span class="font-weight-bold">Fybca</span>
+                    </div>
+                    <div class="col-6 col-sm-3  d-flex align-items-end">
+                        <span class="text-dark  pr-3">Division</span>
+                        <span class="font-weight-bold">1</span>
+                    </div>
+                    <div class="col-6 col-sm-3  d-flex align-items-end">
+                        <span class="text-dark pr-3">Gender</span>
+                        <span class="font-weight-bold">Male</span>
+                    </div>
+                </div>
         </div>
-    @endforeach
-    @endforeach
-         <!-- <div class="card p-1 mb-2 px-1 pb-1 new-shadow-sm stud-info">
-                <a href="#" class="text-dark" data-toggle="collapse" data-target="#c2" aria-expanded="true" aria-controls="c2">
-                    <div class="col-md-12 font-size-16 font-weight-bold text-dark d-flex justify-content-between align-items-center">
-                        <span>Piyush Mukeshbhai Monpara</span>
-                        <i data-feather="chevron-down"></i>
-                    </div>
-                </a>
-                <div class="col-md-12">
-                    <span class="text-dark badge badge-soft-primary px-3 mr-2">EID</span>
-                    <span class="font-weight-bold">E12345677890</span>
-                    <span id="pid" style="display:none;"></span>
-                </div>
-
-                <div class="col-md-12 row collapse" id="c2" data-parent="#my-record">
-                    <div class="col-sm-4  d-flex align-items-end">
-                        <span class="text-dark badge badge-soft-dark px-3 mr-2">Class</span>
-                        <span class="font-weight-bold mx-2">Fybca</span>
-                    </div>
-                    <div class="col-sm-4  d-flex align-items-end">
-                        <span class="text-dark badge badge-soft-dark px-3 mr-2">Division</span>
-                        <span class="font-weight-bold mx-2">1</span>
-                    </div>
-                    <div class="col-sm-4  d-flex align-items-end">
-                        <span class="text-dark badge badge-soft-dark px-3 mr-2">Gender</span>
-                        <span class="font-weight-bold mx-2">Male</span>
-                    </div>
-                </div>
-        </div> -->
+       
     </div>
 </div>
 @endsection
