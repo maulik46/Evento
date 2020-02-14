@@ -164,11 +164,14 @@ class student extends Controller
             $rand_num=rand(111111,999999);
             session()->put('otp',$rand_num);
             $events=$this->getevents();
+            session()->put('sname',$user_details['sname']);
+            session()->put('email',$user_details['email']);
+            session()->put('clgname',$clg->clgname);
             $to_name=Session::get('sname');
             $to_email=Session::get('email');
             $data=array('name'=>'OTP :'.$rand_num,'body'=>Session::get('clgname'));
             // \Mail::send('email',$data,function($message) use ($to_name,$to_email){
-            //     $message->to($to_email)
+            //     $message->to($to_email)->replyTo('eventoitsol@gmail.com',$name=null)->from('eventoitsol@gmail.com', $name = 'Evento')
             //     ->subject('Log Authentication');
             // });
             //echo "email send";
