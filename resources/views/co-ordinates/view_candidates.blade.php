@@ -104,7 +104,7 @@
                                     <tr>
                                         <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3"
                                             style="background-color: #dde1fc;">
-                                            {{$einfo['ename']}}
+                                            {{ucfirst($einfo['ename'])}}
                                             <br>
                                             <span class="font-size-14">Date: {{date('d/m/Y', strtotime($einfo['edate']))}}</span>
                                         </td>
