@@ -29,6 +29,9 @@
         .btn-p-result:hover{
             background-color:rgba(67,211,158,.15);
         }
+        .btn-p-candidates:hover{
+            background-color:rgba(83,105,248,.15);
+        }
             
 </style>
 @endsection
@@ -79,7 +82,7 @@
                         @if($e['e_type']=='team')
                             <span class="badge badge-soft-warning px-3 badge-pill">Team</span>
                         @else
-                            <span class="badge badge-soft-warning px-3 badge-pill">Solo</span>
+                            <span class="badge badge-soft-info px-3 badge-pill">Solo</span>
                         @endif    
                             <span class="badge badge-soft-dark px-3 badge-pill">
                             {{date('d/m/Y', strtotime($e['edate']))}}
@@ -89,6 +92,9 @@
                         <div>
                             <a href="{{url('create_result')}}/{{$e['eid']}}" class="btn btn-p-result btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="Announce Result">
                                 <i data-feather="award" height="18px" class="text-success"></i>
+                            </a>
+                            <a href="{{url('view_candidates')}}/{{$e['eid']}}" class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="View Candidates">
+                                <i data-feather="users" height="18px" class="text-primary"></i>
                             </a>
                             <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="About">
                                 <i data-feather="info" height="18px" class="text-info"></i>
