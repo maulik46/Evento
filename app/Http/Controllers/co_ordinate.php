@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\tblevent;
 use App\notice;
 use App\tblcoordinaters;
+use App\tblstudent;
 use App\participant;
 use App\log;
 date_default_timezone_set("Asia/Kolkata"); 
@@ -15,7 +16,13 @@ class co_ordinate extends Controller
     public function create_result($id)
     {
         $candidates=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
-        return view('co-ordinates/create_result',['candidates'=>$candidates]);
+        
+        $einfo=tblevent::select('eid','ename','e_type','edate','category')->where('eid',$id)->first()->toarray();
+        $parameter_array=[
+            'candidates'=>$candidates,
+            'einfo'=>$einfo
+        ];
+        return view('co-ordinates/create_result',$parameter_array);
     }
     public function logout()//destroy session
     {
