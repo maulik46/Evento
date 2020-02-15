@@ -132,14 +132,13 @@
                                 <label class="col-form-label font-size-15">Event Type</label>
                                 <div class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
-                                    <select  multiple="multiple" name="class[]"  class="form-control active w-100" id="efor">
-                                    @foreach($class as $cls)
-                                        <option value="{{$cls['class']}}">{{ucfirst($cls['class'])}}</option>
-                                    @endforeach
+                                    <select id="event-type" name="etype" class="form-control w-100 pt-1 nice-select">
+                                        <option hidden value="">Select Type</option>
+                                        <option value="solo">Solo</option>
+                                        <option value="team">Team</option>
                                     </select>
                                 </div>
                                 <span class="text-danger font-weight-bold"></span>
-
                             </div>
                             <div class="col-md-4 form-group mt-2">
                                 <label class="col-form-label font-size-15">Gender</label>
