@@ -36,8 +36,6 @@
         border-color: var(--warning);
         background-color: var(--warning);
     } */
-
- 
     .sticky {
         position: fixed;
         top: 72px;
@@ -48,11 +46,18 @@
         z-index: 99;
         box-shadow: 0 3px 6px -5px #777;
     }
-
-    .stud-info:hover .drag-me {
+    .stud-info:hover .drag-me,
+    .team-info:hover .drag-me{
         -webkit-transform: translateY(-2px);
         transform: translateY(-2px);
         box-shadow: 0 1px 6px 0 rgba(255, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .08);
+        border-radius: .2rem;
+    }
+    @media(max-width: 500px)
+    {
+        .small-sticky{
+            margin:-24px 0px;
+        }
     }
 </style>
 <link href="{{asset('assets/libs/jquery-ui/jquery-ui.min.css')}}" rel="stylesheet">
@@ -63,7 +68,7 @@
         <a href="{{url('cindex')}}" class="text-right text-dark px-2">
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
-        <h2 class="font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</h2>
+        <span class="h2 my-0 font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</span>
         <h6 class="font-weight-normal text-dark text-center">{{ucfirst(Session::get('clgname'))}}
         </h6>
         <h6 class="text-dark text-center mb-3">
@@ -80,7 +85,7 @@
         <hr class="my-0">
     </div>
     <div class="card mb-0">
-        <div class="card-body">
+        <div class="card-body py-3 px-2">
             <div class="d-flex align-items-center ">
                 <i data-feather="award" class="text-success"></i>
                 <h5>Create Result</h5>
@@ -91,7 +96,7 @@
 
 
     <div class="card new-shadow-sm" id="myHeader">
-        <div class="card-body py-2">
+        <div class="card-body py-1 py-sm-2">
             <div class="row align-items-center" style="margin-bottom:-15px;">
                 <div class="col-md-4">
                     <span class="badge badge-success px-5 mb-1">Rank 1</span>
@@ -100,7 +105,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 small-sticky">
                     <span class="badge badge-primary px-4 mb-1">Rank 2</span>
                     <div class="card bg-soft-primary px-3 droppable-rank" style="border:2px dashed #333;">
                         <img src="{{asset('assets/images/svg-icons/student-dash/winner/2.svg')}}" height="35px" alt="2">
@@ -131,7 +136,13 @@
         <div class="card-body pt-2 pb-2 row justify-content-between">
             <div class="h5 ml-2 d-flex align-items-center">
                 <i data-feather="users" class="icon-dual-info"></i>
-                <span class="ml-1">All Candidates</span>
+                <span class="ml-1">
+                @if($einfo['e_type']=='team')
+                    All Team
+                @else
+                    All Candidates
+                @endif
+                </span>
             </div>
             <div class=" mr-2 d-flex align-items-center">
             <?php $c=participant::where('eid',$einfo['eid'])->count()?>
@@ -144,7 +155,11 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <input id="myInput" class="form-control" type="text" placeholder="Search Candidate..">
+            <input id="myInput" class="form-control" type="text" 
+            placeholder="@if($einfo['e_type']=='team')Search Team..
+            @else Search Candidates..
+            @endif
+            ">
         </div>
     </div>
 
@@ -198,8 +213,9 @@
         
         <div class="bg-white p-1 my-2 px-1 pb-1 new-shadow-sm stud-info rounded">
                 <div class="col-md-12 font-weight-bold text-dark d-flex justify-content-between align-items-center flex-wrap">
-                    <div class="font-size-16 drag-me px-2 ml-1 rounded-sm bg-white hover-me-sm">
+                    <div class=" font-size-16 drag-me px-2 ml-1 rounded-sm bg-white hover-me-sm">
                        <span>{{ucfirst($sinfo['sname'])}}</span> 
+                       <span id="pid" style="display:none;"></span>
                     </div>
                     <div>
                         <span class="badge badge-soft-primary px-3 badge-pill">Solo</span>
@@ -210,7 +226,6 @@
                     <div class="col-6 col-sm-3 d-flex align-items-end">
                         <span class="text-dark pr-1">EID</span>
                         <span class="font-weight-bold">{{ucfirst($sinfo['senrl'])}}</span>
-                        <span id="pid" style="display:none;"></span>
                     </div>
                     <div class="col-6 col-sm-3 d-flex align-items-end">
                         <span class="text-dark pr-3">Class</span>
@@ -230,30 +245,39 @@
     @endforeach
     @endif
 
+    <div class="row">
+
     @if($einfo['e_type']=='team')
     @foreach($candidates as $p)
         <?php $enrl=explode("-",$p['senrl'])?>
-        <div class="stud-info">
-            <span class="badge text-white badge-pill badge-warning px-3 position-relative" style="top:5px;left:8px;z-index:99;">Team</span>
-            <div class="card p-2 mb-0 px-1 pb-1 new-shadow-sm">
-                <div class="col-md-12  font-weight-bold text-dark d-flex justify-content-between align-items-center flex-wrap">
-                    <div class="drag-me bg-white hover-me-sm">
-                        <span class="font-size-16">{{ucfirst($p['tname'])}}</span>
-                    </div>
-                    <div class=" d-flex justify-content-center align-items-center">
-                        <a href="#" data-toggle="tooltip" data-placement="top" title="Click to see" class="d-flex align-items-center badge badge-primary badge-pill pr-3 mr-1">
-                            <i data-feather="users" height="15px"></i>
-                            <span>Team Candidates</span>    
-                        </a>
-                        <span class="badge badge-soft-warning px-3 badge-pill">Team</span>
+    <div class="col-md-6 team-info">
+        <span class="badge text-white badge-pill badge-warning px-3 position-relative" style="top:5px;left:8px;z-index:98;">Team</span>
+        <div class="card p-2 my-0 px-1 pb-1 new-shadow-sm">
+            <div class="row">
+                <div class="col-sm-3 col-md-6 col-6">
+                    <div class="bg-white font-weight-bold text-dark">
+                        <div class="col-sm-12 drag-me bg-white hover-me-sm px-3">
+                            <span class="font-size-16">{{ucfirst($p['tname'])}}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-sm-9 col-md-6 col-6">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <a href="#" class="d-flex align-items-center badge badge-primary badge-pill p-1 px-2 pr-3 mr-1">
+                            <i data-feather="users" height="15px"></i>
+                            <span class="">View Candidates</span>    
+                        </a>
+                    </div>
+                </div>
+            </div>      
         </div>
+    </div>
     @endforeach
     @endif 
+    
     </div>
-</div>
+    </div> <!-- end div of id='myrecord' -->
+</div> <!-- end container-fluid -->
 @endsection
 
 @section('extra-scripts')
@@ -262,7 +286,7 @@
     $(document).ready(function () {
         $("#myInput").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#my-record  .stud-info").filter(function () {
+            $("#my-record  .stud-info, #my-record .team-info").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 
             });
@@ -284,10 +308,11 @@
                 $(this).html(ui.draggable.remove().html());
                 $(this).droppable('destroy');
                 $(this).addClass("font-size-16 font-weight-bold text-dark py-1");
-                
+                $(this).css("border","2px solid gray");
             }
         });
     });
+    
 
     $('.stud-info,.drag-me').mouseenter(function(){
         $(this).css("z-index","100");
