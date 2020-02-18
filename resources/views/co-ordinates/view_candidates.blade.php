@@ -156,7 +156,7 @@
 @section('extra-scripts')
      <script>
      $(document).ready(function(){
-        $('.team-leader-name td:first').css("color","red");
+        $('.team-leader-name td:first').css({"color":"var(--success)","font-weight":"bold"});
        
     })
      </script>
