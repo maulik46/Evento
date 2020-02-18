@@ -42,7 +42,7 @@
                     <?php $c=0;?>
                     @foreach($team_candidates as $tc)
                     <?php $enrl=explode("-",$tc['senrl'])?>
-                    @foreach($enrl as $e)
+                    @foreach($enrl as $e)   
                     <?php $c++; $sinfo=tblstudent::where('senrl',$e)->first();?>
                         <tr>
                             <th scope="row">{{$c}}</th>
@@ -65,6 +65,7 @@
 <script>
 $(document).ready(function(){
     $('tbody tr:first td:first').next().css("font-weight","bold");
+    $('tbody tr:last').css("display","none");
 })
 </script>
 @endsection
