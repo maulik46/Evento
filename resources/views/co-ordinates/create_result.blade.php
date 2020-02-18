@@ -258,12 +258,13 @@
                     <div class="bg-white font-weight-bold text-dark">
                         <div class="col-sm-12 drag-me bg-white hover-me-sm px-3">
                             <span class="font-size-16">{{ucfirst($p['tname'])}}</span>
+                            <span>{{$p['pid']}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-9 col-md-6 col-6">
                     <div class="d-flex justify-content-end align-items-center">
-                        <a href="#" class="d-flex align-items-center badge badge-primary badge-pill p-1 px-2 pr-3 mr-1">
+                        <a href="{{url('view_team')}}/{{$p['pid']}}" class="d-flex align-items-center badge badge-primary badge-pill p-1 px-2 pr-3 mr-1">
                             <i data-feather="users" height="15px"></i>
                             <span class="">View Candidates</span>    
                         </a>
