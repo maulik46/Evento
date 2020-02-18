@@ -7,21 +7,26 @@ use Illuminate\Http\Request;
 use App\tblevent;
 use App\notice;
 use App\tblcoordinaters;
-use App\tblstudent;
 use App\participant;
 use App\log;
 date_default_timezone_set("Asia/Kolkata"); 
 class co_ordinate extends Controller
 {
-    
+    public function create_result($id)
+    {
+        $candidates=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
+        return view('co-ordinates/create_result',['candidates'=>$candidates]);
+    }
     public function logout()//destroy session
     {
             
             $log=new log;
-            $log->cid=Session::get('cid');
+            $log->uid=Session::get('cid');
             $log->action_on="logout";
             $log->action_type="logout";
             $log->time=time();
+            $log->utype="co_ordinatore";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
             $log->save();
             Session::flush(); 
             return redirect(url('/clogin'));
@@ -50,12 +55,13 @@ class co_ordinate extends Controller
             session()->put('cname',$clg->cname);
             session()->put('email',$clg->email);
             session()->put('cat',$clg->category);
-            
-            $log=new log;
-            $log->cid=Session::get('cid');
+            $log=new log();
+            $log->uid=Session::get('cid');
             $log->action_on="login";
             $log->action_type="login";
             $log->time=time();
+            $log->utype="co_ordinatore";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
             $log->save();
             return redirect(url('cindex'));
         } 
@@ -92,7 +98,6 @@ class co_ordinate extends Controller
     }
     public function view_can($id)
     {
-        $id=decrypt($id);
         $participate=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
         $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
         return view('co-ordinates/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
@@ -190,10 +195,12 @@ class co_ordinate extends Controller
         {
             
             $log=new log;
-            $log->cid=Session::get('cid');
+            $log->uid=Session::get('cid');
             $log->action_on="event " .$req_ename;
             $log->action_type="update";
             $log->time=time();
+            $log->utype="co_ordinatore";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
             $log->save();
             session()->flash('success','Your Event is Successfully Updated..!');
         }
@@ -244,10 +251,12 @@ class co_ordinate extends Controller
         $tblevent->save();
         session()->flash('success', 'Event created successfully..!');
         $log=new log;
-            $log->cid=Session::get('cid');
+            $log->uid=Session::get('cid');
             $log->action_on="event " .$req->ename;
             $log->action_type="insert";
             $log->time=time();
+            $log->utype="co_ordinatore";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
             $log->save();
         return redirect(url('cindex'));
     }
@@ -299,10 +308,12 @@ class co_ordinate extends Controller
             
         }
         $log=new log;
-        $log->cid=Session::get('cid');
+        $log->uid=Session::get('cid');
         $log->action_on="password ";
         $log->action_type="update";
         $log->time=time();
+        $log->utype="co_ordinatore";
+        $log->ip_add=$_SERVER['REMOTE_ADDR'];
         $log->save();
         session()->flash('success', 'Password updated successfully..!');
         return redirect(url('cindex'));
@@ -311,7 +322,6 @@ class co_ordinate extends Controller
      {
         $topic=$req->title;
         $message=$req->message;
-        $receiver=$req->receiver;
         $filename="";
         $fname="";
         if($file=$req->file('attachment'))
@@ -336,19 +346,21 @@ class co_ordinate extends Controller
         $notice->sender=Session::get('cname');
         $notice->receiver="student";
         $notice->ndate=date('Y-m-d');
+        $notice->ntime=date('h:i A');//change
         $notice->clgcode=Session::get('clgcode');
         $notice->attechment=$fname;
         $notice->save();
         session()->flash('success', 'Notice send successfully');
         $log=new log;
-        $log->cid=Session::get('cid');
+        $log->uid=Session::get('cid');
         $log->action_on="Notice";
         $log->action_type="insert";
         $log->time=time();
+        $log->utype="co_ordinatore";
+        $lod->ip=$_SERVER['REMOTE_ADDR'];
         $log->save();
         return redirect(url('cindex'));
      }
-
      public function view_team($id)
     {
         $team_candidates=participant::select('pid','senrl','tname')->where('pid',$id)->get()->toarray();
