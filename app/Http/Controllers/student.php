@@ -148,6 +148,40 @@ class student extends Controller
         //echo $senrl;
         return view('otp',['senrl'=>$senrl,'clgcode'=>$clgcode,'check'=>$check]);
     }
+    public function resend_otp($senrl,$clgcode,$check)
+    {
+        $senrl=decrypt($senrl);
+        $clgcode=decrypt($clgcode);
+        $user_details=tblstudent::where('senrl',$senrl)->where('clgcode',$clgcode)->get()->first();
+        $clg=\DB::table('tblcolleges')->where('clgcode',$clgcode)->first();
+        $rand_num=rand(111111,999999);
+        session()->put('otps',$rand_num);
+        session()->put('sname',$user_details['sname']);
+        session()->put('email',$user_details['email']);
+        session()->put('clgname',$clg->clgname);
+        $to_name=Session::get('sname');
+        $to_email=Session::get('email');
+        $data=array('name'=>'OTP :'.$rand_num,'body'=>Session::get('clgname'));
+            // \Mail::send('email',$data,function($message) use ($to_name,$to_email){
+            //     $message->to($to_email)->replyTo('eventoitsol@gmail.com',$name=null)->from('eventoitsol@gmail.com', $name = 'Evento')
+            //     ->subject('Log Authentication');
+            // });
+        return redirect(url('otpview/'.encrypt($senrl).'/'.encrypt($clgcode).'/'.encrypt($check)));
+    }
+    public function timers(Request $req)
+    {
+        if($req->ajax())
+        {
+            $timer=$req->get('timer');
+            if($timer=="EXPIRED")
+            {
+                session()->forget('otps');
+                $data="EXPIRED";
+                
+            }
+            echo json_encode($data);
+        }
+    }
     public function checklogin(Request $req)//check student data for login other wise return error
     {
         $login_details = tblstudent::where([
