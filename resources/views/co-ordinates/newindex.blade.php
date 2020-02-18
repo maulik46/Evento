@@ -40,7 +40,7 @@
 
 @section('my-content')
 <div class="container-fluid">
-@if(Session::has('success'))
+    @if(Session::has('success'))
            
            <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
                <div class="toast-body text-white alert mb-1">
@@ -53,7 +53,7 @@
                    
                </div>
            </div>
-@endif
+    @endif
 <!-- charts -->
     <div class="row justify-content-between align-items-center">
         <div class="col-md-7 col-sm-12">
