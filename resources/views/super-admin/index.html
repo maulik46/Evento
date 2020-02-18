@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Super-admin Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -65,12 +66,18 @@
             right: 0;
             min-width: 450px;
         }
+        .notification-list .noti-icon-badge{
+            position: relative;
+            top:-4px;
+            right: 12px;
+        }
         @media(max-width: 600px){
         .right-bar-enabled .right-bar {
             right: 0;
             min-width: 100%;
             }
         }
+        
         /* end right inbox sidebar */
     </style>
 </head>
@@ -101,7 +108,7 @@
                                     class="align-self-center" />
                                 <div class="media-body text-left d-none d-sm-block">
                                     <h6 class="ml-2 my-0" id="nav-menu-btn">
-                                        <span>Mr.Yash Parmar</span>
+                                        <span>{{ucfirst(Session::get('aname'))}}</span>
                                         <span class="text-muted d-block font-size-12 mt-1">
                                             Super-admin
                                         </span>
@@ -116,16 +123,16 @@
                                     class="align-self-center" />
                                 <div class="media-body text-left">
                                     <h6 class="ml-2 my-0">
-                                        <span>Mr.Yash Parmar</span>
+                                        <span>{{ucfirst(Session::get('aname'))}}</span>
                                         <span class="text-muted d-block font-size-12 mt-1">
-                                            Co-ordinator
+                                            Super-admin
                                         </span>
                                     </h6>
                                 </div>
                             </div>
 
                             <div class="dropdown-divider d-sm-none d-md-none"></div>
-                            <a href="index.html" class="dropdown-item notify-item mb-2">
+                            <a href="sindex" class="dropdown-item notify-item mb-2">
                                 <i data-feather="home" class="icon-dual-primary icon-xs mr-2"></i>
                                 <span>Home</span>
                             </a>
@@ -133,26 +140,33 @@
                                 <i data-feather="user-plus" class="icon-dual-success icon-xs mr-2"></i>
                                 <span>Add Co-ordinator</span>
                             </a>
-                            <a href="new_notice.html" class="dropdown-item notify-item my-2">
+                            <a href="snotice" class="dropdown-item notify-item my-2">
                                 <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
                                 <span>Create Notice</span>
                             </a>
-                            <a href="change_password.html" class="dropdown-item notify-item my-2">
+                            <a href="s_change_pass" class="dropdown-item notify-item my-2">
                                 <i data-feather="key" class="icon-dual-info icon-xs mr-2"></i>
                                 <span>Change Password</span>
                             </a>
 
                             <div class="dropdown-divider"></div>
 
-                            <a href="superadmin_login.html" class="dropdown-item notify-item">
+                            <a href="alogout" class="dropdown-item notify-item">
                                 <i data-feather="log-out" class="icon-dual-danger icon-xs mr-2"></i>
                                 <span>Logout</span>
                             </a>
                         </div>
-                    </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Inbox">
-                        <a href="#" class="text-dark right-bar-toggle">
+                        <?php
+                            $notice = \DB::table('tblnotice')->where([['receiver','LIKE', '%admin%'], ['clgcode', Session::get('clgcode')]])->orderby('nid', 'desc')->get()->toarray();
+                            $lastevent = App\admin::select('last_noti')->where('aid', Session::get('aid'))->first();
+                            $count = \DB::table('tblnotice')->select('nid')->where([['nid', '>', $lastevent->last_noti], ['receiver','LIKE', '%admin%'], ['clgcode', Session::get('clgcode')]])->count();
+                        ?>
+                    <li class="nav-item notification-list" data-toggle="tooxltip" data-placement="bottom" title="Inbox">
+                        <a href="#" class="text-dark right-bar-toggle" id="mail">
                             <i data-feather="mail" height="19px" id="nav-menu-btn"></i>
+                            @if($count>0)
+                            <span class="noti-icon-badge" id="noti"></span>
+                            @endif
                         </a>
                     </li>
                 </ul>
@@ -175,27 +189,40 @@
                                  <div class="card-body p-0">
                                      <h5 class="card-title header-title border-bottom p-3 mb-0">Overview</h5>
                                      <!-- stat 1 -->
+                                     <?php 
+                                        $tot_event=\DB::table('tblevents')->where('clgcode',Session::get('clgcode'))->count();
+                                     ?>
                                      <div class="media px-3 py-4 border-bottom">
                                          <div class="media-body">
-                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">42</h4>
+                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_event}}</h4>
                                              <span class="text-muted">Total Events</span>
                                          </div>
                                          <i data-feather="calendar" class="align-self-center icon-dual icon-lg"></i>
                                      </div>
-
+                                     <?php 
+                                        $tot_part=0;
+                                     ?>
+                                     @foreach($events as $e)
+                                        <?php
+                                            $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
+                                                $tot_part=($e['tsize'] * $p)+$tot_part;
+                                        ?>
+                                     @endforeach
                                      <!-- stat 2 -->
                                      <div class="media px-3 py-4 border-bottom">
                                          <div class="media-body">
-                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">86</h4>
-                                             <span class="text-muted">Total Participator</span>
+                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_part}}</h4>
+                                             <span class="text-muted">Total Participator student</span>
                                          </div>
                                          <i data-feather="users" class="align-self-center icon-dual icon-lg"></i>
                                      </div>
-
+                                    <?php 
+                                        $tot_co=\DB::table('tblcoordinaters')->where('clgcode',Session::get('clgcode'))->count();
+                                    ?>
                                      <!-- stat 3 -->
                                      <div class="media px-3 py-4">
                                          <div class="media-body">
-                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">4</h4>
+                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_co}}</h4>
                                              <span class="text-muted">Total Co-ordinator</span>
                                          </div>
                                          <i data-feather="user-check" class="align-self-center icon-dual icon-lg"></i>
@@ -256,11 +283,34 @@
                                                      <th scope="col">Event</th>
                                                      <th scope="col">Total Participator</th>
                                                      <th scope="col">Date</th>
+                                                     <th scope="col">Co-ordinator</th>
                                                      <th scope="col">Status</th>
                                                  </tr>
                                              </thead>
-                                             <tbody>
-                                                 <tr>
+                                             <tbody><?php $c=0 ?>
+                                                @foreach($events as $e)
+                                                <?php $c++;
+                                                    $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
+                                                    $co=\DB::table('tblcoordinaters')->select('cname')->where('cid',$e['cid'])->first();
+                                                ?>
+                                                <tr>
+                                                    <td>#{{$c}}</td>
+                                                    <td>{{ucfirst($e['ename'])}} compition</td>
+                                                    <td>{{$p}}</td> <!--total Participator -->
+                                                    <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
+                                                    <td>{{ucfirst($co->cname)}}</td>
+                                                    <td>
+                                                        @if($e['edate'] == date('Y-m-d'))
+                                                        <span class="badge badge-soft-success badge-pill px-3 py-1">Running</span>
+                                                        @elseif($e['edate'] > date('Y-m-d'))
+                                                        <span class="badge badge-soft-warning badge-pill px-3 py-1">Upcoming</span>
+                                                        @elseif($e['edate'] < date('Y-m-d')) 
+                                                        <span class="badge badge-soft-info badge-pill px-3 py-1">Finished</span>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                 <!-- <tr>
                                                      <td>#1</td>
                                                      <td>Cricket compititon</td>
                                                      <td>5</td>
@@ -269,6 +319,8 @@
                                                          <span class="badge badge-soft-success badge-pill px-2">Running</span>
                                                      </td>
                                                  </tr >
+                                                  
+
                                                  <tr>
                                                      <td>#2</td>
                                                      <td>PHP Quiz compititon</td>
@@ -326,7 +378,7 @@
                                                          <span
                                                              class="badge badge-soft-info badge-pill px-2">Finished</span>
                                                      </td>
-                                                 </tr>
+                                                 </tr> -->
                                              </tbody>
                                          </table>
                                      </div> <!-- end table-responsive-->
@@ -354,14 +406,14 @@
                          <div class="col-xl-12">
                              <div class="card new-shadow-sm" style="max-height: 300px;">
                                  <div class="row card-body pt-2 my-scroll overflow-auto">
-                                     
+                                     @foreach($cods as $cod)
                                      <div class="hover-me-sm col-lg-4 col-md-6 cod-card media mt-1 py-2">
                                          <img src="../assets/images/users/avatar-7.jpg" class="avatar rounded mr-3"
                                              alt="shreyu">
                                          <div class="media-body">
                                              <a href="#">
-                                             <h6 class="mt-1 mb-0 font-size-15 cod-name">Parth Patthar</h6>
-                                             <h6 class="text-muted font-weight-normal mt-1 mb-3">Sport Events</h6>
+                                             <h6 class="mt-1 mb-0 font-size-15 cod-name">{{ucfirst($cod['cname'])}}</h6>
+                                             <h6 class="text-muted font-weight-normal mt-1 mb-3">{{ucfirst($cod['category'])}} Events</h6>
                                              </a>
                                          </div>
                                         <div class="cod-option d-flex flex-column">
@@ -373,7 +425,8 @@
                                             </a>
                                         </div>
                                      </div>
-                                     <div class="hover-me-sm col-lg-4 col-md-6 cod-card media mt-1 py-2">
+                                     @endforeach
+                                     <!-- <div class="hover-me-sm col-lg-4 col-md-6 cod-card media mt-1 py-2">
                                          <img src="../assets/images/users/avatar-9.jpg" class="avatar rounded mr-3"
                                              alt="shreyu">
                                          <div class="media-body">
@@ -428,7 +481,7 @@
                                                   <i data-feather="trash-2" height="18px"></i>
                                               </a>
                                           </div>
-                                      </div>
+                                      </div> -->
                                  </div>
                              </div>
                          </div>
@@ -442,7 +495,7 @@
                             style="border-radius: 30px;padding: 15px;bottom: 75px;right:12px; background-color: #35bbca;">
                             <i data-feather="user-plus"></i>
                         </a>
-                        <a href="new_notice.html" class="hover-me btn btn-success new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Create Notice"
+                        <a href="snotice" class="hover-me btn btn-success new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Create Notice"
                             style="border-radius: 30px;padding: 15px;bottom: 10px;right:12px;">
                             <i data-feather="edit"></i>
                         </a>
@@ -458,92 +511,87 @@
 
  <!-- inbox Right Sidebar -->
 
- <div class="right-bar bg-light my-scroll overflow-auto">
-     <div class="rightbar-title" style="border-bottom: 1px solid #d3d3d36b;">
-         <a href="#" class="right-bar-toggle float-right text-dark" id="close-btn">
-             <i data-feather="x-circle" height="20px"></i>
-         </a>
-         <h4 class="m-0">Inbox</h4>
-     </div>
-    
-     <div class="px-2">
-         <!-- msg 1 -->
-         <div class="hover-me card new-shadow-sm my-2 rounded-0" style="border-left: 4px solid #43d39e;">
-             <div class="card-body py-2">
-                 <div class="d-flex justify-content-between align-items-center flex-wrap">
-                     <span class="badge badge-soft-primary px-3 py-1 badge-pill">28/12/2019</span>
-                     <h6>Maulik</h6>
-                 </div>
-                 <div>
-                     <h5 class="mt-0">Picnic Notice</h5>
-                     <div class="card-text mb-1">
-                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Non tenetur possimus
-                         adipisci?
+ <div class="right-bar bg-light overflow-auto my-scroll">
+             <div class="rightbar-title" style="border-bottom: 1px solid #d3d3d36b;">
+                 <a href="#" class="right-bar-toggle float-right text-dark" id="close-btn" onclick="window.location.reload()">
+                     <i data-feather="x-circle" height="20px"></i>
+                 </a>
+                 <h4 class="m-0">Inbox</h4>
+             </div>
+
+             <div class="my-scroll px-2">
+             <?php $c = 0;
+                 $lastnotice=0;
+            ?>
+            @foreach($notice as $nt)
+            <?php $c++;
+            if ($c == 1) {
+                $lastnotice = $nt->nid;
+            }
+            ?>           
+            @if($c<=$count)
+            <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm" style="border-left: 4px solid #ff5c75;">
+            @else
+            <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm" style="border-left: 4px solid #1AE1AC;">
+            @endif
+                           <div class="card-body py-2">
+                               <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                    <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
+                                    <h6>{{ucfirst($nt->sender)}}</h6>
+                               </div>
+                               <div>
+                                    <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
+                                    <div class="card-text mb-1">
+                                        {!! ucfirst($nt->message) !!}
+                                    </div>
+                                    @if($nt->attechment)
+                                        <?php $att = explode('-',$nt->attechment);
+                                        $c=count($att);
+                                        $a=0;
+                                        ?>
+                                           
+                                                <div class="card-action my-2">
+                                            @foreach($att as $attachment)
+                                            <?php $a++;?>
+                                            @if($a<$c)
+                                                    <a href="{{asset('attachment')}}/{{$attachment}}" class="btn btn-soft-danger rounded-sm new-shadow-sm font-weight-bold px-3 mr-1" download="{{substr($attachment, strpos($attachment, 'N') + 1)}}">{{substr($attachment, strpos($attachment, "N") + 1)}}</a> 
+                                            @endif
+                                            @endforeach    
+                                                </div> 
+                                            
+                                    @endif
+                               </div>
+                           </div>
+                       </div>
+            @endforeach
+                 <!-- <div class="card new-shadow-sm my-2  hover-me-sm rounded-0">
+                     <div class="card-body py-2">
+                         <div class="d-flex justify-content-between align-items-center flex-wrap">
+                             <span class="badge badge-soft-primary px-3 py-1 badge-pill">28/12/2019</span>
+                             <h6>Dr.Rohit Radadiya</h6>
+                         </div>
+                         <div>
+                             <h5 class="mt-0">Picnic Notice</h5>
+                             <div class="card-text">
+                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Non tenetur possimus
+                                 adipisci?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis
+                                 explicabo itaque fugit pariatur adipisci. Quod, pariatur corrupti, laborum eius
+                                 quaerat eos vero, necessitatibus inventore nihil provident ut consequuntur
+                                 soluta magnam.
+                             </div>
+                             <div class="card-action my-2">
+                                 <a href="#"
+                                     class="btn btn-soft-success rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">XYZ.txt</a>
+
+                                 <a href="#"
+                                     class="btn btn-soft-success rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">XYZ.pdf</a>
+                             </div>
+                         </div>
+
                      </div>
-                 </div>
+                 </div> -->
              </div>
          </div>
-         <!-- msg 1 end -->
-
-         <!-- msg 2 -->
-         <div class="hover-me card new-shadow-sm my-2 rounded-0" style="border-left: 4px solid #ff5c75;">
-             <div class="card-body py-2">
-                 <div class="d-flex justify-content-between align-items-center flex-wrap">
-                     <span class="badge badge-soft-primary px-3 py-1 badge-pill">28/12/2019</span>
-                     <h6>Maulik</h6>
-                 </div>
-                 <div>
-                     <h5 class="mt-0">Picnic Notice</h5>
-                     <div class="card-text">
-                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Non tenetur possimus
-                         adipisci?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis
-                         explicabo itaque fugit pariatur adipisci. Quod, pariatur corrupti, laborum eius
-                         quaerat eos vero, necessitatibus inventore nihil provident ut consequuntur
-                         soluta magnam.
-                     </div>
-                     <div class="card-action my-2">
-                         <a href="#"
-                             class="btn btn-soft-success rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">XYZ.txt</a>
-
-                         <a href="#"
-                             class="btn btn-soft-success rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">XYZ.pdf</a>
-                     </div>
-                 </div>
-
-             </div>
-         </div>
-         <!-- msg 2 end -->
-
-         <!-- msg 3 start -->
-         <div class="hover-me card new-shadow-sm my-2 rounded-0" style="border-left: 4px solid #ff5c75;">
-             <div class="card-body py-2">
-                 <div class="d-flex justify-content-between align-items-center flex-wrap">
-                     <span class="badge badge-soft-primary px-3 py-1 badge-pill">28/12/2019</span>
-                     <h6>Maulik</h6>
-                 </div>
-                 <div>
-                     <h5 class="mt-0">Picnic Notice</h5>
-                     <div class="card-text">
-                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Non tenetur possimus
-                         adipisci?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis
-                         explicabo itaque fugit pariatur adipisci. Quod, pariatur corrupti, laborum eius
-                         quaerat eos vero, necessitatibus inventore nihil provident ut consequuntur
-                         soluta magnam.
-                     </div>
-                     <div class="card-action my-2">
-                         <a href="#"
-                             class="btn btn-soft-success rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">XYZ.txt</a>
-
-                         <a href="#"
-                             class="btn btn-soft-success rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">XYZ.pdf</a>
-                     </div>
-                 </div>
-
-             </div>
-         </div>
-         <!-- msg 3 end -->
-     </div>
- </div>
  <!-- inbox Right-bar -->
 
  <!-- Right bar overlay-->
@@ -564,6 +612,32 @@
 
     <!-- optional plugins -->
     <script src="../assets/js/app.min.js"></script>
+    <script>
+        $('#mail').click(function(){
+            var last=<?php echo $lastnotice; ?>;
+            $.ajaxSetup({
+                    headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+            $.ajax({
+                type:'POST',
+                url:'alastnotice',
+                data:{"lastnote":last},
+                success:function(data) {
+                    $("#noti").removeClass('noti-icon-badge');
+                },
+                error:function(data){
+                console.log(data);
+                }
+                })
+        });
+    </script>
+<script>
+$('.rightbar-overlay').click(function(){
+    window.location.reload();
+});
+</script>
 </body>
 
 </html>

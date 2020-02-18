@@ -112,9 +112,9 @@
                         </div>
                     </li>
                 <?php
-                    $notice = \DB::table('tblnotice')->where([['receiver', 'coordinator'], ['clgcode', Session::get('clgcode')]])->orderby('nid', 'desc')->get()->toarray();
+                    $notice = \DB::table('tblnotice')->where([['receiver','LIKE', '%coordinator%'], ['clgcode', Session::get('clgcode')]])->orderby('nid', 'desc')->get()->toarray();
                     $lastevent = App\tblcoordinaters::select('last_noti')->where('cid', Session::get('cid'))->first();
-                    $count = \DB::table('tblnotice')->select('nid')->where([['nid', '>', $lastevent->last_noti], ['receiver', 'coordinator'], ['clgcode', Session::get('clgcode')]])->count();
+                    $count = \DB::table('tblnotice')->select('nid')->where([['nid', '>', $lastevent->last_noti], ['receiver','LIKE', '%coordinator%'], ['clgcode', Session::get('clgcode')]])->count();
                 ?>
                     <li class="nav-item notification-list" data-toggle="tooltip" data-placement="bottom" title="Inbox">
                         <a href="#" class="text-dark right-bar-toggle" id="mail">
@@ -152,14 +152,15 @@
 
              <div class="my-scroll px-2">
              <?php $c = 0;
-             $lastnotice=0;
-?>
+                 $lastnotice=0;
+            ?>
             @foreach($notice as $nt)
             <?php $c++;
-if ($c == 1) {
-    $lastnotice = $nt->nid;
-}
-?>            @if($c<=$count)
+            if ($c == 1) {
+                $lastnotice = $nt->nid;
+            }
+            ?>           
+            @if($c<=$count)
             <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm" style="border-left: 4px solid #ff5c75;">
             @else
             <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm" style="border-left: 4px solid #1AE1AC;">
@@ -172,12 +173,23 @@ if ($c == 1) {
                                <div>
                                     <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
                                     <div class="card-text mb-1">
-                                        {{ucfirst($nt->message)}}
+                                        {!! ucfirst($nt->message) !!}
                                     </div>
                                     @if($nt->attechment)
-                                    <div class="card-action my-2">
-                                        <a href="{{asset('attechment')}}/{{$nt->attechment}}" class="btn btn-soft-danger rounded-sm new-shadow-sm font-weight-bold px-3 mr-1">{{$nt->attechment}}</a>
-                                    </div>
+                                        <?php $att = explode('-',$nt->attechment);
+                                        $c=count($att);
+                                        $a=0;
+                                        ?>
+                                           
+                                                <div class="card-action my-2">
+                                            @foreach($att as $attachment)
+                                            <?php $a++;?>
+                                            @if($a<$c)
+                                                    <a href="{{asset('attachment')}}/{{$attachment}}" class="btn btn-soft-danger rounded-sm new-shadow-sm font-weight-bold px-3 mr-1" download="{{substr($attachment, strpos($attachment, 'N') + 1)}}">{{substr($attachment, strpos($attachment, "N") + 1)}}</a> 
+                                            @endif
+                                            @endforeach    
+                                                </div> 
+                                            
                                     @endif
                                </div>
                            </div>
