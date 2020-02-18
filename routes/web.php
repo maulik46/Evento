@@ -124,21 +124,35 @@ Route::group(['middleware' => 'co_session_check'], function () {
 // xxxxxxxxxxxxxxx co_ordinator dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
 
 
+
 // ==========================================================================
 // super admin dashboard routes start
 // ==========================================================================
 
-route::view('/sindex','super-admin/index');
-
-route::view('/snotice','super-admin/new_notice');
-
-route::view('/new_cod','super-admin/new_cordinate');
-
 route::view('/slogin','super-admin/superadmin_login');
 
-route::view('/s_change_pass','super-admin/change_password');
+Route::post('/a_checklogin','s_admin@checklogin');
 
-route::view('/sbanner','super-admin/create_banner');
+Route::group(['middleware' => 'admin_session_check'], function () { 
+            
+        route::get('/sindex','s_admin@sindex');
 
+        route::view('/snotice','super-admin/new_notice');
+
+        route::post('/admin-noticesend','s_admin@send_notice');
+
+        route::view('/new_cod','super-admin/new_cordinate');
+
+        route::view('/s_change_pass','super-admin/change_password');
+
+        route::post('/change_pass','s_admin@update_pass');
+
+        route::get('/alogout','s_admin@logout');
+
+        route::post('/alastnotice','s_admin@last_noti');
+    
+        route::view('/sbanner','super-admin/create_banner');
+    });
 
 // xxxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
+
