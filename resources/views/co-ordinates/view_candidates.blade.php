@@ -70,12 +70,12 @@
                                         <th scope="col">Division</th>
                                     </tr>
                                 </thead>
-                                <tbody >
+                                <tbody class="team-leader-name">
                                    <?php $enrl=explode("-",$p['senrl'])?>
                                    @foreach($enrl as $e)
                                    <?php 
                                    $sinfo=tblstudent::where('senrl',$e)->first();?>
-                                    <tr>
+                                    <tr >
                                         <th scope="row">
                                             {{$e}}
                                         </th>
@@ -154,8 +154,10 @@
 @endsection        
 
 @section('extra-scripts')
-     <script src="{{asset('assets/libs/datatables/jquery.dataTables.min.js')}}"></script>
-     <script src="{{asset('assets/libs/datatables/dataTables.bootstrap4.min.js')}}"></script>
-     <!-- Datatables init -->
-     <script src="{{asset('assets/js/pages/datatables.init.js')}}"></script>
+     <script>
+     $(document).ready(function(){
+        $('.team-leader-name td:first').css("color","red");
+       
+    })
+     </script>
 @endsection  
