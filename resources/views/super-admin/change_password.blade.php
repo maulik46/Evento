@@ -168,12 +168,14 @@
                                 <img src="../assets/images/svg-icons/co-ordinate/lock.svg" height="22px" alt="">
                                 <span> Change Password</span>
                             </h4>
-                            <form action="#">
+                           <form method="post" action="change_pass" onsubmit="return check()">
+                           @csrf
+                           <p id="error" class="text-center text-danger">{{Session::get('error')}}</p>
                                 <div class="form-group mt-2">
                                     <label class="col-form-label font-size-14">Current Password</label>
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
-                                        <input type="password" class="form-control"
+                                        <input type="password" name="current_pass" id="curpass" class="form-control"
                                             placeholder="Enter Your Current Password..." />
                                     </div>
                                 </div>
@@ -181,7 +183,7 @@
                                     <label class="col-form-label font-size-14">New Password</label>
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="unlock" class="form-control-icon ml-2" height="19px"></i>
-                                        <input type="password" class="form-control"
+                                        <input type="password" class="form-control" name="npass" id="npass"
                                             placeholder="Enter New Password..." />
                                     </div>
                                 </div>
@@ -189,7 +191,7 @@
                                     <label class="col-form-label font-size-14">Confirm Password</label>
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="check-circle" class="form-control-icon ml-2" height="19px"></i>
-                                        <input type="password" class="form-control"
+                                        <input type="password" class="form-control" name="cpass" id="cpass"
                                             placeholder="Enter Password Again..." />
                                     </div>
                                 </div>
@@ -206,7 +208,31 @@
         </div>
 
     </div>
-
+    <script>
+    function check()
+    {
+        if($('#curpass').val()=="")
+        {
+            $('#error').html("Plese Enter your current password");
+            return false;
+        }
+        if($('#npass').val()=="")
+        {
+            $('#error').html("Plese Enter your New password");
+            return false;
+        }
+        else if($('#npass').val().length <= 6)
+        {
+            $('#error').html("New password length must be greater then 6 character");
+            return false;
+        }
+        if($('#cpass').val()=="")
+        {
+            $('#error').html("Please Re-Enter your New password");
+            return false;
+        }
+    }
+</script>
     <script src="../assets/js/jquery.min.js"></script>
     <!-- Vendor js -->
     <script src="../assets/js/vendor.min.js"></script>
