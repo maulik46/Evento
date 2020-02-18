@@ -13,26 +13,7 @@ use App\log;
 date_default_timezone_set("Asia/Kolkata"); 
 class co_ordinate extends Controller
 {
-    public function view_team($id)
-    {
-        $team_candidates=participant::select('pid','senrl','tname')->where('pid',$id)->get()->toarray();
-        // return $team_candidates;
-        // exit;
-        return view('co-ordinates/view_team_candidate',['team_candidates'=>$team_candidates]);
-    }
-    public function create_result($id)
-    {
-        $candidates=participant::select('pid','senrl','tname')->where('eid',$id)->get()->toarray();
-        // $team_candidates=participant::select('pid', 'senrl', 'tname')->where('pid', $id)->get()->toarray();
-
-        $einfo=tblevent::select('eid','ename','e_type','edate','category')->where('eid',$id)->first()->toarray();
-        $parameter_array=[
-            'candidates'=>$candidates,
-            // 'team_candidates'=>$team_candidates,
-            'einfo'=>$einfo
-        ];
-        return view('co-ordinates/create_result',$parameter_array);
-    }
+    
     public function logout()//destroy session
     {
             
@@ -366,5 +347,26 @@ class co_ordinate extends Controller
         $log->save();
         return redirect(url('cindex'));
      }
+
+     public function view_team($id)
+    {
+        $team_candidates=participant::select('pid','senrl','tname')->where('pid',$id)->get()->toarray();
+        // return $team_candidates;
+        // exit;
+        return view('co-ordinates/view_team_candidate',['team_candidates'=>$team_candidates]);
+    }
+    public function create_result($id)
+    {
+        $candidates=participant::select('pid','senrl','tname')->where('eid',$id)->get()->toarray();
+        // $team_candidates=participant::select('pid', 'senrl', 'tname')->where('pid', $id)->get()->toarray();
+
+        $einfo=tblevent::select('eid','ename','e_type','edate','category')->where('eid',$id)->first()->toarray();
+        $parameter_array=[
+            'candidates'=>$candidates,
+            // 'team_candidates'=>$team_candidates,
+            'einfo'=>$einfo
+        ];
+        return view('co-ordinates/create_result',$parameter_array);
+    }
 }
 
