@@ -92,6 +92,7 @@ class co_ordinate extends Controller
     }
     public function view_can($id)
     {
+        $id=decrypt($id);
         $participate=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
         $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
         return view('co-ordinates/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
