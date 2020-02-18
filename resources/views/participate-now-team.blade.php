@@ -107,6 +107,7 @@
                                                     @foreach($rules as $rule)
                                                         @if(strlen($rule)>0)
                                                         <li>
+                                                            <?php $c++;?>
                                                             {{$rule}}
                                                         </li>
                                                         @endif
