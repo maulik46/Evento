@@ -182,6 +182,7 @@
     $(document).ready(function() {
         $('select').niceSelect();
     });
+    sessionStorage.clear();
     </script>
 
     
