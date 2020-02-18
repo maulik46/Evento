@@ -103,7 +103,7 @@
                         <a href="{{url('/participate-now')}}/{{encrypt($e['eid'])}}"
                             class="text-center btn btn-light btn-block rounded-0 text-dark font-weight-bold ">
                             Participate Now
-                            <i data-feather="arrow-right-circle" height="18px"></i>s
+                            <i data-feather="arrow-right-circle" height="18px"></i>
                         </a>
                         @endif
 
