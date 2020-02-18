@@ -90,7 +90,7 @@
                        
                         </div>
                         <div>
-                            <a href="{{url('create_result')}}/{{$e['eid']}}" class="btn btn-p-result btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="Announce Result">
+                            <a href="{{url('create_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="Announce Result">
                                 <i data-feather="award" height="18px" class="text-success"></i>
                             </a>
                             <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="View Candidates">
