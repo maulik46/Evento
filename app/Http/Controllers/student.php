@@ -112,13 +112,13 @@ class student extends Controller
             'otp'=>'required|max:6|min:6'
         ],[
             'otp.required' => 'Please Enter Your OTP',
-            'otp.max' => 'Invalid OTP Number',
-            'otp.min' => 'Invalid OTP Number',
+            'otp.max' => 'Enter Valid OTP Number',
+            'otp.min' => 'Enter Valid OTP Number',
         ]);
          if($check)
          {
             $otp=$req->otp;
-                if (session::get('otp')==$otp) {
+                if (session::get('otps')==$otp) {
                     if ($check==1) {
                         cookie()->queue('clgcode', $clgcode);
                         cookie()->queue('senrl', $senrl);
@@ -196,7 +196,7 @@ class student extends Controller
             ])->first();
             $clg=\DB::table('tblcolleges')->where('clgcode', $req->clgcode)->first();
             $rand_num=rand(111111,999999);
-            session()->put('otp',$rand_num);
+            session()->put('otps',$rand_num);
             $events=$this->getevents();
             session()->put('sname',$user_details['sname']);
             session()->put('email',$user_details['email']);
