@@ -78,8 +78,8 @@ Route::post('/c_checklogin','co_ordinate@checklogin')->middleware('co_valid_chec
 
 
 Route::group(['middleware' => 'co_session_check'], function () {
-    
-        Route::view('/view_team', 'co-ordinates/view_team_candidate');
+
+        Route::get('/view_team/{pid}', 'co_ordinate@view_team');
     
         Route::get('/create_result/{eid}','co_ordinate@create_result');
 
