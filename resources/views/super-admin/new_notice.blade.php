@@ -168,24 +168,26 @@
                                 <img src="../assets/images/svg-icons/co-ordinate/writing.svg" height="25px" alt="">
                                 <span> Create new notice</span>
                             </h3>
-                            <form action="#">
+                            <div class="text-center font-weight-bold text-danger" id="error">{{$errors->first('attachment')}}</div>
+                            <form action="admin-noticesend" method="post" onsubmit="return check()" enctype="multipart/form-data">
+                                @csrf
                                 <div class="row justify-content-center" style="margin-bottom: -10px;">
                                     <div class="form-group mt-2 col-lg-8">
                                         <label class="col-form-label font-size-14">Notice Title</label>
                                          <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="info" class="form-control-icon ml-2" height="19px"></i>
-                                            <input type="text" class="form-control" placeholder="Enter Notice Title..." />
+                                            <input type="text" name="title" id="title" class="form-control" placeholder="Enter Notice Title..." />
                                         </div>
                                     </div>
                                     <div class="form-group mt-2 col-lg-4">
                                         <label class="col-form-label font-size-14">Notice for</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
-                                            <select name="" id="" class="form-control custom-select">
-                                                <option hidden>Notice for</option>
-                                                <option value="co-ordinator">Co-ordinator</option>
+                                            <select name="nfor" id="nfor" class="form-control custom-select">
+                                                <option value="" hidden>Notice for</option>
+                                                <option value="coordinator">Co-ordinator</option>
                                                 <option value="students">Students</option>
-                                                <option value="students">Evento-co</option>
+                                                <option value="student-coordinator">Both</option>
                                             </select>
                                         </div>
                                     </div>
@@ -195,7 +197,7 @@
                                     <label class="col-form-label font-size-14">Notice Content</label>
                                     <div class="form-group has-icon d-flex">
                                           <i data-feather="edit" class="form-control-icon ml-2" height="19px" style="margin-top: 13px;"></i>
-                                        <textarea class="form-control" rows="6"
+                                        <textarea id="message" name="message" class="form-control" rows="6"
                                             placeholder="Enter Notice Content..."></textarea>
                                     </div>
                                 </div>
@@ -215,12 +217,15 @@
                                             <i data-feather="paperclip"></i>
                                         </label>
 
-                                        <input id="file-upload" type="file" />
+                                        <input id="file-upload" name="attachment[]" type="file" multiple onChange="FileDetails()"/>
                                         <!-- file upload end -->
                                     </div>
 
                                 </div>
-
+                                <div class="mt-3 p-1" id="fc" >
+                               
+                               </div>                             
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -229,6 +234,58 @@
         </div>
 
     </div>
+    <script>
+    function check()
+    {
+        if($('#title').val()=="")
+        {
+            $('#error').text("Please enter notice title..");
+            return false;
+        }
+        
+        if($('#message').val()=="")
+        {
+            $('#error').text("Please put your message..");
+            return false;
+        }
+        if($('#nfor').val()=="")
+        {
+            $('#error').text("Please select Receiver..");
+            return false;
+        }
+        
+    }
+</script>
+<script>
+   function FileDetails() {
+
+// GET THE FILE INPUT.
+var fi = document.getElementById('file-upload');
+
+// VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+if (fi.files.length > 0) {
+
+    // THE TOTAL FILE COUNT.
+    $('#fc').css("border","1px solid #d2d8de");
+    document.getElementById('fc').innerHTML =
+        '<div class="d-flex justify-content-center align-items-center mr-2" style="margin-top:-12px;"><span class="badge badge-dark px-3 py-1 badge-pill">Total Files: <b>' + fi.files.length + '</b></span></div>';
+
+    // RUN A LOOP TO CHECK EACH SELECTED FILE.
+    document.getElementById('fc').innerHTML =
+            document.getElementById('fc').innerHTML + ' <div class="mt-2 col-xl-12 row" id="fl">';
+    for (var i = 0; i <= fi.files.length - 1; i++) {
+
+        var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+        var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+
+        // SHOW THE EXTRACTED DETAILS OF THE FILE.
+        document.getElementById('fl').innerHTML =
+            document.getElementById('fl').innerHTML + '<div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:#25c2e340;border-right:4px solid #fff;border-left:4px solid #fff;"> <span class="text-dark col-8">'+ fname +'</span><span class="badge badge-light px-3 badge-pill mr-2 col-4">' + (fsize/1024).toFixed(2) + 'KB</span></div>';
+        }
+     
+    }
+}
+</script>
 
     <script src="../assets/js/jquery.min.js"></script>
     <!-- Vendor js -->

@@ -139,6 +139,7 @@
                                     </select>
                                 </div>
                                 <span class="text-danger font-weight-bold"></span>
+
                             </div>
                             <div class="col-md-4 form-group mt-2">
                                 <label class="col-form-label font-size-15">Gender</label>
@@ -157,12 +158,11 @@
                                 <label class="col-form-label font-size-15">Event for</label>
                                 <div class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                                    <select  multiple="multiple" class="form-control active w-100" id="scripts">
-                                        <option value="FY">FY</option>
-                                        <option value="SY">SY</option>
-                                        <option value="TY">TY</option>
+                                    <select  multiple="multiple" name="class[]"  class="form-control active w-100" id="efor">
+                                    @foreach($class as $cls)
+                                        <option value="{{$cls['class']}}">{{ucfirst($cls['class'])}}</option>
+                                    @endforeach
                                     </select>
-
                                 </div>
                                 <span class="text-danger font-weight-bold"></span>
                             </div>

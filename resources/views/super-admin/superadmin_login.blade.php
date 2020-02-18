@@ -78,19 +78,21 @@
                                 <span>Log-in</span>
                                 <span class="font-size-12 text-muted mt-1">for Admin</span>
                             </h4>
-                            <form action="#">
+                            <form action="{{ url('a_checklogin') }}" onsubmit="return check()" method="post">
+                                @csrf
+                                <p id="error" class="text-center text-danger">{{Session::get('error')}}</p>
                                 <div class="form-group mt-2">
-                                    <label class="col-form-label font-size-14">Admin ID</label>
+                                    <label class="col-form-label font-size-14">Admin em@il</label>
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                        <input type="text" class="form-control" placeholder="Enter Your ID..." />
+                                        <input type="text" name="auser" id="uid" class="form-control" placeholder="Enter Your Email.." />
                                     </div>
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="col-form-label font-size-14">Password</label>
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
-                                        <input type="password" class="form-control"
+                                        <input type="password" name="password" id="apass" class="form-control"
                                            placeholder="Enter Your Password..."  style="padding-right: 2.375rem;" id="my-password">
                                         <div class="position-relative" style="right:40px;bottom: 10px;">
                                         <a href="#">
@@ -137,6 +139,19 @@
             $('#see-pass').show();
         });
     })
+    function check()
+    {
+        if($('#uid').val()=="")
+        {
+            $('#error').html("Plese Enter your ID or Email...");
+            return false;
+        }
+        if($('#apass').val()=="")
+        {
+            $('#error').html("Plese Enter your password...");
+            return false;
+        }
+    }
     </script>
 </body>
 

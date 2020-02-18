@@ -5,7 +5,7 @@
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
+    
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -72,7 +72,8 @@
     </script>
 </head>
 
-<body class="authentication-bg bg-white">
+<body class="authentication-bg bg-white" >
+    
     <div class="waveWrapper waveAnimation">
 
       <div class="waveWrapperInner bgTop">
@@ -97,8 +98,8 @@
                                             <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
                                             <h2 class="ml-1">Evento</h3>
                                     </a>
-                                    <p class="font-size-12 text-muted font-weight-bold text-center mt-2 mb-4">Select your College and Enter Your Enrollment number</p>
-                                    
+                                    <p class="font-size-12 text-muted font-weight-bold text-center mt-2 mb-4"><?php echo  Session::get('email'); ?></p>
+    
                                     <form action="{{url('/otp_check')}}/{{$senrl}}/{{$clgcode}}/{{$check}}" class="authentication-form" method="post">
                                     @csrf
                                     
@@ -112,13 +113,16 @@
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <span>Didn't get a security code? We can <a href="" class="font-weight-bold" style="color:#1582b3;">resend it</a>
+                                            <span>Didn't get a security code? We can <a href="{{url('/resend_otp')}}/{{$senrl}}/{{$clgcode}}/{{$check}}" class="font-weight-bold" style="color:#1582b3;">resend it</a>
                                             </span>
-                                            <span style="color:#1582b3;" class="font-weight-bold" id="demo">
+                                            <span style="color:#1582b3;" class="font-weight-bold abc" id="demo" >
                                                 
                                             </span>
                                         </div>
-                                        <?php echo Session::get('otp') ?>
+                                        <?php 
+                                        $otp=Session::get('otps');
+                                        echo $otp;
+                                        ?>
                                         @error('otp')
                                         <h6>{{$message}}</h6>
                                         @enderror
@@ -164,35 +168,80 @@
         $('select').niceSelect();
     });
     </script>
-<script>
-    // Set the date we're counting down to
-    var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
-
-    // Update the count down every 1 second
-    var x = setInterval(function() {
-
-    // Get today's date and time
-    var now = new Date().getTime();
-        
-    // Find the distance between now and the count down date
-    var distance = countDownDate - now;
-        
-    // Time calculations for days, hours, minutes and seconds
-    
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-    // Output the result in an element with id="demo"
-    document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
-        
-    // If the count down is over, write some text 
-    if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("demo").innerHTML = "EXPIRED";
+<script type="text/javascript">
+<?php
+$otp=Session::get('otps');
+if (isset($otp)) {
+?>   
+    if (sessionStorage.getItem("counter")) {
+      if (sessionStorage.getItem("counter") <= 0) {
+        var value = 120;
+      } else {
+        var value = sessionStorage.getItem("counter");
+      }
+    } else {
+      var value =120;
     }
-    }, 1000);
+    if(value=="EXPIRED")
+      {
+        document.getElementById('demo').innerHTML = value;
+      }
+      else
+      {
+      document.getElementById('demo').innerHTML = value + ' seconds remaining';
+      }
+
+    var counter = function () {
+      if (value <= 0) {
+        sessionStorage.setItem("counter", "EXPIRED");
+        value = "EXPIRED";
+      } else {
+          if(value!="EXPIRED")
+          {
+        value = parseInt(value) - 1;
+        sessionStorage.setItem("counter", value);
+            }
+            else{
+                sessionStorage.setItem("counter", value);
+            }
+      }
+      if(value=="EXPIRED")
+      {
+        document.getElementById('demo').innerHTML = value;
+      }
+      else
+      {
+      document.getElementById('demo').innerHTML = value + ' seconds remaining';
+      }
+    };
+
+    var interval = setInterval(counter, 1000);
+    <?php
+}
+?>
+  </script>
+<script>
+    $('.abc').on('DOMSubtreeModified',function(){
+        var timer=document.getElementById("demo").innerHTML;
+       var xyz=sessionStorage.getItem("counter");
+       if(xyz=="EXPIRED")
+       {
+        sessionStorage.setItem("counter", 120);
+        
+       }
+                $.ajax({
+                    url:'/timers',
+                    method:'GET',
+                    dataType:'json',
+                    data:{'timer':timer},
+                    success:function(data)
+                    {
+                        console.log(data)
+                    }
+            })
+})
 </script>
-    
+
 </body>
 
 
