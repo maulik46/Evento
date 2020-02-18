@@ -74,7 +74,7 @@
 
 <body class="authentication-bg bg-white" >
     
-    <div class="waveWrapper waveAnimation">
+    <div class="waveWrapper waveAnimation" style="bottom:30px;left:0px;">
 
       <div class="waveWrapperInner bgTop">
         <div class="wave waveTop" style="background-image: url('{{asset('assets/images/wave-top1.png')}}')"></div>
@@ -115,7 +115,7 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <span>Didn't get a security code? We can <a href="{{url('/resend_otp')}}/{{$senrl}}/{{$clgcode}}/{{$check}}" class="font-weight-bold" style="color:#1582b3;">resend it</a>
                                             </span>
-                                            <span style="color:#1582b3;" class="font-weight-bold abc" id="demo" >
+                                            <span  class="font-weight-bold abc" id="demo" >
                                                 
                                             </span>
                                         </div>
@@ -175,43 +175,47 @@ if (isset($otp)) {
 ?>   
     if (sessionStorage.getItem("counter")) {
       if (sessionStorage.getItem("counter") <= 0) {
-        var value = 120;
+        var Timevalue = 2;
       } else {
-        var value = sessionStorage.getItem("counter");
+        var Timevalue = sessionStorage.getItem("counter");
       }
     } else {
-      var value =120;
+      var Timevalue =2;
     }
-    if(value=="EXPIRED")
+    if(Timevalue=="Your OTP is EXPIRED")
       {
-        document.getElementById('demo').innerHTML = value;
+        document.getElementById('demo').innerHTML = Timevalue;
+        document.getElementById('demo').style.color="red";
       }
       else
       {
-      document.getElementById('demo').innerHTML = value + ' seconds remaining';
+      document.getElementById('demo').innerHTML = Timevalue + 's';
+      document.getElementById('demo').style.color="#1582b3";
       }
 
     var counter = function () {
-      if (value <= 0) {
+      if (Timevalue <= 0) {
         sessionStorage.setItem("counter", "EXPIRED");
-        value = "EXPIRED";
+        Timevalue = "Your OTP is EXPIRED";
       } else {
-          if(value!="EXPIRED")
+          if(Timevalue!="Your OTP is EXPIRED")
           {
-        value = parseInt(value) - 1;
-        sessionStorage.setItem("counter", value);
+        Timevalue = parseInt(Timevalue) - 1;
+        sessionStorage.setItem("counter", Timevalue);
             }
             else{
-                sessionStorage.setItem("counter", value);
+                sessionStorage.setItem("counter", Timevalue);
             }
       }
-      if(value=="EXPIRED")
+      if(Timevalue=="Your OTP is EXPIRED")
       {
-        document.getElementById('demo').innerHTML = value;
+        document.getElementById('demo').innerHTML = Timevalue;
+        document.getElementById('demo').style.color="red";
       }
       else
       {
-      document.getElementById('demo').innerHTML = value + ' seconds remaining';
+      document.getElementById('demo').innerHTML = Timevalue + 's';
+      document.getElementById('demo').style.color="#1582b3";
       }
     };
 
@@ -224,7 +228,7 @@ if (isset($otp)) {
     $('.abc').on('DOMSubtreeModified',function(){
         var timer=document.getElementById("demo").innerHTML;
        var xyz=sessionStorage.getItem("counter");
-       if(xyz=="EXPIRED")
+       if(xyz=="Your OTP is EXPIRED")
        {
         sessionStorage.setItem("counter", 120);
         
