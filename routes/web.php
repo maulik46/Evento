@@ -60,6 +60,7 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 });
 Route::get('/otpview/{senrl}/{clgcode}/{check?}','student@otpview');
 Route::post('/otp_check/{senrl}/{clgcode}/{check?}','student@otp_check');
+Route::get('/timers','student@timers');
 Route::get('/login','student@login');
 Route::post('/checklogin','student@checklogin')->middleware('ValidCheck');
 
