@@ -168,7 +168,11 @@
                            <div class="card-body py-2">
                                <div class="d-flex justify-content-between align-items-center flex-wrap">
                                     <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
-                                    <h6>{{ucfirst($nt->sender)}}</h6>
+                                    <div class="d-flex justify-content-between align-items-end flex-wrap flex-column">
+                                        <h6 class="my-0 mb-1">{{ucfirst($nt->sender)}}</h6>
+                                        <span class="badge badge-warning text-white badge-pill px-3">Admin</span>
+                                    </div>
+                                    
                                </div>
                                <div>
                                     <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
@@ -185,7 +189,7 @@
                                             @foreach($att as $attachment)
                                             <?php $a++;?>
                                             @if($a<$c)
-                                                    <a href="{{asset('attachment')}}/{{$attachment}}" class="btn btn-soft-danger rounded-sm new-shadow-sm font-weight-bold px-3 mr-1" download="{{substr($attachment, strpos($attachment, 'N') + 1)}}">{{substr($attachment, strpos($attachment, "N") + 1)}}</a> 
+                                                    <a href="{{asset('attachment')}}/{{$attachment}}" class="btn badge badge-info badge-pill new-shadow-sm font-weight-bold py-2 px-3 mr-2" download="{{substr($attachment, strpos($attachment, 'N') + 1)}}">{{substr($attachment, strpos($attachment, "N") + 1)}}</a> 
                                             @endif
                                             @endforeach    
                                                 </div> 
