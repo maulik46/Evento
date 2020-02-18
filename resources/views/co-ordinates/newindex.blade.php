@@ -93,7 +93,7 @@
                             <a href="{{url('create_result')}}/{{$e['eid']}}" class="btn btn-p-result btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="Announce Result">
                                 <i data-feather="award" height="18px" class="text-success"></i>
                             </a>
-                            <a href="{{url('view_candidates')}}/{{$e['eid']}}" class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="View Candidates">
+                            <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="View Candidates">
                                 <i data-feather="users" height="18px" class="text-primary"></i>
                             </a>
                             <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="About">
@@ -244,7 +244,7 @@
                         </div>
                     </div>
                     <div class="bg-light">
-                        <a href="{{url('view_candidates')}}/{{$e['eid']}}"
+                        <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}"
                             class="text-center btn btn-light btn-block rounded-0 text-dark d-flex align-items-center justify-content-center view-candidate">
                             <i data-feather="eye" height="18px"></i>
                             <span>View Candidates</span>
