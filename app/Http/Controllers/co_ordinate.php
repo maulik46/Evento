@@ -12,11 +12,11 @@ use App\log;
 date_default_timezone_set("Asia/Kolkata"); 
 class co_ordinate extends Controller
 {
-    public function create_result($id)
-    {
-        $candidates=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
-        return view('co-ordinates/create_result',['candidates'=>$candidates]);
-    }
+    // public function create_result($id)
+    // {
+    //     $candidates=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
+    //     return view('co-ordinates/create_result',['candidates'=>$candidates]);
+    // }
     public function logout()//destroy session
     {
             
@@ -98,6 +98,7 @@ class co_ordinate extends Controller
     }
     public function view_can($id)
     {
+        $id=decrypt($id);
         $participate=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
         $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
         return view('co-ordinates/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
