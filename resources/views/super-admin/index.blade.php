@@ -1,6 +1,6 @@
 @extends('super-admin/s_admin_layout')
 
-@section('title','Co-ordinator dashboard')
+@section('title','Super Admin dashboard')
 
 @section('head-tag-links')
     <style>
@@ -106,26 +106,10 @@
                          <div class="col-xl-8 col-md-8">
                              <div class="card new-shadow-sm">
                                  <div class="card-body pb-0">
-                                     <ul class="nav card-nav float-right">
-                                         <li class="nav-item">
-                                             <a class="nav-link text-muted" href="#">Today</a>
-                                         </li>
-                                         <li class="nav-item">
-                                             <a class="nav-link text-muted" href="#">7d</a>
-                                         </li>
-                                         <li class="nav-item">
-                                             <a class="nav-link active" href="#">15d</a>
-                                         </li>
-                                         <li class="nav-item">
-                                             <a class="nav-link text-muted" href="#">1m</a>
-                                         </li>
-                                         <li class="nav-item">
-                                             <a class="nav-link text-muted" href="#">1y</a>
-                                         </li>
-                                     </ul>
-                                     <h5 class="card-title mb-0 header-title">Revenue</h5>
+                                     
+                                    <h5 class="card-title mb-0 header-title">Revenue</h5>
 
-                                     <div id="revenue-chart" class="apex-charts mt-3" dir="ltr"></div>
+                                    <div id="revenue-chart" class="apex-charts mt-3" dir="ltr"></div>
                                  </div>
                              </div>
                          </div>
@@ -135,7 +119,7 @@
 
                      <!-- products -->
                      <div class="row">
-                         <div class="col-xl-5">
+                         <div class="col-xl-4">
                              <div class="card new-shadow-sm">
                                  <div class="card-body px-0">
                                      <h5 class="card-title mt-0 mb-0 header-title px-4">Participation by class</h5>
@@ -143,7 +127,7 @@
                                  </div> <!-- end card-body-->
                              </div> <!-- end card-->
                          </div> <!-- end col-->
-                         <div class="col-xl-7 ">
+                         <div class="col-xl-8">
                              <div class="card new-shadow-sm" style="max-height: 350px;">
                                 <h5 class="card-title mt-4 px-4 mb-1 header-title">Recent Event</h5>
                                  <div class="card-body overflow-auto my-scroll">
@@ -209,9 +193,9 @@
                      <div class="row">
                          <div class="col-xl-12">
                              <div class="card new-shadow-sm" style="max-height: 300px;">
-                                 <div class="row card-body pt-2 my-scroll overflow-auto">
+                                 <div class="row justify-content-lg-around card-body pt-2 my-scroll overflow-auto">
                                      @foreach($cods as $cod)
-                                     <div class="hover-me-sm col-lg-4 col-md-6 cod-card media mt-1 py-2">
+                                     <div class="new-shadow-sm hover-me-sm col-lg-4 col-md-6 cod-card media mt-1 py-2">
                                          <img src="../assets/images/users/avatar-7.jpg" class="avatar rounded mr-3"
                                              alt="shreyu">
                                          <div class="media-body">
@@ -259,12 +243,12 @@
 
                      <!-- side rounded button for create notice and co-ordinator -->
                     <div>
-                        <a href="new_cordinate.html" class="hover-me btn btn-info new-shadow-sm position-fixed" data-toggle="tooltip"
+                        <a href="{{url('new_cod')}}" class="hover-me btn btn-info new-shadow-sm position-fixed" data-toggle="tooltip"
                             data-placement="left" title="Add Co-ordinator"
                             style="border-radius: 30px;padding: 15px;bottom: 75px;right:12px; background-color: #35bbca;">
                             <i data-feather="user-plus"></i>
                         </a>
-                        <a href="snotice" class="hover-me btn btn-success new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Create Notice"
+                        <a href="{{url('snotice')}}" class="hover-me btn btn-success new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Create Notice"
                             style="border-radius: 30px;padding: 15px;bottom: 10px;right:12px;">
                             <i data-feather="edit"></i>
                         </a>
