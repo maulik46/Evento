@@ -266,25 +266,24 @@ class student extends Controller
         $einfo=tblevent::where('eid',decrypt($eid))->first();
         return view('team-insert',['einfo'=>$einfo]);
     }
-    public function teamvalidation(Request $req)
+   public function teamvalidation(Request $req)
     {
         $enr=$req->enrl;
         $eid=$req->eid;
         $galw=$req->galw;
         $awl_diff_class=$req->alw_diff_class;
         $a_d_d=$req->a_d_d;
-    
+        $efor=$req->efor;
             if($galw=="both")
             {
                 if($awl_diff_class=="yes")
                 {
-                    $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr]])->get()->toArray();
+                    $st=tblstudent::select('class')->where([['clgcode',Session::get('clgcode')],['senrl',$enr]])->first();
                     if(!$st)
                     {
                         $msg="*Invalid Enrollment Id of player";
                         return response()->json(array('msg'=> $msg),200);
                     }
-                    $efor=tblevent::where([['clgcode',Session::get('clgcode')],['eid',$eid],['efor','LIKE','%'.$st['class'].'%']])->count();
                 }
                 else
                 {
@@ -346,7 +345,11 @@ class student extends Controller
                     }
                 }
             }
-        
+        $class=explode('-',$efor);
+        if(!in_array($st['class'],$class))
+        {
+            return response()->json(array('msg'=>'Student of class <b>'.ucfirst($st['class']).'</b> not allowed'),200);
+        }
         $st=participant::where([['senrl','LIKE','%'.$enr.'%'],['eid',$eid]])->get()->count();
         if($st>0)
         {
@@ -355,8 +358,7 @@ class student extends Controller
         }
         $msg="";
         return response()->json(array('msg'=> $msg),200);
-    }
-      
+    }   
     public function team_confirm(Request $req)
     {
         return view('participate-now-team',['req'=>$req]);
