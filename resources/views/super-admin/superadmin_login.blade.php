@@ -82,18 +82,18 @@
                                 @csrf
                                 <p id="error" class="text-center text-danger">{{Session::get('error')}}</p>
                                 <div class="form-group mt-2">
-                                    <label class="col-form-label font-size-14">Admin em@il</label>
+                                    <label class="col-form-label font-size-14">Admin email</label>
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                        <input type="text" name="auser" id="uid" class="form-control" placeholder="Enter Your Email.." />
+                                        <input type="text" name="auser" id="uid" class="form-control" placeholder="Enter Your Email" />
                                     </div>
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="col-form-label font-size-14">Password</label>
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
-                                        <input type="password" name="password" id="apass" class="form-control"
-                                           placeholder="Enter Your Password..."  style="padding-right: 2.375rem;" id="my-password">
+                                        <input type="password" name="password" id="my-password" class="form-control"
+                                           placeholder="Enter Your Password"  style="padding-right: 2.375rem;" ">
                                         <div class="position-relative" style="right:40px;bottom: 10px;">
                                         <a href="#">
                                             <i data-feather="eye" class="ml-2 form-control-icon" height="19px" id="see-pass"></i> 
@@ -106,7 +106,7 @@
                                 </div>
 
                                 <button type="submit"
-                                    class="btn btn-info rounded-sm new-shadow font-weight-bold px-4 mt-1 mb-3" style="background-color: #35bbca;">
+                                    class="hover-me-sm btn btn-info rounded-sm new-shadow font-weight-bold px-3 mt-1 mb-3" style="background-color: #35bbca;">
                                     <span class="font-size-14">Log-in</span>
                                     <i data-feather="log-in" height="20px"></i>
                                 </button>
@@ -138,7 +138,7 @@
             $('#hide-pass').hide();
             $('#see-pass').show();
         });
-    })
+    });
     function check()
     {
         if($('#uid').val()=="")
@@ -146,7 +146,7 @@
             $('#error').html("Plese Enter your ID or Email...");
             return false;
         }
-        if($('#apass').val()=="")
+        if($('#my-password').val()=="")
         {
             $('#error').html("Plese Enter your password...");
             return false;
