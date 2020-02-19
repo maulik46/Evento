@@ -85,8 +85,11 @@ Route::group(['middleware' => 'co_session_check'], function () {
         Route::get('/view_team/{pid}', 'co_ordinate@view_team');
     
         Route::get('/create_result/{eid}','co_ordinate@create_result');
+    
+    
+        Route::post('/rank','co_ordinate@rank');
 
-        Route::view('/view_result', 'co-ordinates/view_result');
+        Route::get('/view_result/{eid}', 'co_ordinate@view_result');
 
         Route::get('/clogout','co_ordinate@logout');
 
