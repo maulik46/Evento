@@ -129,7 +129,7 @@
                                         <i data-feather="check-square" height="20px"></i>   
                                         </a>
                                         <br>
-                                        <a href="{{url('/team-insert')}}/{{$einfo->eid}}'" class="my-3 px-4 font-weight-bold btn btn-info new-shadow-sm rounded-sm hover-me-sm">
+                                        <a href="{{url('/team-insert')}}/{{encrypt($einfo->eid)}}'" class="my-3 px-3 font-weight-bold btn btn-info new-shadow-sm rounded-sm hover-me-sm">
                                             <span>Back</span>
                                             <i data-feather="arrow-left-circle"></i>
                                         </a>

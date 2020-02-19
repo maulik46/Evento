@@ -114,7 +114,7 @@
                                 </div>
 
                                 <div class="mt-5 mb-1 ml-4">
-                                    <a href="#" class="px-4 btn btn-success new-shadow rounded-sm hover-me-sm" data-toggle="modal" data-target="#modal-success">
+                                    <a href="#" class="px-3 btn btn-success new-shadow rounded-sm hover-me-sm" data-toggle="modal" data-target="#modal-success">
                                         <span class="font-weight-bold font-size-15">Confirm participation</span>
                                        <i data-feather="check-square" height="20px"></i>   
                                     </a>
