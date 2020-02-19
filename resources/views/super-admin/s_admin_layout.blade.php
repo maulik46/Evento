@@ -47,7 +47,7 @@
         <div class="navbar navbar-expand flex-column flex-md-row navbar-custom position-fixed w-100 new-shadow-sm">
             <div class="container-fluid">
                 <!-- LOGO -->
-                <a href="index.html" class="navbar-brand mx-2">
+                <a href="{{url('sindex')}}" class="navbar-brand mx-2">
                     <span class="logo-lg">
                         <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
                         <span class="d-inline h3 font-weight-bold">Evento</span>
@@ -168,33 +168,38 @@
                 $lastnotice = $nt->nid;
             }
             ?>
-            @if($c<=$count) <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm"
-                style="border-left: 4px solid #ff5c75;">
+            @if($c<=$count) 
+            <div class="card new-shadow-sm my-2 hover-me-sm"
+                style="border-left: 4px solid #ff5c75;border-radius:0px 10px 10px 0px;">
                 @else
-                <div class="card new-shadow-sm my-2 rounded-0 hover-me-sm" style="border-left: 4px solid #1AE1AC;">
+                <div class="card new-shadow-sm my-2 hover-me-sm" style="border-left: 4px solid #1AE1AC;border-radius:0px 10px 10px 0px;">
                     @endif
-                    <div class="card-body py-2">
-                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <div class="card-body py-0" >
+                        <div class="d-flex justify-content-between align-items-center flex-wrap" style="margin:-10px 0px;">
                             <span
-                                class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
-                            <h6>{{ucfirst($nt->sender)}}</h6>
+                                class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}
+                            </span>
+                            <div class="d-flex align-items-end flex-column flex-wrap">
+                                <h6>{{ucfirst($nt->sender)}}</h6>
+                                <span class="badge badge-warning text-white badge-pill" style="padding: 0.3em 0.6rem">Admin</span>
+                            </div>    
                         </div>
                         <div>
                             <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
-                            <div class="card-text mb-1">
+                            <div class="card-text mb-2">
                                 {!! ucfirst($nt->message) !!}
                             </div>
                             @if($nt->attechment)
                             <?php $att = explode('-',$nt->attechment);
-                                        $c=count($att);
-                                        $a=0;
-                                        ?>
+                                $c=count($att);
+                                $a=0;
+                            ?>
 
                             <div class="card-action my-2">
                                 @foreach($att as $attachment)
                                 <?php $a++;?>
                                 @if($a<$c) <a href="{{asset('attachment')}}/{{$attachment}}"
-                                    class="btn btn-soft-danger rounded-sm new-shadow-sm font-weight-bold px-3 mr-1"
+                                    class="btn badge badge-info badge-pill p-2 new-shadow-sm font-weight-bold px-3 mr-1"
                                     download="{{substr($attachment, strpos($attachment, 'N') + 1)}}">
                                     {{substr($attachment, strpos($attachment, "N") + 1)}}</a>
                                     @endif
