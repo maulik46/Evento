@@ -1,39 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('super-admin/s_admin_layout')
 
-<head>
-    <meta charset="utf-8" />
-    <title>Change Password</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+@section('title','Change Password')
 
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
-
-
-    <!-- App css -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" />
-    <!-- extra css  -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/my-extra.css">
-    <style>
-        .profile-dropdown-items {
-            width: 200px;
-        }
-
-        .content-page {
-            margin: 50px 0px !important;
-
-        }
-
-        #event-info p {
-            margin: 22px 0px;
-        }
-
-        #close-btn:hover {
-            color: #ff5c75;
-        }
-
+@section('head-tag-links')
+<style>
         .form-control {
             border-radius: .15rem;
             background-color: #f3f4f7 !important;
@@ -72,111 +42,29 @@
             color: #43d39e;
         }
     </style>
-</head>
-
-<body data-layout="topnav" class="body-scroll">
-    <!-- Begin page -->
-    <div class="wrapper">
-
-        <!-- Topbar Start -->
-        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom position-fixed w-100 new-shadow-sm">
-            <div class="container-fluid">
-                <!-- LOGO -->
-                <a href="index.html" class="navbar-brand mx-2">
-                    <span class="logo-lg">
-                        <img src="../assets/images/logo.png" alt="" height="24" />
-                        <span class="d-inline h3 font-weight-bold">Evento</span>
-                        <h6 class="my-0 text-muted font-size-12 d-sm-none d-md-none" style="margin-left: 30px;">
-                            Super-admin</h6>
-                    </span>
-                </a>
-
-                <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
-
-                    <li class="dropdown notification-list align-self-center profile-dropdown">
-                        <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="false" aria-expanded="false">
-                            <div class="media user-profile ">
-                                <img src="../assets/images/svg-icons/super-admin/man1.svg" alt="user-image"
-                                    class="align-self-center" />
-                                <div class="media-body text-left d-none d-sm-block">
-                                    <h6 class="ml-2 my-0">
-                                        <span>Mr.Yash Parmar</span>
-                                        <span class="text-muted d-block font-size-12 mt-1">
-                                            Super-admin
-                                        </span>
-                                    </h6>
-                                </div>
-                                <span data-feather="chevron-down" class="ml-2 align-self-center"></span>
-                            </div>
-                        </a>
-                        <div class="dropdown-menu profile-dropdown-items dropdown-menu-right">
-                            <div class="media dropdown-item d-sm-none d-md-none">
-                                <img src="../assets/images/svg-icons/super-admin/man1.svg" alt="user-image"
-                                    height="40px" class="align-self-center" />
-                                <div class="media-body text-left">
-                                    <h6 class="ml-2 my-0">
-                                        <span>Mr.Yash Parmar</span>
-                                        <span class="text-muted d-block font-size-12 mt-1">
-                                            Co-ordinator
-                                        </span>
-                                    </h6>
-                                </div>
-                            </div>
-
-                            <div class="dropdown-divider d-sm-none d-md-none"></div>
-                            <a href="newindex.html" class="dropdown-item notify-item mb-2">
-                                <i data-feather="home" class="icon-dual-primary icon-xs mr-2"></i>
-                                <span>Home</span>
-                            </a>
-                            <a href="newevent.html" class="dropdown-item notify-item my-2">
-                                <i data-feather="user-plus" class="icon-dual-success icon-xs mr-2"></i>
-                                <span>Add Co-ordinator</span>
-                            </a>
-                            <a href="new_notice.html" class="dropdown-item notify-item my-2">
-                                <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
-                                <span>Create Notice</span>
-                            </a>
-                            <a href="#" class="dropdown-item notify-item my-2">
-                                <i data-feather="key" class="icon-dual-info icon-xs mr-2"></i>
-                                <span>Change Password</span>
-                            </a>
-
-                            <div class="dropdown-divider"></div>
-
-                            <a href="#" class="dropdown-item notify-item">
-                                <i data-feather="log-out" class="icon-dual-danger icon-xs mr-2"></i>
-                                <span>Logout</span>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-        <!-- end Topbar -->
-
-        <div class="content-page">
+@endsection
+@section('my-content')
             <div class="content d-flex justify-content-center">
-                <div class="container-fluid pt-3 col-lg-5 col-md-8 col-sm-8">
+                <div class="container-fluid pt-0 col-lg-5 col-md-8 col-sm-10">
                     <div class="card mt-4 new-shadow rounded-lg px-1">
                         <div class="card-body px-lg-4">
-                            <a href="index.html" class="float-right text-dark">
-                                <i data-feather="x-circle" id="close-btn"></i>
+                            <a href="{{url('/sindex')}}" class="d-flex justify-content-end text-dark">
+                                <i data-feather="x-circle" id="close-btn" height="18px"></i>
                             </a>
-                            <h4 class="my-4 text-center text-dark">
-                                <img src="../assets/images/svg-icons/co-ordinate/lock.svg" height="22px" alt="">
+                            <h4 class="mt-0 text-center text-dark">
+                                <img src="{{asset('assets/images/svg-icons/co-ordinate/lock.svg')}}" height="22px" alt="">
                                 <span> Change Password</span>
                             </h4>
                            <form method="post" action="change_pass" onsubmit="return check()">
                            @csrf
-                           <p id="error" class="text-center text-danger">{{Session::get('error')}}</p>
+                           <p id="error" class="font-weight-bold text-center text-danger">{{Session::get('error')}}
+                           </p>
                                 <div class="form-group mt-2">
                                     <label class="col-form-label font-size-14">Current Password</label>
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
                                         <input type="password" name="current_pass" id="curpass" class="form-control"
-                                            placeholder="Enter Your Current Password..." />
+                                            placeholder="Enter Your Current Password" />
                                     </div>
                                 </div>
                                 <div class="form-group mt-2">
@@ -184,7 +72,7 @@
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="unlock" class="form-control-icon ml-2" height="19px"></i>
                                         <input type="password" class="form-control" name="npass" id="npass"
-                                            placeholder="Enter New Password..." />
+                                            placeholder="Enter New Password" />
                                     </div>
                                 </div>
                                 <div class="form-group mt-2">
@@ -192,7 +80,7 @@
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="check-circle" class="form-control-icon ml-2" height="19px"></i>
                                         <input type="password" class="form-control" name="cpass" id="cpass"
-                                            placeholder="Enter Password Again..." />
+                                            placeholder="Enter Password Again" />
                                     </div>
                                 </div>
                                 <button type="submit"
@@ -205,9 +93,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-    </div>
+@endsection
+@section('extra-scripts')        
     <script>
     function check()
     {
@@ -232,14 +119,5 @@
             return false;
         }
     }
-</script>
-    <script src="../assets/js/jquery.min.js"></script>
-    <!-- Vendor js -->
-    <script src="../assets/js/vendor.min.js"></script>
-
-    <!-- optional plugins -->
-    <script src="../assets/libs/moment/moment.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-</body>
-
-</html>
+    </script>
+@endsection
