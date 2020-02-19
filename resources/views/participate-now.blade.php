@@ -148,7 +148,7 @@
                 Are you sure you want to participate in this event?
                 </h5> 
                 <div class="my-4">
-                     <a href="{{url('confirm-reg')}}/{{encrypt($einfo->eid)}}" class="px-3 btn btn-success rounded-sm new-shadow font-weight-bold">
+                       <a href="{{url('confirm-reg')}}/{{encrypt($einfo->eid)}}/{{encrypt($einfo->maxteam)}}" class="px-3 btn btn-success rounded-sm new-shadow font-weight-bold">
                          <i data-feather="check-circle" height="20px"></i> Confirm Registration
                     </a>
                  </div>

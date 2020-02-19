@@ -45,7 +45,7 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
     Route::get('/participate-now/{eid}','student@participate');
 
-    Route::get('/confirm-reg/{eid}','student@confirm');
+    Route::get('/confirm-reg/{eid}/{maxteam}','student@confirm');
 
     Route::get('/winner-list','student@winnerlist');
 

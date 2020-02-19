@@ -240,7 +240,7 @@ function check(){
         var enrl=$('#enrl'+i).val();
         if($('#enrl'+i).val()=="")
         {
-            $('#enrl'+i).next().next().text("Enter enrollment no of player "+(i+1));
+            $('#enrl'+i).next().next().html("Enter enrollment no of<b> Player "+(i+1)+"</b>");
             c++;
         }
         else{
@@ -264,7 +264,7 @@ function sameplayer()
             var enrl2=$('#enrl'+j).val();
             if(enrl==enrl2)
             {
-                $('#enrl'+i).next().next().text("This Enrollment number is same as player "+(j+1));
+                $('#enrl'+i).next().next().html("This Enrollment number is same as <b> Player "+(j+1)+"</b>");
             }
         }
     }
@@ -276,6 +276,7 @@ function checkplayer(id)
     var galw='<?php echo $einfo['gallow'] ?>';
     var alw_diff_class='<?php echo $einfo['alw_dif_class'] ?>';
     var a_d_d='<?php echo $einfo['alw_dif_div'] ?>';
+    var efor='<?php echo $einfo['efor'] ?>';
     $.ajax({
             type: 'GET',
             url: '/teamvalidation',
@@ -285,15 +286,16 @@ function checkplayer(id)
                 galw:galw,
                 alw_diff_class:alw_diff_class,
                 a_d_d:a_d_d,
+                efor:efor,
             },
             success: function (data) {
                 if(data.msg.length==0)
                 {
-                    $('#'+id).next().next().text("");
+                    $('#'+id).next().next().html("");
                 }
                 else
                 {
-                    $('#'+id).next().next().text(data.msg);
+                     $('#'+id).next().next().html(data.msg);
                 }
             },
             error: function (data) {
