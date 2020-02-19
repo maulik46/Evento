@@ -43,7 +43,7 @@
                     <i data-feather="x-circle"  height="20px" ></i>
                 </a>
                 <div class="font-weight-bold font-size-16 text-center">
-                    You have successfully participated..!
+                    {{Session::get('alert-' . $msg)}}
                 </div> 
             </div>
         </div>
