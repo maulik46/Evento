@@ -8,13 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 
     <!-- App css -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- extra css  -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/my-extra.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/my-extra.css')}}">
     @section('head-tag-links')
 
     @show
@@ -49,7 +49,7 @@
                 <!-- LOGO -->
                 <a href="index.html" class="navbar-brand mx-2">
                     <span class="logo-lg">
-                        <img src="../assets/images/logo.png" alt="" height="24" />
+                        <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
                         <span class="d-inline h3 font-weight-bold">Evento</span>
                         <h6 class="my-0 text-muted font-size-12 d-sm-none d-md-none" style="margin-left: 30px;">
                             Super-admin</h6>
@@ -63,7 +63,7 @@
                         <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button"
                             aria-haspopup="false" aria-expanded="false">
                             <div class="media user-profile ">
-                                <img src="../assets/images/svg-icons/super-admin/man1.svg" alt="user-image"
+                                <img src="{{asset('assets/images/svg-icons/super-admin/man1.svg')}}" alt="user-image"
                                     class="align-self-center" />
                                 <div class="media-body text-left d-none d-sm-block">
                                     <h6 class="ml-2 my-0" id="nav-menu-btn">
@@ -79,7 +79,7 @@
                         </a>
                         <div class="dropdown-menu profile-dropdown-items dropdown-menu-right">
                             <div class="media dropdown-item d-sm-none d-md-none">
-                                <img src="../assets/images/svg-icons/super-admin/man1.svg" alt="user-image"
+                                <img src="{{asset('assets/images/svg-icons/super-admin/man1.svg')}}" alt="user-image"
                                     height="40px" class="align-self-center" />
                                 <div class="media-body text-left">
                                     <h6 class="ml-2 my-0">
@@ -92,26 +92,26 @@
                             </div>
 
                             <div class="dropdown-divider d-sm-none d-md-none"></div>
-                            <a href="sindex" class="dropdown-item notify-item mb-2">
+                            <a href="{{url('sindex')}}" class="dropdown-item notify-item mb-2">
                                 <i data-feather="home" class="icon-dual-primary icon-xs mr-2"></i>
                                 <span>Home</span>
                             </a>
-                            <a href="new_cordinate.html" class="dropdown-item notify-item my-2">
+                            <a href="{{url('new_cod')}}" class="dropdown-item notify-item my-2">
                                 <i data-feather="user-plus" class="icon-dual-success icon-xs mr-2"></i>
                                 <span>Add Co-ordinator</span>
                             </a>
-                            <a href="snotice" class="dropdown-item notify-item my-2">
+                            <a href="{{url('snotice')}}" class="dropdown-item notify-item my-2">
                                 <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
                                 <span>Create Notice</span>
                             </a>
-                            <a href="s_change_pass" class="dropdown-item notify-item my-2">
+                            <a href="{{url('s_change_pass')}}" class="dropdown-item notify-item my-2">
                                 <i data-feather="key" class="icon-dual-info icon-xs mr-2"></i>
                                 <span>Change Password</span>
                             </a>
 
                             <div class="dropdown-divider"></div>
 
-                            <a href="alogout" class="dropdown-item notify-item">
+                            <a href="{{url('alogout')}}" class="dropdown-item notify-item">
                                 <i data-feather="log-out" class="icon-dual-danger icon-xs mr-2"></i>
                                 <span>Logout</span>
                             </a>
@@ -219,10 +219,10 @@
 
 
 
-    <script src="../assets/js/jquery.min.js"></script>
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <!-- Vendor js -->
-    <script src="../assets/js/vendor.min.js"></script>
-    <script src="../assets/libs/moment/moment.min.js"></script>
+    <script src="{{asset('assets/js/vendor.min.js')}}"></script>
+    <script src="{{asset('assets/libs/moment/moment.min.js')}}"></script>
 
     @section('extra-scripts')
 
@@ -231,7 +231,7 @@
     <script src="{{asset('assets/js/app.min.js')}}"></script>
     <script>
         $('#mail').click(function () {
-            var last = < ? php echo $lastnotice; ? > ;
+            var last = <?php echo $lastnotice; ?>;
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
