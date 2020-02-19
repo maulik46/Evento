@@ -24,25 +24,27 @@
 
 
 @section('my-content')
-        <div class="d-flex justify-content-center">
-        <div class="col-lg-6 col-md-8 col-sm-8">
-                    <div class="card new-shadow rounded-lg px-1">
+        <div class="content d-flex justify-content-center">
+                <div class="container-fluid pt-0 col-lg-5 col-md-8 col-sm-10">
+                    <div class="card mt-4 new-shadow rounded-lg px-1">
                        <div class="card-body px-lg-4">
-                           <a href="{{url('/cindex')}}" class="float-right text-dark">
-                               <i data-feather="x-circle" id="close-btn"></i>
-                           </a>
-                           <h4 class="my-4 text-center text-dark">
+                           <a href="{{url('/cindex')}}" class="d-flex justify-content-end text-dark">
+                                <i data-feather="x-circle" id="close-btn" height="18px"></i>
+                            </a>
+                           <h4 class="mt-0 text-center text-dark">
                                <img src="{{asset('assets/images/svg-icons/co-ordinate/lock.svg')}}" height="22px" alt="">
                                <span> Change Password</span>
                            </h4>
                            <form method="post" action="update_pass" onsubmit="return check()">
                            @csrf
-                           <p id="error" class="text-center text-danger">{{Session::get('error')}}</p>
+                           <p id="error" class="font-weight-bold text-center text-danger">
+                           {{Session::get('error')}}
+                           </p>
                                <div class="form-group mt-2">
                                    <label class="col-form-label font-size-14">Current Password</label>
                                    <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
-                                       <input type="password" name="current_pass" id="curpass" class="form-control" placeholder="Enter Your Current Password..." />
+                                       <input type="password" name="current_pass" id="curpass" class="form-control" placeholder="Enter Your Current Password" />
                                    </div>
                                </div>
                                <div class="form-group mt-2">
@@ -50,14 +52,14 @@
                                    <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="unlock" class="form-control-icon ml-2" height="19px"></i>
                                        <input type="password" class="form-control" name="npass" id="npass"
-                                           placeholder="Enter New Password..." />
+                                           placeholder="Enter New Password" />
                                    </div>
                                </div>
                                <div class="form-group mt-2">
                                    <label class="col-form-label font-size-14">Confirm Password</label>
                                    <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="check-circle" class="form-control-icon ml-2" height="19px"></i>
-                                       <input type="password" name="cpass" id="cpass" class="form-control" placeholder="Enter Password Again..." />
+                                       <input type="password" name="cpass" id="cpass" class="form-control" placeholder="Enter Password Again" />
                                    </div>
                                </div>
                                
