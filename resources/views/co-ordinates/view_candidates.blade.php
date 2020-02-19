@@ -70,7 +70,7 @@
                                         <th scope="col">Division</th>
                                     </tr>
                                 </thead>
-                                <tbody class="team-leader-name">
+                                <tbody>
                                    <?php $enrl=explode("-",$p['senrl'])?>
                                    @foreach($enrl as $e)
                                    <?php 
@@ -152,12 +152,3 @@
                 </div>
             </div>
 @endsection        
-
-@section('extra-scripts')
-     <script>
-     $(document).ready(function(){
-        $('.team-leader-name td:first').css({"color":"var(--success)","font-weight":"bold"});
-       
-    })
-     </script>
-@endsection  
