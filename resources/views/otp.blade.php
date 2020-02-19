@@ -175,12 +175,12 @@ if (isset($otp)) {
 ?>   
     if (sessionStorage.getItem("counter")) {
       if (sessionStorage.getItem("counter") <= 0) {
-        var Timevalue = 2;
+        var Timevalue = 120;
       } else {
         var Timevalue = sessionStorage.getItem("counter");
       }
     } else {
-      var Timevalue =2;
+      var Timevalue =120;
     }
     if(Timevalue=="Your OTP is EXPIRED")
       {
