@@ -188,7 +188,7 @@
                      <!-- end row -->
 
                      <!-- widgets -->
-                      <div class="bg-white d-flex justify-content-between align-items-center flex-wrap mt-2 mb-2 py-2">
+                      <div class="bg-white d-flex justify-content-between align-items-center flex-wrap mt-2 mb-2 py-2 rounded">
                           <div class="h4 d-flex align-items-center ml-4">
                               <i data-feather="users"></i>
                               <span class="ml-1">Event Co-ordinators</span>
@@ -206,7 +206,7 @@
                              <div class="card new-shadow-sm" style="max-height: 300px;">
                                  <div class="row justify-content-around card-body pt-2 my-scroll overflow-auto">
                                      @foreach($cods as $cod)
-                                     <div class="hover-me-sm new-shadow-sm col-lg-5 col-md-6 col-sm-12 cod-card media rounded-lg mt-1 py-2 align-items-end" style="border: 1px solid #3333331f;">
+                                     <div class="hover-me-sm col-lg-5 col-md-6 col-sm-12 cod-card media rounded-lg mt-1 py-2 align-items-end" style="border: 1px solid #3333331f;">
                                         <img src="../assets/images/users/avatar-7.jpg" class="mr-3 rounded-lg" style="height:4.5rem;width:4.5rem;">
                                         <div class="media-body">
                                              <a href="#">
@@ -257,15 +257,28 @@
 
                      <!-- side rounded button for create notice and co-ordinator -->
                     <div>
-                        <a href="{{url('new_cod')}}" class="hover-me btn btn-info new-shadow-sm position-fixed" data-toggle="tooltip"
-                            data-placement="left" title="Add Co-ordinator"
-                            style="border-radius: 30px;padding: 15px;bottom: 75px;right:12px; background-color: #35bbca;">
-                            <i data-feather="user-plus"></i>
+                        <a id="menu-btn" href="#" class="btn btn-info new-shadow-sm position-fixed" 
+                                style="border-radius: 30px;padding: 15px;bottom: 10px;right:12px;z-index:999;">
+                                <i data-feather="grid"></i>
+                                
                         </a>
-                        <a href="{{url('snotice')}}" class="hover-me btn btn-success new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Create Notice"
-                            style="border-radius: 30px;padding: 15px;bottom: 10px;right:12px;">
-                            <i data-feather="edit"></i>
+                        <a id="close" href="#" class="btn btn-info new-shadow-sm position-fixed" 
+                                style="border-radius: 30px;padding: 15px;bottom: 10px;right:12px;z-index:999;">
+                                <i data-feather="x"></i>
+                                
                         </a>
+                        <div id="menu-list" class="p-4">
+                            <a id="m1" href="{{url('snotice')}}" class="hover-me btn btn-success new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Create Notice"   style="border-radius: 30px;padding: 15px;bottom: 142px;right:12px;z-index:999;">
+                                    <i data-feather="edit"></i>
+                                </a>
+                            <a id="m2" href="#" class="hover-me btn btn-warning new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Add Co-ordinator"
+                                style="border-radius: 30px;padding: 15px;bottom: 78px;right:12px;z-index:999;">
+                                <i data-feather="user-plus"></i>
+                            </a>  
+                        </div>
+                    </div>
+                    <div id="menu-overlay" class="w-100 vh-100 position-fixed" style="top:0;left:0;z-index:99;">
+                    
                     </div>
                     <!--end side rounded button for create notice and co-ordinator -->
 
@@ -273,6 +286,22 @@
              
 
     
+@endsection
+@section('extra-scripts')
+<script>
+
+    $(document).ready(function(){
+        $('#menu-list,#menu-overlay,#close').hide();
+        $('#menu-btn').click(function(){
+            $('#menu-list').toggle(150);
+            $('#menu-overlay,#close').show();
+        });
+        $('#menu-overlay,#close').click(function(){
+            $('#menu-list,#menu-overlay,#close').hide();
+        })
+        
+    });
+</script>
 @endsection
 
  
