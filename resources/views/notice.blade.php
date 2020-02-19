@@ -40,7 +40,7 @@
                                 <h5 style="margin-top:-12px;">{{ucfirst($nt->topic)}}</h5>
                                 <div class="card-text mb-2"> 
                                        {!! ucfirst($nt->message) !!}
-                                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere vitae totam consequuntur, rerum iure corrupti? Quod, pariatur consequuntur nulla veritatis quae molestias sit est iure corrupti sequi, dolorem nesciunt consectetur!
+                                       
                                 </div>
                                     @if($nt->attechment)
                                         <?php $att = explode('-',$nt->attechment);
