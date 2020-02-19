@@ -241,7 +241,7 @@ class student extends Controller
 
         return view('participate-now',['einfo'=>$einfo]);
     }
-    public function confirm($eid,$maxteam)//function used fron confirm participation
+  public function confirm($eid,$maxteam)//function used fron confirm participation
     {
         $team_avl=\DB::table('tblparticipant')->where('eid',decrypt($eid))->count();
         if(decrypt($maxteam) > $team_avl)
