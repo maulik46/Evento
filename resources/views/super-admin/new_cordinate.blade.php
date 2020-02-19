@@ -29,7 +29,6 @@
             font-size: 1.1em;
             color: #333 !important;
             height: 50px;
-            cursor: text !important;
         }
 
         /* box-shadow: 0 0 2px black; */
@@ -51,22 +50,29 @@
         .custom-file-upload {
             border: 1px solid gainsboro;
             display: inline-block;
-            padding: 6px 12px;
+            padding: 12px 10px;
             cursor: pointer;
         }
 
         .custom-file-upload:hover {
             color: #43d39e;
         }
-        
+        @media(max-width:432)
+        {
+            .photo-upload{
+                position:relative!important;
+                left:-20px!important;
+                top:45px!important;
+            }
+        }
         
     </style>
 @endsection
 @section('my-content')
             <div class="content d-flex justify-content-center">
-                <div class="container-fluid col-lg-6 col-md-8 col-sm-10">
+                <div class="container-fluid col-xl-8 col-lg-10 col-md-11 col-sm-12">
                     <div class="card new-shadow rounded-lg mt-2">
-                        <div class="card-body px-lg-4">
+                        <div class="card-body px-lg-3">
                             <a href="{{url('/sindex')}}" class="d-flex justify-content-end text-dark">
                                 <i data-feather="x-circle" id="close-btn" height="18px"></i>
                             </a>
@@ -75,21 +81,52 @@
                                 <span> Create Co-ordinator</span>
                             </h3>
                             <form action="#">
-                                    <div class="form-group mt-2">
+                                <div class="d-flex">
+                                    <div class="col-11 mt-2">
                                         <label class="col-form-label font-size-14">Co-ordinator Name</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                            <input type="text" class="form-control"
-                                                placeholder="Enter Co-ordinator Name..." />
+                                            <input type="text" class="form-control" placeholder="Enter Co-ordinator Name..." />
                                         </div>
                                     </div>
+                                    <div class="col-1 photo-upload" style="position:relative;left:-16px;top:45px;">
+                                        <!-- file upload button -->
+                                        <label for="file-upload" class=" custom-file-upload rounded-sm"
+                                            data-toggle="tooltip" data-placement="right" title="Profile Photo">
+                                            <i data-feather="image"></i>
+                                        </label>
 
-                                <div class="form-group mt-4 row">
+                                        <input id="file-upload" name="attachment[]" type="file" multiple onChange="FileDetails()"/>
+                                        <!-- file upload end -->
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mt-2 row mx-0">
+                                    <div class="col-sm-12 col-md-6">
+                                        <label class="col-form-label font-size-14">
+                                        Email</label>
+                                        <div class="form-group has-icon d-flex align-items-center">
+                                           <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
+                                            <input type="email" class="form-control"  placeholder="Enter Co-ordinator's Email" />
+                                        </div>
+                                     
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label class="col-form-label font-size-14">Contact No.</label>
+                                        <div class="form-group has-icon d-flex align-items-center">
+                                           <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
+                                            <input type="text" class="form-control" placeholder="Enter Co-ordinator's Contact no" />
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+
+                                <div class="form-group mt-2 row mx-0">
                                     <div class="col-sm-6">
                                         <label class="col-form-label font-size-14">Event Catagory</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                               <select class="w-100 py-1 form-control  select-me">
+                                               <select class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;">
                                                    <option value="">Event Catagory</option>
                                                    <option value="Sport">Sport</option>
                                                    <option value="Cultural">Cultural</option>
@@ -108,7 +145,7 @@
                                     </div>
                                    
                                 </div>
-                                <div class="mt-2 row justify-content-start align-items-center">
+                                <div class="mt-0 ml-1 row justify-content-start align-items-center">
                                     &nbsp;
                                     <button type="submit"
                                         class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-3 font-size-15
@@ -130,6 +167,7 @@
 <script>
 $(document).ready(function() {
         $('.select-me').niceSelect();
+        
     });
 </script>
 @endsection
