@@ -18,14 +18,13 @@
             display: none!important;
         }
         .cod-card:hover{
-            background-color: #35bbca14;
             border-radius: .3rem;
-            
+            border-color:transparent!important;
         }
         .cod-card:hover .cod-option{
             display: flex!important;
         } 
-        .cod-name:hover{
+        .cod-card:hover .cod-name{
             color: #35bbca!important;
         }
 
@@ -33,6 +32,18 @@
             position: relative;
             top:-4px;
             right: 12px;
+        }
+        .btn-about-cod:hover{
+            background-color: rgba(37,194,227,.15);
+            color: var(--info);
+        }
+        .btn-delete-cod:hover{
+            background-color:rgba(255,92,117,.15);
+            color: var(--danger);
+        }
+        .btn-update-cod:hover{
+            background-color:rgba(255,190,11,.15);
+            color: var(--warning);
         }
     
     </style>
@@ -193,23 +204,26 @@
                      <div class="row">
                          <div class="col-xl-12">
                              <div class="card new-shadow-sm" style="max-height: 300px;">
-                                 <div class="row justify-content-lg-around card-body pt-2 my-scroll overflow-auto">
+                                 <div class="row justify-content-around card-body pt-2 my-scroll overflow-auto">
                                      @foreach($cods as $cod)
-                                     <div class="new-shadow-sm hover-me-sm col-lg-4 col-md-6 cod-card media mt-1 py-2">
-                                         <img src="../assets/images/users/avatar-7.jpg" class="avatar rounded mr-3"
-                                             alt="shreyu">
-                                         <div class="media-body">
+                                     <div class="hover-me-sm new-shadow-sm col-lg-5 col-md-6 col-sm-12 cod-card media rounded-lg mt-1 py-2 align-items-end" style="border: 1px solid #3333331f;">
+                                        <img src="../assets/images/users/avatar-7.jpg" class="mr-3 rounded-lg" style="height:4.5rem;width:4.5rem;">
+                                        <div class="media-body">
                                              <a href="#">
-                                             <h6 class="mt-1 mb-0 font-size-15 cod-name">{{ucfirst($cod['cname'])}}</h6>
-                                             <h6 class="text-muted font-weight-normal mt-1 mb-3">{{ucfirst($cod['category'])}} Events</h6>
+                                             <h6 class="mt-1 mb-0 font-size-18 cod-name">{{ucfirst($cod['cname'])}}</h6>
+                                             <h5 class="text-muted font-size-15 font-weight-normal mt-1 mb-3">{{ucfirst($cod['category'])}} Events</h5>
                                              </a>
-                                         </div>
-                                        <div class="cod-option d-flex flex-column">
-                                            <a href="#" class="text-warning mb-1" data-toggle="tooltip" data-placement="left" title="Edit">
-                                                 <i data-feather="edit-3" height="18px"></i>
+                                        </div>
+
+                                        <div class="d-flex flex-row flex-wrap mb-1">
+                                            <a href="#" class="btn-rounded p-1 btn-update-cod text-warning" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <i data-feather="edit-3" height="18px"></i>
                                              </a>
-                                            <a href="#" class="text-danger mt-1" data-toggle="tooltip" data-placement="left" title="Delete">
-                                                 <i data-feather="trash-2" height="18px"></i>
+                                            <a href="#" class="btn-rounded p-1 btn-delete-cod text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <i data-feather="trash-2" height="18px"></i>
+                                            </a>
+                                            <a href="#" class="btn-rounded p-1 btn-about-cod text-info" data-toggle="tooltip" data-placement="top" title="About">
+                                                <i data-feather="info" height="18px"></i>
                                             </a>
                                         </div>
                                      </div>
@@ -235,7 +249,7 @@
                                               </a>
                                           </div>
                                       </div> -->
-                                 </div>
+                                
                              </div>
                          </div>
                      </div>
