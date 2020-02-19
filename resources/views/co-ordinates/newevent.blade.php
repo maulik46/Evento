@@ -53,7 +53,7 @@
                             <div id="enamediv" class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="edit-3" class="form-control-icon ml-2" height="19px"></i>
                                 <input type="text" onkeyup="this.value = this.value.toLowerCase()" id="ename"
-                                    onkeyup="return echeck()" name="ename" class="form-control"
+                                    onblur="return echeck()" name="ename" class="form-control"
                                     placeholder="Enter Event Name..." />
                             </div>
                             <span id="erevent" class="text-danger font-weight-bold"></span>
