@@ -71,10 +71,10 @@
     $('#diff-class').click(function () {
         if ($(this).prop("checked") == true) {
             $('#diff-div').prop("checked", true);
-            $('#diff-div').prop("disabled", true);
+            // $('#diff-div').prop("disabled", true);
         } else {
             $('#diff-div').prop("checked", false);
-            $('#diff-div').prop("disabled", false);
+            // $('#diff-div').prop("disabled", false);
         }
 });
 // end toggle btn script---
@@ -223,7 +223,12 @@ function getMessage() {
             $('#efor').parent().next().text("");
         }
 
-
+        if($('#max-team').val()=="")
+        {
+            $('#max-team').parent().addClass('border border-danger');
+            $('#max-team').parent().next().text("Please enter maximum team");
+            f = 1;
+        }
 
         if ($('#loc').val() == "") {
             $('#loc').parent().addClass('border border-danger');
