@@ -30,7 +30,6 @@
             font-size: 1.1em;
             color: #333 !important;
             height: 50px;
-            cursor: text !important;
         }
 
         /* box-shadow: 0 0 2px black; */
@@ -54,6 +53,7 @@
             display: inline-block;
             padding: 6px 12px;
             cursor: pointer;
+            margin-top:5px;
         }
 
         .custom-file-upload:hover {
