@@ -111,7 +111,7 @@
                                 <div class="mt-2 row justify-content-start align-items-center">
                                     &nbsp;
                                     <button type="submit"
-                                        class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-4 font-size-15
+                                        class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-3 font-size-15
                                         font-weight-bold ml-2" style="background-color: #35bbca;">
                                         <span>Create</span>
                                         <i data-feather="check-square" height="20px"></i>
