@@ -88,7 +88,7 @@ class co_ordinate extends Controller
         {
             $ename=tblevent::where('eid',$p['eid'])->first();
             $ename_string.="'".$ename['ename']."'".",";
-            $part_count.=$p['eid'].",";
+            $part_count.=$p['count_par'].",";
         }
         return view('co-ordinates/newindex',['events'=>$events,'date_string'=>$date_string,'tble'=>$tble,'ename_string'=>$ename_string,'part_count'=>$part_count]);
     }
