@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="d-flex align-items-end flex-column flex-wrap">
                                     <h6>{{ucfirst($nt->sender)}}</h6>
-                                    <span class="badge badge-warning text-white badge-pill" style="padding: 0.3em 0.6rem">Co-ordinator</span>
+                                    <span class="badge badge-warning text-white badge-pill" style="padding: 0.3em 0.6rem">{{ucfirst($nt->sender_type)}}</span>
                                 </div>
                                     
                             </div>
