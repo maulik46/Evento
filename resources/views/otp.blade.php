@@ -74,7 +74,7 @@
 
 <body class="authentication-bg bg-white" >
     
-    <div class="waveWrapper waveAnimation" style="bottom:30px;left:0px;">
+    <div class="waveWrapper waveAnimation">
 
       <div class="waveWrapperInner bgTop">
         <div class="wave waveTop" style="background-image: url('{{asset('assets/images/wave-top1.png')}}')"></div>
@@ -113,9 +113,9 @@
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <span>Didn't get a security code? We can <a href="{{url('/resend_otp')}}/{{$senrl}}/{{$clgcode}}/{{$check}}" class="font-weight-bold" style="color:#1582b3;">resend it</a>
+                                            <span>Didn't get a security code? We can <a  href="{{url('/resend_otp')}}/{{$senrl}}/{{$clgcode}}/{{$check}}" class="font-weight-bold" style="color:#1582b3;">resend it</a>
                                             </span>
-                                            <span  class="font-weight-bold abc" id="demo" >
+                                            <span style="color:#1582b3;" class="font-weight-bold counter" id="demo" >
                                                 
                                             </span>
                                         </div>
@@ -174,48 +174,44 @@ $otp=Session::get('otps');
 if (isset($otp)) {
 ?>   
     if (sessionStorage.getItem("counter")) {
-      if (sessionStorage.getItem("counter") <= 0) {
-        var Timevalue = 120;
+      if (sessionStorage.getItem("counter") == "EXPIRED") {
+        var value = "EXPIRED";
       } else {
-        var Timevalue = sessionStorage.getItem("counter");
+        var value = sessionStorage.getItem("counter");
       }
     } else {
-      var Timevalue =120;
+      var value =120;
     }
-    if(Timevalue=="Your OTP is EXPIRED")
+    if(value=="EXPIRED")
       {
-        document.getElementById('demo').innerHTML = Timevalue;
-        document.getElementById('demo').style.color="red";
+        document.getElementById('demo').innerHTML = value;
       }
       else
       {
-      document.getElementById('demo').innerHTML = Timevalue + 's';
-      document.getElementById('demo').style.color="#1582b3";
+      document.getElementById('demo').innerHTML = value + ' s';
       }
 
     var counter = function () {
-      if (Timevalue <= 0) {
+      if (value == 0) {
         sessionStorage.setItem("counter", "EXPIRED");
-        Timevalue = "Your OTP is EXPIRED";
+        value = "EXPIRED";
       } else {
-          if(Timevalue!="Your OTP is EXPIRED")
+          if(value != "EXPIRED")
           {
-        Timevalue = parseInt(Timevalue) - 1;
-        sessionStorage.setItem("counter", Timevalue);
+        value = parseInt(value) - 1;
+        sessionStorage.setItem("counter", value);
             }
             else{
-                sessionStorage.setItem("counter", Timevalue);
+                sessionStorage.setItem("counter", value);
             }
       }
-      if(Timevalue=="Your OTP is EXPIRED")
+      if(value=="EXPIRED")
       {
-        document.getElementById('demo').innerHTML = Timevalue;
-        document.getElementById('demo').style.color="red";
+        document.getElementById('demo').innerHTML = value;
       }
       else
       {
-      document.getElementById('demo').innerHTML = Timevalue + 's';
-      document.getElementById('demo').style.color="#1582b3";
+      document.getElementById('demo').innerHTML = value + ' s';
       }
     };
 
@@ -225,24 +221,24 @@ if (isset($otp)) {
 ?>
   </script>
 <script>
-    $('.abc').on('DOMSubtreeModified',function(){
+  
+    $('.counter').on('DOMSubtreeModified',function(){
         var timer=document.getElementById("demo").innerHTML;
        var xyz=sessionStorage.getItem("counter");
-       if(xyz=="Your OTP is EXPIRED")
+       if(xyz == "EXPIRED")
        {
         sessionStorage.setItem("counter", 120);
-        
-       }
                 $.ajax({
                     url:'/timers',
                     method:'GET',
                     dataType:'json',
-                    data:{'timer':timer},
+                    data:{'timer':xyz},
                     success:function(data)
                     {
                         console.log(data)
                     }
             })
+       }
 })
 </script>
 
