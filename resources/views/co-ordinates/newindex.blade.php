@@ -66,7 +66,7 @@
             <div class="h4 d-flex align-items-center justify-content-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">My Running Events</span>
-            </div>
+            </div>   
             <hr class="mt-0 mb-2">
             <?php $c = 0;$a=0;?>
             @foreach($events as $e)
@@ -74,7 +74,7 @@
             $p = \DB::table('tblparticipant')->select('senrl')->where('eid', $e['eid'])->count();
             ?>
             @if($e['cid']==Session::get('cid'))
-            @if($e['edate']==date('Y-m-d'))
+            @if($e['edate'] <= date('Y-m-d') && $e['enddate'] >= date('Y-m-d'))
              <?php $a=1;?>
                 <div class="card bg-light new-shadow-sm mb-2 my-1 px-2 rounded-0 hover-me-sm">
                     <div class="d-flex justify-content-between align-items-center px-1">
@@ -90,9 +90,18 @@
                        
                         </div>
                         <div>
+                        <?php 
+                            $result=\DB::table('tblparticipant')->where([['eid',$e['eid']],['rank',1]])->count();
+                        ?>
+                            @if($result == 0)
                             <a href="{{url('create_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="Announce Result">
                                 <i data-feather="award" height="18px" class="text-success"></i>
                             </a>
+                            @else
+                            <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Show Result">
+                                    <i data-feather="award" height="18px" class=" text-success"></i>
+                            </a>
+                            @endif
                             <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="View Candidates">
                                 <i data-feather="users" height="18px" class="text-primary"></i>
                             </a>
@@ -159,7 +168,7 @@
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
                             <td>{{ucfirst($co->cname)}}</td>
                             <td>
-                                @if($e['edate'] == date('Y-m-d'))
+                                @if($e['edate'] <= date('Y-m-d') && $e['enddate'] >= date('Y-m-d'))
                                 <span class="badge badge-soft-success badge-pill px-3 py-1">Running</span>
                                 @elseif($e['edate'] > date('Y-m-d'))
                                 <span class="badge badge-soft-warning badge-pill px-3 py-1">Upcoming</span>
@@ -352,9 +361,9 @@
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
                              <td>{{ucfirst(Session::get('cname'))}}</td>
                             <td  class="d-flex justify-content-start align-items-center pt-1 mb-0">
-                                <a href="/view_result" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Result">
+                                <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Show Result">
                                     <i data-feather="award" height="18px" class=" text-success"></i>
-                                </a>
+                            </a>
                                 <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
                                     <i data-feather="info" height="18px" class=" text-info"></i>
                                 </a>
