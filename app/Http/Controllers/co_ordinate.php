@@ -5,6 +5,7 @@ use Session;
 use DB;
 use Illuminate\Http\Request;
 use App\tblevent;
+use App\tblstudent;
 use App\notice;
 use App\tblcoordinaters;
 use App\participant;
@@ -13,6 +14,11 @@ date_default_timezone_set("Asia/Kolkata");
 class co_ordinate extends Controller
 {
    
+   public static function studinfo($enrl)
+   {
+        $sinfo=tblstudent::where('senrl',$enrl)->first();
+        return $sinfo;
+   }
     public function logout()//destroy session
     {
             
@@ -44,10 +50,12 @@ class co_ordinate extends Controller
         ->count();
         if ($login_details==1) 
         {
-            $clg= DB::table('tblcoordinaters')->where([['password', $req->password],['cname',$req->cuser]])
+             $clg= DB::table('tblcoordinaters')->where([['password', $req->password],['cname',$req->cuser]])
             ->orwhere([['password', $req->password],['email',$req->cuser]])->first();
+            $clgname=DB::table('tblcolleges')->select('clgname')->where('clgcode',$clg->clgcode)->first();
             session()->put('cid', $clg->cid);
             session()->put('clgcode', $clg->clgcode);
+            session()->put('clgname',$clgname->clgname);
             session()->put('cname',$clg->cname);
             session()->put('email',$clg->email);
             session()->put('cat',$clg->category);
@@ -381,5 +389,23 @@ class co_ordinate extends Controller
         ];
         return view('co-ordinates/create_result',$parameter_array);
     }
+     public function rank(Request $req)
+    {
+        $a=participant::where('pid',$req->r1)->update(['rank'=>'1']);
+        $b=participant::where('pid',$req->r2)->update(['rank'=>'2']);
+        $c=participant::where('pid',$req->r3)->update(['rank'=>'3']);
+         session()->flash('success','Result announced successfully..!');
+        return response()->json(array('msg'=> $a.$b.$c),200);
+    }
+    public static function participant($eid)
+    {
+        $participant=participant::where([['eid',$eid],['rank','p']])->get()->toarray();
+        return $participant;
+    }
+    public function view_result($eid)
+    {
+        $participant=participant::where([['eid',decrypt($eid)],['rank','p']])->count();
+        $event=tblevent::select('eid','ename','edate')->where('eid',decrypt($eid))->first();
+        return view('co-ordinates/view_result',['participant'=>$participant],['einfo'=>$event]);
+    }
 }
-

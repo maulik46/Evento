@@ -3,7 +3,6 @@
     use App\participant;
 ?>
 @extends('co-ordinates/cod_layout')
-
 @section('title','Create Result')
 @section('head-tag-links')
 <style>
@@ -65,7 +64,7 @@
 @section('my-content')
 <div class="container-fluid">
     <div class="mb-0 pt-2 card new-shadow-sm">
-        <a href="{{url('cindex')}}" class="text-right text-dark px-2">
+        <a href="" class="text-right text-dark px-2">
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
         <span class="h2 my-0 font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</span>
@@ -100,26 +99,26 @@
             <div class="row align-items-center" style="margin-bottom:-15px;">
                 <div class="col-md-4">
                     <span class="badge badge-success px-5 mb-1">Rank 1</span>
-                    <div class="card bg-soft-success px-3 droppable-rank" style="border:2px dashed #333;">
+                    <div id="r1" class="card bg-soft-success px-3 droppable-rank" style="border:2px dashed #333;">
                         <img src="{{asset('assets/images/svg-icons/student-dash/winner/1.svg')}}" height="35px" alt="1">
                     </div>
                 </div>
 
                 <div class="col-md-4 small-sticky">
                     <span class="badge badge-primary px-4 mb-1">Rank 2</span>
-                    <div class="card bg-soft-primary px-3 droppable-rank" style="border:2px dashed #333;">
+                    <div id="r2" class="card bg-soft-primary px-3 droppable-rank" style="border:2px dashed #333;">
                         <img src="{{asset('assets/images/svg-icons/student-dash/winner/2.svg')}}" height="35px" alt="2">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <span class="badge badge-warning px-3 mb-1">Rank 3</span>
-                    <div class="card bg-soft-warning px-3 droppable-rank" style="border:2px dashed #333;">
+                    <div id="r3" class="card bg-soft-warning px-3 droppable-rank" style="border:2px dashed #333;">
                         <img src="{{asset('assets/images/svg-icons/student-dash/winner/3.svg')}}" height="35px" alt="3">
                     </div>
                 </div>
             </div>
             <div class="text-center">
-                <a href="#" class="btn btn-success px-3 p-1 new-shadow-sm rounded-sm font-weight-bold hover-me-sm mx-1">
+                <a href="{{url('cindex')}}" class="btn btn-success px-3 p-1 new-shadow-sm rounded-sm font-weight-bold hover-me-sm mx-1"  onclick="return rankcheck()">
                     Done
                     <i data-feather="check-square" height="19px"></i>
                 </a>
@@ -149,6 +148,8 @@
                 <span class="badge badge-soft-primary badge-pill px-3">Total
                 @if($einfo['e_type']=='team')
                     Team
+                @else
+                    Participator
                 @endif
                 </span>
                 <span class="badge badge-primary badge-pill ml-1">{{$c}}</span>
@@ -215,7 +216,7 @@
                 <div class="col-md-12 font-weight-bold text-dark d-flex justify-content-between align-items-center flex-wrap">
                     <div class=" font-size-16 drag-me px-2 ml-1 rounded-sm bg-white hover-me-sm">
                        <span>{{ucfirst($sinfo['sname'])}}</span> 
-                       <span id="pid" style="display:none;"></span>
+                       <span id="pid" style="display:none;">{{$p['pid']}}</span>
                     </div>
                     <div>
                         <span class="badge badge-soft-primary px-3 badge-pill">Solo</span>
@@ -258,6 +259,7 @@
                     <div class="bg-white font-weight-bold text-dark">
                         <div class="col-sm-12 drag-me bg-white hover-me-sm px-3">
                             <span class="font-size-16">{{ucfirst($p['tname'])}}</span>
+                            <span id="pid" style="display:none;">{{$p['pid']}}</span>
                         </div>
                     </div>
                 </div>
@@ -283,6 +285,7 @@
 @section('extra-scripts')
 <script src="{{asset('assets/libs/jquery-ui/jquery-ui.min.js')}}"></script>
 <script src="{{asset('assets/js/jQueryUITouchPunch.js')}}"></script>
+<script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $("#myInput").on("keyup", function () {
@@ -340,6 +343,160 @@ function myFunction() {
     header.classList.remove("sticky");
     allCandidate.style.marginTop="0px";
   }
+}
+</script>
+<script>
+
+function rankcheck() {
+        var r1 = $('#r1 #pid').text();
+        var r2 = $('#r2 #pid').text();
+        var r3 = $('#r3 #pid').text();
+        var link = "<?php echo url('cindex') ?>";
+        // alert(r1+r2+r3);
+        if(r1=="" && r2=="" && r3=="")
+        {
+            Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Please give any rank..!!',
+                    });
+                return false;
+        }
+        if(r2!="")
+        {
+            if(r1=="")
+            {
+                Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'if you want to give Rank 2 then Rank 1 is Mandatory..!',
+                    });
+                return false;
+            }
+        }
+        if(r3!="")
+        {
+            if(r2=="")
+            {
+                Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'if you want to give Rank 3 then Rank 1 and Rank 2 is Mandatory..!',
+                    });
+                return false;
+            }
+        }
+        if(r2 != "" && r3=="")
+        {
+                        Swal.fire({
+            title: 'Are you sure?',
+            text: "You give only Rank 1 and Rank 2..!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'confirm'
+            }).then((result) => {
+            if (result.value) {
+                    $.ajaxSetup({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                    $.ajax({
+                        type: 'POST',
+                        url: '/rank',
+                        data: {
+                            r1: r1,
+                            r2: r2,    
+                            r3: r3,
+                        },
+                        success: function (data) {
+                            window.location.href = link;
+                        },
+                        error: function (data) {
+                        console.log(data);
+                        }
+                    })
+                    
+            }
+            
+            })
+            return false;
+        }
+        if(r1 != "" && r2=="")
+        {
+                        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to give only Rank 1..!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'confirm'
+            }).then((result) => {
+            if (result.value) {
+                    $.ajaxSetup({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                    $.ajax({
+                        type: 'POST',
+                        url: '/rank',
+                        data: {
+                            r1: r1,
+                            r2: r2,    
+                            r3: r3,
+                        },
+                        success: function (data) {
+                            window.location.href = link;
+                        },
+                        error: function (data) {
+                        console.log(data);
+                        }
+                    })
+                    
+            }
+            
+            })
+            return false;
+        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to Announce the result..!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'confirm'
+            }).then((result) => {
+            if (result.value) {
+                    $.ajaxSetup({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                    $.ajax({
+                        type: 'POST',
+                        url: '/rank',
+                        data: {
+                            r1: r1,
+                            r2: r2,    
+                            r3: r3,
+                        },
+                        success: function (data) {
+                            window.location.href = link;
+                        },
+                        error: function (data) {
+                        console.log(data);
+                        }
+                    })
+                    
+            }
+            
+            })
+            return false;
 }
 </script>
 @endsection
