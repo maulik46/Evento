@@ -122,12 +122,12 @@
                             $count = \DB::table('tblnotice')->select('nid')->where([['nid', '>', $lastevent->last_noti], ['receiver','LIKE', '%admin%'], ['clgcode', Session::get('clgcode')]])->count();
                         ?>
                     <li class="nav-item notification-list" data-toggle="tooxltip" data-placement="bottom" title="Inbox">
-                        <a href="#" class="text-dark right-bar-toggle" id="mail">
+                        <span  class="text-dark right-bar-toggle" id="mail">
                             <i data-feather="mail" height="19px" id="nav-menu-btn"></i>
                             @if($count>0)
                             <span class="noti-icon-badge" id="noti"></span>
                             @endif
-                        </a>
+                        </span>
                     </li>
                 </ul>
             </div>
