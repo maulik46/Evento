@@ -9,12 +9,12 @@ use App\tblstudent;
 use App\notice;
 use App\tblcoordinaters;
 use App\participant;
-use App\admin;
 use App\log;
 date_default_timezone_set("Asia/Kolkata"); 
 class co_ordinate extends Controller
 {
-   public function mail($to_name,$to_email,$data)
+
+    public function mail($to_name,$to_email,$data)
     {
         \Mail::send('email',$data,function($message) use ($to_name, $to_email){
                 $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
@@ -22,6 +22,7 @@ class co_ordinate extends Controller
                 ->subject("Update Reports")->bcc($to_email);
             });
     }
+   
    public static function studinfo($enrl)
    {
         $sinfo=tblstudent::where('senrl',$enrl)->first();
@@ -130,7 +131,7 @@ class co_ordinate extends Controller
                 $topic=ucfirst($tblename['ename'])." Event has been Cancelled..!";
                 $message=$reason;
                 $notice=DB::table('tblnotice')->insert(
-                ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('clgcode')]
+                ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'sender_type' => 'co-coordinator','receiver'=>'student-admin','ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('clgcode')]
             );
                 if(isset($notice))
                 {
@@ -364,7 +365,7 @@ class co_ordinate extends Controller
             
             if ($message!="") {
                 $notice=DB::table('tblnotice')->insert(
-                    ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','ndate'=>date('Y-m-d'),'clgcode'=>Session::get('clgcode')]
+                    ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','sender_type' => 'co-coordinator','ndate'=>date('Y-m-d'),'clgcode'=>Session::get('clgcode')]
                 );
             }
             if($update_event)
@@ -407,6 +408,7 @@ class co_ordinate extends Controller
         }
         return redirect(url('cindex'));
     }
+   
     public function create_event(Request $req)
     {
         $edate=date('Y-m-d',strtotime($req->edate));
@@ -545,6 +547,7 @@ class co_ordinate extends Controller
         $notice->topic=$topic;
         $notice->message=$message;
         $notice->sender=Session::get('cname');
+        $notice->sender_type="co-ordinator";
         $notice->receiver="student";
         $notice->ndate=date('Y-m-d');
         $notice->ntime=date('h:i A');//change
@@ -558,14 +561,14 @@ class co_ordinate extends Controller
         $log->action_type="insert";
         $log->time=time();
         $log->utype="co_ordinatore";
-        $lod->ip=$_SERVER['REMOTE_ADDR'];
+        $log->ip_add=$_SERVER['REMOTE_ADDR'];
         $log->save();
         return redirect(url('cindex'));
      }
      public function view_team($id)
     {
         $id=decrypt($id);
-        $team_candidates=participant::select('pid','senrl','tname')->where('pid',$id)->get()->toarray();
+        $team_candidates=participant::select('pid','eid','senrl','tname')->where('pid',$id)->get()->toarray();
         // return $team_candidates;
         // exit;
         return view('co-ordinates/view_team_candidate',['team_candidates'=>$team_candidates]);
@@ -574,7 +577,7 @@ class co_ordinate extends Controller
     {
         $id = decrypt($id);
 
-        $candidates=participant::select('pid','eid','senrl','tname')->where('eid',$id)->get()->toarray();
+        $candidates=participant::select('pid','senrl','tname')->where('eid',$id)->get()->toarray();
         // $team_candidates=participant::select('pid', 'senrl', 'tname')->where('pid', $id)->get()->toarray();
 
         $einfo=tblevent::select('eid','ename','e_type','edate','category')->where('eid',$id)->first()->toarray();
@@ -590,7 +593,7 @@ class co_ordinate extends Controller
         $a=participant::where('pid',$req->r1)->update(['rank'=>'1']);
         $b=participant::where('pid',$req->r2)->update(['rank'=>'2']);
         $c=participant::where('pid',$req->r3)->update(['rank'=>'3']);
-         session()->flash('success','Result announced successfully..!');
+        session()->flash('success','Result announced successfully..!');
         return response()->json(array('msg'=> $a.$b.$c),200);
     }
     public static function participant($eid)
