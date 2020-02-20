@@ -9,6 +9,7 @@ use App\tblstudent;
 use App\notice;
 use App\tblcoordinaters;
 use App\participant;
+use App\admin;
 use App\log;
 date_default_timezone_set("Asia/Kolkata"); 
 class co_ordinate extends Controller
@@ -287,7 +288,7 @@ class co_ordinate extends Controller
                 foreach($tbladmin as $admin)
                 {
                     $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
-                    $this->mail($admin->name,$admin->email,$data);
+                    // $this->mail($admin->name,$admin->email,$data);
                 }
                 // $log=new log;
                 // $log->cid=Session::get('cid');
@@ -389,7 +390,7 @@ class co_ordinate extends Controller
                                 $tbls=tblstudent::select('sname', 'email')->where('senrl', $enrl)->get()->first();
                                 //echo $tbls['sname'],$tbls['email'];
                                 $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
-                                $this->mail($tbls['sname'], trim($tbls['email']), $data);
+                                // $this->mail($tbls['sname'], trim($tbls['email']), $data);
                             }
                         }
                 }
