@@ -64,7 +64,7 @@
 @section('my-content')
 <div class="container-fluid">
     <div class="mb-0 pt-2 card new-shadow-sm">
-        <a href="" class="text-right text-dark px-2">
+        <a href="{{url('/cindex')}}" class="text-right text-dark px-2">
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
         <span class="h2 my-0 font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</span>
