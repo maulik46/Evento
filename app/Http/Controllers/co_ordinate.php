@@ -394,6 +394,7 @@ class co_ordinate extends Controller
         $a=participant::where('pid',$req->r1)->update(['rank'=>'1']);
         $b=participant::where('pid',$req->r2)->update(['rank'=>'2']);
         $c=participant::where('pid',$req->r3)->update(['rank'=>'3']);
+         session()->flash('success','Result announced successfully..!');
         return response()->json(array('msg'=> $a.$b.$c),200);
     }
     public static function participant($eid)
