@@ -4,151 +4,76 @@
 ?>
 @extends('co-ordinates/cod_layout')
 
-@section('title','View Candidates')
-
-@section('head-tag-links')
-    <!-- data table plugins -->
-    <link href="{{asset('assets/libs/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
-
-    <style>
-
-     .page-item.active .page-link {
-     color: #fff;
-     background-color: #43d39e;
-     border-color: #43d39e;
-     }
-     .page-link {
-     color: #27b58f;
-     background-color: #fff;
-     border: 1px solid #e2e7f1;
-     }
-    </style>
-@endsection
+@section('title','View Team Candidates')
 
 @section('my-content')
-            <div class="container-fluid">
-                 <div class="card mt-5 new-shadow-sm">
-                    <div class="card-body">
-                        <a href="{{url('cindex')}}" class="float-right text-dark">
-                            <i data-feather="x-circle" id="close-btn" height="20px"></i>
-                        </a>    
-                        <div class="mb-3 mt-4 justify-content-between d-flex align-items-center ">
-                            <div class="d-flex align-items-center">
-                                <img src="{{asset('/assets/images/svg-icons/co-ordinate/team.svg')}}" height="35px" alt="">
-                                <span class="h4 ml-2">Participated Candidates</span>
-                            </div>
-                            <div class="font-weight-bold mr-4 font-size-15">
-                            <?php $c=participant::where('eid',$einfo['eid'])->count()?>
-                            @if($einfo['e_type']=="team")
-                                <span class="text-muted">Total Team:</span>
-                            @else
-                                <span class="text-muted">Total Candidates:</span>
-                            @endif
-                                <span class="text-dark font-size-18 ml-1">{{$c}}</span>
-                            </div>
-
-                        </div>
-                        @if($einfo['e_type']=="team")
-                        @if($c>0)
-                        @foreach($participate as $p)
-                        <div class="table-responsive my-scroll">
-                            <table class="table table-hover table-light rounded">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3"
-                                            style="background-color: #dde1fc;">
-                                            Team
-                                            {{ucfirst($p['tname'])}}
-                                            <br>
-                                            <!-- <span class="font-size-14">Date: 03/11/2019</span> -->
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">EID</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Class</th>
-                                        <th scope="col">Division</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                   <?php $enrl=explode("-",$p['senrl'])?>
-                                   @foreach($enrl as $e)
-                                   <?php 
-                                   $sinfo=tblstudent::where('senrl',$e)->first();?>
-                                    <tr >
-                                        <th scope="row">
-                                            {{$e}}
-                                        </th>
-                                        <td>{{ucfirst($sinfo['sname'])}}</td>
-                                        <td>{{ucfirst($sinfo['class'])}}</td>
-                                        <td>{{ucfirst($sinfo['division'])}}</td>
-                                    </tr>
-                                    @endforeach
-                                   
-                                </tbody>
-                            </table>
-
-                        </div>
-                        @endforeach
-                        @else
-                        <hr>
-                        <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p>
-                        @endif
-                          
-
-                        @elseif($einfo['e_type']=="solo")
-                        @if($c>0)
-                        <div class="table-responsive my-scroll">
-                            <table   class="table table-hover table-light rounded">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3"
-                                            style="background-color: #dde1fc;">
-                                            {{ucfirst($einfo['ename'])}}
-                                            <br>
-                                            <span class="font-size-14">Date: {{date('d/m/Y', strtotime($einfo['edate']))}}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">EID</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Class</th>
-                                        <th scope="col">Division</th>
-                                    </tr>
-                                </thead>
-                                <tbody >
-                                    @foreach($participate as $p)
-                                    <?php 
-                                    $sinfo=tblstudent::select('senrl','sname','class','division')->where('senrl',$p['senrl'])->first();?>
-                                    <tr>
-                                        <th scope="row">
-                                            {{$sinfo['senrl']}}
-                                        </th>
-                                        <td>{{ucfirst($sinfo['sname'])}}</td>
-                                        <td>{{ucfirst($sinfo['class'])}}</td>
-                                        <td>{{ucfirst($sinfo['division'])}}</td>
-                                    </tr>
-                                   
-                                   @endforeach
-                                   
-                                </tbody>
-                            </table>
-
-                        </div>
-                        @else
-                            <hr>
-                            <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p>
-                        @endif
-                        @endif
-                        
-                    </div>
-
-                </div>
-                <div class="position-fixed" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left"
-                    title="Print">
-                    <a href="#">
-                        <img src="{{asset('assets/images/svg-icons/co-ordinate/print.svg')}}" height="55px" class="hover-me-sm rounded-circle" alt="">
-                    </a>
-                </div>
+<div class="container-fluid">
+    <div class="mb-0 pt-2 card new-shadow-sm">
+    <?php $a=0?>
+    @foreach($team_candidates as $tc)
+            <?php 
+                $a++;
+                if($a==1)
+                $id=$tc['eid'];
+            ?>
+        @endforeach
+        <a href="{{url('/create_result')}}/{{encrypt($id)}}" class="text-right text-dark px-2">
+            <i data-feather="x-circle" id="close-btn" height="20px"></i>
+        </a>
+        <span class="h3 my-0 font-weight-normal text-dark text-center">
+        Team
+        @foreach($team_candidates as $tc)
+            {{ ucfirst($tc['tname']) }}    
+        @endforeach
+        
+        </span>
+        <h6 class="font-weight-normal text-dark text-center">
+        {{ucfirst(Session::get('clgname'))}}
+        </h6>
+        <hr class="my-0">
+    </div>
+    <div class="card new-shadow-sm" >
+        <div class="card-body">
+            <div class="table-responsive overflow-auto my-scroll" style="height: 350px;">
+                <table class="table table-hover table-nowrap mb-0" >
+                    <thead style="background-color:#1ce1ac40;color:#000;">
+                    
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">EID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Class</th>
+                            <th scope="col">Division</th>                
+                        </tr>
+                    </thead>
+                    <tbody class="text-dark">
+                    <?php $c=0;?>
+                    @foreach($team_candidates as $tc)
+                    <?php $enrl=explode("-",$tc['senrl'])?>
+                    @foreach($enrl as $e)   
+                    <?php $c++; $sinfo=tblstudent::where('senrl',$e)->first();?>
+                        <tr>
+                            <th scope="row">{{$c}}</th>
+                            <td>{{$e}}</td>
+                            <td>{{ucfirst($sinfo['sname'])}}</td>
+                            <td>{{ucfirst($sinfo['class'])}}</td>
+                            <td>{{ucfirst($sinfo['division'])}}</td>
+                        </tr> 
+                    @endforeach
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
-@endsection        
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('extra-scripts')
+<script>
+$(document).ready(function(){
+    $('tbody tr:first td:first').next().css("font-weight","bold");
+    $('tbody tr:last').css("display","none");
+})
+</script>
+@endsection
