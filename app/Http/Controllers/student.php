@@ -172,14 +172,11 @@ class student extends Controller
     {
         if($req->ajax())
         {
-            $timer=$req->get('timer');
-            if($timer=="EXPIRED")
+            if(Session::forget('otps'))
             {
-                session()->forget('otps');
-                $data="EXPIRED";
-                
+                $data="success";
+                echo json_encode($data);
             }
-            echo json_encode($data);
         }
     }
     public function checklogin(Request $req)//check student data for login other wise return error
