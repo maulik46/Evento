@@ -86,8 +86,10 @@
                             <!-- messages -->
                         <div class="tab-pane fade show active overflow-auto my-scroll" id="pills-participated" role="tabpanel" aria-labelledby="pills-participated-tab" style="height: 60vh;">
                     <!-- 1st event -->
+                    <?php $a=0;?>
                     @foreach($activity as $act)
                     @if($act['edate'] > date('Y-m-d'))
+                    <?php $a=1;?>
                             <div class="card bg-light rounded mx-2 new-shadow-sm">
                                 <div class="card-body pt-3 pb-1">
                                     <div class="d-flex justify-content-between align-items-center flex-wrap">
@@ -113,7 +115,11 @@
                             </div>
                     @endif
                     @endforeach
-                            
+                    @if($a==0)
+                            <div class="font-size-14 font-weight-bold d-flex align-items-center justify-content-center font-size-16" style="height: 60vh;">
+                                <span>You have not participated in any activities!!</span> 
+                            </div>
+                    @endif      
                         </div>
 
                         <div class="tab-pane fade show" id="pills-activity" role="tabpanel" aria-labelledby="pills-activity-tab">
@@ -179,7 +185,7 @@
                                     
                                 </ul>
                                 @if($a==0)
-                                <div class="font-size-14 font-weight-bold d-flex align-items-center justify-content-center">
+                                <div class="font-size-14 font-weight-bold d-flex align-items-center justify-content-center font-size-16" style="height:30vh;">
                                        
                                     <span>You have no Activities!!</span> 
                                 </div>
