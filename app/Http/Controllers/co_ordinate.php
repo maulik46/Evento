@@ -139,75 +139,263 @@ class co_ordinate extends Controller
         // echo $eid;
         $eid=decrypt($eid);
         $tble=tblevent::where('eid',$eid)->get()->first()->toArray();
+        $tblp=participant::where('eid',$eid)->get()->count();
+        if($tblp==0)
+        {}
+        else
+        {
+            session()->flash('updatealert','Student are Already Participanted So somes Fields are Disable..!');
+        }
        // print_r($tble);
-        return view('co-ordinates/updateevent',['e_data'=>$tble]);
+        return view('co-ordinates/updateevent',['e_data'=>$tble,'tblpcount'=>$tblp]);
     }
     public function action_update(Request $req,$eid)
     {
         $eid=decrypt($eid);
        // echo $eid;
-        $req_edate=$req->edate;
-        $req_sdate=$req->sdate;
-        $req_ldate=$req->ldate;
-        $req_etime=$req->etime;
-        $req_ename=$req->ename;
-        $req_loc=$req->loc;
-        $req_rules=$req->rules;
-        $edate=date('Y-m-d',strtotime($req_edate));
-        $sdate=date('Y-m-d',strtotime($req_sdate));
-        $ldate=date('Y-m-d',strtotime($req_ldate));
-        $etime=date('h:i:s',strtotime($req_etime));
-        $message="";
-        $tble=tblevent::where('eid',$eid)->get()->first();
-        if($tble['ename']!=$req_ename)
+        $tblp=participant::where('eid',$eid)->get()->count();
+        if($tblp==0)
         {
-            $message.="Event Rename <b>".ucfirst($tble['ename'])."</b> to <b>".ucfirst($req_ename)."</b><br/>";
-        }
-        if($tble['edate']!=$edate)
-        {
-            $message.="Event Date changed <b>".date('d-m-Y',strtotime($tble['edate']))."</b> to <b>".$req_edate."</b></br>";
-        }
-        if($tble['time']!=$etime)
-        {
-            $message.="Event time changed <b>".date('h:i A',strtotime($tble['time']))."</b> to <b>".$etime."</b></br>";
-        }
-        if($tble['reg_start_date']!=$sdate)
-        {
-            $message.="Registration starting date changed <b>".date('d-m-Y',strtotime($tble['reg_start_date']))."</b> to <b>".$req_sdate."</b></br>";
-        }
-        if($tble['reg_end_date']!=$ldate)
-        {
-            $message.="Registration end date changed <b>".date('d-m-Y',strtotime($tble['reg_end_date']))."</b> to <b>".$req_ldate."</b></br>";
-        }
-        if($tble['place']!=$req->loc)
-        {
-            $message.="Event Location changed <b>".ucfirst($tble['place'])."</b> to <b>".$req_loc."</b></br>";
-        }
-        if($tble['rules']!=$req->rules)
-        {
-            $message.="Event Rules changed <b>".ucfirst($tble['rules'])."</b> to <b>".$req_rules."</b></br>";
-        }
-        $update_event=tblevent::where('eid',$eid)
-            ->update(['ename' =>$req_ename,'edate' =>$edate,'time' => $etime,'reg_start_date' => $sdate,'reg_end_date' => $ldate,'place' => $req_loc,'rules' => $req_rules]);
-        $topic="Update of Event ".$req_ename;
-        
-        if ($message!="") {
-            $notice=DB::table('tblnotice')->insert(
-                ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','ndate'=>date('Y-m-d'),'clgcode'=>Session::get('clgcode')]
-            );
-        }
-        if($update_event)
-        {
+            $req_edate=$req->edate;
+            $req_enddate=$req->enddate;
+            $req_sdate=$req->sdate;
+            $req_ldate=$req->ldate;
+            $req_etime=$req->etime;
+            $req_ename=$req->ename;
+            $req_loc=$req->loc;
+            $req_rules=$req->rules;
+
+            $req_etype=$req->etype;
+            $req_efor=$req->efor; //for gender
+           //$req_class=$req->class; //database name efor
+            $req_tsize=$req->tsize;
+            $req_alw_dif_class=$req->alw_diff_class;
+            $req_alw_dif_div=$req->alw_diff_div;
+            $req_mteam=$req->mteam;
+            $req_class="";
+            foreach($req->class as $cls)
+            {
+            $req_class.=$cls."-";
+            }
+            if($req_alw_dif_class=="yes")
+            {
+                $req_alw_dif_class=="yes";
+            }
+            else{
+                $req_alw_dif_class="no";
+            }
+            if($req_alw_dif_div=="yes")
+            {
+                $req_alw_dif_div="yes";
+            }
+            else{
+                $req_alw_dif_div="no";
+            }
+            $edate=date('Y-m-d',strtotime($req_edate));
+            $sdate=date('Y-m-d',strtotime($req_sdate));
+            $ldate=date('Y-m-d',strtotime($req_ldate));
+            $etime=date('h:i:s',strtotime($req_etime));
+            $enddate=date('Y-m-d',strtotime($req_enddate));
+            $message="";
+            $tble=tblevent::where('eid',$eid)->get()->first();
+            if($tble['ename']!=$req_ename)
+            {
+                $message.="Event Rename <b style='color:blue;'>".ucfirst($tble['ename'])."</b> to <b style='color:blue; '>".ucfirst($req_ename)."</b><br/>\r\n";
+            }
+            if($tble['edate']!=$edate)
+            {
+                $message.="Event Date changed <b style='color:blue; '>".date('d-m-Y',strtotime($tble['edate']))."</b> to <b style='color:blue; '>".$req_edate."</b><br/>\r\n";
+            }
+            if($tble['time']!=$etime)
+            {
+                $message.="Event time changed <b style='color:blue;'>".date('h:i A',strtotime($tble['time']))."</b> to <b style='color:blue; '>".date('h:i A',strtotime($etime))."</b><br/>\r\n";
+            }
+            if($tble['reg_start_date']!=$sdate)
+            {
+                $message.="Registration starting date changed <b style='color:blue;'>".date('d-m-Y',strtotime($tble['reg_start_date']))."</b> to <b style='color:blue; '>".$req_sdate."</b><br/>\r\n";
+            }
+            if($tble['reg_end_date']!=$ldate)
+            {
+                $message.="Registration end date changed <b style='color:blue;'>".date('d-m-Y',strtotime($tble['reg_end_date']))."</b> to <b style='color:blue; '>".$req_ldate."</b><br/>\r\n";
+            }
+            if($tble['place']!=$req->loc)
+            {
+                $message.="Event Location changed <b style='color:blue; '>".ucfirst($tble['place'])."</b> to <b style='color:blue; '>".$req_loc."</b><br/>\r\n";
+            }
+            if($tble['rules']!=$req->rules)
+            {
+                $message.="Event Rules changed <b style='color:blue;'>".ucfirst($tble['rules'])."</b> to <b style='color:blue; '>".$req_rules."</b><br/>\r\n";
+            }
+            if($tble['enddate']!=$enddate)
+            {
+                $message.="Event End Date changed <b style='color:blue;'>".ucfirst($tble['enddate'])."</b> to <b style='color:blue; '>".$req_enddate."</b><br/>";
+            }
+            if($tble['e_type']!=$req_etype)
+            {
+                $message.="Event Type changed  <b style='color:blue; '>".ucfirst($tble['e_type'])."</b> to <b style='color:blue; '>".$req_etype."</b><br/>";
+                $req_tsize=1;
+            }
+            if($req_etype=="solo")
+            {
+                $req_tsize=1;
+            }
+            if($tble['efor']!=$req_class)
+            {
+                $message.="Event for classes changed  <b style='color:blue;'>".ucfirst($tble['efor'])."</b> to <b style='color:blue; '>".$req_class."</b><br/>";
+            }
+            if($tble['tsize']!=$req_tsize)
+            {
+                $message.="Event team size changed  <b style='color:blue;'>".ucfirst($tble['tsize'])."</b> to <b style='color:blue; '>".$req_tsize."</b><br/>";
+            }
+            if($tble['maxteam']!=$req_mteam)
+            {
+                $message.="Event team size changed  <b style='color:blue;'>".ucfirst($tble['maxteam'])."</b> to <b style='color:blue; '>".$req_mteam."</b><br/>";
+            }
+            if($tble['alw_dif_class']!=$req_alw_dif_class)
+            {
+                $message.="Event changed for Allow Different class  <b style='color:blue;'>".ucfirst($tble['alw_dif_class'])."</b> to <b style='color:blue; '>".$req_alw_dif_class."</b><br/>";
+            }
+            if($tble['alw_dif_div']!=$req_alw_dif_div)
+            {
+                $message.="Event changed for Allow Different division  <b style='color:blue;'>".ucfirst($tble['alw_dif_div'])."</b> to <b style='color:blue; '>".$req_alw_dif_div."</b><br/>";
+            }
+            if($tble['gallow']!=$req_efor)
+            {
+                $message.="Event changed for Gender Allow  <b style='color:blue;'>".ucfirst($tble['gallow'])."</b> to <b style='color:blue; '>".$req_efor."</b><br/>";
+            }
+            $message.="<br>---<br> With Regards,<br> ".Session::get('cname')." (co-ordinate)<br>".Session::get('clgname');
+            $update_event=tblevent::where('eid',$eid)
+                ->update(['ename' =>$req_ename,'edate' =>$edate,'enddate' =>$enddate,'time' => $etime,'reg_start_date' => $sdate,'reg_end_date' => $ldate,'gallow' =>$req_efor,'efor' =>$req_class,'e_type' =>$req_etype,'tsize' =>$req_tsize,'maxteam' =>$req_mteam,'place' => $req_loc,'alw_dif_class' =>$req_alw_dif_class,'alw_dif_div' =>$req_alw_dif_div,'rules' => $req_rules]);
+            $topic="Update of Event ".$req_ename;
             
-            $log=new log;
-            $log->uid=Session::get('cid');
-            $log->action_on="event " .$req_ename;
-            $log->action_type="update";
-            $log->time=time();
-            $log->utype="co_ordinatore";
-            $log->ip_add=$_SERVER['REMOTE_ADDR'];
-            $log->save();
-            session()->flash('success','Your Event is Successfully Updated..!');
+            if ($message!="") {
+                $notice=DB::table('tblnotice')->insert(
+                    ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'admin','ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('clgcode')]
+                );
+            }
+            if($update_event)
+            {
+                $ename=tblevent::select('ename')->where('eid',$eid)->get()->first();
+                $tbladmin=DB::table('tbladmin')->where('clgcode',Session::get('clgcode'))->get()->toArray();
+                foreach($tbladmin as $admin)
+                {
+                    $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
+                    $this->mail($admin->name,$admin->email,$data);
+                }
+                // $log=new log;
+                // $log->cid=Session::get('cid');
+                // $log->action_on="event " .$req_ename;
+                // $log->action_type="update";
+                // $log->time=time();
+                // $log->save();
+                session()->flash('success','Your Event is Successfully Updated..!');
+            }
+        }
+        else
+        {
+            $req_edate=$req->edate;
+            $req_enddate=$req->enddate;
+            $req_sdate=$req->sdate;
+            $req_ldate=$req->ldate;
+            $req_etime=$req->etime;
+            $req_ename=$req->ename;
+            $req_mteam=$req->mteam;
+            $req_loc=$req->loc;
+            $req_rules=$req->rules;
+            $tble=tblevent::where('eid',$eid)->get()->first();
+            if($req_mteam < $tble['maxteam'])
+            {
+                session()->flash('validteam','Maximum Team Size is Not Valid');
+                return redirect()->back();                
+            }
+            $edate=date('Y-m-d',strtotime($req_edate));
+            $sdate=date('Y-m-d',strtotime($req_sdate));
+            $ldate=date('Y-m-d',strtotime($req_ldate));
+            $etime=date('h:i:s',strtotime($req_etime));
+            $enddate=date('Y-m-d',strtotime($req_enddate));
+            $message="";
+            $tble=tblevent::where('eid',$eid)->get()->first();
+            if($tble['ename']!=$req_ename)
+            {
+                $message.="Event Rename <b style='color:blue;'>".ucfirst($tble['ename'])."</b> to <b style='color:blue; '>".ucfirst($req_ename)."</b><br/>\r\n";
+            }
+            if($tble['edate']!=$edate)
+            {
+                $message.="Event Date changed <b style='color:blue; '>".date('d-m-Y',strtotime($tble['edate']))."</b> to <b style='color:blue; '>".$req_edate."</b><br/>\r\n";
+            }
+            if($tble['time']!=$etime)
+            {
+                $message.="Event time changed <b style='color:blue;'>".date('h:i A',strtotime($tble['time']))."</b> to <b style='color:blue; '>".date('h:i A',strtotime($etime))."</b><br/>\r\n";
+            }
+            if($tble['reg_start_date']!=$sdate)
+            {
+                $message.="Registration starting date changed <b style='color:blue;'>".date('d-m-Y',strtotime($tble['reg_start_date']))."</b> to <b style='color:blue; '>".$req_sdate."</b><br/>\r\n";
+            }
+            if($tble['reg_end_date']!=$ldate)
+            {
+                $message.="Registration end date changed <b style='color:blue;'>".date('d-m-Y',strtotime($tble['reg_end_date']))."</b> to <b style='color:blue; '>".$req_ldate."</b><br/>\r\n";
+            }
+            if($tble['place']!=$req->loc)
+            {
+                $message.="Event Location changed <b style='color:blue;'>".ucfirst($tble['place'])."</b> to <b style='color:blue; '>".$req_loc."</b><br/>\r\n";
+            }
+            if($tble['rules']!=$req->rules)
+            {
+                $message.="Event Rules changed <b style='color:blue;'>".ucfirst($tble['rules'])."</b> to <b style='color:blue; '>".$req_rules."</b><br/>\r\n";
+            }
+            $message.="<br>---<br> With Regards,<br> ".Session::get('cname')." (co-ordinate)<br>".Session::get('clgname');
+            $req_etype=$req->etype;
+            $req_efor=$req->efor;
+            $req_class=$req->class;
+            $req_tsize=$req->tsize;
+            $req_alw_dif_class=$req->alw_diff_class;
+            $req_alw_dif_div=$req->alw_diff_div;
+            $update_event=tblevent::where('eid',$eid)
+                ->update(['ename' =>$req_ename,'edate' =>$edate,'enddate' =>$enddate,'time' => $etime,'reg_start_date' => $sdate,'reg_end_date' => $ldate,'maxteam' =>$req_mteam,'place' => $req_loc,'rules' => $req_rules]);
+            $topic="Update of Event ".$req_ename;
+            
+            if ($message!="") {
+                $notice=DB::table('tblnotice')->insert(
+                    ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','ndate'=>date('Y-m-d'),'clgcode'=>Session::get('clgcode')]
+                );
+            }
+            if($update_event)
+            {
+                $ename=tblevent::select('ename')->where('eid',$eid)->get()->first();
+                $tbladmin=admin::where('clgcode',Session::get('clgcode'))->get()->toArray();
+                foreach($tbladmin as $admin)
+                {
+                    if ($admin) {
+                        $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
+                        $this->mail($admin['name'],trim($admin['email']),$data);
+                    }
+                }
+                $tblp=participant::select('senrl')->where('eid',$eid)->get()->toArray();
+                
+                foreach($tblp as $p)
+                {
+                    
+                        $senrl=explode('-', $p['senrl']);
+                        //print_r($senrl);
+                        foreach ($senrl as $enrl) {
+                            if ($enrl) {
+                                $tbls=tblstudent::select('sname', 'email')->where('senrl', $enrl)->get()->first();
+                                //echo $tbls['sname'],$tbls['email'];
+                                $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
+                                $this->mail($tbls['sname'], trim($tbls['email']), $data);
+                            }
+                        }
+                }
+                
+                //$this->mail();
+                // $log=new log;
+                // $log->cid=Session::get('cid');
+                // $log->action_on="event " .$req_ename;
+                // $log->action_type="update";
+                // $log->time=time();
+                // $log->save();
+                    session()->flash('success','Your Event is Successfully Updated..!');
+            }
         }
         return redirect(url('cindex'));
     }
