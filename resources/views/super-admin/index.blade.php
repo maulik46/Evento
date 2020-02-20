@@ -139,10 +139,10 @@
                              </div> <!-- end card-->
                          </div> <!-- end col-->
                          <div class="col-xl-8">
-                             <div class="card new-shadow-sm" style="max-height: 350px;">
+                             <div class="card new-shadow-sm" >
                                 <h5 class="card-title mt-4 px-4 mb-1 header-title">Recent Event</h5>
-                                 <div class="card-body overflow-auto my-scroll">
-                                     <div class="table-responsive overflow-auto my-scroll">
+                                 <div class="card-body">
+                                     <div class="table-responsive overflow-auto my-scroll" style="max-height: 300px;">
                                          <table class="table table-hover table-nowrap mb-0">
                                              <thead>
                                                  <tr>
@@ -257,24 +257,32 @@
 
                      <!-- side rounded button for create notice and co-ordinator -->
                     <div>
-                        <a id="menu-btn" href="#" class="btn btn-info new-shadow-sm position-fixed" 
-                                style="border-radius: 30px;padding: 15px;bottom: 10px;right:12px;z-index:999;">
+                        <a id="menu-btn" class="text-white btn btn-info new-shadow-sm position-fixed" 
+                                style="border-radius: 30px;padding: 15px;bottom: 10px;right:15px;z-index:999;">
                                 <i data-feather="grid"></i>
                                 
                         </a>
-                        <a id="close" href="#" class="btn btn-info new-shadow-sm position-fixed" 
-                                style="border-radius: 30px;padding: 15px;bottom: 10px;right:12px;z-index:999;">
+                        <a id="close" class="text-white btn btn-info new-shadow-sm position-fixed" 
+                                style="border-radius: 30px;padding: 15px;bottom: 10px;right:15px;z-index:999;">
                                 <i data-feather="x"></i>
                                 
                         </a>
-                        <div id="menu-list" class="p-4">
-                            <a id="m1" href="{{url('snotice')}}" class="hover-me btn btn-success new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Create Notice"   style="border-radius: 30px;padding: 15px;bottom: 142px;right:12px;z-index:999;">
+                        <div id="menu-list" class="bg-white position-fixed shadow" style="border-radius: 30px;bottom: 78px;right:12px;z-index:999;width:65px;height:auto;display: flex;flex-direction: column;justify-content: center;align-items: center;padding: 6px;">
+                            <!-- <a  href="{{url('snotice')}}" class="hover-me btn btn-success new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Create Notice"   style="border-radius: 30px;padding: 15px;bottom: 142px;right:12px;z-index:999;">
                                     <i data-feather="edit"></i>
                                 </a>
-                            <a id="m2" href="#" class="hover-me btn btn-warning new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Add Co-ordinator"
+                            <a  href="{{url('new_cod')}}" class="hover-me btn btn-warning new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Add Co-ordinator"
                                 style="border-radius: 30px;padding: 15px;bottom: 78px;right:12px;z-index:999;">
                                 <i data-feather="user-plus"></i>
-                            </a>  
+                            </a>   -->
+                            <a  href="{{url('snotice')}}" class="hover-me btn btn-success new-shadow-sm " data-toggle="tooltip" data-placement="left" title="Create Notice"   style="border-radius: 30px;padding: 12px;">
+                                    <i data-feather="edit"></i>
+                                </a>
+                            <a  href="{{url('new_cod')}}" class="mt-2 hover-me btn btn-warning new-shadow-sm " data-toggle="tooltip" data-placement="left" title="Add Co-ordinator"
+                                style="border-radius: 30px;padding: 12px;">
+                                <i data-feather="user-plus"></i>
+                            </a> 
+                            
                         </div>
                     </div>
                     <div id="menu-overlay" class="w-100 vh-100 position-fixed" style="top:0;left:0;z-index:99;">
@@ -293,11 +301,12 @@
     $(document).ready(function(){
         $('#menu-list,#menu-overlay,#close').hide();
         $('#menu-btn').click(function(){
-            $('#menu-list').toggle(150);
+            $('#menu-list').slideDown(150);
             $('#menu-overlay,#close').show();
         });
         $('#menu-overlay,#close').click(function(){
-            $('#menu-list,#menu-overlay,#close').hide();
+            $('#menu-list,#menu-overlay').slideUp(150);
+            $('#close').hide();
         })
         
     });
