@@ -82,14 +82,7 @@ Route::post('/c_checklogin','co_ordinate@checklogin')->middleware('co_valid_chec
 
 Route::group(['middleware' => 'co_session_check'], function () {
 
-        Route::get('/view_team/{pid}', 'co_ordinate@view_team');
-    
-        Route::get('/create_result/{eid}','co_ordinate@create_result');
-    
-    
-        Route::post('/rank','co_ordinate@rank');
-
-        Route::get('/view_result/{eid}', 'co_ordinate@view_result');
+        
 
         Route::get('/clogout','co_ordinate@logout');
 
@@ -123,6 +116,15 @@ Route::group(['middleware' => 'co_session_check'], function () {
         Route::post('/update_pass','co_ordinate@update_pass');
     
         Route::post('/noticesend','co_ordinate@send_notice');
+    
+        Route::get('/view_team/{pid}', 'co_ordinate@view_team');
+    
+        Route::get('/create_result/{eid}','co_ordinate@create_result');
+    
+    
+        Route::post('/rank','co_ordinate@rank');
+
+        Route::get('/view_result/{eid}', 'co_ordinate@view_result');
 
 });
 
