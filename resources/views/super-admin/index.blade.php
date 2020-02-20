@@ -167,13 +167,13 @@
                                                     <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
                                                     <td>{{ucfirst($co->cname)}}</td>
                                                     <td>
-                                                        @if($e['edate'] == date('Y-m-d'))
-                                                        <span class="badge badge-soft-success badge-pill px-3 py-1">Running</span>
-                                                        @elseif($e['edate'] > date('Y-m-d'))
-                                                        <span class="badge badge-soft-warning badge-pill px-3 py-1">Upcoming</span>
-                                                        @elseif($e['edate'] < date('Y-m-d')) 
-                                                        <span class="badge badge-soft-info badge-pill px-3 py-1">Finished</span>
-                                                        @endif
+                                                          @if($e['edate'] <= date('Y-m-d') && $e['enddate'] >= date('Y-m-d'))
+                                                            <span class="badge badge-soft-success badge-pill px-3 py-1">Running</span>
+                                                            @elseif($e['edate'] > date('Y-m-d'))
+                                                            <span class="badge badge-soft-warning badge-pill px-3 py-1">Upcoming</span>
+                                                            @elseif($e['edate'] < date('Y-m-d')) 
+                                                            <span class="badge badge-soft-info badge-pill px-3 py-1">Finished</span>
+                                                            @endif
                                                     </td>
                                                 </tr>
                                                 @endforeach
