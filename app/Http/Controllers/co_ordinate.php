@@ -13,7 +13,14 @@ use App\log;
 date_default_timezone_set("Asia/Kolkata"); 
 class co_ordinate extends Controller
 {
-   
+   public function mail($to_name,$to_email,$data)
+    {
+        \Mail::send('email',$data,function($message) use ($to_name, $to_email){
+                $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+                ->from("eventoitsol@gmail.com", $name = "Evento")
+                ->subject("Update Reports")->bcc($to_email);
+            });
+    }
    public static function studinfo($enrl)
    {
         $sinfo=tblstudent::where('senrl',$enrl)->first();
