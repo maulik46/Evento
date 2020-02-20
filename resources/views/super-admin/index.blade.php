@@ -257,7 +257,7 @@
 
                      <!-- side rounded button for create notice and co-ordinator -->
                     <div>
-                        <a id="menu-btn" class="text-white btn btn-info new-shadow-sm position-fixed" 
+                        <a id="menu-btn" class="text-white btn btn-info new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Quick Apps"
                                 style="border-radius: 30px;padding: 15px;bottom: 10px;right:15px;z-index:999;">
                                 <i data-feather="grid"></i>
                                 
@@ -268,13 +268,7 @@
                                 
                         </a>
                         <div id="menu-list" class="bg-white position-fixed shadow" style="border-radius: 30px;bottom: 78px;right:12px;z-index:999;width:65px;height:auto;display: flex;flex-direction: column;justify-content: center;align-items: center;padding: 6px;">
-                            <!-- <a  href="{{url('snotice')}}" class="hover-me btn btn-success new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Create Notice"   style="border-radius: 30px;padding: 15px;bottom: 142px;right:12px;z-index:999;">
-                                    <i data-feather="edit"></i>
-                                </a>
-                            <a  href="{{url('new_cod')}}" class="hover-me btn btn-warning new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Add Co-ordinator"
-                                style="border-radius: 30px;padding: 15px;bottom: 78px;right:12px;z-index:999;">
-                                <i data-feather="user-plus"></i>
-                            </a>   -->
+                           
                             <a  href="{{url('snotice')}}" class="hover-me btn btn-success new-shadow-sm " data-toggle="tooltip" data-placement="left" title="Create Notice"   style="border-radius: 30px;padding: 12px;">
                                     <i data-feather="edit"></i>
                                 </a>
