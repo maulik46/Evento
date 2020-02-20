@@ -574,7 +574,7 @@ class co_ordinate extends Controller
     {
         $id = decrypt($id);
 
-        $candidates=participant::select('pid','senrl','tname')->where('eid',$id)->get()->toarray();
+        $candidates=participant::select('pid','eid','senrl','tname')->where('eid',$id)->get()->toarray();
         // $team_candidates=participant::select('pid', 'senrl', 'tname')->where('pid', $id)->get()->toarray();
 
         $einfo=tblevent::select('eid','ename','e_type','edate','category')->where('eid',$id)->first()->toarray();
