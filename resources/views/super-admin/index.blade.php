@@ -148,7 +148,7 @@
                                                  <tr>
                                                      <th scope="col">#</th>
                                                      <th scope="col">Event</th>
-                                                     <th scope="col">Total Participator</th>
+                                                     <th scope="col">Participator</th>
                                                      <th scope="col">Date</th>
                                                      <th scope="col">Co-ordinator</th>
                                                      <th scope="col">Status</th>
@@ -228,27 +228,7 @@
                                         </div>
                                      </div>
                                      @endforeach
-                                    <!-- 
-                                      <div class="hover-me-sm col-lg-4 col-md-6 cod-card media mt-1 py-2">
-                                          <img src="../assets/images/users/avatar-4.jpg" class="avatar rounded mr-3"
-                                              alt="shreyu">
-                                          <div class="media-body">
-                                              <a href="#">
-                                                  <h6 class="mt-1 mb-0 font-size-15 cod-name">Parth Patthar</h6>
-                                                  <h6 class="text-muted font-weight-normal mt-1 mb-3">IT Events</h6>
-                                              </a>
-                                          </div>
-                                          <div class="cod-option d-flex flex-column">
-                                              <a href="#" class="text-warning mb-1" data-toggle="tooltip"
-                                                  data-placement="left" title="Edit">
-                                                  <i data-feather="edit-3" height="18px"></i>
-                                              </a>
-                                              <a href="#" class="text-danger mt-1" data-toggle="tooltip"
-                                                  data-placement="left" title="Delete">
-                                                  <i data-feather="trash-2" height="18px"></i>
-                                              </a>
-                                          </div>
-                                      </div> -->
+                                    
                                 
                              </div>
                          </div>
