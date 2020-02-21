@@ -18,6 +18,25 @@
     @section('head-tag-links')
 
     @show
+    <style>
+    .profile-dropdown-items {
+    width: 200px;
+    }
+
+    .content-page {
+        margin: 50px 0px !important;
+    }
+
+    .notification-list .noti-icon-badge {
+        position: relative;
+        top: -4px;
+        right: 12px;
+    }
+
+    .left-red-border {
+        border-left: 4px solid #ff5c75;
+    }
+    </style>
 </head>
 
 <body data-layout="topnav" class="body-scroll">
@@ -224,7 +243,7 @@
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-warning badge-pill px-3 py-2 font-size-13 new-shadow-sm">Add Co-ordinator</span> 
                                 </a>
-                                <a  href="{{url('new_cod')}}">
+                                <a  href="{{url('check_logs')}}">
                                     <div class="btn btn-info new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="file-text" height="20px"></i>
                                     </div>
