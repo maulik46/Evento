@@ -257,7 +257,13 @@ class student extends Controller
         }
     	return redirect()->to('/index');
     }
-    
+     public function tnamecheck(Request $req){
+        $tname = strtoupper($req->tname);
+        $eid = $req->eid;
+        $tcount=participant::where([['eid',$eid],['tname',$tname]
+        ])->count();
+            return response()->json(array('msg'=> $tcount),200);
+     }
     public function team_ins($eid)//insert team
     {
         $einfo=tblevent::where('eid',decrypt($eid))->first();
@@ -286,7 +292,7 @@ class student extends Controller
                 {
                     if($a_d_d=="yes")
                     {
-                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')]])->get()->toArray();
+                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')]])->first();
                         if(!$st)
                         {
                             $msg="This player not from ".Session::get('class') . " class or invalid Enrollment" ;
@@ -295,7 +301,7 @@ class student extends Controller
                     }
                     else
                     {
-                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')],['division',Session::get('div')]])->get()->toArray();
+                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')],['division',Session::get('div')]])->first();
                         if(!$st)
                         {
                             $msg="This player not from ".Session::get('class') ." class or invalid Enrollment  or not from Division ". Session::get('div'). " or invalid Enrollment" ;
@@ -308,7 +314,7 @@ class student extends Controller
             else{
                 if($awl_diff_class=="yes")
                 {
-                    $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw]])->get()->toArray();
+                    $st=tblstudent::select('class')->where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw]])->first();
                 
                     if(!$st)
                     {
@@ -322,7 +328,7 @@ class student extends Controller
                 {
                     if($a_d_d=="yes")
                     {
-                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')]])->get()->toArray();
+                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')]])->first();
                 
                         if(!$st)
                         {
@@ -332,7 +338,7 @@ class student extends Controller
                     }
                     else
                     {
-                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')],['division',Session::get('div')]])->get()->toArray();
+                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')],['division',Session::get('div')]])->first();
                 
                         if(!$st)
                         {
@@ -356,12 +362,13 @@ class student extends Controller
         $msg="";
         return response()->json(array('msg'=> $msg),200);
     }   
+    
     public function team_confirm(Request $req)
     {
         return view('participate-now-team',['req'=>$req]);
 
     }
-      public function confirm_reg($eid,$enrl,$tname)//confirm the team registration
+    public function confirm_reg($eid,$enrl,$tname)//confirm the team registration
     {
         $eid=decrypt($eid);
         $maxteam=tblevent::select('maxteam')->where('eid',$eid)->first();
@@ -371,7 +378,7 @@ class student extends Controller
             $participant=new participant;
             $participant->eid=$eid;
             $participant->senrl=decrypt($enrl);
-            $participant->tname=$tname;
+            $participant->tname=strtoupper($tname);
             $participant->clgcode=Session::get('clgcode');
             $participant->rank="p";
             $participant->reg_date=date("Y:m:d");
@@ -623,13 +630,7 @@ class student extends Controller
             echo json_encode($data);
         }
     }
-    public function tnamecheck(Request $req){
-        $tname = $req->tname;
-        $eid = $req->eid;
-        $tcount=participant::where([['eid',$eid],['tname',$tname]
-        ])->count();
-            return response()->json(array('msg'=> $tcount),200);
-     }
+
     public function notice()
     {
         $notice=\DB::table('tblnotice')->where([['clgcode',Session::get('clgcode')],['receiver','like','%student%']])->orderby('nid','desc')->get()->toarray();
