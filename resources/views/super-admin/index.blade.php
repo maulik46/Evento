@@ -142,7 +142,7 @@
                              <div class="card new-shadow-sm" >
                                 <h5 class="card-title mt-4 px-4 mb-1 header-title">Recent Event</h5>
                                  <div class="card-body">
-                                     <div class="table-responsive overflow-auto my-scroll" style="max-height: 300px;">
+                                    <div class="table-responsive overflow-auto my-scroll" style="max-height: 300px;">
                                          <table class="table table-hover table-nowrap mb-0">
                                              <thead>
                                                  <tr>
@@ -180,7 +180,7 @@
                                                  
                                              </tbody>
                                          </table>
-                                     </div> <!-- end table-responsive-->
+                                    </div> <!-- end table-responsive-->
                                  </div> <!-- end card-body-->
                              </div> <!-- end card-->
                          </div> <!-- end col-->
