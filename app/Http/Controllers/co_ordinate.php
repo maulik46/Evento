@@ -150,14 +150,7 @@ class co_ordinate extends Controller
                     );
                 if(isset($tblap))
                 {
-                    $apid=DB::table('tblapproval')->where('eid',$eid)->get()->first();
-                    if (isset($apid)) {
-                        $tbleinsert=tblevent::where('eid', $eid)->update(['apid'=>$apid->apid]);
-                        if (isset($tbleinsert)) {
-                            session()->flash("success","Event Waiting for approval..!");
-                        }
-                    }
-                
+                    session()->flash("success","Event Waiting for approval..!");        
                 }
             }
             $data="success";

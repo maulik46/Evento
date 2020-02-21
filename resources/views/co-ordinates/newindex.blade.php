@@ -205,8 +205,8 @@
         @if($e['cid']==Session::get('cid'))
         @if($e['edate']>date('Y-m-d'))
         <div class="col-md-6 col-xl-4 col-sm-6">
-            <?php $tblapp=DB::table('tblapproval')->where('eid',$e['eid'])->get(); ?>
-            @if($tblapp)
+            <?php $tblapp=DB::table('tblapproval')->where('eid',$e['eid'])->get()->count(); ?>
+            @if($tblapp!=0)
             <div class="card new-shadow-sm hover-me-sm mb-3 mt-2" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
                 title="This Event is Currently disabled. You need approval from Administrator to delete it.">
             
@@ -227,7 +227,7 @@
                                     </span>
                                     <div>
                                     <a href="#" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-    aria-expanded="false" <?php if($tblapp){ ?>class="dropdown-toggle disabled"<?php } else { ?>class="dropdown-toggle" <?php } ?>>
+    aria-expanded="false" <?php if($tblapp!=0){ ?>class="dropdown-toggle disabled"<?php } else { ?>class="dropdown-toggle" <?php } ?>>
 
                                             <i id="event-info" data-feather="more-vertical" class="text-dark"
                                                 height="20px"></i>
