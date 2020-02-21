@@ -168,6 +168,68 @@ img{
 
 /* body tag scrollbar css end*/
 
+/* super admin right side  btn */
+
+  #menu-list a {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+  }
+
+  #menu-list {
+      border-radius: 20px 20px 5px 20px;
+      bottom: 72px;
+      right: 25px;
+      z-index: 999;
+      width: auto;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      /* justify-content: center; */
+      align-items: start;
+      padding: 10px;
+      background: rgb(255, 255, 255);
+  }
+
+  #menu-list a {
+      margin-top: 4px;
+  }
+
+  #menu-list a span {
+      margin-left: 3px;
+      margin-top: 2px;
+  }
+
+  .badge-soft-orange {
+      background: rgba(247, 126, 83, 0.22) !important;
+      color: var(--orange) !important;
+  }
+
+/* super admin right side  btn endddd*/
+
+
+/* navbar and right inbox css */
+.profile-dropdown-items {
+    width: 200px;
+}
+
+.content-page {
+    margin: 50px 0px !important;
+}
+
+.notification-list .noti-icon-badge {
+    position: relative;
+    top: -4px;
+    right: 12px;
+}
+
+.left-red-border {
+    border-left: 4px solid #ff5c75;
+}
+/* end */
+
+
 /* right inbox sidebar */
 
     .right-bar-enabled .right-bar {
