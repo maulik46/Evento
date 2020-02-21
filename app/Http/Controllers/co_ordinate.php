@@ -123,23 +123,45 @@ class co_ordinate extends Controller
             $eid=$req->get('id');
             $reason=$req->get('reason');
             
-            $tblename=tblevent::where('eid',$eid)->get()->first();;
-            $tble=tblevent::where('eid',$eid)->delete();
-            $tblp=participant::where('eid',$eid)->delete();
-            if(isset($tble) && isset($tblp))
+            // $tblename=tblevent::where('eid',$eid)->get()->first();
+            // $tble=tblevent::where('eid',$eid)->delete();
+            // $tblp=participant::where('eid',$eid)->delete();
+            // if(isset($tble) && isset($tblp))
+            // {
+            //     $topic=ucfirst($tblename['ename'])." Event has been Cancelled..!";
+            //     $message=$reason;
+            //     $notice=DB::table('tblnotice')->insert(
+            //     ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('clgcode')]
+            // );
+            //     if(isset($notice))
+            //     {
+            //         session()->flash("success","Event Waiting for approval..!");
+            //     }
+            // }
+            $tble=tblevent::where('eid',$eid)->get()->first();
+            
+            if(isset($tble))
             {
-                $topic=ucfirst($tblename['ename'])." Event has been Cancelled..!";
+                $topic=ucfirst($tble['ename'])." Event has been Cancelled..!";
                 $message=$reason;
-                $notice=DB::table('tblnotice')->insert(
-                ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'sender_type' => 'co-coordinator','receiver'=>'student-admin','ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('clgcode')]
-            );
-                if(isset($notice))
+                
+                $tblap=DB::table('tblapproval')->insert(
+                        ['eid'=>$eid,'topic'=>$topic,'message'=>$message,'status'=>1,'cid'=>session::get('cid')]
+                    );
+                if(isset($tblap))
                 {
-                    session()->flash("success","Event Deleted Successfully..!");
+                    $apid=DB::table('tblapproval')->where('eid',$eid)->get()->first();
+                    if (isset($apid)) {
+                        $tbleinsert=tblevent::where('eid', $eid)->update(['apid'=>$apid->apid]);
+                        if (isset($tbleinsert)) {
+                            session()->flash("success","Event Waiting for approval..!");
+                        }
+                    }
+                
                 }
             }
-                $data="success";
-            // //return redirect(url("/index"));
+            $data="success";
+            //return redirect(url("/index"));
             echo json_encode($data);
         }
     }
