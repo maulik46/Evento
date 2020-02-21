@@ -3,19 +3,19 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Log-in</title>
+    <title>Admin Log-in</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 
 
     <!-- App css -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- extra css  -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/my-extra.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/my-extra.css')}}">
     <style>
         body {
             background-color: #35bbca;
@@ -42,7 +42,10 @@
         }
         #see-pass:hover,
         #hide-pass:hover{
-        color: #333;
+            color: #333;
+        }
+        .f-pass a:hover{
+            color:var(--info)!important;
         }
     </style>
 </head>
@@ -58,7 +61,7 @@
                 <!-- LOGO -->
                 <a href="superadmin_login.html" class="navbar-brand mx-auto">
                     <span class="logo-lg">
-                        <img src="../assets/images/logo.png" alt="Evento" height="24" />
+                        <img src="{{asset('assets/images/logo.png')}}" alt="Evento" height="24" />
                         <span class="d-inline h2 text-dark font-weight-bold">Evento</span>
                     </span>
                 </a>
@@ -74,7 +77,7 @@
                         <div class="card-body px-xl-4">
 
                             <h4 class="my-4 text-center text-dark d-flex flex-column">
-                                <img src="../assets/images/svg-icons/super-admin/man1.svg" alt="user" height="45px">
+                                <img src="{{asset('assets/images/svg-icons/super-admin/man1.svg')}}" alt="user" height="45px">
                                 <span>Log-in</span>
                                 <span class="font-size-12 text-muted mt-1">for Admin</span>
                             </h4>
@@ -93,7 +96,7 @@
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
                                         <input type="password" name="password" id="my-password" class="form-control"
-                                           placeholder="Enter Your Password"  style="padding-right: 2.375rem;" ">
+                                           placeholder="Enter Your Password"  style="padding-right: 2.375rem;">
                                         <div class="position-relative" style="right:40px;bottom: 10px;">
                                         <a href="#">
                                             <i data-feather="eye" class="ml-2 form-control-icon" height="19px" id="see-pass"></i> 
@@ -104,12 +107,16 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="d-flex justify-content-between align-items-start">
                                 <button type="submit"
                                     class="hover-me-sm btn btn-info rounded-sm new-shadow font-weight-bold px-3 mt-1 mb-3" style="background-color: #35bbca;">
                                     <span class="font-size-14">Log-in</span>
                                     <i data-feather="log-in" height="20px"></i>
                                 </button>
+                                <div class="text-right font-weight-bold f-pass">
+                                    <a href="#" class="text-muted">Forgot Password?</a>
+                                </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -118,13 +125,13 @@
         </div>
 
     </div>
-    <script src="../assets/js/jquery.min.js"></script>
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <!-- Vendor js -->
-    <script src="../assets/js/vendor.min.js"></script>
+    <script src="{{asset('assets/js/vendor.min.js')}}"></script>
 
     <!-- optional plugins -->
-    <script src="../assets/libs/moment/moment.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
+    <script src="{{asset('assets/libs/moment/moment.min.js')}}"></script>
+    <script src="{{asset('assets/js/app.min.js')}}"></script>
     <script>
     $(document).ready(function(){
         $('#hide-pass').hide(); 
