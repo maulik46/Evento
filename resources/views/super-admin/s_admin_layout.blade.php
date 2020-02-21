@@ -212,37 +212,37 @@
                         </span>
                         <div id="menu-list" class="position-fixed new-shadow-2">
                             
-                                <a  href="{{url('snotice')}}" data-toggle="tooltip" data-placement="left" title="Create Notice">
+                                <a  href="{{url('snotice')}}">
                                     <div class="btn btn-success new-shadow-sm" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="edit" height="20px"></i> 
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-success badge-pill px-3 py-2 font-size-13 new-shadow-sm mb-2">Add Notice</span>
                                 </a>
-                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                <a  href="{{url('new_cod')}}">
                                     <div class="btn btn-warning new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="user-plus" height="20px"></i>
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-warning badge-pill px-3 py-2 font-size-13 new-shadow-sm">Add Co-ordinator</span> 
                                 </a>
-                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                <a  href="{{url('new_cod')}}">
                                     <div class="btn btn-info new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="file-text" height="20px"></i>
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-info badge-pill px-3 py-2 font-size-13 new-shadow-sm">Check Logs</span> 
                                 </a>
-                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                <a  href="{{url('new_cod')}}">
                                     <div class="btn btn-primary new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="user-plus" height="20px"></i>
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-primary badge-pill px-3 py-2 font-size-13 new-shadow-sm">Add Student</span> 
                                 </a>
-                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                <a  href="{{url('new_cod')}}">
                                     <div class="btn btn-danger new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="check-square" height="20px"></i>
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-danger badge-pill px-3 py-2 font-size-13 new-shadow-sm">Approve Events</span> 
                                 </a>
-                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                <a  href="{{url('new_cod')}}">
                                     <div class="btn new-shadow-sm mt-2 text-white" style="border-radius: 30px;padding: 5px;background:var(--orange);">
                                         <i data-feather="bar-chart-2" height="20px"></i>
                                     </div>
