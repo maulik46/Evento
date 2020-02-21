@@ -48,7 +48,8 @@
         }
 
         .custom-file-upload {
-            border: 1px solid gainsboro;
+            border: 2px solid #f3efef;
+            heigh:100%;
             width:100%;
             text-align:center;
             padding: 6px 10px;
@@ -64,10 +65,12 @@
         }
 
         .my-avatar label {
-        border: 2px solid #fff;
-        display: block;
+        border: 2px solid #f3efef;
+        display: flex;
         position: relative;
         cursor: pointer;
+        padding:2px;
+        border-radius:8px;
         }
 
         .my-avatar label img {
@@ -78,7 +81,7 @@
         :checked + label {
         border-color: var(--info);
         background-color: rgba(37,194,227,.15);
-        border-radius:8px;
+        /* border-radius:8px; */
         }
 
         :checked + label:before {
@@ -88,7 +91,6 @@
 
         :checked + label img {
         transform: scale(0.95);
-        z-index: -1;
         }
     </style>
 @endsection
@@ -100,10 +102,10 @@
                             <a href="{{url('/sindex')}}" class="d-flex justify-content-end text-dark">
                                 <i data-feather="x-circle" id="close-btn" height="18px"></i>
                             </a>
-                            <h3 class="my-3 text-center text-dark">
-                                <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="25px" alt="">
-                                <span> Create Co-ordinator</span>
-                            </h3>
+                            <h4 class="my-3 text-center text-dark">
+                                <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="22px" alt="">
+                                <span>Create Co-ordinator</span>
+                            </h4>
                             <form action="#">
                                 
                                     <div class="col-md-12 mt-2">
@@ -116,8 +118,8 @@
                                     
                                     <div class="col-md-12">
                                     <label class="col-form-label font-size-14">Select Avatar</label>
-                                    <div class="row">
-                                    <div class="col-lg-5 col-md-4 col-sm-12 my-2">
+                                    <div class="row justify-content-between align-items-center align-items-md-end mx-0">
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
                                         <div class="pt-0">
                                             <label for="file-upload" class=" custom-file-upload rounded">
                                                 <i data-feather="camera"></i>
@@ -127,7 +129,7 @@
                                             <input id="file-upload" name="attachment[]" type="file" multiple onChange="FileDetails()"/>
                                         </div>
                                     </div>
-                                    <div class="col-lg-7 col-md-8 col-sm-12 row justify-content-between border">
+                                    <div class="col-lg-8 col-md-8 col-sm-12 row justify-content-between mx-0">
                                         <div class="my-avatar">
                                             <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox1" />
                                             <label for="myCheckbox1">
