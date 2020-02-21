@@ -49,23 +49,47 @@
 
         .custom-file-upload {
             border: 1px solid gainsboro;
-            display: inline-block;
-            padding: 12px 10px;
+            width:100%;
+            text-align:center;
+            padding: 6px 10px;
             cursor: pointer;
         }
 
         .custom-file-upload:hover {
             color: #43d39e;
         }
-        @media(max-width:432)
-        {
-            .photo-upload{
-                position:relative!important;
-                left:-20px!important;
-                top:45px!important;
-            }
+
+        .my-avatar input[type="radio"][class="myCheckbox"] {
+        display: none;
         }
-        
+
+        .my-avatar label {
+        border: 2px solid #fff;
+        display: block;
+        position: relative;
+        cursor: pointer;
+        }
+
+        .my-avatar label img {
+        transition-duration: 0.2s;
+        transform-origin: 50% 50%;
+        }
+
+        :checked + label {
+        border-color: var(--info);
+        background-color: rgba(37,194,227,.15);
+        border-radius:8px;
+        }
+
+        :checked + label:before {
+        content: "";
+        transform: scale(1);
+        }
+
+        :checked + label img {
+        transform: scale(0.95);
+        z-index: -1;
+        }
     </style>
 @endsection
 @section('my-content')
@@ -81,27 +105,72 @@
                                 <span> Create Co-ordinator</span>
                             </h3>
                             <form action="#">
-                                <div class="d-flex">
-                                    <div class="col-11 mt-2">
+                                
+                                    <div class="col-md-12 mt-2">
                                         <label class="col-form-label font-size-14">Co-ordinator Name</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                            <input type="text" class="form-control" placeholder="Enter Co-ordinator Name..." />
+                                            <input type="text" class="form-control" placeholder="Enter Co-ordinator Name" />
                                         </div>
                                     </div>
-                                    <div class="col-1 photo-upload" style="position:relative;left:-16px;top:45px;">
-                                        <!-- file upload button -->
-                                        <label for="file-upload" class=" custom-file-upload rounded-sm"
-                                            data-toggle="tooltip" data-placement="right" title="Profile Photo">
-                                            <i data-feather="image"></i>
-                                        </label>
+                                    
+                                    <div class="col-md-12">
+                                    <label class="col-form-label font-size-14">Select Avatar</label>
+                                    <div class="row">
+                                    <div class="col-lg-5 col-md-4 col-sm-12 my-2">
+                                        <div class="pt-0">
+                                            <label for="file-upload" class=" custom-file-upload rounded">
+                                                <i data-feather="camera"></i>
+                                                <span class="mx-2">Upload Picture</span>
+                                            </label>
 
-                                        <input id="file-upload" name="attachment[]" type="file" multiple onChange="FileDetails()"/>
-                                        <!-- file upload end -->
+                                            <input id="file-upload" name="attachment[]" type="file" multiple onChange="FileDetails()"/>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="col-lg-7 col-md-8 col-sm-12 row justify-content-between border">
+                                        <div class="my-avatar">
+                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox1" />
+                                            <label for="myCheckbox1">
+                                            <img src="{{asset('assets/images/avatars/child (1).svg')}}" height="55px" />
+                                            </label>
+                                        </div>
+                                        <div class="my-avatar">
+                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox2" />
+                                            <label for="myCheckbox2">
+                                            <img src="{{asset('assets/images/avatars/child.svg')}}" height="55px" />
+                                            </label>
+                                        </div>
+                                        <div class="my-avatar">
+                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox3" />
+                                            <label for="myCheckbox3">
+                                            <img src="{{asset('assets/images/avatars/girl.svg')}}" height="55px" />
+                                            </label>
+                                        </div>
+                                        <div class="my-avatar">
+                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox4" />
+                                            <label for="myCheckbox4">
+                                            <img src="{{asset('assets/images/avatars/professor.svg')}}" height="55px" />
+                                            </label>
+                                        </div>
+                                        <div class="my-avatar">
+                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox5" />
+                                            <label for="myCheckbox5">
+                                            <img src="{{asset('assets/images/avatars/teacher.svg')}}" height="55px" />
+                                            </label>
+                                        </div>
+                                        <div class="my-avatar">
+                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox6" />
+                                            <label for="myCheckbox6">
+                                            <img src="{{asset('assets/images/avatars/woman.svg')}}" height="55px" />
+                                            </label>
+                                        </div>
+                                        
+                                    </div>
+                                    </div>
+                                    </div>
+                               
                                 
-                                <div class="form-group mt-2 row mx-0">
+                                <div class="form-group row mx-0">
                                     <div class="col-sm-12 col-md-6">
                                         <label class="col-form-label font-size-14">
                                         Email</label>
@@ -153,8 +222,7 @@
                                         <span>Create</span>
                                         <i data-feather="check-square" height="20px"></i>
                                     </button>
-
-                                </div>
+                                    </div>
 
                             </form>
                         </div>
@@ -164,10 +232,28 @@
 @endsection  
 @section('extra-scripts')
 <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script> 
-<script>
-$(document).ready(function() {
+    <script>
+    $(document).ready(function() {
+        // this is for select tag
         $('.select-me').niceSelect();
-        
+        // end here
+
+        // this is for avatar raddio
+        var allRadios = document.getElementsByName('m-avatar');
+        var booRadio;
+        var x = 0;
+        for(x = 0; x < allRadios.length; x++){
+        allRadios[x].onclick = function() {
+            if(booRadio == this){
+            this.checked = false;
+            booRadio = null;
+            } else {
+            booRadio = this;
+            }
+        };
+        } 
+
+        // avatar radio end
     });
-</script>
+    </script>
 @endsection
