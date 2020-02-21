@@ -286,7 +286,7 @@ class student extends Controller
                 {
                     if($a_d_d=="yes")
                     {
-                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')]])->get()->toArray();
+                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')]])->first();
                         if(!$st)
                         {
                             $msg="This player not from ".Session::get('class') . " class or invalid Enrollment" ;
@@ -295,7 +295,7 @@ class student extends Controller
                     }
                     else
                     {
-                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')],['division',Session::get('div')]])->get()->toArray();
+                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')],['division',Session::get('div')]])->first();
                         if(!$st)
                         {
                             $msg="This player not from ".Session::get('class') ." class or invalid Enrollment  or not from Division ". Session::get('div'). " or invalid Enrollment" ;
@@ -308,7 +308,7 @@ class student extends Controller
             else{
                 if($awl_diff_class=="yes")
                 {
-                    $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw]])->get()->toArray();
+                    $st=tblstudent::select('class')->where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw]])->first();
                 
                     if(!$st)
                     {
@@ -322,7 +322,7 @@ class student extends Controller
                 {
                     if($a_d_d=="yes")
                     {
-                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')]])->get()->toArray();
+                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')]])->first();
                 
                         if(!$st)
                         {
@@ -332,7 +332,7 @@ class student extends Controller
                     }
                     else
                     {
-                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')],['division',Session::get('div')]])->get()->toArray();
+                        $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['gender',$galw],['class',Session::get('class')],['division',Session::get('div')]])->first();
                 
                         if(!$st)
                         {
