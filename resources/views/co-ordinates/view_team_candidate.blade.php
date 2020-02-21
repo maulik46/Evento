@@ -9,7 +9,15 @@
 @section('my-content')
 <div class="container-fluid">
     <div class="mb-0 pt-2 card new-shadow-sm">
-        <a href="{{url('/cindex')}}" class="text-right text-dark px-2">
+    <?php $a=0?>
+    @foreach($team_candidates as $tc)
+            <?php 
+                $a++;
+                if($a==1)
+                $id=$tc['eid'];
+            ?>
+        @endforeach
+        <a href="{{url('/create_result')}}/{{encrypt($id)}}" class="text-right text-dark px-2">
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
         <span class="h3 my-0 font-weight-normal text-dark text-center">
