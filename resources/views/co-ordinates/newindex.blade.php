@@ -205,7 +205,14 @@
         @if($e['cid']==Session::get('cid'))
         @if($e['edate']>date('Y-m-d'))
         <div class="col-md-6 col-xl-4 col-sm-6">
+            <?php $tblapp=DB::table('tblapproval')->where('eid',$e['eid'])->get(); ?>
+            @if($tblapp)
+            <div class="card new-shadow-sm hover-me-sm mb-3 mt-2" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
+                title="This Event is Currently disabled. You need approval from Administrator to delete it.">
+            
+            @else
             <div class="card new-shadow-sm hover-me-sm mb-3 mt-2">
+            @endif
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
@@ -219,8 +226,8 @@
                                         @endif
                                     </span>
                                     <div>
-                                        <a href="#" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                                            aria-expanded="false" class="dropdown-toggle">
+                                    <a href="#" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+    aria-expanded="false" <?php if($tblapp){ ?>class="dropdown-toggle disabled"<?php } else { ?>class="dropdown-toggle" <?php } ?>>
 
                                             <i id="event-info" data-feather="more-vertical" class="text-dark"
                                                 height="20px"></i>
@@ -253,8 +260,8 @@
                         </div>
                     </div>
                     <div class="bg-light">
-                        <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}"
-                            class="text-center btn btn-light btn-block rounded-0 text-dark d-flex align-items-center justify-content-center view-candidate">
+                        <a href="{{url('view_candidates')}}/{{$e['eid']}}"
+                            class="text-center btn btn-light btn-block rounded-0 text-dark d-flex align-items-center justify-content-center view-candidate" <?php if($tblapp){ ?>onclick="return false;"<?php }  ?>>
                             <i data-feather="eye" height="18px"></i>
                             <span>View Candidates</span>
                         </a>
