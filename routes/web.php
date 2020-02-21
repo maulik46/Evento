@@ -159,6 +159,10 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::post('/alastnotice','s_admin@last_noti');
     
         route::view('/sbanner','super-admin/create_banner');
+
+        route::view('/check_logs', 'super-admin/check_logs');
+
+
     });
 
 // xxxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
