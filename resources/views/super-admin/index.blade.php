@@ -45,7 +45,40 @@
             background-color:rgba(255,190,11,.15);
             color: var(--warning);
         }
-    
+        #menu-list a{
+            display:flex;
+            align-items:center;
+            flex-wrap:wrap;
+            
+        }
+        #menu-list{
+            border-radius: 7px;
+            bottom: 78px;
+            right:25px;
+            z-index:999;
+            width:auto;
+            height:auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            padding: 10px;
+            background:rgba(255,255,255,0.5);
+        }
+        #menu-list:hover{
+            background:#fff;
+        }
+        #menu-list a{
+            margin-top: 4px;
+        }
+        #menu-list a span{
+            margin-left:3px;
+            margin-top:2px;
+        }
+        .badge-soft-orange{
+            background:rgba(247, 126, 83, 0.22)!important;
+            color:var(--orange)!important;
+        }
     </style>
 @endsection
 @section('my-content')
@@ -257,26 +290,54 @@
 
                      <!-- side rounded button for create notice and co-ordinator -->
                     <div>
-                        <span id="menu-btn" class="text-white btn btn-info new-shadow-sm position-fixed" data-toggle="tooltip" data-placement="left" title="Quick Apps"
+                        <span id="menu-btn" class="text-white btn btn-info new-shadow position-fixed" data-toggle="tooltip" data-placement="left" title="Quick Apps"
                                 style="border-radius: 30px;padding: 15px;bottom: 10px;right:15px;z-index:999;cursor:pointer;">
                                 <i data-feather="grid"></i>
                                 
                         </span>
-                        <span id="close" class="text-white btn btn-info new-shadow-sm position-fixed" 
+                        <span id="close" class="text-white btn btn-info new-shadow position-fixed" 
                                 style="border-radius: 30px;padding: 15px;bottom: 10px;right:15px;z-index:999;cursor:pointer;">
                                 <i data-feather="x"></i>
                                 
                         </span>
-                        <div id="menu-list" class="bg-white position-fixed shadow" style="border-radius: 30px;bottom: 78px;right:12px;z-index:999;width:65px;height:auto;display: flex;flex-direction: column;justify-content: center;align-items: center;padding: 6px;">
-                           
-                            <a  href="{{url('snotice')}}" class="hover-me btn btn-success new-shadow-sm " data-toggle="tooltip" data-placement="left" title="Create Notice"   style="border-radius: 30px;padding: 12px;">
-                                    <i data-feather="edit"></i>
-                                </a>
-                            <a  href="{{url('new_cod')}}" class="mt-2 hover-me btn btn-warning new-shadow-sm " data-toggle="tooltip" data-placement="left" title="Add Co-ordinator"
-                                style="border-radius: 30px;padding: 12px;">
-                                <i data-feather="user-plus"></i>
-                            </a> 
+                        <div id="menu-list" class="position-fixed new-shadow-2">
                             
+                                <a  href="{{url('snotice')}}" data-toggle="tooltip" data-placement="left" title="Create Notice">
+                                    <div class="btn btn-success new-shadow-sm" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="edit" height="20px"></i> 
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-success badge-pill px-3 py-2 font-size-13 new-shadow-sm mb-2">Add Notice</span>
+                                </a>
+                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                    <div class="btn btn-warning new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="user-plus" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-warning badge-pill px-3 py-2 font-size-13 new-shadow-sm">Add Co-ordinator</span> 
+                                </a>
+                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                    <div class="btn btn-info new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="file-text" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-info badge-pill px-3 py-2 font-size-13 new-shadow-sm">Check Logs</span> 
+                                </a>
+                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                    <div class="btn btn-primary new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="user-plus" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-primary badge-pill px-3 py-2 font-size-13 new-shadow-sm">Add Student</span> 
+                                </a>
+                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                    <div class="btn btn-danger new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="check-square" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-danger badge-pill px-3 py-2 font-size-13 new-shadow-sm">Approve Events</span> 
+                                </a>
+                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                    <div class="btn new-shadow-sm mt-2 text-white" style="border-radius: 30px;padding: 5px;background:var(--orange);">
+                                        <i data-feather="bar-chart-2" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-orange badge-pill px-3 py-2 font-size-13 new-shadow-sm" >Filter Records</span> 
+                                </a>
                         </div>
                     </div>
                     <div id="menu-overlay" class="w-100 vh-100 position-fixed" style="top:0;left:0;z-index:99;">
@@ -295,11 +356,12 @@
     $(document).ready(function(){
         $('#menu-list,#menu-overlay,#close').hide();
         $('#menu-btn').click(function(){
-            $('#menu-list').slideDown(150);
+            $('#menu-list').fadeIn(200);
+
             $('#menu-overlay,#close').show();
         });
         $('#menu-overlay,#close').click(function(){
-            $('#menu-list,#menu-overlay').slideUp(150);
+            $('#menu-list,#menu-overlay').fadeOut(200);
             $('#close').hide();
         })
         
