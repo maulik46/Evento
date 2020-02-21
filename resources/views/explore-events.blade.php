@@ -50,18 +50,25 @@
                                 <h4>
                                     @if($e['e_type']=='team')
                                     <a href="{{url('/team-insert')}}/{{encrypt($e['eid'])}}">
-                                            {{$e['ename']}}
+                                            {{ucfirst($e['ename'])}}
                                     </a>
                                     @else
                                     <a href="{{url('/participate-now')}}/{{encrypt($e['eid'])}}">
-                                            {{$e['ename']}}
+                                        {{ucfirst($e['ename'])}}
                                     </a>
                                     @endif
                                 </h4>
                                 <div>
-                                    <span class="font-size-13 badge badge-pill badge-soft-success px-3">
-                                        {{ucfirst($e['e_type'])}} Event
+                                    
+                                    @if($e['e_type']=='team')
+                                    <span class="font-size-13 badge badge-pill badge-soft-warning px-3">
+                                        Team Event
                                     </span>
+                                    @else
+                                    <span class="font-size-13 badge badge-pill badge-soft-success px-3">
+                                        Solo Event
+                                    </span>
+                                    @endif
                                 </div>
                                 
                             </div>
