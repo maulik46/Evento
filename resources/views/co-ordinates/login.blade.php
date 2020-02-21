@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Log-in</title>
+    <title>Co-ordinator Log-in</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
@@ -40,8 +40,8 @@
         .form-control:focus {
             background-color: #f3f4f79a !important;
         }
-        .color-black{
-            color: #232323;
+        .f-pass a:hover{
+            color:var(--success)!important;
         }
     </style>
     <script type = "text/javascript" >
@@ -106,11 +106,17 @@
                                 @if(Session::get('error'))
                                         <h6>Invalid Co-ordinates ID or Password</h6>
                                 @endif
-                               <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-3 mt-1 mb-3">
-                                    <span class="font-size-14">Log-in</span>
-                                    <i data-feather="log-in" height="20px"></i>
-                               </button>
+                                <div class="d-flex justify-content-between align-items-start">
+                                <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-3 mt-1 mb-3">
+                                        <span class="font-size-14">Log-in</span>
+                                        <i data-feather="log-in" height="20px"></i>
+                                </button>
+                                <div class="text-right font-weight-bold f-pass">
+                                    <a href="#" class="text-muted">Forgot Password?</a>
+                                </div>
+                                </div>
                            </form>
+                           
                        </div>
                     </div>
                 </div>
