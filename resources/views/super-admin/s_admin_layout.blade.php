@@ -18,25 +18,6 @@
     @section('head-tag-links')
 
     @show
-    <style>
-        .profile-dropdown-items {
-            width: 200px;
-        }
-
-        .content-page {
-            margin: 50px 0px !important;
-        }
-
-        .notification-list .noti-icon-badge {
-            position: relative;
-            top: -4px;
-            right: 12px;
-        }
-
-        .left-red-border {
-            border-left: 4px solid #ff5c75;
-        }
-    </style>
 </head>
 
 <body data-layout="topnav" class="body-scroll">
@@ -96,13 +77,9 @@
                                 <i data-feather="home" class="icon-dual-primary icon-xs mr-2"></i>
                                 <span>Dashboard</span>
                             </a>
-                            <a href="{{url('new_cod')}}" class="dropdown-item notify-item my-2">
-                                <i data-feather="user-plus" class="icon-dual-success icon-xs mr-2"></i>
-                                <span>Add Co-ordinator</span>
-                            </a>
-                            <a href="{{url('snotice')}}" class="dropdown-item notify-item my-2">
-                                <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
-                                <span>Create Notice</span>
+                            <a href="#" class="dropdown-item notify-item my-2">
+                                <i data-feather="user" class="icon-dual-success icon-xs mr-2"></i>
+                                <span>My Profile</span>
                             </a>
                             <a href="{{url('s_change_pass')}}" class="dropdown-item notify-item my-2">
                                 <i data-feather="key" class="icon-dual-info icon-xs mr-2"></i>
@@ -221,7 +198,62 @@
     <div class="rightbar-overlay"></div>
 
     <!-- end Right bar overlay-->
-
+    <!-- side rounded button for quick apps -->
+                    <div>
+                        <span id="menu-btn" class="text-white btn btn-info new-shadow position-fixed" data-toggle="tooltip" data-placement="left" title="Quick Apps"
+                                style="border-radius: 30px;padding: 15px;bottom: 10px;right:15px;z-index:999;cursor:pointer;">
+                                <i data-feather="grid"></i>
+                                
+                        </span>
+                        <span id="close" class="text-white btn btn-info new-shadow position-fixed" 
+                                style="border-radius: 30px;padding: 15px;bottom: 10px;right:15px;z-index:999;cursor:pointer;">
+                                <i data-feather="x"></i>
+                                
+                        </span>
+                        <div id="menu-list" class="position-fixed new-shadow-2">
+                            
+                                <a  href="{{url('snotice')}}" data-toggle="tooltip" data-placement="left" title="Create Notice">
+                                    <div class="btn btn-success new-shadow-sm" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="edit" height="20px"></i> 
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-success badge-pill px-3 py-2 font-size-13 new-shadow-sm mb-2">Add Notice</span>
+                                </a>
+                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                    <div class="btn btn-warning new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="user-plus" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-warning badge-pill px-3 py-2 font-size-13 new-shadow-sm">Add Co-ordinator</span> 
+                                </a>
+                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                    <div class="btn btn-info new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="file-text" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-info badge-pill px-3 py-2 font-size-13 new-shadow-sm">Check Logs</span> 
+                                </a>
+                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                    <div class="btn btn-primary new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="user-plus" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-primary badge-pill px-3 py-2 font-size-13 new-shadow-sm">Add Student</span> 
+                                </a>
+                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                    <div class="btn btn-danger new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="check-square" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-danger badge-pill px-3 py-2 font-size-13 new-shadow-sm">Approve Events</span> 
+                                </a>
+                                <a  href="{{url('new_cod')}}" data-toggle="tooltip" data-placement="left" title="Create Co-ordinator">
+                                    <div class="btn new-shadow-sm mt-2 text-white" style="border-radius: 30px;padding: 5px;background:var(--orange);">
+                                        <i data-feather="bar-chart-2" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-orange badge-pill px-3 py-2 font-size-13 new-shadow-sm" >Filter Records</span> 
+                                </a>
+                        </div>
+                    </div>
+                    <div id="menu-overlay" class="w-100 vh-100 position-fixed" style="top:0;left:0;z-index:99;">
+                    
+                    </div>
+                    <!--end side rounded button for quick apps -->
 
 
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
@@ -261,6 +293,23 @@
         $('.rightbar-overlay').click(function () {
             window.location.reload();
         });
+    </script>
+
+    <script>
+
+    $(document).ready(function(){
+        $('#menu-list,#menu-overlay,#close').hide();
+        $('#menu-btn').click(function(){
+            $('#menu-list').fadeIn(200);
+
+            $('#menu-overlay,#close').show();
+        });
+        $('#menu-overlay,#close').click(function(){
+            $('#menu-list,#menu-overlay').fadeOut(200);
+            $('#close').hide();
+        })
+        
+    });
     </script>
 </body>
 
