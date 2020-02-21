@@ -209,25 +209,6 @@ img{
 /* super admin right side  btn endddd*/
 
 
-/* navbar and right inbox css */
-.profile-dropdown-items {
-    width: 200px;
-}
-
-.content-page {
-    margin: 50px 0px !important;
-}
-
-.notification-list .noti-icon-badge {
-    position: relative;
-    top: -4px;
-    right: 12px;
-}
-
-.left-red-border {
-    border-left: 4px solid #ff5c75;
-}
-/* end */
 
 
 /* right inbox sidebar */
