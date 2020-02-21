@@ -106,7 +106,7 @@
                                 @if(Session::get('error'))
                                         <h6>Invalid Co-ordinates ID or Password</h6>
                                 @endif
-                               <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-4 mt-1 mb-3">
+                               <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-3 mt-1 mb-3">
                                     <span class="font-size-14">Log-in</span>
                                     <i data-feather="log-in" height="20px"></i>
                                </button>

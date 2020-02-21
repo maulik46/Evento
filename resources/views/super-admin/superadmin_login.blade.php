@@ -47,7 +47,7 @@
     </style>
 </head>
 
-<body data-layout="topnav" class="body-scroll">
+<body data-layout="topnav" class="body-scroll" style="height: 90vh!important;">
     <!-- Begin page -->
     <div class="wrapper">
 
