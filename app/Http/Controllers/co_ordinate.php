@@ -142,11 +142,10 @@ class co_ordinate extends Controller
             
             if(isset($tble))
             {
-                $topic=ucfirst($tble['ename'])." Event has been Cancelled..!";
                 $message=$reason;
                 
                 $tblap=DB::table('tblapproval')->insert(
-                        ['eid'=>$eid,'topic'=>$topic,'message'=>$message,'status'=>1,'cid'=>session::get('cid')]
+                        ['eid'=>$eid,'reason'=>$message,'status'=>1,'cid'=>session::get('cid')]
                     );
                 if(isset($tblap))
                 {
