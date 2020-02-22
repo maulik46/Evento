@@ -18,8 +18,12 @@
                             <hr>
                             <div id="event-info" class="p-1  text-dark font-size-15">
                                 <p class="d-flex justify-content-between mx-5">
-                                    <span class="font-weight-bold">Event date</span>
+                                    <span class="font-weight-bold">Event Starting date</span>
                                     <span>{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
+                                </p>
+                                <p class="d-flex justify-content-between mx-5">
+                                    <span class="font-weight-bold">Event Ending date</span>
+                                    <span>{{date('d/m/Y',strtotime($einfo['enddate']))}}</span>
                                 </p>
                                 <p class="d-flex justify-content-between mx-5">
                                     <span class="font-weight-bold text-right">Event time</span>
