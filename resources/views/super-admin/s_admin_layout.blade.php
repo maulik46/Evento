@@ -255,7 +255,7 @@
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-primary badge-pill px-3 py-2 font-size-13 new-shadow-sm">Add Student</span> 
                                 </a>
-                                <a  href="{{url('new_cod')}}">
+                                <a  href="{{url('approval')}}">
                                     <div class="btn btn-danger new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="check-square" height="20px"></i>
                                     </div>
