@@ -207,8 +207,7 @@
         <div class="col-md-6 col-xl-4 col-sm-6">
             <?php $tblapp=DB::table('tblapproval')->where('eid',$e['eid'])->get()->count(); ?>
             @if($tblapp!=0)
-            <div class="card new-shadow-sm hover-me-sm mb-3 mt-2" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
-                title="This Event is Currently disabled. You need approval from Administrator to delete it.">
+        <div class="card new-shadow-sm hover-me-sm mb-3 mt-2" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom" title="This Event is Currently disabled. You need approval from Administrator to delete it.">
             
             @else
             <div class="card new-shadow-sm hover-me-sm mb-3 mt-2">
@@ -252,8 +251,6 @@
                                         </div>
         
                                     </div>
-
-
                             </div>
                             <h4 class="mb-0 mt-3">{{ucfirst($e['ename'])}}</h4>
                             <span class="text-muted1">{{date('d/m/Y', strtotime($e['edate']))}}</span>
