@@ -146,4 +146,20 @@ class s_admin extends Controller
         admin::where('aid',Session::get('aid'))->update(['last_noti'=>$las_notice]);
         return response()->json(array('msg'=> $las_notice),200);
     }
+      public function approval()
+    {
+        $apl=tblevent::join('tblapproval','tblapproval.eid','=','tblevents.eid')
+        ->join('tblcoordinaters','tblcoordinaters.cid','=','tblapproval.cid')->where('tblevents.clgcode',Session::get('clgcode'))->get()->toarray();
+        return view('super-admin/approval',['delevnt'=>$apl]);
+    }
+    public function con_del($eid,$y)
+    {
+        $e_id=decrypt($eid);
+        $del_event=\DB::table('tblapproval')->where('eid',$e_id)->delete();
+        if($y=="del")
+        {
+            $events=tblevent::where('eid', $e_id)->delete();
+        }
+        return back();
+    }
 }
