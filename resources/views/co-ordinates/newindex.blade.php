@@ -143,13 +143,14 @@
     <div class="card new-shadow-sm mt-2" >
         <div class="card-body">
             <div class="table-responsive overflow-auto my-scroll" style="max-height: 350px;">
-                <table class="table table-hover table-nowrap mb-0" >
+            <table class="table table-hover table-nowrap mb-0" >
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Event</th>
-                            <th scope="col">Total Participator</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Participator</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
                             <th scope="col">Co-ordinator</th>
                             <th scope="col">Status</th>
                         </tr>
@@ -166,6 +167,7 @@
                             <td>{{ucfirst($e['ename'])}} compition</td>
                              <td>{{$p}}</td> <!--total Participator -->
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
+                            <td>{{date('d/m/Y', strtotime($e['enddate']))}}</td>
                             <td>{{ucfirst($co->cname)}}</td>
                             <td>
                                 @if($e['edate'] <= date('Y-m-d') && $e['enddate'] >= date('Y-m-d'))
@@ -174,7 +176,16 @@
                                 <span class="badge badge-soft-warning badge-pill px-3 py-1">Upcoming</span>
                                 @elseif($e['edate'] < date('Y-m-d')) 
                                 <span class="badge badge-soft-info badge-pill px-3 py-1">Finished</span>
+                                    <?php $r=\DB::table('tblparticipant')->select('senrl')->where([['eid',$e['eid']],['rank',1]])->count();?>
+                                    @if($r==1)
+                                        <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Show Result">
+                                            <i data-feather="award" height="18px" class=" text-success"></i>
+                                    </a>
+                                    @endif
                                 @endif
+                                <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
+                                    <i data-feather="info" height="18px" class=" text-info"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -257,7 +268,7 @@
                         </div>
                     </div>
                     <div class="bg-light">
-                        <a href="{{url('view_candidates')}}/{{$e['eid']}}"
+                    <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}"
                             class="text-center btn btn-light btn-block rounded-0 text-dark d-flex align-items-center justify-content-center view-candidate" <?php if($tblapp){ ?>onclick="return false;"<?php }  ?>>
                             <i data-feather="eye" height="18px"></i>
                             <span>View Candidates</span>
@@ -329,32 +340,37 @@
                         @foreach($events as $e)
                         @if($e['cid']==Session::get('cid'))
                         @if($e['enddate'] < date('Y-m-d'))
-                        <?php $c++?>                        
-                        @if($c==1)
-                        <div class="card mt-2 mb-0 new-shadow-sm">
-                            <div class="card-body py-2">
-                                <div class="h4 d-flex align-items-center">
-                                    <i data-feather="calendar" class="icon-dual-dark"></i>
-                                    <span class="ml-1">Past Events</span>
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="card new-shadow-sm mt-2" style="max-height: 350px;">
-                            <div class="card-body overflow-auto my-scroll">
-                                <div class="table-responsive overflow-auto my-scroll">
-                        <table class="table table-hover table-nowrap mb-0">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Event</th>
-                            <th scope="col">Total Participator</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Co-ordinator</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @endif
+
+                        <?php 
+                            $r=\DB::table('tblparticipant')->select('senrl')->where([['eid',$e['eid']],['rank',1]])->count();
+                        ?>
+                        @if($r==1)       
+                        <?php $c++ ?>                 
+                            @if($c==1)
+                                <div class="card mt-2 mb-0 new-shadow-sm">
+                                    <div class="card-body py-2">
+                                        <div class="h4 d-flex align-items-center">
+                                            <i data-feather="calendar" class="icon-dual-dark"></i>
+                                            <span class="ml-1">Past Events</span>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="card new-shadow-sm mt-2" style="max-height: 350px;">
+                                    <div class="card-body overflow-auto my-scroll">
+                                        <div class="table-responsive overflow-auto my-scroll">
+                                <table class="table table-hover table-nowrap mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Event</th>
+                                    <th scope="col">Total Participator</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Co-ordinator</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @endif
                         <?php
                             $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
                         ?>
@@ -374,6 +390,7 @@
                                 
                             </td>
                         </tr>
+                        @endif
                         @endif
                         @endif
                         @endforeach
