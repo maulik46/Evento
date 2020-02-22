@@ -162,6 +162,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
         route::view('/check_logs', 'super-admin/check_logs');
 
+        route::view('/approval', 'super-admin/approval');
+
 
     });
 
