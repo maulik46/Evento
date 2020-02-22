@@ -1,3 +1,7 @@
+<?php
+    use \App\Http\Controllers\co_ordinate;
+    co_ordinate::remain_result();
+?>
 @extends('co-ordinates/cod_layout')
 
 @section('title','Co-ordinator dashboard')
@@ -55,6 +59,7 @@
            </div>
     @endif
 <!-- charts -->
+
     <div class="row justify-content-between align-items-center">
         <div class="col-md-7 col-sm-12">
             <div class="card pr-4 py-2 new-shadow-sm">
