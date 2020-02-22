@@ -24,6 +24,17 @@
     .nice-select .option.selected.focus {
         background-color: #f3f4f7;
     }
+    .flatpickr-weekdays {
+        margin: 10px 0px;
+    }
+
+    .flatpickr-weekday {
+        color: #000 !important;
+        margin-top: 5px;
+    }
+    .flatpickr-calendar{
+        z-index: 10!important;
+    }
 
     .form-control {
         border-radius: .15rem;
@@ -59,6 +70,9 @@
 @section('my-content')
 <div class="container-fluid">
     <div class="card mb-0">
+        <a href="{{url('sindex')}}" class="text-dark text-right p-2" id="close-btn">
+            <i data-feather="x-circle" height="20px"></i>
+        </a>
         <div class="text-dark d-flex align-items-center justify-content-center p-1">
             <i data-feather="users"></i>
             <span class="h4 text-dark ml-2">Co-ordinator's Log</span>
@@ -145,7 +159,7 @@
             <div class="card-text">
                 
                 <div class="text-dark font-size-15 font-weight-bold">Location changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz</div>
-                <span class="text-muted more">Location changed to lab 3 of php quiz eventLocation changed to lab 3 of  php quizLocation changed to lab 3 of php quiz eventLocation changed to lab 3 of php quizLocation changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz php quizLocation changed to lab 3 of php quiz eventLocation changed to lab 3 of php quizLocation changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz php quizLocation changed to lab 3 of php quiz eventLocation changed to lab 3 of php quizLocation changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz</span>
+                <span class="text-muted more">Location changed to lab 3</span>
                 <div class="float-right">
                     <span class="font-weight-bold">IP</span>
                     <span class="badge badge-soft-dark badge-pill px-2">192.30.58.223</span>
