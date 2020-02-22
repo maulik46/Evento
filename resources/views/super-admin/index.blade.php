@@ -1,3 +1,7 @@
+<?php
+    use \App\Http\Controllers\co_ordinate;
+    co_ordinate::remain_result();
+?>
 @extends('super-admin/s_admin_layout')
 
 @section('title','Super Admin dashboard')
