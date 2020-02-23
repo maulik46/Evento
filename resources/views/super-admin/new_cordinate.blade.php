@@ -126,7 +126,7 @@
                                                 <span class="mx-2">Upload Picture</span>
                                             </label>
 
-                                            <input id="file-upload" name="attachment[]" type="file" multiple onChange="FileDetails()"/>
+                                            <input id="file-upload" name="" type="file" />
                                         </div>
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-12 row justify-content-between mx-0">
