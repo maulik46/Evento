@@ -65,7 +65,7 @@ class s_admin extends Controller
         $cod=tblcoordinaters::where('clgcode',Session::get('clgcode'))->get();
         return view('super-admin/index',['events'=>$events,'cods'=>$cod]);
     }
-    public function send_notice(Request $req)
+     public function send_notice(Request $req)
     {
        $topic=$req->title;
        $message=$req->message;
@@ -83,22 +83,13 @@ class s_admin extends Controller
            foreach($file as $att)
            {
                $destinationPath=public_path('attachment/');
-               $filename=time()."N".$att->getClientOriginalName();
+               $filename=time().$att->getClientOriginalName();
                $att->move($destinationPath,$filename);
-               $fname.=$filename."-";
+               $fname.=$filename.";";
            }
        }
-       $notice=new notice;
-       $notice->topic=$topic;
-       $notice->message=$message;
-       $notice->receiver=$receiver;
-       $notice->sender=Session::get('aname');
-       $notice->ndate=date('Y-m-d');
-       $notice->ntime=date('h:i A');//change
-       $notice->clgcode=Session::get('clgcode');
-       $notice->attechment=$fname;
-       $notice->save();
-       session()->flash('success', 'Notice send successfully');
+        $cod=app('App\Http\Controllers\co_ordinate')->notice($topic,Session::get('aname'),'Admin',$receiver,$message,$fname);
+        session()->flash('success', 'Notice send successfully');
        $log=new log;
        $log->uid=Session::get('aid');
        $log->action_on="Notice";
