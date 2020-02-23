@@ -46,7 +46,7 @@
             <div class="row justify-content-between align-items-end">
                 <div class="card-text col-sm-9 col-12">
                     <div>
-                        <span>EventCo-ordinator</span>  Dr.Parth Patthar
+                        <span>Event Co-ordinator</span>  Dr.Parth Patthar
                     </div>
                     <div>
                         <span>Event-Type</span>  IT
