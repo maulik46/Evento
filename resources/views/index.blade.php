@@ -1,3 +1,7 @@
+<?php
+    use \App\Http\Controllers\co_ordinate;
+    co_ordinate::remain_result();
+?>
 @extends('stud_layout')
 
     @section('title','Home')
