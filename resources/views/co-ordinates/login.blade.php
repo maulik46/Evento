@@ -18,7 +18,7 @@
             color:#f8435f;
         }
         body{
-           background-color: #43d39e;
+           background-image:url('../assets/images/cod_bg.png');
         }
         .content-page {
             margin: 50px 0px !important;
