@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/my-extra.css')}}">
     <style>
         body {
-            background-color: #35bbca;
+            background-image:url('../assets/images/super_admin_bg.png');
         }
 
         .content-page {
