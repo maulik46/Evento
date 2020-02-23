@@ -13,7 +13,26 @@ use App\log;
 date_default_timezone_set("Asia/Kolkata"); 
 class co_ordinate extends Controller
 {
-
+    public static function remain_result()
+    {
+        $evnt=tblevent::select('eid','cid','ename','enddate')->where([['clgcode',Session::get('clgcode')],['enddate','<',date("Y-m-d")]])->get();
+        foreach($evnt as $e){
+            $rr=participant::where([['eid',$e['eid']],['rank',1]])->count();
+            if($rr==0)
+            {
+                $exist=DB::table('tblresult_delay')->where('eid',$e['eid'])->count();
+                if($exist==0)
+                {
+                    $late_res=DB::table('tblresult_delay')->insert(['eid'=>$e['eid'],'cid'=>$e['cid']]);
+                    $co=tblcoordinaters::select('cname')->where('cid',$e['cid'])->first();
+                    if(isset($late_res))
+                    {
+                        (new self)->notice('Result Not Announced','System','System','student-admin','Result for Event <b>'.ucfirst($e['ename']).'</b> not declared  by co-ordinator <b>'.ucfirst($co['cname']).'</b>','');
+                    }
+                }
+            }
+        }
+    }
     public function mail($to_name,$to_email,$data)
     {
         \Mail::send('email',$data,function($message) use ($to_name, $to_email){
@@ -27,6 +46,20 @@ class co_ordinate extends Controller
    {
         $sinfo=tblstudent::where('senrl',$enrl)->first();
         return $sinfo;
+   }
+   public function notice($topic,$sender,$s_type,$receiver,$message,$fname)
+   {
+        $notice=new notice;
+        $notice->topic=$topic;
+        $notice->message=$message;
+        $notice->sender=$sender;
+        $notice->sender_type=$s_type;
+        $notice->receiver=$receiver;
+        $notice->ndate=date('Y-m-d');
+        $notice->ntime=date('h:i A');//change
+        $notice->clgcode=Session::get('clgcode');
+        $notice->attechment=$fname;
+        $notice->save();
    }
     public function logout()//destroy session
     {
@@ -98,7 +131,7 @@ class co_ordinate extends Controller
         $tble=tblevent::where('clgcode',session::get('clgcode'))->where('cid',session::get('cid'))->get()->toArray();
         $tblp=participant::select('eid',DB::raw('COUNT(eid) AS count_par'))->where('clgcode',session::get('clgcode'))->groupBy('eid')->get()->toarray();
         $events=tblevent::where([['clgcode',Session::get('clgcode')]
-        ])->orderby('edate','desc')->get()->toarray();//change
+        ])->orderby('enddate','desc')->get()->toarray();//change
         $ename_string="";
         $part_count="";
         foreach($tblp as $p)
@@ -536,7 +569,7 @@ class co_ordinate extends Controller
         session()->flash('success', 'Password updated successfully..!');
         return redirect(url('cindex'));
      }
-      public function send_notice(Request $req)
+     public function send_notice(Request $req)
      {
         $topic=$req->title;
         $message=$req->message;
@@ -553,22 +586,12 @@ class co_ordinate extends Controller
             foreach($file as $att)
             {
                 $destinationPath=public_path('attachment/');
-                $filename=time()."N".$att->getClientOriginalName();
+                $filename=time().$att->getClientOriginalName();
                 $att->move($destinationPath,$filename);
-                $fname.=$filename."-";
+                $fname.=$filename.";";
             }
         }
-        $notice=new notice;
-        $notice->topic=$topic;
-        $notice->message=$message;
-        $notice->sender=Session::get('cname');
-        $notice->sender_type="co-ordinator";
-        $notice->receiver="student";
-        $notice->ndate=date('Y-m-d');
-        $notice->ntime=date('h:i A');//change
-        $notice->clgcode=Session::get('clgcode');
-        $notice->attechment=$fname;
-        $notice->save();
+        $this->notice($topic,Session::get('cname'),'co-ordinator','student',$message,$fname);
         session()->flash('success', 'Notice send successfully');
         $log=new log;
         $log->uid=Session::get('cid');
