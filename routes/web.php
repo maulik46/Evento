@@ -162,11 +162,9 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
         route::view('/check_logs', 'super-admin/check_logs');
 
-        route::view('/approval', 'super-admin/approval');
+        route::get('/approval', 's_admin@approval');
 
-        route::view('/admin_profile', 'super-admin/admin_profile');
-
-
+        route::get('/approval/confrim_del/{eid}/{val}','s_admin@con_del');
 
     });
 
