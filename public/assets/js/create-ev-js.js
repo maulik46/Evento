@@ -85,13 +85,17 @@
 function getMessage() {
         var f = 0;
         var d = new Date();
-        var today =d.getFullYear() + "-"+("0" + (d.getMonth() + 1)).slice(-2)+"-"+"0"+ d.getDate();
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
         var edate = $('#edate').val().split("-").reverse().join("-");
         var sdate = $('#sdate').val().split("-").reverse().join("-");
         var ldate = $('#ldate').val().split("-").reverse().join("-");
         var enddate=$('#enddate').val().split("-").reverse().join("-");
         var ename = $('#ename').val();
         var gen = $('#gen').val();
+        today = yyyy + '-' + mm + '-' + dd;
         $('*').removeClass('border border-danger');
 
         if ($('#ename').val() == "") {
@@ -157,8 +161,7 @@ function getMessage() {
         } 
         else if (edate < sdate || today > sdate) {
             $('#sdate').parent().addClass('border border-danger');
-            $('#sdate').parent().next().text(
-            "Starting date of registration should be before the event date and after today ");
+            $('#sdate').parent().next().text("Starting date of registration should be before the event date and after today ");
             f = 1;
         } else {
             $('#sdate').parent().next().text("");
