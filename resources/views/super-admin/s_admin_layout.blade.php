@@ -96,7 +96,7 @@
                                 <i data-feather="home" class="icon-dual-primary icon-xs mr-2"></i>
                                 <span>Dashboard</span>
                             </a>
-                            <a href="#" class="dropdown-item notify-item my-2">
+                            <a href="{{url('admin_profile')}}" class="dropdown-item notify-item my-2">
                                 <i data-feather="user" class="icon-dual-success icon-xs mr-2"></i>
                                 <span>My Profile</span>
                             </a>
