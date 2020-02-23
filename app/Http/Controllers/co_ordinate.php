@@ -569,7 +569,7 @@ class co_ordinate extends Controller
         session()->flash('success', 'Password updated successfully..!');
         return redirect(url('cindex'));
      }
-      public function send_notice(Request $req)
+     public function send_notice(Request $req)
      {
         $topic=$req->title;
         $message=$req->message;
@@ -586,23 +586,12 @@ class co_ordinate extends Controller
             foreach($file as $att)
             {
                 $destinationPath=public_path('attachment/');
-                $filename=time()."N".$att->getClientOriginalName();
+                $filename=time().$att->getClientOriginalName();
                 $att->move($destinationPath,$filename);
-                $fname.=$filename."-";
+                $fname.=$filename.";";
             }
         }
         $this->notice($topic,Session::get('cname'),'co-ordinator','student',$message,$fname);
-        // $notice=new notice;
-        // $notice->topic=$topic;
-        // $notice->message=$message;
-        // $notice->sender=Session::get('cname');
-        // $notice->sender_type="co-ordinator";
-        // $notice->receiver="student";
-        // $notice->ndate=date('Y-m-d');
-        // $notice->ntime=date('h:i A');//change
-        // $notice->clgcode=Session::get('clgcode');
-        // $notice->attechment=$fname;
-        // $notice->save();
         session()->flash('success', 'Notice send successfully');
         $log=new log;
         $log->uid=Session::get('cid');
