@@ -255,7 +255,7 @@
                             <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
                                 <input type="text" class="form-control" value="9685741230" />
                         </div>
-                        <button type="submit" class="btn btn-success rounded-sm hover-me-sm px-2 font-weight-bold new-shadow-sm btn-sm py-2 font-size-13">
+                        <button type="submit" class="btn btn-info rounded-sm hover-me-sm px-2 font-weight-bold new-shadow-sm btn-sm py-2 font-size-13">
                             <i data-feather="check-square" height="18px"></i>
                             Update Details
                         </button>
