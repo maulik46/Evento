@@ -82,7 +82,7 @@ Route::post('/c_checklogin','co_ordinate@checklogin')->middleware('co_valid_chec
 
 Route::group(['middleware' => 'co_session_check'], function () {
 
-        
+        Route::view('/cod_profile','co-ordinates/cod_profile');
 
         Route::get('/clogout','co_ordinate@logout');
 
@@ -165,6 +165,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::get('/approval', 's_admin@approval');
 
         route::get('/approval/confrim_del/{eid}/{val}','s_admin@con_del');
+
+        route::view('admin_profile','super-admin/admin_profile');
 
     });
 
