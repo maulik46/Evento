@@ -5,7 +5,7 @@
 @section('head-tag-links')
 <style>
     .pattern-bg {
-        background-image: url('../assets/images/pattern/p2.jpg');
+        background-image: url('../assets/images/pattern/p3.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
