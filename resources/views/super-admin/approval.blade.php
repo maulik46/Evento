@@ -19,7 +19,7 @@
 @endsection
 @section('my-content')
 <div class="container-fluid">
-    <div class="card mb-0">
+    <div class="card mb-0 new-shadow-sm">
         <a href="{{url('sindex')}}" class="text-dark text-right p-2" id="close-btn">
             <i data-feather="x-circle" height="20px"></i>
         </a>
@@ -28,7 +28,9 @@
             <span class="h4 text-dark ml-2">Approve Deleted Event</span>
         </div>
     </div>
+    <?php $a=0;?>
     @foreach($delevnt as $del)
+    <?php $a=1;?>
     <div class="card mb-0 mt-1 new-shadow-sm">
         <div class="card-body py-2">
            
@@ -70,6 +72,11 @@
         </div>
     </div>
     @endforeach
+    @if($a==0)
+    <div class="mt-2 py-5 card text-center new-shadow-sm">
+        <div class="font-weight-bold font-size-16">No events are available to approve!!</div>
+    </div>
+    @endif
 </div>
 @endsection
 @section('extra-scripts')
