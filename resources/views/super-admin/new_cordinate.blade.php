@@ -49,7 +49,7 @@
 
         .custom-file-upload {
             border: 2px solid #f3efef;
-            heigh:100%;
+            height:100%;
             width:100%;
             text-align:center;
             padding: 6px 10px;
