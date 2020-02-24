@@ -1,6 +1,6 @@
 @extends('super-admin/s_admin_layout')
 
-@section('title','My Profile')
+@section('title','Admin Profile')
 
 @section('head-tag-links')
 <style>
@@ -14,7 +14,7 @@
     }
 
     .user-img {
-        background: url('../assets/images/pattern/user.jpg');
+        background: url('../assets/images/users/super_admin.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -39,7 +39,7 @@
     }
 
     .custom-file-upload {
-        heigh: 100%;
+        height: 100%;
         width: 100%;
         text-align: center;
         cursor: pointer;
@@ -87,7 +87,9 @@
             border: 1px solid #d1d1d1 !important;
             background-color: #f3f4f7 !important;
         }
-
+        .my-scroll::-webkit-scrollbar-thumb{
+            background-color:transparent;
+        }
 
     @media(max-width:468px) {
 
@@ -167,13 +169,13 @@
 
     <div  class="row" style="margin-top:-160px!important;">
         <div class="col">
-            <div class="card p-1 new-shadow-sm">
+            <div class="text-center card p-1 new-shadow-sm">
                 <h4 class="ml-3">
                     <i data-feather="bar-chart-2" class="icon-dual"></i>
                     My Activity
                 </h4>
             </div>
-            <div class="left-timeline pl-1 pl-sm-3">
+            <div class="left-timeline pl-1 pl-sm-3 my-scroll overflow-auto" style="max-height:700px;">
                 <ul class="list-unstyled events">
                     <li class="event-list">
                         <div>
@@ -189,7 +191,7 @@
                                     <div class="card d-inline-block new-shadow-sm">
                                         <div class="card-body p-3">
                                             <h5 class="mt-0">Event One</h5>
-                                            <span class="text-muted">It will be as simple as occidental in fact it will be Occidental Cambridge friend</span>
+                                            <span class="text-muted">It will be as simple as occidental in fact it will be Occidental Cambridge friend Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse laborum asperiores magnam maxime quod explicabo laudantium ipsam sunt praesentium deserunt veniam ut qui, odio deleniti delectus rerum dolorum possimus dignissimos?</span>
                                         </div>
                                     </div>
                                 </div>
@@ -234,6 +236,7 @@
                 </span>
                 <div class="card-body">
                     <h4 class="text-center mt-0 mb-2">
+                        <i data-feather="edit"></i>
                         Update Details
                     </h4>
                     <form>
