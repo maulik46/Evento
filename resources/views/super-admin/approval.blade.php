@@ -93,7 +93,7 @@
         else
         {
             var msg= "You won't reject request for delete Event <b>" + ename + " </b> !!";
-            var btn='Yes, cancle it!';
+            var btn='Yes, cancel it!';
         }
         Swal.fire({
         title: 'Are you sure?',
