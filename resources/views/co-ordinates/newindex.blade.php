@@ -407,17 +407,7 @@
         </div> <!-- end card-body-->
     </div>
 
-    <!-- plus button right side for create events -->
-    <div class="position-fixed plus-btn" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left"
-        title="Create Event">
-        <a href="{{url('/create_event')}}">
-            <img src="{{asset('assets/images/svg-icons/co-ordinate/plus.svg')}}" class="hover-me-sm rounded-circle"
-                height="60px" alt="">
-        </a>
 
-    </div>
-
-    <!-- end plus button div -->
 
     <!-- 
  <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed" style="top:20px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
