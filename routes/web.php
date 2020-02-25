@@ -79,6 +79,18 @@ Route::get('/resend_otp/{senrl}/{clgcode}/{check?}', 'student@resend_otp');
 Route::get('/clogin','co_ordinate@login');
 Route::post('/c_checklogin','co_ordinate@checklogin')->middleware('co_valid_check');
 
+Route::get('/resetpassword',function(){
+    return view('co-ordinates/reset_pass');
+});
+Route::post('/csend_otp','co_ordinate@send_otp');
+
+Route::post('/confirm_pass','co_ordinate@confirm_pass');
+
+Route::post('/ctimers','co_ordinate@timers');
+
+Route::post('/change_pass/{email}', 'co_ordinate@change_pass');
+
+Route::post('/cresend_otp','co_ordinate@send_otp');
 
 Route::group(['middleware' => 'co_session_check'], function () {
 

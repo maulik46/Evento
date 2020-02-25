@@ -644,4 +644,62 @@ class co_ordinate extends Controller
         $event=tblevent::select('eid','ename','edate')->where('eid',decrypt($eid))->first();
         return view('co-ordinates/view_result',['participant'=>$participant],['einfo'=>$event]);
     }
+    public function send_otp(Request $req)
+     {
+         if ($req->ajax()) {
+             $rand_num=rand(111111, 999999);
+             session()->put('otps', $rand_num);
+             $cuser=$req->get('cuser');
+             $message="<br/>---<br/> Thanks For visiting Evento ";
+             $data=array('name'=>'OTP :'.Session::get('otps'),'body'=>$message);
+             $tblco=tblcoordinaters::where('email', $cuser)->get()->first();
+             if ($tblco) {
+                //$this->mail($tblco['cname'], $tblco['email'], $data);
+                 $data=Session::get('otps');
+             }
+             else{
+                 $data="Invalid Email Id..";
+             }
+            
+             echo json_encode($data);
+         }
+     }
+     public function confirm_pass(Request $req)
+     {
+        return view("co-ordinates/confirm_pass",['email'=>$req->cuser]);
+     }
+     public function change_pass(Request $req,$email)
+     {
+        $email=decrypt($email);
+        //echo $email;
+        $pass=$req->password;
+        $cpass=$req->cpassword;
+        if($pass==$cpass)
+        {
+            $tblc=tblcoordinaters::where('email',$email)
+            ->update(['password' =>$pass]);
+            if($tblc)
+            {
+                session()->flash("success","Your Password Successfully Changed...");
+            }
+            return redirect(url('/clogin'));
+        }
+        else
+        {
+            return redirect()->back();
+        }
+     }
+    public function timers(Request $req)
+    {
+        if($req->ajax())
+        {
+            if(Session::get('otps')==$req->get('otpcode'))
+            {
+                Session::forget('otps');
+                $data="";
+                echo json_encode($data);
+            }
+        }
+        
+    }
 }
