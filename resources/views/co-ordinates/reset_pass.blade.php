@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Log-in</title>
+    <title>Forgot Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -60,7 +60,7 @@
         </div>
         <div class="content-page">
             <div class="content d-flex justify-content-center">
-                <div class="container-fluid pt-3 col-xl-4 col-lg-5 col-md-8 col-sm-10">
+                <div class="container-fluid pt-2 col-xl-4 col-lg-5 col-md-8 col-sm-10">
                     <div class="card mt-5 shadow rounded-lg px-1">
                        <div class="card-body px-xl-4">
                            <h4 class="my-4 text-center text-dark d-flex flex-column">
@@ -71,10 +71,10 @@
                            <form action="{{url('/send_otp')}}" onsubmit="return valid()" method="post" id="myform">
                            @csrf
                                <div class="form-group mt-2">
-                                   <label class="col-form-label font-size-14">Co-ordinator ID</label>
+                                   <label class="col-form-label font-size-14">Enter your registered email id</label>
                                    <div class="form-group has-icon d-flex align-items-center">
-                                       <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                       <input type="text" class="form-control" placeholder="Enter Your ID..." name="cuser"  id="cuser" />
+                                       <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
+                                       <input type="text" class="form-control" placeholder="Enter Your Email..." name="cuser"  id="cuser" />
                                    </div>
                                    <span class="text-danger font-weight-bold" id="cuser-label" hidden></span>
                                </div>
@@ -85,19 +85,21 @@
                                        <i data-feather="external-link" class="form-control-icon ml-2" height="19px"></i>
                                        <input type="text" class="form-control" placeholder="Enter Your OTP..." name="otp" id="otp"/>
                                    </div>
-                                   <span class="text-danger font-weight-bold"></span><br/>
+                                   <span class="text-dark font-weight-bold"></span><br/>
+                                   <div class="d-flex justify-content-between align-items-center">
                                    <span>Didn't get a security code? We can <a  href="#" class="font-weight-bold" style="color:#1582b3;" id="resend">resend it</a>
-                                            </span>
+                                    </span>
                                     <span style="color:#1582b3;" class="font-weight-bold counter" id="demo" ></span>
-                                    <span id="otp-label">
+                                    </div>
+                                    <div id="otp-label">
                                     {{Session::get('otps')}}
-                                    </span> 
+                                    </div> 
                                     
                                </div>
                                
-                               <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-4 mt-1 mb-3" id="submit">
+                               <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-3 mt-1 mb-3" id="submit">
                                     <span class="font-size-14">Confirm</span>
-                                    <i data-feather="log-in" height="20px"></i>
+                                    <i data-feather="check-square" height="20px"></i>
                                </button>
                            </form>
                        </div>
@@ -249,18 +251,16 @@
             var otpcode=$("#cuser-label").text();
             var f=0;
             var otps=$('#otp-label').val();
+            
             if ($('#cuser').val() == "") {
-                $('#cuser').parent().addClass('border border-danger');
                 $('#cuser').parent().next().text("Please Enter User ID...");
                 return false;
             } 
             if ($('#otp').val() == "") {
-                    $('#otp').parent().addClass('border border-danger');
                     $('#otp').parent().next().text("Please Enter Your OTP...");
                     f=1;
                 }
                 else if ($('#otp').val() != otpcode) {
-                    $('#otp').parent().addClass('border border-danger');
                     $('#otp').parent().next().text("Invalid OTP..");
                     f=1;
                 }
