@@ -48,9 +48,12 @@
             background-color: #f3f4f7 !important;
         }
 
-        .border-form {
-            border: 1px solid #d1d1d152;
-            border-radius: .5rem;
+        input[type="file"] {
+        display: none;
+        }
+
+        .custom-file-upload {
+            cursor: pointer;
         }
 
 
@@ -179,6 +182,15 @@
                         </div>
                     </div>
                 </div>
+            <!--  right side buttons div  -->
+                
+                <div class="position-fixed plus-btn" style="bottom: 72px;right:16px;" data-toggle="tooltip" data-placement="left" title="Upload Excel File">
+                    <label for="file-upload" class="custom-file-upload btn bg-white badge-pill hover-me-sm new-shadow-sm">
+                        <img src="{{asset('assets/images/svg-icons/super-admin/excel.svg')}}" height="40px" alt="">
+                    </label>
+                    <input id="file-upload" name="" type="file" />
+                </div>
+            <!-- end right side buttons div -->
             </div>
 @endsection  
 @section('extra-scripts')
