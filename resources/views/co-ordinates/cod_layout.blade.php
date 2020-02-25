@@ -88,19 +88,11 @@
                              <div class="dropdown-divider d-sm-none d-md-none"></div>
                             <a href="{{url('/cindex')}}" class="dropdown-item notify-item mb-2">
                                 <i data-feather="home" class="icon-dual-primary icon-xs mr-2"></i>
-                                <span>Home</span>
+                                <span>Dashboard</span>
                             </a>
                             <a href="{{url('/cod_profile')}}" class="dropdown-item notify-item mb-2">
-                                <i data-feather="user" class="icon-dual-primary icon-xs mr-2"></i>
+                                <i data-feather="user" class="icon-dual-success icon-xs mr-2"></i>
                                 <span>My Profile</span>
-                             </a>
-                            <a href="{{url('/create_event')}}" class="dropdown-item notify-item my-2">
-                                <i data-feather="calendar" class="icon-dual-success icon-xs mr-2"></i>
-                                <span>Create Event</span>
-                            </a>
-                            <a href="{{url('/cnotice')}}" class="dropdown-item notify-item my-2">
-                                <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
-                                <span>Create Notice</span>
                             </a>
                             <a href="{{url('/change_pass')}}" class="dropdown-item notify-item my-2">
                                 <i data-feather="key" class="icon-dual-info icon-xs mr-2"></i>
@@ -211,6 +203,21 @@
          <!-- Right bar overlay-->
          <div class="rightbar-overlay"></div>
          <!-- end Right bar overlay-->
+
+    <!--  right side buttons div  -->
+            <div class="position-fixed plus-btn" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left"
+                title="Create Event">
+                <a href="{{url('/create_event')}}" class="btn badge-pill bg-success text-white p-3 hover-me-sm new-shadow-sm">
+                    <i data-feather="edit" height="24px"></i>
+                </a>
+            </div>
+            <div class="position-fixed plus-btn" style="bottom: 74px;right:12px;" data-toggle="tooltip" data-placement="left"
+                title="Create Notice">
+                <a href="{{url('/cnotice')}}" class="btn badge-pill bg-info text-white p-3 hover-me-sm new-shadow-sm">
+                    <i data-feather="file-text" height="24px"></i>
+                </a>
+            </div>
+    <!-- end right side buttons div -->
 
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <!-- Vendor js -->
