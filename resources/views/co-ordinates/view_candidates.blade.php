@@ -144,12 +144,12 @@
                     </div>
 
                 </div>
-                <div class="position-fixed" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left"
+                <!-- <div class="position-fixed" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left"
                     title="Print">
                     <a href="#">
                         <img src="{{asset('assets/images/svg-icons/co-ordinate/print.svg')}}" height="55px" class="hover-me-sm rounded-circle" alt="">
                     </a>
-                </div>
+                </div> -->
             </div>
 @endsection        
 
