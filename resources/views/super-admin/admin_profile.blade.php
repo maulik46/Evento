@@ -171,7 +171,7 @@
         <div class="col">
             <div class="text-center card p-1 new-shadow-sm">
                 <h4 class="ml-3">
-                    <i data-feather="bar-chart-2" class="icon-dual"></i>
+                    <i data-feather="activity" class="icon-dual"></i>
                     My Activity
                 </h4>
             </div>
