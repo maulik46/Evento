@@ -203,7 +203,7 @@
                                 if(sessionStorage.getItem("c")==1)
                                 {
                                     
-                                    var countdown = 0.2 * 60 * 1000;
+                                    var countdown = 2 * 60 * 1000;
                                     var timerId = setInterval(function(){
                                     countdown -= 1000;
                                     var min = Math.floor(countdown / (60 * 1000));
