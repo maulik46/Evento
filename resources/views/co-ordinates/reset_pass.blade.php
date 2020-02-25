@@ -46,7 +46,7 @@
         }
     </style>
 </head>
-<body data-layout="topnav" class="body-scroll" style="height: 90vh!important;" oncontextmenu="return false"> 
+<body data-layout="topnav" class="body-scroll" style="height: 90vh!important;"> 
     <div class="wrapper ">
         <div class="navbar navbar-expand flex-column flex-md-row navbar-custom position-fixed w-100 new-shadow-sm" style="height: 60px;">
             <div class="container-fluid">
@@ -76,7 +76,7 @@
                                        <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
                                        <input type="text" class="form-control" placeholder="Enter Your ID..." name="cuser"  id="cuser" />
                                    </div>
-                                   <span class="text-danger font-weight-bold" id="cuser-label" hidden></span>
+                                   <span class="text-danger font-weight-bold" id="cuser-label"></span>
                                </div>
                                
                                <div class="form-group mt-2" id="content-otp" style="display: none;">
@@ -95,7 +95,7 @@
                                     
                                </div>
                                
-                               <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-4 mt-1 mb-3" id="submit">
+                               <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-4 mt-1 mb-3" id="submitotp">
                                     <span class="font-size-14">Confirm</span>
                                     <i data-feather="log-in" height="20px"></i>
                                </button>
@@ -132,12 +132,12 @@
                     {
                         console.log(otp)
                         $("#otp-label").html(otp);
-                        $("#cuser-label").html(otp);
+                        sessionStorage.setItem("otps",otp);
                         sessionStorage.setItem("c",1);
                         if(sessionStorage.getItem("c")==1)
                                 {
                                     
-                                    var countdown = 0.2 * 60 * 1000;
+                                    var countdown = 2 * 60 * 1000;
                                     var timerId = setInterval(function(){
                                     countdown -= 1000;
                                     var min = Math.floor(countdown / (60 * 1000));
@@ -145,7 +145,7 @@
                                     var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);  //correct
                                     if (countdown <= 0) {
                                         $("#demo").html("EXPIRED");
-                                        var otplabel=$('#cuser-label').text();
+                                        var otplabel=sessionStorage.getItem("otps");
                                         $.ajaxSetup({
                                                 headers: {
                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -158,9 +158,8 @@
                                             data:{'otpcode':otplabel},
                                             success:function(data2)
                                             {
-                                                console.log(data2)
-                                                $("#demo").html(data2);
-                                                $("#cuser-label").html(data2);
+                                               // console.log(data2)
+                                                sessionStorage.setItem("otps",data2);
                                             }                                       
                                         })
                                         clearInterval(timerId);                                        
@@ -177,7 +176,8 @@
         <script>
        $(document).ready(function(){
         sessionStorage.setItem("c",1);
-        $( "#cuser" ).change(function() {
+        $( "#submitotp" ).click(function() {
+            document.getElementById("submitotp").id = "submitpass";  
             var cuser=$('#cuser').val();
             var otp=$('#otp').val();
             $.ajaxSetup({
@@ -192,14 +192,23 @@
                     data:{'cuser':cuser},
                         success:function(data)
                         {
+                            sessionStorage.setItem("otps",data);
+                            if(data.length > 6)
+                            {
                             $('#cuser-label').html(data);
-                            console.log(data)
+                            }
+                            else{
+                                $('#cuser-label').html();
+                            }
+                            //console.log(data)
                             document.getElementById("myform").action = "{{url('/confirm_pass')}}";
                             if(data!="Invalid Email Id..")
                             {
                                 $('#content-otp').fadeIn("slow");
+                                $('#cuser-label').html("");
                                 document.getElementById("cuser").readOnly = true;                                
                                 $('#otp-label').html(data);
+                                sessionStorage.setItem("otps",data);
                                 if(sessionStorage.getItem("c")==1)
                                 {
                                     
@@ -211,7 +220,7 @@
                                     var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);  //correct
                                     if (countdown <= 0) {
                                         $("#demo").html("EXPIRED");
-                                        var otplabel=$('#cuser-label').text();
+                                        var otplabel=sessionStorage.getItem("otps");;
                                         $.ajaxSetup({
                                                 headers: {
                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -224,9 +233,8 @@
                                             data:{'otpcode':otplabel},
                                             success:function(data2)
                                             {
-                                                console.log(data2)
-                                                $("#demo").html(data2);
-                                                $("#cuser-label").html(data2);
+                                                //console.log(data2)
+                                                sessionStorage.setItem("otps",data2);
                                             }                                       
                                         })
                                         clearInterval(timerId);                                        
@@ -246,7 +254,6 @@
         {
             var cuser=$('#cuser').val();
             var otp=$('#otp').val();
-            var otpcode=$("#cuser-label").text();
             var f=0;
             var otps=$('#otp-label').val();
             if ($('#cuser').val() == "") {
@@ -259,7 +266,7 @@
                     $('#otp').parent().next().text("Please Enter Your OTP...");
                     f=1;
                 }
-                else if ($('#otp').val() != otpcode) {
+                else if ($('#otp').val() != sessionStorage.getItem("otps")) {
                     $('#otp').parent().addClass('border border-danger');
                     $('#otp').parent().next().text("Invalid OTP..");
                     f=1;
