@@ -112,7 +112,7 @@
                                         <i data-feather="log-in" height="20px"></i>
                                 </button>
                                 <div class="text-right font-weight-bold f-pass">
-                                    <a href="#" class="text-muted">Forgot Password?</a>
+                                    <a href="{{url('/resetpassword')}}" class="text-muted">Forgot Password?</a>
                                 </div>
                                 </div>
                            </form>
