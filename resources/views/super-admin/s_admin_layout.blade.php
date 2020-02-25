@@ -232,9 +232,9 @@
                             
                                 <a  href="{{url('snotice')}}">
                                     <div class="btn btn-success new-shadow-sm" style="border-radius: 30px;padding: 5px;">
-                                        <i data-feather="edit" height="20px"></i> 
+                                        <i data-feather="file-text" height="20px"></i> 
                                     </div>
-                                    <span class="hover-me-sm badge badge-soft-success badge-pill px-3 py-2 font-size-13  mb-2">Add Notice</span>
+                                    <span class="hover-me-sm badge badge-soft-success badge-pill px-3 py-2 font-size-13  mb-2">Send Notice</span>
                                 </a>
                                 <a  href="{{url('new_cod')}}">
                                     <div class="btn btn-warning new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
@@ -244,13 +244,13 @@
                                 </a>
                                 <a  href="{{url('check_logs')}}">
                                     <div class="btn btn-info new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
-                                        <i data-feather="file-text" height="20px"></i>
+                                        <i data-feather="list" height="20px"></i>
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-info badge-pill px-3 py-2 font-size-13 ">Check Logs</span> 
                                 </a>
                                 <a  href="{{url('add_student')}}">
                                     <div class="btn btn-primary new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
-                                        <i data-feather="user-plus" height="20px"></i>
+                                        <i data-feather="users" height="20px"></i>
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-primary badge-pill px-3 py-2 font-size-13 ">Add Student</span> 
                                 </a>
