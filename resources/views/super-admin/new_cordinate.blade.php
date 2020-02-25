@@ -60,7 +60,7 @@
             color: #43d39e;
         }
 
-        .my-avatar input[type="radio"][class="myCheckbox"] {
+        .my-avatar input[type="checkbox"][class="myCheckbox"] {
         display: none;
         }
 
@@ -92,6 +92,12 @@
         :checked + label img {
         transform: scale(0.95);
         }
+        @media(max-width:568px)
+        {
+            .my-avatar img{
+                height:35px;
+            }
+        }
     </style>
 @endsection
 @section('my-content')
@@ -108,7 +114,7 @@
                             </h4>
                             <form action="#">
                                 
-                                    <div class="col-md-12 mt-2">
+                                    <div class="col-md-12 mt-2  px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">Co-ordinator Name</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
@@ -116,52 +122,54 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 px-sm-2 px-0">
                                     <label class="col-form-label font-size-14">Select Avatar</label>
-                                    <div class="row justify-content-between align-items-center align-items-md-end mx-0">
-                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="row justify-content-between align-items-center align-items-md-end mx-0 mx-sm-0">
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-12 px-sm-2 px-0">
                                         <div class="pt-0">
-                                            <label for="file-upload" class=" custom-file-upload rounded">
-                                                <i data-feather="camera"></i>
-                                                <span class="mx-2">Upload Picture</span>
+                                            <label for="photo-upload" class="custom-file-upload rounded">
+                                                <i id="camera" data-feather="camera"></i>
+                                                <span id="up" class="mx-2">Upload Picture</span>
                                             </label>
 
-                                            <input id="file-upload" name="" type="file" />
+                                            <input id="photo-upload" name="photo-upload" type="file" />
                                         </div>
+                                        
                                     </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-12 row justify-content-between mx-0">
+                                    
+                                    <div class="col-lg-8 col-md-12 col-sm-12 row justify-content-around justify-content-sm-between mx-sm-0 px-sm-2 px-0 ml-0">
                                         <div class="my-avatar">
-                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox1" />
+                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox1" />
                                             <label for="myCheckbox1">
                                             <img src="{{asset('assets/images/avatars/child (1).svg')}}" height="55px" />
                                             </label>
                                         </div>
                                         <div class="my-avatar">
-                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox2" />
+                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox2" />
                                             <label for="myCheckbox2">
                                             <img src="{{asset('assets/images/avatars/child.svg')}}" height="55px" />
                                             </label>
                                         </div>
                                         <div class="my-avatar">
-                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox3" />
+                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox3" />
                                             <label for="myCheckbox3">
                                             <img src="{{asset('assets/images/avatars/girl.svg')}}" height="55px" />
                                             </label>
                                         </div>
                                         <div class="my-avatar">
-                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox4" />
+                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox4" />
                                             <label for="myCheckbox4">
                                             <img src="{{asset('assets/images/avatars/professor.svg')}}" height="55px" />
                                             </label>
                                         </div>
                                         <div class="my-avatar">
-                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox5" />
+                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox5" />
                                             <label for="myCheckbox5">
                                             <img src="{{asset('assets/images/avatars/teacher.svg')}}" height="55px" />
                                             </label>
                                         </div>
                                         <div class="my-avatar">
-                                            <input type="radio" name="m-avatar" class="myCheckbox" id="myCheckbox6" />
+                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox6" />
                                             <label for="myCheckbox6">
                                             <img src="{{asset('assets/images/avatars/woman.svg')}}" height="55px" />
                                             </label>
@@ -172,8 +180,8 @@
                                     </div>
                                
                                 
-                                <div class="form-group row mx-0">
-                                    <div class="col-sm-12 col-md-6">
+                                <div class="form-group row mx-0 mx-sm-0 px-sm-2">
+                                    <div class="col-sm-12 col-md-6 px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">
                                         Email</label>
                                         <div class="form-group has-icon d-flex align-items-center">
@@ -182,7 +190,7 @@
                                         </div>
                                      
                                     </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-sm-12 col-md-6 px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">Contact No.</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
@@ -192,8 +200,8 @@
                                    
                                 </div>
 
-                                <div class="form-group mt-2 row mx-0">
-                                    <div class="col-sm-6">
+                                <div class="form-group mt-2 row mx-0 mx-sm-0 ">
+                                    <div class="col-sm-6 px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">Event Catagory</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
@@ -206,7 +214,7 @@
                                         </div>
                                      
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">Password</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="key" class="form-control-icon ml-2" height="19px"></i>
@@ -236,26 +244,71 @@
 <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script> 
     <script>
     $(document).ready(function() {
-        // this is for select tag
-        $('.select-me').niceSelect();
-        // end here
+       
+            $('#photo-upload').click(function(){
+                if($('.myCheckbox').is(":checked"))
+                {
+                    $('#photo-upload').prop("disabled", true);
+                }
+                else {
+                    $('#photo-upload').removeAttr("disabled");
+                
+                }
+                
+            });
+       
+            $('.myCheckbox').change(function(){
+                
+                if($('#photo-upload').prop("disabled", true))
+                {
+                    $('#photo-upload').removeAttr("disabled");
+                }
+            });
+            
+            $('#photo-upload').change(function(){
+                if($('#photo-upload').val() !="")
+                {
+                    $('#up,#camera').hide();
+                    
+                }
+            });
 
-        // this is for avatar raddio
-        var allRadios = document.getElementsByName('m-avatar');
-        var booRadio;
-        var x = 0;
-        for(x = 0; x < allRadios.length; x++){
-        allRadios[x].onclick = function() {
-            if(booRadio == this){
-            this.checked = false;
-            booRadio = null;
-            } else {
-            booRadio = this;
-            }
-        };
-        } 
-
-        // avatar radio end
     });
+    </script>
+    <script>
+    // to create avatar as checkbox
+        $("input:checkbox").on('click', function() {
+        // in the handler, 'this' refers to the box clicked on
+        var $box = $(this);
+        if ($box.is(":checked")) {
+            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            $(group).prop("checked", false);
+            $box.prop("checked", true);
+        } else {
+            $box.prop("checked", false);
+        }
+        });
+    // $(document).ready(function() {
+    //     // this is for select tag
+    //     $('.select-me').niceSelect();
+    //     // end here
+
+    //     // this is for avatar raddio
+    //     var allRadios = document.getElementsByName('m-avatar');
+    //     var booRadio;
+    //     var x = 0;
+    //     for(x = 0; x < allRadios.length; x++){
+    //     allRadios[x].onclick = function() {
+    //         if(booRadio == this){
+    //         this.checked = false;
+    //         booRadio = null;
+    //         } else {
+    //         booRadio = this;
+    //         }
+    //     };
+    //     } 
+
+    //     // avatar radio end
+    // });
     </script>
 @endsection
