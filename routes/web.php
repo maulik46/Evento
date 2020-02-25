@@ -168,6 +168,9 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
         route::view('admin_profile','super-admin/admin_profile');
 
+        route::view('add_student', 'super-admin/add_student');
+
+
     });
 
 // xxxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
