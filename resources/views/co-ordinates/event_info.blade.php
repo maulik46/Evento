@@ -1,5 +1,6 @@
 @extends('co-ordinates/cod_layout')
 @section('title','Event Information')
+
 @section('my-content')
             <div class="d-flex justify-content-center">
                 <div class="container-fluid col-lg-6 col-md-9 col-sm-10">
@@ -7,6 +8,11 @@
                         <a href="{{url('cindex')}}" class="text-right text-dark p-2">
                             <i data-feather="x-circle" id="close-btn" height="20px"></i>
                         </a>
+                        <div class="position-absolute print-btn bg-success new-shaow-sm" style="padding:0.5rem 0.3rem;top: 15%;left:100%;width:0px;border-radius:0px 5px 5px 0px;" data-toggle="tooltip" data-placement="left" title="Print">
+                            <a href="#" class="printer">
+                                <i data-feather="printer" class="text-white"></i>
+                            </a>
+                        </div>
                         <div class="card-body px-2">
                             <div class="text-center">
                               <h2 class="font-weight-light"> {{ucfirst($einfo['ename'])}}</h2>
@@ -61,18 +67,29 @@
                                     <span>{{ucfirst($einfo['place'])}}</span>
                                 </p>
                             </div>
+                        
                         </div>
                         
                     </div>
-                    <!-- <button class="btn btn-success new-shadow rounded-sm font-weight-bold font-size-15 px-4">
-                        <span>Print Details </span>
-                        <i data-feather="printer" height="20px"></i>
-                    </button> -->
-                    <div class="position-fixed" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left" title="Print">
-                        <a href="#" >
-                            <img src="{{asset('assets/images/svg-icons/co-ordinate/print.svg')}}" class="hover-me-sm rounded-circle" height="55px" alt="">
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
+@endsection
+
+@section('head-tag-links')
+<style>
+.printer{
+    visibility:hidden;
+}
+.print-btn:hover .printer,
+.card:hover .printer{
+    visibility:visible;
+}
+.card:hover .print-btn,
+.print-btn:hover{
+    width:55px!important;
+    padding:0.5rem 0.9rem!important;
+    transition:0.2s ease-out;
+}
+</style>
 @endsection
