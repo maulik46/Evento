@@ -167,19 +167,18 @@
             @if($c<=$count) 
             <div class="card new-shadow-sm my-2 hover-me-sm"
                 style="border-left: 3px solid #ff5c75;border-radius:0px 10px 10px 0px;">
-                @else
-                <div class="card new-shadow-sm my-2 hover-me-sm" style="border-left: 3px solid #1AE1AC;border-radius:0px 10px 10px 0px;">
-                    @endif
-                    <div class="card-body py-0 px-2">
-                        <div class="d-flex justify-content-between align-items-center flex-wrap" style="margin:-10px 0px;">
-                            <span
-                                class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}
-                            </span>
-                            <div class="d-flex align-items-end flex-column flex-wrap">
-                                <h6>{{ucfirst($nt->sender)}}</h6>
-                                <span class="badge badge-warning text-white badge-pill" style="padding: 0.3em 0.6rem">Admin</span>
-                            </div>    
-                        </div>
+            @else
+            <div class="card new-shadow-sm my-2 hover-me-sm" style="border-left: 3px solid #1AE1AC;border-radius:0px 10px 10px 0px;">
+            @endif
+            <div class="card-body py-0 px-2">
+                <div class="d-flex justify-content-between align-items-center flex-wrap" style="margin:-10px 0px;">
+                    <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}
+                    </span>
+                    <div class="d-flex align-items-end flex-column flex-wrap">
+                        <h6>{{ucfirst($nt->sender)}}</h6>
+                        <span class="badge badge-warning text-white badge-pill" style="padding: 0.3em 0.6rem">Admin</span>
+                    </div>    
+                </div>
                         <div>
                             <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
                             <div class="card-text mb-2 rounded p-2" style="border:1px solid #d3d3d369;">
@@ -202,11 +201,13 @@
 
                                 @endif
                         </div>
-                    </div>
-                </div>
-                @endforeach
+            </div>
+            </div>
+            @endforeach
 
+            </div>
         </div>
+       
     </div>
     <!-- inbox Right-bar -->
 
@@ -233,37 +234,37 @@
                                     <div class="btn btn-success new-shadow-sm" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="edit" height="20px"></i> 
                                     </div>
-                                    <span class="hover-me-sm badge badge-soft-success badge-pill px-3 py-2 font-size-13 new-shadow-sm mb-2">Add Notice</span>
+                                    <span class="hover-me-sm badge badge-soft-success badge-pill px-3 py-2 font-size-13  mb-2">Add Notice</span>
                                 </a>
                                 <a  href="{{url('new_cod')}}">
                                     <div class="btn btn-warning new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="user-plus" height="20px"></i>
                                     </div>
-                                    <span class="hover-me-sm badge badge-soft-warning badge-pill px-3 py-2 font-size-13 new-shadow-sm">Add Co-ordinator</span> 
+                                    <span class="hover-me-sm badge badge-soft-warning badge-pill px-3 py-2 font-size-13 ">Add Co-ordinator</span> 
                                 </a>
                                 <a  href="{{url('check_logs')}}">
                                     <div class="btn btn-info new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="file-text" height="20px"></i>
                                     </div>
-                                    <span class="hover-me-sm badge badge-soft-info badge-pill px-3 py-2 font-size-13 new-shadow-sm">Check Logs</span> 
+                                    <span class="hover-me-sm badge badge-soft-info badge-pill px-3 py-2 font-size-13 ">Check Logs</span> 
                                 </a>
-                                <a  href="{{url('new_cod')}}">
+                                <a  href="{{url('add_student')}}">
                                     <div class="btn btn-primary new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="user-plus" height="20px"></i>
                                     </div>
-                                    <span class="hover-me-sm badge badge-soft-primary badge-pill px-3 py-2 font-size-13 new-shadow-sm">Add Student</span> 
+                                    <span class="hover-me-sm badge badge-soft-primary badge-pill px-3 py-2 font-size-13 ">Add Student</span> 
                                 </a>
                                 <a  href="{{url('approval')}}">
                                     <div class="btn btn-danger new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="check-square" height="20px"></i>
                                     </div>
-                                    <span class="hover-me-sm badge badge-soft-danger badge-pill px-3 py-2 font-size-13 new-shadow-sm">Approve Events</span> 
+                                    <span class="hover-me-sm badge badge-soft-danger badge-pill px-3 py-2 font-size-13 ">Approve Events</span> 
                                 </a>
                                 <a  href="{{url('new_cod')}}">
                                     <div class="btn new-shadow-sm mt-2 text-white" style="border-radius: 30px;padding: 5px;background:var(--orange);">
                                         <i data-feather="bar-chart-2" height="20px"></i>
                                     </div>
-                                    <span class="hover-me-sm badge badge-soft-orange badge-pill px-3 py-2 font-size-13 new-shadow-sm" >Filter Records</span> 
+                                    <span class="hover-me-sm badge badge-soft-orange badge-pill px-3 py-2 font-size-13 " >Filter Records</span> 
                                 </a>
                         </div>
                     </div>
