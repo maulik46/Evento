@@ -15,6 +15,7 @@
         color:var(--dark);
         margin-right: 6px;
     }
+    
 </style>
 @endsection
 @section('my-content')
@@ -47,7 +48,7 @@
             </div>
             <hr class="my-0">
             <div class="row justify-content-between align-items-end">
-                <div class="card-text col-sm-9 col-12">
+                <div class="card-text col-xl-8 col-md-6 c col-12">
                     <div>
                         <span>Event Co-ordinator</span>  {{ucfirst($del['cname'])}}
                     </div>
@@ -59,14 +60,13 @@
                     </div>
                     
                 </div>  
-                <div class="col-sm-3 col-12">
-                    <a href="#" onclick="return confirm('<?php echo ucfirst($del['ename'])?>','<?php echo encrypt($del['eid'])?>','cal')" class="m-1 btn btn-default btn-sm  btn-rounded float-right font-weight-bold px-4 text-danger" style="border:2px solid var(--danger);">
-                        <span>Cancel</span>    
+                <div class="col-xl-4 col-md-6  col-12 d-flex align-items-center justify-content-end">
+                    <a href="" onclick="return confirm('<?php echo ucfirst($del['ename'])?>','<?php echo encrypt($del['eid'])?>','del')" class="m-1 btn btn-block btn-danger btn-sm  btn-rounded float-right font-weight-bold px-3" >
+                        <span>Delete Event</span>    
                     </a>
-                    <a href="" onclick="return confirm('<?php echo ucfirst($del['ename'])?>','<?php echo encrypt($del['eid'])?>','del')" class="m-1 btn btn-danger btn-sm  btn-rounded float-right font-weight-bold px-4" >
-                        <span>Delete</span>    
+                    <a href="#" onclick="return confirm('<?php echo ucfirst($del['ename'])?>','<?php echo encrypt($del['eid'])?>','cal')" class="m-1 btn btn-block btn-default btn-sm  btn-rounded float-right font-weight-bold px-3 text-danger cancel-btn" style="border:2px solid var(--danger);">
+                        <span>Cancel Request</span>    
                     </a>
-                    
                 </div>
             </div>
         </div>
