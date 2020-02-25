@@ -51,6 +51,20 @@
     </script>
 </head>
 <body data-layout="topnav" class="body-scroll" style="height: 90vh!important;"> 
+@if(Session::has('success'))
+           
+           <div class="toast bg-info fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+               <div class="toast-body text-white alert mb-1">
+                   <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                       <i data-feather="x-circle" id="close-btn" height="18px" ></i>
+                   </a>
+                   <div class="mt-2 font-weight-bold font-size-14">
+                       {{Session::get('success')}}
+                   </div> 
+                   
+               </div>
+           </div>
+@endif
     <div class="wrapper ">
         <div class="navbar navbar-expand flex-column flex-md-row navbar-custom position-fixed w-100 new-shadow-sm" style="height: 60px;">
             <div class="container-fluid">
