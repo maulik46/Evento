@@ -184,12 +184,13 @@ img{
       z-index: 999;
       width: auto;
       height: auto;
-      display: flex;
+      display: none;
       flex-direction: column;
       /* justify-content: center; */
       align-items: start;
       padding: 10px;
       background: rgb(255, 255, 255);
+      background-clip:padding-box;
   }
 
   #menu-list a {
