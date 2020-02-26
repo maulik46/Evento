@@ -316,7 +316,7 @@
     <script>
 
     $(document).ready(function(){
-        $('#menu-list,#menu-overlay,#close').hide();
+        $('#menu-overlay,#close').hide();
         $('#menu-btn').click(function(){
             $('#menu-list').fadeIn(200);
 
