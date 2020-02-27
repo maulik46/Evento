@@ -97,7 +97,7 @@
                         <img src="{{asset('assets/images/avatars/woman.svg')}}" class="avatar-md d-block mx-auto" alt="User" />
                     @endif
 
-                        <div class="media-body mx-auto mt-3 font-weight-bold" data-toggle="tooltip" data-placement="bottom" title="Profile">
+                        <div class="media-body mx-auto mt-3 font-weight-bold text-center">
                             <a href="#" class="pro-user-name text-dark user-link font-size-16">
                                 {{ucfirst(Session::get('sname'))}}
                             </a>
