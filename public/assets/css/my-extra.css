@@ -114,6 +114,13 @@ img{
 
  /* icon with input tag over */
 
+/* notice text editor css */
+.note-editor.note-airframe,
+.note-editor.note-frame {
+    border: 1px solid #a9a9a969!important;
+}
+/* notice text editor css end */
+
 /* particular div scrollbar css start */
 
 .my-scroll::-webkit-scrollbar {
