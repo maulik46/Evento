@@ -3,6 +3,7 @@
 @section('title','Create Notice')
 
 @section('head-tag-links')
+<link href="{{asset('assets/libs/summernote/summernote-bs4.min.css')}}" rel="stylesheet" type="text/css" />
     <style>
         .form-control{
         border-radius: .15rem;
@@ -43,7 +44,7 @@
 
 @section('my-content')        
         <div class="container col-lg-6">
-                    <div class="card mt-5 new-shadow rounded-lg">
+                    <div class="card new-shadow rounded-lg">
                         <div class="card-body px-lg-4">
                             <a href="{{url('/cindex')}}" class="float-right text-dark">
                                 <i data-feather="x-circle" id="close-btn" height="20px"></i>
@@ -69,10 +70,8 @@
                                 
                                 <div class="form-group">
                                     <label class="col-form-label font-size-14">Notice Content</label>
-                                    <div class="form-group has-icon d-flex">
-                                          <i data-feather="edit" class="form-control-icon ml-2" height="19px" style="margin-top: 13px;"></i>
-                                        <textarea class="form-control" name="message" id="message" rows="6" maxlength=550
-                                            placeholder="Enter Notice Content..."></textarea>
+                                    <div class="form-group w-100">
+                                        <textarea class="summernote" name="message" id="message"></textarea>
                                             
                                     </div>
                                 </div>
@@ -120,6 +119,22 @@
         </div>
 @endsection        
 @section('extra-scripts')
+<script src="{{asset('assets/libs/summernote/summernote-bs4.min.js')}}"></script>
+<script>
+$('.summernote').summernote({
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+                ['font', ['bold', 'underline', 'clear','fontsize','height']],
+                
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link']],
+                ['view', ['undo','redo','fullscreen']],
+                ],
+        placeholder:'Enter Notice Content...'
+});
+</script>
 <script>
     function check()
     {
