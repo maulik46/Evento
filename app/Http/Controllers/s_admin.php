@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use validator;
 use App\tblevent;
 use App\notice;
+use App\tblstudent;
 use App\tblcoordinaters;
 use App\participant;
 use App\log;
 use App\admin;
 use Cookie;
 use Session;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ImportStudent;
 class s_admin extends Controller
 {
     public function checklogin(Request $req)
@@ -177,5 +180,21 @@ class s_admin extends Controller
         }
         $del_event=\DB::table('tblapproval')->where('eid',$e_id)->delete();
         return back();
+    }
+     public function mail($to_name,$to_email,$data)
+    {
+        \Mail::send('del_email',$data,function($message) use ($to_name, $to_email){
+                $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+                ->from("eventoitsol@gmail.com", $name = "Evento")
+                ->subject("Event cancelled")->bcc($to_email);
+            });
+    }
+    public function import(Request $request)
+    {
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+        Excel::import(new ImportStudent, request()->file('import_file'));
+        return back()->with('success', 'Student record inserted successfully.');
     }
 }

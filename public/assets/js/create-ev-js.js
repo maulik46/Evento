@@ -159,7 +159,7 @@ function getMessage() {
             $('#sdate').parent().next().text("Please enter Registration Start Date");
             f = 1;
         } 
-        else if (edate < sdate || today > sdate) {
+        else if (edate <= sdate || today > sdate) {
             $('#sdate').parent().addClass('border border-danger');
             $('#sdate').parent().next().text("Starting date of registration should be before the event date and after today ");
             f = 1;
@@ -173,7 +173,7 @@ function getMessage() {
             $('#ldate').parent().next().text("Please enter Last date of Registration ");
             f = 1;
         } 
-        else if (ldate < sdate || edate < ldate) {
+        else if (ldate < sdate || edate <= ldate) {
             $('#ldate').parent().addClass('border border-danger');
             $('#ldate').parent().next().text(
             "End date of registration should be before the event date  and after start date of registration");
@@ -230,6 +230,13 @@ function getMessage() {
         {
             $('#max-team').parent().addClass('border border-danger');
             $('#max-team').parent().next().text("Please enter maximum team");
+            f = 1;
+        }
+
+        if($('#max-team').val()<=1)
+        {
+            $('#max-team').parent().addClass('border border-danger');
+            $('#max-team').parent().next().text("Maximum limit should be more than one");
             f = 1;
         }
 

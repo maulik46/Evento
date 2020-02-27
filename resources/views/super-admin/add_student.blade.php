@@ -68,18 +68,46 @@
 </style>
 @endsection
 @section('my-content')
-<div class="content d-flex justify-content-center">
-    <div class="container-fluid col-xl-9 col-lg-10 col-md-12">
-        <div class="card new-shadow rounded-lg mt-2">
-            <div class="card-body px-lg-3">
-                <a href="{{url('/sindex')}}" class="d-flex justify-content-end text-dark">
-                    <i data-feather="x-circle" id="close-btn" height="18px"></i>
-                </a>
-                <h4 class="my-3 text-dark d-flex align-items-center justify-content-center">
-                    <i data-feather="user-plus"></i>
-                    <span class="ml-2">Add new student</span>
-                </h4>
-                <form action="#">
+@if ($errors->any())
+    <div class="bg-danger fade show border-0 new-shadow rounded-0 position-fixed w-100" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="z-index:99999;top:73px;left:0px">
+        <div class="text-white alert mb-1">
+            <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                <i data-feather="x-circle"  height="20px" ></i>
+            </a>
+            <div class="font-weight-bold font-size-16 text-center">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            </div> 
+        </div>
+    </div>
+@endif
+@if($message = Session::get('success'))
+    <div class="bg-success fade show border-0 new-shadow rounded-0 position-fixed w-100" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="z-index:99999;top:73px;left:0px">
+        <div class="text-white alert mb-1">
+            <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                <i data-feather="x-circle"  height="20px" ></i>
+            </a>
+            <div class="font-weight-bold font-size-16 text-center">
+            <strong>{{ $message }}</strong>
+            </div> 
+        </div>
+    </div>
+@endif
+    <div class="content d-flex justify-content-center">
+        <div class="container-fluid col-xl-9 col-lg-10 col-md-12">
+            <div class="card new-shadow rounded-lg mt-2">
+                <div class="card-body px-lg-3">
+                    <a href="{{url('/sindex')}}" class="d-flex justify-content-end text-dark">
+                        <i data-feather="x-circle" id="close-btn" height="18px"></i>
+                    </a>
+                    <h4 class="my-3 text-dark d-flex align-items-center justify-content-center">
+                        <i data-feather="user-plus"></i>
+                        <span class="ml-2">Add new student</span>
+                    </h4>
+                    <form action="#">
                     <div class="row mx-0">
                         <div class="col-md-7 mt-2">
                             <label class="col-form-label font-size-14">
@@ -211,14 +239,15 @@
         <a href="#" id="close-upload-form" class="mb-3 d-flex justify-content-end text-dark" style="margin-top:-10px;">
             <i data-feather="x-circle" id="close-btn" height="18px"></i>
         </a>
-        <form>
+        <form action="{{ url('import-excel') }}" method="POST" name="importform" enctype="multipart/form-data">
+        @csrf
             <div class="card new-shadow-sm hover-me-sm mb-0" id="upload-plus-btn">
                 <label for="file-upload"
                     class="custom-file-upload w-100 d-flex align-items-center justify-content-center overflow-auto">
                     <i data-feather="upload" class="mt-2"></i>
                     <span class="mt-2 ml-2">Upload your excel file from here</span>
                 </label>
-                <input id="file-upload" name="" type="file" />
+                <input id="file-upload" name="import_file" type="file" />
             </div>
             <div class="text-center mt-3" style="cursor:pointer;" id="re-upload">
                 <i data-feather="refresh-cw" id="close-btn"></i>
@@ -226,6 +255,7 @@
             <button type="submit"
                 class="mt-3 upl btn btn-success px-3 new-shadow-sm hover-me-sm font-weight-bold rounded-sm">Upload</button>
         </form>
+        <a href="{{asset('demo')}}/studnetrec.xlsx">Demo excel file</a>
     </div>
 </div>
 <!-- end right side buttons div -->
