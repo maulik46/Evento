@@ -101,10 +101,8 @@
                                 
                                 <div class="form-group">
                                     <label class="col-form-label font-size-14">Notice Content</label>
-                                    <div class="form-group has-icon d-flex ">
-                                          <i data-feather="edit" class="form-control-icon ml-2" height="19px" style="margin-top: 13px;"></i>
-                                        <textarea id="message" name="message" class="summernote" 
-                                            placeholder="Enter Notice Content..."></textarea>
+                                    <div class="form-group w-100">
+                                        <textarea id="message" name="message" class="summernote"></textarea>
                                     </div>
                                 </div>
                                 <div class="row justify-content-start align-items-center" style="margin-bottom: -25px;">
@@ -146,14 +144,23 @@
 $('.summernote').summernote({
         tabsize: 2,
         height: 120,
+        // toolbar: [
+		// 		['style', ['bold', 'italic', 'underline', 'clear']],
+        //         ['font', ['forecolor']],
+        //         ['fontsize', ['fontsize']],
+        //         ['para', ['ul', 'ol', 'paragraph']],
+        //         ['height', ['height']],
+        //         ['view', ['fullscreen', 'codeview']],
+		// 	],
         toolbar: [
-				['style', ['bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough']],
-                ['fontsize', ['fontsize']],
+                ['font', ['bold', 'underline', 'clear','fontsize','height']],
+                
                 ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']],
-                ['view', ['fullscreen', 'codeview']],
-			]
+                ['table', ['table']],
+                ['insert', ['link']],
+                ['view', ['undo','redo','fullscreen']],
+                ],
+        placeholder:'Enter Notice Content...'
 });
 </script>
 <script>
