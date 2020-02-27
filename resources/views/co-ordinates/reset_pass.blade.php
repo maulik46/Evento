@@ -97,11 +97,7 @@
                                     
                                </div>
                                
-<<<<<<< HEAD
-                               <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-3 mt-1 mb-3" id="submit">
-=======
                                <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-4 mt-1 mb-3" id="submitotp">
->>>>>>> 3a6b0f3f88c0dc0c2116376126d5672321f8fb6f
                                     <span class="font-size-14">Confirm</span>
                                     <i data-feather="check-square" height="20px"></i>
                                </button>
