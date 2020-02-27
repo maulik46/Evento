@@ -4,6 +4,7 @@
 
 @section('head-tag-links')
 <link href="{{asset('assets/libs/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/libs/summernote/summernote-bs4.min.css')}}" rel="stylesheet" type="text/css" />
     <style>
         .nice-select:after {
             border-bottom: 3px solid #999;
@@ -100,9 +101,9 @@
                                 
                                 <div class="form-group">
                                     <label class="col-form-label font-size-14">Notice Content</label>
-                                    <div class="form-group has-icon d-flex">
+                                    <div class="form-group has-icon d-flex ">
                                           <i data-feather="edit" class="form-control-icon ml-2" height="19px" style="margin-top: 13px;"></i>
-                                        <textarea id="message" name="message" class="form-control" rows="6"
+                                        <textarea id="message" name="message" class="summernote" 
                                             placeholder="Enter Notice Content..."></textarea>
                                     </div>
                                 </div>
@@ -139,6 +140,22 @@
 @endsection
 @section('extra-scripts')
 <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script> 
+
+<script src="{{asset('assets/libs/summernote/summernote-bs4.min.js')}}"></script>
+<script>
+$('.summernote').summernote({
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+				['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough']],
+                ['fontsize', ['fontsize']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['view', ['fullscreen', 'codeview']],
+			]
+});
+</script>
 <script>
 $(document).ready(function() {
         $('.select-me').niceSelect();
