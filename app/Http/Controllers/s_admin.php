@@ -137,7 +137,7 @@ class s_admin extends Controller
         admin::where('aid',Session::get('aid'))->update(['last_noti'=>$las_notice]);
         return response()->json(array('msg'=> $las_notice),200);
     }
-      public function approval()
+    public function approval()
     {
         $apl=tblevent::join('tblapproval','tblapproval.eid','=','tblevents.eid')
         ->join('tblcoordinaters','tblcoordinaters.cid','=','tblapproval.cid')->where('tblevents.clgcode',Session::get('clgcode'))->get()->toarray();
@@ -146,11 +146,36 @@ class s_admin extends Controller
     public function con_del($eid,$y)
     {
         $e_id=decrypt($eid);
-        $del_event=\DB::table('tblapproval')->where('eid',$e_id)->delete();
+        
         if($y=="del")
         {
+            $msg_info=tblevent::join('tblapproval','tblapproval.eid','tblevents.eid')->where('tblevents.eid',$e_id)->first();
+            $message="Event Name    <b>:".ucfirst($msg_info['ename'])."</b><br>Reason       <b>:".ucfirst($msg_info['reason']);
+            
+            
+            $notice=app('App\Http\Controllers\co_ordinate')->notice('Event Canceled','System','System','student-coordinator',$message,"");
+            
+            $tblp=participant::select('senrl')->where('eid',$e_id)->get()->toArray();
+                
+                foreach($tblp as $p)
+                {
+                    
+                        $senrl=explode('-', $p['senrl']);
+
+                        foreach ($senrl as $enrl) {
+                            if ($enrl) {
+                                
+                                $tbls=tblstudent::select('sname', 'email')->where('senrl', $enrl)->get()->first();
+                                $data=array('name'=>'Cancel Event','edate'=>$msg_info['edate'],'ename'=>$msg_info['ename'],'reason'=>$msg_info['reason'],'reciever'=>$tbls['sname']);
+                                $this->mail($tbls['sname'], trim($tbls['email']), $data);
+                            }
+                        }
+                }
             $events=tblevent::where('eid', $e_id)->delete();
+            $del_part=participant::where('eid',$e_id)->delete();
+            
         }
+        $del_event=\DB::table('tblapproval')->where('eid',$e_id)->delete();
         return back();
     }
 }
