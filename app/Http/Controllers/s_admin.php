@@ -189,4 +189,12 @@ class s_admin extends Controller
                 ->subject("Event cancelled")->bcc($to_email);
             });
     }
+    public function import(Request $request)
+    {
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+        Excel::import(new ImportStudent, request()->file('import_file'));
+        return back()->with('success', 'Student record inserted successfully.');
+    }
 }
