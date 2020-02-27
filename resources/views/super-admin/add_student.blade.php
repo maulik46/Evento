@@ -54,7 +54,7 @@
     }
 
     .has-icon .form-control-icon {
-        z-index: 0;
+        z-index: 1;
     }
 
     input[type="file"] {
@@ -85,7 +85,7 @@
                             <label class="col-form-label font-size-14">
                                 Student Name</label>
                             <div class="form-group has-icon d-flex align-items-center">
-                                <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
+                               <img src="{{asset('assets/images/svg-icons/super-admin/student.svg')}}" class="ml-2 form-control-icon" height="20px" alt="">
                                 <input type="text" class="form-control" placeholder="Enter Student Name" />
                             </div>
                         </div>
@@ -104,8 +104,7 @@
                             <label class="col-form-label font-size-14">
                                 Roll no.</label>
                             <div class="form-group has-icon d-flex align-items-center">
-                                <img src="{{asset('assets/images/svg-icons/student-dash/id.svg')}}"
-                                    class="ml-2 form-control-icon" height="20px" alt="">
+                                <img src="{{asset('assets/images/svg-icons/super-admin/rollno.svg')}}" class="ml-2 form-control-icon" height="20px" alt="">
                                 <input type="email" class="form-control" placeholder="Enter Student's Roll no" />
                             </div>
 
@@ -208,7 +207,7 @@
     </div>
     <div id="excel-form-model"
         class="col-lg-4 col-md-5 col-sm-7 col-10 p-4 bg-light position-fixed new-shadow-2 rounded"
-        style="top: 50%;left: 50%;transform: translate(-50%, -40%);display:none">
+        style="top: 50%;left: 50%;transform: translate(-50%, -40%);display:none;z-index:9999;">
         <a href="#" id="close-upload-form" class="mb-3 d-flex justify-content-end text-dark" style="margin-top:-10px;">
             <i data-feather="x-circle" id="close-btn" height="18px"></i>
         </a>
