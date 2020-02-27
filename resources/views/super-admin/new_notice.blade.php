@@ -144,14 +144,6 @@
 $('.summernote').summernote({
         tabsize: 2,
         height: 120,
-        // toolbar: [
-		// 		['style', ['bold', 'italic', 'underline', 'clear']],
-        //         ['font', ['forecolor']],
-        //         ['fontsize', ['fontsize']],
-        //         ['para', ['ul', 'ol', 'paragraph']],
-        //         ['height', ['height']],
-        //         ['view', ['fullscreen', 'codeview']],
-		// 	],
         toolbar: [
                 ['font', ['bold', 'underline', 'clear','fontsize','height']],
                 
