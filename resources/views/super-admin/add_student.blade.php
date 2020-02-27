@@ -255,7 +255,7 @@
             <button type="submit"
                 class="mt-3 upl btn btn-success px-3 new-shadow-sm hover-me-sm font-weight-bold rounded-sm">Upload</button>
         </form>
-        <a href="{{asset('demo')}}/studnetrec.xlsx">Demo excel file</a>
+        <a href="{{asset('demo/studentrec.xlsx')}}">Demo excel file</a>
     </div>
 </div>
 <!-- end right side buttons div -->
