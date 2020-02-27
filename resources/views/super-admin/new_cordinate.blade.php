@@ -125,9 +125,9 @@
                                     <div class="col-md-12 px-sm-2 px-0">
                                     <label class="col-form-label font-size-14">Select Avatar</label>
                                     <div class="row justify-content-between align-items-center align-items-md-end mx-0 mx-sm-0">
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-12 px-sm-2 px-0">
+                                    <div class="col-lg-4 col-md-12 col-12 px-sm-2 px-0">
                                         <div class="pt-0">
-                                            <label for="photo-upload" class="custom-file-upload rounded">
+                                            <label for="photo-upload" class="custom-file-upload rounded overflow-auto">
                                                 <i id="camera" data-feather="camera"></i>
                                                 <span id="up" class="mx-2">Upload Picture</span>
                                             </label>
@@ -249,10 +249,11 @@
                 if($('.myCheckbox').is(":checked"))
                 {
                     $('#photo-upload').prop("disabled", true);
+                    // $('#photo-upload').val('');
                 }
                 else {
                     $('#photo-upload').removeAttr("disabled");
-                
+                    
                 }
                 
             });
@@ -261,17 +262,40 @@
                 
                 if($('#photo-upload').prop("disabled", true))
                 {
-                    $('#photo-upload').removeAttr("disabled");
+                    $('#photo-upload').removeAttr("disabled");   
                 }
+
+                if($('.myCheckbox').is(":checked")){
+                    $('.custom-file-upload').css('color','lightgray');    
+                    $('#photo-upload').val('');
+                }
+                else{
+                    $('.custom-file-upload').css('color','var(--dark-gray)'); 
+                    var i = $(this).prev('label').clone();
+                    var file = $('#photo-upload')[0].files[0].name;
+
+                    //  $('#photo-upload').val('');
+                    //  $('.custom-file-upload').text(file);
+
+                }
+               
+                
             });
             
             $('#photo-upload').change(function(){
                 if($('#photo-upload').val() !="")
                 {
                     $('#up,#camera').hide();
-                    
+                    var i = $(this).prev('label').clone();
+                    var file = $('#photo-upload')[0].files[0].name;
+                    $('.custom-file-upload').text(file);
+                    // $('.myCheckbox').prop("disabled", true);
                 }
             });
+
+            $('h4').click(function(){
+                alert($('#photo-upload').val());
+            })
 
     });
     </script>
