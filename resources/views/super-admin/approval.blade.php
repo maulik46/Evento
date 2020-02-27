@@ -15,7 +15,6 @@
         color:var(--dark);
         margin-right: 6px;
     }
-    
 </style>
 @endsection
 @section('my-content')
@@ -26,7 +25,7 @@
         </a>
         <div class="text-dark d-flex align-items-center justify-content-center p-1">
             <i data-feather="calendar"></i>
-            <span class="h4 text-dark ml-2">Approve Deleted Event</span>
+            <span class="h4 text-dark ml-2">Request for Delete Event</span>
         </div>
     </div>
     <?php $a=0;?>
@@ -48,7 +47,7 @@
             </div>
             <hr class="my-0">
             <div class="row justify-content-between align-items-end">
-                <div class="card-text col-xl-8 col-md-6 c col-12">
+                <div class="card-text col-sm-8 col-12">
                     <div>
                         <span>Event Co-ordinator</span>  {{ucfirst($del['cname'])}}
                     </div>
@@ -60,13 +59,14 @@
                     </div>
                     
                 </div>  
-                <div class="col-xl-4 col-md-6  col-12 d-flex align-items-center justify-content-end">
-                    <a href="" onclick="return confirm('<?php echo ucfirst($del['ename'])?>','<?php echo encrypt($del['eid'])?>','del')" class="m-1 btn btn-block btn-danger btn-sm  btn-rounded float-right font-weight-bold px-3" >
-                        <span>Delete Event</span>    
-                    </a>
-                    <a href="#" onclick="return confirm('<?php echo ucfirst($del['ename'])?>','<?php echo encrypt($del['eid'])?>','cal')" class="m-1 btn btn-block btn-default btn-sm  btn-rounded float-right font-weight-bold px-3 text-danger cancel-btn" style="border:2px solid var(--danger);">
+                <div class="col-sm-4 col-12">
+                    <a href="#" onclick="return confirm('<?php echo ucfirst($del['ename'])?>','<?php echo encrypt($del['eid'])?>','cal')" class="m-1 btn btn-default btn-sm  btn-rounded float-right font-weight-bold px-4 text-danger" style="border:2px solid var(--danger);">
                         <span>Cancel Request</span>    
                     </a>
+                    <a href="" onclick="return confirm('<?php echo ucfirst($del['ename'])?>','<?php echo encrypt($del['eid'])?>','del')" class="m-1 btn btn-danger btn-sm  btn-rounded float-right font-weight-bold px-4" >
+                        <span>Delete Event</span>    
+                    </a>
+                    
                 </div>
             </div>
         </div>
@@ -87,12 +87,12 @@
         var y=0;
         if(val=="del")
         {
-            var msg= "You won't delete Event <b>" + ename + " </b> !!";
-            var btn='Yes, delete it!';
+            var msg= "You want to Delete Event <b>" + ename + " </b> !!";
+            var btn='Yes, Delete it!';
         }
         else
         {
-            var msg= "You won't reject request for delete Event <b>" + ename + " </b> !!";
+            var msg= "You want reject request for delete Event <b>" + ename + " </b> !!";
             var btn='Yes, cancel it!';
         }
         Swal.fire({
