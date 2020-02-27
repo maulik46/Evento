@@ -241,7 +241,7 @@
                                     placeholder="Enter any message or rule.."></textarea>
                             </div>
                             <span class="help-block">
-                                <span>Rules must be seprated by <b>;</b></span>
+                                <span>Rules must be seprated by <b class="text-dark h5"> ;</b></span>
                             </span>
                         </div>
 
