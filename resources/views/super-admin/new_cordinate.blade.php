@@ -243,6 +243,13 @@
 @endsection  
 @section('extra-scripts')
 <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script> 
+<script>
+$(document).ready(function() {
+        // this is for select tag
+        $('.select-me').niceSelect();
+        // end here
+});
+</script>
     <script>
     $(document).ready(function() {
        
@@ -276,7 +283,6 @@
                     $('.custom-file-upload').html('<i id="camera" data-feather="camera"></i><span id="up">&nbsp;&nbsp; Upload Picture</span>&nbsp;&nbsp; ').css('color','var(--dark-gray)'); 
                     feather.replace();
 
-                    
                 }
                
             });
@@ -312,9 +318,7 @@
         }
         });
     // $(document).ready(function() {
-    //     // this is for select tag
-    //     $('.select-me').niceSelect();
-    //     // end here
+     
 
     //     // this is for avatar raddio
     //     var allRadios = document.getElementsByName('m-avatar');
