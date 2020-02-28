@@ -184,6 +184,12 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
         route::view('add_student', 'super-admin/add_student');
 
+        route::get('view_students', 's_admin@view_students');
+
+        route::any('action_update_stud/{senrl}', 's_admin@action_update_stud');
+
+        route::any('update_stud/{senrl}', 's_admin@update_stud');
+
 
     });
 
