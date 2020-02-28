@@ -184,8 +184,8 @@
                                 <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
                                 <select name="s_gender" class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;">
                                     <option value="">Select Gender</option>
-                                    <option value="Sport">Male</option>
-                                    <option value="Cultural">Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
                                 </select>
                             </div>
 
