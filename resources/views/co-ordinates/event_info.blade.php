@@ -1,6 +1,22 @@
 @extends('co-ordinates/cod_layout')
 @section('title','Event Information')
-
+@section('head-tag-links')
+<style>
+    .printer{
+        visibility:hidden;
+    }
+    .print-btn:hover .printer,
+    .card:hover .printer{
+        visibility:visible;
+    }
+    .card:hover .print-btn,
+    .print-btn:hover{
+        width:55px!important;
+        padding:0.5rem 0.9rem!important;
+        transition:0.2s ease-out;
+    }
+</style>
+@endsection
 @section('my-content')
             <div class="d-flex justify-content-center">
                 <div class="container-fluid col-lg-6 col-md-9 col-sm-10">
@@ -76,20 +92,4 @@
             </div>
 @endsection
 
-@section('head-tag-links')
-<style>
-.printer{
-    visibility:hidden;
-}
-.print-btn:hover .printer,
-.card:hover .printer{
-    visibility:visible;
-}
-.card:hover .print-btn,
-.print-btn:hover{
-    width:55px!important;
-    padding:0.5rem 0.9rem!important;
-    transition:0.2s ease-out;
-}
-</style>
-@endsection
+
