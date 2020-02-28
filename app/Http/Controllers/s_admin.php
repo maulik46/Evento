@@ -197,4 +197,42 @@ class s_admin extends Controller
         Excel::import(new ImportStudent, request()->file('import_file'));
         return back()->with('success', 'Student record inserted successfully.');
     }
+    public function view_students()
+    {
+        // Session::get('clgname')
+        
+        $stud = tblstudent::where('clgcode',Session::get('clgcode'))->paginate(3);
+        // return $stud;
+        // exit;
+        $alldata = ['stud' => $stud];
+        return view('super-admin/view_students', $alldata);
+
+    }
+    public function update_stud($en){
+        $en = decrypt($en);
+        $table = tblstudent::where('senrl', $en)->get()->first();
+        return view('super-admin/update_student', ['stud_data' => $table]);
+
+    }
+    public function action_update_stud(Request $req,$en){
+        $en = decrypt($en);        
+        $senrl=$req->s_enrl;
+        $sname=$req->s_name;
+        $rno=$req->s_rollno;
+        $dob=$req->s_dob;
+        $class=$req->s_class;
+        $division=$req->s_division;
+        $email=$req->s_email;
+        $mobile=$req->s_contact;
+        $address=$req->s_address;
+        $gender=$req->s_gender;
+
+        $update = tblstudent::where('senrl', $en)->update(['sname' => $sname, 'rno' => $rno,'dob' => $dob,'class' => $class,'division' => $division,'email' => $email,'mobile' => $mobile,'address' => $address,'gender' => $gender]);
+        if ($update) {
+            session()->flash('msg', 'Record has been updated!!');
+        }
+
+        return redirect(url('/view_students'));
+
+    }
 }
