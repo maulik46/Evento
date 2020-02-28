@@ -108,13 +108,14 @@
                         <span class="ml-2">Add new student</span>
                     </h4>
                     <form action="#">
+                        @csrf
                     <div class="row mx-0">
                         <div class="col-md-7 mt-2">
                             <label class="col-form-label font-size-14">
                                 Student Name</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                <img src="{{asset('assets/images/svg-icons/super-admin/student.svg')}}" class="ml-2 form-control-icon" height="20px" alt="">
-                                <input type="text" class="form-control" placeholder="Enter Student Name" />
+                                <input type="text" name="s_name" class="form-control" placeholder="Enter Student Name" />
                             </div>
                         </div>
                         <div class="col-md-5 mt-2">
@@ -123,7 +124,7 @@
                             <div class="form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/student-dash/id.svg')}}"
                                     class="ml-2 form-control-icon" height="20px" alt="">
-                                <input type="text" class="form-control" placeholder="Enter Enrollment Number" />
+                                <input type="text" name="s_enrl" class="form-control" placeholder="Enter Enrollment Number" />
                             </div>
                         </div>
                     </div>
@@ -133,7 +134,7 @@
                                 Roll no.</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/super-admin/rollno.svg')}}" class="ml-2 form-control-icon" height="20px" alt="">
-                                <input type="email" class="form-control" placeholder="Enter Student's Roll no" />
+                                <input type="text" name="s_rollno" class="form-control" placeholder="Enter Student's Roll no" />
                             </div>
 
                         </div>
@@ -142,7 +143,7 @@
                             <div class="form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/super-admin/class.svg')}}"
                                     class="ml-2 form-control-icon" height="20px" alt="">
-                                <input type="text" class="form-control" placeholder="Enter Student's Class" />
+                                <input type="text" name="s_class" class="form-control" placeholder="Enter Student's Class" />
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-4">
@@ -150,7 +151,7 @@
                             <div class="form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/super-admin/split.svg')}}"
                                     class="ml-2 form-control-icon" height="20px" alt="">
-                                <input type="text" class="form-control" placeholder="Enter Student's Divisions" />
+                                <input type="text" name="s_division" class="form-control" placeholder="Enter Student's Divisions" />
                             </div>
                         </div>
 
@@ -161,7 +162,7 @@
                                 Email</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="email" class="form-control" placeholder="Enter Student's Email" />
+                                <input type="email" name="s_email" class="form-control" placeholder="Enter Student's Email" />
                             </div>
 
                         </div>
@@ -169,7 +170,7 @@
                             <label class="col-form-label font-size-14">Contact No.</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" class="form-control" placeholder="Enter Student's Contact no" />
+                                <input type="text" name="s_contact" class="form-control" placeholder="Enter Student's Contact no" />
                             </div>
                         </div>
 
@@ -181,7 +182,7 @@
                                 Select Gender</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                <select class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;">
+                                <select name="s_gender" class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;">
                                     <option value="">Select Gender</option>
                                     <option value="Sport">Male</option>
                                     <option value="Cultural">Female</option>
@@ -193,7 +194,7 @@
                             <label class="col-form-label font-size-14">Date Of Birth</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" class="form-control basicDate" placeholder="Date Of Birth"
+                                <input type="text" name="s_dob" class="form-control basicDate" placeholder="Date Of Birth"
                                     data-input />
                             </div>
                         </div>
@@ -204,7 +205,7 @@
                             Address</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="map" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="email" class="form-control" placeholder="Enter Student's Address" />
+                            <input type="text" name="s_address" class="form-control" placeholder="Enter Student's Address" />
                         </div>
 
                     </div>
@@ -234,7 +235,7 @@
         </button>
     </div>
     <div id="excel-form-model"
-        class="col-lg-4 col-md-5 col-sm-7 col-10 p-4 bg-light position-fixed new-shadow-2 rounded"
+        class="col-xl-4 col-md-6 col-sm-8 col-10 p-4 bg-light position-fixed new-shadow-2 rounded"
         style="top: 50%;left: 50%;transform: translate(-50%, -40%);display:none;z-index:9999;">
         <a href="#" id="close-upload-form" class="mb-3 d-flex justify-content-end text-dark" style="margin-top:-10px;">
             <i data-feather="x-circle" id="close-btn" height="18px"></i>
@@ -252,10 +253,14 @@
             <div class="text-center mt-3" style="cursor:pointer;" id="re-upload">
                 <i data-feather="refresh-cw" id="close-btn"></i>
             </div>
-            <button type="submit"
-                class="mt-3 upl btn btn-success px-3 new-shadow-sm hover-me-sm font-weight-bold rounded-sm">Upload</button>
+            <div class="d-flex align-items-center justify-content-between flex-wrap">
+                <button type="submit" class="mt-3 upl btn btn-success px-3 new-shadow-sm hover-me-sm font-weight-bold rounded-sm">
+                    Upload
+                </button>
+                <a href="{{asset('demo/studentrec.xlsx')}}" class="mt-3 font-weight-bold text-info">Click to get demo of excel file</a>
+            </div>
         </form>
-        <a href="{{asset('demo/studentrec.xlsx')}}">Demo excel file</a>
+        
     </div>
 </div>
 <!-- end right side buttons div -->
