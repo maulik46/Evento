@@ -229,42 +229,49 @@
                                 
                         </span>
                         <div id="menu-list" class="position-fixed new-shadow-2">
-                            
-                                <a  href="{{url('snotice')}}">
-                                    <div class="btn btn-success new-shadow-sm" style="border-radius: 30px;padding: 5px;">
-                                        <i data-feather="file-text" height="20px"></i> 
+                                
+                                <a  href="{{url('approval')}}">
+                                    <div class="btn btn-danger new-shadow-sm my-1" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="check-square" height="20px"></i>
                                     </div>
-                                    <span class="hover-me-sm badge badge-soft-success badge-pill px-3 py-2 font-size-13  mb-2">Send Notice</span>
+                                    <span class="hover-me-sm badge badge-soft-danger badge-pill px-3 py-2 font-size-13 ">Approve Events</span> 
+                                </a>
+                                <a  href="{{url('add_student')}}">
+                                    <div class="btn btn-primary new-shadow-sm my-1" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="users" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-primary badge-pill px-3 py-2 font-size-13 ">Add Student</span> 
                                 </a>
                                 <a  href="{{url('new_cod')}}">
-                                    <div class="btn btn-warning new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
+                                    <div class="btn btn-warning new-shadow-sm my-1" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="user-plus" height="20px"></i>
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-warning badge-pill px-3 py-2 font-size-13 ">Add Co-ordinator</span> 
                                 </a>
                                 <a  href="{{url('check_logs')}}">
-                                    <div class="btn btn-info new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
+                                    <div class="btn btn-info new-shadow-sm my-1" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="list" height="20px"></i>
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-info badge-pill px-3 py-2 font-size-13 ">Check Logs</span> 
                                 </a>
-                                <a  href="{{url('add_student')}}">
-                                    <div class="btn btn-primary new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
-                                        <i data-feather="users" height="20px"></i>
-                                    </div>
-                                    <span class="hover-me-sm badge badge-soft-primary badge-pill px-3 py-2 font-size-13 ">Add Student</span> 
-                                </a>
-                                <a  href="{{url('approval')}}">
-                                    <div class="btn btn-danger new-shadow-sm mt-2" style="border-radius: 30px;padding: 5px;">
-                                        <i data-feather="check-square" height="20px"></i>
-                                    </div>
-                                    <span class="hover-me-sm badge badge-soft-danger badge-pill px-3 py-2 font-size-13 ">Approve Events</span> 
-                                </a>
+                                
                                 <a  href="{{url('new_cod')}}">
-                                    <div class="btn new-shadow-sm mt-2 text-white" style="border-radius: 30px;padding: 5px;background:var(--orange);">
+                                    <div class="btn new-shadow-sm my-1 text-white" style="border-radius: 30px;padding: 5px;background:var(--orange);">
                                         <i data-feather="bar-chart-2" height="20px"></i>
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-orange badge-pill px-3 py-2 font-size-13 " >Filter Records</span> 
+                                </a>
+                                <a  href="{{url('snotice')}}">
+                                    <div class="btn btn-success new-shadow-sm my-1" style="border-radius: 30px;padding: 5px;">
+                                        <i data-feather="file-text" height="20px"></i> 
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-success badge-pill px-3 py-2 font-size-13">Send Notice</span>
+                                </a>
+                                <a  href="{{url('view_students')}}">
+                                    <div class="btn new-shadow-sm my-1 text-white" style="border-radius: 30px;padding: 5px;background:var(--indigo);">
+                                        <i data-feather="eye" height="20px"></i> 
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-indigo badge-pill px-3 py-2 font-size-13">View Students</span>
                                 </a>
                         </div>
                     </div>
