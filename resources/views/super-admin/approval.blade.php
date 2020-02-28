@@ -25,7 +25,7 @@
         </a>
         <div class="text-dark d-flex align-items-center justify-content-center p-1">
             <i data-feather="calendar"></i>
-            <span class="h4 text-dark ml-2">Request for Delete Event</span>
+            <span class="h4 text-dark ml-2">Request Of Delete Event</span>
         </div>
     </div>
     <?php $a=0;?>
@@ -74,7 +74,7 @@
     @endforeach
     @if($a==0)
     <div class="mt-2 py-5 card text-center new-shadow-sm">
-        <div class="font-weight-bold font-size-16">No events are available to approve!!</div>
+        <div class="font-weight-bold font-size-16">No events are available to delete!!</div>
     </div>
     @endif
 </div>
