@@ -195,7 +195,7 @@ img{
       flex-direction: column;
       /* justify-content: center; */
       align-items: start;
-      padding: 10px;
+      padding: 10px 15px;
       background: rgb(255, 255, 255);
       background-clip:padding-box;
   }
@@ -213,6 +213,11 @@ img{
       background: rgba(247, 126, 83, 0.22) !important;
       color: var(--orange) !important;
   }
+
+   .badge-soft-indigo {
+       background: rgba(151, 112, 241, 0.22) !important;
+       color: var(--indigo) !important;
+   }
 
 /* super admin right side  btn endddd*/
 
