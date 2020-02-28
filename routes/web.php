@@ -183,6 +183,21 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::view('admin_profile','super-admin/admin_profile');
 
         route::view('add_student', 'super-admin/add_student');
+    
+        route::post('/checkenrl','s_admin@checkenrl');
+
+        route::post('/checkemail','s_admin@checkemail');
+
+        route::post('/checkmobile','s_admin@checkmobile');
+
+        route::post('/checkrno','s_admin@checkrno');
+
+        route::post('/studinsrt','s_admin@studinsrt');
+
+        route::get('/check_logs', function(){
+            $logs=log::join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')->where([['tblcoordinaters.clgcode',Session::get('clgcode')],['tbllog.utype','co_ordinatore']])->get()->toarray();
+            return view('super-admin/check_logs',['logs'=>$logs]);
+        });
 
         route::get('view_students', 's_admin@view_students');
 
