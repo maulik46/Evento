@@ -151,7 +151,6 @@
                                     <option value="" hidden>Select Gender</option>
                                     <option value="male" <?php if($stud_data['gender']=="male"){?> selected <?php }?>>Male</option>
                                     <option value="female"  <?php if($stud_data['gender']=="female"){?> selected <?php }?>>Female</option>
-                                    <option value="both"  <?php if($stud_data['gender']=="both"){?> selected <?php }?>>For both</option>
                                 </select>
                             </div>
 
