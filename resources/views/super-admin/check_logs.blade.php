@@ -104,55 +104,23 @@
         </div>
 
     </div>
+    @foreach($logs as $log)
     <div class="card mb-0 mt-3 new-shadow-sm">
         <div class="card-body py-2">
-            <!-- <div class="table-responsive overflow-auto my-scroll" style="max-height: 300px;">
-                <table class="table mb-0">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Co-ordinator</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Action on</th>
-                            <th scope="col">Action</th>
-                            <th scope="col">IP</th>
-                        </tr>
-                        <tr>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Yash Parmar</td>
-                            <td>12/02/2020</td>
-                            <td>
-                                <span class="badge badge-soft-dark badge-pill px-3 py-1">PHP Quiz Event</span>
-                            </td>
-                            <td>
-                                <span class="badge badge-soft-warning badge-pill px-3 py-1">Update</span>
-                            </td>
-                            <td>192.30.58.223</td>
-                        </tr>
-                        <tr >
-                            <td colspan="6" class="font-weight-bold text-dark">Location changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz event</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div><hr> -->
             <div class="row justify-content-between mx-0">
                 <div>
-                <span class="badge badge-info px-3 badge-pill  my-1">12/02/2020</span>
-                <span class="badge badge-soft-primary px-3 badge-pill  my-1">By Yash Parmar</span>
+                <span class="badge badge-info px-3 badge-pill  my-1">{{date('d-m-Y',$log['time'])}}</span>
+                <span class="badge badge-danger px-3 badge-pill  my-1">{{date('h:m:s A',$log['time'])}}</span>
+                <span class="badge badge-soft-primary px-3 badge-pill  my-1">By {{ucfirst($log['cname'])}}</span>
                 </div>
                 <div id="action" class="row justify-content-between mx-0">
                     <div class="mr-1">
                         <span class="badge badge-dark px-3 rounded-0  my-1" style="margin-right:-5px;">Action on</span>
-                        <span class="badge badge-soft-dark px-3 rounded-0">PHP Quiz Event</span>
+                        <span class="badge badge-soft-dark px-3 rounded-0">{{ucfirst($log['action_on'])}}</span>
                     </div>
                     <div class="ml-1">
                         <span class="badge badge-dark px-3 rounded-0  my-1" style="margin-right:-5px;">Action</span>
-                        <span class="badge badge-soft-dark px-3 rounded-0">Update</span>
+                        <span class="badge badge-soft-dark px-3 rounded-0">{{ucfirst($log['action_type'])}}</span>
                     </div>
                 </div>
             </div>
@@ -162,11 +130,14 @@
                 <span class="text-muted more">Location changed to lab 3</span>
                 <div class="float-right">
                     <span class="font-weight-bold">IP</span>
-                    <span class="badge badge-soft-dark badge-pill px-2">192.30.58.223</span>
+                    <span class="badge badge-soft-dark badge-pill px-2">{{$log['ip_add']}}</span>
                 </div>
             </div>
         </div>
+        
     </div>
+    @endforeach
+    
 </div>
 @endsection
 @section('extra-scripts')

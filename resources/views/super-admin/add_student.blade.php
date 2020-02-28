@@ -107,16 +107,17 @@
                         <i data-feather="user-plus"></i>
                         <span class="ml-2">Add new student</span>
                     </h4>
-                    <form action="#">
-                        @csrf
+                    <form action="{{url('studinsrt')}}" method="post" onsubmit="return valid()">
+                    @csrf
                     <div class="row mx-0">
                         <div class="col-md-7 mt-2">
                             <label class="col-form-label font-size-14">
                                 Student Name</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                <img src="{{asset('assets/images/svg-icons/super-admin/student.svg')}}" class="ml-2 form-control-icon" height="20px" alt="">
-                                <input type="text" name="s_name" class="form-control" placeholder="Enter Student Name" />
+                                <input type="text" name="name" id="sname" class="form-control" placeholder="Enter Student Name" />
                             </div>
+                            <span class="text-danger font-weight-bold"></span>
                         </div>
                         <div class="col-md-5 mt-2">
                             <label class="col-form-label font-size-14">
@@ -124,8 +125,9 @@
                             <div class="form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/student-dash/id.svg')}}"
                                     class="ml-2 form-control-icon" height="20px" alt="">
-                                <input type="text" name="s_enrl" class="form-control" placeholder="Enter Enrollment Number" />
+                                <input type="text" id="enrl" onkeyup="checkenrl()" name="enrl" class="form-control" placeholder="Enter Enrollment Number" />
                             </div>
+                            <span class="text-danger font-weight-bold"></span>
                         </div>
                     </div>
                     <div class="form-group row mx-0">
@@ -134,25 +136,27 @@
                                 Roll no.</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/super-admin/rollno.svg')}}" class="ml-2 form-control-icon" height="20px" alt="">
-                                <input type="text" name="s_rollno" class="form-control" placeholder="Enter Student's Roll no" />
+                                <input type="number" name="rno"  id="rno" onkeyup="checkrno()"  class="form-control" placeholder="Enter Student's Roll no" />
                             </div>
-
+                            <span class="text-danger font-weight-bold"></span>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label class="col-form-label font-size-14">Class</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/super-admin/class.svg')}}"
                                     class="ml-2 form-control-icon" height="20px" alt="">
-                                <input type="text" name="s_class" class="form-control" placeholder="Enter Student's Class" />
+                                <input type="text" id="clas" name="clas" onkeyup="checkrno()" class="form-control" placeholder="Enter Student's Class" />
                             </div>
+                            <span class="text-danger font-weight-bold"></span>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label class="col-form-label font-size-14">Division</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/super-admin/split.svg')}}"
                                     class="ml-2 form-control-icon" height="20px" alt="">
-                                <input type="text" name="s_division" class="form-control" placeholder="Enter Student's Divisions" />
+                                <input type="number" id="div" name="div" class="form-control" placeholder="Enter Student's Divisions" />
                             </div>
+                            <span class="text-danger font-weight-bold"></span>
                         </div>
 
                     </div>
@@ -162,16 +166,17 @@
                                 Email</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="email" name="s_email" class="form-control" placeholder="Enter Student's Email" />
+                                <input type="email" name="email" onkeyup="checkemail()"  id="email" class="form-control" placeholder="Enter Student's Email" />
                             </div>
-
+                            <span class="text-danger font-weight-bold"></span>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label class="col-form-label font-size-14">Contact No.</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" name="s_contact" class="form-control" placeholder="Enter Student's Contact no" />
+                                <input type="text" name="mobile" onkeyup="checkmobile()"  id="mobile" class="form-control" placeholder="Enter Student's Contact no" />
                             </div>
+                            <span class="text-danger font-weight-bold"></span>
                         </div>
 
                     </div>
@@ -182,21 +187,21 @@
                                 Select Gender</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                <select name="s_gender" class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;">
+                                <select name="gen" id="gen" class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;">
                                     <option value="">Select Gender</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
                             </div>
-
+                            <span class="text-danger font-weight-bold"></span>
                         </div>
                         <div class="col-sm-6">
                             <label class="col-form-label font-size-14">Date Of Birth</label>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" name="s_dob" class="form-control basicDate" placeholder="Date Of Birth"
-                                    data-input />
+                                <input type="date" name="dob" id="dob" class="form-control basicDate" placeholder="Date Of Birth" data-input />
                             </div>
+                            <span class="text-danger font-weight-bold"></span>
                         </div>
 
                     </div>
@@ -205,9 +210,9 @@
                             Address</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="map" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" name="s_address" class="form-control" placeholder="Enter Student's Address" />
+                            <input type="text" name="add" id="add" class="form-control" placeholder="Enter Student's Address" />
                         </div>
-
+                        <span class="text-danger font-weight-bold"></span>
                     </div>
                     <div class="mt-0 ml-1 row justify-content-start align-items-center">
                         &nbsp;
@@ -235,7 +240,7 @@
         </button>
     </div>
     <div id="excel-form-model"
-        class="col-xl-4 col-md-6 col-sm-8 col-10 p-4 bg-light position-fixed new-shadow-2 rounded"
+        class="col-lg-4 col-md-5 col-sm-7 col-10 p-4 bg-light position-fixed new-shadow-2 rounded"
         style="top: 50%;left: 50%;transform: translate(-50%, -40%);display:none;z-index:9999;">
         <a href="#" id="close-upload-form" class="mb-3 d-flex justify-content-end text-dark" style="margin-top:-10px;">
             <i data-feather="x-circle" id="close-btn" height="18px"></i>
@@ -253,14 +258,10 @@
             <div class="text-center mt-3" style="cursor:pointer;" id="re-upload">
                 <i data-feather="refresh-cw" id="close-btn"></i>
             </div>
-            <div class="d-flex align-items-center justify-content-between flex-wrap">
-                <button type="submit" class="mt-3 upl btn btn-success px-3 new-shadow-sm hover-me-sm font-weight-bold rounded-sm">
-                    Upload
-                </button>
-                <a href="{{asset('demo/studentrec.xlsx')}}" class="mt-3 font-weight-bold text-info">Click to get demo of excel file</a>
-            </div>
+            <button type="submit"
+                class="mt-3 upl btn btn-success px-3 new-shadow-sm hover-me-sm font-weight-bold rounded-sm">Upload</button>
         </form>
-        
+        <a href="{{asset('demo')}}/studentrec.xlsx">Demo excel file</a>
     </div>
 </div>
 <!-- end right side buttons div -->
@@ -307,5 +308,328 @@
         var file = $('#file-upload')[0].files[0].name;
         alert(file);
     })
+</script>
+<script>
+    function valid()
+    {
+        var f=0;
+        var regex = /^[A-Za-z]+$/;
+        $('*').removeClass('border border-danger');
+        if($('#sname').val()=="")
+        {
+            $('#sname').parent().next().html("Please enter valid Student name.");
+            $('#sname').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if(!regex.test($('#sname').val())){
+            $('#sname').parent().next().html("Please enter valid Student name.");
+            $('#sname').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#sname').parent().next().html("");
+        }
+
+
+        regex= /^[Ee]{1}\d{14}$/;
+        if($('#enrl').val()=="")
+        {
+            $('#enrl').parent().next().html("Please enter valid Enrollment number.");
+            $('#enrl').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if(!regex.test($('#enrl').val()))
+        {
+            $('#enrl').parent().next().html("Please enter valid Student name.");
+            $('#enrl').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if ($('#enrl').parent().next().html().length > 0) {
+            $('#enrl').parent().addClass('border border-danger');
+            $('#enrl').parent().next().text("This Enrollment number already available");
+            f = 1;
+        } 
+        else{
+            $('#enrl').parent().next().html("");
+        }
+
+
+       
+        if($('#rno').val()=="")
+        {
+            $('#rno').parent().next().html("Please enter Student Roll no.");
+            $('#rno').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if($('#rno').val()<1)
+        {
+            $('#rno').parent().next().html("Please enter valid Student Division.");
+            $('#rno').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if ($('#rno').parent().next().html().length > 0) {
+            $('#rno').parent().addClass('border border-danger');
+            $('#rno').parent().next().text("This roll no already available for this class");
+            f = 1;
+        } 
+        else{
+            $('#rno').parent().next().html("");
+        }
+        
+
+        regex = /^[A-Za-z]+$/;
+        if($('#clas').val()=="")
+        {
+            $('#clas').parent().next().html("Please enter Student class.");
+            $('#clas').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if(!regex.test($('#clas').val()))
+        {
+            $('#clas').parent().next().html("Please enter valid Student class.");
+            $('#clas').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#clas').parent().next().html("");
+        }
+
+
+        if($('#div').val()=="")
+        {
+            $('#div').parent().next().html("Please enter Student Division.");
+            $('#div').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if($('#div').val() <= 0)
+        {
+            $('#div').parent().next().html("Please enter valid Student Division.");
+            $('#div').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#div').parent().next().html("");
+        }
+
+        regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if($('#email').val()=="")
+        {
+            $('#email').parent().next().html("Please enter Student Email Address.");
+            $('#email').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if(!regex.test($('#email').val()))
+        {
+            $('#email').parent().next().html("Please enter valid email Address.");
+            $('#email').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if ($('#email').parent().next().html().length > 0) {
+            $('#email').parent().addClass('border border-danger');
+            $('#email').parent().next().text("This email addess already taken");
+            f = 1;
+        }
+        else{
+            $('#email').parent().next().html("");
+        }
+
+
+        regex = /^\d*(?:\.\d{1,2})?$/;
+        var mo= $('#mobile').val();
+        if($('#mobile').val()=="")
+        {
+            $('#mobile').parent().next().html("Please enter Student Mobile no.");
+            $('#mobile').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if(!(regex.test($('#mobile').val()) && mo.length == 10))
+        {
+            $('#mobile').parent().next().html("Please enter valid Mobile no.");
+            $('#mobile').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if ($('#mobile').parent().next().html().length > 0) {
+            $('#mobile').parent().addClass('border border-danger');
+            $('#mobile').parent().next().text("This Mobile number already taken");
+            f = 1;
+        }
+        else{
+            $('#mobile').parent().next().html("");
+        }
+
+
+
+        if($('#gen').val()=="")
+        {
+            $('#gen').parent().next().html("Please select gender of student.");
+            $('#gen').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#gen').parent().next().html("");
+        }
+
+        if($('#dob').val()=="")
+        {
+            $('#dob').parent().next().html("Please enter date of birth");
+            $('#dob').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#dob').parent().next().html("");
+        }
+
+
+        if($('#add').val()=="")
+        {
+            $('#add').parent().next().html("Please enter Student Address");
+            $('#add').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else if($('#add').val().length < 8){
+            $('#add').parent().next().html("Address is too short ");
+            $('#add').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#add').parent().next().html("");
+        }
+        if(f==1)
+        {
+            return false;
+        }
+        return true;
+    }
+  
+</script>
+<script>
+  function checkenrl(){
+    
+        var enrl = $('#enrl').val();
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+            type: 'POST',
+            url: '/checkenrl',
+            data: {
+                enrl: enrl
+            },
+            success: function (data) {
+                if(data.msg.length==0)
+                {
+                    $('#enrl').parent().next().html("");
+                    $('#enrl').parent().removeClass('border border-danger');
+                }
+                else
+                {
+                     $('#enrl').parent().next().html(data.msg);
+                     $('#enrl').parent().addClass('border border-danger');
+                     
+                }
+            },
+            error: function (data) {
+            console.log(data);
+            }
+        })
+    }
+    function checkemail(){
+    
+    var email = $('#email').val();
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+$.ajax({
+        type: 'POST',
+        url: '/checkemail',
+        data: {
+            email: email
+        },
+        success: function (data) {
+            if(data.msg.length==0)
+            {
+                $('#email').parent().next().html("");
+                $('#email').parent().removeClass('border border-danger');
+            }
+            else
+            {
+                 $('#email').parent().next().html(data.msg);
+                 $('#email').parent().addClass('border border-danger');
+            }
+        },
+        error: function (data) {
+        console.log(data);
+        }
+    })
+}
+function checkmobile(){
+    
+    var mobile = $('#mobile').val();
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+$.ajax({
+        type: 'POST',
+        url: '/checkmobile',
+        data: {
+            mobile: mobile
+        },
+        success: function (data) {
+            if(data.msg.length==0)
+            {
+                $('#mobile').parent().next().html("");
+                $('#mobile').parent().removeClass('border border-danger');
+            }
+            else
+            {
+                 $('#mobile').parent().next().html(data.msg);
+                 $('#mobile').parent().addClass('border border-danger');
+            }
+        },
+        error: function (data) {
+        console.log(data);
+        }
+    })
+}
+function checkrno(){
+    
+    var rno = $('#rno').val();
+    var clas=$('#clas').val();
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+$.ajax({
+        type: 'POST',
+        url: '/checkrno',
+        data: {
+            rno: rno,
+            clas:clas
+        },
+        success: function (data) {
+            if(data.msg.length==0)
+            {
+                $('#rno').parent().next().html("");
+                $('#rno').parent().removeClass('border border-danger');
+            }
+            else
+            {
+                 $('#rno').parent().next().html(data.msg);
+                 $('#rno').parent().addClass('border border-danger');
+            }
+        },
+        error: function (data) {
+        console.log(data);
+        }
+    })
+}
+
 </script>
 @endsection

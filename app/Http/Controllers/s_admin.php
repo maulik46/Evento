@@ -197,6 +197,65 @@ class s_admin extends Controller
         Excel::import(new ImportStudent, request()->file('import_file'));
         return back()->with('success', 'Student record inserted successfully.');
     }
+    
+    public function checkenrl(Request $req)
+    {
+        $enrl=$req->enrl;
+        $c=tblstudent::where('senrl',$enrl)->count();
+        if($c>0)
+        {
+            return response()->json(array('msg'=> "This Enrollment number already available"),200);
+        }
+        return response()->json(array('msg'=> ""),200);
+    }
+    public function checkemail(Request $req)
+    {
+        $email=$req->email;
+        $c=tblstudent::where('email',$email)->count();
+        if($c>0)
+        {
+            return response()->json(array('msg'=> "This email addess already taken"),200);
+        }
+        return response()->json(array('msg'=> ""),200);
+    }
+    public function checkmobile(Request $req)
+    {
+        $mobile=$req->mobile;
+        $c=tblstudent::where('mobile',$mobile)->count();
+        if($c>0)
+        {
+            return response()->json(array('msg'=> "This Mobile number already taken"),200);
+        }
+        return response()->json(array('msg'=> ""),200);
+    }
+    public function checkrno(Request $req)
+    {
+        $rno=$req->rno;
+        $clas=$req->clas;
+        $c=tblstudent::where([['rno',$rno],['class',$clas]])->count();
+        if($c>0)
+        {
+            return response()->json(array('msg'=> "This roll no already available for this class"),200);
+        }
+        return response()->json(array('msg'=> ""),200);
+    }
+    public function studinsrt(Request $req)
+    {
+        $stud=new tblstudent;
+        $stud->senrl=$req->enrl;
+        $stud->sname=$req->name;
+        $stud->rno=$req->rno;
+        $stud->clgcode=Session::get('clgcode');
+        $stud->dob=date('Y-m-d',strtotime($req->dob));
+        $stud->class=$req->clas;
+        $stud->division=$req->div;
+        $stud->email=$req->email;
+        $stud->mobile=$req->mobile;
+        $stud->address=$req->add;
+        $stud->gender=$req->gen;
+        $stud->save();
+        return back()->with('success', 'Student record inserted successfully.');
+    }
     public function view_students()
     {
         // Session::get('clgname')
