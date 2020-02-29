@@ -294,4 +294,69 @@ class s_admin extends Controller
         return redirect(url('/view_students'));
 
     }
+      public function filterlog(Request $req)
+    {
+        $cid=$req->cid;
+        $sdate=$req->sdate;
+        $ldate=$req->ldate;
+        if($cid=="all")
+        {
+            $cid='%%';
+        }
+        if($ldate=="")
+        {
+            $ldate=time();
+        }
+        else{
+            $ldate=strtotime("+1 day", strtotime($ldate));
+        }
+        if($sdate=="")
+        {
+            $sdate=0;
+        }
+        else{
+            $sdate=strtotime($sdate);
+        }
+        $logs=log::join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')
+        ->where([['tblcoordinaters.clgcode',Session::get('clgcode')],
+        ['tbllog.utype','co-ordinatore'],
+        ['tblcoordinaters.cid','LIKE',$cid],
+        ['tbllog.time','>=',$sdate],['tbllog.time','<=',$ldate]])->orderby('time','desc')->get()->toarray();
+        $msg="";
+        foreach($logs as $log){
+        $msg.='<div class="card mb-0 mt-3 new-shadow-sm">
+            <div class="card-body py-2">
+                <div class="row justify-content-between mx-0">
+                    <div>
+                    <span class="badge badge-info px-3 badge-pill  my-1">'.date('d-m-Y',$log['time']).'</span>
+                    <span class="badge badge-danger px-3 badge-pill  my-1">'.date('h:m:s A',$log['time']).'</span>
+                    <span class="badge badge-soft-primary px-3 badge-pill  my-1">By '.ucfirst($log['cname']).'</span>
+                    </div>
+                    <div id="action" class="row justify-content-between mx-0">
+                        <div class="mr-1">
+                            <span class="badge badge-dark px-3 rounded-0  my-1" style="margin-right:-5px;">Action on</span>
+                            <span class="badge badge-soft-dark px-3 rounded-0">'.ucfirst($log['action_on']).'</span>
+                        </div>
+                        <div class="ml-1">
+                            <span class="badge badge-dark px-3 rounded-0  my-1" style="margin-right:-5px;">Action</span>
+                            <span class="badge badge-soft-dark px-3 rounded-0">'.ucfirst($log['action_type']).'</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-text">
+                    
+                    <div class="text-dark font-size-15 font-weight-bold">Location changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz</div>
+                    <span class="text-muted more">Location changed to lab 3</span>
+                    <div class="float-right">
+                        <span class="font-weight-bold">IP</span>
+                        <span class="badge badge-soft-dark badge-pill px-2">'.$log['ip_add'].'</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>';
+        }
+        $msg.='<div class="mt-3">'.$logs->links().'</div>';
+        return response()->json(array('msg'=>$msg),200);
+    }
 }
