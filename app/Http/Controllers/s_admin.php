@@ -319,7 +319,7 @@ class s_admin extends Controller
         }
         $logs=log::join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')
         ->where([['tblcoordinaters.clgcode',Session::get('clgcode')],
-        ['tbllog.utype','co_ordinatore'],
+        ['tbllog.utype','co-ordinatore'],
         ['tblcoordinaters.cid','LIKE',$cid],
         ['tbllog.time','>=',$sdate],['tbllog.time','<=',$ldate]])->orderby('time','desc')->get()->toarray();
         $msg="";
