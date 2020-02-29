@@ -197,7 +197,7 @@ Route::group(['middleware' => 'admin_session_check'], function () {
           route::get('/check_logs', function(){
             $logs=log::join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')
             ->where([['tblcoordinaters.clgcode',Session::get('clgcode')],['tbllog.utype','co_ordinatore']])
-            ->orderby('time','desc')->get()->toarray();
+            ->orderby('time','desc')->paginate(10);
             $cod=App\tblcoordinaters::select('cid','cname')->where('clgcode',Session::get('clgcode'))->get()->toarray();
             return view('super-admin/check_logs',['logs'=>$logs,'cod'=>$cod]);
         });
