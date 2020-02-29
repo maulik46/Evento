@@ -356,6 +356,7 @@ class s_admin extends Controller
             
         </div>';
         }
+        $msg.='<div class="mt-3">'.$logs->links().'</div>';
         return response()->json(array('msg'=>$msg),200);
     }
 }
