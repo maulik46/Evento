@@ -451,7 +451,7 @@ async function deleteEvent(eid){
     icon: 'warning',
     showCancelButton: false,
     html:
-    '<input id="swal-input1" class="swal2-input" placeholder="Reason..!" required>',
+    '<input id="swal-input1" class="swal2-input" placeholder="Reason is required..!" required>',
     focusConfirm: false,
     showCloseButton: true,
     confirmButtonColor: '#d33',
