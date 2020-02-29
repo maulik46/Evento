@@ -221,8 +221,23 @@ img{
 
 /* super admin right side  btn endddd*/
 
+/* sweet alert confirm & cancel button & input field css */
+.swal2-styled {
+    padding:.7rem 1.6rem !important;
+    font-size:.875rem !important;
+    line-height:1.5 !important;
+    border-radius:.3rem !important;
+    font-weight:bold!important;
+    box-shadow: 0 3px 6px -5px #777!important;
 
-
+}
+.swal2-input {
+    height: 45px!important;
+}
+.swal2-actions{
+    margin:auto!important;
+}
+/* end */
 
 /* right inbox sidebar */
 
