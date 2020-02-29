@@ -654,7 +654,7 @@ class co_ordinate extends Controller
              $data=array('name'=>'OTP :'.Session::get('otps'),'body'=>$message);
              $tblco=tblcoordinaters::where('email', $cuser)->get()->first();
              if ($tblco) {
-                //$this->mail($tblco['cname'], $tblco['email'], $data);
+                $this->mail($tblco['cname'], $tblco['email'], $data);
                  $data=Session::get('otps');
              }
              else{
