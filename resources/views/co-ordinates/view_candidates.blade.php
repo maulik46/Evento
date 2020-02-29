@@ -55,12 +55,8 @@
                             <table class="table table-hover table-light rounded">
                                 <thead class="thead-light">
                                     <tr>
-                                        <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3"
-                                            style="background-color: #dde1fc;">
-                                            Team
-                                            {{ucfirst($p['tname'])}}
-                                            <br>
-                                            <!-- <span class="font-size-14">Date: 03/11/2019</span> -->
+                                        <td colspan="4" class=" font-weight-bold text-dark p-3" style="background-color: #dde1fc;">
+                                            {{$p['tname']}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -156,7 +152,7 @@
 @section('extra-scripts')
      <script>
      $(document).ready(function(){
-        $('.team-leader-name td:first').css("color","red");
+        $('.team-leader-name td:first').append('<span class="text-primary"> (Team-leader)</span>');
        
     })
      </script>
