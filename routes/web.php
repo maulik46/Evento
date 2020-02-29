@@ -57,6 +57,13 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
     Route::post('/insertteam','student@team_confirm');
 
+    Route::get('/check_event_info/{id}','student@check_event_info');
+
+    route::any('student_update_action/{senrl}', 'student@student_update_action');
+
+    // route::any('student_update/{senrl}', 'student@student_update');
+
+
 });
 Route::get('/otpview/{senrl}/{clgcode}/{check?}','student@otpview');
 Route::post('/otp_check/{senrl}/{clgcode}/{check?}','student@otp_check');
@@ -208,5 +215,5 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
     });
 
-// xxxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
+// xoxoxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
 
