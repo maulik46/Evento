@@ -32,6 +32,7 @@
         display: none;
         background: rgba(0, 0, 0, 0.6);
         color: #fff;
+        cursor:pointer;
     }
 
     input[type="file"] {
@@ -55,6 +56,7 @@
 
     #update-profile {
         opacity: 0.5;
+
     }
 
     .pattern-bg:hover #update-profile {
@@ -160,10 +162,10 @@
     <div class="user-img new-shadow-2 d-flex align-items-end justify-content-center overflow-hidden">
         <div id="upload-photo" class="p-1 w-100 text-center" data-toggle="tooltip" data-placement="bottom"
             title="Upload Photo">
-            <label for="file-upload" class=" custom-file-upload rounded">
+            <span>
                 <i data-feather="camera" height="20px"></i>
-            </label>
-            <input id="file-upload" name="" type="file" />
+            </span>
+           
         </div>
     </div>
 
@@ -265,7 +267,29 @@
         </div>
 
     </div>
-
+        <div id="excel-form-model"
+        class="col-lg-4 col-md-5 col-sm-7 col-10 p-4 bg-light position-fixed new-shadow-2 rounded"
+        style="top: 50%;left: 50%;transform: translate(-50%, -40%);display:none;z-index:9999;">
+        <a href="#" id="close-upload-form" class="mb-3 d-flex justify-content-end text-dark" style="margin-top:-10px;">
+            <i data-feather="x-circle" id="close-btn" height="18px"></i>
+        </a>
+        <form action="{{ url('import-excel') }}" method="POST" name="importform" enctype="multipart/form-data">
+        @csrf
+            <div class="card new-shadow-sm hover-me-sm mb-0" id="upload-plus-btn">
+                <label for="file-upload"
+                    class="custom-file-upload w-100 d-flex align-items-center justify-content-center overflow-auto">
+                    <i data-feather="upload" class="mt-2"></i>
+                    <span class="mt-2 ml-2">Upload your photo from here</span>
+                </label>
+                <input id="file-upload" name="import_file" type="file" />
+            </div>
+            <div class="text-center mt-3" style="cursor:pointer;" id="re-upload">
+                <i data-feather="refresh-cw" id="close-btn"></i>
+            </div>
+            <button type="submit"
+                class="mt-3 upl btn btn-success px-3 new-shadow-sm hover-me-sm font-weight-bold rounded-sm">Upload</button>
+        </form>
+    </div>
 </div>
 @endsection
 @section('extra-scripts')
@@ -281,6 +305,33 @@
         $('#close-form').click(function(){
              $('#update-form').fadeOut(200);
         });
+
+    });
+    $('#upload-photo').click(function () {
+        $('#excel-form-model').fadeIn(150);
+    });
+    $('#close-upload-form').click(function () {
+        $('#excel-form-model').fadeOut(180);
+    });
+    $('#re-upload').hide();
+    $('#re-upload').click(function () {
+        $('.custom-file-upload').remove();
+        $('#upload-plus-btn').prepend(
+            '<label for="file-upload" class="custom-file-upload w-100 d-flex align-items-center justify-content-center overflow-auto"><i data-feather="upload" class="mt-2"></i><span class="mt-2 ml-2">Upload your photo from here</span></label>'
+            );
+        feather.replace();
+        $('#re-upload').hide();
+    });
+    $('#file-upload').change(function () {
+
+        var i = $(this).prev('label').clone();
+        var file = $('#file-upload')[0].files[0].name;
+        $(this).prev('label').text(file).css({
+            "margin-top": "4px",
+            "color": "var(--success)"
+        });
+        $('#re-upload').show();
+
 
     });
     
