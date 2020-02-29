@@ -229,7 +229,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-lg-5 mt-4 mt-lg-0" id="update-form">
+        <div class="col-lg-5 mt-4 mt-lg-0" style="display:none;" id="update-form">
             <div class="card new-shadow-sm">
                 <span class="text-right p-1 px-2" id="close-form">
                     <i data-feather="x-circle" id="close-btn" height="18px" class="text-dark" style="cursor:pointer;"></i>
