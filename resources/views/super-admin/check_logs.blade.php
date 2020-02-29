@@ -1,3 +1,4 @@
+<?php date_default_timezone_set("Asia/Kolkata"); ?>
 @extends('super-admin/s_admin_layout')
 
 @section('title','Check Logs')
@@ -83,61 +84,63 @@
             <div class="col-md-4 col-sm-12">
                 <div class="form-group has-icon d-flex align-items-center">
                     <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
-                    <select class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;">
+                    <select name="cname" id="cname" onchange="filter()" class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;">
                         <option value="">Select Co-ordinator</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                        <option value="all">All</option>
+                        @foreach($cod as $co)
+                           <option value="{{$co['cid']}}">{{ucfirst($co['cname'])}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="col-md-8 col-12 d-flex justify-content-end">
                 <div class="mx-1 form-group has-icon d-flex align-items-center">
                     <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                    <input name="" type="text" class="form-control basicDate" placeholder="Starting Date" />
+                    <input name="" id="from" onchange="filter()" type="text" class="form-control basicDate" placeholder="From" />
                 </div>
                 <div class="mx-1 form-group has-icon d-flex align-items-center">
                     <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                    <input name="" type="text" class="form-control basicDate" placeholder="End Date" />
+                    <input name="" id="to" onchange="filter()" type="text" class="form-control basicDate" placeholder="To" />
                 </div>
             </div>
         </div>
 
     </div>
+    <div id="loglist">
     @foreach($logs as $log)
-    <div class="card mb-0 mt-3 new-shadow-sm">
-        <div class="card-body py-2">
-            <div class="row justify-content-between mx-0">
-                <div>
-                <span class="badge badge-info px-3 badge-pill  my-1">{{date('d-m-Y',$log['time'])}}</span>
-                <span class="badge badge-danger px-3 badge-pill  my-1">{{date('h:m:s A',$log['time'])}}</span>
-                <span class="badge badge-soft-primary px-3 badge-pill  my-1">By {{ucfirst($log['cname'])}}</span>
-                </div>
-                <div id="action" class="row justify-content-between mx-0">
-                    <div class="mr-1">
-                        <span class="badge badge-dark px-3 rounded-0  my-1" style="margin-right:-5px;">Action on</span>
-                        <span class="badge badge-soft-dark px-3 rounded-0">{{ucfirst($log['action_on'])}}</span>
+        <div class="card mb-0 mt-3 new-shadow-sm">
+            <div class="card-body py-2">
+                <div class="row justify-content-between mx-0">
+                    <div>
+                    <span class="badge badge-info px-3 badge-pill  my-1">{{date('d-m-Y',$log['time'])}}</span>
+                    <span class="badge badge-danger px-3 badge-pill  my-1">{{date('h:m:s A',$log['time'])}}</span>
+                    <span class="badge badge-soft-primary px-3 badge-pill  my-1">By {{ucfirst($log['cname'])}}</span>
                     </div>
-                    <div class="ml-1">
-                        <span class="badge badge-dark px-3 rounded-0  my-1" style="margin-right:-5px;">Action</span>
-                        <span class="badge badge-soft-dark px-3 rounded-0">{{ucfirst($log['action_type'])}}</span>
+                    <div id="action" class="row justify-content-between mx-0">
+                        <div class="mr-1">
+                            <span class="badge badge-dark px-3 rounded-0  my-1" style="margin-right:-5px;">Action on</span>
+                            <span class="badge badge-soft-dark px-3 rounded-0">{{ucfirst($log['action_on'])}}</span>
+                        </div>
+                        <div class="ml-1">
+                            <span class="badge badge-dark px-3 rounded-0  my-1" style="margin-right:-5px;">Action</span>
+                            <span class="badge badge-soft-dark px-3 rounded-0">{{ucfirst($log['action_type'])}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-text">
+                    
+                    <div class="text-dark font-size-15 font-weight-bold">Location changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz</div>
+                    <span class="text-muted more">Location changed to lab 3</span>
+                    <div class="float-right">
+                        <span class="font-weight-bold">IP</span>
+                        <span class="badge badge-soft-dark badge-pill px-2">{{$log['ip_add']}}</span>
                     </div>
                 </div>
             </div>
-            <div class="card-text">
-                
-                <div class="text-dark font-size-15 font-weight-bold">Location changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz</div>
-                <span class="text-muted more">Location changed to lab 3</span>
-                <div class="float-right">
-                    <span class="font-weight-bold">IP</span>
-                    <span class="badge badge-soft-dark badge-pill px-2">{{$log['ip_add']}}</span>
-                </div>
-            </div>
+            
         </div>
-        
-    </div>
     @endforeach
-    
+    </div>
 </div>
 @endsection
 @section('extra-scripts')
@@ -193,5 +196,33 @@
         return false;
     });
 });
+function filter()
+{
+    
+    var cid = $('#cname').val();
+    var sdate = $('#from').val();
+    var ldate = $('#to').val();
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+            type: 'POST',
+            url: '/filterlog',
+            data: {
+                cid: cid,
+                sdate: sdate,
+                ldate: ldate
+            },
+            success: function (data) {
+                    $('#loglist').html(data.msg);
+            },
+            error: function (data) {
+            console.log(data);
+            }
+        })
+}
+
 </script>
 @endsection
