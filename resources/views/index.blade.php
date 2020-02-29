@@ -29,7 +29,10 @@
             box-shadow: none;
         }
         .event-link:hover{
-            color:#1ac1ae!important;
+            color:var(--success)!important;
+        }
+        .event-info:hover{
+            color: var(--info)!important;
         }
     </style>
     @endsection
@@ -64,29 +67,20 @@
                             <div class="carousel-inner new-shadow rounded" role="listbox">
                                 <div class="carousel-item active">
                                     <div style="height: 300px; width: 100%;background-color: #d9e4f5;background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);"
-                                        class="d-flex align-items-center justify-content-center flex-column">
-                                        <h1 class="text-dark font-size-24">Upcoming Sport Event Notice</h1>
-                                        <button
-                                            class="btn btn-explore btn-rounded font-weight-light mt-3 px-5 new hover-me-sm">Participate
-                                            Now</button>
+                                        class="d-flex align-items-center justify-content-end flex-column">
+                                        <h1 class="text-dark font-size-24 mb-5 font-weight-light">Zeal 2020</h1>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
                                     <div style="height: 300px; width: 100%;  background-color: #f8f9d2;background-image: linear-gradient(315deg, #f8f9d2 0%, #e8dbfc 74%);"
-                                        class="d-flex align-items-center flex-column justify-content-center ">
-                                        <h1 class="text-dark font-size-24">Upcoming Cultural Event Notice</h1>
-                                        <button
-                                            class="btn btn-explore btn-rounded font-weight-light mt-3 px-5 hover-me-sm">Participate
-                                            Now</button>
+                                        class="d-flex align-items-center justify-content-end flex-column">
+                                        <h1 class="text-dark font-size-24 mb-5 font-weight-light">IMPTUS 2020</h1>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
                                     <div style="height: 300px; width: 100%; background-color: #fde7f9;background-image: linear-gradient(315deg, #fde7f9 0%, #aacaef 74%);"
-                                        class="d-flex align-items-center flex-column justify-content-center flex-column ">
-                                        <h1 class="text-dark font-size-24">Upcoming IT Event Notice</h1>
-                                        <button
-                                            class="btn btn-explore btn-rounded font-weight-light mt-3 px-5 hover-me-sm">Participate
-                                            Now</button>
+                                        class="d-flex align-items-center justify-content-end flex-column ">
+                                        <h1 class="text-dark font-size-24 mb-5 font-weight-light">Explorica 2020</h1>
                                     </div>
                                 </div>
                             </div>
@@ -107,13 +101,15 @@
                                 <div class="card-body pt-2 p-0">
                                     <h6 class="font-size-24 mb-0 pb-1 ml-3 text-center">Events</h6>
                                     <hr>
+                                    <div class="row mx-0">
                                     <?php $a=0?>
                                     @foreach($events as $e)
                                     <?php $c=\DB::table('tblparticipant')->where([['senrl','LIKE','%'.Session::get('senrl').'%'],['eid',$e['eid']]])->count();
                                     ?>
                                     @if($c==0)
                                     <?php $a=1;?>
-                                    <div class="media my-1 px-2 py-2 new-shadow-sm bg-light hover-me-sm">
+                                    
+                                    <div class="col-xl-12 col-md-6 media my-1 px-2 py-2 new-shadow-sm bg-light hover-me-sm">
                                         <div class="media-body">
                                             <span
                                                 class="text-muted badge badge-pill  
@@ -131,25 +127,29 @@
                                             <div class="ml-1 mt-2 header-title text-dark">
                                                 {{ucfirst($e['ename'])}}
                                             </div>
-                                            <div class="text-muted"></div>
                                             
 
                                         </div>
+                                        <a href="{{url('check_event_info')}}/{{encrypt($e['eid'])}}"  data-toggle="tooltip" data-placement="bottom" title="Details" class="mr-1">
+                                            <i data-feather="info" height="18px" class="text-dark event-info"></i>
+                                        </a>
                                         @if($e['e_type']=='team')
-                                        <a href="{{url('/team-insert')}}/{{encrypt($e['eid'])}}">
-                                            <i data-feather="external-link"
-                                                class="align-self-center text-dark event-link" height="20px">
+                                        <a href="{{url('/team-insert')}}/{{encrypt($e['eid'])}}" data-toggle="tooltip" data-placement="bottom" title="Participate">
+                                            <i data-feather="arrow-right-circle"
+                                                class="align-self-center text-dark event-link" height="18px">
                                             </i>
                                         </a>
                                         @else
-                                        <a href="{{url('/participate-now')}}/{{encrypt($e['eid'])}}">
-                                            <i data-feather="external-link" class="align-self-center text-dark event-link" height="20px">
+                                        <a href="{{url('/participate-now')}}/{{encrypt($e['eid'])}}" data-toggle="tooltip" data-placement="bottom" title="Participate">
+                                            <i data-feather="arrow-right-circle" class="align-self-center text-dark event-link" height="18px">
                                             </i>
                                         </a>
                                         @endif
-                                    </div> 
+                                    </div>
+                                    
                                     @endif
                                     @endforeach
+                                    </div> 
                                     @if($a==0)
                                     <div class="p-4 font-weight-bold text-center">
                                         No new events available!!
