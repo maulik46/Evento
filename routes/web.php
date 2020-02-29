@@ -194,10 +194,15 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
         route::post('/studinsrt','s_admin@studinsrt');
 
-        route::get('/check_logs', function(){
-            $logs=log::join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')->where([['tblcoordinaters.clgcode',Session::get('clgcode')],['tbllog.utype','co_ordinatore']])->get()->toarray();
-            return view('super-admin/check_logs',['logs'=>$logs]);
+          route::get('/check_logs', function(){
+            $logs=log::join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')
+            ->where([['tblcoordinaters.clgcode',Session::get('clgcode')],['tbllog.utype','co_ordinatore']])
+            ->orderby('time','desc')->get()->toarray();
+            $cod=App\tblcoordinaters::select('cid','cname')->where('clgcode',Session::get('clgcode'))->get()->toarray();
+            return view('super-admin/check_logs',['logs'=>$logs,'cod'=>$cod]);
         });
+
+        route::post('/filterlog','s_admin@filterlog');
 
         route::get('view_students', 's_admin@view_students');
 
