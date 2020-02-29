@@ -8,14 +8,14 @@
                     <div class="card new-shadow rounded-lg">
                         <div class="card-body px-md-4 px-1">
                             <a href="{{url('/profile')}}" class="float-right text-dark mr-1">
-                                <i data-feather="x-circle" id="close-btn"></i>
+                                <i data-feather="x-circle" height="20px" id="close-btn"></i>
                             </a>
                             <br>
                             <div class="text-center mt-4">
                               <h2 class="font-weight-light">{{ucfirst($list_event_d['ename'])}} Compitition</h2>
                              <span>{{ucfirst($list_event_d['clgname'])}}</span>
                              <p class="my-2">
-                                 <span class="font-weight-bold">{{ucfirst($list_event_d['cname'])}} </span>(Co-ordinate)
+                                 <span class="font-weight-bold">{{ucfirst($list_event_d['cname'])}} </span>(Co-ordinator)
                             </p>
                             </div>
                             <hr>
@@ -24,6 +24,10 @@
                                     <p class="d-flex justify-content-between">
                                         <span class="font-weight-bold">Event date</span>
                                         <span>{{date('d/m/Y', strtotime($list_event_d['edate']))}}</span>
+                                    </p>
+                                    <p class="d-flex justify-content-between">
+                                        <span class="font-weight-bold">Event Ending date</span>
+                                        <span>{{date('d/m/Y', strtotime($list_event_d['enddate']))}}</span>
                                     </p>
                                     <p class="d-flex justify-content-between">
                                         <span class="font-weight-bold text-right">Event time</span>
@@ -39,10 +43,6 @@
                                         <span>{{ucfirst($list_event_d['gallow'])}}</span>
                                     </p>
                                     <p class="d-flex justify-content-between">
-                                        <span class="font-weight-bold">Team Size</span>
-                                        <span>{{ucfirst($list_event_d['tsize'])}}</span>
-                                    </p>
-                                    <p class="d-flex justify-content-between">
                                         <span class="font-weight-bold">Event Location</span>
                                         <span>{{ucfirst($list_event_d['place'])}}</span>
                                     </p>
@@ -54,14 +54,11 @@
                                     <table class="table table-hover table-light new-shadow-sm rounded-sm">
                                         <thead class="thead-light">
                                             <tr>
-                                                <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3"
+                                                <td colspan="4" class="rounded  font-weight-bold text-dark p-3"
                                                     style="background-color: #dde1fc;">
-                                                    <div class="font-size-18">
-                                                        Team Members
-                                                    </div>
-                                                    <div class="font-size-13 mt-1 badge badge-light px-3 rounded-pill">
-                                                        Team {{ucfirst($list_event_d['tname'])}}
-                                                    </div>
+                                                    <span class="mt-1 badge badge-primary px-3">
+                                                        {{ucfirst($list_event_d['tname'])}}
+                                                    </span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -71,7 +68,7 @@
                                                 <th scope="col">Division</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="team-leader">
                                             <?php
                                                 $stud_data=explode('-',$list_event_d['senrl']);
                                                 $c=1;
@@ -86,7 +83,7 @@
                                                 <th scope="row">
                                                     {{$c}}
                                                 </th>
-                                                <td>{{$stud['sname']}}</td>
+                                                <td>{{ucfirst($stud['sname'])}}</td>
                                                 <td>{{$stud['class']}}</td>
                                                 <td>{{$stud['division']}}</td>
                                             </tr>
@@ -100,19 +97,11 @@
                                 </div>
                             </div>
                             @endif
-                                <p class="mx-5 text-muted font-size-13">
-                                    <br>
-                                    <span>
-                                        **All the team members have to reach at <b>{{ucfirst($list_event_d['place'])}}</b> before <b>{{date('h:i A', strtotime($list_event_d['time']))}}</b> without being late!!
-                                    </span>
-                                </p>
+                               
                         </div>
                         
                     </div>
-                    <!-- <button class="btn btn-success new-shadow rounded-sm font-weight-bold font-size-15 px-4">
-                        <span>Print Details </span>
-                        <i data-feather="printer" height="20px"></i>
-                    </button> -->
+                   
                     <div class="position-fixed" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left" title="Print">
                         <a href="#" >
                             <img src="{{asset('assets/images/svg-icons/co-ordinate/print.svg')}}" class="hover-me-sm rounded-circle" height="55px" alt="">
@@ -120,5 +109,15 @@
                     </div>
                 </div>
             </div>
+@endsection
+
+@section('extra-scripts')
+<script>
+  $(document).ready(function(){
+       
+        $('.team-leader td:first').append('<span class="text-primary"> (Team-leader)</span>');
+       
+})
+</script>
 @endsection
 
