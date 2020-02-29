@@ -258,10 +258,13 @@
             <div class="text-center mt-3" style="cursor:pointer;" id="re-upload">
                 <i data-feather="refresh-cw" id="close-btn"></i>
             </div>
-            <button type="submit"
-                class="mt-3 upl btn btn-success px-3 new-shadow-sm hover-me-sm font-weight-bold rounded-sm">Upload</button>
+            <div class="d-flex align-items-center justify-content-between">
+                <button type="submit"class="mt-3 upl btn btn-success px-3 new-shadow-sm hover-me-sm font-weight-bold rounded-sm">Upload</button>
+                <a href="{{asset('demo')}}/studentrec.xlsx" class="font-weight-bold text-primary">Click to get excel file demo</a>
+            </div>
+            
         </form>
-        <a href="{{asset('demo')}}/studentrec.xlsx">Demo excel file</a>
+        
     </div>
 </div>
 <!-- end right side buttons div -->
@@ -299,8 +302,9 @@
     $('#re-upload').click(function () {
         $('.custom-file-upload').remove();
         $('#upload-plus-btn').prepend(
-            '<label for="file-upload" class="custom-file-upload w-100 d-flex align-items-center justify-content-center overflow-auto"><span class="mt-2">Upload again from here!!</span></label>'
+            '<label for="file-upload" class="custom-file-upload w-100 d-flex align-items-center justify-content-center overflow-auto"><i data-feather="upload" class="mt-2"></i><span class="mt-2 ml-2">Upload your excel file from here</span></label>'
             );
+            feather.replace();
         $('#re-upload').hide();
     });
     $('.upl').click(function () {
