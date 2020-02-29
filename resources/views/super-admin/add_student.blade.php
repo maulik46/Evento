@@ -313,7 +313,7 @@
     function valid()
     {
         var f=0;
-        var regex = /^[A-Za-z]+$/;
+        var regex = /^[A-Za-z\s]+$/;
         $('*').removeClass('border border-danger');
         if($('#sname').val()=="")
         {
@@ -340,7 +340,7 @@
         }
         else if(!regex.test($('#enrl').val()))
         {
-            $('#enrl').parent().next().html("Please enter valid Student name.");
+            $('#enrl').parent().next().html("Please enter valid Student Enrollment.");
             $('#enrl').parent().addClass('border border-danger');
             f = 1;
         }
