@@ -14,7 +14,30 @@ use App\tblevent;
 use App\participant;
 class student extends Controller
 {
-     public function about_event($pid)
+    public function student_update_action(Request $req,$en){
+        $en = decrypt($en);
+        $s_mobile=$req->user_mobile;
+        $s_email=$req->user_email;
+        $s_address=$req->user_address;
+
+        $update=tblstudent::where('senrl',$en)->update(['mobile' =>$s_mobile,'email'=>$s_email,'address'=>$s_address]);
+        if($update)
+        {
+        session()->put('email',$s_email);
+        session()->put('mobile',$s_mobile); 
+        session()->put('address',$s_address);
+        session()->flash('msg','Your profile has been updated!!');
+        }
+
+        return redirect(url('/profile')); 
+    }
+    public function check_event_info($id){
+        $id = decrypt($id);
+        $einfo = tblevent::where('eid', $id)->first();
+        return view("check_event_info", ['einfo' => $einfo]);
+
+    }
+    public function about_event($pid)
     {
         $pid=decrypt($pid);
         //echo $pid;
