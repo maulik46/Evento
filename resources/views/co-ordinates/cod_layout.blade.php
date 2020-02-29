@@ -166,7 +166,7 @@
                                     <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
                                     <div class="d-flex justify-content-between align-items-end flex-wrap flex-column">
                                         <h6 class="my-0 mb-1">{{ucfirst($nt->sender)}}</h6>
-                                        <span class="badge badge-warning text-white badge-pill px-3">Admin</span>
+                                        <span class="badge badge-warning text-white badge-pill px-3">{{ucfirst($nt->sender_type)}}</span>
                                     </div>
                                     
                                </div>
