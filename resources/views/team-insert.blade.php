@@ -48,7 +48,7 @@
                     <h2
                         class="d-flex justify-content-center align-items-center font-weight-normal text-center text-dark my-3 mt-4s">
                         <img src="{{asset('assets/images/svg-icons/student-dash/flag.svg')}}" height="30px" alt="">
-                        <span class="ml-2">{{ucfirst($einfo['ename'])}} Compitition</span>
+                        <span class="ml-2">{{ucfirst($einfo['ename'])}} Competition</span>
                     </h2>
                     <p class="text-center">{{ucfirst(Session::get('clgname'))}}
                     </p>
