@@ -61,21 +61,7 @@ class co_ordinate extends Controller
         $notice->attechment=$fname;
         $notice->save();
    }
-    public function logout()//destroy session
-    {
-            
-            $log=new log;
-            $log->uid=Session::get('cid');
-            $log->action_on="logout";
-            $log->action_type="logout";
-            $log->time=time();
-            $log->utype="co_ordinatore";
-            $log->ip_add=$_SERVER['REMOTE_ADDR'];
-            $log->save();
-            Session::flush(); 
-            return redirect(url('/clogin'));
-    }
-    public function login()
+     public function login()
     {
         return view('co-ordinates/login');
     }
@@ -105,8 +91,9 @@ class co_ordinate extends Controller
             $log->uid=Session::get('cid');
             $log->action_on="login";
             $log->action_type="login";
+            $log->descr="Login successfully";
             $log->time=time();
-            $log->utype="co_ordinatore";
+            $log->utype="co-ordinator";
             $log->ip_add=$_SERVER['REMOTE_ADDR'];
             $log->save();
             return redirect(url('cindex'));
@@ -116,6 +103,22 @@ class co_ordinate extends Controller
             return back()->with('error','Invalid Co-ordinate ID or Password');
         }
     }
+    public function logout()//destroy session
+    {
+            
+            $log=new log;
+            $log->uid=Session::get('cid');
+            $log->action_on="logout";
+            $log->action_type="logout";
+            $log->descr="Logout successfully";
+            $log->time=time();
+            $log->utype="co-ordinator";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
+            $log->save();
+            Session::flush(); 
+            return redirect(url('/clogin'));
+    }
+   
    public function index()
     {
         $date_string="";
@@ -501,13 +504,14 @@ class co_ordinate extends Controller
         $tblevent->save();
         session()->flash('success', 'Event created successfully..!');
         $log=new log;
-            $log->uid=Session::get('cid');
-            $log->action_on="event " .$req->ename;
-            $log->action_type="insert";
-            $log->time=time();
-            $log->utype="co_ordinatore";
-            $log->ip_add=$_SERVER['REMOTE_ADDR'];
-            $log->save();
+        $log->uid=Session::get('cid');
+        $log->action_on="Event ";
+        $log->action_type="insert";
+        $log->descr="Event <b>".$req->ename." </b> created";
+        $log->time=time();
+        $log->utype="co-ordinator";
+        $log->ip_add=$_SERVER['REMOTE_ADDR'];
+        $log->save();
         return redirect(url('cindex'));
     }
     public function err(Request $req){
@@ -561,8 +565,9 @@ class co_ordinate extends Controller
         $log->uid=Session::get('cid');
         $log->action_on="password ";
         $log->action_type="update";
+        $log->descr="Update password";
         $log->time=time();
-        $log->utype="co_ordinatore";
+        $log->utype="co-ordinator";
         $log->ip_add=$_SERVER['REMOTE_ADDR'];
         $log->save();
         session()->flash('success', 'Password updated successfully..!');
@@ -596,8 +601,9 @@ class co_ordinate extends Controller
         $log->uid=Session::get('cid');
         $log->action_on="Notice";
         $log->action_type="insert";
+        $log->descr="Notice about <b>".$topic."</b>";
         $log->time=time();
-        $log->utype="co_ordinatore";
+        $log->utype="co-ordinator";
         $log->ip_add=$_SERVER['REMOTE_ADDR'];
         $log->save();
         return redirect(url('cindex'));
@@ -631,6 +637,15 @@ class co_ordinate extends Controller
         $b=participant::where('pid',$req->r2)->update(['rank'=>'2']);
         $c=participant::where('pid',$req->r3)->update(['rank'=>'3']);
         session()->flash('success','Result announced successfully..!');
+         $log=new log;
+        $log->uid=Session::get('cid');
+        $log->action_on="Rank";
+        $log->action_type="insert";
+        $log->descr="Result announced for event <b>".$req->ename." </b>";
+        $log->time=time();
+        $log->utype="co-ordinator";
+        $log->ip_add=$_SERVER['REMOTE_ADDR'];
+        $log->save();
         return response()->json(array('msg'=> $a.$b.$c),200);
     }
     public static function participant($eid)
@@ -680,6 +695,15 @@ class co_ordinate extends Controller
             ->update(['password' =>$pass]);
             if($tblc)
             {
+                $log=new log;
+                $log->uid=Session::get('cid');
+                $log->action_on="password ";
+                $log->action_type="update";
+                $log->descr="Update password";
+                $log->time=time();
+                $log->utype="co-ordinator";
+                $log->ip_add=$_SERVER['REMOTE_ADDR'];
+                $log->save();
                 session()->flash("success","Your Password Successfully Changed...");
             }
             return redirect(url('/clogin'));
