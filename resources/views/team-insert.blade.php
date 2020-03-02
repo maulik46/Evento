@@ -96,11 +96,11 @@
                     <div class="pt-1">
                         <hr>
                         <div class="h4 mb-3 font-size-17 ml-2 text-center" id="title1">
-                            <i data-feather="user-plus" class="mr-2 icon-dual-dark"></i>
+                            <i data-feather="users" class="mr-2 icon-dual-dark"></i>
                             <span>Enter Team Members</span>
                         </div>
                         <div class="h4 mb-3 font-size-17 ml-2 text-center" id="title2">
-                            <i data-feather="user-plus" class="mr-2 icon-dual-dark"></i>
+                            <i data-feather="users" class="mr-2 icon-dual-dark"></i>
                             Enter Team Name
 
                         </div>
@@ -119,27 +119,29 @@
                         <div id="part1">
                                     <label class="form-control-label">Team name</label>
                                     <input type="text" id="tname" onkeyup="return checktname()" class="form-control" name="tname" id="" placeholder="Enter Team Name" style="letter-spacing: 0;padding:25px;">
-                                    <span id="tnameerr" style="color:red"></span>
+                                    <span id="tnameerr" class="text-danger font-weight-bold"></span>
                         </div>
                         <div id="part2">
                         <script>a=0 ;</script>
                         @for($i=0;$i<$n;$i++) 
                                 <div class="form-group">
-                                    <label class="form-control-label">Player {{$i+1}}</label>
+                                    
                                     @if($i==0)
-                                    <input type="text" class="form-control" name="enrl[]" id="enrl{{$i}}" 
+                                    <label class="form-control-label">You</label>
+                                    <input type="text" class="form-control font-weight-bold" style="color:var(--dark-gray)!important;" name="enrl[]" id="enrl{{$i}}" 
                                         placeholder="Enter Enrollment ID" value="{{Session::get('senrl')}}"
                                         readonly >
                                         <script>a++ ;</script>
                                     @else
+                                    <label class="form-control-label">Player {{$i+1}}</label>
                                     <input type="text" class="form-control" onkeyup="return checkplayer(this.id)" onblur="this.value=this.value.toUpperCase()" name="enrl[]" id="enrl{{$i}}"
                                         placeholder="Enter Enrollment ID">
                                         <script> a++ ;</script>
                                     @endif
-                                    <span style="color:red">{{$errors->first('enrl.'. $i)}}</span>
+                                    <span class="text-danger font-weight-bold">{{$errors->first('enrl.'. $i)}}</span>
                                     <?php $a=$i+1 ?>
                                     @if(Session::get('error'."$a"))
-                                    <p style="color:red"> {{Session::get('error'."$a")}}</p>
+                                    <p class="text-danger font-weight-bold"> {{Session::get('error'."$a")}}</p>
                                     @endif
                                 </div>
                                  @endfor
