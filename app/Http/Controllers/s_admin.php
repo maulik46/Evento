@@ -359,6 +359,75 @@ class s_admin extends Controller
         $msg.='<div class="mt-3">'.$logs->links().'</div>';
         return response()->json(array('msg'=>$msg),200);
     }
+    public function otp_mail($to_name,$to_email,$data)
+    {
+        \Mail::send('email',$data,function($message) use ($to_name, $to_email){
+                $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+                ->from("eventoitsol@gmail.com", $name = "Evento")
+                ->subject("OTP Athentication")->bcc($to_email);
+            });
+    }
+    public function send_otp(Request $req)
+     {
+         if ($req->ajax()) {
+             $rand_num=rand(111111, 999999);
+             session()->put('otps', $rand_num);
+             $cuser=$req->get('cuser');
+             $message="<br/>---<br/> Thanks For visiting Evento ";
+             $data=array('name'=>'OTP :'.Session::get('otps'),'body'=>$message);
+             $tbla=admin::where('email', $cuser)->get()->first();
+             if ($tbla) {
+                 if (Session::get('email_check')==1) {
+                     //$this->otp_mail($tbla['name'], $tbla['email'], $data);
+                     session()->put('email_check',0);
+                 }
+                 $data=Session::get('otps');
+             }
+             else{
+                 $data="Invalid Email Id..";
+             }
+            
+             echo json_encode($data);
+         }
+     }
+     public function confirm_pass(Request $req)
+     {
+        return view("super-admin/confirm_pass",['email'=>$req->cuser]);
+     }
+     public function change_pass(Request $req,$email)
+     {
+        $email=decrypt($email);
+        //echo $email;
+        $pass=$req->password;
+        $cpass=$req->cpassword;
+        if($pass==$cpass)
+        {
+            $tblc=admin::where('email',$email)
+            ->update(['pass' =>$pass]);
+            if($tblc)
+            {
+                session()->flash("success","Your Password Successfully Changed...");
+            }
+            return redirect(url('/slogin'));
+        }
+        else
+        {
+            return redirect()->back();
+        }
+     }
+    public function timers(Request $req)
+    {
+        if($req->ajax())
+        {
+            if(Session::get('otps')==$req->get('otpcode'))
+            {
+                Session::forget('otps');
+                $data="";
+                echo json_encode($data);
+            }
+        }
+        
+    }
     public function new_cod_add(Request $req)
     {
         if (isset($req->avatar)) {
