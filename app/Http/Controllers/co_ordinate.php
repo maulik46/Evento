@@ -641,7 +641,8 @@ class co_ordinate extends Controller
     public function view_result($eid)
     {
         $participant=participant::where([['eid',decrypt($eid)],['rank','p']])->count();
-        $event=tblevent::select('eid','ename','edate')->where('eid',decrypt($eid))->first();
+        $event=tblevent::select('eid','ename','edate','e_type')->where('eid',decrypt($eid))->first();
+       
         return view('co-ordinates/view_result',['participant'=>$participant],['einfo'=>$event]);
     }
     public function send_otp(Request $req)
