@@ -141,9 +141,10 @@
                         <div class="row">
                         <div class="col-xl-4 form-group mt-2">
                                           <label class="col-form-label font-size-15">Event Type</label>
-                                          <div class="form-group has-icon d-flex align-items-center">
+                                          <div class="form-group has-icon d-flex align-items-center" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
+                title="This field disable because some student was participated.">
                                            <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
-                                              <select id="event-type" name="etype" class="form-control w-100 pt-1 nice-select" disabled>
+                                              <select id="event-type" name="etype" class="form-control w-100 pt-1 nice-select">
                                                         <option selected value="{{$e_data['e_type']}}">{{ucfirst($e_data['e_type'])}}</option>
                                               </select>
                                           </div>
@@ -152,9 +153,10 @@
                             </div>
                             <div class="col-xl-4 form-group mt-2">
                             <label class="col-form-label font-size-15">Gender</label>
-                                          <div class="form-group has-icon d-flex align-items-center">
+                                          <div class="form-group has-icon d-flex align-items-center"  style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
+                title="This field disable because some student was participated.">
                                            <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                                              <select id="gen" onchange="return echeck()" name="efor" class="form-control w-100 pt-1 nice-select" disabled>
+                                              <select id="gen" onchange="return echeck()" name="efor" class="form-control w-100 pt-1 nice-select">
                                                     <option selected value="{{$e_data['gallow']}}">{{ucfirst($e_data['gallow'])}}</option>
                                               </select>
                                           </div>
@@ -162,9 +164,10 @@
                             </div>
                             <div class="col-md-4 form-group mt-2">
                                 <label class="col-form-label font-size-15">Event for</label>
-                                <div class="form-group has-icon d-flex align-items-center">
+                                <div class="form-group has-icon d-flex align-items-center"  style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
+                title="This field disable because some student was participated.">
                                     <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                                    <select name="class" class="form-control active w-100" id="efor" disabled>
+                                    <select name="class" class="form-control active w-100  nice-select" id="efor">
                                         <option selected value="{{$e_data['efor']}}">
                                         <?php 
                                         $ev="";
@@ -187,14 +190,16 @@
                             <div class="col-md-4 form-group mt-2">
                                 <label id="team-size-label" class="col-form-label font-size-15">Team size
                                 </label>
-                                <div id="t-size" class="form-group has-icon d-flex align-items-center">
+                                <div id="t-size" class="form-group has-icon d-flex align-items-center"  style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
+                title="This field disable because some student was participated.">
                                              <i data-feather="user-plus" class="form-control-icon ml-2" height="19px"></i>
                                                <input id="team-size" name="tsize" type="number" class="form-control"
-                                                   placeholder="Team size" value="{{$e_data['tsize']}}" disabled/>
+                                                   placeholder="Team size" value="{{$e_data['tsize']}}" readonly/>
                                 </div>
                                 <span class="text-danger font-weight-bold"></span>
                             </div>
-                            <div class="col-md-4 form-group mt-sm-5 mt-2">
+                            <div class="col-md-4 form-group mt-sm-5 mt-2"  style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
+                title="This field disable because some student was participated.">
                                 <div class="custom-control custom-switch mb-2">
                                     <input type="checkbox" name="alw_diff_class" class="custom-control-input" id="diff-class" value="yes"<?php if($e_data['alw_dif_class']=="yes"){ ?>checked<?php } ?> disabled>
                                     <label class="custom-control-label" for="diff-class" id="diff-class-label">Allow
