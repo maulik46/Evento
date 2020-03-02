@@ -70,9 +70,9 @@
                             <a href="#" id="update-profile-btn" data-toggle="tooltip" data-placement="bottom" title="Update Profile" class="text-warning">
                                 <i data-feather="edit" height="18px"></i>
                             </a>
-                            <span style="display:none" id="close-form" class="text-danger">
+                            <a href="#" style="display:none" id="close-form" class="text-danger">
                                 <i data-feather="x-circle" height="18px"></i>
-                            </span>
+                            </a>
 
                         </div>
                         <hr class="mt-1 mb-1">
