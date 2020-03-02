@@ -659,6 +659,14 @@ class co_ordinate extends Controller
         $event=tblevent::select('eid','ename','edate')->where('eid',decrypt($eid))->first();
         return view('co-ordinates/view_result',['participant'=>$participant],['einfo'=>$event]);
     }
+    public function otp_mail($to_name,$to_email,$data)
+    {
+        \Mail::send('email',$data,function($message) use ($to_name, $to_email){
+                $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+                ->from("eventoitsol@gmail.com", $name = "Evento")
+                ->subject("OTP authentication")->bcc($to_email);
+            });
+    }
     public function send_otp(Request $req)
      {
          if ($req->ajax()) {
@@ -669,7 +677,10 @@ class co_ordinate extends Controller
              $data=array('name'=>'OTP :'.Session::get('otps'),'body'=>$message);
              $tblco=tblcoordinaters::where('email', $cuser)->get()->first();
              if ($tblco) {
-                $this->mail($tblco['cname'], $tblco['email'], $data);
+                if (Session::get('email_check')==1) {
+                    //$this->otp_mail($tblco['cname'], $tblco['email'], $data);
+                    session()->put('email_check',0);
+                }
                  $data=Session::get('otps');
              }
              else{
