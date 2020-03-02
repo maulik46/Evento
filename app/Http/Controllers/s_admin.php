@@ -361,17 +361,16 @@ class s_admin extends Controller
     }
     public function new_cod_add(Request $req)
     {
-        $file=$req->file('photo-upload');
-        $destinationPath=public_path('profile/');
-        $filename=time().$file->getClientOriginalName();
-        $file->move($destinationPath,$filename);
-        if($filename)
-        {
-            $avatar=$filename;
+        if (isset($req->avatar)) {
+            $avatar=$req->avatar;
         }
         else
         {
-            $avatar=$req->avatar;
+            $file=$req->file('photo-upload');
+            $destinationPath=public_path('profile/');
+            $filename=time().$file->getClientOriginalName();
+            $file->move($destinationPath, $filename);
+            $avatar=$filename;
         }
         $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('clgcode'),'cname'=>$req->cname,'email'=>$req->email,
         'password'=>$req->pass,'category'=>$req->category,'pro_pic'=>$avatar] );
