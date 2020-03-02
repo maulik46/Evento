@@ -45,7 +45,7 @@ class s_admin extends Controller
         } 
         else
         {
-            return back()->with('error','Invalid Co-ordinate ID or Password');
+            return back()->with('error','Invalid email address or Password');
         }
     }
     public function logout()
