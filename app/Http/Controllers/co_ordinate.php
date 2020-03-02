@@ -132,7 +132,12 @@ class co_ordinate extends Controller
             $today_date=$date_v;
         }
         $tble=tblevent::where('clgcode',session::get('clgcode'))->where('cid',session::get('cid'))->get()->toArray();
-        $tblp=participant::select('eid',DB::raw('COUNT(eid) AS count_par'))->where('clgcode',session::get('clgcode'))->groupBy('eid')->get()->toarray();
+        $tblp=participant::select('tblparticipant.eid',DB::raw('COUNT(tblparticipant.eid) AS count_par'))
+        ->join('tblevents','tblevents.eid','=','tblparticipant.eid')
+        ->where('tblparticipant.clgcode',session::get('clgcode'))
+        ->where('tblevents.cid',session::get('cid'))
+        ->where([['tblevents.enddate','>=',date('Y-m-d')]])
+        ->groupBy('tblparticipant.eid')->get()->toarray();
         $events=tblevent::where([['clgcode',Session::get('clgcode')]
         ])->orderby('enddate','desc')->get()->toarray();//change
         $ename_string="";
