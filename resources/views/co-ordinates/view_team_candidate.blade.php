@@ -8,7 +8,7 @@
 
 @section('my-content')
 <div class="container-fluid">
-    <div class="mb-0 pt-2 card new-shadow-sm">
+    <div class="mb-0 pt-2 card new-shadow-sm py-4">
     <?php $a=0?>
     @foreach($team_candidates as $tc)
             <?php 
@@ -17,9 +17,7 @@
                 $id=$tc['eid'];
             ?>
         @endforeach
-        <a href="{{url('/create_result')}}/{{encrypt($id)}}" class="text-right text-dark px-2">
-            <i data-feather="x-circle" id="close-btn" height="20px"></i>
-        </a>
+      
         <span class="h3 my-0 font-weight-normal text-dark text-center">
         Team
         @foreach($team_candidates as $tc)
@@ -34,7 +32,7 @@
     </div>
     <div class="card new-shadow-sm" >
         <div class="card-body">
-            <div class="table-responsive overflow-auto my-scroll" style="height: 350px;">
+            <div class="table-responsive">
                 <table class="table table-hover table-nowrap mb-0" >
                     <thead style="background-color:#1ce1ac40;color:#000;">
                     
