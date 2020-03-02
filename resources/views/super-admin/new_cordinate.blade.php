@@ -112,14 +112,15 @@
                                 <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="22px" alt="">
                                 <span>Create Co-ordinator</span>
                             </h4>
-                            <form action="#">
-                                
+                            <form action="{{url('/new_cod_add')}}" onsubmit="return getMessage()" method="POST" enctype="multipart/form-data">
+                                @csrf
                                     <div class="col-md-12 mt-2  px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">Co-ordinator Name</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                            <input type="text" class="form-control" placeholder="Enter Co-ordinator Name" />
+                                            <input type="text" class="form-control" placeholder="Enter Co-ordinator Name" id="cname" name="cname" />
                                         </div>
+                                        <span class="text-danger font-weight-bold"></span>
                                     </div>
                                     
                                     <div class="col-md-12 px-sm-2 px-0">
@@ -135,48 +136,52 @@
 
                                             <input id="photo-upload" name="photo-upload" type="file" />
                                         </div>
-                                        
+                                
+                                        <span class="text-danger font-weight-bold"></span>
+        
+                                    
                                     </div>
                                     
                                     <div class="col-lg-8 col-md-12 col-sm-12 row justify-content-around justify-content-sm-between mx-sm-0 px-sm-2 px-0 ml-0">
                                         <div class="my-avatar">
-                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox1" />
+                                            <input type="checkbox" name="avatar" class="myCheckbox" id="myCheckbox1" value="child (1).svg"/>
                                             <label for="myCheckbox1">
                                             <img src="{{asset('assets/images/avatars/child (1).svg')}}" height="55px" />
                                             </label>
                                         </div>
                                         <div class="my-avatar">
-                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox2" />
+                                            <input type="checkbox" name="avatar" class="myCheckbox" id="myCheckbox2" value="child.svg"  />
                                             <label for="myCheckbox2">
                                             <img src="{{asset('assets/images/avatars/child.svg')}}" height="55px" />
                                             </label>
                                         </div>
                                         <div class="my-avatar">
-                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox3" />
+                                            <input type="checkbox" name="avatar" class="myCheckbox" id="myCheckbox3" value="girl.svg"  />
                                             <label for="myCheckbox3">
                                             <img src="{{asset('assets/images/avatars/girl.svg')}}" height="55px" />
                                             </label>
                                         </div>
                                         <div class="my-avatar">
-                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox4" />
+                                            <input type="checkbox" name="avatar" class="myCheckbox" id="myCheckbox4" value="professor.svg"/>
                                             <label for="myCheckbox4">
                                             <img src="{{asset('assets/images/avatars/professor.svg')}}" height="55px" />
                                             </label>
                                         </div>
                                         <div class="my-avatar">
-                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox5" />
+                                            <input type="checkbox" name="avatar" class="myCheckbox" id="myCheckbox5" value="teacher.svg" />
                                             <label for="myCheckbox5">
                                             <img src="{{asset('assets/images/avatars/teacher.svg')}}" height="55px" />
                                             </label>
                                         </div>
                                         <div class="my-avatar">
-                                            <input type="checkbox" name="m-avatar" class="myCheckbox" id="myCheckbox6" />
+                                            <input type="checkbox" name="avatar" class="myCheckbox" id="myCheckbox6" value="woman.svg" />
                                             <label for="myCheckbox6">
                                             <img src="{{asset('assets/images/avatars/woman.svg')}}" height="55px" />
                                             </label>
                                         </div>
                                         
                                     </div>
+                                    <span class="text-danger font-weight-bold" id="validphoto"></span>
                                     </div>
                                     </div>
                                
@@ -187,16 +192,17 @@
                                         Email</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                                            <input type="email" class="form-control"  placeholder="Enter Co-ordinator's Email" />
+                                            <input type="text" class="form-control"  placeholder="Enter Co-ordinator's Email" id="email" name="email" />
                                         </div>
-                                     
+                                        <span class="text-danger font-weight-bold"></span>
                                     </div>
                                     <div class="col-sm-12 col-md-6 px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">Contact No.</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                                            <input type="text" class="form-control" placeholder="Enter Co-ordinator's Contact no" />
+                                            <input type="text" class="form-control" placeholder="Enter Co-ordinator's Contact no" id="cno" name="cno"/>
                                         </div>
+                                        <span class="text-danger font-weight-bold"></span>
                                     </div>
                                    
                                 </div>
@@ -206,21 +212,21 @@
                                         <label class="col-form-label font-size-14">Event Catagory</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                               <select class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;">
+                                               <select class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;" id="cocategory" name="category" >
                                                    <option value="">Event Catagory</option>
                                                    <option value="Sport">Sport</option>
                                                    <option value="Cultural">Cultural</option>
                                                    <option value="IT">IT</option>
                                                </select>
                                         </div>
-                                     
+                                        <span class="text-danger font-weight-bold"></span>
                                     </div>
                                     <div class="col-sm-6 px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">Password</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="key" class="form-control-icon ml-2" height="19px"></i>
                                             <input type="text" class="form-control" style="letter-spacing: 5px;"
-                                                value="A1be4TY" readonly />
+                                                value="<?php echo uniqid() ?>" readonly name="pass" />
                                         </div>
                                     </div>
                                    
@@ -244,6 +250,112 @@
 @section('extra-scripts')
 <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script> 
 <script>
+     $('#photo-upload').on('change', function() { 
+        var fileName=document.getElementById('photo-upload').value;
+        var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+        const size =  
+               (this.files[0].size / 1024).toFixed(2); 
+        if(ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "svg" || ext == "SVG" || ext == "png" || ext == "PNG")
+        {
+            if (size > 1024 ) { 
+                $('#validphoto').text("File must be between less than 1 MB");
+                sessionStorage.setItem('file',1);
+            } else { 
+                $('#validphoto').text( 'This file size is: ' + size + ' KB');  
+                sessionStorage.setItem('file',0);            
+            }   
+        }
+        else
+        {            
+            $('#validphoto').text('File Extension must be jpg,jpeg,svg and png format...!');    
+            sessionStorage.setItem('file',1);
+        }
+}); 
+    function getMessage() {
+        var f = 0;
+        var check = 0;
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        var phoneno = /^\d{10}$/;
+        if ($('#cname').val() == "") {
+            $('#cname').parent().addClass('border border-danger');
+            $('#cname').parent().next().text("Please enter Co-ordinator Name");
+            f = 1;
+        } 
+        else {
+            $('#cname').parent().next().text("");
+        }
+        if($('#photo-upload').val()=="")
+        {
+            var c=document.getElementsByTagName('input');
+            for (var i = 0; i<c.length; i++){
+                if (c[i].type=='checkbox')
+                {
+                    if (c[i].checked){
+                        check=0;
+                        alert(c[i].value);
+                        break;
+                    }
+                    else{
+                        check=1;
+                    }
+                }
+            }
+            if(check == 1)
+            {
+              
+                $('#validphoto').text("Please Select Profile image");
+                f=1;
+            }
+            else{
+                $('#validphoto').text("");
+            }
+            
+        }
+        if( sessionStorage.getItem('file') == 1)
+        {
+                f=1;
+        }
+        if ($('#email').val() == "") {
+            $('#email').parent().addClass('border border-danger');
+            $('#email').parent().next().text("Please enter email id");
+            f = 1;
+        } 
+        else if(!emailPattern.test($('#email').val()))
+        {
+            $('#email').parent().addClass('border border-danger');
+            $('#email').parent().next().text("Please enter Proper Email id");
+            f = 1;
+        }
+        else {
+            $('#email').parent().next().text("");
+        }
+
+        if ($('#cno').val() == "") {
+            $('#cno').parent().addClass('border border-danger');
+            $('#cno').parent().next().text("Please Select Content no");
+            f = 1;
+        } 
+        else if (!phoneno.test($('#cno').val())) {
+            $('#cno').parent().addClass('border border-danger');
+            $('#cno').parent().next().text("Please enter valid mobile number");
+            f = 1;
+        } 
+        else {
+            $('#cno').parent().next().text("");
+        }
+
+        if ($('#cocategory').val() == "") {
+            $('#cocategory').parent().addClass('border border-danger');
+            $('#cocategory').parent().next().text("Please select gender");
+            f = 1;
+        } 
+        else {
+            $('#cocategory').parent().next().text("");
+        }
+        if (f == 1) {
+            return false;
+        }
+}
 $(document).ready(function() {
         // this is for select tag
         $('.select-me').niceSelect();
@@ -270,12 +382,14 @@ $(document).ready(function() {
                 
                 if($('#photo-upload').prop("disabled", true))
                 {
-                    $('#photo-upload').removeAttr("disabled");   
+                    $('#photo-upload').removeAttr("disabled");  
+
                 }
 
                 if($('.myCheckbox').is(":checked")){
                     $('.custom-file-upload').css('color','lightgray'); 
                     $('#photo-upload').val('');
+                    $('#validphoto').text("");
                 }
                 else{
                     
@@ -321,7 +435,7 @@ $(document).ready(function() {
      
 
     //     // this is for avatar raddio
-    //     var allRadios = document.getElementsByName('m-avatar');
+    //     var allRadios = document.getElementsByName('avatar');
     //     var booRadio;
     //     var x = 0;
     //     for(x = 0; x < allRadios.length; x++){

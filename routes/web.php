@@ -168,6 +168,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::post('/admin-noticesend','s_admin@send_notice');
 
         route::view('/new_cod','super-admin/new_cordinate');
+    
+        route::post('new_cod_add', 's_admin@new_cod_add');
 
         route::view('/s_change_pass','super-admin/change_password');
 
