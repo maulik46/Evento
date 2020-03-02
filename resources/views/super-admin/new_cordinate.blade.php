@@ -292,7 +292,7 @@
                 {
                     if (c[i].checked){
                         check=0;
-                        alert(c[i].value);
+                
                         break;
                     }
                     else{
