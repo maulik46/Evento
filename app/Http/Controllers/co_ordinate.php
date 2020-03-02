@@ -61,21 +61,7 @@ class co_ordinate extends Controller
         $notice->attechment=$fname;
         $notice->save();
    }
-    public function logout()//destroy session
-    {
-            
-            $log=new log;
-            $log->uid=Session::get('cid');
-            $log->action_on="logout";
-            $log->action_type="logout";
-            $log->time=time();
-            $log->utype="co_ordinatore";
-            $log->ip_add=$_SERVER['REMOTE_ADDR'];
-            $log->save();
-            Session::flush(); 
-            return redirect(url('/clogin'));
-    }
-    public function login()
+     public function login()
     {
         return view('co-ordinates/login');
     }
@@ -105,8 +91,9 @@ class co_ordinate extends Controller
             $log->uid=Session::get('cid');
             $log->action_on="login";
             $log->action_type="login";
+            $log->descr="Login successfully";
             $log->time=time();
-            $log->utype="co_ordinatore";
+            $log->utype="co-ordinator";
             $log->ip_add=$_SERVER['REMOTE_ADDR'];
             $log->save();
             return redirect(url('cindex'));
@@ -116,6 +103,22 @@ class co_ordinate extends Controller
             return back()->with('error','Invalid Co-ordinate ID or Password');
         }
     }
+    public function logout()//destroy session
+    {
+            
+            $log=new log;
+            $log->uid=Session::get('cid');
+            $log->action_on="logout";
+            $log->action_type="logout";
+            $log->descr="Logout successfully";
+            $log->time=time();
+            $log->utype="co-ordinator";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
+            $log->save();
+            Session::flush(); 
+            return redirect(url('/clogin'));
+    }
+   
    public function index()
     {
         $date_string="";
@@ -129,7 +132,12 @@ class co_ordinate extends Controller
             $today_date=$date_v;
         }
         $tble=tblevent::where('clgcode',session::get('clgcode'))->where('cid',session::get('cid'))->get()->toArray();
-        $tblp=participant::select('eid',DB::raw('COUNT(eid) AS count_par'))->where('clgcode',session::get('clgcode'))->groupBy('eid')->get()->toarray();
+        $tblp=participant::select('tblparticipant.eid',DB::raw('COUNT(tblparticipant.eid) AS count_par'))
+        ->join('tblevents','tblevents.eid','=','tblparticipant.eid')
+        ->where('tblparticipant.clgcode',session::get('clgcode'))
+        ->where('tblevents.cid',session::get('cid'))
+        ->where([['tblevents.enddate','>=',date('Y-m-d')]])
+        ->groupBy('tblparticipant.eid')->get()->toarray();
         $events=tblevent::where([['clgcode',Session::get('clgcode')]
         ])->orderby('enddate','desc')->get()->toarray();//change
         $ename_string="";
@@ -207,12 +215,9 @@ class co_ordinate extends Controller
     }
     public function action_update(Request $req,$eid)
     {
-        $eid=decrypt($eid);
-       // echo $eid;
-        $tblp=participant::where('eid',$eid)->get()->count();
-        if($tblp==0)
-        {
-            $req_edate=$req->edate;
+       $eid=decrypt($eid);     
+
+        $req_edate=$req->edate;
             $req_enddate=$req->enddate;
             $req_sdate=$req->sdate;
             $req_ldate=$req->ldate;
@@ -223,15 +228,19 @@ class co_ordinate extends Controller
 
             $req_etype=$req->etype;
             $req_efor=$req->efor; //for gender
-           //$req_class=$req->class; //database name efor
+            //$req_class=$req->class; //database name efor
             $req_tsize=$req->tsize;
             $req_alw_dif_class=$req->alw_diff_class;
             $req_alw_dif_div=$req->alw_diff_div;
             $req_mteam=$req->mteam;
             $req_class="";
-            foreach($req->class as $cls)
-            {
-            $req_class.=$cls."-";
+            if (is_array($req->class)) {
+                foreach ($req->class as $cls) {
+                    $req_class.=$cls."-";
+                }
+            }
+            else{
+                $req_class=$req->class;
             }
             if($req_alw_dif_class=="yes")
             {
@@ -257,6 +266,11 @@ class co_ordinate extends Controller
             if($tble['ename']!=$req_ename)
             {
                 $message.="Event Rename <b style='color:blue;'>".ucfirst($tble['ename'])."</b> to <b style='color:blue; '>".ucfirst($req_ename)."</b><br/>\r\n";
+            }
+            if($req_mteam < $tble['maxteam'])
+            {
+                session()->flash('validteam','Maximum Team Size is Not Valid');
+                return redirect()->back();                
             }
             if($tble['edate']!=$edate)
             {
@@ -319,16 +333,25 @@ class co_ordinate extends Controller
             {
                 $message.="Event changed for Gender Allow  <b style='color:blue;'>".ucfirst($tble['gallow'])."</b> to <b style='color:blue; '>".$req_efor."</b><br/>";
             }
-            $message.="<br>---<br> With Regards,<br> ".Session::get('cname')." (co-ordinate)<br>".Session::get('clgname');
+            
             $update_event=tblevent::where('eid',$eid)
                 ->update(['ename' =>$req_ename,'edate' =>$edate,'enddate' =>$enddate,'time' => $etime,'reg_start_date' => $sdate,'reg_end_date' => $ldate,'gallow' =>$req_efor,'efor' =>$req_class,'e_type' =>$req_etype,'tsize' =>$req_tsize,'maxteam' =>$req_mteam,'place' => $req_loc,'alw_dif_class' =>$req_alw_dif_class,'alw_dif_div' =>$req_alw_dif_div,'rules' => $req_rules]);
             $topic="Update of Event ".$req_ename;
             
             if ($message!="") {
+                $tblp=participant::where('eid',$eid)->get()->count();
+                if ($tblp>0) {
+                    $receiver="admin-student";
+                }
+                else
+                {
+                    $receiver="admin";
+                }
                 $notice=DB::table('tblnotice')->insert(
-                    ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'admin','ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('clgcode')]
+                    ['topic'=>$topic,'message'=>$message,'sender'=>'System','sender_type'=>'System','receiver'=>$receiver,'ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('clgcode')]
                 );
             }
+            $message.="<br>---<br> With Regards,<br> ".Session::get('cname')." (co-ordinate)<br>".Session::get('clgname');
             if($update_event)
             {
                 $ename=tblevent::select('ename')->where('eid',$eid)->get()->first();
@@ -336,95 +359,8 @@ class co_ordinate extends Controller
                 foreach($tbladmin as $admin)
                 {
                     $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
-                    // $this->mail($admin->name,$admin->email,$data);
-                }
-                // $log=new log;
-                // $log->cid=Session::get('cid');
-                // $log->action_on="event " .$req_ename;
-                // $log->action_type="update";
-                // $log->time=time();
-                // $log->save();
-                session()->flash('success','Your Event is Successfully Updated..!');
-            }
-        }
-        else
-        {
-            $req_edate=$req->edate;
-            $req_enddate=$req->enddate;
-            $req_sdate=$req->sdate;
-            $req_ldate=$req->ldate;
-            $req_etime=$req->etime;
-            $req_ename=$req->ename;
-            $req_mteam=$req->mteam;
-            $req_loc=$req->loc;
-            $req_rules=$req->rules;
-            $tble=tblevent::where('eid',$eid)->get()->first();
-            if($req_mteam < $tble['maxteam'])
-            {
-                session()->flash('validteam','Maximum Team Size is Not Valid');
-                return redirect()->back();                
-            }
-            $edate=date('Y-m-d',strtotime($req_edate));
-            $sdate=date('Y-m-d',strtotime($req_sdate));
-            $ldate=date('Y-m-d',strtotime($req_ldate));
-            $etime=date('h:i:s',strtotime($req_etime));
-            $enddate=date('Y-m-d',strtotime($req_enddate));
-            $message="";
-            $tble=tblevent::where('eid',$eid)->get()->first();
-            if($tble['ename']!=$req_ename)
-            {
-                $message.="Event Rename <b style='color:blue;'>".ucfirst($tble['ename'])."</b> to <b style='color:blue; '>".ucfirst($req_ename)."</b><br/>\r\n";
-            }
-            if($tble['edate']!=$edate)
-            {
-                $message.="Event Date changed <b style='color:blue; '>".date('d-m-Y',strtotime($tble['edate']))."</b> to <b style='color:blue; '>".$req_edate."</b><br/>\r\n";
-            }
-            if($tble['time']!=$etime)
-            {
-                $message.="Event time changed <b style='color:blue;'>".date('h:i A',strtotime($tble['time']))."</b> to <b style='color:blue; '>".date('h:i A',strtotime($etime))."</b><br/>\r\n";
-            }
-            if($tble['reg_start_date']!=$sdate)
-            {
-                $message.="Registration starting date changed <b style='color:blue;'>".date('d-m-Y',strtotime($tble['reg_start_date']))."</b> to <b style='color:blue; '>".$req_sdate."</b><br/>\r\n";
-            }
-            if($tble['reg_end_date']!=$ldate)
-            {
-                $message.="Registration end date changed <b style='color:blue;'>".date('d-m-Y',strtotime($tble['reg_end_date']))."</b> to <b style='color:blue; '>".$req_ldate."</b><br/>\r\n";
-            }
-            if($tble['place']!=$req->loc)
-            {
-                $message.="Event Location changed <b style='color:blue;'>".ucfirst($tble['place'])."</b> to <b style='color:blue; '>".$req_loc."</b><br/>\r\n";
-            }
-            if($tble['rules']!=$req->rules)
-            {
-                $message.="Event Rules changed <b style='color:blue;'>".ucfirst($tble['rules'])."</b> to <b style='color:blue; '>".$req_rules."</b><br/>\r\n";
-            }
-            $message.="<br>---<br> With Regards,<br> ".Session::get('cname')." (co-ordinate)<br>".Session::get('clgname');
-            $req_etype=$req->etype;
-            $req_efor=$req->efor;
-            $req_class=$req->class;
-            $req_tsize=$req->tsize;
-            $req_alw_dif_class=$req->alw_diff_class;
-            $req_alw_dif_div=$req->alw_diff_div;
-            $update_event=tblevent::where('eid',$eid)
-                ->update(['ename' =>$req_ename,'edate' =>$edate,'enddate' =>$enddate,'time' => $etime,'reg_start_date' => $sdate,'reg_end_date' => $ldate,'maxteam' =>$req_mteam,'place' => $req_loc,'rules' => $req_rules]);
-            $topic="Update of Event ".$req_ename;
-            
-            if ($message!="") {
-                $notice=DB::table('tblnotice')->insert(
-                    ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','sender_type' => 'co-coordinator','ndate'=>date('Y-m-d'),'clgcode'=>Session::get('clgcode')]
-                );
-            }
-            if($update_event)
-            {
-                $ename=tblevent::select('ename')->where('eid',$eid)->get()->first();
-                $tbladmin=admin::where('clgcode',Session::get('clgcode'))->get()->toArray();
-                foreach($tbladmin as $admin)
-                {
-                    if ($admin) {
-                        $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
-                        $this->mail($admin['name'],trim($admin['email']),$data);
-                    }
+                   
+                    //$this->mail($admin->name,$admin->email,$data);
                 }
                 $tblp=participant::select('senrl')->where('eid',$eid)->get()->toArray();
                 
@@ -438,22 +374,19 @@ class co_ordinate extends Controller
                                 $tbls=tblstudent::select('sname', 'email')->where('senrl', $enrl)->get()->first();
                                 //echo $tbls['sname'],$tbls['email'];
                                 $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
-                                // $this->mail($tbls['sname'], trim($tbls['email']), $data);
+                                //$this->mail($tbls['sname'], trim($tbls['email']), $data);
                             }
                         }
                 }
-                
-                //$this->mail();
                 // $log=new log;
                 // $log->cid=Session::get('cid');
                 // $log->action_on="event " .$req_ename;
                 // $log->action_type="update";
                 // $log->time=time();
                 // $log->save();
-                    session()->flash('success','Your Event is Successfully Updated..!');
+                session()->flash('success','Your Event is Successfully Updated..!');
             }
-        }
-        return redirect(url('cindex'));
+            return redirect(url('cindex'));
     }
    
     public function create_event(Request $req)
@@ -501,13 +434,14 @@ class co_ordinate extends Controller
         $tblevent->save();
         session()->flash('success', 'Event created successfully..!');
         $log=new log;
-            $log->uid=Session::get('cid');
-            $log->action_on="event " .$req->ename;
-            $log->action_type="insert";
-            $log->time=time();
-            $log->utype="co_ordinatore";
-            $log->ip_add=$_SERVER['REMOTE_ADDR'];
-            $log->save();
+        $log->uid=Session::get('cid');
+        $log->action_on="Event ";
+        $log->action_type="insert";
+        $log->descr="Event <b>".$req->ename." </b> created";
+        $log->time=time();
+        $log->utype="co-ordinator";
+        $log->ip_add=$_SERVER['REMOTE_ADDR'];
+        $log->save();
         return redirect(url('cindex'));
     }
     public function err(Request $req){
@@ -561,8 +495,9 @@ class co_ordinate extends Controller
         $log->uid=Session::get('cid');
         $log->action_on="password ";
         $log->action_type="update";
+        $log->descr="Update password";
         $log->time=time();
-        $log->utype="co_ordinatore";
+        $log->utype="co-ordinator";
         $log->ip_add=$_SERVER['REMOTE_ADDR'];
         $log->save();
         session()->flash('success', 'Password updated successfully..!');
@@ -596,8 +531,9 @@ class co_ordinate extends Controller
         $log->uid=Session::get('cid');
         $log->action_on="Notice";
         $log->action_type="insert";
+        $log->descr="Notice about <b>".$topic."</b>";
         $log->time=time();
-        $log->utype="co_ordinatore";
+        $log->utype="co-ordinator";
         $log->ip_add=$_SERVER['REMOTE_ADDR'];
         $log->save();
         return redirect(url('cindex'));
@@ -631,6 +567,15 @@ class co_ordinate extends Controller
         $b=participant::where('pid',$req->r2)->update(['rank'=>'2']);
         $c=participant::where('pid',$req->r3)->update(['rank'=>'3']);
         session()->flash('success','Result announced successfully..!');
+         $log=new log;
+        $log->uid=Session::get('cid');
+        $log->action_on="Rank";
+        $log->action_type="insert";
+        $log->descr="Result announced for event <b>".$req->ename." </b>";
+        $log->time=time();
+        $log->utype="co-ordinator";
+        $log->ip_add=$_SERVER['REMOTE_ADDR'];
+        $log->save();
         return response()->json(array('msg'=> $a.$b.$c),200);
     }
     public static function participant($eid)
@@ -645,6 +590,14 @@ class co_ordinate extends Controller
        
         return view('co-ordinates/view_result',['participant'=>$participant],['einfo'=>$event]);
     }
+    public function otp_mail($to_name,$to_email,$data)
+    {
+        \Mail::send('email',$data,function($message) use ($to_name, $to_email){
+                $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+                ->from("eventoitsol@gmail.com", $name = "Evento")
+                ->subject("OTP authentication")->bcc($to_email);
+            });
+    }
     public function send_otp(Request $req)
      {
          if ($req->ajax()) {
@@ -655,7 +608,10 @@ class co_ordinate extends Controller
              $data=array('name'=>'OTP :'.Session::get('otps'),'body'=>$message);
              $tblco=tblcoordinaters::where('email', $cuser)->get()->first();
              if ($tblco) {
-                $this->mail($tblco['cname'], $tblco['email'], $data);
+                if (Session::get('email_check')==1) {
+                    //$this->otp_mail($tblco['cname'], $tblco['email'], $data);
+                    session()->put('email_check',0);
+                }
                  $data=Session::get('otps');
              }
              else{
@@ -681,6 +637,15 @@ class co_ordinate extends Controller
             ->update(['password' =>$pass]);
             if($tblc)
             {
+                $log=new log;
+                $log->uid=Session::get('cid');
+                $log->action_on="password ";
+                $log->action_type="update";
+                $log->descr="Update password";
+                $log->time=time();
+                $log->utype="co-ordinator";
+                $log->ip_add=$_SERVER['REMOTE_ADDR'];
+                $log->save();
                 session()->flash("success","Your Password Successfully Changed...");
             }
             return redirect(url('/clogin'));

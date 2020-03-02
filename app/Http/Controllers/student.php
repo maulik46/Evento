@@ -230,6 +230,28 @@ class student extends Controller
             // });
             //echo "email send";
            $remainder = $req->get('remainder') ?? 0;
+            if(Session::get('reload')=="")
+           {
+               session()->put('reload',$user_details['senrl']);
+           }
+           else
+           {
+            session()->put('reload2',$user_details['senrl']);
+           }
+          if(Session::get('reload')==Session::get('reload2'))
+          {
+            session()->put('change',0);
+          }
+          else
+          {
+            session()->put('change',1);
+            
+          }
+        //   echo Session::get('reload')."<br/>";
+        //   echo Session::get('reload2')."<br/>";
+        //   echo "-".Session::get('change');
+          session()->put('reload',Session::get('reload2'));
+          session()->forget('reload2');
            return redirect(url('otpview/'.encrypt($req->senrl).'/'.encrypt($req->clgcode).'/'.encrypt($remainder)));
         } 
         else

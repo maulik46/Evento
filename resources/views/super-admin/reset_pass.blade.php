@@ -18,8 +18,8 @@
         form h6{
             color:#f8435f;
         }
-        body{
-           background-color: #43d39e;
+        body {
+            background-image:url('../assets/images/super_admin_bg.png');
         }
         .content-page {
             margin: 50px 0px !important;
@@ -84,14 +84,14 @@
                     <div class="card mt-5 shadow rounded-lg px-1">
                        <div class="card-body px-xl-4">
                            <h4 class="my-4 text-center text-dark d-flex flex-column">
-                              <img src="{{asset('assets/images/svg-icons/co-ordinate/man.svg')}}" alt="user" height="45px">
+                              <img src="{{asset('assets/images/svg-icons/super-admin/man1.svg')}}" alt="user" height="45px">
                                <span>Log-in</span>
-                               <span class="font-size-12 text-muted">for Co-ordinator</span>
+                               <span class="font-size-12 text-muted">for Admin</span>
                            </h4>
-                           <form action="{{url('/send_otp')}}" onsubmit="return valid()" method="post" id="myform">
+                           <form action="{{url('/a_send_otp')}}" onsubmit="return valid()" method="post" id="myform">
                            @csrf
                                <div class="form-group mt-2">
-                                   <label class="col-form-label font-size-14">Co-ordinator ID</label>
+                                   <label class="col-form-label font-size-14">Admin ID</label>
                                    <div class="form-group has-icon d-flex align-items-center">
                                        <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
                                        <input type="text" class="form-control" placeholder="Enter Your ID..." name="cuser"  id="cuser" />
@@ -138,8 +138,8 @@
     <script src="{{asset('assets/libs/moment/moment.min.js')}}"></script>
     <script src="{{asset('assets/js/app.min.js')}}"></script>
     <script>
-    function timers()
-    {
+        function timers()
+        {
         if(sessionStorage.getItem("c")==1)
                                 {
                                     
@@ -158,7 +158,7 @@
                                             }
                                         });
                                         $.ajax({
-                                            url:'/ctimers',
+                                            url:'/a_timers',
                                             method:'POST',
                                             dataType:'json',
                                             data:{'otpcode':otplabel},
@@ -175,11 +175,10 @@
                                     }, 1000);
                                     sessionStorage.setItem("c",0);
                                 }
-    }
-    </script>
+        }
+        </script>
     <script>
         $("#resend").click(function(){
-            
             var cuser=$('#cuser').val();
             $.ajaxSetup({
                      headers: {
@@ -187,7 +186,7 @@
                 }
             });
              $.ajax({
-                    url:'/cresend_otp',
+                    url:'/a_resend_otp',
                     method:'POST',
                     dataType:'json',
                     data:{'cuser':cuser},
@@ -201,16 +200,17 @@
                         {       
                         timers();
                         }
+
                         }                                       
                     })
-            
         });
+    
         </script>
         <script>
        $(document).ready(function(){
         $('#loader').hide();
         sessionStorage.setItem("c",1);
-        $( "#submitotp" ).click(function() {
+        $( "#submitotp" ).click(function() {  
             $('#loader').show();
             var cuser=$('#cuser').val();
             var otp=$('#otp').val();
@@ -220,7 +220,7 @@
                 }
             });
             $.ajax({
-                    url:'/csend_otp',
+                    url:'/a_send_otp',
                     method:'POST',
                     dataType:'json',
                     data:{'cuser':cuser},
@@ -236,7 +236,7 @@
                                 $('#cuser-label').html();
                             }
                             //console.log(data)
-                            document.getElementById("myform").action = "{{url('/confirm_pass')}}";
+                            document.getElementById("myform").action = "{{url('/a_confirm_pass')}}";
                             {{session()->put('email_check',1)}}
                             if(data!="Invalid Email Id..")
                             {
@@ -249,7 +249,6 @@
                                 sessionStorage.setItem("otps",data);
                                 timers();
                             }
-                            
                                 
                             
                         }
@@ -276,6 +275,7 @@
                 else if ($('#otp').val() != sessionStorage.getItem("otps")) {
                     $('#otp').parent().addClass('border border-danger');
                     $('#otp').parent().next().text("Invalid OTP..");
+                    $('#loader').hide();
                     f=1;
                 }
                 else{

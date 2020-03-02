@@ -159,6 +159,20 @@ route::view('/slogin','super-admin/superadmin_login');
 
 Route::post('/a_checklogin','s_admin@checklogin');
 
+Route::get('/a_resetpassword',function(){
+    return view('super-admin/reset_pass');
+});
+
+Route::post('/a_send_otp','s_admin@send_otp');
+
+Route::post('/a_confirm_pass','s_admin@confirm_pass');
+
+Route::post('/a_timers','s_admin@timers');
+
+Route::post('/a_change_pass/{email}', 's_admin@change_pass');
+
+Route::post('/a_resend_otp','s_admin@send_otp');
+
 Route::group(['middleware' => 'admin_session_check'], function () { 
             
         route::get('/sindex','s_admin@sindex');

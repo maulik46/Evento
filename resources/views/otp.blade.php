@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,15 +62,21 @@
         }
 
     </style>
-    <script type="text/javascript"> 
-        function preventBack() { 
-            window.history.forward();  
-        } 
-          
-        setTimeout("preventBack()", 0); 
-          
-        window.onunload = function () { null }; 
-    </script>
+    <script>
+      <?php       
+      if(Session::get('change') == 1) {
+        session()->put('change',2);
+          ?>
+      sessionStorage.setItem("counter",120)
+      location.reload();
+      <?php
+      
+      }else{
+        session()->put('change',3);
+      }
+      ?>
+      location
+      </script>
 </head>
 
 <body class="authentication-bg bg-white" >
@@ -98,11 +105,23 @@
                                             <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
                                             <h2 class="ml-1">Evento</h3>
                                     </a>
-                                    <p class="font-size-12 text-muted font-weight-bold text-center mt-2 mb-4"><?php echo  Session::get('email'); ?></p>
+                                    <p class="font-size-12 text-muted font-weight-bold text-center mt-2 mb-4">
+                                      <?php 
+                                      function partially_email($email)
+                                      {
+                                          $em   = explode("@",$email);
+                                          $name = implode(array_slice($em, 0, count($em)-1),"@");
+                                          $len  = floor(strlen($name)/2);
+                                          return substr($name,0, $len) . str_repeat('*', $len) . "@" . end($em);   
+                                      }
+                                  
+                                      $email = 'hardikdayani1@gmail.com';
+                                      echo partially_email(Session::get('email'));
+                                      ?>
+                                  </p>
     
                                     <form action="{{url('/otp_check')}}/{{$senrl}}/{{$clgcode}}/{{$check}}" class="authentication-form" method="post">
                                     @csrf
-                                    
                                         <div class="form-group" style="margin-top:30px;">
                                             <label class="form-control-label">Enter OTP</label>
 
@@ -162,7 +181,6 @@
     <script src="{{asset('assets/js/app.min.js')}}"></script>
 
     <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script>   
-    
     <script>
     $(document).ready(function() {
         $('select').niceSelect();
