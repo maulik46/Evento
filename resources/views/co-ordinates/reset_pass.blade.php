@@ -44,6 +44,26 @@
         .color-black{
             color: #232323;
         }
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+            }
+
+            /* Safari */
+            @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+            }
+
+            @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+            }
     </style>
 </head>
 <body data-layout="topnav" class="body-scroll" style="height: 90vh!important;"> 
@@ -99,6 +119,8 @@
                                     <span class="font-size-14">Confirm</span>
                                     <i data-feather="log-in" height="20px"></i>
                                </button>
+                               <div class="loader" id="loader" style="display: none;">
+                               </div>
                            </form>
                        </div>
                     </div>
@@ -116,25 +138,9 @@
     <script src="{{asset('assets/libs/moment/moment.min.js')}}"></script>
     <script src="{{asset('assets/js/app.min.js')}}"></script>
     <script>
-        $("#resend").click(function(){
-            var cuser=$('#cuser').val();
-            $.ajaxSetup({
-                     headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-             $.ajax({
-                    url:'/cresend_otp',
-                    method:'POST',
-                    dataType:'json',
-                    data:{'cuser':cuser},
-                    success:function(otp)
-                    {
-                        console.log(otp)
-                        $("#otp-label").html(otp);
-                        sessionStorage.setItem("otps",otp);
-                        sessionStorage.setItem("c",1);
-                        if(sessionStorage.getItem("c")==1)
+    function timers()
+    {
+        if(sessionStorage.getItem("c")==1)
                                 {
                                     
                                     var countdown = 2 * 60 * 1000;
@@ -169,15 +175,43 @@
                                     }, 1000);
                                     sessionStorage.setItem("c",0);
                                 }
+    }
+    </script>
+    <script>
+        $("#resend").click(function(){
+            
+            var cuser=$('#cuser').val();
+            $.ajaxSetup({
+                     headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+             $.ajax({
+                    url:'/cresend_otp',
+                    method:'POST',
+                    dataType:'json',
+                    data:{'cuser':cuser},
+                    success:function(otp)
+                    {
+                        console.log(otp)
+                        $("#otp-label").html(otp);
+                        sessionStorage.setItem("otps",otp);
+                        sessionStorage.setItem("c",1);
+                        if($('#demo').html() == "EXPIRED")
+                        {       
+                        timers();
+                        }
                         }                                       
                     })
+            
         });
         </script>
         <script>
        $(document).ready(function(){
+        $('#loader').hide();
         sessionStorage.setItem("c",1);
         $( "#submitotp" ).click(function() {
-              
+            $('#loader').show();
             var cuser=$('#cuser').val();
             var otp=$('#otp').val();
             $.ajaxSetup({
@@ -192,6 +226,7 @@
                     data:{'cuser':cuser},
                         success:function(data)
                         {
+                            $('#loader').hide();
                             sessionStorage.setItem("otps",data);
                             if(data.length > 6)
                             {
@@ -202,51 +237,17 @@
                             }
                             //console.log(data)
                             document.getElementById("myform").action = "{{url('/confirm_pass')}}";
-                            
+                            {{session()->put('email_check',1)}}
                             if(data!="Invalid Email Id..")
                             {
+                                $('#loader').hide();
                                 document.getElementById("submitotp").id = "submitpass";
                                 $('#content-otp').fadeIn("slow");
                                 $('#cuser-label').html("");
                                 document.getElementById("cuser").readOnly = true;                                
                                 $('#otp-label').html(data);
                                 sessionStorage.setItem("otps",data);
-                                if(sessionStorage.getItem("c")==1)
-                                {
-                                    
-                                    var countdown = 2 * 60 * 1000;
-                                    var timerId = setInterval(function(){
-                                    countdown -= 1000;
-                                    var min = Math.floor(countdown / (60 * 1000));
-                                    //var sec = Math.floor(countdown - (min * 60 * 1000));  // wrong
-                                    var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);  //correct
-                                    if (countdown <= 0) {
-                                        $("#demo").html("EXPIRED");
-                                        var otplabel=sessionStorage.getItem("otps");;
-                                        $.ajaxSetup({
-                                                headers: {
-                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                            }
-                                        });
-                                        $.ajax({
-                                            url:'/ctimers',
-                                            method:'POST',
-                                            dataType:'json',
-                                            data:{'otpcode':otplabel},
-                                            success:function(data2)
-                                            {
-                                                //console.log(data2)
-                                                sessionStorage.setItem("otps",data2);
-                                            }                                       
-                                        })
-                                        clearInterval(timerId);                                        
-                                    } else {
-                                        $("#demo").html(min + " : " + sec + " Min ");
-                                    }
-                                    }, 1000);
-                                    sessionStorage.setItem("c",0);
-                                    
-                                }
+                                timers();
                             }
                             
                                 
