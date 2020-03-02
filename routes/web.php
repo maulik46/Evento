@@ -15,7 +15,7 @@
 // Student dashboard routes start
 // ==========================================================================
 
-
+route::view('/home','home');
 Route::group(['middleware' => 'SessionCheck'], function () {
     route::get('/index',function(){
          return view('index');
