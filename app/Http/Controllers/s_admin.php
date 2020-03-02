@@ -367,7 +367,7 @@ class s_admin extends Controller
         else
         {
             $file=$req->file('photo-upload');
-            $destinationPath=public_path('profile/');
+            $destinationPath=public_path('profile_pic/');
             $filename=time().$file->getClientOriginalName();
             $file->move($destinationPath, $filename);
             $avatar=$filename;
