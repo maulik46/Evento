@@ -191,6 +191,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
         route::view('add_student', 'super-admin/add_student');
     
+        route::post('new_cod_add', 's_admin@new_cod_add');
+    
         route::post('/checkenrl','s_admin@checkenrl');
 
         route::post('/checkemail','s_admin@checkemail');
