@@ -359,4 +359,28 @@ class s_admin extends Controller
         $msg.='<div class="mt-3">'.$logs->links().'</div>';
         return response()->json(array('msg'=>$msg),200);
     }
+    public function new_cod_add(Request $req)
+    {
+        $file=$req->file('photo-upload');
+        $destinationPath=public_path('profile/');
+        $filename=time().$file->getClientOriginalName();
+        $file->move($destinationPath,$filename);
+        if($filename)
+        {
+            $avatar=$filename;
+        }
+        else
+        {
+            $avatar=$req->avatar;
+        }
+        $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('clgcode'),'cname'=>$req->cname,'email'=>$req->email,
+        'password'=>$req->pass,'category'=>$req->category,'pro_pic'=>$avatar] );
+        if($tblc)
+        {
+            //echo "new co create";
+            session()->flash('success','New Co-ordinater is Create...!');
+        }
+        return redirect(url('/sindex'));
+       
+    }
 }
