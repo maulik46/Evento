@@ -676,4 +676,21 @@ class co_ordinate extends Controller
         }
         
     }
+     public function updateprofile(Request $req)
+    {
+        $cname=$req->cname;
+        $cid=$req->cid;
+        $cemail=$req->cemail;
+        $mobile=$req->mobile;
+        $rec=tblcoordinaters::where('cid',$cid)->update(['cname'=>$cname,'email'=>$cemail,'mobile'=>$mobile]);
+        if($rec>0)
+        {
+            session()->put('cname',$cname);
+            session()->put('email',$cemail);
+            session()->put('mobile',$mobile);
+            session()->flash('success', 'Profile updated successfully');
+            
+        }
+        return back();
+    }
 }
