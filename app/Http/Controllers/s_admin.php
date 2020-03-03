@@ -260,7 +260,7 @@ class s_admin extends Controller
     {
         // Session::get('clgname')
         
-        $stud = tblstudent::where('clgcode',Session::get('clgcode'))->paginate(3);
+        $stud = tblstudent::where('clgcode',Session::get('clgcode'))->get();
         // return $stud;
         // exit;
         $alldata = ['stud' => $stud];
