@@ -83,7 +83,7 @@
                             </h4>
                             <form action="{{ url('a_checklogin') }}" onsubmit="return check()" method="post">
                                 @csrf
-                                <p id="error" class="text-center text-danger">{{Session::get('error')}}</p>
+                                <p id="error" class="text-center text-danger font-weight-bold">{{Session::get('error')}}</p>
                                 <div class="form-group mt-2">
                                     <label class="col-form-label font-size-14">Admin email</label>
                                     <div class="form-group has-icon d-flex align-items-center">
