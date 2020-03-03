@@ -225,13 +225,11 @@
                         </div>
                     </li>
                 @endforeach
-                    
-                    
+                  @if($a==1)    
                     <!-- dont touch me -->
                     <li class="event-list last-child"></li>
                     <!-- i said don't touch me :( -->
-                    
-
+                @endif
                 </ul>
             </div>
         </div>
