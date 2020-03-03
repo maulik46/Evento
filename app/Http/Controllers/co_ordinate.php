@@ -87,6 +87,8 @@ class co_ordinate extends Controller
             session()->put('cname',$clg->cname);
             session()->put('email',$clg->email);
             session()->put('cat',$clg->category);
+            session()->put('mobile',$clg->mobile);
+            session()->put('profilepic',$clg->pro_pic);
             $log=new log();
             $log->uid=Session::get('cid');
             $log->action_on="login";
