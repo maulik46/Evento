@@ -219,10 +219,10 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::post('/checkrno','s_admin@checkrno');
 
         route::post('/studinsrt','s_admin@studinsrt');
-
+     
           route::get('/check_logs', function(){
             $logs=log::join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')
-            ->where([['tblcoordinaters.clgcode',Session::get('clgcode')],['tbllog.utype','co-ordinatore']])
+            ->where([['tblcoordinaters.clgcode',Session::get('clgcode')],['tbllog.utype','co-ordinator']])
             ->orderby('time','desc')->paginate(10);
             $cod=App\tblcoordinaters::select('cid','cname')->where('clgcode',Session::get('clgcode'))->get()->toarray();
             return view('super-admin/check_logs',['logs'=>$logs,'cod'=>$cod]);
