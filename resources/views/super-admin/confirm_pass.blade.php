@@ -71,12 +71,12 @@
                            @csrf
                            
                            <div class="form-group mt-2">
-                                   <label class="col-form-label font-size-14">Enter Password</label>
+                                   <label class="col-form-label font-size-14">New Password</label>
                                    
                                    <div class="form-group has-icon d-flex align-items-center" >
                                        <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
                                        <input type="password" class="form-control"
-                                           placeholder="Enter Confirm Password..."  name="password" style="padding-right: 2.375rem;" id="my-password">
+                                           placeholder="Enter New Password..."  name="password" style="padding-right: 2.375rem;" id="my-password">
                                         <div class="position-relative" style="right:40px;bottom: 10px;">
                                         <a href="#">
                                             <i data-feather="eye" class="ml-2 form-control-icon" height="19px" id="see-pass"></i> 
@@ -94,7 +94,7 @@
                                    <div class="form-group has-icon d-flex align-items-center" >
                                        <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
                                        <input type="password" class="form-control"
-                                           placeholder="Enter Your Password..."  name="cpassword" style="padding-right: 2.375rem;" id="my-password2">
+                                           placeholder="Enter Confirm Password..."  name="cpassword" style="padding-right: 2.375rem;" id="my-password2">
                                         <div class="position-relative" style="right:40px;bottom: 10px;">
                                         <a href="#">
                                             <i data-feather="eye" class="ml-2 form-control-icon" height="19px" id="see-pass2"></i> 
@@ -107,7 +107,7 @@
                                    <span class="text-danger font-weight-bold"></span>
                                </div>
                                 
-                               <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-4 mt-1 mb-3">
+                               <button type="submit" class="hover-me-sm btn btn-info rounded-sm new-shadow font-weight-bold px-4 mt-1 mb-3">
                                     <span class="font-size-14">Log-in</span>
                                     <i data-feather="log-in" height="20px"></i>
                                </button>

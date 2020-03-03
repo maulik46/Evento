@@ -44,11 +44,7 @@
             color:var(--success)!important;
         }
     </style>
-    <script type = "text/javascript" >
-    function preventBack(){window.history.forward();}
-        setTimeout("preventBack()", 0);
-        window.onunload=function(){null};
-    </script>
+
 </head>
 <body data-layout="topnav" class="body-scroll" style="height: 90vh!important;"> 
 @if(Session::has('success'))

@@ -45,11 +45,11 @@
             color: #232323;
         }
         .loader {
-            border: 16px solid #f3f3f3;
+            border: 5px solid #f3f3f3;
             border-radius: 50%;
-            border-top: 16px solid #3498db;
-            width: 120px;
-            height: 120px;
+            border-top: 5px solid var(--success);
+            width: 30px;
+            height: 30px;
             -webkit-animation: spin 2s linear infinite; /* Safari */
             animation: spin 2s linear infinite;
             }
@@ -81,7 +81,7 @@
         <div class="content-page">
             <div class="content d-flex justify-content-center">
                 <div class="container-fluid pt-3 col-xl-4 col-lg-5 col-md-8 col-sm-10">
-                    <div class="card mt-5 shadow rounded-lg px-1">
+                    <div class="card mt-4 shadow rounded-lg px-1">
                        <div class="card-body px-xl-4">
                            <h4 class="my-4 text-center text-dark d-flex flex-column">
                               <img src="{{asset('assets/images/svg-icons/super-admin/man1.svg')}}" alt="user" height="45px">
@@ -91,10 +91,10 @@
                            <form action="{{url('/a_send_otp')}}" onsubmit="return valid()" method="post" id="myform">
                            @csrf
                                <div class="form-group mt-2">
-                                   <label class="col-form-label font-size-14">Admin ID</label>
+                                   <label class="col-form-label font-size-14">Email ID</label>
                                    <div class="form-group has-icon d-flex align-items-center">
                                        <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                       <input type="text" class="form-control" placeholder="Enter Your ID..." name="cuser"  id="cuser" />
+                                       <input type="text" class="form-control" placeholder="Enter Email ID..." name="cuser"  id="cuser" />
                                    </div>
                                    <span class="text-danger font-weight-bold" id="cuser-label"></span>
                                </div>
@@ -114,13 +114,14 @@
                                     </span> 
                                     
                                </div>
-                               
-                               <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-4 mt-1 mb-3" id="submitotp">
-                                    <span class="font-size-14">Confirm</span>
-                                    <i data-feather="log-in" height="20px"></i>
-                               </button>
-                               <div class="loader" id="loader" style="display: none;">
-                               </div>
+                                <div class="d-flex align-items-center">
+                                    <button type="submit" class="hover-me-sm btn btn-info rounded-sm new-shadow font-weight-bold px-3 mt-1 mb-3" id="submitotp">
+                                            <span class="font-size-14">Confirm</span>
+                                            <i data-feather="log-in" height="20px"></i>
+                                    </button>
+                                    <div class="loader ml-2 mb-3" id="loader" style="display: none;">
+                                    </div>
+                                </div>
                            </form>
                        </div>
                     </div>
