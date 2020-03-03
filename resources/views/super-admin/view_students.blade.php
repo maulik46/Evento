@@ -2,7 +2,8 @@
 
 @section('title','View Students')
 
-@section('head-tag-links')     
+@section('head-tag-links')    
+<link href="{{asset('assets/libs/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" /> 
 <style>
     .form-control {
         border-radius: .1rem;
@@ -20,9 +21,20 @@
     .page-item.active .page-link {
         background-color: var(--info);
         border-color: var(--info);
+        text-align:left!important;
     }
     .page-link{
         color: var(--info);
+    }
+    div.dataTables_wrapper div.dataTables_length select {
+        width: 90px;
+        display: inline-block;
+    }
+    @media (max-width: 767.98px){
+    li.paginate_button.next, li.paginate_button.previous {
+        display: inline-block;
+        font-size: 1rem;
+    }
     }
 </style>
 @endsection
@@ -53,12 +65,13 @@
             {{ucfirst(Session::get('clgname'))}}
         </span>
         <hr>
-        <div class="card-body px-1 px-md-2 pt-0" >
-            <div class="mx-3">
-                <input id="myInput" type="text" class="form-control col-lg-3 col-md-4 col-sm-6 col-12 mb-2" placeholder="Search Student..">
-            </div>
-            <div class="table-responsive overflow-auto my-scroll" style="max-height:415px;">
-                <table  class="table table-hover nowrap mb-0">
+        <div class="card-body px-1 px-md-2 pt-0">
+            <!-- <div class="col-lg-3 col-md-5 col-sm-6 col-12 form-group has-icon d-flex align-items-center">
+                <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
+                <input id="myInput" type="text" class="form-control " placeholder="Search Student..">
+            </div> -->
+            <div class="table-responsive overflow-auto my-scroll">
+                <table id="my-datatable" class="table table-hover mb-0 ">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -72,10 +85,10 @@
                             <th scope="col">Mobile No</th>
                             <th scope="col">Gender</th>
                             <th scope="col">City</th>
-                            <th scope="col">Update</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="stud-data">
+                    <tbody>
                         <?php $no=0;?>
                         @foreach($stud as $s)
                         <?php $no++;?>
@@ -95,31 +108,36 @@
                                 <a href="{{url('update_stud')}}/{{encrypt($s['senrl'])}}" class="btn text-warning p-0">
                                 <i data-feather="edit" height="19px"></i>
                                 </a>
+                                <a href="#" class="btn text-danger p-0">
+                                <i data-feather="trash-2" height="19px"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
 
                     </tbody>
                 </table>
-                <div class="mt-3 font-weight-bold">
-                {{ $stud->links() }}
-                </div>
             </div> <!-- end table-responsive-->
+            
         </div> <!-- end card-body-->
     </div> <!-- end card-->
 </div>
 @endsection
 @section('extra-scripts')
-<script>
-    $(document).ready(function () {
-        $("#myInput").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#stud-data  tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-
-            });
-        });
-    });
-</script>       
 <script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
+<script src="{{asset('assets/libs/datatables/jquery.dataTables.min.js')}}"></script> 
+<script src="{{asset('assets/libs/datatables/dataTables.bootstrap4.min.js')}}"></script>
+<!-- Datatables init -->
+<!-- <script src="{{asset('assets/js/pages/datatables.init.js')}}"></script> -->
+<script>
+$("#my-datatable").DataTable({
+    "language": {
+      "emptyTable": "No data available in table"
+    },
+    // "lengthMenu": [ 3, 25, 50, 75, 100 ]
+});
+
+</script>
+      
+
 @endsection
