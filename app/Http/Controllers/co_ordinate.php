@@ -603,13 +603,21 @@ class co_ordinate extends Controller
          if ($req->ajax()) {
              $rand_num=rand(111111, 999999);
              session()->put('otps', $rand_num);
-             $cuser=$req->get('cuser');
+             if($req->get('cuser_resend'))
+             {
+                $cuser=$req->get('cuser_resend');
+                session()->put('email_check',1);
+             }
+             else
+             {
+                $cuser=$req->get('cuser');
+             }
              $message="<br/>---<br/> Thanks For visiting Evento ";
              $data=array('name'=>'OTP :'.Session::get('otps'),'body'=>$message);
              $tblco=tblcoordinaters::where('email', $cuser)->get()->first();
              if ($tblco) {
                 if (Session::get('email_check')==1) {
-                    //$this->otp_mail($tblco['cname'], $tblco['email'], $data);
+                    $this->otp_mail($tblco['cname'], $tblco['email'], $data);
                     session()->put('email_check',0);
                 }
                  $data=Session::get('otps');

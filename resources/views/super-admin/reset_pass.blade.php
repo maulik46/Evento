@@ -189,7 +189,7 @@
                     url:'/a_resend_otp',
                     method:'POST',
                     dataType:'json',
-                    data:{'cuser':cuser},
+                    data:{'cuser_resend':cuser},
                     success:function(otp)
                     {
                         console.log(otp)
@@ -227,7 +227,9 @@
                         success:function(data)
                         {
                             $('#loader').hide();
-                            sessionStorage.setItem("otps",data);
+                            if (sessionStorage.getItem('otps')=="") {
+                                sessionStorage.setItem("otps", data);
+                            }
                             if(data.length > 6)
                             {
                             $('#cuser-label').html(data);
