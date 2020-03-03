@@ -148,6 +148,8 @@ Route::group(['middleware' => 'co_session_check'], function () {
         Route::post('/rank','co_ordinate@rank');
 
         Route::get('/view_result/{eid}', 'co_ordinate@view_result');
+    
+        route::post('/cod_profile/updateprofile','co_ordinate@updateprofile');
 
 });
 
