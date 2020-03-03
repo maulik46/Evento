@@ -371,14 +371,22 @@ class s_admin extends Controller
      {
          if ($req->ajax()) {
              $rand_num=rand(111111, 999999);
+             if($req->get('cuser_resend'))
+             {
+                $cuser=$req->get('cuser_resend');
+                session()->put('email_check',1);
+             }
+             else
+             {
+                $cuser=$req->get('cuser');
+             }
              session()->put('otps', $rand_num);
-             $cuser=$req->get('cuser');
              $message="<br/>---<br/> Thanks For visiting Evento ";
              $data=array('name'=>'OTP :'.Session::get('otps'),'body'=>$message);
              $tbla=admin::where('email', $cuser)->get()->first();
              if ($tbla) {
                  if (Session::get('email_check')==1) {
-                     //$this->otp_mail($tbla['name'], $tbla['email'], $data);
+                     $this->otp_mail($tbla['name'], $tbla['email'], $data);
                      session()->put('email_check',0);
                  }
                  $data=Session::get('otps');
