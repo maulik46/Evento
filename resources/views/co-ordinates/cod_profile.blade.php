@@ -1,3 +1,5 @@
+<?php use App\log ;?>
+
 @extends('co-ordinates/cod_layout')
 
 @section('title','Co-ordinator Profile')
@@ -14,8 +16,9 @@
     }
 
     .user-img {
-        background: url('../assets/images/users/cod1.jpg');
+        background: url('../profile_pic/<?php echo Session::get("profilepic")?>');
         background-size: cover;
+        background-color:white;
         background-repeat: no-repeat;
         background-position: center;
         width: 180px;
@@ -88,7 +91,9 @@
             border: 1px solid #d1d1d1 !important;
             background-color: #f3f4f7 !important;
         }
-
+        .form-group{
+            margin-bottom:0.3rem;
+        }
         .my-scroll::-webkit-scrollbar-thumb{
             background-color:transparent;
         }
@@ -134,6 +139,20 @@
 <!-- text-center text-md-right -->
 @endsection
 @section('my-content')
+@if(Session::has('success'))
+           
+           <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+               <div class="toast-body text-white alert mb-1">
+                   <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                       <i data-feather="x-circle" id="close-btn" height="18px" ></i>
+                   </a>
+                   <div class="mt-2 font-weight-bold font-size-14">
+                       {{Session::get('success')}}
+                   </div> 
+                   
+               </div>
+           </div>
+    @endif
 <div class="container-fluid">
     <div class="card pattern-bg mb-0 d-flex align-items-end justify-content-start">
         <a href="#cod-section" class="btn bg-white py-0 text-dark btn-sm badge-pill font-weight-bold m-1 m-sm-2 d-flex align-items-center hover-me-sm" id="update-profile" style="cursor:pointer;">
@@ -146,16 +165,15 @@
             <div class="mt-2 mt-md-0 font-size-22 text-dark font-weight-bold cod-name">
                 {{ucfirst(Session::get('cname'))}}
             </div>
-            <div class="font-size-14 text-muted font-weight-bold cod-clg">Sutex Bank College Of Computer Applications &
-                Science </div>
+            <div class="font-size-14 text-muted font-weight-bold cod-clg">{{ucfirst(Session::get('clgname'))}}</div>
             <div class="mt-1">
                 <span class="badge badge-soft-dark px-2" style="padding:0.1rem 0px;">
                     <i data-feather="mail" height="18px"></i>
-                    dishantsakariya@gmail.com
+                    {{Session::get('email')}}
                 </span>
                 <span class="badge badge-soft-dark px-2" style="padding:0.1rem 0px;">
                     <i data-feather="phone" height="18px"></i>
-                    9685741230
+                    {{Session::get('mobile')}}
                 </span>
             </div>
         </div>
@@ -181,48 +199,32 @@
             </div>
             <div class="left-timeline pl-1 pl-sm-3 overflow-auto my-scroll" style="max-height:700px;">
                 <ul class="list-unstyled events">
+                <?php
+                    $activity=log::where([['uid',Session::get('cid')],['utype','co-ordinator']])->whereNotIn('action_on', ['login','logout'])->get();
+                ?>
+                @foreach($activity as $act)
                     <li class="event-list">
                         <div>
                             <div class="media">
                                 <div class="event-date text-center mr-1 mr-sm-3">
                                     <div class="bg-soft-primary badge mt-2 font-size-13">
                                         <span class="avatar-title text-primary font-weight-semibold">
-                                            02 Jun 2020
+                                            {{date('d M Y',$act['time'])}}
                                         </span>
                                     </div>
                                 </div>
                                 <div class="media-body mt-2">
                                     <div class="card d-inline-block new-shadow-sm">
                                         <div class="card-body p-3">
-                                            <h5 class="mt-0">Event One</h5>
-                                            <span class="text-muted">It will be as simple as occidental in fact it will be Occidental Cambridge friend Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse laborum asperiores magnam maxime quod explicabo laudantium ipsam sunt praesentium deserunt veniam ut qui, odio deleniti delectus rerum dolorum possimus dignissimos?</span>
+                                            <h5 class="mt-0">{{$act['action_on']}}</h5>
+                                            <span class="text-muted">{!! $act['descr'] !!}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <li class="event-list">
-                        <div>
-                            <div class="media">
-                                <div class="event-date text-center  mr-1 mr-sm-3">
-                                    <div class="bg-soft-primary badge mt-2 font-size-13">
-                                        <span class="avatar-title text-primary font-weight-semibold">
-                                            02 Jun 2020
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="media-body mt-2">
-                                    <div class="card d-inline-block new-shadow-sm">
-                                        <div class="card-body p-3">
-                                            <h5 class="mt-0">Event One</h5>
-                                            <span class="text-muted">It will be as simple as occidental in fact it will be Occidental Cambridge friend</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                @endforeach
                     
                     
                     <!-- dont touch me -->
@@ -243,22 +245,30 @@
                         <i data-feather="edit"></i>
                         Update Details
                     </h4>
-                    <form>
+                    <form method="post" onsubmit="return valid()" action="{{url('cod_profile/updateprofile')}}">
+                    @csrf
+                    <input type="hidden" name="cid" class="form-control" value="{{ucfirst(Session::get('cid'))}}" />
                         <label class="col-form-label font-size-14">Name</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" class="form-control" value="Mr. Dishant Sakariya" />
+                                <input type="text" class="form-control" id="cname" name="cname" value="{{ucfirst(Session::get('cname'))}}" />
+                                
                         </div>
+                        <div class="text-danger font-weight-bold" id="cname-err"></div>
                         <label class="col-form-label font-size-14">Email</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" class="form-control" value="dishantsakariya@gmail.com" />
+                                <input type="text" class="form-control" id="cemail" name="cemail" value="{{Session::get('email')}}" />
+                                
                         </div>
+                        <div class="text-danger font-weight-bold" id="email-err"></div>
                         <label class="col-form-label font-size-14">Mobile No</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" class="form-control" value="9685741230" />
+                                <input type="text" id="mobile" class="form-control" name="mobile" value="{{Session::get('mobile')}}" />
+                           
                         </div>
+                        <div id="mobile-err" class="text-danger font-weight-bold"></div>
                         <button type="submit" class="btn btn-success rounded-sm hover-me-sm px-2 font-weight-bold new-shadow-sm btn-sm py-2 font-size-13">
                             <i data-feather="check-square" height="18px"></i>
                             Update Details
@@ -296,6 +306,53 @@
 @endsection
 @section('extra-scripts')
 <script>
+function valid()
+{
+    var f=0;
+    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if($('#cname').val()=="")
+    {
+        $('#cname-err').text("Please enter name");
+        f=1;
+    }
+    else{
+        $('#cname-err').text("");
+    }
+    if($('#cemail').val()=="")
+    {
+        $('#email-err').text("Please enter email");
+        f=1;
+    }
+    else if(!regex.test($('#cemail').val()))
+    {
+        
+        $('#email-err').text("Invalid email Address");
+        f=1;
+    }
+    else{
+        $('#email-err').text("");
+    }
+
+    regex = /^\d*(?:\.\d{1,2})?$/; 
+    var mo= $('#mobile').val();
+    if($('#mobile').val()=="")
+    {
+        $('#mobile-err').text("Please enter Mobile no.");
+        f=1;
+    }
+    else if(!(regex.test($('#mobile').val()) && mo.length == 10))
+    {
+        $('#mobile-err').text("Please enter Mobile no.");
+        f=1;
+    }
+    else{
+        $('#mobile-err').text("");
+    }
+    if(f==1)
+    {
+        return false;
+    }
+}
     $(document).ready(function(){
         $('#update-form').hide();
         $('.user-img').hover(function () {
