@@ -179,8 +179,8 @@
     </script>
     <script>
         $("#resend").click(function(){
-            
             var cuser=$('#cuser').val();
+            
             $.ajaxSetup({
                      headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -190,10 +190,10 @@
                     url:'/cresend_otp',
                     method:'POST',
                     dataType:'json',
-                    data:{'cuser':cuser},
+                    data:{'cuser_resend':cuser},
                     success:function(otp)
                     {
-                        console.log(otp)
+                        //console.log(otp)
                         $("#otp-label").html(otp);
                         sessionStorage.setItem("otps",otp);
                         sessionStorage.setItem("c",1);
@@ -227,7 +227,9 @@
                         success:function(data)
                         {
                             $('#loader').hide();
-                            sessionStorage.setItem("otps",data);
+                            if (sessionStorage.getItem('otps')=="") {
+                                sessionStorage.setItem("otps", data);
+                            }
                             if(data.length > 6)
                             {
                             $('#cuser-label').html(data);
@@ -241,7 +243,7 @@
                             if(data!="Invalid Email Id..")
                             {
                                 $('#loader').hide();
-                                document.getElementById("submitotp").id = "submitpass";
+                                document.getElementById("submitotp").id = "submitpass";                                
                                 $('#content-otp').fadeIn("slow");
                                 $('#cuser-label').html("");
                                 document.getElementById("cuser").readOnly = true;                                
@@ -259,6 +261,7 @@
        })
         function valid()
         {
+            alert(sessionStorage.getItem('otps'));
             var cuser=$('#cuser').val();
             var otp=$('#otp').val();
             var f=0;
