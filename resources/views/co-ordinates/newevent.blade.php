@@ -17,21 +17,26 @@
         justify-content: center;
         margin-top:0px;
     }
+    input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            border: 2px solid #f3efef;
+            height:100%;
+            width:100%;
+            text-align:center;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        .custom-file-upload:hover {
+            color: #43d39e;
+        }
 </style>
 @endsection
 
 @section('my-content')
-<div class="container-fluid">
-    <!-- <div class="col-md-3 mb-0">
-        <div class="card new-shadow">
-            <label for="s1" class="btn">
-            <input type="checkbox" onclick="sell(this.id);" class="" style="display: none" id="s1" name="">
-            <h4 class="course-name p-3">BCA</h4>
-             </label>
-        </div>
-    </div> -->
-   
-</div>
 <div class="row justify-content-center">
     <div class="col-lg-8 col-md-10 col-sm-10 mx-2 p-0">
 
@@ -48,7 +53,8 @@
                 @csrf
                 <div class="card border-form">
                     <div class="card-body py-0 pb-1">
-                        <div class="form-group mt-2 ">
+                        <div class="row">
+                        <div class="col-md-8 form-group mt-2 ">
                             <label class="col-form-label font-size-15">Event Name</label>
                             <div id="enamediv" class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="edit-3" class="form-control-icon ml-2" height="19px"></i>
@@ -57,7 +63,17 @@
                                     placeholder="Enter Event Name..." />
                             </div>
                             <span id="erevent" class="text-danger font-weight-bold"></span>
-
+                        </div>
+                        <div class="col-md-4 form-group mt-2">
+                            <label class="col-form-label font-size-15">Event Poster</label>
+                            <div>
+                            <label for="poster-upload" class="custom-file-upload rounded overflow-auto">
+                            <i id="camera" data-feather="camera"></i>
+                            <span id="up" class="mx-2">Uploa Poster</span>
+                            </label>
+                            <input id="poster-upload" name="poster-upload" type="file" />
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
