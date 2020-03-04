@@ -200,11 +200,16 @@ class s_admin extends Controller
         Excel::import(new ImportStudent, request()->file('import_file'));
         return back()->with('success', 'Student record inserted successfully.');
     }
-    
-    public function checkenrl(Request $req)
+     public function checkenrl(Request $req)
     {
         $enrl=$req->enrl;
-        $c=tblstudent::where('senrl',$enrl)->count();
+        if($req->oenrl)
+        {
+            $c=tblstudent::where([['senrl','!=',$req->oenrl],['senrl',$enrl]])->count();
+        }
+        else{
+            $c=tblstudent::where('senrl',$enrl)->count();
+        }
         if($c>0)
         {
             return response()->json(array('msg'=> "This Enrollment number already available"),200);
@@ -214,7 +219,13 @@ class s_admin extends Controller
     public function checkemail(Request $req)
     {
         $email=$req->email;
-        $c=tblstudent::where('email',$email)->count();
+        if($req->enrl)
+        {
+            $c=tblstudent::where([['senrl','!=',$req->enrl],['email',$email]])->count();
+        }
+        else{
+            $c=tblstudent::where('email',$email)->count();
+        }
         if($c>0)
         {
             return response()->json(array('msg'=> "This email addess already taken"),200);
@@ -224,7 +235,13 @@ class s_admin extends Controller
     public function checkmobile(Request $req)
     {
         $mobile=$req->mobile;
-        $c=tblstudent::where('mobile',$mobile)->count();
+        if($req->enrl)
+        {
+            $c=tblstudent::where([['senrl','!=',$req->enrl],['mobile',$mobile]])->count();
+        }
+        else{
+            $c=tblstudent::where('mobile',$mobile)->count();
+        }
         if($c>0)
         {
             return response()->json(array('msg'=> "This Mobile number already taken"),200);
@@ -235,7 +252,13 @@ class s_admin extends Controller
     {
         $rno=$req->rno;
         $clas=$req->clas;
-        $c=tblstudent::where([['rno',$rno],['class',$clas]])->count();
+        if($req->enrl)
+        {
+            $c=tblstudent::where([['senrl','!=',$req->enrl],['rno',$rno],['class',$clas]])->count();
+        }
+        else{
+            $c=tblstudent::where([['rno',$rno],['class',$clas]])->count();
+        }
         if($c>0)
         {
             return response()->json(array('msg'=> "This roll no already available for this class"),200);
