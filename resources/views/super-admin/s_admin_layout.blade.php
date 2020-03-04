@@ -9,7 +9,6 @@
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
-
     <!-- App css -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
@@ -255,11 +254,11 @@
                                     <span class="hover-me-sm badge badge-soft-info badge-pill px-3 py-2 font-size-13 ">Check Logs</span> 
                                 </a>
                                 
-                                <a  href="{{url('new_cod')}}">
+                                <a  href="{{url('student_records')}}">
                                     <div class="btn new-shadow-sm my-1 text-white" style="border-radius: 30px;padding: 5px;background:var(--orange);">
                                         <i data-feather="bar-chart-2" height="20px"></i>
                                     </div>
-                                    <span class="hover-me-sm badge badge-soft-orange badge-pill px-3 py-2 font-size-13 " >Filter Records</span> 
+                                    <span class="hover-me-sm badge badge-soft-orange badge-pill px-3 py-2 font-size-13 " >Student Records</span> 
                                 </a>
                                 <a  href="{{url('snotice')}}">
                                     <div class="btn btn-success new-shadow-sm my-1" style="border-radius: 30px;padding: 5px;">
