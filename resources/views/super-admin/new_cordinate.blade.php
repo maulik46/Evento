@@ -3,7 +3,9 @@
 @section('title','Create Co-ordinator')
 
 @section('head-tag-links')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link href="{{asset('assets/libs/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" type="text/css" />
+
     <style>
         .nice-select:after {
             border-bottom: 3px solid #999;
@@ -192,7 +194,7 @@
                                         Email</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                                            <input type="text" class="form-control"  placeholder="Enter Co-ordinator's Email" id="email" name="email" />
+                                            <input type="text" class="form-control"  placeholder="Enter Co-ordinator's Email" id="email" name="email" onkeyup="return ccheck()" />
                                         </div>
                                         <span class="text-danger font-weight-bold"></span>
                                     </div>
@@ -200,7 +202,7 @@
                                         <label class="col-form-label font-size-14">Contact No.</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                                            <input type="text" class="form-control" placeholder="Enter Co-ordinator's Contact no" id="cno" name="cno"/>
+                                            <input type="text" class="form-control" placeholder="Enter Co-ordinator's Contact no" id="cno" name="cno" onkeyup="return ccheck()"/>
                                         </div>
                                         <span class="text-danger font-weight-bold"></span>
                                     </div>
@@ -250,6 +252,45 @@
 @section('extra-scripts')
 <script src="{{asset('assets/libs/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script> 
 <script>
+    function ccheck() {
+        var email = $('#email').val();
+        var cno = $('#cno').val();
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+        $.ajax({
+            type: 'POST',
+            url: 'c_check',
+            data: {
+                email: email,
+                cno: cno
+            },
+            success: function (data) {
+                
+                if (data.email > 0) {
+                    $('#email').addClass('border border-danger');
+                    $('#email').parent().next().text("Email already exist");
+                } 
+                else {
+                    $('#email').parent().next().text("");
+                    $('#email').removeClass('border border-danger');
+                }
+                if (data.phoneno > 0) {
+                    $('#cno').addClass('border border-danger');
+                    $('#cno').parent().next().text("Mobile number already exist");
+                } 
+                else {
+                    $('#cno').parent().next().text("");
+                    $('#cno').removeClass('border border-danger');
+                }
+            },
+            error: function (data) {
+            console.log(data);
+            }
+        })
+}
      $('#photo-upload').on('change', function() { 
         var fileName=document.getElementById('photo-upload').value;
         var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
@@ -292,7 +333,7 @@
                 {
                     if (c[i].checked){
                         check=0;
-                
+                        //alert(c[i].value);
                         break;
                     }
                     else{
@@ -326,6 +367,10 @@
             $('#email').parent().next().text("Please enter Proper Email id");
             f = 1;
         }
+        else if($('#email').parent().next().text()=="Email already exist")
+        {
+            f = 1;
+        }
         else {
             $('#email').parent().next().text("");
         }
@@ -339,7 +384,11 @@
             $('#cno').parent().addClass('border border-danger');
             $('#cno').parent().next().text("Please enter valid mobile number");
             f = 1;
-        } 
+        }
+        else if ($('#cno').parent().next().text() == "Mobile number already exist")
+        {
+            f = 1;
+        }
         else {
             $('#cno').parent().next().text("");
         }
