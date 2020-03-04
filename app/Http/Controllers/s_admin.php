@@ -477,4 +477,38 @@ class s_admin extends Controller
         ])->count();
             return response()->json(array('email'=> $email_check,'phoneno'=> $cno_check),200);
      }
+    public function updateprofile(Request $req)
+    {
+        $aname=$req->aname;
+        $aid=$req->aid;
+        $aemail=$req->aemail;
+        $mobile=$req->mobile;
+        $rec=admin::where('aid',$aid)->update(['name'=>$aname,'email'=>$aemail,'mobile'=>$mobile]);
+        if($rec>0)
+        {
+            session()->put('aname',$aname);
+            session()->put('email',$aemail);
+            session()->put('mobile',$mobile);
+            session()->flash('success', 'Profile updated successfully');
+        }
+        return back();
+    }
+    public function event_info($id)
+     {      $id=decrypt($id);
+            $einfo=tblevent::where('eid',$id)->first();
+            return view("super-admin/event_info",['einfo'=>$einfo]);
+     }
+     public function view_result($eid)
+     {
+         $participant=participant::where([['eid',decrypt($eid)],['rank','p']])->count();
+         $event=tblevent::select('eid','ename','edate')->where('eid',decrypt($eid))->first();
+         return view('super-admin/view_result',['participant'=>$participant],['einfo'=>$event]);
+     }
+     public function view_can($id)
+    {
+        $id=decrypt($id);
+        $participate=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
+        $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
+        return view('super-admin/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
+    }
 }
