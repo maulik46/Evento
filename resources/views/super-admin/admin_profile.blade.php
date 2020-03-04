@@ -1,3 +1,4 @@
+<?php use App\log ;?>
 @extends('super-admin/s_admin_layout')
 
 @section('title','Admin Profile')
@@ -14,8 +15,9 @@
     }
 
     .user-img {
-        background: url('../assets/images/users/super_admin.jpg');
+        background: url('../profile_pic/admin_pro_pic/<?php echo Session::get("profilepic")?>');
         background-size: cover;
+        background-color:white;
         background-repeat: no-repeat;
         background-position: center;
         width: 180px;
@@ -134,6 +136,20 @@
 <!-- text-center text-md-right -->
 @endsection
 @section('my-content')
+@if(Session::has('success'))
+           
+           <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+               <div class="toast-body text-white alert mb-1">
+                   <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                       <i data-feather="x-circle" id="close-btn" height="18px" ></i>
+                   </a>
+                   <div class="mt-2 font-weight-bold font-size-14">
+                       {{Session::get('success')}}
+                   </div> 
+                   
+               </div>
+           </div>
+    @endif
 <div class="container-fluid">
     <div class="card pattern-bg mb-0 d-flex align-items-end justify-content-start">
         <a href="#cod-section" class="btn bg-white py-0 text-dark btn-sm badge-pill font-weight-bold m-1 m-sm-2 d-flex align-items-center hover-me-sm" id="update-profile" style="cursor:pointer;">
@@ -143,17 +159,20 @@
     </div>
     <div id="cod-section" class="card mb-0 py-3 py-sm-4  bg-white new-shadow-sm cod-detail">
         <div class="text-right px-0 px-sm-3">
-            <div class="mt-2 mt-md-0 font-size-22 text-dark font-weight-bold cod-name">MR. Dishant Sakariya</div>
-            <div class="font-size-14 text-muted font-weight-bold cod-clg">Sutex Bank College Of Computer Applications &
-                Science </div>
+            <div class="mt-2 mt-md-0 font-size-22 text-dark font-weight-bold cod-name">
+                {{ucfirst(Session::get('aname'))}}
+            </div>
+            <div class="font-size-14 text-muted font-weight-bold cod-clg"> 
+                {{ucfirst(Session::get('clgname'))}}
+            </div>
             <div class="mt-1">
                 <span class="badge badge-soft-dark px-2" style="padding:0.1rem 0px;">
                     <i data-feather="mail" height="18px"></i>
-                    dishantsakariya@gmail.com
+                    {{Session::get('email')}}
                 </span>
                 <span class="badge badge-soft-dark px-2" style="padding:0.1rem 0px;">
                     <i data-feather="phone" height="18px"></i>
-                    9685741230
+                    {{Session::get('mobile')}}
                 </span>
             </div>
         </div>
@@ -241,22 +260,30 @@
                         <i data-feather="edit"></i>
                         Update Details
                     </h4>
-                    <form>
+                    <form method="post" onsubmit="return valid()" action="{{url('admin_profile/updateprofile')}}">
+                    @csrf
+                    <input type="hidden" name="aid" class="form-control" value="{{ucfirst(Session::get('aid'))}}" />
                         <label class="col-form-label font-size-14">Name</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" class="form-control" value="Mr. Dishant Sakariya" />
+                                <input type="text" class="form-control" id="aname" name="aname" value="{{ucfirst(Session::get('aname'))}}" />
+                                
                         </div>
+                        <div class="text-danger font-weight-bold" id="aname-err"></div>
                         <label class="col-form-label font-size-14">Email</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" class="form-control" value="dishantsakariya@gmail.com" />
+                                <input type="text" class="form-control" id="aemail" name="aemail" value="{{Session::get('email')}}" />
+                                
                         </div>
+                        <div class="text-danger font-weight-bold" id="email-err"></div>
                         <label class="col-form-label font-size-14">Mobile No</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" class="form-control" value="9685741230" />
+                                <input type="text" id="mobile" class="form-control" name="mobile" value="{{Session::get('mobile')}}" />
+                           
                         </div>
+                        <div id="mobile-err" class="text-danger font-weight-bold"></div>
                         <button type="submit" class="btn btn-info rounded-sm hover-me-sm px-2 font-weight-bold new-shadow-sm btn-sm py-2 font-size-13">
                             <i data-feather="check-square" height="18px"></i>
                             Update Details
@@ -293,7 +320,57 @@
 </div>
 @endsection
 @section('extra-scripts')
+
 <script>
+function valid()
+{
+    var f=0;
+    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if($('#aname').val()=="")
+    {
+        $('#aname-err').text("Please enter name");
+        f=1;
+    }
+    else{
+        $('#aname-err').text("");
+    }
+
+
+    if($('#aemail').val()=="")
+    {
+        $('#email-err').text("Please enter email");
+        f=1;
+    }
+    else if(!regex.test($('#aemail').val()))
+    {
+        
+        $('#email-err').text("Invalid email Address");
+        f=1;
+    }
+    else{
+        $('#email-err').text("");
+    }
+
+    regex = /^\d*(?:\.\d{1,2})?$/; 
+    var mo= $('#mobile').val();
+    if($('#mobile').val()=="")
+    {
+        $('#mobile-err').text("Please enter Mobile no.");
+        f=1;
+    }
+    else if(!(regex.test($('#mobile').val()) && mo.length == 10))
+    {
+        $('#mobile-err').text("Please valid Mobile no.");
+        f=1;
+    }
+    else{
+        $('#mobile-err').text("");
+    }
+    if(f==1)
+    {
+        return false;
+    }
+}
     $(document).ready(function(){
         $('#update-form').hide();
         $('.user-img').hover(function () {
