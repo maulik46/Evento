@@ -248,7 +248,7 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         Route::get('/sview_result/{eid}', 's_admin@view_result');
 
         Route::get('/sview_candidates/{eid}','s_admin@view_can');
-    
+   
     });
 
 // xoxoxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
