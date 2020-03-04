@@ -108,7 +108,7 @@
                                 <a href="{{url('update_stud')}}/{{encrypt($s['senrl'])}}" class="btn text-warning p-0">
                                 <i data-feather="edit" height="19px"></i>
                                 </a>
-                                <a href="#" class="btn text-danger p-0">
+                                <a href="" onclick="return confirm('<?php echo $s['senrl'] ?>')" class="btn text-danger p-0">
                                 <i data-feather="trash-2" height="19px"></i>
                                 </a>
                             </td>
@@ -140,6 +140,24 @@ $("#my-datatable").DataTable({
 $('#my-datatable_info').parent().remove();
 $('#my-datatable_paginate .pagination').css({"justify-content":"flex-start","margin":"5px"});
 </script>
-      
-
+<script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
+<script>
+function confirm(enrl){
+     Swal.fire({
+        title: "Are you sure!",
+        html:"You want to delete this student ?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText:"Yes,Delete it",
+        cancelButtonText: 'No',
+        }).then((result) => {
+        if (result.value) {
+            window.location.href = '<?php echo url('/view_student/confrim_del').'/' ?>'+enrl;
+        }
+        })
+        return false;
+    }
+</script>
 @endsection
