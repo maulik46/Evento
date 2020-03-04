@@ -449,14 +449,66 @@ class s_admin extends Controller
             $file->move($destinationPath, $filename);
             $avatar=$filename;
         }
-        $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('clgcode'),'cname'=>$req->cname,'email'=>$req->email,
-        'password'=>$req->pass,'category'=>$req->category,'pro_pic'=>$avatar] );
+        $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('clgcode'),'cname'=>strtolower($req->cname),'email'=>$req->email,
+        'password'=>$req->pass,'phoneno'=>$req->cno,'category'=>$req->category,'pro_pic'=>$avatar] );
         if($tblc)
         {
             //echo "new co create";
-            session()->flash('success','New Co-ordinater is Create...!');
+            $to_name=strtoupper($req->cname);
+            $to_email=$req->email;
+            $message=" <table border=1 style='padding:10px'> <tr style='background-color:#e6e6e6'><td style='padding:5px'> User Name </td><td style='padding:5px'> Password </td></tr>  <tr><td style='padding:5px'>".$req->email."</td> <td style='padding:5px'>".$req->pass."</td></tr>    </table> ";
+            $data=array('name'=>'Welcome to Evento ','body'=>$message);
+            \Mail::send('email',$data,function($message) use ($to_name, $to_email){
+                $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+                ->from("eventoitsol@gmail.com", $name = "Evento")
+                ->subject("Co-ordinaters login")->bcc($to_email);
+            });
+            session()->flash('success','New Co-ordinater Created...!');
         }
         return redirect(url('/sindex'));
        
+    }
+    public function err(Request $req){
+        $email = $req->email;
+        $cno=$req->cno;
+        $email_check=tblcoordinaters::where([['clgcode',Session::get('clgcode')],['email',$email]
+        ])->count();
+        $cno_check=tblcoordinaters::where([['clgcode',Session::get('clgcode')],['phoneno',$cno]
+        ])->count();
+            return response()->json(array('email'=> $email_check,'phoneno'=> $cno_check),200);
+     }
+    public function updateprofile(Request $req)
+    {
+        $aname=$req->aname;
+        $aid=$req->aid;
+        $aemail=$req->aemail;
+        $mobile=$req->mobile;
+        $rec=admin::where('aid',$aid)->update(['name'=>$aname,'email'=>$aemail,'mobile'=>$mobile]);
+        if($rec>0)
+        {
+            session()->put('aname',$aname);
+            session()->put('email',$aemail);
+            session()->put('mobile',$mobile);
+            session()->flash('success', 'Profile updated successfully');
+        }
+        return back();
+    }
+    public function event_info($id)
+     {      $id=decrypt($id);
+            $einfo=tblevent::where('eid',$id)->first();
+            return view("super-admin/event_info",['einfo'=>$einfo]);
+     }
+     public function view_result($eid)
+     {
+         $participant=participant::where([['eid',decrypt($eid)],['rank','p']])->count();
+         $event=tblevent::select('eid','ename','edate')->where('eid',decrypt($eid))->first();
+         return view('super-admin/view_result',['participant'=>$participant],['einfo'=>$event]);
+     }
+     public function view_can($id)
+    {
+        $id=decrypt($id);
+        $participate=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
+        $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
+        return view('super-admin/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
     }
 }
