@@ -49,7 +49,12 @@
             background-color:rgba(255,190,11,.15);
             color: var(--warning);
         }
-        
+        @media(max-width:576px){
+            .avatar-xxl{
+                height:6rem;
+                width:6rem;
+            }
+        }
     </style>
 @endsection
 @section('my-content')
@@ -57,16 +62,16 @@
     <div class="container-fluid">
         @if(Session::has('success'))
             <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
-                            <div class="toast-body text-white alert mb-1">
-                                <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
-                                    <i data-feather="x-circle" id="close-btn" height="18px" ></i>
-                                </a>
-                                <div class="mt-2 font-weight-bold font-size-14">
-                                    {{Session::get('success')}}
-                                </div> 
+                <div class="toast-body text-white alert mb-1">
+                    <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                    <i data-feather="x-circle" id="close-btn" height="18px" ></i>
+                    </a>
+                    <div class="mt-2 font-weight-bold font-size-14">
+                        {{Session::get('success')}}
+                    </div> 
                                 
-                            </div>
-                        </div>
+                </div>
+            </div>
         @endif
 
                      <!-- stats + charts -->
@@ -315,12 +320,41 @@
                 </div>
                      <!-- end row -->
 
-                <div class="col-lg-4 col-md-5 col-6 bg-danger p-3 position-fixed new-shadow-sm rounded" style="bottom:20px;left:10px;">
-                    <span class="text-white font-weight-bold">
+                <!-- <div class="col-lg-4 col-md-5 col-6 bg-danger p-3 position-fixed new-shadow-sm rounded" style="bottom:20px;left:10px;"> -->
+                    <!-- <span class="text-white font-weight-bold">
                     Result of cricket competition is not announced by Yash parmar yet.
                     <a href="#" class="text-white"><u>Click here to announce</u></a>
-                    </span>
-                </div>    
+                    </span> -->
+                <div class="toast bg-white fade show border-0 new-shadow-2 rounded-lg position-fixed w-75" style="bottom:20px;left:10px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+                    <div class="toast-body text-dark alert mb-1">
+                        <h5 class="text-center mt-0">Delay Result List</h5>
+                        <div class="card bg-soft-danger p-2 new-shadow hover-me-sm mb-2">
+                            <div>
+                                <span class="h5 my-1">Cricket Competition</span>
+                            </div> 
+                            <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge badge-soft-dark px-3 badge-pill">By Yash Parmar</span>
+                            <a href="#" class="badge badge-success badge-pill px-2 pl-3">
+                                <span>Declare</span>
+                                <i data-feather="arrow-right-circle" height="15px" class="text-white"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card bg-soft-danger p-2 new-shadow hover-me-sm mb-2">
+                            <div>
+                                <span class="h5 my-1">Cricket Competition</span>
+                            </div> 
+                            <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge badge-soft-dark px-3 badge-pill">By Yash Parmar</span>
+                            <a href="#" class="badge badge-success badge-pill px-2 pl-3">
+                                <span>Declare</span>
+                                <i data-feather="arrow-right-circle" height="15px" class="text-white"></i>
+                                </a>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+                <!-- </div>     -->
 
                 </div> <!-- end container fluid-->
              
