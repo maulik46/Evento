@@ -240,8 +240,15 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::any('action_update_stud/{senrl}', 's_admin@action_update_stud');
 
         route::any('update_stud/{senrl}', 's_admin@update_stud');
+    
+        route::post('/admin_profile/updateprofile','s_admin@updateprofile');
 
+        Route::get('/sevent_info/{id}','s_admin@event_info');
 
+        Route::get('/sview_result/{eid}', 's_admin@view_result');
+
+        Route::get('/sview_candidates/{eid}','s_admin@view_can');
+    
     });
 
 // xoxoxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
