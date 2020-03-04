@@ -188,11 +188,11 @@
                                         <span class="badge badge-soft-primary badge-pill px-3 ">{{date('d/m/Y', strtotime($act['edate']))}}</span>
                                         </div>
                                         <div>
-                                            <a href="{{url('about_event')}}/{{encrypt($act['pid'])}}" data-toggle="tooltip" data-placement="bottom" title="About Event">
-                                                <i data-feather="info" height="20px" class="text-dark" id="event-info"></i>
+                                            <a href="{{url('about_event')}}/{{encrypt($act['pid'])}}" data-toggle="tooltip" data-placement="bottom" title="About Event" class="mr-1">
+                                                <i data-feather="info" height="18px" class="text-dark" id="event-info"></i>
                                             </a>
-                                            <a href="#" class="text-dark" data-toggle="tooltip" data-placement="bottom" title="Cancel Participation">
-                                                <i data-feather="x-circle" height="20px" id="close-btn"></i>
+                                            <a href="#" class="text-dark cancel-btn" data-toggle="tooltip" data-placement="bottom" title="Cancel Participation">
+                                                <i data-feather="trash-2" height="18px" id="close-btn"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -268,6 +268,7 @@
 </div>
 @endsection
 @section('extra-scripts')
+
 <script>
     $(document).ready(function () {
         $('#update-form').hide();
