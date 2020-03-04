@@ -177,7 +177,19 @@
                                                             <span class="badge badge-soft-warning badge-pill px-3 py-1">Upcoming</span>
                                                             @elseif($e['edate'] < date('Y-m-d')) 
                                                             <span class="badge badge-soft-info badge-pill px-3 py-1">Finished</span>
+                                                            <?php $r=\DB::table('tblparticipant')->select('senrl')->where([['eid',$e['eid']],['rank',1]])->count();?>
+                                                                @if($r==1)
+                                                                    <a href="{{url('sview_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Show Result">
+                                                                        <i data-feather="award" height="18px" class=" text-success"></i>
+                                                                </a>
+                                                                @endif
                                                             @endif
+                                                            <a href="{{url('sevent_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
+                                                                <i data-feather="info" height="18px" class=" text-info"></i>
+                                                            </a>
+                                                            <a href="{{url('sview_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="View Candidates">
+                                                                <i data-feather="users" height="18px" class="text-primary"></i>
+                                                            </a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
