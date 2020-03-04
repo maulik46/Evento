@@ -444,19 +444,37 @@ class s_admin extends Controller
         else
         {
             $file=$req->file('photo-upload');
-            $destinationPath=public_path('profile_pic/');
+            $destinationPath=public_path('profile/');
             $filename=time().$file->getClientOriginalName();
             $file->move($destinationPath, $filename);
             $avatar=$filename;
         }
-        $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('clgcode'),'cname'=>$req->cname,'email'=>$req->email,
-        'password'=>$req->pass,'category'=>$req->category,'pro_pic'=>$avatar] );
+        $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('clgcode'),'cname'=>strtolower($req->cname),'email'=>$req->email,
+        'password'=>$req->pass,'phoneno'=>$req->cno,'category'=>$req->category,'pro_pic'=>$avatar] );
         if($tblc)
         {
             //echo "new co create";
-            session()->flash('success','New Co-ordinater is Create...!');
+            $to_name=strtoupper($req->cname);
+            $to_email=$req->email;
+            $message=" <table border=1 style='padding:10px'> <tr style='background-color:#e6e6e6'><td style='padding:5px'> User Name </td><td style='padding:5px'> Password </td></tr>  <tr><td style='padding:5px'>".$req->email."</td> <td style='padding:5px'>".$req->pass."</td></tr>    </table> ";
+            $data=array('name'=>'Welcome to Evento ','body'=>$message);
+            \Mail::send('email',$data,function($message) use ($to_name, $to_email){
+                $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+                ->from("eventoitsol@gmail.com", $name = "Evento")
+                ->subject("Co-ordinaters login")->bcc($to_email);
+            });
+            session()->flash('success','New Co-ordinater Created...!');
         }
         return redirect(url('/sindex'));
        
     }
+    public function err(Request $req){
+        $email = $req->email;
+        $cno=$req->cno;
+        $email_check=tblcoordinaters::where([['clgcode',Session::get('clgcode')],['email',$email]
+        ])->count();
+        $cno_check=tblcoordinaters::where([['clgcode',Session::get('clgcode')],['phoneno',$cno]
+        ])->count();
+            return response()->json(array('email'=> $email_check,'phoneno'=> $cno_check),200);
+     }
 }
