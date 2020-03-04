@@ -84,7 +84,7 @@
                             <th scope="col">Email</th>
                             <th scope="col">Mobile No</th>
                             <th scope="col">Gender</th>
-                            <th scope="col">City</th>
+                            <th scope="col">Address</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -134,9 +134,11 @@ $("#my-datatable").DataTable({
     "language": {
       "emptyTable": "No data available in table"
     },
+    
     // "lengthMenu": [ 3, 25, 50, 75, 100 ]
 });
-
+$('#my-datatable_info').parent().remove();
+$('#my-datatable_paginate .pagination').css({"justify-content":"flex-start","margin":"5px"});
 </script>
       
 
