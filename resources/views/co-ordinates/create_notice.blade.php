@@ -37,6 +37,9 @@
         .custom-file-upload:hover{
             color: var(--info);
         }
+         .note-editor.note-frame .note-editing-area .note-editable {
+            padding:10px 20px;
+        }
     </style>
 @endsection
 
@@ -128,7 +131,6 @@ $('.summernote').summernote({
                 ['font', ['bold', 'underline', 'clear','fontsize','height']],
                 
                 ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
                 ['insert', ['link']],
                 ['view', ['undo','redo','fullscreen']],
                 ],
@@ -146,7 +148,7 @@ $('.summernote').summernote({
         
         if($('#message').val()=="")
         {
-            $('#error').text("Please enter put your message");
+            $('#error').text("Please enter your message");
             return false;
         }
         
