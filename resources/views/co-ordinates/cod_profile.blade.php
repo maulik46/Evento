@@ -342,7 +342,7 @@ function valid()
     }
     else if(!(regex.test($('#mobile').val()) && mo.length == 10))
     {
-        $('#mobile-err').text("Please enter Mobile no.");
+        $('#mobile-err').text("Please enter valid Mobile no.");
         f=1;
     }
     else{
