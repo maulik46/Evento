@@ -537,4 +537,13 @@ class s_admin extends Controller
         $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
         return view('super-admin/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
     }
+    public function stud_del($enrl)
+    {
+        $std=tblstudent::where('senrl',$enrl)->delete();
+        if($std>0)
+        {
+            session()->flash('msg', 'Student deleted successfully');
+        }
+        return back();
+    }
 }
