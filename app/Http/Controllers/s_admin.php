@@ -33,7 +33,7 @@ class s_admin extends Controller
             session()->put('clgname',$clgname->clgname);
             session()->put('aname',$admin['name']);
             session()->put('email',$admin['email']);  
-            session()->put('profilepic',$admin['profilepic']);  
+            session()->put('adminprofile',$admin['profilepic']);  
             session()->put('mobile',$admin['mobile']);
             $log=new log;
             $log->uid=Session::get('aid');
