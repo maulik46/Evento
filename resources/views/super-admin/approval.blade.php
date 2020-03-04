@@ -87,12 +87,12 @@
         var y=0;
         if(val=="del")
         {
-            var msg= "You want to Delete Event <b>" + ename + " </b> !!";
+            var msg= "Are you sure you want to Delete Event <b>" + ename + " </b> !!";
             var btn='Yes, Delete it!';
         }
         else
         {
-            var msg= "You want reject request for delete Event <b>" + ename + " </b> !!";
+            var msg= "Reject request for delete Event <b>" + ename + " </b> !!";
             var btn='Yes, cancel it!';
         }
         Swal.fire({
