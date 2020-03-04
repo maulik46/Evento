@@ -201,8 +201,10 @@
                 <ul class="list-unstyled events">
                 <?php
                     $activity=log::where([['uid',Session::get('cid')],['utype','co-ordinator']])->whereNotIn('action_on', ['login','logout'])->get();
+                    $a=0;
                 ?>
                 @foreach($activity as $act)
+                <?php $a=1;?>
                     <li class="event-list">
                         <div>
                             <div class="media">
@@ -225,7 +227,7 @@
                         </div>
                     </li>
                 @endforeach
-                  @if($a==1)    
+                @if($a==1)    
                     <!-- dont touch me -->
                     <li class="event-list last-child"></li>
                     <!-- i said don't touch me :( -->
@@ -267,7 +269,7 @@
                            
                         </div>
                         <div id="mobile-err" class="text-danger font-weight-bold"></div>
-                        <button type="submit" class="btn btn-success rounded-sm hover-me-sm px-2 font-weight-bold new-shadow-sm btn-sm py-2 font-size-13">
+                        <button type="submit" class="mt-2 btn btn-success rounded-sm hover-me-sm px-2 font-weight-bold new-shadow-sm btn-sm py-2 font-size-13">
                             <i data-feather="check-square" height="18px"></i>
                             Update Details
                         </button>
