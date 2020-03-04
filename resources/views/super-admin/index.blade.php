@@ -49,7 +49,7 @@
             background-color:rgba(255,190,11,.15);
             color: var(--warning);
         }
-      
+        
     </style>
 @endsection
 @section('my-content')
@@ -198,14 +198,14 @@
                               <span class="ml-1">Event Co-ordinators</span>
                           </div>
 
-                          <a href="new_cordinate.html" class="text-success d-none d-sm-block ">
-                              <div class="add-cod d-flex align-items-center badge badge-soft-info badge-pill pr-3 py-2 mr-3">
+                          <a href="{{url('new_cod')}}" class="text-success">
+                              <div class="add-cod d-flex align-items-center badge badge-soft-info badge-pill pr-sm-3 py-2 mr-3">
                                   <i data-feather="plus-circle" height="18px"></i>
-                                  <span class="font-size-13">Add Co-ordinator</span>
+                                  <span class="font-size-13 d-none d-sm-flex">Add Co-ordinator</span>
                               </div>
                           </a>
                       </div>
-                     <div class="row">
+                     <!-- <div class="row">
                          <div class="col-xl-12">
                              <div class="card new-shadow-sm" style="max-height: 300px;">
                                  <div class="row justify-content-around card-body pt-2 my-scroll overflow-auto">
@@ -236,7 +236,71 @@
                                 
                              </div>
                          </div>
-                     </div>
+                     </div> -->
+                <div class="row">
+                <?php $count = 0; ?>
+                    @foreach($cods as $c)
+                    <?php $count++;?>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="card rounded-lg new-shadow-sm hover-me-sm">    
+                        <div class="card-body px-1 px-sm-2">
+                            <div class="d-flex justify-content-between text-lg-left text-left text-sm-center flex-wrap ">
+                                <div class="col col-lg-4 col-md-12 col-sm-4 col-4">
+                                <img src="{{asset('profile_pic/'.$c->pro_pic)}}" alt="" class="avatar-xxl rounded-circle new-shadow-sm bg-light" style="border:1px solid #f1f1f1" />
+                                </div>
+                                <div class="col col-lg-8 col-md-12 col-sm-8 col-8">
+                                    <h5 class="mt-2 mb-0">{{$c['cname']}}</h5>
+                                    <h6 class="text-muted font-weight-normal mt-2 mb-0">
+                                    <i data-feather="mail" height="18px"></i>
+                                    <span class="font-weight-bold">{{$c['email']}}</span>
+                                    </h6>
+                                    <h6 class="text-muted font-weight-normal mt-2 mb-0">
+                                    <i data-feather="phone" height="18px"></i>
+                                    <span class="font-weight-bold">{{$c['mobile']}}</span>
+                                    </h6>
+                                    <div class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-sm-center ">
+                                        <span class="badge badge-info badge-pill px-3 mt-3 mr-3 new-shadow-sm">{{$c['category']}}</span>
+                                        <div class="custom-control custom-switch mt-3">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch<?=$count?>">
+                                            <label class="custom-control-label" for="customSwitch<?=$count?>"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    </div>
+                    @endforeach
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="card rounded-lg new-shadow-sm hover-me-sm" >    
+                        <div class="card-body p-2 py-3">
+                            <div class="text-center" style="opacity:0.5;">
+                            <img src="{{asset('profile_pic/1583151955IMG_8518.jpg')}}" alt="" class="avatar-xxl rounded-circle new-shadow-sm" />
+                                <h5 class="mt-2 mb-0">Yash Parmar</h5>
+                                <hr class="my-1">
+                            <div class="text-left">
+                                <h6 class="text-muted font-weight-normal mt-2 mb-0">
+                                <i data-feather="mail" height="18px"></i>
+                                <span class="font-weight-bold">parmaryash201@gmail.com</span>
+                                </h6>
+                                <h6 class="text-muted font-weight-normal mt-2 mb-0">
+                                <i data-feather="phone" height="18px"></i>
+                                <span class="font-weight-bold">123467890</span>
+                                </h6>
+                            </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span class="badge badge-info badge-pill px-3 mt-3 new-shadow-sm">Sport Co-ordinator</span>
+                                <div class="custom-control custom-switch mt-3">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch5">
+                                    <label class="custom-control-label" for="customSwitch5"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
                      <!-- end row -->
 
                     
