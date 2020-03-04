@@ -30,7 +30,7 @@
     $('#event-type').change(function () {
         if ($(this).val() == "solo") {
         $('#team-size').prop("disabled", true);
-        $('#team-size').prop("placeholder", "");
+        $('#team-size').prop("placeholder", "Team size");
         $('#team-size').addClass("disable-me");
         $('#team-size').val('');
         $('#team-size-label').css("color", "lightgray");
