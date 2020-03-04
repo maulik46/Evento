@@ -303,9 +303,14 @@
                 </div>
                      <!-- end row -->
 
-                    
+                <div class="col-lg-4 col-md-5 col-6 bg-danger p-3 position-fixed new-shadow-sm rounded" style="bottom:20px;left:10px;">
+                    <span class="text-white font-weight-bold">
+                    Result of cricket competition is not announced by Yash parmar yet.
+                    <a href="#" class="text-white"><u>Click here to announce</u></a>
+                    </span>
+                </div>    
 
-                 </div> <!-- end container fluid-->
+                </div> <!-- end container fluid-->
              
 
     
