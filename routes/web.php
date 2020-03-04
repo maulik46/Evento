@@ -190,6 +190,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::view('/new_cod','super-admin/new_cordinate');
     
         route::post('new_cod_add', 's_admin@new_cod_add');
+    
+        Route::post('/c_check','s_admin@err');
 
         route::view('/s_change_pass','super-admin/change_password');
 
@@ -238,10 +240,17 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::any('action_update_stud/{senrl}', 's_admin@action_update_stud');
 
         route::any('update_stud/{senrl}', 's_admin@update_stud');
+    
+        route::post('/admin_profile/updateprofile','s_admin@updateprofile');
+
+        Route::get('/sevent_info/{id}','s_admin@event_info');
 
         route::view('student_records','super-admin/student_records');
 
+        Route::get('/sview_result/{eid}', 's_admin@view_result');
 
+        Route::get('/sview_candidates/{eid}','s_admin@view_can');
+   
     });
 
 // xoxoxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
