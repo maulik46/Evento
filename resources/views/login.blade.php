@@ -84,6 +84,7 @@
 
       <div class="waveWrapperInner bgMiddle">
         <div class="wave waveMiddle" style="background-image: url('{{asset('assets/images/wave-mid2.png')}}')"></div>
+        
       </div>
 
       <div class="waveWrapperInner bgBottom">
