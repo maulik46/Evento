@@ -23,6 +23,15 @@
         ::placeholder{
             color: #000!important;
         }
+        .dropdown-menu{
+            min-width:0px!important;
+            background-color:transparent!important;
+        }
+        .dropdown-menu.show {
+            top: 100%!important;
+            display: flex;
+            left:-5px!important;
+        }
     </style>
 </head>
 <body class="body-scroll">
@@ -33,23 +42,24 @@
                 <img src="{{asset('assets/images/logo.png')}}" alt="" class="logo-dark mr-1" height="24" /> <span class="text-dark">Evento</span>
             </a>
         <div class="btn-group">
-            <a href="#" class="bg-white btn badge-pill py-1 text-danger font-weight-bold font-size-15 mt-1 mt-sm-3 mx-2 mx-sm-4 dropdown-toggle pl-3 pr-2 hover-me-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="bg-white btn badge-pill py-1 text-danger font-weight-bold font-size-15 mt-1 mt-sm-3 mx-2 mx-sm-4 dropdown-toggle pl-3 pr-2 hover-me-sm new-shadow-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Log in
                 <i data-feather="chevron-down" height="18px"></i>
             </a>
-            <div class="dropdown-menu dropdown-menu-right mr-3 mt-2 rounded-lg">
-                <a class="dropdown-item text-red" href="#">
-                    <i data-feather="user" height="19px" class="mb-1"></i>
-                    I'm Student
+            <div class=" shadow-none dropdown-menu dropdown-menu-right  mr-2 mt-2 rounded-lg  flex-column align-items-center justify-content-center">
+                <a class="text-red badge badge-pill bg-white my-1 p-2 new-shadow-2 hover-me-sm" href="{{url('index')}}" data-toggle="tooltip" data-placement="left" title="I'm Student">
+                    <img src="{{asset('assets/images/svg-icons/student.svg')}}" height="30px" alt="">
+                    <!-- I'm Student -->
                 </a>
-                <a class="dropdown-item text-blue" href="#">
-                    <i data-feather="user" height="19px" class="mb-1"></i>
-                    I'm Co-ordinator
+                <a class="text-blue badge badge-pill bg-white my-1 p-2 new-shadow-2 hover-me-sm" href="{{url('cindex')}}" data-toggle="tooltip" data-placement="left" title="I'm Co-ordinator">
+                    <img src="{{asset('assets/images/svg-icons/cod.svg')}}" height="33px" alt="">
+                    <!-- I'm Co-ordinator -->
                 </a>
-                <a class="dropdown-item text-orange" href="#">
-                    <i data-feather="user" height="19px" class="mb-1"></i>
-                    I'm Admin
+                <a class=" text-orange badge badge-pill bg-white my-1 p-2 new-shadow-2 hover-me-sm" href="{{url('sindex')}}" data-toggle="tooltip" data-placement="left" title="I'm Admin">
+                    <img src="{{asset('assets/images/svg-icons/admin.svg')}}" height="30px" alt="">
+                    <!-- I'm Admin -->
                 </a>
+                
             </div>
         </div>
         </nav>
@@ -154,7 +164,7 @@
                     <i data-feather="linkedin" class="text-blue" height="20px"></i>
                 </a>
             </div>
-            <a href="#" class="mt-5 mx-2 mx-sm-3 badge badge-pill badge-primary hover-me-sm px-3">
+            <a href="{{url('getdemo')}}" class="mt-0 mt-md-5 mx-2 mx-sm-3 badge badge-pill badge-primary hover-me-sm px-3">
                 Get a demo
             </a>
             
