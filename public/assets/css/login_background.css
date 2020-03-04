@@ -81,3 +81,10 @@
 .waveAnimation .waveBottom {
     animation: move_wave 15s linear infinite;
 }
+
+@media(max-width:576px)
+{
+    .waveWrapper {
+        bottom: 20px;
+    }
+}
