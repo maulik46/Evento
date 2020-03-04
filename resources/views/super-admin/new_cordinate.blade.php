@@ -95,7 +95,7 @@
         @media(max-width:568px)
         {
             .my-avatar img{
-                height:35px;
+                height:38px;
             }
         }
     </style>
