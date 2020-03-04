@@ -27,10 +27,13 @@ class s_admin extends Controller
         if ($login_details==1) 
         {
             $admin=admin::where([['pass', $req->password],['email',$req->auser]])->first();
+           $clgname=\DB::table('tblcolleges')->select('clgname')->where('clgcode',$admin['clgcode'])->first();
             session()->put('aid', $admin['aid']);
             session()->put('clgcode', $admin['clgcode']);
+            session()->put('clgname',$clgname->clgname);
             session()->put('aname',$admin['name']);
             session()->put('email',$admin['email']);  
+            session()->put('profilepic',$admin['profilepic']);  
             session()->put('mobile',$admin['mobile']);
             $log=new log;
             $log->uid=Session::get('aid');
