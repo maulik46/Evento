@@ -190,6 +190,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::view('/new_cod','super-admin/new_cordinate');
     
         route::post('new_cod_add', 's_admin@new_cod_add');
+    
+        Route::post('/c_check','s_admin@err');
 
         route::view('/s_change_pass','super-admin/change_password');
 
