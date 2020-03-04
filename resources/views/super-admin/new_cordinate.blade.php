@@ -299,7 +299,7 @@
         if(ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "svg" || ext == "SVG" || ext == "png" || ext == "PNG")
         {
             if (size > 1024 ) { 
-                $('#validphoto').text("File must be between less than 1 MB");
+                $('#validphoto').text("File must be less than 1 MB");
                 sessionStorage.setItem('file',1);
             } else { 
                 $('#validphoto').text( 'This file size is: ' + size + ' KB');  
