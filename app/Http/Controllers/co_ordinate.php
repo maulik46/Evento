@@ -568,16 +568,27 @@ class co_ordinate extends Controller
         $a=participant::where('pid',$req->r1)->update(['rank'=>'1']);
         $b=participant::where('pid',$req->r2)->update(['rank'=>'2']);
         $c=participant::where('pid',$req->r3)->update(['rank'=>'3']);
+        $eid=participant::select('eid')->where('pid',$req->r1)->first();
         session()->flash('success','Result announced successfully..!');
+        \DB::table('tblresult_delay')->where('eid',$eid['eid'])->delete();
          $log=new log;
-        $log->uid=Session::get('cid');
+         if($req->utype)
+         {
+            $log->uid=Session::get('aid');
+            $log->utype="admin";
+         }
+         else{
+            $log->uid=Session::get('cid');
+            $log->utype="co-ordinator";
+         }
+        
         $log->action_on="Rank";
         $log->action_type="insert";
         $log->descr="Result announced for event <b>".$req->ename." </b>";
         $log->time=time();
-        $log->utype="co-ordinator";
         $log->ip_add=$_SERVER['REMOTE_ADDR'];
         $log->save();
+
         return response()->json(array('msg'=> $a.$b.$c),200);
     }
     public static function participant($eid)
