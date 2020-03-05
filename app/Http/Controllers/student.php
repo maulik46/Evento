@@ -465,7 +465,7 @@ class student extends Controller
     //     }
     // print_r($st);
     // }
-    public function confrim_del($pid)
+    public function confirm_del($pid)
     {
         $del=participant::where('pid',$pid)->delete();
         if($del>0)
