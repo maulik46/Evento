@@ -19,6 +19,8 @@ use App\log;
 route::view('/college_list','start/college_list');
 route::view('/event_list', 'start/event_list');
 route::view('/getdemo','start/demo');
+route::view('/winner', 'winner');
+
 
 Route::group(['middleware' => 'SessionCheck'], function () {
     route::get('/index',function(){
@@ -66,6 +68,7 @@ Route::group(['middleware' => 'SessionCheck'], function () {
     route::post('student_update_action/{senrl}', 'student@student_update_action');
 
     // route::any('student_update/{senrl}', 'student@student_update');
+    Route::view('/view_winner_team', 'view_winner_team');
 
 
 });
