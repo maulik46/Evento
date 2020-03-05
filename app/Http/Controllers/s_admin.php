@@ -347,7 +347,7 @@ class s_admin extends Controller
         ->where([['tblcoordinaters.clgcode',Session::get('clgcode')],
         ['tbllog.utype','co-ordinatore'],
         ['tblcoordinaters.cid','LIKE',$cid],
-        ['tbllog.time','>=',$sdate],['tbllog.time','<=',$ldate]])->orderby('time','desc')->get()->toarray();
+        ['tbllog.time','>=',$sdate],['tbllog.time','<=',$ldate]])->orderby('time','desc')->paginate(10)->toarray();
         $msg="";
         foreach($logs as $log){
         $msg.='<div class="card mb-0 mt-3 new-shadow-sm">
@@ -536,6 +536,14 @@ class s_admin extends Controller
         $participate=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
         $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
         return view('super-admin/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
+    }
+    public function view_team($id)
+    {
+        $id=decrypt($id);
+        $team_candidates=participant::select('pid','eid','senrl','tname')->where('pid',$id)->get()->toarray();
+        // return $team_candidates;
+        // exit;
+        return view('super-admin/view_team_candidates',['team_candidates'=>$team_candidates]);
     }
     public function stud_del($enrl)
     {

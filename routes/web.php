@@ -209,7 +209,6 @@ Route::group(['middleware' => 'admin_session_check'], function () {
     
         route::view('/sbanner','super-admin/create_banner');
 
-        route::view('/check_logs', 'super-admin/check_logs');
 
         route::get('/approval', 's_admin@approval');
 
@@ -229,7 +228,7 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
         route::post('/studinsrt','s_admin@studinsrt');
      
-          route::get('/check_logs', function(){
+        route::get('/check_logs', function(){
             $logs=log::join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')
             ->where([['tblcoordinaters.clgcode',Session::get('clgcode')],['tbllog.utype','co-ordinator']])
             ->orderby('time','desc')->paginate(10);
@@ -254,6 +253,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         Route::get('/sview_result/{eid}', 's_admin@view_result');
 
         Route::get('/sview_candidates/{eid}','s_admin@view_can');
+
+        Route::get('/sview_team/{pid}', 's_admin@view_team');
     
         Route::get('/view_student/confirm_del/{enrl}','s_admin@stud_del');
    
