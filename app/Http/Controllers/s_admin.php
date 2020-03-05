@@ -320,7 +320,7 @@ class s_admin extends Controller
         return redirect(url('/view_students'));
 
     }
-      public function filterlog(Request $req)
+     public function filterlog(Request $req)
     {
         $cid=$req->cid;
         $sdate=$req->sdate;
@@ -345,9 +345,9 @@ class s_admin extends Controller
         }
         $logs=log::join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')
         ->where([['tblcoordinaters.clgcode',Session::get('clgcode')],
-        ['tbllog.utype','co-ordinatore'],
+        ['tbllog.utype','co-ordinator'],
         ['tblcoordinaters.cid','LIKE',$cid],
-        ['tbllog.time','>=',$sdate],['tbllog.time','<=',$ldate]])->orderby('time','desc')->paginate(10)->toarray();
+        ['tbllog.time','>=',$sdate],['tbllog.time','<=',$ldate]])->orderby('time','desc')->paginate(10);
         $msg="";
         foreach($logs as $log){
         $msg.='<div class="card mb-0 mt-3 new-shadow-sm">
@@ -371,8 +371,7 @@ class s_admin extends Controller
                 </div>
                 <div class="card-text">
                     
-                    <div class="text-dark font-size-15 font-weight-bold">Location changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz</div>
-                    <span class="text-muted more">Location changed to lab 3</span>
+                <span class="text-muted more">'. $log['descr'] .'</span>
                     <div class="float-right">
                         <span class="font-weight-bold">IP</span>
                         <span class="badge badge-soft-dark badge-pill px-2">'.$log['ip_add'].'</span>
@@ -382,7 +381,7 @@ class s_admin extends Controller
             
         </div>';
         }
-        $msg.='<div class="mt-3">'.$logs->links().'</div>';
+        // $msg.='<div class="mt-3">'.$logs->links().'</div>';
         return response()->json(array('msg'=>$msg),200);
     }
     public function otp_mail($to_name,$to_email,$data)
