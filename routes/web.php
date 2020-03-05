@@ -66,7 +66,8 @@ Route::group(['middleware' => 'SessionCheck'], function () {
     Route::get('/check_event_info/{id}','student@check_event_info');
 
     route::post('student_update_action/{senrl}', 'student@student_update_action');
-
+    
+    route::get('/profile/confrim_del/{pid}','student@confrim_del');
     // route::any('student_update/{senrl}', 'student@student_update');
     Route::view('/view_winner_team', 'view_winner_team');
 

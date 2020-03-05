@@ -465,6 +465,15 @@ class student extends Controller
     //     }
     // print_r($st);
     // }
+    public function confrim_del($pid)
+    {
+        $del=participant::where('pid',$pid)->delete();
+        if($del>0)
+        {
+            session()->flash('msg', 'Your participation cancel successfully');
+        }
+        return back();
+    }
     public function winnerlist()
     {
         $student_name = DB::table('tblstudent')

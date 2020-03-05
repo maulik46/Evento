@@ -175,7 +175,9 @@
                             <?php $a=0;?>
                             @foreach($activity as $act)
                             @if($act['edate'] > date('Y-m-d'))
-                            <?php $a=1;?>
+                            <?php $a=1;
+                                $captain=substr($act['senrl'],0,15);
+                            ?>
                             <div class="card bg-light rounded  new-shadow-sm  hover-me-sm">
                                 <div class="card-body pt-2 pb-1">
                                     <div class="d-flex justify-content-between align-items-center flex-wrap">
@@ -191,9 +193,16 @@
                                             <a href="{{url('about_event')}}/{{encrypt($act['pid'])}}" data-toggle="tooltip" data-placement="bottom" title="About Event" class="mr-1">
                                                 <i data-feather="info" height="18px" class="text-dark" id="event-info"></i>
                                             </a>
-                                            <a href="#" class="text-dark cancel-btn" data-toggle="tooltip" data-placement="bottom" title="Cancel Participation">
-                                                <i data-feather="trash-2" height="18px" id="close-btn"></i>
-                                            </a>
+                                            @if(Session::get('senrl')==$captain)
+                                                <?php $msg="<b>You want to cancel participation ?</b>";?>
+                                                @if($act['e_type']=="team")
+                                                <?php $msg="<b>You want to cancel participation of your whole team ?</b>";?>
+                                                @endif
+                                                    <a href="" onclick="return cancel_part('<?php echo $act['pid']?>','<?php echo $msg?>')" class="text-dark cancel-btn" data-toggle="tooltip" data-placement="bottom" title="Cancel Participation">
+                                                        <i data-feather="trash-2" height="18px" id="close-btn"></i>
+                                                    </a>
+                                                
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="card-text py-1">
@@ -283,6 +292,7 @@
         });
     })
 </script>
+<script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
 <script>
     $('#update').click(function () {
 
@@ -320,5 +330,23 @@
         }
 
     })
+    function cancel_part(pid,msg)
+    {
+        Swal.fire({
+        title: "Are you sure?",
+        html:msg,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText:"Yes,cancel it",
+        cancelButtonText: 'No',
+        }).then((result) => {
+        if (result.value) {
+            window.location.href = '<?php echo url('/profile/confrim_del').'/' ?>'+pid;
+        }
+        })
+        return false;
+    }
 </script>
 @endsection
