@@ -128,9 +128,7 @@
                     </div>
                 </div>
                 <div class="card-text">
-                    
-                    <div class="text-dark font-size-15 font-weight-bold">Location changed to lab 3 of php quiz eventLocation changed to lab 3 of php quiz</div>
-                    <span class="text-muted more">Location changed to lab 3</span>
+                    <span class="text-muted font-weight-bold more">{!!$log['descr']!!}</span>
                     <div class="float-right">
                         <span class="font-weight-bold">IP</span>
                         <span class="badge badge-soft-dark badge-pill px-2">{{$log['ip_add']}}</span>
