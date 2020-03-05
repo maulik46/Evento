@@ -553,4 +553,17 @@ class s_admin extends Controller
         }
         return back();
     }
+     public function delay_res($eid)
+    {
+        $candidates=participant::select('pid','senrl','tname')->where('eid',$eid)->get()->toarray();
+        // $team_candidates=participant::select('pid', 'senrl', 'tname')->where('pid', $id)->get()->toarray();
+
+        $einfo=tblevent::select('eid','ename','e_type','edate','category')->where('eid',$eid)->first();
+        // $parameter_array=[
+        //     'candidates'=>$candidates,
+        //     // 'team_candidates'=>$team_candidates,
+        //     'einfo'=>$einfo
+        // ];
+        return view('super-admin/delay_result',['candidates'=>$candidates,'einfo'=>$einfo]);
+    }
 }
