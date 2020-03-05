@@ -527,7 +527,7 @@ class s_admin extends Controller
      public function view_result($eid)
      {
          $participant=participant::where([['eid',decrypt($eid)],['rank','p']])->count();
-         $event=tblevent::select('eid','ename','edate')->where('eid',decrypt($eid))->first();
+         $event=tblevent::select('eid','e_type','ename','edate')->where('eid',decrypt($eid))->first();
          return view('super-admin/view_result',['participant'=>$participant],['einfo'=>$event]);
      }
      public function view_can($id)
