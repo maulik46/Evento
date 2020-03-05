@@ -1,86 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>Institute List | Evento</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+@extends('start/start_layout')
+@section('title','Institute List')
 
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
-
-    <!-- App css -->
-    <link href="{{asset('assets/css/demopage.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/css/my-extra.css')}}" rel="stylesheet" type="text/css" />
-    <style>
-        body{
-            background: #AAFFA9;
-            background: -webkit-linear-gradient(to right, #11FFBD, #AAFFA9);
-            background: linear-gradient(to right, #11FFBD, #AAFFA9);
-        }
-        ::placeholder{
-            color: #000!important;
-        }
-        .dropdown-menu{
-            min-width:0px!important;
-            background-color:transparent!important;
-        }
-        .dropdown-menu.show {
-            top: 100%!important;
-            display: flex;
-            left:-5px!important;
-        }
-    </style>
-</head>
-<body class="body-scroll">
- 
-   <main>
-        <nav class="row justify-content-between align-items-center" style="z-index: 999;width: 100%;">
-            <a href="#" class="mt-1 mt-sm-3 mx-4 mx-sm-5 navbar-brand  font-size-24 font-weight-bold text-dark">
-                <img src="{{asset('assets/images/logo.png')}}" alt="" class="logo-dark mr-1" height="24" /> <span class="text-dark">Evento</span>
-            </a>
-        <div class="btn-group">
-            <a href="#" class="bg-white btn badge-pill py-1 text-danger font-weight-bold font-size-15 mt-1 mt-sm-3 mx-2 mx-sm-4 dropdown-toggle pl-3 pr-2 hover-me-sm new-shadow-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Log in
-                <i data-feather="chevron-down" height="18px"></i>
-            </a>
-            <div class=" shadow-none dropdown-menu dropdown-menu-right  mr-2 mt-2 rounded-lg  flex-column align-items-center justify-content-center">
-                <a class="text-red badge badge-pill bg-white my-1 p-2 new-shadow-2 hover-me-sm" href="{{url('index')}}" data-toggle="tooltip" data-placement="left" title="I'm Student">
-                    <img src="{{asset('assets/images/svg-icons/student.svg')}}" height="30px" alt="">
-                    <!-- I'm Student -->
-                </a>
-                <a class="text-blue badge badge-pill bg-white my-1 p-2 new-shadow-2 hover-me-sm" href="{{url('cindex')}}" data-toggle="tooltip" data-placement="left" title="I'm Co-ordinator">
-                    <img src="{{asset('assets/images/svg-icons/cod.svg')}}" height="33px" alt="">
-                    <!-- I'm Co-ordinator -->
-                </a>
-                <a class=" text-orange badge badge-pill bg-white my-1 p-2 new-shadow-2 hover-me-sm" href="{{url('sindex')}}" data-toggle="tooltip" data-placement="left" title="I'm Admin">
-                    <img src="{{asset('assets/images/svg-icons/admin.svg')}}" height="30px" alt="">
-                    <!-- I'm Admin -->
-                </a>
-                
-            </div>
-        </div>
-        </nav>
-        
-        <div>
-               <ul class="circles" style="z-index: -10;">
-                   <li></li>
-                   <li></li>
-                   <li></li>
-                   <li></li>
-                   <li></li>
-                   <li></li>
-                   <li></li>
-                   <li></li>
-                   <li></li>
-                   <li></li>
-               </ul>
-        </div>
-       
+@section('my-content')       
         <div class="mt-4 mx-4 mx-sm-3 d-flex justify-content-center align-items-center">
-            <div class="card col-lg-5 col-md-8 col-sm-8 p-2 pt-3 pb-1 new-shadow-2 rounded-lg">
+            <div class="card col-lg-6 col-md-8 col-sm-8 p-2 pt-3 pb-1 new-shadow-2 rounded-lg">
                 <h5 class="text-center">Select Your College</h5>
                 <hr class="mt-0">
                 <div class="col-12">
@@ -170,11 +93,8 @@
             
             
         </nav>
-   </main> 
-   <!-- Vendor js -->
-   <script src="{{asset('assets/js/vendor.min.js')}}"></script>
-   <!-- App js -->
-   <script src="{{asset('assets/js/app.min.js')}}"></script>
+@endsection
+@section('extra-scripts')
    <script>
         $(document).ready(function () {
             $("#myInput").on("keyup", function () {
@@ -186,6 +106,4 @@
             });
         });
    </script>
-
-</body>
-</html>
+@endsection
