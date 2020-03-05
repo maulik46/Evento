@@ -37,6 +37,15 @@
             top:-4px;
             right: 12px;
         }
+        .btn-p-about:hover{
+            background-color:rgba(37,194,227,.15);
+        }
+        .btn-p-result:hover{
+            background-color:rgba(67,211,158,.15);
+        }
+        .btn-p-candidates:hover{
+            background-color:rgba(83,105,248,.15);
+        }
         .btn-about-cod:hover{
             background-color: rgba(37,194,227,.15);
             color: var(--info);
@@ -44,10 +53,6 @@
         .btn-delete-cod:hover{
             background-color:rgba(255,92,117,.15);
             color: var(--danger);
-        }
-        .btn-update-cod:hover{
-            background-color:rgba(255,190,11,.15);
-            color: var(--warning);
         }
         @media(max-width:576px){
             .avatar-xxl{
@@ -110,7 +115,7 @@
                                      <div class="col-md-4 media px-3 py-4 border-right border-bottom">
                                          <div class="media-body">
                                              <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_event}}</h4>
-                                             <span class="text-muted">Total Events</span>
+                                             <span class="text-muted font-weight-bold">Total Events</span>
                                          </div>
                                          <i data-feather="calendar" class="align-self-center icon-dual-success icon-lg"></i>
                                      </div>
@@ -127,7 +132,7 @@
                                      <div class="col-md-4 media px-3 py-4 border-right border-bottom">
                                          <div class="media-body">
                                              <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_part}}</h4>
-                                             <span class="text-muted">Total Participator student</span>
+                                             <span class="text-muted font-weight-bold">Total Participator</span>
                                          </div>
                                          <i data-feather="users" class="align-self-center icon-dual-info icon-lg"></i>
                                      </div>
@@ -138,7 +143,7 @@
                                      <div class="col-md-4 media px-3 py-4 ">
                                          <div class="media-body">
                                              <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_co}}</h4>
-                                             <span class="text-muted">Total Co-ordinator</span>
+                                             <span class="text-muted font-weight-bold">Total Co-ordinator</span>
                                          </div>
                                          <i data-feather="user-check" class="align-self-center icon-dual-primary icon-lg"></i>
                                      </div>
@@ -149,7 +154,7 @@
                      <div class="row">
                          <div class="col-xl-12">
                              <div class="card new-shadow-sm" >
-                                <h5 class="card-title mt-4 px-4 mb-1 header-title">Recent Event</h5>
+                                <h5 class="card-title mt-4 px-4 mb-1 header-title">Events</h5>
                                  <div class="card-body">
                                     <div class="table-responsive overflow-auto my-scroll" style="max-height: 300px;">
                                          <table class="table table-hover table-nowrap mb-0">
@@ -161,6 +166,7 @@
                                                      <th scope="col">Date</th>
                                                      <th scope="col">Co-ordinator</th>
                                                      <th scope="col">Status</th>
+                                                     <th scope="col">Action</th>
                                                  </tr>
                                              </thead>
                                              <tbody><?php $c=0 ?>
@@ -175,27 +181,29 @@
                                                     <td>{{$p}}</td> <!--total Participator -->
                                                     <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
                                                     <td>{{ucfirst($co->cname)}}</td>
-                                                    <td>
-                                                          @if($e['edate'] <= date('Y-m-d') && $e['enddate'] >= date('Y-m-d'))
-                                                            <span class="badge badge-soft-success badge-pill px-3 py-1">Running</span>
-                                                            @elseif($e['edate'] > date('Y-m-d'))
-                                                            <span class="badge badge-soft-warning badge-pill px-3 py-1">Upcoming</span>
-                                                            @elseif($e['edate'] < date('Y-m-d')) 
-                                                            <span class="badge badge-soft-info badge-pill px-3 py-1">Finished</span>
-                                                            <?php $r=\DB::table('tblparticipant')->select('senrl')->where([['eid',$e['eid']],['rank',1]])->count();?>
-                                                                @if($r==1)
-                                                                    <a href="{{url('sview_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Show Result">
-                                                                        <i data-feather="award" height="18px" class=" text-success"></i>
-                                                                </a>
-                                                                @endif
-                                                            @endif
-                                                            <a href="{{url('sevent_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
-                                                                <i data-feather="info" height="18px" class=" text-info"></i>
-                                                            </a>
-                                                            <a href="{{url('sview_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="View Candidates">
-                                                                <i data-feather="users" height="18px" class="text-primary"></i>
-                                                            </a>
-                                                    </td>
+                                                <td>
+                                                    @if($e['edate'] <= date('Y-m-d') && $e['enddate'] >= date('Y-m-d'))
+                                                        <span class="badge badge-soft-success badge-pill px-3 py-1">Running</span>
+                                                    @elseif($e['edate'] > date('Y-m-d'))
+                                                        <span class="badge badge-soft-warning badge-pill px-3 py-1">Upcoming</span>
+                                                    @elseif($e['edate'] < date('Y-m-d')) 
+                                                        <span class="badge badge-soft-info badge-pill px-3 py-1">Finished</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a href="{{url('sevent_info')}}/{{encrypt($e['eid'])}}" class="btn p-1 btn-rounded mr-1 btn-p-about" data-toggle="tooltip" data-placement="top" title="About">
+                                                        <i data-feather="info" height="18px" class=" text-info"></i>
+                                                    </a>
+                                                    <a href="{{url('sview_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="View Candidates">
+                                                        <i data-feather="users" height="18px" class="text-primary"></i>
+                                                    </a>
+                                                    <?php $r=\DB::table('tblparticipant')->select('senrl')->where([['eid',$e['eid']],['rank',1]])->count();?>
+                                                    @if($r==1)
+                                                    <a href="{{url('sview_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Show Result">
+                                                        <i data-feather="award" height="18px" class=" text-success"></i>
+                                                    </a>
+                                                    @endif
+                                                </td>
                                                 </tr>
                                                 @endforeach
                                                  
@@ -222,38 +230,7 @@
                               </div>
                           </a>
                       </div>
-                     <!-- <div class="row">
-                         <div class="col-xl-12">
-                             <div class="card new-shadow-sm" style="max-height: 300px;">
-                                 <div class="row justify-content-around card-body pt-2 my-scroll overflow-auto">
-                                     @foreach($cods as $cod)
-                                     <div class="hover-me-sm col-lg-5 col-md-6 col-sm-12 cod-card media rounded-lg mt-1 py-2 align-items-end" style="border: 1px solid #3333331f;">
-                                        <img src="../assets/images/users/avatar-7.jpg" class="mr-3 rounded-lg" style="height:4.5rem;width:4.5rem;">
-                                        <div class="media-body">
-                                             <a href="#">
-                                             <h6 class="mt-1 mb-0 font-size-18 cod-name">{{ucfirst($cod['cname'])}}</h6>
-                                             <h5 class="text-muted font-size-15 font-weight-normal mt-1 mb-3">{{ucfirst($cod['category'])}} Events</h5>
-                                             </a>
-                                        </div>
-
-                                        <div class="d-flex flex-row flex-wrap mb-1">
-                                            <a href="#" class="btn-rounded p-1 btn-update-cod text-warning" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                <i data-feather="edit-3" height="18px"></i>
-                                             </a>
-                                            <a href="#" class="btn-rounded p-1 btn-delete-cod text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                <i data-feather="trash-2" height="18px"></i>
-                                            </a>
-                                            <a href="#" class="btn-rounded p-1 btn-about-cod text-info" data-toggle="tooltip" data-placement="top" title="About">
-                                                <i data-feather="info" height="18px"></i>
-                                            </a>
-                                        </div>
-                                     </div>
-                                     @endforeach
-                                    
-                                
-                             </div>
-                         </div>
-                     </div> -->
+                   
                 <div class="row">
                 <?php $count = 0; ?>
                     @foreach($cods as $c)
@@ -266,7 +243,7 @@
                                 <img src="{{asset('profile_pic/'.$c->pro_pic)}}" alt="" class="avatar-xxl rounded-circle new-shadow-sm bg-light" style="border:1px solid #f1f1f1" />
                                 </div>
                                 <div class="col col-lg-8 col-md-12 col-sm-8 col-8">
-                                    <h5 class="mt-2 mb-0">{{$c['cname']}}</h5>
+                                    <h5 class="mt-2 mb-0">{{ucfirst($c['cname'])}}</h5>
                                     <h6 class="text-muted font-weight-normal mt-2 mb-0">
                                     <i data-feather="mail" height="18px"></i>
                                     <span class="font-weight-bold">{{$c['email']}}</span>
@@ -276,11 +253,10 @@
                                     <span class="font-weight-bold">{{$c['mobile']}}</span>
                                     </h6>
                                     <div class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-sm-center ">
-                                        <span class="badge badge-info badge-pill px-3 mt-3 mr-3 new-shadow-sm">{{$c['category']}}</span>
-                                        <div class="custom-control custom-switch mt-3">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch<?=$count?>">
-                                            <label class="custom-control-label" for="customSwitch<?=$count?>"></label>
-                                        </div>
+                                        <span class="badge badge-info badge-pill px-3 mt-3 mr-3 new-shadow-sm">{{ucfirst($c['category'])}}</span>
+                                        <a href="#" data-toggle="tooltip" title="Remove Co-ordinator">
+                                        <i data-feather="trash-2" id="close-btn" class="mt-3 text-dark" height="18px"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -289,34 +265,6 @@
                     </div>
                     </div>
                     @endforeach
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="card rounded-lg new-shadow-sm hover-me-sm" >    
-                        <div class="card-body p-2 py-3">
-                            <div class="text-center" style="opacity:0.5;">
-                            <img src="{{asset('profile_pic/1583151955IMG_8518.jpg')}}" alt="" class="avatar-xxl rounded-circle new-shadow-sm" />
-                                <h5 class="mt-2 mb-0">Yash Parmar</h5>
-                                <hr class="my-1">
-                            <div class="text-left">
-                                <h6 class="text-muted font-weight-normal mt-2 mb-0">
-                                <i data-feather="mail" height="18px"></i>
-                                <span class="font-weight-bold">parmaryash201@gmail.com</span>
-                                </h6>
-                                <h6 class="text-muted font-weight-normal mt-2 mb-0">
-                                <i data-feather="phone" height="18px"></i>
-                                <span class="font-weight-bold">123467890</span>
-                                </h6>
-                            </div>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <span class="badge badge-info badge-pill px-3 mt-3 new-shadow-sm">Sport Co-ordinator</span>
-                                <div class="custom-control custom-switch mt-3">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                                    <label class="custom-control-label" for="customSwitch5"></label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
                 </div>
                      <!-- end row -->
 

@@ -158,6 +158,7 @@
                             <th scope="col">End Date</th>
                             <th scope="col">Co-ordinator</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -181,16 +182,18 @@
                                 <span class="badge badge-soft-warning badge-pill px-3 py-1">Upcoming</span>
                                 @elseif($e['edate'] < date('Y-m-d')) 
                                 <span class="badge badge-soft-info badge-pill px-3 py-1">Finished</span>
-                                    <?php $r=\DB::table('tblparticipant')->select('senrl')->where([['eid',$e['eid']],['rank',1]])->count();?>
-                                    @if($r==1)
-                                        <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Show Result">
-                                            <i data-feather="award" height="18px" class=" text-success"></i>
-                                    </a>
-                                    @endif
                                 @endif
+                            </td>
+                            <td>
                                 <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
                                     <i data-feather="info" height="18px" class=" text-info"></i>
                                 </a>
+                            <?php $r = \DB::table('tblparticipant')->select('senrl')->where([['eid', $e['eid']], ['rank', 1]])->count();?>
+                            @if($r==1)
+                                <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Show Result">
+                                    <i data-feather="award" height="18px" class=" text-success"></i>
+                                </a>
+                            @endif
                             </td>
                         </tr>
                         @endforeach
