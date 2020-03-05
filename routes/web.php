@@ -67,7 +67,7 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
     route::post('student_update_action/{senrl}', 'student@student_update_action');
     
-    route::get('/profile/confrim_del/{pid}','student@confrim_del');
+    route::get('/profile/confirm_del/{pid}','student@confirm_del');
     // route::any('student_update/{senrl}', 'student@student_update');
     Route::view('/view_winner_team', 'view_winner_team');
 
@@ -213,7 +213,7 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
         route::get('/approval', 's_admin@approval');
 
-        route::get('/approval/confrim_del/{eid}/{val}','s_admin@con_del');
+        route::get('/approval/confirm_del/{eid}/{val}','s_admin@con_del');
 
         route::view('admin_profile','super-admin/admin_profile');
 
@@ -254,6 +254,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         Route::get('/sview_result/{eid}', 's_admin@view_result');
 
         Route::get('/sview_candidates/{eid}','s_admin@view_can');
+    
+        Route::get('/view_student/confirm_del/{enrl}','s_admin@stud_del');
    
     });
 
