@@ -154,7 +154,7 @@ function confirm(enrl){
         cancelButtonText: 'No',
         }).then((result) => {
         if (result.value) {
-            window.location.href = '<?php echo url('/view_student/confrim_del').'/' ?>'+enrl;
+            window.location.href = '<?php echo url('/view_student/confirm_del').'/' ?>'+enrl;
         }
         })
         return false;
