@@ -79,7 +79,7 @@
                                 ?>
                                 <td colspan="3">{{$t1->tname}}</td>
                                 <td class="text-center">
-                                    <a href="{{url('view_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3 hover-me-sm">View Team</a>
+                                    <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3 hover-me-sm">View Team</a>
                                 </td>
                                 @endif
                             </tr>
@@ -109,7 +109,7 @@
                                 ?>
                                 <td colspan="3">{{$t2->tname}}</td>
                                 <td class="text-center">
-                                    <a href="{{url('view_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3 hover-me-sm">View Team</a>
+                                    <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3 hover-me-sm">View Team</a>
                                 </td>
                                 @endif
                             </tr>
@@ -140,7 +140,7 @@
                                 ?>
                                 <td colspan="3">{{$t3->tname}}</td>
                                 <td class="text-center">
-                                    <a href="{{url('view_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3 hover-me-sm">View Team</a>
+                                    <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3 hover-me-sm">View Team</a>
                                 </td>
                                 @endif
                             </tr>
