@@ -106,7 +106,7 @@
         cancelButtonText: 'No',
         }).then((result) => {
         if (result.value) {
-            window.location.href = '<?php echo url('/approval/confrim_del').'/' ?>'+eid+'/'+val;
+            window.location.href = '<?php echo url('/approval/confirm_del').'/' ?>'+eid+'/'+val;
         }
         })
         

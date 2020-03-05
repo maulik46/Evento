@@ -343,7 +343,7 @@
         cancelButtonText: 'No',
         }).then((result) => {
         if (result.value) {
-            window.location.href = '<?php echo url('/profile/confrim_del').'/' ?>'+pid;
+            window.location.href = '<?php echo url('/profile/confirm_del').'/' ?>'+pid;
         }
         })
         return false;
