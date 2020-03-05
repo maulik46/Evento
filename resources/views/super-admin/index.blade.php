@@ -76,52 +76,15 @@
 
                      <!-- stats + charts -->
                      <div class="row">
-                         <div class="col-xl-4 col-md-4">
-                             <div class="card new-shadow-sm">
-                                 <div class="card-body p-0">
-                                     <h5 class="card-title header-title border-bottom p-3 mb-0">Overview</h5>
-                                     <!-- stat 1 -->
-                                     <?php 
-                                        $tot_event=\DB::table('tblevents')->where('clgcode',Session::get('clgcode'))->count();
-                                     ?>
-                                     <div class="media px-3 py-4 border-bottom">
-                                         <div class="media-body">
-                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_event}}</h4>
-                                             <span class="text-muted">Total Events</span>
-                                         </div>
-                                         <i data-feather="calendar" class="align-self-center icon-dual icon-lg"></i>
-                                     </div>
-                                     <?php 
-                                        $tot_part=0;
-                                     ?>
-                                     @foreach($events as $e)
-                                        <?php
-                                            $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
-                                                $tot_part=($e['tsize'] * $p)+$tot_part;
-                                        ?>
-                                     @endforeach
-                                     <!-- stat 2 -->
-                                     <div class="media px-3 py-4 border-bottom">
-                                         <div class="media-body">
-                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_part}}</h4>
-                                             <span class="text-muted">Total Participator student</span>
-                                         </div>
-                                         <i data-feather="users" class="align-self-center icon-dual icon-lg"></i>
-                                     </div>
-                                    <?php 
-                                        $tot_co=\DB::table('tblcoordinaters')->where('clgcode',Session::get('clgcode'))->count();
-                                    ?>
-                                     <!-- stat 3 -->
-                                     <div class="media px-3 py-4">
-                                         <div class="media-body">
-                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_co}}</h4>
-                                             <span class="text-muted">Total Co-ordinator</span>
-                                         </div>
-                                         <i data-feather="user-check" class="align-self-center icon-dual icon-lg"></i>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
+                        <div class="col-xl-4">
+                            <div class="card new-shadow-sm">
+                                <div class="card-body px-0">
+                                    <h5 class="card-title mt-0 mb-0 header-title px-4">Participation by class</h5>
+                                    <div id="sales-by-category-chart" class="apex-charts mb-0 mt-3" dir="ltr"></div>
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                         
 
                          <div class="col-xl-8 col-md-8">
                              <div class="card new-shadow-sm">
@@ -136,18 +99,55 @@
 
                      </div>
                      <!-- row -->
-
+                    <div class="col-xl-12 px-0">
+                            <div class="card new-shadow-sm">
+                            <h5 class="card-title header-title border-bottom p-3 mb-0">Overview</h5>
+                                <div class="card-body p-0 d-flex flex-wrap">
+                                     <!-- stat 1 -->
+                                     <?php 
+                                        $tot_event=\DB::table('tblevents')->where('clgcode',Session::get('clgcode'))->count();
+                                     ?>
+                                     <div class="col-md-4 media px-3 py-4 border-right border-bottom">
+                                         <div class="media-body">
+                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_event}}</h4>
+                                             <span class="text-muted">Total Events</span>
+                                         </div>
+                                         <i data-feather="calendar" class="align-self-center icon-dual-success icon-lg"></i>
+                                     </div>
+                                     <?php 
+                                        $tot_part=0;
+                                     ?>
+                                     @foreach($events as $e)
+                                        <?php
+                                            $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
+                                                $tot_part=($e['tsize'] * $p)+$tot_part;
+                                        ?>
+                                     @endforeach
+                                     <!-- stat 2 -->
+                                     <div class="col-md-4 media px-3 py-4 border-right border-bottom">
+                                         <div class="media-body">
+                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_part}}</h4>
+                                             <span class="text-muted">Total Participator student</span>
+                                         </div>
+                                         <i data-feather="users" class="align-self-center icon-dual-info icon-lg"></i>
+                                     </div>
+                                    <?php 
+                                        $tot_co=\DB::table('tblcoordinaters')->where('clgcode',Session::get('clgcode'))->count();
+                                    ?>
+                                     <!-- stat 3 -->
+                                     <div class="col-md-4 media px-3 py-4 ">
+                                         <div class="media-body">
+                                             <h4 class="mt-0 mb-1 font-size-22 font-weight-bold">{{$tot_co}}</h4>
+                                             <span class="text-muted">Total Co-ordinator</span>
+                                         </div>
+                                         <i data-feather="user-check" class="align-self-center icon-dual-primary icon-lg"></i>
+                                     </div>
+                                </div>
+                             </div>
+                         </div>
                      <!-- products -->
                      <div class="row">
-                         <div class="col-xl-4">
-                             <div class="card new-shadow-sm">
-                                 <div class="card-body px-0">
-                                     <h5 class="card-title mt-0 mb-0 header-title px-4">Participation by class</h5>
-                                     <div id="sales-by-category-chart" class="apex-charts mb-0 mt-3" dir="ltr"></div>
-                                 </div> <!-- end card-body-->
-                             </div> <!-- end card-->
-                         </div> <!-- end col-->
-                         <div class="col-xl-8">
+                         <div class="col-xl-12">
                              <div class="card new-shadow-sm" >
                                 <h5 class="card-title mt-4 px-4 mb-1 header-title">Recent Event</h5>
                                  <div class="card-body">
