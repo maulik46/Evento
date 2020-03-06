@@ -138,18 +138,32 @@
 @section('my-content')
 @if(Session::has('success'))
            
-           <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
-               <div class="toast-body text-white alert mb-1">
-                   <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
-                       <i data-feather="x-circle" id="close-btn" height="18px" ></i>
-                   </a>
-                   <div class="mt-2 font-weight-bold font-size-14">
-                       {{Session::get('success')}}
-                   </div> 
-                   
-               </div>
-           </div>
-    @endif
+        <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+            <div class="toast-body text-white alert mb-1">
+                <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                    <i data-feather="x-circle" id="close-btn" height="18px" ></i>
+                </a>
+                <div class="mt-2 font-weight-bold font-size-14">
+                    {{Session::get('success')}}
+                </div> 
+                
+            </div>
+        </div>
+@endif
+@if($errors->first('photo-upload'))
+        
+        <div class="toast bg-danger fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+            <div class="toast-body text-white alert mb-1">
+                <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                    <i data-feather="x-circle" id="close-btn" height="18px" ></i>
+                </a>
+                <div class="mt-2 font-weight-bold font-size-14">
+                {{$errors->first('photo-upload')}}
+                </div> 
+                
+            </div>
+        </div>
+@endif
 <div class="container-fluid">
     <div class="card pattern-bg mb-0 d-flex align-items-end justify-content-start">
         <a href="#cod-section" class="btn bg-white py-0 text-dark btn-sm badge-pill font-weight-bold m-1 m-sm-2 d-flex align-items-center hover-me-sm" id="update-profile" style="cursor:pointer;">
@@ -300,7 +314,7 @@
         <a href="#" id="close-upload-form" class="mb-3 d-flex justify-content-end text-dark" style="margin-top:-10px;">
             <i data-feather="x-circle" id="close-btn" height="18px"></i>
         </a>
-        <form action="{{ url('import-excel') }}" method="POST" name="importform" enctype="multipart/form-data">
+        <form action="{{ url('supdate_propic') }}" method="POST" name="importform" enctype="multipart/form-data">
         @csrf
             <div class="card new-shadow-sm hover-me-sm mb-0" id="upload-plus-btn">
                 <label for="file-upload"
@@ -308,7 +322,7 @@
                     <i data-feather="upload" class="mt-2"></i>
                     <span class="mt-2 ml-2">Upload your photo from here</span>
                 </label>
-                <input id="file-upload" name="import_file" type="file" />
+                <input id="file-upload" name="photo-upload" type="file" />
             </div>
             <div class="text-center mt-3" style="cursor:pointer;" id="re-upload">
                 <i data-feather="refresh-cw" id="close-btn"></i>
