@@ -254,17 +254,13 @@
                                     <span class="font-weight-bold">{{$c['mobile']}}</span>
                                     </h6>
                                     <div class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-sm-center ">
-                                        <span class="badge badge-info badge-pill px-3 mt-3 mr-3 new-shadow-sm">{{$c['category']}}</span>
-                                        <div class="custom-control custom-switch mt-3">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch<?=$count?>">
-                                            <label class="custom-control-label" for="customSwitch<?=$count?>"></label>
-                                        </div>
+                                        <span class="badge badge-info badge-pill px-3 mt-3 mr-3 new-shadow-sm">{{ucfirst($c['category'])}}</span>
                                         <?php  $tble=tblevent::where('cid',$c['cid'])->get()->toArray();                                      
                                         $e="";
                                         foreach($tble as $te){
                                             $e.=$te['ename'].",";
                                         } ?>
-                                        <a href="" onclick="return confirm('<?php echo $e ?>','<?php echo $c['cid'] ?>')" class="btn text-danger p-0">
+                                        <a href="#" data-toggle="tooltip" title="Delete Co-ordinator" onclick="return confirm('<?php echo $e ?>','<?php echo $c['cid'] ?>')" class="btn text-danger p-0 mt-3">
                                                 <i data-feather="trash-2" height="19px"></i>
                                         </a>
                                         <div class="text-danger font-weight-bold" ></div>
