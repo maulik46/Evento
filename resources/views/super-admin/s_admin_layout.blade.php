@@ -62,8 +62,7 @@
                         <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button"
                             aria-haspopup="false" aria-expanded="false">
                             <div class="media user-profile ">
-                               <img src="{{asset('profile_pic/admin_pro_pic')}}/{{Session::get('adminprofile')}}" alt="user-image"
-                                    class="align-self-center" />
+                               <img src="{{asset('profile_pic/admin_pro_pic')}}/{{Session::get('adminprofile')}}" style="height:35px;width:35px" alt="user-image" class="align-self-center rounded-circle" />
                                 <div class="media-body text-left d-none d-sm-block">
                                     <h6 class="ml-2 my-0" id="nav-menu-btn">
                                         <span>{{ucfirst(Session::get('aname'))}}</span>
@@ -77,9 +76,8 @@
                             </div>
                         </a>
                         <div class="dropdown-menu profile-dropdown-items dropdown-menu-right">
-                            <div class="media dropdown-item d-sm-none d-md-none">
-                                <img src="{{asset('profile_pic/admin_pro_pic')}}/{{Session::get('adminprofile')}}" alt="user-image"
-                                    height="40px" class="align-self-center" />
+                            <div class="media dropdown-item d-sm-none d-md-none align-items-center">
+                                <img src="{{asset('profile_pic/admin_pro_pic')}}/{{Session::get('adminprofile')}}" alt="user-image" height="50px" width="50px" class="align-self-center rounded-circle" />
                                 <div class="media-body text-left">
                                     <h6 class="ml-2 my-0">
                                         <span>{{ucfirst(Session::get('aname'))}}</span>
