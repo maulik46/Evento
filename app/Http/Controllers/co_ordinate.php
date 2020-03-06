@@ -706,4 +706,25 @@ class co_ordinate extends Controller
         }
         return back();
     }
+      public function update_propic(Request $req)
+    {
+        $req->validate([
+            'photo-upload' => 'required|mimes:png,jpg,jpeg,svg|max:2000',
+            ],
+        [
+            'photo-upload.max'=>"The file size should be less then 2 Mb",
+            'photo-upload.mimes'=>"Only image or svg allowed"
+        ]);
+        $file=$req->file('photo-upload');
+        $destinationPath=public_path('profile_pic/');
+        $filename=time().$file->getClientOriginalName();
+        $file->move($destinationPath, $filename);
+        $pro_pic=$filename;
+        $propic=tblcoordinaters::where('cid',Session::get('cid'))->update(['pro_pic'=>$pro_pic]);
+        if($propic)
+        {
+            session()->put('profilepic',$pro_pic);
+        }
+        return back();
+    }
 }
