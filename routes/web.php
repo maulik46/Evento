@@ -276,6 +276,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         Route::get('confirm_del_cod/{cid}','s_admin@cod_del');
     
         route::post('/supdate_propic','s_admin@update_propic');
+    
+        route::get('/delay_res/{eid}','s_admin@delay_res');
    
     });
 
