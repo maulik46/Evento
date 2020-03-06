@@ -4,29 +4,32 @@
 <div class="container-fluid mt-5">
     <div class="row justify-content-center align-items-center">
         <div class="col-lg-5 col-md-8 col-sm-10">
-            <h5 class="text-center bg-light py-3 rounded card new-shadow-sm">
-                Change Password</h5>
+            <div class="text-center bg-light py-3 rounded card new-shadow-sm">
+                <span class="h5">
+                <i class="uil uil-lock-access h5 mr-1"></i>
+                Change Password</span>
+            </div>
             <div class="mt-2 card bg-light p-3 new-shadow-2">
                 <form>
                     <div class="form-group mt-2">
                         
                         <label class="col-form-label font-size-14">Current Password</label>
                         <div class="form-group has-icon d-flex align-items-center">
-                            <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
+                            <i class="uil uil-padlock font-size-17 form-control-icon ml-2"></i>
                             <input type="password"  class="form-control" placeholder="Enter Current Password..." />
                         </div>
                     </div>
                     <div class="form-group mt-2">
                         <label class="col-form-label font-size-14">New Password</label>
                         <div class="form-group has-icon d-flex align-items-center">
-                            <i data-feather="unlock" class="form-control-icon ml-2" height="19px"></i>
+                            <i class="uil uil-lock-open-alt font-size-17 form-control-icon ml-2"></i>
                             <input type="password" class="form-control" placeholder="Enter New Password..." />
                         </div>
                     </div>
                     <div class="form-group mt-2">
                         <label class="col-form-label font-size-14">Confirm Password</label>
                         <div class="form-group has-icon d-flex align-items-center">
-                            <i data-feather="check-circle" class="form-control-icon ml-2" height="19px"></i>
+                            <i class="uil uil-padlock font-size-17 form-control-icon ml-2"></i>
                             <input type="password"  class="form-control" placeholder="Enter Confirm Password..." />
                         </div>
                     </div>

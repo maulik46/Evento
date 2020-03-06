@@ -36,9 +36,9 @@
                         <i data-feather="grid" height="19px"></i>
                         <!-- <span class="noti-icon-badge"></span> -->
                     </a>
-                    <button class="btn btn-default button-menu-mobile open-left text-dark mr-0">
+                    <a href="#" class="btn btn-default button-menu-mobile open-left text-dark mr-0">
                         <i data-feather="menu" class="menu-icon"></i>
-                    </button>
+                    </a>
                 </div>
             </nav>
             <div class="left-side-menu bg-transparent shadow-none" style="top:10px;z-index:100!important;">
@@ -59,25 +59,25 @@
 
                                 <li class="my-3">
                                     <a href="{{url('/system')}}">
-                                        <i data-feather="home" class="text-dark"></i>
+                                        <i class="text-dark uil uil-home-alt h5"></i>
                                         <span class="font-weight-bold">Dashboard</span>
                                     </a>
                                 </li>
                                 <li class="my-3">
                                     <a href="{{url('/system_add_college')}}">
-                                        <i data-feather="plus-circle" class="text-dark"></i>
+                                        <i class="text-dark uil uil-graduation-hat h5"></i>
                                         <span class="font-weight-bold">Add College</span>
                                     </a>
                                 </li>
                                 <li class="my-3">
                                     <a href="{{url('/system_notice')}}">
-                                        <img src="{{asset('assets/images/svg-icons/request.svg')}}" height="20px" class="" alt="">
+                                        <i class="text-dark uil uil-envelope-add h5"></i>
                                         <span class="font-weight-bold">Demo Requests</span>
                                     </a>
                                 </li>
                                 <li class="my-3">
                                     <a href="{{url('/system_change_password')}}">
-                                        <i data-feather="lock" class="text-dark"></i>
+                                        <i class="text-dark uil uil-padlock h5"></i>
                                         <span class="font-weight-bold">Change Password</span>
                                     </a>
                                 </li>
@@ -85,7 +85,7 @@
                                 <li class="mt-3">
                                     <a href="#" class="d-flex align-items-center justify-content-between">
                                     <div>
-                                        <i data-feather="log-out" class="text-dark"></i>
+                                        <i class="text-dark uil uil-exit h5"></i>
                                         <span class="font-weight-bold">Log Out</span>
                                     </div>
                                     </a>
@@ -113,13 +113,13 @@
             <ul class="nav nav-pills navtab-bg nav-justified" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="pills-message-tab" data-toggle="pill" href="#pills-message" role="tab" aria-controls="pills-message"aria-selected="true">
-                        <i data-feather="mail" height="18px"></i>
+                        <i class="uil uil-envelope-upload h5 text-muted"></i>
                         Notice
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                        <i data-feather="user" height="18px"></i>
+                        <i class="uil uil-user-square h5 text-muted"></i>
                         Profile
                     </a>
                 </li>
