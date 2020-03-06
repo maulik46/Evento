@@ -262,3 +262,13 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
 // xoxoxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
 
+
+// ==========================================================================
+// System admin dashboard routes start
+// ==========================================================================
+
+
+ route::view('/system','system/index');
+ route::view('/system_notice','system/system_notice');
+ route::view('/system_change_password','system/change_password');
+ route::view('/system_add_college', 'system/add_college');
