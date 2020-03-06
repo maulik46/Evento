@@ -485,7 +485,7 @@ class s_admin extends Controller
             $avatar=$filename;
         }
         $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('clgcode'),'cname'=>strtolower($req->cname),'email'=>$req->email,
-        'password'=>$req->pass,'phoneno'=>$req->cno,'category'=>$req->category,'pro_pic'=>$avatar] );
+        'password'=>$req->pass,'phoneno'=>$req->cno,'category'=>strtolower($req->category),'pro_pic'=>$avatar] );
         if($tblc)
         {
             //echo "new co create";
@@ -562,5 +562,18 @@ class s_admin extends Controller
             session()->flash('msg', 'Student deleted successfully');
         }
         return back();
+    }
+     public function delay_res($eid)
+    {
+        $candidates=participant::select('pid','senrl','tname')->where('eid',$eid)->get()->toarray();
+        // $team_candidates=participant::select('pid', 'senrl', 'tname')->where('pid', $id)->get()->toarray();
+
+        $einfo=tblevent::select('eid','ename','e_type','edate','category')->where('eid',$eid)->first();
+        // $parameter_array=[
+        //     'candidates'=>$candidates,
+        //     // 'team_candidates'=>$team_candidates,
+        //     'einfo'=>$einfo
+        // ];
+        return view('super-admin/delay_result',['candidates'=>$candidates,'einfo'=>$einfo]);
     }
 }

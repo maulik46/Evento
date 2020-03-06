@@ -1,9 +1,9 @@
-<?php
-use App\participant;
-use App\tblstudent;
+<?php 
+    use App\tblstudent;
+    use App\participant;
 ?>
-@extends('super-admin/delay_result')
-@section('title','Declare Result')
+@extends('super-admin/s_admin_layout')
+@section('title','Create Result')
 @section('head-tag-links')
 <style>
     .form-control {
@@ -64,7 +64,7 @@ use App\tblstudent;
 @section('my-content')
 <div class="container-fluid">
     <div class="mb-0 pt-2 card new-shadow-sm">
-        <a href="{{url('/cindex')}}" class="text-right text-dark px-2">
+        <a href="{{url('/sindex')}}" class="text-right text-dark px-2">
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
         <span class="h2 my-0 font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</span>
@@ -144,7 +144,7 @@ use App\tblstudent;
                 </span>
             </div>
             <div class=" mr-2 d-flex align-items-center">
-            <?php $c = participant::where('eid', $einfo['eid'])->count()?>
+            <?php $c=participant::where('eid',$einfo['eid'])->count()?>
                 <span class="badge badge-soft-primary badge-pill px-3">Total
                 @if($einfo['e_type']=='team')
                     Team
@@ -156,7 +156,7 @@ use App\tblstudent;
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <input id="myInput" class="form-control" type="text"
+            <input id="myInput" class="form-control" type="text" 
             placeholder="@if($einfo['e_type']=='team')Search Team..
             @else Search Candidates..
             @endif
@@ -166,7 +166,7 @@ use App\tblstudent;
 
 
     <div id="my-record" class="accordion custom-accordionwitharrow">
-
+    
         <!-- <div class="card p-1 mb-2 px-1 pb-1 new-shadow-sm stud-info">
                 <div class="col-md-12 font-size-16 font-weight-bold text-dark d-flex justify-content-between align-items-center flex-wrap">
                     <div class="col-md-6 row">Piyush Mukeshbhai Monpara</div>
@@ -174,7 +174,7 @@ use App\tblstudent;
                         <div class="custom-control custom-switch  mx-2">
                             <input type="checkbox" name="1" class="switch-1 custom-control-input" id="r1">
                             <label class="custom-control-label" for="r1">1st</label>
-                        </div>
+                        </div>   
                         <div class="custom-control custom-switch mx-2">
                             <input type="checkbox" name="1" class="switch-2 custom-control-input" id="r2">
                             <label class="custom-control-label" for="r2">2nd</label>
@@ -182,7 +182,7 @@ use App\tblstudent;
                         <div class="custom-control custom-switch  mx-2">
                             <input type="checkbox" name="1" class="switch-3 custom-control-input" id="r3">
                             <label class="custom-control-label" for="r3">3rd</label>
-                        </div>
+                        </div>  
                     </div>
                 </div>
                 <div class="dropdown-divider m-1"></div>
@@ -206,16 +206,16 @@ use App\tblstudent;
                     </div>
                 </div>
         </div> -->
-    @if($einfo['e_type']=='solo')
+    @if($einfo['e_type']=='solo')   
     @foreach($candidates as $p)
-        <?php $enrl = explode("-", $p['senrl'])?>
+        <?php $enrl=explode("-",$p['senrl'])?>
         @foreach($enrl as $e)
-            <?php $sinfo = tblstudent::select('senrl', 'sname', 'class', 'division')->where('senrl', $p['senrl'])->first();?>
-
+            <?php $sinfo = tblstudent::select('senrl', 'sname', 'class', 'division')->where('senrl', $p['senrl'])->first(); ?>
+        
         <div class="bg-white p-1 my-2 px-1 pb-1 new-shadow-sm stud-info rounded">
                 <div class="col-md-12 font-weight-bold text-dark d-flex justify-content-between align-items-center flex-wrap">
                     <div class=" font-size-16 drag-me px-2 ml-1 rounded-sm bg-white hover-me-sm" style="cursor:pointer!important;min-width:150px!important;">
-                       <span>{{ucfirst($sinfo['sname'])}}</span>
+                       <span>{{ucfirst($sinfo['sname'])}}</span> 
                        <span id="pid" style="display:none;">{{$p['pid']}}</span>
                     </div>
                     <div>
@@ -250,7 +250,7 @@ use App\tblstudent;
 
     @if($einfo['e_type']=='team')
     @foreach($candidates as $p)
-        <?php $enrl = explode("-", $p['senrl'])?>
+        <?php $enrl=explode("-",$p['senrl'])?>
     <div class="col-md-6 team-info">
         <span class="badge text-white badge-pill badge-warning px-3 position-relative" style="top:5px;left:8px;z-index:98;">Team</span>
         <div class="card p-2 my-0 px-1 pb-1 new-shadow-sm">
@@ -267,16 +267,16 @@ use App\tblstudent;
                     <div class="d-flex justify-content-end align-items-center">
                         <a href="{{url('view_team')}}/{{encrypt($p['pid'])}}" class="d-flex align-items-center badge badge-primary badge-pill p-1 px-2 pr-3 mr-1">
                             <i data-feather="users" height="15px"></i>
-                            <span class="">View Candidates</span>
+                            <span class="">View Candidates</span>    
                         </a>
                     </div>
                 </div>
-            </div>
+            </div>      
         </div>
     </div>
     @endforeach
-    @endif
-
+    @endif 
+    
     </div>
     </div> <!-- end div of id='myrecord' -->
 </div> <!-- end container-fluid -->
@@ -316,7 +316,7 @@ use App\tblstudent;
             }
         });
     });
-
+    
 
     $('.stud-info,.drag-me').mouseenter(function(){
         $(this).css("z-index","100");
@@ -338,7 +338,7 @@ function myFunction() {
   if (window.pageYOffset > sticky) {
     header.classList.add("sticky");
     allCandidate.style.marginTop="230px";
-
+    
   } else {
     header.classList.remove("sticky");
     allCandidate.style.marginTop="0px";
@@ -351,7 +351,7 @@ function rankcheck() {
         var r1 = $('#r1 #pid').text();
         var r2 = $('#r2 #pid').text();
         var r3 = $('#r3 #pid').text();
-        var link = "<?php echo url('cindex') ?>";
+        var link = "<?php echo url('sindex') ?>";
         // alert(r1+r2+r3);
         if(r1=="" && r2=="" && r3=="")
         {
@@ -395,7 +395,7 @@ function rankcheck() {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'confirm'
+            confirmButtonText: 'Confirm'
             }).then((result) => {
             if (result.value) {
                     $.ajaxSetup({
@@ -405,11 +405,12 @@ function rankcheck() {
                 });
                     $.ajax({
                         type: 'POST',
-                        url: '/rank',
+                        url: '/srank',
                         data: {
                             r1: r1,
-                            r2: r2,
+                            r2: r2,    
                             r3: r3,
+                            utype:'admin'
                         },
                         success: function (data) {
                             window.location.href = link;
@@ -418,9 +419,9 @@ function rankcheck() {
                         console.log(data);
                         }
                     })
-
+                    
             }
-
+            
             })
             return false;
         }
@@ -433,7 +434,7 @@ function rankcheck() {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'confirm'
+            confirmButtonText: 'Confirm'
             }).then((result) => {
             if (result.value) {
                     $.ajaxSetup({
@@ -443,11 +444,12 @@ function rankcheck() {
                 });
                     $.ajax({
                         type: 'POST',
-                        url: '/rank',
+                        url: '/srank',
                         data: {
                             r1: r1,
-                            r2: r2,
+                            r2: r2,    
                             r3: r3,
+                            utype:'admin'
                         },
                         success: function (data) {
                             window.location.href = link;
@@ -456,9 +458,9 @@ function rankcheck() {
                         console.log(data);
                         }
                     })
-
+                    
             }
-
+            
             })
             return false;
         }
@@ -469,7 +471,7 @@ function rankcheck() {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'confirm'
+            confirmButtonText: 'Confirm'
             }).then((result) => {
             if (result.value) {
                     $.ajaxSetup({
@@ -479,11 +481,12 @@ function rankcheck() {
                 });
                     $.ajax({
                         type: 'POST',
-                        url: '/rank',
+                        url: '/srank',
                         data: {
                             r1: r1,
-                            r2: r2,
+                            r2: r2,    
                             r3: r3,
+                            utype:'admin'
                         },
                         success: function (data) {
                             window.location.href = link;
@@ -492,9 +495,9 @@ function rankcheck() {
                         console.log(data);
                         }
                     })
-
+                    
             }
-
+            
             })
             return false;
 }

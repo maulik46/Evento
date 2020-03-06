@@ -43,7 +43,7 @@
                                        
                                 </div>
                                     @if($nt->attechment)
-                                        <?php $att = explode('-',$nt->attechment);
+                                        <?php $att = explode(';',$nt->attechment);
                                         $c=count($att);
                                         $a=0;
                                         ?>
@@ -52,7 +52,7 @@
                                             @foreach($att as $attachment)
                                             <?php $a++;?>
                                             @if($a<$c)
-                                                    <a href="{{asset('attachment')}}/{{$attachment}}" class="btn badge badge-info badge-pill p-2 new-shadow-sm font-weight-bold px-3 mr-1" download="{{substr($attachment, strpos($attachment, 'N') + 1)}}">{{substr($attachment, strpos($attachment, "N") + 1)}}</a> 
+                                                    <a href="{{asset('attachment')}}/{{$attachment}}" class="btn badge badge-info badge-pill p-2 new-shadow-sm font-weight-bold px-3 mr-1" download="{{substr($attachment, 10)}}">{{substr($attachment,10)}}</a> 
                                             @endif
                                             @endforeach    
                                         </div> 

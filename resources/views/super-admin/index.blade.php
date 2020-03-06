@@ -268,39 +268,28 @@
                 </div>
                      <!-- end row -->
 
-                <!-- <div class="col-lg-4 col-md-5 col-6 bg-danger p-3 position-fixed new-shadow-sm rounded" style="bottom:20px;left:10px;"> -->
-                    <!-- <span class="text-white font-weight-bold">
-                    Result of cricket competition is not announced by Yash parmar yet.
-                    <a href="#" class="text-white"><u>Click here to announce</u></a>
-                    </span> -->
                 <div class="toast bg-white fade show border-0 new-shadow-2 rounded-lg position-fixed w-75" style="bottom:20px;left:10px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
-                    <div class="toast-body text-dark alert mb-1">
+                    <?php $delay_res=\DB::table('tblresult_delay')->join('tblevents','tblevents.eid','tblresult_delay.eid')->join('tblcoordinaters','tblcoordinaters.cid','tblresult_delay.cid')->join('tblparticipant','tblparticipant.eid','tblevents.eid')->where('tblcoordinaters.clgcode',Session::get('clgcode'))->get()->toarray();?>
+                    @if($delay_res)
+                        <div class="toast-body text-dark alert mb-1">
                         <h5 class="text-center mt-0">Delay Result List</h5>
+                        
+                    @foreach($delay_res as $del_res)
                         <div class="card bg-soft-danger p-2 new-shadow hover-me-sm mb-2">
                             <div>
-                                <span class="h5 my-1">Cricket Competition</span>
+                                <span class="h5 my-1">{{ucfirst($del_res->ename)}}</span>
                             </div> 
                             <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge badge-soft-dark px-3 badge-pill">By Yash Parmar</span>
-                            <a href="#" class="badge badge-success badge-pill px-2 pl-3">
+                            <span class="badge badge-soft-dark px-3 badge-pill">By {{ucfirst($del_res->cname)}}</span>
+                            <a href="{{url('delay_res')}}/{{$del_res->eid}}" class="badge badge-success badge-pill px-2 pl-3">
                                 <span>Declare</span>
                                 <i data-feather="arrow-right-circle" height="15px" class="text-white"></i>
                                 </a>
                             </div>
                         </div>
-                        <div class="card bg-soft-danger p-2 new-shadow hover-me-sm mb-2">
-                            <div>
-                                <span class="h5 my-1">Cricket Competition</span>
-                            </div> 
-                            <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge badge-soft-dark px-3 badge-pill">By Yash Parmar</span>
-                            <a href="#" class="badge badge-success badge-pill px-2 pl-3">
-                                <span>Declare</span>
-                                <i data-feather="arrow-right-circle" height="15px" class="text-white"></i>
-                                </a>
-                            </div>
-                        </div>    
+                    @endforeach
                     </div>
+                    @endif
                 </div>
                 <!-- </div>     -->
 
