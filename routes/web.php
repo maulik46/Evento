@@ -271,6 +271,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         Route::get('/sview_team/{pid}', 's_admin@view_team');
     
         Route::get('/view_student/confirm_del/{enrl}','s_admin@stud_del');
+    
+        Route::get('confirm_del_cod/{cid}','s_admin@cod_del');
    
     });
 
