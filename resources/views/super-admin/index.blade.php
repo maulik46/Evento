@@ -259,7 +259,7 @@
                                             <input type="checkbox" class="custom-control-input" id="customSwitch<?=$count?>">
                                             <label class="custom-control-label" for="customSwitch<?=$count?>"></label>
                                         </div>
-                                        <?php  $tble=tblevent::where('cid',$c['cid'])->get()->toArray();                                      
+                                        <?php  $tble=tblevent::where('cid',$c['cid'])->where('edate','>=',date('Y-m-d'))->get()->toArray();                                                 
                                         $e="";
                                         foreach($tble as $te){
                                             $e.=$te['ename'].",";
@@ -327,10 +327,22 @@ function confirm(ename, cid){
         ename_string+="<li>" + ename_array[i] + "</li><br/>";
     }
     }
-    
-    Swal.fire({
+    if(ename.length>0)
+    {
+        Swal.fire({
+        title: "Can't delete this co-ordinater !",
+        html:"<h5 style='color :red'> Events is currently Pending... </h5>"+ename_string,
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',        
+        cancelButtonText: 'Back',
+        })
+        return false;
+    }
+    else
+    {
+        Swal.fire({
         title: "Are you sure want to delete this co-ordinater !",
-        html:"<h5 style='color :red'> Event Data and Also participated Student will be delete... </h5>"+ename_string,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -343,6 +355,8 @@ function confirm(ename, cid){
         }
         })
         return false;
+    }
+    
 
     }
 </script>
