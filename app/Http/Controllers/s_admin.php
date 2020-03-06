@@ -349,7 +349,9 @@ class s_admin extends Controller
         ['tblcoordinaters.cid','LIKE',$cid],
         ['tbllog.time','>=',$sdate],['tbllog.time','<=',$ldate]])->orderby('time','desc')->paginate(10);
         $msg="";
+        $a=0;
         foreach($logs as $log){
+            $a=1;
         $msg.='<div class="card mb-0 mt-3 new-shadow-sm">
             <div class="card-body py-2">
                 <div class="row justify-content-between mx-0">
@@ -381,7 +383,15 @@ class s_admin extends Controller
             
         </div>';
         }
-        // $msg.='<div class="mt-3">'.$logs->links().'</div>';
+        if($a==0)
+        {
+            $msg.='<div class="text-center mt-5 font-weight-bold">No logs available!!</div>';
+        }
+        else
+        {
+            $msg.='<div class="mt-3">'.$logs->links().'</div>';
+        }
+
         return response()->json(array('msg'=>$msg),200);
     }
     public function otp_mail($to_name,$to_email,$data)
