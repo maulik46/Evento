@@ -253,10 +253,20 @@
                                     <span class="font-weight-bold">{{$c['mobile']}}</span>
                                     </h6>
                                     <div class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-sm-center ">
-                                        <span class="badge badge-info badge-pill px-3 mt-3 mr-3 new-shadow-sm">{{ucfirst($c['category'])}}</span>
-                                        <a href="#" data-toggle="tooltip" title="Remove Co-ordinator">
-                                        <i data-feather="trash-2" id="close-btn" class="mt-3 text-dark" height="18px"></i>
+                                        <span class="badge badge-info badge-pill px-3 mt-3 mr-3 new-shadow-sm">{{$c['category']}}</span>
+                                        <div class="custom-control custom-switch mt-3">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch<?=$count?>">
+                                            <label class="custom-control-label" for="customSwitch<?=$count?>"></label>
+                                        </div>
+                                        <?php  $tble=tblevent::where('cid',$c['cid'])->get()->toArray();                                      
+                                        $e="";
+                                        foreach($tble as $te){
+                                            $e.=$te['ename'].",";
+                                        } ?>
+                                        <a href="" onclick="return confirm('<?php echo $e ?>','<?php echo $c['cid'] ?>')" class="btn text-danger p-0">
+                                                <i data-feather="trash-2" height="19px"></i>
                                         </a>
+                                        <div class="text-danger font-weight-bold" ></div>
                                     </div>
                                 </div>
                             </div>
@@ -298,5 +308,42 @@
 
     
 @endsection
+@section('extra-scripts')
+<!-- Datatables init -->
+<!-- <script src="{{asset('assets/js/pages/datatables.init.js')}}"></script> -->
 
+<script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
+
+<script>
+    
+function confirm(ename, cid){
+    var cid=cid;
+    var ename_string="";
+    var ename_array = ename.split(',');
+    for (var i=0; i < ename_array.length; i++ ) { 
+        if(ename_array[i])  
+        {     
+        ename_string+="<li>" + ename_array[i] + "</li><br/>";
+    }
+    }
+    
+    Swal.fire({
+        title: "Are you sure want to delete this co-ordinater !",
+        html:"<h5 style='color :red'> Event Data and Also participated Student will be delete... </h5>"+ename_string,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText:"Yes,Delete it",
+        cancelButtonText: 'No',
+        }).then((result) => {
+        if (result.value) {
+            window.location.href = '<?php echo url('/confirm_del_cod').'/' ?>'+cid;
+        }
+        })
+        return false;
+
+    }
+</script>
+@endsection
  
