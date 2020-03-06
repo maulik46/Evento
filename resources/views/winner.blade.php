@@ -117,10 +117,7 @@
                     </table>
                 </div>
             </div>
-        </div>
-            
-        <div class="row mt-4">
-            <div class="card mb-0 rounded-0 col-lg-6 col-md-12 new-shadow-sm">
+            <div class="card mb-0 my-2 rounded-0 col-lg-6 col-md-12 new-shadow-sm">
                 <div class="row  align-items-center justify-content-between mx-0" style="background-color:#dde1fc;">
                     <div class="p-2"  >
                         <span class="h5">IT Quiz Competition</span>
@@ -177,6 +174,10 @@
                     </table>
                 </div>
             </div>
+        </div>
+            
+        <div class="row mt-4">
+            
         </div>
         <!-- end row tag -->
         </div>
