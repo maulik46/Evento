@@ -4,10 +4,6 @@ body {
     background: linear-gradient(to left, #11FFBD, #AAFFA9);
 }
 
-.button-menu-mobile:hover,
-.right-bar-toggle i:hover {
-    color: gray !important;
-}
 
 .left-side-menu-condensed .avatar-xl {
     height: 3.5rem !important;
