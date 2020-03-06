@@ -332,10 +332,7 @@ function confirm(ename, cid){
         Swal.fire({
         title: "Can't delete this co-ordinater !",
         html:"<h5 style='color :red'> Events is currently Pending... </h5>"+ename_string,
-        icon: 'warning',
-        showCancelButton: true,
-        cancelButtonColor: '#d33',        
-        cancelButtonText: 'Back',
+        icon: 'warning'
         })
         return false;
     }
