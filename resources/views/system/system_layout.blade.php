@@ -57,36 +57,36 @@
                         <div id="sidebar-menu">
                             <ul class="metismenu" id="menu-bar">
 
-                                <li class="my-3">
+                                <li class="my-2">
                                     <a href="{{url('/system')}}">
-                                        <i class="text-dark uil uil-home-alt h5"></i>
-                                        <span class="font-weight-bold">Dashboard</span>
+                                        <i class="text-dark uil uil-home-alt h6"></i>
+                                        <span class="font-weight-bold font-size-14">Dashboard</span>
                                     </a>
                                 </li>
-                                <li class="my-3">
+                                <li class="my-2">
                                     <a href="{{url('/system_add_college')}}">
                                         <i class="text-dark uil uil-graduation-hat h5"></i>
-                                        <span class="font-weight-bold">Add College</span>
+                                        <span class="font-weight-bold font-size-14">Add College</span>
                                     </a>
                                 </li>
-                                <li class="my-3">
+                                <li class="my-2">
                                     <a href="{{url('/system_notice')}}">
-                                        <i class="text-dark uil uil-envelope-add h5"></i>
-                                        <span class="font-weight-bold">Demo Requests</span>
+                                        <i class="text-dark uil uil-envelope-add h6"></i>
+                                        <span class="font-weight-bold font-size-14">Demo Requests</span>
                                     </a>
                                 </li>
-                                <li class="my-3">
+                                <li class="my-2">
                                     <a href="{{url('/system_change_password')}}">
-                                        <i class="text-dark uil uil-padlock h5"></i>
-                                        <span class="font-weight-bold">Change Password</span>
+                                        <i class="text-dark uil uil-padlock h6"></i>
+                                        <span class="font-weight-bold font-size-14">Change Password</span>
                                     </a>
                                 </li>
                                 
-                                <li class="mt-3">
+                                <li class="mt-2">
                                     <a href="#" class="d-flex align-items-center justify-content-between">
                                     <div>
-                                        <i class="text-dark uil uil-exit h5"></i>
-                                        <span class="font-weight-bold">Log Out</span>
+                                        <i class="text-dark uil uil-exit h6"></i>
+                                        <span class="font-weight-bold font-size-14">Log Out</span>
                                     </div>
                                     </a>
                                 </li>
