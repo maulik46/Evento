@@ -76,10 +76,10 @@
                 <a href="{{url('sindex')}}" class="d-flex justify-content-end text-dark">
                     <i data-feather="x-circle" id="close-btn" height="18px"></i>
                 </a>
-                <h3 class="my-2 text-center text-dark">
-                    <img src="../assets/images/svg-icons/co-ordinate/writing.svg" height="25px" alt="">
+                <h4 class="my-2 mb-3 text-center text-dark">
+                    <img src="../assets/images/svg-icons/co-ordinate/writing.svg" height="20px" alt="">
                     <span> Create new notice</span>
-                </h3>
+                </h4>
                 <div class="text-center font-weight-bold text-danger" id="error">{{$errors->first('attachment')}}</div>
                 <form action="admin-noticesend" method="post" onsubmit="return check()" enctype="multipart/form-data">
                     @csrf

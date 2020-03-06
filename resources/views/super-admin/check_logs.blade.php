@@ -75,7 +75,7 @@
             <i data-feather="x-circle" height="20px"></i>
         </a>
         <div class="text-dark d-flex align-items-center justify-content-center p-1">
-            <i data-feather="users"></i>
+            <i data-feather="list"></i>
             <span class="h4 text-dark ml-2">Co-ordinator's Log</span>
         </div>
         <hr class="my-1">
@@ -107,7 +107,9 @@
 
     </div>
     <div id="loglist">
+    <?php $a=0;?>
     @foreach($logs as $log)
+    <?php $a=1;?>
         <div class="card mb-0 mt-3 new-shadow-sm">
             <div class="card-body py-2">
                 <div class="row justify-content-between mx-0">
@@ -138,6 +140,9 @@
             
         </div>
     @endforeach
+    @if($a==0)
+    <div class="text-center mt-5 font-weight-bold">No logs available!!</div>
+    @endif
         <div class="mt-3">
         {{$logs->links()}}
         </div>

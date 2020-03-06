@@ -110,9 +110,9 @@
                             <a href="{{url('/sindex')}}" class="d-flex justify-content-end text-dark">
                                 <i data-feather="x-circle" id="close-btn" height="18px"></i>
                             </a>
-                            <h4 class="my-3 text-center text-dark">
-                                <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="22px" alt="">
-                                <span>Create Co-ordinator</span>
+                            <h4 class="my-3 text-dark d-flex align-items-center justify-content-center">
+                                <i data-feather="user-plus"></i>
+                                <span class="ml-2">Add new Co-ordinator</span>
                             </h4>
                             <form action="{{url('/new_cod_add')}}" onsubmit="return getMessage()" method="POST" enctype="multipart/form-data">
                                 @csrf
