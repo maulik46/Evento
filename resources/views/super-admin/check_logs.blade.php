@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <div class="card-text">
-                    <span class="text-muted font-weight-bold more">{!!$log['descr']!!}</span>
+                    <span class="text-muted more">{!!$log['descr']!!}</span>
                     <div class="float-right">
                         <span class="font-weight-bold">IP</span>
                         <span class="badge badge-soft-dark badge-pill px-2">{{$log['ip_add']}}</span>
