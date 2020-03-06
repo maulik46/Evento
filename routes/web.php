@@ -49,7 +49,6 @@ Route::group(['middleware' => 'SessionCheck'], function () {
         return view('winner-list');    
     });   
     
-    route::get('/','student@index');
 
     route::get('index','student@index');
 
