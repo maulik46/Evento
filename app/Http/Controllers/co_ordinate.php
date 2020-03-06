@@ -391,8 +391,24 @@ class co_ordinate extends Controller
             return redirect(url('cindex'));
     }
    
-    public function create_event(Request $req)
+   public function create_event(Request $req)
     {
+        $banner="";
+        $filename="";
+        if($file=$req->file('poster-upload'))
+        {
+            foreach($file as $att)
+            {
+                $destinationPath=public_path('banner/');
+                $filename=time().$att->getClientOriginalName();
+                $att->move($destinationPath,$filename);
+                $banner.=$filename.";";
+            }
+        }
+        else
+        {
+            $banner="";
+        }
         $edate=date('Y-m-d',strtotime($req->edate));
         $sdate=date('Y-m-d',strtotime($req->sdate));
         $enddate=date('Y-m-d',strtotime($req->enddate));
@@ -414,6 +430,14 @@ class co_ordinate extends Controller
         {
             $class.=$cls."-";
         }
+        if($req->etype=="solo")
+        {
+            $tsize=1;
+        }
+        else
+        {
+            $tsize=$req->tsize;
+        }
         $tblevent=new tblevent;
         $tblevent->ename=$req->ename;
         $tblevent->category=Session::get('cat');
@@ -426,12 +450,13 @@ class co_ordinate extends Controller
         $tblevent->gallow=$req->efor;
         $tblevent->efor=$class;
         $tblevent->e_type=$req->etype;
-        $tblevent->tsize=$req->tsize;
+        $tblevent->tsize=$tsize;
         $tblevent->maxteam=$req->mteam;
         $tblevent->place=$req->loc;
         $tblevent->alw_dif_class=$alw_diff_class;
         $tblevent->alw_dif_div=$alw_diff_div;
         $tblevent->rules=$req->rules;
+        $tblevent->banner=$banner;
         $tblevent->cid=Session::get('cid');
         $tblevent->save();
         session()->flash('success', 'Event created successfully..!');
