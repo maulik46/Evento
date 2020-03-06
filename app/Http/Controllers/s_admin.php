@@ -576,4 +576,25 @@ class s_admin extends Controller
         // ];
         return view('super-admin/delay_result',['candidates'=>$candidates,'einfo'=>$einfo]);
     }
+    public function update_propic(Request $req)
+    {
+        $req->validate([
+            'photo-upload' => 'required|mimes:png,jpg,jpeg,svg|max:2000',
+            ],
+        [
+            'photo-upload.max'=>"The file size should be less then 2 Mb",
+            'photo-upload.mimes'=>"Only image or svg allowed"
+        ]);
+        $file=$req->file('photo-upload');
+        $destinationPath=public_path('profile_pic/admin_pro_pic');
+        $filename=time().$file->getClientOriginalName();
+        $file->move($destinationPath, $filename);
+        $pro_pic=$filename;
+        $propic=admin::where('aid',Session::get('aid'))->update(['profilepic'=>$pro_pic]);
+        if($propic)
+        {
+            session()->put('adminprofile',$pro_pic);
+        }
+        return back();
+    }
 }

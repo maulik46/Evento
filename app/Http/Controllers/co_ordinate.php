@@ -391,8 +391,24 @@ class co_ordinate extends Controller
             return redirect(url('cindex'));
     }
    
-    public function create_event(Request $req)
+   public function create_event(Request $req)
     {
+        $banner="";
+        $filename="";
+        if($file=$req->file('poster-upload'))
+        {
+            foreach($file as $att)
+            {
+                $destinationPath=public_path('banner/');
+                $filename=time().$att->getClientOriginalName();
+                $att->move($destinationPath,$filename);
+                $banner.=$filename.";";
+            }
+        }
+        else
+        {
+            $banner="";
+        }
         $edate=date('Y-m-d',strtotime($req->edate));
         $sdate=date('Y-m-d',strtotime($req->sdate));
         $enddate=date('Y-m-d',strtotime($req->enddate));
@@ -414,6 +430,14 @@ class co_ordinate extends Controller
         {
             $class.=$cls."-";
         }
+        if($req->etype=="solo")
+        {
+            $tsize=1;
+        }
+        else
+        {
+            $tsize=$req->tsize;
+        }
         $tblevent=new tblevent;
         $tblevent->ename=$req->ename;
         $tblevent->category=Session::get('cat');
@@ -426,12 +450,13 @@ class co_ordinate extends Controller
         $tblevent->gallow=$req->efor;
         $tblevent->efor=$class;
         $tblevent->e_type=$req->etype;
-        $tblevent->tsize=$req->tsize;
+        $tblevent->tsize=$tsize;
         $tblevent->maxteam=$req->mteam;
         $tblevent->place=$req->loc;
         $tblevent->alw_dif_class=$alw_diff_class;
         $tblevent->alw_dif_div=$alw_diff_div;
         $tblevent->rules=$req->rules;
+        $tblevent->banner=$banner;
         $tblevent->cid=Session::get('cid');
         $tblevent->save();
         session()->flash('success', 'Event created successfully..!');
@@ -703,6 +728,27 @@ class co_ordinate extends Controller
             session()->put('mobile',$mobile);
             session()->flash('success', 'Profile updated successfully');
             
+        }
+        return back();
+    }
+      public function update_propic(Request $req)
+    {
+        $req->validate([
+            'photo-upload' => 'required|mimes:png,jpg,jpeg,svg|max:2000',
+            ],
+        [
+            'photo-upload.max'=>"The file size should be less then 2 Mb",
+            'photo-upload.mimes'=>"Only image or svg allowed"
+        ]);
+        $file=$req->file('photo-upload');
+        $destinationPath=public_path('profile_pic/');
+        $filename=time().$file->getClientOriginalName();
+        $file->move($destinationPath, $filename);
+        $pro_pic=$filename;
+        $propic=tblcoordinaters::where('cid',Session::get('cid'))->update(['pro_pic'=>$pro_pic]);
+        if($propic)
+        {
+            session()->put('profilepic',$pro_pic);
         }
         return back();
     }

@@ -59,30 +59,45 @@
                     <!-- carousal Start -->
                     <div class="row align-items-center">
                         <div id="carouselExampleIndicators" class="carousel slide col-xl-8 mt-4" data-ride="carousel">
+                            <?php  
+                                $tble=App\tblevent::where([['reg_end_date','>=',date('Y-m-d')],
+                                ['reg_start_date','<=',date('Y-m-d')]])->get();
+                                $active=0;
+                                $count=1;
+                                ?>    
                             <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            @foreach($tble as $e)
+                                
+                                <?php $att = explode(';',$e['banner']);
+                                ?>
+                                @foreach($att as $b)
+                                @if($b)
+                                <li data-target="#carouselExampleIndicators" data-slide-to="{{$count}}" <?php if($active==0) { ?>  class="active"  <?php  } ?>></li>
+                                <?php $count++; ?>
+                                @endif
+                                @endforeach
+                                
+                                
+                            @endforeach
                             </ol>
                             <div class="carousel-inner new-shadow rounded" role="listbox">
-                                <div class="carousel-item active">
-                                    <div style="height: 300px; width: 100%;background-color: #d9e4f5;background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);"
+                                
+                                @foreach($tble as $e)
+                                
+                                <?php $att = explode(';',$e['banner']);
+                                ?>
+                                @foreach($att as $b)
+                                @if($b)
+                                <div class="carousel-item <?php if($active==0) { ?>  active <?php $active=1;  } ?> ">
+                                    <div style="height: 300px; width: 100%;background-color: #d9e4f5;background-image:url('../banner/{{$b}}')"
                                         class="d-flex align-items-center justify-content-end flex-column">
-                                        <h1 class="text-dark font-size-24 mb-5 font-weight-light">Zeal 2020</h1>
+                                        <h1 class="text-dark font-size-24 mb-5 font-weight-light">{{ucfirst($e['ename'])}}</h1>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div style="height: 300px; width: 100%;  background-color: #f8f9d2;background-image: linear-gradient(315deg, #f8f9d2 0%, #e8dbfc 74%);"
-                                        class="d-flex align-items-center justify-content-end flex-column">
-                                        <h1 class="text-dark font-size-24 mb-5 font-weight-light">IMPTUS 2020</h1>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div style="height: 300px; width: 100%; background-color: #fde7f9;background-image: linear-gradient(315deg, #fde7f9 0%, #aacaef 74%);"
-                                        class="d-flex align-items-center justify-content-end flex-column ">
-                                        <h1 class="text-dark font-size-24 mb-5 font-weight-light">Explorica 2020</h1>
-                                    </div>
-                                </div>
+                                @endif
+                                @endforeach
+                                
+                                @endforeach
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
                                 data-slide="prev">

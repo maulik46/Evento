@@ -49,7 +49,7 @@
                 <span> Create new event</span>
             </h3>
 
-            <form class="form-horizontal" method="post" onsubmit="return getMessage()" action="{{url('newevent')}}">
+            <form class="form-horizontal" method="post" onsubmit="return getMessage()" action="{{url('newevent')}}"  enctype="multipart/form-data">
                 @csrf
                 <div class="card border-form">
                     <div class="card-body py-0 pb-1">
@@ -69,12 +69,14 @@
                             <div>
                             <label for="poster-upload" class="custom-file-upload rounded overflow-auto">
                             <i id="camera" data-feather="camera"></i>
-                            <span id="up" class="mx-2">Uploa Poster</span>
+                            <span id="up" class="mx-2">Upload Poster</span>
                             </label>
-                            <input id="poster-upload" name="poster-upload" type="file" />
+                            <input id="poster-upload" name="poster-upload[]" type="file"  multiple onChange="FileDetails()"/>
                             </div>
+                            <span class="text-danger font-weight-bold" id="validphoto"></span>
                         </div>
                         </div>
+                        <div class="mt-3 p-1" id="fc" ></div>
                     </div>
                 </div>
                 <div class="card border-form my-5">
@@ -295,10 +297,81 @@
 <script src="{{asset('assets/libs/multicheckbox/multiselect.js')}}"></script>
 <script src="{{asset('assets/js/create-ev-js.js')}}"></script>
 <script>
+    $('#poster-upload').change(function(){
+                if($('#poster-upload').val() !="")
+                {
+                    // var i = $(this).prev('label').clone();
+                    // var file = $('#poster-upload')[0].files[0].name;
+                    // $('.custom-file-upload').text(file);
+                    // $('.myCheckbox').prop("disabled", true);
+                    // GET THE FILE INPUT.
+                var fi = document.getElementById('poster-upload');
+                
+                // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+                if (fi.files.length > 0) {
+                    $('#fc').css("border","1px solid #d2d8de");
+                document.getElementById('fc').innerHTML ='<div class="d-flex justify-content-center align-items-center mr-2" style="margin-top:-12px;"><span class="badge badge-dark px-3 py-1 badge-pill">Total Files: <b>' + fi.files.length + '</b></span></div>';
+                document.getElementById('fc').innerHTML = document.getElementById('fc').innerHTML + ' <div class="mt-2 col-xl-12 row" id="fl">';
+                    for (var i = 0; i <= fi.files.length - 1; i++) {
+
+                        var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+                        var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                        var ext = fname.substring(fname.lastIndexOf('.') + 1);
+                        const size = (fi.files[i].size / 1024).toFixed(2); 
+                        if(ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "svg" || ext == "SVG" || ext == "png" || ext == "PNG")
+                        {
+                            if (size > 2048 ) { 
+                                $('#validphoto').text("File must be less than 2 MB");
+                                sessionStorage.setItem('err',1);
+                                document.getElementById('fl').innerHTML =
+                            document.getElementById('fl').innerHTML + '<div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:orange;border-right:4px solid #fff;border-left:4px solid #fff;"> <span class="text-dark col-8">'+ fname +'</span><span class="badge badge-light px-3 badge-pill mr-2 col-4">' + (fsize/1024).toFixed(2) + 'KB</span></div>';
+                            }  
+                            else{
+                                $('#validphoto').text("");
+                                document.getElementById('fl').innerHTML =
+                                document.getElementById('fl').innerHTML + '<div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:#25c2e340;border-right:4px solid #fff;border-left:4px solid #fff;"> <span class="text-dark col-8">'+ fname +'</span><span class="badge badge-light px-3 badge-pill mr-2 col-4">' + (fsize/1024).toFixed(2) + 'KB</span></div>';
+                                
+                            } 
+                        }
+                        else
+                        {            
+                            $('#validphoto').text('File Extension must be jpg,jpeg,svg and png format...!'); 
+                            sessionStorage.setItem('err',1);
+                            document.getElementById('fl').innerHTML =
+                            document.getElementById('fl').innerHTML + '<div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:orange;border-right:4px solid #fff;border-left:4px solid #fff;"> <span class="text-dark col-8">'+ fname +'</span><span class="badge badge-light px-3 badge-pill mr-2 col-4">' + (fsize/1024).toFixed(2) + 'KB</span></div>';  
+                        }
+                        }
+                    
+                    }
+                }
+            });
+//     $('#poster-upload').on('change', function() { 
+//         var fileName=document.getElementById('poster-upload').value;
+//         alert(fileName);
+//         var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+//         const size =  
+//                (this.files[0].size / 1024).toFixed(2); 
+//         if(ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "svg" || ext == "SVG" || ext == "png" || ext == "PNG")
+//         {
+//             if (size > 2048 ) { 
+//                 $('#validphoto').text("File must be less than 2 MB");
+//             } else { 
+                
+//                 $('#validphoto').text( 'This file size is: ' + size / 1024 + ' MB ' );                     
+//             }   
+//         }
+//         else
+//         {            
+//             $('#validphoto').text('File Extension must be jpg,jpeg,svg and png format...!');    
+//         }
+// });
          function sell(id)
         {
 	        $("#"+id).parent().toggleClass("bg-info");
         
         };
+
+
+
 </script>
 @endsection
