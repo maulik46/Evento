@@ -1,6 +1,7 @@
 <?php
-
+use Illuminate\Http\Request;
 use App\log;
+use App\tblevent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,11 +17,24 @@ use App\log;
 // Student dashboard routes start
 // ==========================================================================
 
-route::view('/college_list','start/college_list');
-route::view('/event_list', 'start/event_list');
+route::get('/',function(){
+    $clg=\DB::table('tblcolleges')->select('clgname','clgcode')->get()->toarray();
+    return view('start/college_list',['clgs'=>$clg]);
+});
+route::post('/event_list', function(Request $req){
+    $events=tblevent::where([['clgcode',$req->clgcode],
+        ['reg_end_date','>=',date('Y-m-d')],
+        ['reg_start_date','<=',date('Y-m-d')]])
+        ->orderby('reg_end_date')->get()->toArray();
+    return view('start/event_list',['events'=>$events,'clgcode'=>$req->clgcode]);
+});
 route::view('/getdemo','start/demo');
 route::view('/winner', 'winner');
-route::view('/e_info', 'start/e_info');
+route::get('/e_info/{eid}', function($eid){
+    $eid=decrypt($eid);
+    $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcolleges.clgname')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcolleges','tblcolleges.clgcode','tblcoordinaters.clgcode')->where('tblevents.eid',$eid)->first();
+    return view('start/e_info',['einfo'=>$einfo]);
+});
 
 Route::group(['middleware' => 'SessionCheck'], function () {
     route::get('/index',function(){
