@@ -89,9 +89,9 @@
                                 @foreach($att as $b)
                                 @if($b)
                                 <div class="carousel-item <?php if($active==0) { ?>  active <?php $active=1;  } ?> ">
-                                    <div style="height: 300px; width: 100%;background-color: #d9e4f5;background-image:url('../banner/{{$b}}')"
+                                    <div style="height: 300px; width: 100%;background-color: #d9e4f5;background-image:url('../banner/{{$b}}');background-size:cover;background-position:center;background-repeat:no-repeat;"
                                         class="d-flex align-items-center justify-content-end flex-column">
-                                        <h1 class="text-dark font-size-24 mb-5 font-weight-light">{{ucfirst($e['ename'])}}</h1>
+                                        <h1 class="text-white bg-soft-dark w-100 text-center  mb-5 h4 py-2">{{ucfirst($e['ename'])}}</h1>
                                     </div>
                                 </div>
                                 @endif
