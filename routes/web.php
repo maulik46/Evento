@@ -277,6 +277,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
     
         route::post('/supdate_propic','s_admin@update_propic');
     
+        Route::post('/srank','co_ordinate@rank');    
+    
         route::get('/delay_res/{eid}','s_admin@delay_res');
    
     });
