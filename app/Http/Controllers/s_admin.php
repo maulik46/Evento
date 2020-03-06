@@ -484,8 +484,8 @@ class s_admin extends Controller
             $file->move($destinationPath, $filename);
             $avatar=$filename;
         }
-        $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('clgcode'),'cname'=>strtolower($req->cname),'email'=>$req->email,
-        'password'=>$req->pass,'phoneno'=>$req->cno,'category'=>strtolower($req->category),'pro_pic'=>$avatar] );
+        $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('clgcode'),'cname'=>strtolower($req->cname),'email'=>$req->email,'mobile'=>$req->cno,
+        'password'=>$req->pass,'category'=>strtolower($req->category),'pro_pic'=>$avatar] );
         if($tblc)
         {
             //echo "new co create";
@@ -493,11 +493,11 @@ class s_admin extends Controller
             $to_email=$req->email;
             $message=" <table border=1 style='padding:10px'> <tr style='background-color:#e6e6e6'><td style='padding:5px'> User Name </td><td style='padding:5px'> Password </td></tr>  <tr><td style='padding:5px'>".$req->email."</td> <td style='padding:5px'>".$req->pass."</td></tr>    </table> ";
             $data=array('name'=>'Welcome to Evento ','body'=>$message);
-            \Mail::send('email',$data,function($message) use ($to_name, $to_email){
-                $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
-                ->from("eventoitsol@gmail.com", $name = "Evento")
-                ->subject("Co-ordinaters login")->bcc($to_email);
-            });
+            // \Mail::send('email',$data,function($message) use ($to_name, $to_email){
+            //     $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+            //     ->from("eventoitsol@gmail.com", $name = "Evento")
+            //     ->subject("Co-ordinaters login")->bcc($to_email);
+            // });
             session()->flash('success','New Co-ordinater Created...!');
         }
         return redirect(url('/sindex'));
