@@ -597,4 +597,19 @@ class s_admin extends Controller
         }
         return back();
     }
+    public function cod_del($cid)
+    {
+        $tblc=tblcoordinaters::where('cid',$cid)->delete();
+        if ($tblc) {
+            $tble=tblevent::select('eid')->where('cid', $cid)->get();
+            //print_r($tble);
+            tblevent::select('eid')->where('cid', $cid)->delete();
+            foreach($tble as $e)
+            {
+                $tblp=participant::where('eid',$e['eid'])->delete();
+            }
+            session()->flash('success', 'Co-ordinater deleted successfully');
+        }     
+        return back();
+    }
 }
