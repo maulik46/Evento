@@ -508,7 +508,7 @@ class s_admin extends Controller
         $cno=$req->cno;
         $email_check=tblcoordinaters::where([['clgcode',Session::get('clgcode')],['email',$email]
         ])->count();
-        $cno_check=tblcoordinaters::where([['clgcode',Session::get('clgcode')],['phoneno',$cno]
+        $cno_check=tblcoordinaters::where([['clgcode',Session::get('clgcode')],['mobile',$cno]
         ])->count();
             return response()->json(array('email'=> $email_check,'phoneno'=> $cno_check),200);
      }
