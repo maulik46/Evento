@@ -13,51 +13,19 @@
                             placeholder="Enter Your college name..">
                     </div>
                 </div>
-                <form>
+                <form method="post" action="{{url('/event_list')}}">
+                @csrf
                 <div class="clg-list px-2 py-3 overflow-auto my-scroll" style="height: 210px;">
+                <?php $a=0?>
+                @foreach($clgs as $clg) 
+                <?php $a++?>
                     <div class="custom-control custom-radio mb-2">
-                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadio1">
-                            Sutex bank college of computer applications & science 
+                        <input type="radio" id="customRadio{{$a}}" name="clgcode" value="{{$clg->clgcode}}" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadio{{$a}}">
+                            {{ucfirst($clg->clgname)}} 
                         </label>
                     </div>
-                    <div class="custom-control custom-radio mb-2">
-                        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadio2">
-                            S.V patel college
-                        </label>
-                    </div>
-                    <div class="custom-control custom-radio mb-2">
-                        <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadio3">
-                            S D J international college
-                        </label>
-                    </div>
-                    <div class="custom-control custom-radio mb-2">
-                        <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadio4">
-                            S S Agarwal college
-                    </div>
-                    <div class="custom-control custom-radio mb-2">
-                        <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadio5">
-                            Bhagvan mahavir college
-                        </label>
-                    </div>
-                    <div class="custom-control custom-radio mb-2">
-                        <input type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadio6">
-                            S P B college
-                        </label>
-                    </div>
-                    <div class="custom-control custom-radio mb-2">
-                        <input type="radio" id="customRadio7" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadio7">
-                            Sarvjanik college of computer science
-                        </label>
-                    </div>
-                    
-                    
+                @endforeach
                 </div>
                 <div class="p-3">
                     <button type="submit"
