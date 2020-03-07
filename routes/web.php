@@ -292,6 +292,7 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
 
  route::view('/system','system/index');
- route::view('/system_notice','system/system_notice');
- route::view('/system_change_password','system/change_password');
- route::view('/system_add_college', 'system/add_college');
+ route::view('/s_log_in', 'system/log_in');
+ route::view('/s_send_notice','system/send_notice');
+ route::view('/s_demo_request','system/demo_request');
+ route::view('/s_add_college', 'system/add_college');
