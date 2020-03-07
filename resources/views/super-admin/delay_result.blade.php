@@ -64,7 +64,7 @@
 @section('my-content')
 <div class="container-fluid">
     <div class="mb-0 pt-2 card new-shadow-sm">
-        <a href="{{url('/sindex')}}" class="text-right text-dark px-2">
+        <a href="{{url('sindex')}}" onclick="window.history.back();" class="text-right text-dark px-2">
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
         <span class="h2 my-0 font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</span>
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <a href="{{url('cindex')}}" class="btn btn-success px-3 p-1 new-shadow-sm rounded-sm font-weight-bold hover-me-sm mx-1"  onclick="return rankcheck()">
+                <a href="" class="btn btn-success px-3 p-1 new-shadow-sm rounded-sm font-weight-bold hover-me-sm mx-1"  onclick="return rankcheck()">
                     Done
                     <i data-feather="check-square" height="19px"></i>
                 </a>
@@ -265,7 +265,7 @@
                 </div>
                 <div class="col-sm-9 col-md-6 col-6">
                     <div class="d-flex justify-content-end align-items-center">
-                        <a href="{{url('view_team')}}/{{encrypt($p['pid'])}}" class="d-flex align-items-center badge badge-primary badge-pill p-1 px-2 pr-3 mr-1">
+                        <a href="{{url('sview_team')}}/{{encrypt($p['pid'])}}" class="d-flex align-items-center badge badge-primary badge-pill p-1 px-2 pr-3 mr-1">
                             <i data-feather="users" height="15px"></i>
                             <span class="">View Candidates</span>    
                         </a>
@@ -352,6 +352,8 @@ function rankcheck() {
         var r2 = $('#r2 #pid').text();
         var r3 = $('#r3 #pid').text();
         var link = "<?php echo url('sindex') ?>";
+        var ename="<?php echo ucfirst($einfo['ename'])?>";
+        var eid="<?php echo $einfo['eid'] ?>";
         // alert(r1+r2+r3);
         if(r1=="" && r2=="" && r3=="")
         {
@@ -410,7 +412,9 @@ function rankcheck() {
                             r1: r1,
                             r2: r2,    
                             r3: r3,
-                            utype:'admin'
+                            utype:'admin',
+                            ename:ename,
+                            eid:eid,
                         },
                         success: function (data) {
                             window.location.href = link;
@@ -449,7 +453,9 @@ function rankcheck() {
                             r1: r1,
                             r2: r2,    
                             r3: r3,
-                            utype:'admin'
+                            utype:'admin',
+                            ename:ename,
+                            eid:eid,
                         },
                         success: function (data) {
                             window.location.href = link;
@@ -486,7 +492,9 @@ function rankcheck() {
                             r1: r1,
                             r2: r2,    
                             r3: r3,
-                            utype:'admin'
+                            utype:'admin',
+                            ename:ename,
+                            eid:eid,
                         },
                         success: function (data) {
                             window.location.href = link;
