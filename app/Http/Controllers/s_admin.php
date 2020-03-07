@@ -39,6 +39,7 @@ class s_admin extends Controller
             $log->uid=Session::get('aid');
             $log->action_on="login";
             $log->action_type="login";
+            $log->descr="Successfully login";
             $log->time=time();
             $log->utype="admin";
             $log->ip_add=$_SERVER['REMOTE_ADDR'];
@@ -53,11 +54,12 @@ class s_admin extends Controller
     }
     public function logout()
     {
-        $log=new log;
+       $log=new log;
         $log->uid=Session::get('aid');
         $log->action_on="logout";
         $log->action_type="logout";
         $log->time=time();
+        $log->descr="logout Successfully";
         $log->utype="admin";
         $log->ip_add=$_SERVER['REMOTE_ADDR'];
         $log->save();
@@ -101,6 +103,7 @@ class s_admin extends Controller
        $log->action_on="Notice";
        $log->action_type="insert";
        $log->time=time();
+       $log->descr="Notice send to the <b>". $receiver."</b> about the <b>".ucfirst($topic)."</b>";
        $log->utype="admin";
        $log->ip_add=$_SERVER['REMOTE_ADDR'];
        $log->save();
@@ -130,6 +133,7 @@ class s_admin extends Controller
        $log->uid=Session::get('aid');
        $log->action_on="password ";
        $log->action_type="update";
+       $log->descr="Password updated";
        $log->time=time();
        $log->utype="admin";
        $log->ip_add=$_SERVER['REMOTE_ADDR'];
@@ -179,7 +183,15 @@ class s_admin extends Controller
                 }
             $events=tblevent::where('eid', $e_id)->delete();
             $del_part=participant::where('eid',$e_id)->delete();
-            
+            $log=new log;
+            $log->uid=Session::get('aid');
+            $log->action_on="Event delete request";
+            $log->action_type="Delete";
+            $log->descr="Event <b>".ucfirst($msg_info['ename'])." deleted .</b>";
+            $log->time=time();
+            $log->utype="admin";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
+            $log->save();
         }
         $del_event=\DB::table('tblapproval')->where('eid',$e_id)->delete();
         return back();
@@ -198,6 +210,15 @@ class s_admin extends Controller
             'import_file' => 'required'
         ]);
         Excel::import(new ImportStudent, request()->file('import_file'));
+        $log=new log;
+        $log->uid=Session::get('aid');
+        $log->action_on="Student";
+        $log->action_type="Insert";
+        $log->descr="Add student using Excelsheet ";
+        $log->time=time();
+        $log->utype="admin";
+        $log->ip_add=$_SERVER['REMOTE_ADDR'];
+        $log->save();
         return back()->with('success', 'Student record inserted successfully.');
     }
      public function checkenrl(Request $req)
@@ -280,6 +301,15 @@ class s_admin extends Controller
         $stud->address=$req->add;
         $stud->gender=$req->gen;
         $stud->save();
+       $log=new log;
+        $log->uid=Session::get('aid');
+        $log->action_on="Student";
+        $log->action_type="Insert";
+        $log->descr="Student <b>".$req->enrl. "</b>added by form";
+        $log->time=time();
+        $log->utype="admin";
+        $log->ip_add=$_SERVER['REMOTE_ADDR'];
+        $log->save();
         return back()->with('success', 'Student record inserted successfully.');
     }
     public function view_students()
@@ -314,6 +344,15 @@ class s_admin extends Controller
 
         $update = tblstudent::where('senrl', $en)->update(['sname' => $sname, 'rno' => $rno,'dob' => $dob,'class' => $class,'division' => $division,'email' => $email,'mobile' => $mobile,'address' => $address,'gender' => $gender]);
         if ($update) {
+             $log=new log;
+            $log->uid=Session::get('aid');
+            $log->action_on="Student";
+            $log->action_type="update";
+            $log->descr="Student record enrollment no <b>".$req->s_enrl."</b> updated";
+            $log->time=time();
+            $log->utype="admin";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
+            $log->save();
             session()->flash('msg', 'Record has been updated!!');
         }
 
@@ -449,6 +488,15 @@ class s_admin extends Controller
             ->update(['pass' =>$pass]);
             if($tblc)
             {
+                 $log=new log;
+                $log->uid=Session::get('aid');
+                $log->action_on="Password";
+                $log->action_type="update";
+                $log->descr="Passsword updated";
+                $log->time=time();
+                $log->utype="admin";
+                $log->ip_add=$_SERVER['REMOTE_ADDR'];
+                $log->save();
                 session()->flash("success","Your Password Successfully Changed...");
             }
             return redirect(url('/slogin'));
@@ -498,6 +546,15 @@ class s_admin extends Controller
             //     ->from("eventoitsol@gmail.com", $name = "Evento")
             //     ->subject("Co-ordinaters login")->bcc($to_email);
             // });
+            $log=new log;
+            $log->uid=Session::get('aid');
+            $log->action_on="co-ordinator";
+            $log->action_type="Insert";
+            $log->descr="New co-ordinatore<b> ".$req->cname."</b> added";
+            $log->time=time();
+            $log->utype="admin";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
+            $log->save();
             session()->flash('success','New Co-ordinater Created...!');
         }
         return redirect(url('/sindex'));
@@ -524,6 +581,15 @@ class s_admin extends Controller
             session()->put('aname',$aname);
             session()->put('email',$aemail);
             session()->put('mobile',$mobile);
+            $log=new log;
+            $log->uid=Session::get('aid');
+            $log->action_on="Profile";
+            $log->action_type="Update";
+            $log->descr="Profile updated";
+            $log->time=time();
+            $log->utype="admin";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
+            $log->save();
             session()->flash('success', 'Profile updated successfully');
         }
         return back();
@@ -559,6 +625,15 @@ class s_admin extends Controller
         $std=tblstudent::where('senrl',$enrl)->delete();
         if($std>0)
         {
+             $log=new log;
+            $log->uid=Session::get('aid');
+            $log->action_on="Student";
+            $log->action_type="Delete";
+            $log->descr="Student <b>".$enrl."</b>";
+            $log->time=time();
+            $log->utype="admin";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
+            $log->save();
             session()->flash('msg', 'Student deleted successfully');
         }
         return back();
@@ -594,6 +669,15 @@ class s_admin extends Controller
         $propic=admin::where('aid',Session::get('aid'))->update(['profilepic'=>$pro_pic]);
         if($propic)
         {
+            $log=new log;
+            $log->uid=Session::get('aid');
+            $log->action_on="Profile photo";
+            $log->action_type="Update";
+            $log->descr="Profile photo updated to <b>".$file->getClientOriginalName()."</b>";
+            $log->time=time();
+            $log->utype="admin";
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
+            $log->save();
             session()->put('adminprofile',$pro_pic);
         }
         return back();
