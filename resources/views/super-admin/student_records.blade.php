@@ -84,7 +84,10 @@ use \App\tblstudent;
                             <th scope="col">Class</th>
                             <th scope="col">Division</th>
                             <th scope="col">Gender</th>
-                            
+                            <th scope="col">Rank 1</th>
+                            <th scope="col">Rank 2</th>
+                            <th scope="col">Rank 3</th>
+                            <th scope="col">Total Participation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,7 +97,12 @@ use \App\tblstudent;
                         ?>
                         <?php $no = 0;?>
                         @foreach($stud as $s)
-                        <?php $no++;?>
+                        <?php $no++;
+                            $r1=\DB::table('tblparticipant')->where([['senrl','LIKE','%'.$s['senrl'].'%'],['rank',1]])->count();
+                            $r2=\DB::table('tblparticipant')->where([['senrl','LIKE','%'.$s['senrl'].'%'],['rank',2]])->count();
+                            $r3=\DB::table('tblparticipant')->where([['senrl','LIKE','%'.$s['senrl'].'%'],['rank',3]])->count();
+                            $tp=\DB::table('tblparticipant')->where('senrl','LIKE','%'.$s['senrl'].'%')->count();
+                        ?>
                         <tr>
                             <td>{{$no}}</td>
                             <td>{{$s['senrl']}}</td>
@@ -103,7 +111,10 @@ use \App\tblstudent;
                             <td>{{ucfirst($s['class'])}}</td>
                             <td>{{$s['division']}}</td>
                             <td>{{ucfirst($s['gender'])}}</td>
-                            
+                            <td>{{$r1}}</td>
+                            <td>{{$r2}}</td>
+                            <td>{{$r3}}</td>
+                            <td>{{$tp}}</td>
                         </tr>
                         @endforeach
 
