@@ -1,7 +1,14 @@
 @extends('system/system_layout')
 @section('title','Add College')
-@section('my-content')            
-            <form class="mt-5 p-2 px-2 px-sm-4">
+@section('my-content')  
+         <div class="text-center py-2 rounded card shadow-none mb-0">
+                <span class="h4">
+                <i class="uil uil-graduation-hat h4 mr-1"></i>
+                Add College
+                </span>
+        </div> 
+        <div class="px-1 px-sm-3" >
+            <form class="mt-2 card shadow-none py-3 px-1 px-sm-2 rounded-lg" style="border:1px solid #e2e7f1;">
                 <div class="row mx-0">
                     <div class="form-group col-sm-6 mb-1">
                         <label>Admin Name</label>
@@ -16,7 +23,6 @@
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
                             <input type="email" class="form-control" placeholder="Enter Your Email">
                         </div>
-                        <!--  -->
                     </div>
                 </div>
                 <div class="row form-group col-12 mx-0 flex-column mb-1">
@@ -79,4 +85,5 @@
                     </button>
                 </div>
             </form>
+        </div>          
 @endsection

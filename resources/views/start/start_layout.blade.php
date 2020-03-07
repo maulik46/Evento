@@ -51,7 +51,7 @@
             </a>
             <div class="btn-group">
                 <a href="#"
-                    class="bg-white btn badge-pill py-1 text-danger font-weight-bold font-size-15 mt-1 mt-sm-3 mx-2 mx-sm-4 dropdown-toggle pl-3 pr-2 hover-me-sm new-shadow-sm"
+                    class="bg-white btn badge-pill py-1 text-danger font-weight-bold font-size-15 mt-1 mt-sm-3 mx-2 mx-sm-4 dropdown-toggle pl-3 pr-2 new-shadow-sm"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Log in
                     <i data-feather="chevron-down" height="18px"></i>

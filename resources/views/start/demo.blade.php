@@ -369,16 +369,12 @@
         <div class="px-2 d-flex align-items-center justify-content-center mx-2">
             <div id="demo-form" class="position-fixed col-lg-8 col-md-10 col-sm-10 col-11 card rounded-lg new-shadow-2 rounded-lg px-0">
                 
-                <div class="d-flex align-items-center justify-content-between py-1">
-                    <div class="ml-4">
-                        <img src="{{asset('assets/images/logo.png')}}" height="24px"  alt="Evento">
-                        <span class="h3">Evento</span>
-                    </div>
+                <div class="text-right py-1">
                     <span style="cursor: pointer;" class="text-dark mr-3" id="close-btn">
                         <i data-feather="x-circle" height="18px"></i>
                     </span>
                 </div>
-                <div class="text-center text-dark h6">Fill up these fields and send us. We'll contact you soon</div>
+                <div class="text-center text-dark h6 px-3">Fill up these fields and send us. We'll contact you soon</div>
             <form class="p-2 px-2 px-sm-4">
                 <div class="row mx-0">
                     <div class="form-group col-6 mb-1">
@@ -438,15 +434,21 @@
                     <input type="text" class="form-control" placeholder="Enter Your Message" />
                     </div>
                 </div>
-                <div class="my-2 mx-2">
-                    <button type="submit"  class="hover-me-sm btn btn-success new-shadow-sm font-weight-bold px-3 rounded-sm mr-1">
-                        <span class="font-size-15">Send</span>
-                        <i data-feather="send" class="mb-1" height="18px"></i>
-                    </button>
-                    <button type="reset"  class="hover-me-sm btn btn-danger new-shadow-sm font-weight-bold px-3 rounded-sm ml-1">
-                        <span class="font-size-15">Clear</span>
-                        <i data-feather="rotate-ccw" class="mb-1" height="18px"></i>
-                    </button>
+                <div class="my-2 mx-2 navbar">
+                    <div>
+                        <button type="submit"  class="hover-me-sm btn btn-success new-shadow-sm font-weight-bold px-3 rounded-sm mr-1">
+                            <span class="font-size-15">Send</span>
+                            <i data-feather="send" class="mb-1" height="18px"></i>
+                        </button>
+                        <button type="reset"  class="hover-me-sm btn btn-danger new-shadow-sm font-weight-bold px-3 rounded-sm ml-1">
+                            <span class="font-size-15">Clear</span>
+                            <i data-feather="rotate-ccw" class="mb-1" height="18px"></i>
+                        </button>
+                    </div>
+                    <div class="ml-4 d-none d-sm-block">
+                        <img src="{{asset('assets/images/logo.png')}}" height="24px"  alt="Evento">
+                        <span class="h3">Evento</span>
+                    </div>
                 </div>
             </form>
             </div>
