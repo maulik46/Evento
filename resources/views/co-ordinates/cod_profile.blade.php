@@ -214,7 +214,7 @@
             <div class="left-timeline pl-1 pl-sm-3 overflow-auto my-scroll" style="max-height:700px;">
                 <ul class="list-unstyled events">
                 <?php
-                    $activity=log::where([['uid',Session::get('cid')],['utype','co-ordinator']])->whereNotIn('action_on', ['login','logout'])->get();
+                    $activity=log::where([['uid',Session::get('cid')],['utype','co-ordinator']])->whereNotIn('action_on', ['login','logout'])->orderBy('time','desc')->get();
                     $a=0;
                 ?>
                 @foreach($activity as $act)
