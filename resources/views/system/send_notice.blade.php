@@ -1,5 +1,5 @@
 @extends('system/system_layout')
-@section('title','Change Password')
+@section('title','Send Notice')
 @section('head-tag-links')
 <link href="{{asset('assets/libs/multicheckbox/multiselect.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/libs/summernote/summernote-bs4.min.css')}}" rel="stylesheet" type="text/css" />

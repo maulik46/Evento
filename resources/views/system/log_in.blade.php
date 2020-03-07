@@ -20,7 +20,7 @@
             background: linear-gradient(to left, #11FFBD, #AAFFA9);
         }
         .form-control:focus{
-            border:2px solid #AAFFA9;
+            border:1px solid var(--success);
 
         }
         .auth-page-sidebar{
