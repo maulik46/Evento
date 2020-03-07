@@ -323,10 +323,19 @@ function confirm(ename, cid){
         ename_string+="<li>" + ename_array[i] + "</li><br/>";
     }
     }
-    
-    Swal.fire({
+    if(ename.length>0)
+    {
+        Swal.fire({
+        title: "Can't delete this co-ordinater !",
+        html:"<h5 style='color :red'> Events is currently Pending... </h5>"+ename_string,
+        icon: 'warning'
+        })
+        return false;
+    }
+    else
+    {
+        Swal.fire({
         title: "Are you sure want to delete this co-ordinater !",
-        html:"<h5 style='color :red'> Event Data and Also participated Student will be delete... </h5>"+ename_string,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -339,6 +348,8 @@ function confirm(ename, cid){
         }
         })
         return false;
+    }
+    
 
     }
 </script>
