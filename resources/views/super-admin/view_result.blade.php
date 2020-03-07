@@ -1,5 +1,6 @@
 <?php
     use \App\Http\Controllers\co_ordinate;
+    date_default_timezone_set("Asia/Kolkata"); 
 ?>
 @extends('super-admin/s_admin_layout')
 
@@ -19,16 +20,27 @@
             <span
                 class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
         </h6>
+        
         <hr class=" my-1">
+        
     </div>
     <div class="mt-0">
         <div class="card mb-0 rounded-sm">
-            <div class="card-body py-2">
+            <div class="card-body py-2  d-flex justify-content-between align-items-center">
                 <div class="h5 d-flex align-items-center">
                     <i data-feather="award" class="icon-dual-success"></i>
                     <span class="ml-1">Top 3 Winner Candidate</span>
                 </div>
+                @if(strtotime("+1 day",strtotime($einfo['enddate'])) >= strtotime(date('Y-m-d')))
+                <a href="{{url('delay_res')}}/{{encrypt($einfo['eid'])}}" class="text-success">
+                    <div class="add-cod d-flex align-items-center badge badge-soft-warning badge-pill pr-sm-3 py-2 mr-3">
+                        <i data-feather="plus-circle" height="18px"></i>
+                        <span class="font-size-13 d-none d-sm-flex">Update Result</span>
+                    </div>
+                </a>
+                @endif
             </div>
+            
             <hr class=" my-1">
         </div>
 
