@@ -590,30 +590,48 @@ class co_ordinate extends Controller
     }
      public function rank(Request $req)
     {
+        if($req->eid)
+        {
+            $del_rank=participant::where([['eid',$req->eid],['rank','!=','p']])->update(['rank'=>'p']);
+            \DB::table('tblresult_delay')->where('eid',$req->eid)->delete();
+        }
         $a=participant::where('pid',$req->r1)->update(['rank'=>'1']);
         $b=participant::where('pid',$req->r2)->update(['rank'=>'2']);
         $c=participant::where('pid',$req->r3)->update(['rank'=>'3']);
-        $eid=participant::select('eid')->where('pid',$req->r1)->first();
-        session()->flash('success','Result announced successfully..!');
-        \DB::table('tblresult_delay')->where('eid',$eid['eid'])->delete();
-         $log=new log;
-         if($req->utype)
-         {
+        if($del_rank>0)
+        {
+            session()->flash('success','Result updated successfully..!');
+            $log=new log;
             $log->uid=Session::get('aid');
             $log->utype="admin";
-         }
-         else{
-            $log->uid=Session::get('cid');
-            $log->utype="co-ordinator";
-         }
-        
-        $log->action_on="Rank";
-        $log->action_type="insert";
-        $log->descr="Result announced for event <b>".$req->ename." </b>";
-        $log->time=time();
-        $log->ip_add=$_SERVER['REMOTE_ADDR'];
-        $log->save();
-
+            $log->action_on="Rank";
+            $log->action_type="update";
+            $log->descr="Result updated for event <b>".$req->ename." </b>";
+            $log->time=time();
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
+            $log->save();
+        }
+        else
+        {
+            session()->flash('success','Result announced successfully..!');
+            $log=new log;
+            if($req->utype)
+            {
+                $log->uid=Session::get('aid');
+                $log->utype="admin";
+            }
+            else{
+                $log->uid=Session::get('cid');
+                $log->utype="co-ordinator";
+            }
+            
+            $log->action_on="Rank";
+            $log->action_type="insert";
+            $log->descr="Result announced for event <b>".$req->ename." </b>";
+            $log->time=time();
+            $log->ip_add=$_SERVER['REMOTE_ADDR'];
+            $log->save();
+        }   
         return response()->json(array('msg'=> $a.$b.$c),200);
     }
     public static function participant($eid)
