@@ -295,4 +295,5 @@ Route::group(['middleware' => 'admin_session_check'], function () {
  route::view('/s_log_in', 'system/log_in');
  route::view('/s_send_notice','system/send_notice');
  route::view('/s_demo_request','system/demo_request');
+  route::view('/s_read_request','system/read_request');
  route::view('/s_add_college', 'system/add_college');
