@@ -9,25 +9,14 @@ use App\tblstudent;
 <div class="container-fluid">
         
     <div class="mb-0 pt-2 card new-shadow-sm pb-4">
-        <a href="{{url('sindex')}}" class="text-right text-dark px-2">
+        <a href="{{url('sview_result')}}/{{encrypt($tc['eid'])}}"  class="text-right text-dark px-2">
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
-    <?php $a = 0?>
-    @foreach($team_candidates as $tc)
-            <?php
-            $a++;
-            if ($a == 1) {
-                $id = $tc['eid'];
-            }
-
-            ?>
-        @endforeach
+    <?php  $id = $tc['eid'];?>
 
         <span class="h3 my-0 font-weight-normal text-dark text-center">
         Team
-        @foreach($team_candidates as $tc)
             {{ ucfirst($tc['tname']) }}
-        @endforeach
 
         </span>
         <h6 class="font-weight-normal text-dark text-center">
@@ -51,11 +40,10 @@ use App\tblstudent;
                     </thead>
                     <tbody class="text-dark">
                     <?php $c = 0;?>
-                    @foreach($team_candidates as $tc)
                     <?php $enrl = explode("-", $tc['senrl'])?>
                     @foreach($enrl as $e)
                     <?php $c++;
-$sinfo = tblstudent::where('senrl', $e)->first();?>
+                        $sinfo = tblstudent::where('senrl', $e)->first();?>
                         <tr>
                             <th scope="row">{{$c}}</th>
                             <td>{{$e}}</td>
@@ -63,7 +51,6 @@ $sinfo = tblstudent::where('senrl', $e)->first();?>
                             <td>{{ucfirst($sinfo['class'])}}</td>
                             <td>{{ucfirst($sinfo['division'])}}</td>
                         </tr>
-                    @endforeach
                     @endforeach
                     </tbody>
                 </table>
