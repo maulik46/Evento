@@ -43,7 +43,9 @@ input[type="file"] {
     padding: 6px 10px;
     cursor: pointer;
 }
-
+.btn-profile:hover {
+    background-color:rgba(83, 105, 248, .15);
+}
 .custom-file-upload:hover {
     color: #43d39e;
 }
@@ -63,7 +65,7 @@ input[type="file"] {
 .ms-options-wrap {
     width: 100%;
     border: 1px solid #e2e7f1;
-    padding: 0px 10px;
+    padding: 3px 10px;
     border-radius: 0.2rem;
 }
 
