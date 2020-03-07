@@ -528,15 +528,15 @@ class s_admin extends Controller
         }
         return back();
     }
-    public function event_info($id)
-     {      $id=decrypt($id);
-            $einfo=tblevent::where('eid',$id)->first();
+   public function event_info($id)
+     {      $eid=decrypt($id);
+        $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcolleges.clgname')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcolleges','tblcolleges.clgcode','tblcoordinaters.clgcode')->where('tblevents.eid',$eid)->first();
             return view("super-admin/event_info",['einfo'=>$einfo]);
      }
      public function view_result($eid)
      {
          $participant=participant::where([['eid',decrypt($eid)],['rank','p']])->count();
-         $event=tblevent::select('eid','e_type','ename','edate')->where('eid',decrypt($eid))->first();
+         $event=tblevent::select('eid','e_type','ename','edate','enddate')->where('eid',decrypt($eid))->first();
          return view('super-admin/view_result',['participant'=>$participant],['einfo'=>$event]);
      }
      public function view_can($id)
@@ -549,10 +549,10 @@ class s_admin extends Controller
     public function view_team($id)
     {
         $id=decrypt($id);
-        $team_candidates=participant::select('pid','eid','senrl','tname')->where('pid',$id)->get()->toarray();
+        $team_candidates=participant::select('pid','eid','senrl','tname')->where('pid',$id)->first();
         // return $team_candidates;
         // exit;
-        return view('super-admin/view_team_candidates',['team_candidates'=>$team_candidates]);
+        return view('super-admin/view_team_candidates',['tc'=>$team_candidates]);
     }
     public function stud_del($enrl)
     {
@@ -565,6 +565,7 @@ class s_admin extends Controller
     }
      public function delay_res($eid)
     {
+        $eid=decrypt($eid);
         $candidates=participant::select('pid','senrl','tname')->where('eid',$eid)->get()->toarray();
         // $team_candidates=participant::select('pid', 'senrl', 'tname')->where('pid', $id)->get()->toarray();
 
