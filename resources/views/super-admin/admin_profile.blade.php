@@ -212,56 +212,40 @@
             </div>
             <div class="left-timeline pl-1 pl-sm-3 my-scroll overflow-auto" style="max-height:700px;">
                 <ul class="list-unstyled events">
+                <?php
+                    $activity=log::where([['uid',Session::get('aid')],['utype','admin']])->whereNotIn('action_on', ['login','logout'])->orderBy('time','desc')->get();
+                    $a=0;
+                ?>
+                @foreach($activity as $act)
+                <?php $a=1;?>
                     <li class="event-list">
                         <div>
                             <div class="media">
                                 <div class="event-date text-center mr-1 mr-sm-3">
                                     <div class="bg-soft-primary badge mt-2 font-size-13">
                                         <span class="avatar-title text-primary font-weight-semibold">
-                                            02 Jun 2020
+                                            {{date('d M Y',$act['time'])}}
                                         </span>
                                     </div>
                                 </div>
                                 <div class="media-body mt-2">
                                     <div class="card d-inline-block new-shadow-sm">
                                         <div class="card-body p-3">
-                                            <h5 class="mt-0">Event One</h5>
-                                            <span class="text-muted">It will be as simple as occidental in fact it will be Occidental Cambridge friend Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse laborum asperiores magnam maxime quod explicabo laudantium ipsam sunt praesentium deserunt veniam ut qui, odio deleniti delectus rerum dolorum possimus dignissimos?</span>
+                                            <h5 class="mt-0">{{$act['action_on']}}</h5>
+                                            <span class="text-muted">{!! $act['descr'] !!}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <li class="event-list">
-                        <div>
-                            <div class="media">
-                                <div class="event-date text-center  mr-1 mr-sm-3">
-                                    <div class="bg-soft-primary badge mt-2 font-size-13">
-                                        <span class="avatar-title text-primary font-weight-semibold">
-                                            02 Jun 2020
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="media-body mt-2">
-                                    <div class="card d-inline-block new-shadow-sm">
-                                        <div class="card-body p-3">
-                                            <h5 class="mt-0">Event One</h5>
-                                            <span class="text-muted">It will be as simple as occidental in fact it will be Occidental Cambridge friend</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    
+                @endforeach
+                @if($a==1)    
                     <!-- dont touch me -->
                     <li class="event-list last-child"></li>
                     <!-- i said don't touch me :( -->
-                    
-
-                </ul>
+                @endif
+                </ul>            
             </div>
         </div>
         <div class="col-lg-5 mt-4 mt-lg-0" style="display:none;" id="update-form">
