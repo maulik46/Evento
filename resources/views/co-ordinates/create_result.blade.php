@@ -351,6 +351,7 @@ function rankcheck() {
         var r1 = $('#r1 #pid').text();
         var r2 = $('#r2 #pid').text();
         var r3 = $('#r3 #pid').text();
+        var ename='<?php echo ucfirst($einfo['ename'])?>';
         var link = "<?php echo url('cindex') ?>";
         // alert(r1+r2+r3);
         if(r1=="" && r2=="" && r3=="")
@@ -410,6 +411,7 @@ function rankcheck() {
                             r1: r1,
                             r2: r2,    
                             r3: r3,
+                            ename:ename,
                         },
                         success: function (data) {
                             window.location.href = link;
@@ -448,6 +450,7 @@ function rankcheck() {
                             r1: r1,
                             r2: r2,    
                             r3: r3,
+                            ename:ename,
                         },
                         success: function (data) {
                             window.location.href = link;
@@ -484,6 +487,7 @@ function rankcheck() {
                             r1: r1,
                             r2: r2,    
                             r3: r3,
+                            ename:ename,
                         },
                         success: function (data) {
                             window.location.href = link;
