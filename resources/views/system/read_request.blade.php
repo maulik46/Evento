@@ -21,7 +21,7 @@
                 </span>
             </div>
             <div>
-                <a href="{{url('s_read_request')}}" class="badge badge-pill pr-sm-2 pl-sm-3 p-1  hover-me-sm text-white d-flex align-items-center" style="background-color: var(--info);">
+                <a href="#" class="badge badge-pill pr-sm-2 pl-sm-3 p-1  hover-me-sm text-white d-flex align-items-center" style="background-color: var(--info);">
                     <span class="d-none d-sm-flex">Read more</span>
                     <i data-feather="arrow-right-circle" height="16px"></i>
                 </a>
