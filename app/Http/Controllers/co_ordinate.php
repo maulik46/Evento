@@ -590,6 +590,7 @@ class co_ordinate extends Controller
     }
      public function rank(Request $req)
     {
+        $del_rank=0;
         if($req->eid)
         {
             $del_rank=participant::where([['eid',$req->eid],['rank','!=','p']])->update(['rank'=>'p']);
