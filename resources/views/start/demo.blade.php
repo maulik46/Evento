@@ -19,6 +19,9 @@
         .btn{
             border-width:0.069rem;
         }
+        ::placeholder{
+            color:#000!important;
+        }
     </style>
 </head>
 
@@ -366,7 +369,7 @@
     <!-- END FOOTER -->
     <!-- form start -->
     <div>
-        <div class="px-2 d-flex align-items-center justify-content-center mx-2">
+        <div class="px-2 d-flex align-items-center justify-content-center">
             <div id="demo-form" class="position-fixed col-lg-8 col-md-10 col-sm-10 col-11 card rounded-lg new-shadow-2 rounded-lg px-0">
                 
                 <div class="text-right py-1">
@@ -374,7 +377,7 @@
                         <i data-feather="x-circle" height="18px"></i>
                     </span>
                 </div>
-                <div class="text-center text-dark h6 px-3">Fill up these fields and send us. We'll contact you soon</div>
+                <div class="text-center text-dark h6">Fill up these fields and send us. We'll contact you soon</div>
             <form class="p-2 px-2 px-sm-4">
                 <div class="row mx-0">
                     <div class="form-group col-6 mb-1">
