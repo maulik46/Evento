@@ -33,7 +33,9 @@ class student extends Controller
     }
     public function check_event_info($id){
         $id = decrypt($id);
-        $einfo = tblevent::where('eid', $id)->first();
+        $einfo = tblevent::where('eid', $id)
+        ->join('tblcoordinaters', 'tblevents.cid', '=', 'tblcoordinaters.cid')
+        ->first();
         return view("check_event_info", ['einfo' => $einfo]);
 
     }
@@ -46,7 +48,6 @@ class student extends Controller
             ->join('tblcoordinaters', 'tblevents.cid', '=', 'tblcoordinaters.cid')
             ->join('tblcolleges', 'tblparticipant.clgcode', '=', 'tblcolleges.clgcode')
             ->get()->first()->toArray();
-       
         //print_r($list_about_event);
         // echo "<br>";
         // print_r($tble);
