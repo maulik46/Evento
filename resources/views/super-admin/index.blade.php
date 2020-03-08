@@ -260,7 +260,7 @@
                                         foreach($tble as $te){
                                             $e.=$te['ename'].",";
                                         } ?>
-                                        <a href="#" data-toggle="tooltip" title="Delete Co-ordinator" onclick="return confirm('<?php echo $e ?>','<?php echo $c['cid'] ?>')" class="btn text-danger p-0 mt-3">
+                                        <a href="#" data-toggle="tooltip" title="Delete Co-ordinator" onclick="return confirm('<?php echo $e ?>','<?php echo $c['cid'] ?>')" class="btn text-danger p-1 btn-rounded mt-3 btn-delete-cod">
                                                 <i data-feather="trash-2" height="19px"></i>
                                         </a>
                                         <div class="text-danger font-weight-bold" ></div>
