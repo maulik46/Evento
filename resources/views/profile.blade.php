@@ -27,6 +27,49 @@
     .form-group {
         margin-bottom: 2px !important;
     }
+    .rating {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-pack: center;
+                justify-content: center;
+        overflow: hidden;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: reverse;
+                flex-direction: row-reverse;
+        position: relative;
+        }
+
+    .rating-0 {
+        -webkit-filter: grayscale(100%);
+                filter: grayscale(100%);
+        }
+
+    .rating > input {
+        display: none;
+        }
+
+    .rating > label {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        margin-top: auto;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23e3e3e3' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 76%;
+        -webkit-transition: .3s;
+        transition: .3s;
+        }
+
+    .rating > input:checked ~ label,
+    .rating > input:checked ~ label ~ label {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+        }
+
+    .rating > input:not(:checked) ~ label:hover,
+    .rating > input:not(:checked) ~ label:hover ~ label {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23d8b11e' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+        }
 </style>
 
 @endsection
@@ -196,7 +239,7 @@
                                             @if(Session::get('senrl')==$captain)
                                                 <?php $msg="<b>You want to cancel participation ?</b>";?>
                                                 @if($act['e_type']=="team")
-                                                <?php $msg="<b>You want to cancel participation of your whole team ?</b>";?>
+                                                <?php $msg="<b>You want to cancel participation of your whole team?</b>";?>
                                                 @endif
                                                     <a href="" onclick="return cancel_part('<?php echo $act['pid']?>','<?php echo $msg?>')" class="text-dark cancel-btn" data-toggle="tooltip" data-placement="bottom" title="Cancel Participation">
                                                         <i data-feather="trash-2" height="18px" id="close-btn"></i>
@@ -223,10 +266,11 @@
                         <div class="tab-pane fade show" id="pills-activity" role="tabpanel"
                             aria-labelledby="pills-activity-tab">
                             <div class="left-timeline bg-white overflow-auto my-scroll" style="height: 60vh;">
-                                <?php $a=0;?>
+                                <?php $a=0;$count=0;?>
                                 @foreach($activity as $act)
-                                @if($act['edate'] < date('Y-m-d')) <?php $a=1;?> 
-                                <div class="card bg-light p-2 new-shadow-sm hover-me-sm">
+                                @if($act['edate'] < date('Y-m-d')) 
+                                <?php $a=1;$count++;?> 
+                                <div class="card mb-2 bg-light px-2 pt-1 new-shadow-sm hover-me-sm">
                                     <div class="row align-items-center mx-0 justify-content-between">
                                         <span class="badge badge-soft-primary badge-pill px-3">
                                             @if(date('d/m/Y', strtotime($act['edate']))===date('d/m/Y',strtotime('-1
@@ -239,7 +283,7 @@
                                                 Result
                                             </span>
                                             <span class="badge badge-soft-primary px-3 rounded-0">
-                                                @if(($act['rank'])=='p')Lost
+                                                @if(($act['rank'])=='p')Lose
                                                 @elseif(($act['rank'])==1)First
                                                 @elseif(($act['rank'])==2)Second
                                                 @elseif(($act['rank'])==3)Third
@@ -247,9 +291,22 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <span class="font-size-20 font-weight-bold text-dark py-1">{{ucfirst($act['ename'])}}</span>
-                                    <div class="card-text">
-                                        On this day you participated in {{ucfirst($act['ename'])}}
+                                    <div class="navbar align-items-end p-0">
+                                        <span class="h5">{{ucfirst($act['ename'])}}</span>
+                                        <div class="" data-toggle="tooltip" title="Feedback">
+                                            <div class="rating">
+                                            <input type="checkbox" name="rating" id="rating-<?=$count;?>1">
+                                            <label for="rating-<?=$count;?>1"></label>
+                                            <input type="checkbox" name="rating" id="rating-<?=$count;?>2">
+                                            <label for="rating-<?=$count;?>2"></label>
+                                            <input type="checkbox" name="rating" id="rating-<?=$count;?>3">
+                                            <label for="rating-<?=$count;?>3"></label>
+                                            <input type="checkbox" name="rating" id="rating-<?=$count;?>4">
+                                            <label for="rating-<?=$count;?>4"></label>
+                                            <input type="checkbox" name="rating" id="rating-<?=$count;?>5">
+                                            <label for="rating-<?=$count;?>5"></label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             @endif
