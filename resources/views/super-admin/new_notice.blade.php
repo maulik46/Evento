@@ -65,6 +65,9 @@
     .note-editor.note-frame .note-editing-area .note-editable {
         padding:10px 20px;
     }
+    .note-editor.note-airframe .note-placeholder, .note-editor.note-frame .note-placeholder {
+         margin-left: 10px;
+    }
   
 </style>
 @endsection
