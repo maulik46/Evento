@@ -3,7 +3,7 @@
 
 @section('my-content')            
             <div class="my-4 d-flex justify-content-center">
-                <div class="px-0 container col-lg-8 col-md-9 col-sm-10">
+                <div class="px-0 container col-lg-7 col-md-10 col-sm-10">
                   <div class="card new-shadow-2 rounded">
                         <a href="{{url('index')}}" class="text-right text-dark p-2">
                             <i data-feather="x-circle" id="close-btn" height="20px"></i>
@@ -13,7 +13,7 @@
                               <h2 class="font-weight-light"> {{ucfirst($einfo['ename'])}}</h2>
                              <span>{{ucfirst(Session::get('clgname'))}}</span>
                              <p class="my-2">
-                                 <span class="font-weight-bold">{{ucfirst(Session::get('cname'))}}</span>(Co-ordinator)
+                                 <span class="font-weight-bold">{{ucfirst($einfo['cname'])}}</span>(Co-ordinator)
                             </p>
                             </div>
                             <hr>
