@@ -1,7 +1,7 @@
 @extends('system/system_layout')
 @section('title','Dashboard')
 @section('my-content')
-<div class="container-fluid mt-5">
+<div class="container-fluid mt-4">
     <div class="card new-shadow-sm bg-light mb-2">
         <div class="card-body py-2 navbar px-0">
             <h5 class="ml-3">College List</h5>
@@ -35,10 +35,10 @@
                             </h6>
                         </div>
                         <div>
-                            <a href="">
+                            <a href="#">
                                 <i data-feather="edit" class="text-warning mr-1" height="19px"></i>
                             </a>
-                            <a href="">
+                            <a href="#" >
                                 <i data-feather="trash-2" class="text-danger ml-1" height="19px"></i>
                             </a>
                         </div>
