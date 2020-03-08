@@ -30,7 +30,7 @@
                                                 </p>
                                                 <p class="d-flex justify-content-between my-2">
                                                     <span class="font-weight-bold">Time</span>
-                                                    <span class="mr-2">{{$einfo->time}}</span>
+                                                    <span class="mr-2">{{date('h:i A', strtotime($einfo->time))}}</span>
                                                 </p>
                                                 <p class="d-flex justify-content-between my-2">
                                                     <span class="font-weight-bold">Registration Last-Date</span>
