@@ -34,7 +34,7 @@
             <a href="#" class="ml-2 navbar-brand mr-lg-5 font-size-24 font-weight-bold text-dark">
                 <img src="{{asset('assets/images/logo.png')}}" alt="" class="logo-dark mr-1" height="24" /> Evento
             </a>
-            <ul class=" text-right nav font-weight-light  font-size-16 d-flex align-items-center">
+            <ul class="text-right nav font-weight-bold  font-size-16 d-flex align-items-center">
                 <div class="nav d-md-flex d-none mr-md-3 my-nav">
                     <li class="nav-item"><a href="#home" class="nav-link text-dark active">Home</a></li>
                     <li class="nav-item"><a href="#feature" class="nav-link text-dark">Features</a></li>
@@ -55,14 +55,27 @@
                 style="height:100%;top:0;left:0;z-index:2;display: none;">
                 <ul class="nav flex-column font-size-16 font-weight-bold mt-5 text-center">
                     <li class="nav-item">
-                        <a href="#home" class="nav-link text-dark py-3">Home</a></li>
+                        <a href="#home" class="nav-link text-dark py-3">
+                            <i data-feather="home" class="mb-1 text-primary" height="16px"></i>
+                            Home
+                        </a></li>
                     <li class="nav-item">
-                        <a href="#feature" class="nav-link text-dark py-3">Features</a></li>
+                        <a href="#feature" class="nav-link text-dark py-3">
+                            <i data-feather="package" class="mb-1 text-warning" height="16px"></i>    
+                            Features
+                        </a></li>
                     <li class="nav-item">
-                        <a href="#about" class="nav-link text-dark py-3">About</a></li>
+                        <a href="#about" class="nav-link text-dark py-3">
+                            <i data-feather="users" class="mb-1 text-info" height="16px"></i>
+                            About
+                        </a></li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link text-dark py-3">Contact</a></li>
+                        <a href="#contact" class="nav-link text-dark py-3">
+                            <i data-feather="phone" class="mb-1 text-success" height="16px"></i>
+                            Contact
+                        </a></li>
                 </ul>
+                
             </div>
             <div id="overlay-bg" class="position-fixed w-100"
                 style="height:100%;top:0;left:0;z-index:1;background:rgba(0,0,0,0.5);display: none;">
@@ -377,26 +390,26 @@
                         <i data-feather="x-circle" height="18px"></i>
                     </span>
                 </div>
-                <div class="text-center text-dark h6">Fill up these fields and send us. We'll contact you soon</div>
+                <div class="text-center text-dark h6 px-2">Fill up these fields and send us. We'll contact you</div>
             <form class="p-2 px-2 px-sm-4">
                 <div class="row mx-0">
-                    <div class="form-group col-6 mb-1">
+                    <div class="form-group col-5 mb-0">
                         <label>Name</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text"  class="form-control" placeholder="Enter Notice Title..." />
+                            <input type="text"  class="form-control" placeholder="Enter Your Name" />
                         </div>
                     </div>
-                    <div class="form-group col-6 mb-1">
+                    <div class="form-group col-7 mb-0">
                         <label>Email</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="email" class="form-control" placeholder="Enter Your Email">
+                            <input type="email" class="form-control" placeholder="Enter Your/Institute Email">
                         </div>
                         <!--  -->
                     </div>
                 </div>
-                <div class="row form-group col-12 mx-0 flex-column mb-1">
+                <div class="row form-group col-12 mx-0 flex-column mb-0">
                     <label>Institute Name</label>
                     <div class="form-group has-icon d-flex align-items-center">
                         <img src="{{asset('assets/images/clg1.svg')}}" height="20px" class="form-control-icon ml-2" alt="">
@@ -405,15 +418,15 @@
                     <!--  -->
                 </div>
                 <div class="row mx-0">
-                    <div class="form-group col-6 mb-1">
+                    <div class="form-group col-6 mb-0">
                         <label>Contact no</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" class="form-control" placeholder="Enter Your Contact no">
+                            <input type="text" class="form-control" placeholder="Enter Your/Institute Contact">
                         </div>
                         <!--  -->
                     </div>
-                    <div class="form-group col-6 mb-1">
+                    <div class="form-group col-6 mb-0">
                         <label>City</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="map" class="form-control-icon ml-2" height="19px"></i>
@@ -422,7 +435,7 @@
                         <!--  -->
                     </div>
                 </div>
-                <div class="row form-group col-12 mx-0 flex-column mb-1">
+                <div class="row form-group col-12 mx-0 flex-column mb-0">
                     <label>Address</label>
                     <div class="form-group has-icon d-flex align-items-center">
                         <i data-feather="home" class="form-control-icon ml-2" height="19px"></i>
@@ -434,10 +447,11 @@
                     <label>Message</label>
                     <div class="form-group has-icon d-flex align-items-start w-100">
                     <i data-feather="message-square" class="form-control-icon ml-2" style="margin-top: 10px;" height="19px"></i>
-                    <input type="text" class="form-control" placeholder="Enter Your Message" />
+                    <textarea style="resize:none;" class="form-control" placeholder="Enter your message"></textarea>
                     </div>
+                    
                 </div>
-                <div class="my-2 mx-2 navbar">
+                <div class="my-2 ml-3 navbar p-0">
                     <div>
                         <button type="submit"  class="hover-me-sm btn btn-success new-shadow-sm font-weight-bold px-3 rounded-sm mr-1">
                             <span class="font-size-15">Send</span>

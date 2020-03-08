@@ -144,7 +144,7 @@
            <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
                <div class="toast-body text-white alert mb-1">
                    <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
-                       <i data-feather="x-circle" id="close-btn" height="18px" ></i>
+                       <i data-feather="x-circle" height="18px" ></i>
                    </a>
                    <div class="mt-2 font-weight-bold font-size-14">
                        {{Session::get('success')}}
@@ -158,7 +158,7 @@
            <div class="toast bg-danger fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
                <div class="toast-body text-white alert mb-1">
                    <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
-                       <i data-feather="x-circle" id="close-btn" height="18px" ></i>
+                       <i data-feather="x-circle"  height="18px" ></i>
                    </a>
                    <div class="mt-2 font-weight-bold font-size-14">
                    {{$errors->first('photo-upload')}}
@@ -169,12 +169,12 @@
 @endif
 <div class="container-fluid">
     <div class="card pattern-bg mb-0 d-flex align-items-end justify-content-start">
-        <a href="#cod-section" class="btn bg-white py-0 text-dark btn-sm badge-pill font-weight-bold m-1 m-sm-2 d-flex align-items-center hover-me-sm" id="update-profile" style="cursor:pointer;">
+        <a href="#profile-section" class="btn bg-white py-0 text-dark btn-sm badge-pill font-weight-bold m-1 m-sm-2 d-flex align-items-center hover-me-sm" id="update-profile" style="cursor:pointer;">
             <i data-feather="edit" height="15px"></i>
             <span>Update Profile</span>
         </a>
     </div>
-    <div id="cod-section" class="card mb-0 py-3 py-sm-4  bg-white new-shadow-sm cod-detail">
+    <div id="profile-section" class="card mb-0 py-3 py-sm-4  bg-white new-shadow-sm cod-detail">
         <div class="text-right px-0 px-sm-3">
             <div class="mt-2 mt-md-0 font-size-22 text-dark font-weight-bold cod-name">
                 {{ucfirst(Session::get('cname'))}}
@@ -211,7 +211,7 @@
                     My Activity
                 </h4>
             </div>
-            <div class="left-timeline pl-1 pl-sm-3 overflow-auto my-scroll" style="max-height:700px;">
+            <div class="left-timeline pl-1 pl-sm-3 overflow-auto my-scroll bg-light rounded-lg pt-2 new-shadow-sm" style="max-height:700px;">
                 <ul class="list-unstyled events">
                 <?php
                     $activity=log::where([['uid',Session::get('cid')],['utype','co-ordinator']])->whereNotIn('action_on', ['login','logout'])->orderBy('time','desc')->get();
@@ -293,7 +293,7 @@
         </div>
 
     </div>
-    <div id="excel-form-model"
+    <div id="profile-form-modal"
         class="col-lg-4 col-md-5 col-sm-7 col-10 p-4 bg-light position-fixed new-shadow-2 rounded"
         style="top: 50%;left: 50%;transform: translate(-50%, -40%);display:none;z-index:9999;">
         <a href="#" id="close-upload-form" class="mb-3 d-flex justify-content-end text-dark" style="margin-top:-10px;">
@@ -381,10 +381,10 @@ function valid()
 
     });
     $('#upload-photo').click(function () {
-        $('#excel-form-model').fadeIn(150);
+        $('#profile-form-modal').fadeIn(150);
     });
     $('#close-upload-form').click(function () {
-        $('#excel-form-model').fadeOut(180);
+        $('#profile-form-modal').fadeOut(180);
     });
     $('#re-upload').hide();
     $('#re-upload').click(function () {

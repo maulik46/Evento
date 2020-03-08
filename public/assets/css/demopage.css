@@ -1,5 +1,7 @@
 html{
     scroll-behavior: smooth;
+    margin:0px;
+    padding: 0px;
 }
 .text-white{
     color:#fff!important;
@@ -33,7 +35,7 @@ html{
  }
 
  .my-nav li a:hover {
-    color:#18a4e0 !important;
+    color:#e75a5f !important;
     transition: 0.2s ease;
  }
  .hero-section{
@@ -72,6 +74,10 @@ html{
     left: 50%;
     transform: translate(-50%, -40%);
     z-index: 9999999 !important;
+}
+#left-menu ul li a:hover{
+    color: #e75a5f !important;
+    transition: 0.2s ease;
 }
  .circles {
      position: absolute;
