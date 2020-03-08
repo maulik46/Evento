@@ -54,15 +54,17 @@
                                     <table class="table table-hover table-light new-shadow-sm rounded-sm">
                                         <thead class="thead-light">
                                             <tr>
-                                                <td colspan="4" class="rounded  font-weight-bold text-dark p-3"
+                                                <td colspan="5" class="rounded-sm  font-weight-bold text-dark p-3"
                                                     style="background-color: #dde1fc;">
-                                                    <span class="mt-1 badge badge-primary px-3">
-                                                        {{ucfirst($list_event_d['tname'])}}
+                                                    <span>Team</span>
+                                                    <span class="mt-1 badge badge-primary px-3 badge-pill">
+                                                         {{ucfirst($list_event_d['tname'])}}
                                                     </span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th scope="col">#</th>
+                                                <th scope="col">Enrollment no</th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Class</th>
                                                 <th scope="col">Division</th>
@@ -83,6 +85,7 @@
                                                 <th scope="row">
                                                     {{$c}}
                                                 </th>
+                                                <td>{{$stud['senrl']}}</td>
                                                 <td>{{ucfirst($stud['sname'])}}</td>
                                                 <td>{{$stud['class']}}</td>
                                                 <td>{{$stud['division']}}</td>
@@ -111,13 +114,5 @@
             </div>
 @endsection
 
-@section('extra-scripts')
-<script>
-  $(document).ready(function(){
-       
-        $('.team-leader td:first').append('<span class="text-primary"> (Team-leader)</span>');
-       
-})
-</script>
-@endsection
+
 
