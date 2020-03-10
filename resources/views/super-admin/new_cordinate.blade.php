@@ -480,25 +480,6 @@ $(document).ready(function() {
             $box.prop("checked", false);
         }
         });
-    // $(document).ready(function() {
-     
-
-    //     // this is for avatar raddio
-    //     var allRadios = document.getElementsByName('avatar');
-    //     var booRadio;
-    //     var x = 0;
-    //     for(x = 0; x < allRadios.length; x++){
-    //     allRadios[x].onclick = function() {
-    //         if(booRadio == this){
-    //         this.checked = false;
-    //         booRadio = null;
-    //         } else {
-    //         booRadio = this;
-    //         }
-    //     };
-    //     } 
-
-    //     // avatar radio end
-    // });
+   
     </script>
 @endsection
