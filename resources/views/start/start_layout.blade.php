@@ -33,7 +33,7 @@
         .dropdown-menu.show {
             top: 100%!important;
             display: flex;
-            left:-5px!important;
+            left:5px!important;
         }
     </style>
     @section('head-tag-links')
@@ -56,7 +56,7 @@
                     Log in
                     <i data-feather="chevron-down" height="18px"></i>
                 </a>
-                <div class=" shadow-none dropdown-menu dropdown-menu-right  mr-2 mt-2 rounded-lg  flex-column align-items-center justify-content-center">
+                <div class=" shadow-none dropdown-menu dropdown-menu-right mt-2 rounded-lg  flex-column align-items-center justify-content-center">
                 <a class="text-red badge badge-pill bg-white my-1 p-2 new-shadow-2 hover-me-sm" href="{{url('index')}}" data-toggle="tooltip" data-placement="left" title="I'm Student">
                     <img src="{{asset('assets/images/svg-icons/student.svg')}}" height="30px" alt="">
                     <!-- I'm Student -->
