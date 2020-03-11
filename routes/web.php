@@ -299,7 +299,7 @@ route::get('/s_send_notice',function(){
      return view('system/send_notice',['clgs'=>$clgs]);
  });
  route::post('send_notice','system@send_notice');
- route::view('/s_send_notice','system/send_notice');
+
  route::get('/s_demo_request','system@demo_request');
   route::view('/s_read_request','system/read_request');
  route::view('/s_add_college', 'system/add_college');
