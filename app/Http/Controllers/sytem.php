@@ -35,7 +35,7 @@ class system extends Controller
         $notice->message=$req->message;
         $notice->sender='system';
         $notice->sender_type='system';
-        $notice->receiver='adminn';
+        $notice->receiver='admin';
         $notice->ndate=date('Y-m-d');
         $notice->ntime=date('h:i A');//change
         $notice->clgcode=$clgs;
