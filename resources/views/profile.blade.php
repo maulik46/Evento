@@ -295,16 +295,16 @@
                                         <span class="h5">{{ucfirst($act['ename'])}}</span>
                                         <div class="" data-toggle="tooltip" title="Feedback">
                                             <div class="rating">
-                                            <input type="checkbox" name="rating" id="rating-<?=$count;?>1">
-                                            <label for="rating-<?=$count;?>1"></label>
-                                            <input type="checkbox" name="rating" id="rating-<?=$count;?>2">
-                                            <label for="rating-<?=$count;?>2"></label>
-                                            <input type="checkbox" name="rating" id="rating-<?=$count;?>3">
-                                            <label for="rating-<?=$count;?>3"></label>
-                                            <input type="checkbox" name="rating" id="rating-<?=$count;?>4">
-                                            <label for="rating-<?=$count;?>4"></label>
-                                            <input type="checkbox" name="rating" id="rating-<?=$count;?>5">
-                                            <label for="rating-<?=$count;?>5"></label>
+                                            <input type="radio" name="rating-{{$count}}" id="rating-{{$count}}1">
+                                            <label for="rating-{{$count}}1"></label>
+                                            <input type="radio" name="rating-{{$count}}" id="rating-{{$count}}2">
+                                            <label for="rating-{{$count}}2"></label>
+                                            <input type="radio" name="rating-{{$count}}" id="rating-{{$count}}3">
+                                            <label for="rating-{{$count}}3"></label>
+                                            <input type="radio" name="rating-{{$count}}" id="rating-{{$count}}4">
+                                            <label for="rating-{{$count}}4"></label>
+                                            <input type="radio" name="rating-{{$count}}" id="rating-{{$count}}5">
+                                            <label for="rating-{{$count}}5"></label>
                                             </div>
                                         </div>
                                     </div>
