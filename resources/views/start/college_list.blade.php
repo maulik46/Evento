@@ -83,14 +83,15 @@
         <div class="col-lg-4">
             <div class=" form-group has-icon d-flex align-items-center">
                 <i data-feather="search" class="form-control-icon text-dark ml-2" height="19px"></i>
-                <input type="text" id="myInput" class="w-100 border-0 p-2 pl-5 pr-4 font-size-14 rounded bg-light" placeholder="Search Your Institute/College">
+                <input type="text" id="myInput" class="w-100 border-0 p-2 pl-5 pr-4 font-size-14 rounded bg-light new-shadow-sm" placeholder="Search Your Institute/College">
             </div>
         </div>
         <h5 class="text-center text-dark">Select Your Institute/College</h5>
         <hr class="my-1">
-        <form method="post" action="{{url('/event_list')}}" class="d-flex align-items-center flex-column" style="min-height:65vh;">
+        <form method="post" action="{{url('/event_list')}}" class="d-flex align-items-center flex-column " >
             @csrf
-            <div class="row justify-content-center mx-0 mb-auto">
+            <div class="overflow-auto my-scroll" style="height:54vh;">
+            <div class="row justify-content-center mx-0 mb-auto clg-list" >
             <?php $a=0?>
             @foreach($clgs as $clg) 
             <?php $a++?>
@@ -104,7 +105,8 @@
             </div>
             @endforeach
             </div>
-            <div class="mb-3">
+            </div>
+            <div class="mb-3 pt-1">
                 <button id="btn-next" type="submit" class="btn btn-success new-shadow-sm font-weight-bold new-shadow-sm rounded-sm hover-me-sm px-3 mr-2">
                         <span>Next</span>
                         <i data-feather="arrow-right-circle" height="19px"></i>
@@ -144,7 +146,7 @@
         $(document).ready(function () {
             $("#myInput").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
-                $(".clg-list .custom-control").filter(function () {
+                $(".clg-list .my-college").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 
                 });
