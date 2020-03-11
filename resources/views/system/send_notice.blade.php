@@ -15,17 +15,17 @@
                 </span>
             </div>
             <div class="mt-2 card shadow-none p-3 px-3 px-sm-4 rounded-lg" style="border:1px solid #e2e7f1;">
-                <form>
+                <form action="{{url('send_notice')}}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
                         <label class="col-form-label font-size-15">Event for</label>
                         <div class="form-group has-icon d-flex align-items-center bg-white">
                             <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                            <select  multiple="multiple" name=""  class="form-control active w-100 py-2">
-                                <option value="sutex">sutex</option>
-                                <option value="s v patel">s v patel</option>
-                                <option value="s s agarwal">s s agarwal</option>
+                            <select  multiple="multiple" name="clg[]"  class="form-control active w-100 py-2">
+                            @foreach($clgs as $clg)
+                                <option value="{{$clg->clgcode}}">{{ucfirst($clg->clgname)}}</option>
+                            @endforeach
                             </select>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
         $(document).ready(function() {
         $('select[multiple]').multiselect({
             columns: 1,
-            placeholder: 'Select Class',
+            placeholder: 'Select college(s)',
             selectAll: true
         });
 
