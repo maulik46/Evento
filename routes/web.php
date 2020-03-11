@@ -82,7 +82,7 @@ Route::group(['middleware' => 'SessionCheck'], function () {
     
     route::get('/profile/confirm_del/{pid}','student@confirm_del');
     // route::any('student_update/{senrl}', 'student@student_update');
-    Route::view('/view_winner_team', 'view_winner_team');
+    Route::get('/viewteam/{pid}', 'student@view_team');
 
 
 });
