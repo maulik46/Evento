@@ -217,7 +217,21 @@ class co_ordinate extends Controller
     }
     public function action_update(Request $req,$eid)
     {
-       $eid=decrypt($eid);     
+       $eid=decrypt($eid); 
+       $data_banner=tblevent::select('banner')->where('eid',$eid)->get()->first();
+       $banner=$data_banner['banner'];    
+
+       $filename="";
+       if($file=$req->file('poster-upload'))
+       {
+           foreach($file as $att)
+           {
+               $destinationPath=public_path('banner/');
+               $filename=time().$att->getClientOriginalName();
+               $att->move($destinationPath,$filename);
+               $banner.=$filename.";";
+           }
+       }
 
         $req_edate=$req->edate;
             $req_enddate=$req->enddate;
@@ -280,7 +294,7 @@ class co_ordinate extends Controller
             }
             if($tble['time']!=$etime)
             {
-                $message.="Event time changed <b style='color:blue;'>".date('h:i A',strtotime($tble['time']))."</b> to <b style='color:blue; '>".date('h:i A',strtotime($etime))."</b><br/>\r\n";
+                $message.=$tble['time']." ".$etime."Event time changed <b style='color:blue;'>".date('h:i A',strtotime($tble['time']))."</b> to <b style='color:blue; '>".date('h:i A',strtotime($etime))."</b><br/>\r\n";
             }
             if($tble['reg_start_date']!=$sdate)
             {
@@ -337,7 +351,7 @@ class co_ordinate extends Controller
             }
             
             $update_event=tblevent::where('eid',$eid)
-                ->update(['ename' =>$req_ename,'edate' =>$edate,'enddate' =>$enddate,'time' => $etime,'reg_start_date' => $sdate,'reg_end_date' => $ldate,'gallow' =>$req_efor,'efor' =>$req_class,'e_type' =>$req_etype,'tsize' =>$req_tsize,'maxteam' =>$req_mteam,'place' => $req_loc,'alw_dif_class' =>$req_alw_dif_class,'alw_dif_div' =>$req_alw_dif_div,'rules' => $req_rules]);
+                ->update(['ename' =>$req_ename,'edate' =>$edate,'enddate' =>$enddate,'time' => $etime,'reg_start_date' => $sdate,'reg_end_date' => $ldate,'gallow' =>$req_efor,'efor' =>$req_class,'e_type' =>$req_etype,'tsize' =>$req_tsize,'maxteam' =>$req_mteam,'place' => $req_loc,'alw_dif_class' =>$req_alw_dif_class,'alw_dif_div' =>$req_alw_dif_div,'rules' => $req_rules,'banner'=>$banner]);
             $topic="Update of Event ".$req_ename;
             
             if ($message!="") {
