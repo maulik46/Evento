@@ -12,10 +12,10 @@
     <div class="mb-0 pt-2 card new-shadow-sm py-4">
 
         <span class="h3 my-0 font-weight-normal text-dark text-center">
-        Team Blue
+        {{ucfirst($tc['tname'])}}
         </span>
         <h6 class="font-weight-normal text-dark text-center">
-            Sutex Bank College
+           {{Session::get('clgname')}}
         </h6>
         <hr class="my-0">
     </div>
@@ -33,14 +33,26 @@
                             <th scope="col">Division</th>                
                         </tr>
                     </thead>
+                    <?php 
+                        $players=explode('-',$tc['senrl']);
+                        $a=0;
+                    ?>
                     <tbody class="text-dark">
+                    @foreach($players as $player)
+                        @if($player)
+                        <?php 
+                            $sinfo=App\tblstudent::select('senrl','sname','class','division')->where('senrl',$player)->first();
+                            $a++; 
+                        ?> 
                         <tr>
-                            <td>1</td>
-                            <td>e123456erew</td>
-                            <td>Maulik</td>
-                            <td>TYBCA</td>
-                            <td>3</td>
+                            <td>{{$a}}</td>
+                            <td>{{$sinfo['senrl']}}</td>
+                            <td>{{ucfirst($sinfo['sname'])}}</td>
+                            <td>{{strtoupper($sinfo['class'])}}</td>
+                            <td>{{$sinfo['division']}}</td>
                         </tr>
+                        @endif
+                    @endforeach
                     </tbody>
                 </table>
             </div>
