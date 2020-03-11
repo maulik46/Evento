@@ -34,6 +34,19 @@
         .event-info:hover{
             color: var(--info)!important;
         }
+        .form-control {
+            border-radius: .15rem;
+            background-color: #f3f4f7 !important;
+            padding: 10px 15px;
+            border: 1px solid #f3f4f7 !important;
+            font-size: 1em;
+            color: #333 !important;
+            height: 40px;
+            cursor: text !important;
+        }
+        .form-control:focus {
+            background-color: #f3f4f79a !important;
+        }
     </style>
     @endsection
  
@@ -145,8 +158,11 @@
                             style="height: 300px;">
                             <div class="card shadow-none">
                                 <div class="card-body pt-2 p-0">
-                                    <h6 class="font-size-24 mb-0 pb-1 ml-3 text-center">Events</h6>
-                                    <hr>
+                                    <!-- <h6 class="font-size-24 mb-0 pb-1 text-center d-xl-none d-flex">Events</h6> -->
+                                    <div class="form-group has-icon d-flex align-items-center col-xl-12 col-sm-8 col-12 px-0">
+                                        <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
+                                        <input type="text" name="title" id="title" class="form-control" placeholder="Search Events" />
+                                    </div>
                                     <div class="row mx-0">
                                     <?php $a=0?>
                                     @foreach($events as $e)
