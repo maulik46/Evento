@@ -215,6 +215,33 @@ class co_ordinate extends Controller
        // print_r($tble);
         return view('co-ordinates/updateevent',['e_data'=>$tble,'tblpcount'=>$tblp]);
     }
+    public function del_banner(Request $req)
+    {
+        if($req->ajax())
+        {
+            $banner_list="";
+            $fulname=decrypt($req->get('fulname'));
+            $eid=$req->get('eid');
+            $tble=tblevent::select('banner')->where('eid',$eid)->get()->first();
+            $solo_banner=explode(';', $tble['banner']);
+            foreach($solo_banner as $sb)
+            {
+                if ($sb) {
+                    if ($sb != $fulname) {
+                        $banner_list.=$sb.";";
+                    }
+                }
+
+            }
+            $update_banner=tblevent::where('eid',$eid)
+                ->update(['banner'=>$banner_list]);
+            if($update_banner)
+            {
+                $data="success";
+            }            
+            echo json_encode($data);
+        }
+    }
     public function action_update(Request $req,$eid)
     {
        $eid=decrypt($eid); 
