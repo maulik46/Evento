@@ -25,161 +25,101 @@
                 </button>
             </div>
         <div class="row mt-4">
+        @foreach($winners as $winner)
+            <?php 
+                $event=App\tblevent::select('eid','ename','e_type','enddate')->where('eid',$winner->eid)->first();
+            ?>
             <div class="card mb-0 my-2 rounded-0 col-lg-6 col-md-12 new-shadow-sm">
                 <div class="row  align-items-center justify-content-between mx-0" style="background-color:#dde1fc;">
                     <div class="p-2"  >
-                        <span class="h5">IT Quiz Competition</span>
-                        <span class="badge badge-pill badge-info px-3">Solo</span>
+                        <span class="h5">{{ucfirst($event->ename)}}</span>
+                        @if($event->e_type=="solo")
+                        <span class="badge badge-pill badge-info px-3">{{ucfirst($event->e_type)}}</span>
+                        @else
+                        <span class="badge badge-pill badge-warning px-3">{{ucfirst($event->e_type)}}</span>
+                        @endif
                     </div>
                     <div class="mr-2">
-                        <span class="badge badge-pill badge-primary px-3">12/02/2020</span>
+                        <span class="badge badge-pill badge-primary px-3">{{date('d/m/Y',strtotime($event->enddate))}}</span>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover table-light">
                         <thead class="thead-light">
                             <tr>
+                            @if($event->e_type=="solo")
                                 <th scope="col">Rank</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Class</th>
                                 <th scope="col">Division</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <img src="assets/images/svg-icons/student-dash/winner/1.svg" height="22px" alt="1">
-                                </th>
-                                <td>Piyush Monpara</td>
-                                <td>TYBCA</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <img src="assets/images/svg-icons/student-dash/winner/2.svg" height="22px" alt="2">
-                                </th>
-                                <td>Dishant Sakariya</td>
-                                <td>TYBCA</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <img src="assets/images/svg-icons/student-dash/winner/3.svg" height="22px" alt="3">
-                                </th>
-                                <td>Yash Parmar</td>
-                                <td>TYBCA</td>
-                                <td>3</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card mb-0 my-2 rounded-0 col-lg-6 col-md-12 new-shadow-sm">
-                <div class="row  align-items-center justify-content-between mx-0" style="background-color:#dde1fc;">
-                    <div class="p-2"  >
-                        <span class="h5">IT Quiz Competition</span>
-                        <span class="badge badge-pill badge-info px-3">Solo</span>
-                    </div>
-                    <div class="mr-2">
-                        <span class="badge badge-pill badge-primary px-3">12/02/2020</span>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-hover table-light">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Rank</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Class</th>
-                                <th scope="col">Division</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <img src="assets/images/svg-icons/student-dash/winner/1.svg" height="22px" alt="1">
-                                </th>
-                                <td>Piyush Monpara</td>
-                                <td>TYBCA</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <img src="assets/images/svg-icons/student-dash/winner/2.svg" height="22px" alt="2">
-                                </th>
-                                <td>Dishant Sakariya</td>
-                                <td>TYBCA</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <img src="assets/images/svg-icons/student-dash/winner/3.svg" height="22px" alt="3">
-                                </th>
-                                <td>Yash Parmar</td>
-                                <td>TYBCA</td>
-                                <td>3</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card mb-0 my-2 rounded-0 col-lg-6 col-md-12 new-shadow-sm">
-                <div class="row  align-items-center justify-content-between mx-0" style="background-color:#dde1fc;">
-                    <div class="p-2"  >
-                        <span class="h5">IT Quiz Competition</span>
-                        <span class="badge badge-pill badge-warning px-3">Team</span>
-                    </div>
-                    <div class="mr-2">
-                        <span class="badge badge-pill badge-primary px-3">12/02/2020</span>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-hover table-light">
-                        <thead class="thead-light">
-                            <tr>
+                            @else
                                 <th scope="col">Rank</th>
                                 <th scope="col">Team Name</th>
                                 <th scope="col" class="text-center">View Team</th>
+                            @endif
                             </tr>
                         </thead>
                         <tbody>
+                        <?php $rank=App\participant::where([['eid',$event->eid],['rank','!=','p']])->orderby('rank','asc')->get(); ?>
+                        @foreach($rank as $r)
+                        @if($event->e_type=="solo")
+                        <?php $sinfo=App\tblstudent::select('sname','class','division')->where('senrl',$r['senrl'])->first();?>
                             <tr>
                                 <th scope="row">
+                                @if($r['rank']==1) 
                                     <img src="assets/images/svg-icons/student-dash/winner/1.svg" height="22px" alt="1">
+                                @elseif($r['rank']==2)
+                                    <img src="assets/images/svg-icons/student-dash/winner/2.svg" height="22px" alt="2">
+                                @else
+                                    <img src="assets/images/svg-icons/student-dash/winner/3.svg" height="22px" alt="3">
+                                @endif
                                 </th>
-                                <td>Abc</td>
+                                <td>{{$sinfo['sname']}}</td>
+                                <td>{{strtoupper($sinfo['class'])}}</td>
+                                <td>{{$sinfo['division']}}</td>
+                            </tr>
+                        @else
+                            <tr>
+                                <th scope="row">
+                                @if($r['rank']==1)
+                                    <img src="assets/images/svg-icons/student-dash/winner/1.svg" height="22px" alt="1">
+                                @elseif($r['rank']==2)
+                                    <img src="assets/images/svg-icons/student-dash/winner/2.svg" height="22px" alt="2">
+                                @else
+                                    <img src="assets/images/svg-icons/student-dash/winner/3.svg" height="22px" alt="3">
+                                @endif
+                                </th>
+                                <td>{{$r['tname']}}</td>
                                 <td class="text-center">
-                                    <a href="#" class="badge badge-success badge-pill px-3">
+                                    <a href="{{url('viewteam')}}/{{encrypt($r['pid'])}}" class="badge badge-success badge-pill px-3">
                                         View
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
+                        @endif
+                        @endforeach
+                            <!-- <tr>
                                 <th scope="row">
                                     <img src="assets/images/svg-icons/student-dash/winner/2.svg" height="22px" alt="2">
                                 </th>
-                                <td>xyz</td>
-                                <td class="text-center">
-                                    <a href="#" class="badge badge-success badge-pill px-3">
-                                        View
-                                    </a>
-                                </td>
+                                <td>Dishant Sakariya</td>
+                                <td>TYBCA</td>
+                                <td>3</td>
                             </tr>
                             <tr>
                                 <th scope="row">
                                     <img src="assets/images/svg-icons/student-dash/winner/3.svg" height="22px" alt="3">
                                 </th>
-                                <td>pqr</td>
-                                <td class="text-center">
-                                    <a href="#" class="badge badge-success badge-pill px-3">
-                                        View
-                                    </a>
-                                </td>
-                            </tr>
+                                <td>Yash Parmar</td>
+                                <td>TYBCA</td>
+                                <td>3</td>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
             </div>
+        @endforeach
+         
         </div>
             
         <div class="row mt-4">
@@ -377,3 +317,4 @@
         </div> -->
 </div>
 @endsection
+

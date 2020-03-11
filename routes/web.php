@@ -29,7 +29,6 @@ route::post('/event_list', function(Request $req){
     return view('start/event_list',['events'=>$events,'clgcode'=>$req->clgcode]);
 });
 route::view('/getdemo','start/demo');
-route::view('/winner', 'winner');
 route::get('/e_info/{eid}', function($eid){
     $eid=decrypt($eid);
     $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcolleges.clgname')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcolleges','tblcolleges.clgcode','tblcoordinaters.clgcode')->where('tblevents.eid',$eid)->first();
@@ -44,10 +43,7 @@ Route::group(['middleware' => 'SessionCheck'], function () {
     route::get('/profile','student@activity');
     
     route::get('/about_event/{pid}','student@about_event');
-    
-    route::get('/winner-list',function(){
-        return view('winner-list');    
-    });   
+   
     
 
     route::get('index','student@index');
@@ -66,7 +62,11 @@ Route::group(['middleware' => 'SessionCheck'], function () {
 
     Route::get('/confirm-reg/{eid}/{maxteam}','student@confirm');
 
-    Route::get('/winner-list','student@winnerlist');
+     Route::get('/winner-list',function(){
+        $winners=\DB::table('tblparticipant')->select('eid')->where('rank','!=','p')->orderby('eid','desc')->groupby('eid')->get()->toarray();
+        // print_r($winners);
+        return view('/winner',['winners'=>$winners]);
+    });
 
     Route::get('/filter','student@filter');
     
@@ -291,9 +291,15 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 // ==========================================================================
 
 
- route::view('/system','system/index');
+  route::get('/system','system@index');
+ route::post('/demo_req','system@demo_req');
  route::view('/s_log_in', 'system/log_in');
+route::get('/s_send_notice',function(){
+     $clgs=\DB::table('tblcolleges')->select('clgname','clgcode')->get();
+     return view('system/send_notice',['clgs'=>$clgs]);
+ });
+ route::post('send_notice','system@send_notice');
  route::view('/s_send_notice','system/send_notice');
- route::view('/s_demo_request','system/demo_request');
+ route::get('/s_demo_request','system@demo_request');
   route::view('/s_read_request','system/read_request');
  route::view('/s_add_college', 'system/add_college');
