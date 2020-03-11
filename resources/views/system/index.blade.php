@@ -1,7 +1,7 @@
 @extends('system/system_layout')
 @section('title','Dashboard')
 @section('my-content')
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-5">
     <div class="card new-shadow-sm bg-light mb-2">
         <div class="card-body py-2 navbar px-0">
             <h5 class="ml-3">College List</h5>
@@ -12,6 +12,7 @@
         </div>
     </div>
     <div class="row">
+    @foreach($clgs as $clg)
         <div class="col-lg-6">
             <div class="card new-shadow-2 bg-light hover-me-sm">
                 <div class="card-body py-1">
@@ -21,9 +22,9 @@
                         </span>
                         <div class="badge badge-success px-3 badge-pill">Running</div>
                     </div>
-                    <h5 class="text-dark mt-0">Sutex Bank College</h5>
+                    <h5 class="text-dark mt-0">{{ucfirst($clg->clgname)}}</h5>
                     
-                    <span class="text-muted">Address If several languages coalesce, the grammar of the resulting language ismore regular.</span>
+                    <span class="text-muted">{{$clg->address}}</span>
 
                     <div class="navbar px-0 pb-0">
                         <div class="d-flex">
@@ -31,14 +32,14 @@
                                 <img src="assets/images/avatars/child.svg" alt="" class="avatar-sm m-1 rounded-circle">
                             </a>
                             <h6 class="ml-2">
-                                Yash Parmar <span class="badge badge-soft-primary px-3 badge-pill">Admin</span>
+                                {{ucfirst($clg->name)}} <span class="badge badge-soft-primary px-3 badge-pill">Admin</span>
                             </h6>
                         </div>
                         <div>
-                            <a href="#">
+                            <a href="">
                                 <i data-feather="edit" class="text-warning mr-1" height="19px"></i>
                             </a>
-                            <a href="#" >
+                            <a href="">
                                 <i data-feather="trash-2" class="text-danger ml-1" height="19px"></i>
                             </a>
                         </div>
@@ -46,7 +47,9 @@
                 </div>
                 
             </div>
+            
         </div>
+    @endforeach
     </div>
 </div>
 @endsection
