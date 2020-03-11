@@ -136,6 +136,8 @@ Route::group(['middleware' => 'co_session_check'], function () {
     
         Route::post('/action_update/{eid}','co_ordinate@action_update');
     
+        Route::post('/del_banner','co_ordinate@del_banner');
+    
         Route::get('/cindex','co_ordinate@index');
 
         Route::get('/view_candidates/{eid}','co_ordinate@view_can');
