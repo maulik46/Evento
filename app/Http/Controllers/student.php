@@ -475,6 +475,14 @@ class student extends Controller
         }
         return back();
     }
+    public function view_team($id)
+    {
+        $id=decrypt($id);
+        $team_candidates=participant::select('pid','eid','senrl','tname')->where('pid',$id)->first();
+        // return $team_candidates;
+        // exit;
+        return view('view_winner_team',['tc'=>$team_candidates]);
+    }
     public function winnerlist()
     {
         $student_name = DB::table('tblstudent')
