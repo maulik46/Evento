@@ -14,9 +14,15 @@
 <div class="container-fluid my-5">
     <div class="card">
         <div class="card-body">
-            <div class="mt-2 ml-2 h4">
-                <img src="assets/images/svg-icons/student-dash/winner/ranking.svg" height="30px" alt="">
-                Past Winners
+            <div class="navbar px-0">
+                <div class="mt-2 ml-2 h4">
+                    <img src="assets/images/svg-icons/student-dash/winner/ranking.svg" height="30px" alt="">
+                    <span>Past Winners</span>
+                </div>
+                <button class="btn btn-soft-success btn-sm btn-rounded pr-3 pl-2 font-weight-bold new-shadow-sm hover-me-sm">
+                <i data-feather="filter" height="18px"></i>
+                Filters
+                </button>
             </div>
         <div class="row mt-4">
             <div class="card mb-0 my-2 rounded-0 col-lg-6 col-md-12 new-shadow-sm">
