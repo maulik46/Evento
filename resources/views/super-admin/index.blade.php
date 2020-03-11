@@ -288,7 +288,7 @@
                             </div> 
                             <div class="d-flex justify-content-between align-items-center">
                             <span class="badge badge-soft-dark px-3 badge-pill">By {{ucfirst($del_res->cname)}}</span>
-                            <a href="{{url('delay_res')}}/{{$del_res->eid}}" class="badge badge-success badge-pill px-2 pl-3">
+                            <a href="{{url('delay_res')}}/{{encrypt($del_res->eid)}}" class="badge badge-success badge-pill px-2 pl-3">
                                 <span>Declare</span>
                                 <i data-feather="arrow-right-circle" height="15px" class="text-white"></i>
                                 </a>
