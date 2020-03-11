@@ -9,7 +9,7 @@ use App\tblstudent;
 <div class="container-fluid">
         
     <div class="mb-0 pt-2 card new-shadow-sm pb-4">
-        <a href="{{url('sview_result')}}/{{encrypt($tc['eid'])}}"  class="text-right text-dark px-2">
+        <a href="javascript:window.history.back()"  class="text-right text-dark px-2">
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
     <?php  $id = $tc['eid'];?>
