@@ -110,9 +110,9 @@
                             </a>
                         </div>
                         <?php
-                            $notice = \DB::table('tblnotice')->where([['receiver','LIKE', '%admin%'], ['clgcode', Session::get('clgcode')]])->orderby('nid', 'desc')->get()->toarray();
+                            $notice = \DB::table('tblnotice')->where([['receiver','LIKE', '%admin%'], ['clgcode','LIKE','%'.Session::get('clgcode').'%']])->orderby('nid', 'desc')->get()->toarray();
                             $lastevent = App\admin::select('last_noti')->where('aid', Session::get('aid'))->first();
-                            $count = \DB::table('tblnotice')->select('nid')->where([['nid', '>', $lastevent->last_noti], ['receiver','LIKE', '%admin%'], ['clgcode', Session::get('clgcode')]])->count();
+                            $count = \DB::table('tblnotice')->select('nid')->where([['nid', '>', $lastevent->last_noti], ['receiver','LIKE', '%admin%'],['clgcode','LIKE','%'.Session::get('clgcode').'%']])->count();
                         ?>
                     <li class="nav-item notification-list" data-toggle="tooxltip" data-placement="bottom" title="Inbox">
                         <span  class="text-dark right-bar-toggle" id="mail">
