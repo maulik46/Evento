@@ -66,11 +66,11 @@
         <div class="account-pages">
             <div class="container">
                 <div class="row justify-content-center align-items-center vh-100">
-                    <div class="col-xl-10 col-sm-10 col-10">
+                    <div class="col-xl-10">
                         <div class="card new-shadow-2 rounded-lg">
                             <div class="card-body p-0">
                                 <div class="row">
-                                    <div class="col-lg-6 p-5">
+                                    <div class="col-md-6 p-5">
                                         <div class="text-center mb-3">
                                             <a href="#">
                                                 <img src="assets/images/logo.png" alt="" height="24" />
@@ -80,31 +80,34 @@
                                         <h6 class="h5 mb-0 mt-4 text-dark">Welcome back!</h6>
                                         <p class="text-muted mt-1 mb-4">Enter your email address and password to access
                                             Evento</p>
-                                        <form>
-                                        <div class="form-group mb-1">
-                                            <label>Admin Name</label>
-                                            <div class="form-group has-icon d-flex align-items-center">
-                                                <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                                <input type="text"  class="form-control" placeholder="Enter Admin Name" />
-                                            </div>
-                                        </div>
+                                            <p class="text-danger">{{Session::get('danger')}}</p>
+                                        <form method="post" action="{{url('check_login')}}">
+                                        @csrf
                                         <div class="form-group">
                                             <label>Email</label>
                                             <div class="form-group has-icon d-flex align-items-center">
                                                 <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                                                <input type="email" class="form-control" placeholder="Enter Admin Email">
+                                                <input type="email" name="amail" class="form-control" placeholder="Enter Admin Email">
                                             </div>
-                                        </div> 
+                                        </div>
+                                        
+                                        <div class="form-group mb-1">
+                                            <label>Password</label>
+                                            <div class="form-group has-icon d-flex align-items-center">
+                                                <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
+                                                <input type="password" name="password" class="form-control" placeholder="Enter Password" />
+                                            </div>
+                                        </div>
                                         <br>
                                         <button type="submit" class="btn btn-block btn-success font-weight-bold rounded-sm new-shadow-sm btn-ripple">
                                             Get Started
                                         </button>  
                                         </form>
                                     </div>
-                                    <div class="col-lg-6 d-none d-lg-block">
+                                    <div class="col-lg-6 d-none d-md-inline-block">
                                         <div class="auth-page-sidebar">
                                             <div class="overlay" style="border-radius:0px .5rem .5rem 0px;"></div>
-                                            <div class="auth-user-testimonial ">
+                                            <div class="auth-user-testimonial">
                                                 <p class="font-size-24 font-weight-bold text-white mb-1">Evento</p>
                                                 <p class="lead">
                                                     Keep it easy. Keep it simple!
