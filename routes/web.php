@@ -292,16 +292,32 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 // System admin dashboard routes start
 // ==========================================================================
 
-
-  route::get('/system','system@index');
  route::post('/demo_req','system@demo_req');
  route::view('/s_log_in', 'system/log_in');
-route::get('/s_send_notice',function(){
-     $clgs=\DB::table('tblcolleges')->select('clgname','clgcode')->get();
-     return view('system/send_notice',['clgs'=>$clgs]);
- });
- route::post('send_notice','system@send_notice');
+ Route::group(['middleware' => 'system_session_check'], function () { 
 
- route::get('/s_demo_request','system@demo_request');
-  route::view('/s_read_request','system/read_request');
- route::view('/s_add_college', 'system/add_college');
+    route::get('syslogout',function(){
+        Session::flush(); 
+        return redirect(url('/s_log_in'));
+    });
+
+    route::get('/system','system@index');
+
+    route::post('/check_login', 'system@check_login');
+    
+    route::get('/s_send_notice',function(){
+        $clgs=\DB::table('tblcolleges')->select('clgname','clgcode')->get();
+        return view('system/send_notice',['clgs'=>$clgs]);
+    });
+
+
+
+    route::post('send_notice','system@send_notice');
+
+    route::get('/s_demo_request','system@demo_request');
+
+    route::view('/s_read_request','system/read_request');
+
+    route::view('/s_add_college', 'system/add_college');
+ });
+
