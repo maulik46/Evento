@@ -24,8 +24,9 @@
                 </span>
             </div>
         </div>
+        
+        <div class="text-muted" id="msg-text">
         <hr>
-        <div class="text-muted">
         Hello..
         <br><br>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias perferendis, repellendus doloribus ipsum cupiditate atque consectetur nostrum repellat incidunt vero voluptate rem hic perspiciatis impedit explicabo nobis, veritatis consequuntur architecto.
@@ -46,14 +47,57 @@
         </div>
     </div>
     </div>
-    <a href="#" class="mt-2 btn btn-success font-weight-bold rounded-sm px-3 new-shadow-sm hover-me-sm">
-        Accept Request
-        <i data-feather="check-square" height="18px"></i>
-    </a>
-    <a href="#" class="mt-2 btn btn-danger font-weight-bold rounded-sm px-3 new-shadow-sm hover-me-sm">
-        Reject
-        <i data-feather="x-circle" height="18px"></i>
-    </a>
+
+    <form id="clg-code-form" style="display:none;">
+    <div class="row justify-content-center align-items-start flex-row mt-3">
+        <div class="col-lg-4 col-sm-6">
+        <div class="form-group my-0">
+            <div class="form-group has-icon d-flex align-items-center">
+                <i class="uil uil-tag-alt form-control-icon ml-2"></i>
+                <input type="text" class="form-control" placeholder="Enter Institute Code" required>
+            </div>
+        </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-6">
+            <button type="submit" id="submit-code" class="mt-0 btn btn-success font-weight-bold rounded-sm px-3 new-shadow-sm hover-me-sm">
+                Done
+                <i data-feather="arrow-right-circle" height="18px"></i>
+            </button>
+            <button type="reset" id="cancel-code" class="mt-0 btn btn-danger font-weight-bold rounded-sm px-3 new-shadow-sm hover-me-sm">
+                Cancel
+                <i data-feather="arrow-right-circle" height="18px"></i>
+            </button>
+        </div>
+    
+    </div>
+    </form>
+
+    <div id="request-btns">
+        <a href="#" id="accept-btn" class="mt-2 btn btn-success font-weight-bold rounded-sm px-3 new-shadow-sm hover-me-sm">
+            Accept Request
+            <i data-feather="check-square" height="18px"></i>
+        </a>
+        <a href="#" class="mt-2 btn btn-danger font-weight-bold rounded-sm px-3 new-shadow-sm hover-me-sm">
+            Reject
+            <i data-feather="x-circle" height="18px"></i>
+        </a>
+    </div>
 </div>
+@endsection
+
+@section('extra-scripts')
+<script>
+$(document).ready(function(){
+    $('#accept-btn').click(function(){
+        $('#msg-text,#request-btns').hide();
+        $('#clg-code-form').show();
+    });
+    $('#cancel-code').click(function(){
+        $('#msg-text,#request-btns').show();
+        $('#clg-code-form').hide();
+    })
+});
+</script>
 @endsection
 
