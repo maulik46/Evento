@@ -46,7 +46,7 @@
 <div class="container-fluid">
     @if(Session::has('success'))
            
-           <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+           <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
                <div class="toast-body text-white alert mb-1">
                    <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
                        <i data-feather="x-circle" id="close-btn" height="18px" ></i>
@@ -63,7 +63,7 @@
     <div class="row justify-content-between align-items-center">
         <div class="col-md-7 col-sm-12">
             <div class="card pr-4 py-2 new-shadow-sm">
-                <div id="chart-2"></div>
+                <div id="chart-2" class="apex-charts"></div>
             </div>
         </div>
         <div class="col-md-5 col-sm-12">
@@ -413,7 +413,7 @@
 
 
     <!-- 
- <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed" style="top:20px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+ <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed" style="top:20px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
      <div class="toast-body text-white alert mb-1">
          <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
              <i data-feather="x-circle" id="close-btn" height="18px" ></i>
@@ -439,10 +439,7 @@
 <script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
 
 <!-- page js -->
-<script src="{{asset('assets/js/pages/dashboard.init.js')}}"></script>
 <script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
-<!-- <script src="{{asset('assets/js/Chart.min.js')}}"></script> -->
-<!-- <script src="{{asset('assets/js/utils.js')}}"></script> -->
 <script>
 
 async function deleteEvent(eid){
@@ -487,7 +484,7 @@ async function deleteEvent(eid){
 }
 </script>
 <script>
-var area = {
+    var area = {
           series: [
         <?php
                 foreach ($tble as $t)
@@ -555,12 +552,12 @@ var area = {
         }]
         };
 
-        var chart1 = new ApexCharts(
-            document.querySelector("#chart-1"), 
-            area
+        // var chart1 = new ApexCharts(
+        //     document.querySelector("#chart-1"), 
+        //     area
             
-        );
-        chart1.render();
+        // );
+        // chart1.render();
 
         var chart2 = new ApexCharts( 
             document.querySelector("#chart-2"),

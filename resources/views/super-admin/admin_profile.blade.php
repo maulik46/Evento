@@ -138,7 +138,7 @@
 @section('my-content')
 @if(Session::has('success'))
            
-        <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+        <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
             <div class="toast-body text-white alert mb-1">
                 <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
                     <i data-feather="x-circle"  height="18px" ></i>
@@ -152,7 +152,7 @@
 @endif
 @if($errors->first('photo-upload'))
         
-        <div class="toast bg-danger fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+        <div class="toast bg-danger fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
             <div class="toast-body text-white alert mb-1">
                 <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
                     <i data-feather="x-circle" height="18px" ></i>

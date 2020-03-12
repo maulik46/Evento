@@ -49,7 +49,7 @@
 <body data-layout="topnav" class="body-scroll" style="height: 90vh!important;"> 
 @if(Session::has('success'))
            
-           <div class="toast bg-info fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+           <div class="toast bg-info fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
                <div class="toast-body text-white alert mb-1">
                    <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
                        <i data-feather="x-circle" id="close-btn" height="18px" ></i>

@@ -36,7 +36,7 @@ use \App\tblstudent;
     @media (max-width: 767.98px){
     li.paginate_button.next, li.paginate_button.previous {
         display: inline-block;
-        font-size: 1rem;
+        font-size: 13px;
     }
     }
 </style>
@@ -103,7 +103,7 @@ use \App\tblstudent;
                             $r3=\DB::table('tblparticipant')->where([['senrl','LIKE','%'.$s['senrl'].'%'],['rank',3]])->count();
                             $tp=\DB::table('tblparticipant')->where('senrl','LIKE','%'.$s['senrl'].'%')->count();
                         ?>
-                        <tr>
+                        <tr class="text-dark">
                             <td>{{$no}}</td>
                             <td>{{$s['senrl']}}</td>
                             <td>{{$s['rno']}}</td>
@@ -139,7 +139,7 @@ $(document).ready(function(){
       "emptyTable": "No data available in table"
     },
     
-    // "lengthMenu": [ 3, 25, 50, 75, 100 ]
+    // "lengthMenu": [10]
     });
     $('#my-datatable_info').parent().remove();
     $('#my-datatable_paginate .pagination').css({"justify-content":"flex-start","margin":"5px"});

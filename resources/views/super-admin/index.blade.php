@@ -79,7 +79,7 @@ co_ordinate::remain_result();
 <div class="container-fluid">
     @if(Session::has('success'))
     <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75"
-        style="top:80px;right:30px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true"
+        style="top:80px;right:30px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true"
         data-toggle="toast">
         <div class="toast-body text-white alert mb-1">
             <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
@@ -305,7 +305,7 @@ co_ordinate::remain_result();
     <!-- end row -->
 
     <div class="toast bg-white fade show border-0 new-shadow-2 rounded-lg position-fixed w-75"
-        style="bottom:20px;left:10px;z-index:9999999;" role="alert" aria-live="assertive" aria-atomic="true"
+        style="bottom:20px;left:10px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true"
         data-toggle="toast">
         <?php $delay_res = \DB::table('tblresult_delay')->join('tblevents', 'tblevents.eid', 'tblresult_delay.eid')->join('tblcoordinaters', 'tblcoordinaters.cid', 'tblresult_delay.cid')->join('tblparticipant', 'tblparticipant.eid', 'tblevents.eid')->where('tblcoordinaters.clgcode', Session::get('clgcode'))->get()->toarray();?>
         @if($delay_res)
@@ -338,7 +338,7 @@ co_ordinate::remain_result();
 
 @endsection
 @section('extra-scripts')
-
+<script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
 <script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
 
 <script>
