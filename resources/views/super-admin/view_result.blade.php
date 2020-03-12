@@ -15,10 +15,9 @@
         <h2 class="font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</h2>
         <h6 class="font-weight-normal text-dark text-center">{{ucfirst(Session::get('clgname'))}}</h6>
         <h6 class="font-weight-normal text-dark text-center">
-            <span
-                class="font-weight-bold badge badge-soft-dark px-3 badge-pill">{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
-            <span
-                class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
+            <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
+            <span class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
+            <span class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">{{ucfirst($einfo['e_type'])}} Event</span>
         </h6>
         
         <hr class=" my-1">
@@ -91,7 +90,7 @@
                                 ?>
                                 <td colspan="3">{{$t1->tname}}</td>
                                 <td class="text-center">
-                                    <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3 hover-me-sm">View Team</a>
+                                    <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3">View Team</a>
                                 </td>
                                 @endif
                             </tr>
@@ -121,7 +120,7 @@
                                 ?>
                                 <td colspan="3">{{$t2->tname}}</td>
                                 <td class="text-center">
-                                    <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3 hover-me-sm">View Team</a>
+                                    <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3">View Team</a>
                                 </td>
                                 @endif
                             </tr>
@@ -152,7 +151,7 @@
                                 ?>
                                 <td colspan="3">{{$t3->tname}}</td>
                                 <td class="text-center">
-                                    <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3 hover-me-sm">View Team</a>
+                                    <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3">View Team</a>
                                 </td>
                                 @endif
                             </tr>
@@ -188,21 +187,21 @@ $parti = co_ordinate::participant($einfo['eid']);
                 <table class="table table-hover table-nowrap mb-0">
                     <thead style="background-color:#25c2e340;color:#000;">
                     <tr>
-                                <th scope="col">#</th>
-                                @if($einfo['e_type']=='solo')
-                                <th scope="col">EID</th>
-                               
-                                <th scope="col">Name</th>
-                                <th scope="col">Class</th>
-                                <th scope="col">Division</th>
-                                @endif
-                                @if($einfo['e_type']=='team')
-                                <th scope="col">Team Name</th>
-                                <th></th>
-                                <th></th>
-                                <th scope="col" class="text-center">View Team Candidates</th>
-                                @endif
-                            </tr>
+                        <th scope="col">#</th>
+                        @if($einfo['e_type']=='solo')
+                        <th scope="col">EID</th>
+                        
+                        <th scope="col">Name</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Division</th>
+                        @endif
+                        @if($einfo['e_type']=='team')
+                        <th scope="col">Team Name</th>
+                        <th></th>
+                        <th></th>
+                        <th scope="col" class="text-center">View Team Candidates</th>
+                        @endif
+                    </tr>
                     </thead>
                     <tbody class="text-dark">
                         @if($einfo['e_type']=='solo')
