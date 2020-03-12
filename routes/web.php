@@ -291,6 +291,7 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 // ==========================================================================
 // System admin dashboard routes start
 // ==========================================================================
+route::post('/check_login', 'system@check_login');
 
  route::post('/demo_req','system@demo_req');
  route::view('/s_log_in', 'system/log_in');
@@ -303,7 +304,7 @@ Route::group(['middleware' => 'admin_session_check'], function () {
 
     route::get('/system','system@index');
 
-    route::post('/check_login', 'system@check_login');
+    
     
     route::get('/s_send_notice',function(){
         $clgs=\DB::table('tblcolleges')->select('clgname','clgcode')->get();
