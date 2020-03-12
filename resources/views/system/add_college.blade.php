@@ -21,18 +21,27 @@
                         <label>Email</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="email" class="form-control" placeholder="Enter Your Email">
+                            <input type="email" class="form-control" placeholder="Enter  Email">
                         </div>
                     </div>
                 </div>
-                <div class="row form-group col-12 mx-0 flex-column mb-1">
+                <div class="row mx-0">
+                    <div class="form-group col-md-8 mx-0 flex-column mb-1">
                     <label>Institute Name</label>
                     <div class="form-group has-icon d-flex align-items-center">
                         <img src="{{asset('assets/images/clg1.svg')}}" height="20px" class="form-control-icon ml-2" alt="">
-                        <input type="text" class="form-control" placeholder="Enter Your Institute Name">
+                        <input type="text" class="form-control" placeholder="Enter Institute Name">
                     </div>
-                    <!--  -->
+                    </div>
+                    <div class="form-group col-md-4 mx-0 flex-column mb-1">
+                    <label>Institute Code</label>
+                    <div class="form-group has-icon d-flex align-items-center">
+                        <i class="uil uil-tag-alt form-control-icon ml-2"></i>
+                        <input type="text" class="form-control" placeholder="Enter Institute Code">
+                    </div>
+                    </div>
                 </div>
+                
                 <div class="row mx-0">
                     <div class="form-group col-md-4 col-12 mb-1">
                         <label>Contact no</label>
