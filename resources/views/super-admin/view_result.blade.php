@@ -19,9 +19,6 @@
                 class="font-weight-bold badge badge-soft-dark px-3 badge-pill">{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
             <span
                 class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
-            <span
-                class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">
-                {{ucfirst($einfo['e_type'])}} Event</span>
         </h6>
         
         <hr class=" my-1">
@@ -190,7 +187,7 @@ $parti = co_ordinate::participant($einfo['eid']);
             <div class="table-responsive overflow-auto my-scroll">
                 <table class="table table-hover table-nowrap mb-0">
                     <thead style="background-color:#25c2e340;color:#000;">
-                        <tr>
+                    <tr>
                                 <th scope="col">#</th>
                                 @if($einfo['e_type']=='solo')
                                 <th scope="col">EID</th>
@@ -220,15 +217,14 @@ $parti = co_ordinate::participant($einfo['eid']);
                         </tr>
                         @endforeach
                         @endif
-                        
                         @if($einfo['e_type']=='team')
-                        
+                        <?php $c=1?>
                         @foreach($parti as $participant)
                         <tr>
-                            <td>1</td>
-                            <td colspan="3">Team xyz</td>
+                            <td>{{$c++}}</td>
+                            <td colspan="3">{{$participant['tname']}}</td>
                             <td class="text-center">
-                                <a href="#" class="badge badge-pill badge-soft-primary px-3">View Team</a>
+                                <a href="{{url('sview_team')}}/{{encrypt($participant['pid'])}}" class="badge badge-pill badge-soft-primary px-3">View Team</a>
                             </td>
                         </tr>
                         @endforeach
