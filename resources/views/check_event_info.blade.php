@@ -1,3 +1,4 @@
+
 @extends('stud_layout')
 @section('title','Event Information')
 
@@ -28,7 +29,7 @@
                                 </p>
                                 <p class="d-flex justify-content-between mx-5">
                                     <span class="font-weight-bold text-right">Event time</span>
-                                    <span>{{date('h:i A',strtotime($einfo['etime']))}}</span>
+                                    <span>{{date('h:i A',strtotime($einfo['time']))}}</span>
                                 </p>
                                  <p class="d-flex justify-content-between mx-5">
                                     <span class="font-weight-bold">Registraion start date</span>
