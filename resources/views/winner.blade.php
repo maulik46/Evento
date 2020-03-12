@@ -8,6 +8,10 @@
         padding: .50rem !important;
         vertical-align: middle !important;
     }
+    .form-control:focus {
+        background-color: #fff !important;
+        border: 1px solid lightgray !important;
+        }
 </style>
 @endsection
 @section('my-content')
@@ -19,12 +23,84 @@
                     <img src="assets/images/svg-icons/student-dash/winner/ranking.svg" height="30px" alt="">
                     <span>Past Winners</span>
                 </div>
-                <button class="btn btn-soft-success btn-sm btn-rounded pr-3 pl-2 font-weight-bold new-shadow-sm hover-me-sm">
-                <i data-feather="filter" height="18px"></i>
-                Filters
-                </button>
+                <a href="#" class=" badge-pill badge-soft-dark btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter">
+                    <i data-feather="filter" height="18px"></i>
+                    Filters
+                </a>
+                <a href="#" class="text-dark" id="close-btn" style="display:none">
+                    <i data-feather="x-circle" height="20px"></i>
+                </a>
             </div>
-        <div class="row mt-4">
+            <div id="filter-box" class="card position-relative w-100 mb-0" style="left:0px;z-index:9;display:none;border:1px solid #e9e9e9;">
+                <div class="card-body p-2">
+                <div class="row justify-content-between">
+                <div class="col-md-5 col-12">
+                    <div class="form-group has-icon d-flex align-items-center px-0 mb-1">
+                        <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Enter Student Name" />
+                    </div>
+                </div>
+                <div class="col-md-5 col-12">
+                    <div class="form-group has-icon d-flex align-items-center px-0 mb-1">
+                        <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Enter Event Name" />
+                    </div>
+                </div>
+                <div class="col-md-2 col-12">
+                        <select name="" id="" class="form-control">
+                            <option hidden>Select Year</option>
+                            <option value="">2018</option>
+                            <option value="">2019</option>
+                            <option value="">2020</option>
+                        </select>
+                </div>
+                </div>
+                <div class="row justify-content-between justify-content-sm-around">
+                    <div class="col-auto">
+                        <h6>Class</h6>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Fybca</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Sybca</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Tybca</label>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <h6>Division</h6>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">1</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">2</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">3</label>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <h6>Category</h6>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Team</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Solo</label>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        <div class="row mt-2">
         @foreach($winners as $winner)
             <?php 
                 $event=App\tblevent::select('eid','ename','e_type','enddate')->where('eid',$winner->eid)->first();
@@ -40,7 +116,7 @@
                         @endif
                     </div>
                     <div class="mr-2">
-                        <span class="badge badge-pill badge-primary px-3">{{date('d/m/Y',strtotime($event->enddate))}}</span>
+                        <span class="badge badge-primary">{{date('d/m/Y',strtotime($event->enddate))}}</span>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -316,5 +392,21 @@
             </div>
         </div> -->
 </div>
+@endsection
+
+@section('extra-scripts')
+<script>
+$(document).ready(function(){
+    $('#filter-box,#close-btn').hide();
+    $('.btn-filter').click(function(){
+        $('#filter-box,#close-btn').show();
+        $('.btn-filter').hide();
+    });
+    $('#close-btn').click(function(){
+        $('#filter-box,#close-btn').hide();
+        $('.btn-filter').show();
+    })
+})
+</script>
 @endsection
 
