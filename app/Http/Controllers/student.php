@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+date_default_timezone_set("Asia/Kolkata");
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +12,9 @@ use Session;
 use Redirect;
 use App\tblevent;
 use App\participant;
+
+
+
 class student extends Controller
 {
     public function student_update_action(Request $req,$en){
