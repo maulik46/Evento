@@ -9,8 +9,10 @@
 @endsection
 @section('my-content')
 <div class="container-fluid my-5">
-    <div class="mb-0 pt-2 card new-shadow-sm py-4">
-
+    <div class="mb-0 card new-shadow-sm">
+        <a href="{{url('winner-list')}}" class="text-right text-dark p-2">
+            <i data-feather="x-circle" id="close-btn" height="20px"></i>
+        </a>
         <span class="h3 my-0 font-weight-normal text-dark text-center">
         {{ucfirst($tc['tname'])}}
         </span>
