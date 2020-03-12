@@ -28,18 +28,14 @@
                                         </h2>
                                         <p class="text-center">{{ucfirst(Session::get('clgname'))}}</p>
                                         
-                                        <div class="mt-4 text-muted col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-sm-12">
+                                        <div class="mt-4 text-dark col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-sm-12">
                                             <p class="d-flex justify-content-between my-2">
                                                 <span class="font-weight-bold">Date</span>
                                                 <span class="mr-2">{{date('d/m/Y', strtotime($einfo->edate))}}</span>
                                             </p>
                                             <p class="d-flex justify-content-between my-2">
                                                 <span class="font-weight-bold">Time</span>
-                                                <span class="mr-2">{{$einfo->time}}</span>
-                                            </p>
-                                            <p class="d-flex justify-content-between my-2">
-                                                <span class="font-weight-bold">Registration Last-Date</span>
-                                                <span class="mr-2">{{date('d/m/Y', strtotime($einfo->reg_end_date))}}</span>
+                                                <span class="mr-2">{{date('h:i A',strtotime($einfo['etime']))}}</span>
                                             </p>
                                             <p class="d-flex justify-content-between my-2">
                                                 <span class="font-weight-bold">Venue</span>
@@ -54,10 +50,10 @@
                                                 Your Information
                                             </h4>
                                             <hr>
-                                            <div class="table-responsive my-scroll overflow-auto pt-4  col-12">
+                                            <div class="table-responsive my-scroll overflow-auto pt-4   col-12">
                                                  <table class="table new-shadow-sm">
                                                      <thead class="light-bg1">
-                                                         <tr>
+                                                         <tr class="text-dark">
                                                              <th>No</th>
                                                              <th>EID</th>
                                                              <th>Name</th>
@@ -67,7 +63,7 @@
                                                          </tr>
                                                      </thead>
                                                      <tbody>
-                                                         <tr>
+                                                         <tr class="text-dark">
                                                              <th scope="row">1</th>
                                                              <td>{{Session::get('senrl')}}</td>
                                                              <td>{{Session::get('sname')}}</td>

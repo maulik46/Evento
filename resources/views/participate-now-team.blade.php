@@ -33,10 +33,6 @@
                                                     <span class="mr-2">{{date('h:i A', strtotime($einfo->time))}}</span>
                                                 </p>
                                                 <p class="d-flex justify-content-between my-2">
-                                                    <span class="font-weight-bold">Registration Last-Date</span>
-                                                    <span class="mr-2">{{date('d/m/Y', strtotime($einfo->reg_end_date))}}</span>
-                                                </p>
-                                                <p class="d-flex justify-content-between my-2">
                                                     <span class="font-weight-bold">Venue</span>
                                                     <span class="mr-2">{{$einfo->place}}</span>
                                                 </p>
@@ -52,7 +48,7 @@
                                                 <div class="table-responsive my-scroll overflow-auto pt-4  col-12">
                                                     <table class="table new-shadow-sm">
                                                         <thead class="light-bg1">
-                                                            <tr>
+                                                            <tr class="text-dark">
                                                                 <th>No</th>
                                                                 <th>EID</th>
                                                                 <th>Name</th>
@@ -69,7 +65,7 @@
                                                                 ?>
                                                                 
                                                                     <?php $st=\DB::table('tblstudent')->where('senrl',$e)->first()?>
-                                                                <tr>
+                                                                <tr class="text-dark">
                                                                     <th scope="row">{{$i}}</th>
                                                                     <td>{{$e}}</td>
                                                                     <td>{{ucfirst($st->sname)}}</td>
