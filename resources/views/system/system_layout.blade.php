@@ -40,11 +40,14 @@
             </nav>
             <div class="left-side-menu bg-transparent shadow-none" style="top:10px;z-index:100!important;">
                     <div class="media user-profile d-flex flex-column align-items-center mt-5">
+                    @if(Session::get('syspropic')=="")
                         <img src="{{asset('assets/images/avatars/man.svg')}}" class="avatar-xl border rounded-circle bg-white d-block mx-auto" alt="User" />
-
+                    @else
+                    <img src="{{asset('assets/images/avatars/women.svg')}}" class="avatar-xl border rounded-circle bg-white d-block mx-auto" alt="User" />
+                    @endif
                         <div class="media-body mx-auto mt-3 font-weight-bold text-center">
                             <a href="#" class="pro-user-name text-dark user-link font-size-16">
-                                Maulik
+                                {{ucfirst(Session::get('sysadmin'))}}
                             </a>
                         </div>
                     </div>
@@ -80,7 +83,7 @@
                                 </li>
                                 
                                 <li class="mt-2">
-                                    <a href="#" class="d-flex align-items-center justify-content-between">
+                                    <a href="{{url('syslogout')}}" class="d-flex align-items-center justify-content-between">
                                     <div>
                                         <i class="text-dark uil uil-exit h6"></i>
                                         <span class="font-weight-bold font-size-14">Log Out</span>
@@ -141,19 +144,19 @@
                     <label class="col-form-label font-size-14">Name</label>
                     <div class="form-group has-icon d-flex align-items-center">
                         <i class="uil uil-user form-control-icon ml-2 font-size-16"></i>
-                        <input type="text" id="sname" name="user_name" class="form-control" value="" />
+                        <input type="text" id="sname" value="{{ucfirst(Session::get('sysadmin'))}}" name="user_name" class="form-control" value="" />
                     </div>
                     <div id="name-er" class="text-danger font-weight-bold"></div>
                     <label class="col-form-label font-size-14">Email</label>
                     <div class="form-group has-icon d-flex align-items-center">
                         <i class="uil uil-envelope form-control-icon ml-2 font-size-16"></i>
-                        <input type="email" id="semail" name="user_email" class="form-control" value="" />
+                        <input type="email" id="semail" value="{{Session::get('sysemail')}}" name="user_email" class="form-control" value="" />
                     </div>
                     <div id="email-er" class="text-danger font-weight-bold"></div>
                     <label class="col-form-label font-size-14">Mobile No</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i class="uil uil-phone-alt form-control-icon ml-2 font-size-16"></i>
-                        <input type="text" id="smobile" name="user_mobile" class="form-control" value="" />
+                        <input type="text" id="smobile" value="{{Session::get('sysmobile')}}" name="user_mobile" class="form-control" value="" />
                     </div>
                     <div id="mobile-er" class="text-danger font-weight-bold"></div>
                     
