@@ -7,8 +7,6 @@
 @section('title','View Candidates')
 
 @section('head-tag-links')
-    <!-- data table plugins -->
-    <link href="{{asset('assets/libs/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
 
     <style>
 
@@ -35,7 +33,11 @@
                         <div class="mb-3 mt-4 justify-content-between d-flex align-items-center ">
                             <div class="d-flex align-items-center">
                                 <img src="{{asset('/assets/images/svg-icons/co-ordinate/team.svg')}}" height="35px" alt="">
-                                <span class="h4 ml-2">Participated Candidates</span>
+                                @if($einfo['e_type']=="team")
+                                <span class="h4 ml-2">Participated Teams</span>
+                                @else
+                               <span class="h4 ml-2">Participated Candidates</span>
+                                @endif
                             </div>
                             <div class="font-weight-bold mr-4 font-size-15">
                             <?php $c=participant::where('eid',$einfo['eid'])->count()?>
@@ -56,7 +58,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <td colspan="4" class=" font-weight-bold text-dark p-3" style="background-color: #dde1fc;">
-                                            {{$p['tname']}}
+                                            Team {{$p['tname']}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -140,20 +142,12 @@
                     </div>
 
                 </div>
-                <!-- <div class="position-fixed" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left"
+                <div class="position-fixed" style="bottom: 134px;right:15px;" data-toggle="tooltip" data-placement="left"
                     title="Print">
                     <a href="#">
                         <img src="{{asset('assets/images/svg-icons/co-ordinate/print.svg')}}" height="55px" class="hover-me-sm rounded-circle" alt="">
                     </a>
-                </div> -->
+                </div>
             </div>
 @endsection        
 
-@section('extra-scripts')
-     <script>
-     $(document).ready(function(){
-        $('.team-leader-name td:first').append('<span class="text-primary"> (Team-leader)</span>');
-       
-    })
-     </script>
-@endsection  
