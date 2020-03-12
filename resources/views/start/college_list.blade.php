@@ -119,8 +119,8 @@
         </form>
         </div>
         
-        <nav class="row justify-content-between align-items-center position-fixed" style="z-index: 999;width: 100%;bottom:10px;left:0px;">
-            <div class="d-flex align-items-center justify-content-center mt-0 mt-md-5 mx-4 mx-sm-5">
+        <div class="row justify-content-between align-items-center position-fixed" style="z-index: 999;width: 100%;bottom:10px;left:0px;">
+            <div class="d-flex align-items-center justify-content-center mx-4 mx-sm-5">
                 <a href="#" class="badge-pill btn bg-white p-1 mx-1 hover-me-sm">
                     <i data-feather="facebook" class="text-primary" height="20px"></i>
                 </a>
@@ -134,12 +134,12 @@
                     <i data-feather="linkedin" class="text-blue" height="20px"></i>
                 </a>
             </div>
-            <a href="{{url('getdemo')}}" class="mt-0 mt-md-5 mx-2 mx-sm-3 badge badge-pill badge-primary hover-me-sm px-3">
+            <a href="{{url('getdemo')}}" class=" mx-2 mx-sm-3 badge badge-pill badge-primary hover-me-sm px-3">
                 Get a demo
             </a>
             
             
-        </nav>
+        </div>
 @endsection
 @section('extra-scripts')
    <script>
