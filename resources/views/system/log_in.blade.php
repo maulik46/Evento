@@ -78,9 +78,8 @@
                                             </a>
                                         </div>
                                         <h6 class="h5 mb-0 mt-4 text-dark">Welcome back!</h6>
-                                        <p class="text-muted mt-1 mb-4">Enter your email address and password to access
-                                            Evento</p>
-                                            <p class="text-danger">{{Session::get('danger')}}</p>
+                                        <p class="text-muted mt-1 mb-4">Enter your email address and password to access Evento</p>
+                                            <p class="text-danger font-weight-bold">{{Session::get('danger')}}</p>
                                         <form method="post" action="{{url('check_login')}}">
                                         @csrf
                                         <div class="form-group">

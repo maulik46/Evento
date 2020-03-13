@@ -55,7 +55,7 @@
                                                      <thead class="light-bg1">
                                                          <tr class="text-dark">
                                                              <th>No</th>
-                                                             <th>EID</th>
+                                                             <th>Enrollment</th>
                                                              <th>Name</th>
                                                              <th>Mobile No</th>
                                                              <th>Division</th>

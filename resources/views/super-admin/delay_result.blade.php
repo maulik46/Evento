@@ -188,7 +188,7 @@
                 <div class="dropdown-divider m-1"></div>
                 <div class="col-sm-12 row">
                     <div class="col-6 col-sm-3 d-flex align-items-end">
-                        <span class="text-dark pr-1">EID</span>
+                        <span class="text-dark pr-1">Enrollment</span>
                         <span class="font-weight-bold">E12345677890</span>
                         <span id="pid" style="display:none;"></span>
                     </div>
@@ -225,7 +225,7 @@
                 <div class="dropdown-divider m-1"></div>
                 <div class="col-sm-12 d-flex flex-wrap">
                     <div class="col-6 col-sm-3 d-flex align-items-end">
-                        <span class="text-dark pr-1">EID</span>
+                        <span class="text-dark pr-1">Enrollment</span>
                         <span class="font-weight-bold">{{ucfirst($sinfo['senrl'])}}</span>
                     </div>
                     <div class="col-6 col-sm-3 d-flex align-items-end">

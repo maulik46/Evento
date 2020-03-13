@@ -62,7 +62,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">EID</th>
+                                        <th scope="col">Enrollment</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Class</th>
                                         <th scope="col">Division</th>
@@ -108,7 +108,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th scope="col">EID</th>
+                                        <th scope="col">Enrollment</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Class</th>
                                         <th scope="col">Division</th>

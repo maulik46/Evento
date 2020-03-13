@@ -39,7 +39,7 @@ use \App\Http\Controllers\co_ordinate;
                             <tr>
                                 <th scope="col">Rank</th>
                                 @if($einfo['e_type']=='solo')
-                                <th scope="col">EID</th>
+                                <th scope="col">Enrollment</th>
                                
                                 <th scope="col">Name</th>
                                 <th scope="col">Class</th>
@@ -177,7 +177,7 @@ $parti = co_ordinate::participant($einfo['eid']);
                         <tr>
                             <th scope="col">#</th>
                             @if($einfo['e_type']=='solo')
-                            <th scope="col">EID</th>
+                            <th scope="col">Enrollment</th>
                             
                             <th scope="col">Name</th>
                             <th scope="col">Class</th>
