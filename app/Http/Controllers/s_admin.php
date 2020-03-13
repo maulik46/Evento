@@ -426,10 +426,7 @@ class s_admin extends Controller
         {
             $msg.='<div class="text-center mt-5 font-weight-bold">No logs available!!</div>';
         }
-        else
-        {
-            $msg.='<div class="mt-3">'.$logs->links().'</div>';
-        }
+        
 
         return response()->json(array('msg'=>$msg),200);
     }
