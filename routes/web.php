@@ -253,7 +253,7 @@ Route::group(['middleware' => 'admin_session_check'], function () {
             return view('super-admin/check_logs',['logs'=>$logs,'cod'=>$cod]);
         });
 
-        route::post('/filterlog','s_admin@filterlog');
+        route::any('/filterlog','s_admin@filterlog');
 
         route::get('view_students', 's_admin@view_students');
 
