@@ -122,7 +122,7 @@
                                                 
                                             </div>
                                             @error('clgcode')
-                                            <h6 style>{{$message}}</h6>
+                                            <h6>{{$message}}</h6>
                                             @enderror
                                             <div class="form-group" style="margin-top:30px;">
                                                 <label class="form-control-label">Enrollment number</label>
