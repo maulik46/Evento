@@ -80,21 +80,21 @@
     <div class="row align-items-center">
         <div id="carouselExampleIndicators" class="carousel slide col-xl-8 mt-4" data-ride="carousel">
             <?php  
-                                $tble=App\tblevent::where([['reg_end_date','>=',date('Y-m-d')],
-                                ['reg_start_date','<=',date('Y-m-d')]])->where('clgcode',Session::get('clgcode'))->get();
-                                $tblecount=App\tblevent::select('banner')->where([['reg_end_date','>=',date('Y-m-d')],
-                                ['reg_start_date','<=',date('Y-m-d')]])->where('clgcode',Session::get('clgcode'))->get()->toArray();
-                                $active=0;
-                                $ban_c=0;
-                                $count=0;
-                                foreach($tblecount as $c)
-                                {
-                                    if($c['banner'])
-                                    {
-                                        $ban_c++;
-                                    }
-                                }
-                                ?>
+                $tble=App\tblevent::where([['reg_end_date','>=',date('Y-m-d')],
+                ['reg_start_date','<=',date('Y-m-d')]])->where('clgcode',Session::get('clgcode'))->get();
+                $tblecount=App\tblevent::select('banner')->where([['reg_end_date','>=',date('Y-m-d')],
+                ['reg_start_date','<=',date('Y-m-d')]])->where('clgcode',Session::get('clgcode'))->get()->toArray();
+                $active=0;
+                $ban_c=0;
+                $count=0;
+                foreach($tblecount as $c)
+                {
+                    if($c['banner'])
+                    {
+                        $ban_c++;
+                    }
+                }
+            ?>
             @if($ban_c>0)
             <ol class="carousel-indicators">
 
@@ -165,9 +165,9 @@
                     <!-- <h6 class="font-size-24 mb-0 pb-1 text-center d-xl-none d-flex">Events</h6> -->
                     <div class="form-group has-icon d-flex align-items-center col-xl-12 col-sm-8 col-12 px-0">
                         <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
-                        <input type="text" name="title" id="title" class="form-control" placeholder="Search Events" />
+                        <input type="text" id="myInput" class="form-control" placeholder="Search Events" />
                     </div>
-                    <div class="row mx-0">
+                    <div class="row mx-0" id="event-list">
                         <?php $a=0?>
                         @foreach($events as $e)
                         <?php $c=\DB::table('tblparticipant')->where([['senrl','LIKE','%'.Session::get('senrl').'%'],['eid',$e['eid']]])->count();
@@ -175,7 +175,7 @@
                         @if($c==0)
                         <?php $a=1;?>
 
-                        <div class="col-xl-12 col-md-6 media my-1 px-2 py-2 new-shadow-sm bg-light hover-me-sm">
+                        <div class="col-xl-12 col-md-6 media my-1 px-2 py-2 new-shadow-sm bg-light hover-me-sm event-name">
                             <div class="media-body">
                                 <span class="text-muted badge badge-pill  
                                                 @if ($e['category'] == 'cultural')badge-soft-primary 
@@ -301,4 +301,17 @@
 
 </div> <!-- end begining div -->
 
+@endsection
+@section('extra-scripts')
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#event-list .event-name").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+
+            });
+        });
+    });
+</script>
 @endsection
