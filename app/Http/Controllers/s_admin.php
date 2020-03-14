@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 date_default_timezone_set("Asia/Kolkata"); 
 use Illuminate\Http\Request;
 use validator;
+use DB;
 use App\tblevent;
 use App\notice;
 use App\tblstudent;
