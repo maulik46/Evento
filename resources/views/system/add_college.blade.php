@@ -8,20 +8,21 @@
                 </span>
         </div> 
         <div class="px-1 px-sm-3" >
-            <form class="mt-2 card shadow-none py-3 px-1 px-sm-2 rounded-lg" style="border:1px solid #e2e7f1;">
+            <form method="POST" action="{{url('add_college')}}" class="mt-2 card shadow-none py-3 px-1 px-sm-2 rounded-lg" style="border:1px solid #e2e7f1;">
+            @csrf
                 <div class="row mx-0">
                     <div class="form-group col-sm-6 mb-1">
                         <label>Admin Name</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text"  class="form-control" placeholder="Enter Admin Name..." />
+                            <input type="text" name="admin_name"  class="form-control" placeholder="Enter Admin Name..." />
                         </div>
                     </div>
                     <div class="form-group col-sm-6 mb-1">
                         <label>Email</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="email" class="form-control" placeholder="Enter  Email">
+                            <input type="email" name="admin_email" class="form-control" placeholder="Enter  Email">
                         </div>
                     </div>
                 </div>
@@ -30,14 +31,14 @@
                     <label>Institute Name</label>
                     <div class="form-group has-icon d-flex align-items-center">
                         <img src="{{asset('assets/images/clg1.svg')}}" height="20px" class="form-control-icon ml-2" alt="">
-                        <input type="text" class="form-control" placeholder="Enter Institute Name">
+                        <input type="text" name="clg_name" class="form-control" placeholder="Enter Institute Name">
                     </div>
                     </div>
                     <div class="form-group col-md-4 mx-0 flex-column mb-1">
                     <label>Institute Code</label>
                     <div class="form-group has-icon d-flex align-items-center">
                         <i class="uil uil-tag-alt form-control-icon ml-2"></i>
-                        <input type="text" class="form-control" placeholder="Enter Institute Code">
+                        <input type="text" name="clg_code" class="form-control" placeholder="Enter Institute Code">
                     </div>
                     </div>
                 </div>
@@ -47,7 +48,7 @@
                         <label>Contact no</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" class="form-control" placeholder="Enter Institute Contact">
+                            <input type="text" name="clg_mob" class="form-control" placeholder="Enter Institute Contact">
                         </div>
                         <!--  -->
                     </div>
@@ -55,7 +56,7 @@
                         <label>City</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="map" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" class="form-control" placeholder="Enter Institute City">
+                            <input type="text" name="clg_city" class="form-control" placeholder="Enter Institute City">
                         </div>
                         <!--  -->
                     </div>
@@ -63,7 +64,7 @@
                         <label>Password</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="key" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" class="form-control" style="letter-spacing:2px;" value="<?=uniqid();?>" readonly>
+                            <input type="text" name="admin_pass" class="form-control" style="letter-spacing:2px;" value="<?=uniqid();?>" readonly>
                         </div>
                         <!--  -->
                     </div>
@@ -72,17 +73,17 @@
                     <label>Institute Address</label>
                     <div class="form-group has-icon d-flex align-items-center">
                         <img src="{{asset('assets/images/svg-icons/address.svg')}}" height="20px" class="form-control-icon ml-2" alt="">
-                        <input type="text" class="form-control" placeholder="Enter Institute Address">
+                        <input type="text" name="clg_add" class="form-control" placeholder="Enter Institute Address">
                     </div>
                     <!--  -->
                 </div>
-                <div class="row form-group col-12 mx-0 mb-0">
+                <!-- <div class="row form-group col-12 mx-0 mb-0">
                     <label>Message</label>
                     <div class="form-group has-icon d-flex align-items-start w-100">
                     <i data-feather="message-square" class="form-control-icon ml-2" style="margin-top: 10px;" height="19px"></i>
                     <input type="text" class="form-control" placeholder="Enter Your Message" />
                     </div>
-                </div>
+                </div> -->
                 <div class="my-2 mx-2">
                     <button type="submit"  class="hover-me-sm btn btn-success new-shadow-sm font-weight-bold px-3 rounded-sm mr-1">
                         <span class="font-size-15">Send</span>
