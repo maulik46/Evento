@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\notice;
 use session;
+use App\admin;
+
 use Illuminate\Http\Request;
 date_default_timezone_set("Asia/Kolkata"); 
 class system extends Controller
@@ -80,4 +82,62 @@ class system extends Controller
         session()->flash('danger','Invalid email or password');
         return back();
     }
+    public function add_college(Request $req)
+    {
+        $admin=new admin;
+        $admin->clgcode=$req->clg_code;
+        $admin->name=$req->admin_name;
+        $admin->email=$req->admin_email;
+        $admin->mobile=$req->clg_mob;
+        $admin->pass=$req->admin_pass;
+        $admin->profilepic='child.svg';
+        $admin->date=date('Y-m-d');
+
+        $tbl_clg_data=[
+            'clgcode' => $req->clg_code, 
+            'clgname' => $req->clg_name, 
+            'address' => $req->clg_add, 
+            'city' => $req->clg_city
+        ];
+        $tbl_clg = \DB::table('tblcolleges')->insert($tbl_clg_data);
+
+        $admin->save();
+        return redirect(url('/system')); 
+    }
+    public function update_college($clgcode)
+    {
+        $clgcode=decrypt($clgcode);
+        $table=admin::join('tblcolleges','tblcolleges.clgcode','=','tbladmin.clgcode')->where('tblcolleges.clgcode',$clgcode)->get()->first();
+        return view('system/update_college',['clg_data'=>$table]); 
+    }
+    public function action_update_college(Request $req,$clgcode)
+    {
+        $clgcode = decrypt($clgcode);
+        $admin_name = $req->admin_name;
+        $admin_email = $req->admin_email;
+        $admin_mobile = $req->clg_mob;
+
+        $clg_name = $req->clg_name; 
+        $clg_city = $req->clg_city;
+        $clg_add = $req->clg_add;
+
+
+        $tbl_admin_data=[
+            'name'=>$admin_name,
+            'email'=>$admin_email,
+            'mobile'=>$admin_mobile
+        ];
+        $update=admin::where('clgcode',$clgcode)->update($tbl_admin_data);
+
+        $tbl_clg_data=[
+            'clgname'=>$clg_name,
+            'address'=>$clg_city,
+            'city'=>$clg_add
+        ];
+        $tbl_clg= \DB::table('tblcolleges')->where('clgcode', $clgcode)->update($tbl_clg_data);
+        
+        return redirect(url('/system'));
+
+    }
+
 }
