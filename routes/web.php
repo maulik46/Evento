@@ -304,14 +304,10 @@ route::post('/check_login', 'system@check_login');
 
     route::get('/system','system@index');
 
-    
-    
     route::get('/s_send_notice',function(){
         $clgs=\DB::table('tblcolleges')->select('clgname','clgcode')->get();
         return view('system/send_notice',['clgs'=>$clgs]);
     });
-
-
 
     route::post('send_notice','system@send_notice');
 
@@ -320,5 +316,12 @@ route::post('/check_login', 'system@check_login');
     route::view('/s_read_request','system/read_request');
 
     route::view('/s_add_college', 'system/add_college');
+    route::any('/add_college','system@add_college');
+
+    route::any('/action_update_college/{clgcode}','system@action_update_college');
+    route::any('/update_college/{clgcode}', 'system@update_college');
+
+
+
  });
 
