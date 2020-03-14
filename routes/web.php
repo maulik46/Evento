@@ -311,10 +311,31 @@ route::post('/check_login', 'system@check_login');
 
     route::post('send_notice','system@send_notice');
 
+    route::get('/s_send_notice',function(){
+    $clgs=\DB::table('tblcolleges')->select('clgname','clgcode')->get();
+    return view('system/send_notice',['clgs'=>$clgs]);
+    });
+
     route::get('/s_demo_request','system@demo_request');
 
-    route::view('/s_read_request','system/read_request');
+    
 
+    route::get('/s_read_request/{did}',function($did){
+        $did=decrypt($did);
+        $d_req=\DB::table('tbldemoreq')->where('did',$did)->first();
+        return view('system/read_request',['d_req'=>$d_req]);
+    });
+
+    route::post('/system/add_institute','system@add_institute');
+
+    route::post('system/update_profile','system@update_pro');
+
+    route::get('/system/delreq/{did}',function($did){
+        $del=\DB::table('tbldemoreq')->where('did',$did)->delete();
+        session()->flash("alert-success","Request rejected successfully..!");
+        return redirect(url('system'));
+    });
+    route::post('system/update_pass','system@update_pass');
     route::view('/s_add_college', 'system/add_college');
     route::any('/add_college','system@add_college');
 
