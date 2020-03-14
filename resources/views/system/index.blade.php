@@ -7,24 +7,27 @@
             <h5 class="ml-3">College List</h5>
             <div class="col-md-4 col-sm-6 col-12 form-group has-icon d-flex align-items-center mb-0">
                 <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
-                <input type="text"  name="" class="form-control" placeholder="Search Institute.." />
+                <input type="text"  id="myInput" class="form-control" placeholder="Search Institute.." />
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="ins-list">
     @foreach($clgs as $clg)
-        <div class="col-lg-6">
+        <div class="col-lg-6 college">
             <div class="card new-shadow-2 bg-light hover-me-sm">
                 <div class="card-body py-1">
                     <div class="navbar px-0 pb-2">
-                        <span class="badge badge-soft-success badge-pill px-3">
-                        12/12/2019
+                        <span class="badge badge-soft-primary badge-pill px-3">
+                        {{date('d/m/Y',strtotime($clg->date))}}
                         </span>
                         <div class="badge badge-success px-3 badge-pill">Running</div>
                     </div>
                     <h5 class="text-dark mt-0">{{ucfirst($clg->clgname)}}</h5>
                     
-                    <span class="text-muted">{{$clg->address}}</span>
+                    <span class="text-muted">
+                    <i class="uil uil-map-marker"></i>
+                    {{ucfirst($clg->address)}}
+                    </span>
 
                     <div class="navbar px-0 pb-0">
                         <div class="d-flex">
@@ -32,11 +35,14 @@
                                 <img src="assets/images/avatars/child.svg" alt="" class="avatar-sm m-1 rounded-circle">
                             </a>
                             <h6 class="ml-2">
-                                {{ucfirst($clg->name)}} <span class="badge badge-soft-primary px-3 badge-pill">Admin</span>
+                                {{ucfirst($clg->name)}} <span class="badge badge-soft-info px-3">Admin</span>
+                                <div>
+                                <span class="font-size-12 text-muted">{{$clg->email}}</span>
+                                </div>
                             </h6>
                         </div>
                         <div>
-                            <a href="">
+                            <a href="{{url('update_college')}}/{{encrypt($clg->clgcode)}}">
                                 <i data-feather="edit" class="text-warning mr-1" height="19px"></i>
                             </a>
                             <a href="">
@@ -47,9 +53,21 @@
                 </div>
                 
             </div>
-            
         </div>
     @endforeach
     </div>
 </div>
+@endsection
+@section('extra-scripts')
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#ins-list .college").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+
+            });
+        });
+    });
+</script>
 @endsection
