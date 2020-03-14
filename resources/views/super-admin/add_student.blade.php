@@ -69,29 +69,29 @@
 @endsection
 @section('my-content')
 @if ($errors->any())
-    <div class="bg-danger fade show border-0 new-shadow rounded-0 position-fixed w-100" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="z-index:99999;top:73px;left:0px">
-        <div class="text-white alert mb-1">
+    <div class="bg-danger fade show border-0 new-shadow rounded-0 position-fixed w-100" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="z-index:99;top:73px;left:0px">
+        <div class="text-white alert mb-0  py-1 ">
             <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
                 <i data-feather="x-circle"  height="20px" ></i>
             </a>
-            <div class="font-weight-bold font-size-16 text-center">
-            <ul>
+            <div >
+            <ol class="mt-2 font-weight-bold font-size-16 d-flex align-items-center justify-content-center">
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li class="text-left">{{ $error }}</li>
                 @endforeach
-            </ul>
+            </ol>
             </div> 
         </div>
     </div>
 @endif
 @if($message = Session::get('success'))
-    <div class="bg-success fade show border-0 new-shadow rounded-0 position-fixed w-100" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="z-index:99999;top:73px;left:0px">
-        <div class="text-white alert mb-1">
+    <div class="bg-success fade show border-0 new-shadow rounded-0 position-fixed w-100" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="z-index:99;top:73px;left:0px">
+        <div class="text-white alert mb-0 py-0">
             <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
                 <i data-feather="x-circle"  height="20px" ></i>
             </a>
             <div class="font-weight-bold font-size-16 text-center">
-            <strong>{{ $message }}</strong>
+            <span>{{ $message }}</span>
             </div> 
         </div>
     </div>
