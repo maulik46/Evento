@@ -111,9 +111,9 @@ class system extends Controller
         $table=admin::join('tblcolleges','tblcolleges.clgcode','=','tbladmin.clgcode')->where('tblcolleges.clgcode',$clgcode)->get()->first();
         return view('system/update_college',['clg_data'=>$table]); 
     }
-    public function action_update_college(Request $req,$clgcode)
+    public function action_update_college(Request $req)
     {
-        $clgcode = decrypt($clgcode);
+        $clgcode = decrypt($req->clgcode);
         $admin_name = $req->admin_name;
         $admin_email = $req->admin_email;
         $admin_mobile = $req->clg_mob;
