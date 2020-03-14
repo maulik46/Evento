@@ -1,4 +1,5 @@
 <?php
+
 use App\tblevent;
 use \App\Http\Controllers\co_ordinate;
 co_ordinate::remain_result();
@@ -349,7 +350,7 @@ co_ordinate::remain_result();
                         {
                         
                             $stud=App\tblstudent::join('tblparticipant', function($join) {
-                                $join->on('tblparticipant.senrl','LIKE',DB::raw("CONCAT('%',tblstudent.senrl,'%')"));
+                                $join->on('tblparticipant.senrl','LIKE',\DB::raw("CONCAT('%',tblstudent.senrl,'%')"));
                             })
                             ->join('tblevents','tblevents.eid','=','tblparticipant.eid')
                             ->where([['tblevents.enddate','>=',date('Y-m-d')]])
@@ -373,8 +374,7 @@ co_ordinate::remain_result();
         plotOptions: {
           bar: {
             horizontal: false,
-            columnWidth: '45%',
-            endingShape: 'rounded'
+            columnWidth: '45%'
           },
         },
         dataLabels: {
