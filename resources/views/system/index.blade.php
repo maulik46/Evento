@@ -22,7 +22,7 @@
                         <span class="badge badge-soft-primary badge-pill px-3">
                         {{date('d/m/Y',strtotime($clg->start_date))}}
                         </span>
-                        <div class="badge badge-success px-3 badge-pill">Running</div>
+                        <div class="badge badge-success px-3 badge-pill">{{$clg->status}}</div>
                     </div>
                     <h5 class="text-dark mt-0">{{ucfirst($clg->clgname)}}</h5>
                     
@@ -34,7 +34,7 @@
                     <div class="navbar px-0 pb-0">
                         <div class="d-flex">
                             <a href="javascript: void(0);">
-                                <img src="assets/images/avatars/child.svg" alt="" class="avatar-sm m-1 rounded-circle">
+                                <img src="{{asset('profile_pic/admin_pro_pic/')}}/{{$clg->profilepic}}" alt="" class="avatar-sm m-1 rounded-circle">
                             </a>
                             <h6 class="ml-2">
                                 {{ucfirst($clg->name)}} <span class="badge badge-soft-info px-3">Admin</span>
