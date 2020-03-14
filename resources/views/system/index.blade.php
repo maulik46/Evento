@@ -12,13 +12,15 @@
         </div>
     </div>
     <div class="row" id="ins-list">
+    <?php $count=0; ?>
     @foreach($clgs as $clg)
+    <?php $count++; ?>
         <div class="col-lg-6 college">
             <div class="card new-shadow-2 bg-light hover-me-sm">
                 <div class="card-body py-1">
                     <div class="navbar px-0 pb-2">
                         <span class="badge badge-soft-primary badge-pill px-3">
-                        {{date('d/m/Y',strtotime($clg->date))}}
+                        {{date('d/m/Y',strtotime($clg->start_date))}}
                         </span>
                         <div class="badge badge-success px-3 badge-pill">Running</div>
                     </div>
@@ -41,13 +43,17 @@
                                 </div>
                             </h6>
                         </div>
-                        <div>
+                        <div class="navbar px-0">
                             <a href="{{url('update_college')}}/{{encrypt($clg->clgcode)}}">
-                                <i data-feather="edit" class="text-warning mr-1" height="19px"></i>
+                                <i data-feather="edit" class="text-warning" height="19px"></i>
                             </a>
-                            <a href="">
-                                <i data-feather="trash-2" class="text-danger ml-1" height="19px"></i>
+                            <a href="" class="mx-2">
+                                <i data-feather="trash-2" class="text-danger" height="19px"></i>
                             </a>
+                            <div class="custom-control custom-switch mt-1">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch{{$count}}">
+                                <label class="custom-control-label" for="customSwitch{{$count}}"></label>
+                            </div>
                         </div>
                     </div>
                 </div>
