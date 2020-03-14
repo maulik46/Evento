@@ -130,9 +130,9 @@ co_ordinate::remain_result();
             <div class="card new-shadow-sm">
                 <div class="card-body pb-0">
 
-                    <h5 class="card-title mb-0 header-title">Revenue</h5>
+                    <h5 class="card-title mb-0 header-title">Participation by class</h5>
 
-                    <div id="revenue-chart" class="apex-charts mt-3" dir="ltr"></div>
+                    <div id="chart-1" class="apex-charts"></div>
                 </div>
             </div>
         </div>
@@ -142,8 +142,9 @@ co_ordinate::remain_result();
         <div class="col-xl-6 col-md-12">
             <div class="card new-shadow-sm">
                 <div class="card-body px-0">
-                    <h5 class="card-title mt-0 mb-0 header-title px-4">Participation by class</h5>
-                    <div id="sales-by-category-chart" class="apex-charts mb-0 mt-3" dir="ltr"></div>
+                    <h5 class="card-title mt-0 mb-0 header-title px-4">Revenue </h5>
+                    <!-- <div id="sales-by-category-chart" class="apex-charts mb-0 mt-3" dir="ltr"></div> -->
+                    <div id="chart-2" class="apex-charts mb-0 mt-3"></div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div>
@@ -331,7 +332,104 @@ co_ordinate::remain_result();
 @section('extra-scripts')
 <script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
 <script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
+<script>
+        var area = {
+          series: [
+        <?php
+                foreach ($div as $t)
+                 {
+                 ?>
+                
+                {
+	            name:'<?php echo "Div :".$t['division']; ?>',
+                data: [
+                    <?php
+                    $data_str="";
+                    foreach($class as $c)
+                        {
+                        
+                            $stud=App\tblstudent::join('tblparticipant', function($join) {
+                                $join->on('tblparticipant.senrl','LIKE',DB::raw("CONCAT('%',tblstudent.senrl,'%')"));
+                            })
+                            ->join('tblevents','tblevents.eid','=','tblparticipant.eid')
+                            ->where([['tblevents.enddate','>=',date('Y-m-d')]])
+                            ->where('tblstudent.class',$c)
+                            ->where('tblstudent.division',$t['division'])->get()->count();
+                            $data_str.="'".$stud."'".",";
+                        }
+                        echo $data_str;
+                	?>
+                    
+					]
+                },
+                <?php
+                }
+                ?>
+        ],
+          chart: {
+          height: 313,
+          type: 'bar'
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '45%',
+            endingShape: 'rounded'
+          },
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'smooth',
+          width: 6,
+          colors: ['transparent']
+        },
+        xaxis: {
+          categories:[<?php
+          $class_string="";
+            foreach($class as $c)
+            {               
+                $class_string.="'".strtoupper($c['class'])."'".",";
+            }
+            echo $class_string;
+            ?>]
+        },
+        
+        };
+ var pie = {
+          series: [<?php echo $part_count; ?>],
+          chart: {
+          height: 350,
+          type: 'donut',
+        },
+        labels: [<?php echo $ename_string; ?>],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
 
+        var chart1 = new ApexCharts(
+            document.querySelector("#chart-1"), 
+            area
+            
+        );
+        chart1.render();
+
+        var chart2 = new ApexCharts( 
+            document.querySelector("#chart-2"),
+            pie
+        );
+        chart2.render();
+</script>
 <script>
     function confirm(ename, cid) {
         var cid = cid;
