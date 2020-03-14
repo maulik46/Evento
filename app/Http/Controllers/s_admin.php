@@ -71,7 +71,33 @@ class s_admin extends Controller
         $events=tblevent::where([['clgcode',Session::get('clgcode')]
             ])->orderby('edate','desc')->get()->toarray();
         $cod=tblcoordinaters::where('clgcode',Session::get('clgcode'))->get();
-        return view('super-admin/index',['events'=>$events,'cods'=>$cod]);
+        $tblp=participant::select('tblparticipant.eid',DB::raw('COUNT(tblparticipant.eid) AS count_par'))
+        ->join('tblevents','tblevents.eid','=','tblparticipant.eid')
+        ->where('tblparticipant.clgcode',session::get('clgcode'))
+        ->where([['tblevents.enddate','>=',date('Y-m-d')]])
+        ->groupBy('tblparticipant.eid')->get()->toarray();
+        
+        $ename_string="";
+        $part_count="";
+        foreach($tblp as $p)
+        {
+            $ename=tblevent::where('eid',$p['eid'])->first();
+            $ename_string.="'".$ename['ename']."'".",";
+            $part_count.=$p['count_par'].",";
+        }
+        $class=tblstudent::select('class')->where('clgcode',Session::get('clgcode'))->groupBy('class')->get()->toArray();
+        $div=tblstudent::select('division')->where('clgcode',Session::get('clgcode'))->groupBy('division')->get()->toArray();
+        // print_r($class);
+        // print_r($div);
+        // $stud=tblstudent::join('tblparticipant', function($join) {
+        //     $join->on('tblparticipant.senrl','LIKE',DB::raw("CONCAT('%',tblstudent.senrl,'%')"));
+        // })->join('tblevents','tblevents.eid','=','tblparticipant.eid')
+        // ->where([['tblevents.enddate','>=',date('Y-m-d')]])
+        // ->where('tblstudent.class',"fybca")
+        // ->where('tblstudent.division',"1")
+        // ->get()->count();
+        // // echo $stud;
+        return view('super-admin/index',['events'=>$events,'cods'=>$cod,'ename_string'=>$ename_string,'part_count'=>$part_count,'class'=>$class,'div'=>$div]);
     }
      public function send_notice(Request $req)
     {
