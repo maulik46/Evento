@@ -318,7 +318,7 @@ route::post('/check_login', 'system@check_login');
     route::view('/s_add_college', 'system/add_college');
     route::any('/add_college','system@add_college');
 
-    route::any('/action_update_college/{clgcode}','system@action_update_college');
+    route::post('/action_update_college','system@action_update_college');
     route::any('/update_college/{clgcode}', 'system@update_college');
 
 
