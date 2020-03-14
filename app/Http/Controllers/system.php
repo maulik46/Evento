@@ -140,5 +140,105 @@ class system extends Controller
         return redirect(url('/system'));
 
     }
+    public function update_pro(Request $req)
+    {
+        $smobile=$req->user_mobile;
+        $semail=$req->user_email;
+        $sname=$req->user_name;
+        if($file=$req->file('photo-upload'))
+        {
+            $req->validate([
+                'photo-upload' => 'required|mimes:png,jpg,jpeg,svg|max:2000',
+                ],
+            [
+                'photo-upload.max'=>"The file size should be less then 2 Mb",
+                'photo-upload.mimes'=>"Only image or svg allowed"
+            ]);
+            $file=$req->file('photo-upload');
+            $destinationPath=public_path('profile_pic/admin_pro_pic');
+            $filename=time().$file->getClientOriginalName();
+            $file->move($destinationPath, $filename);
+            $pro_pic=$filename;
+            $rec=\DB::table('tblsysadmin')->where('sid',$req->sid)->update(['s_aname'=>$sname,'s_email'=>$semail,'s_mobile'=>$smobile,'s_propic'=>$pro_pic]);
+            session()->put('syspropic',$pro_pic);
+        }
+        else{
+            $rec=\DB::table('tblsysadmin')->where('sid',$req->sid)->update(['s_aname'=>$sname,'s_email'=>$semail,'s_mobile'=>$smobile]);
+        }
+        
+        if($rec>0)
+        {
+            
+            session()->put('sysadmin',$sname);
+            session()->put('sysemail',$semail);
+            session()->put('sysmobile',$smobile);
+            session()->flash('alert-success', 'Profile updated successfully');
+        }
+        return back();
+    }
+    public function update_pass(Request $req)
+    {
+        $c=\DB::table('tblsysadmin')->where([['sid',Session::get('sid')],['pass',$req->current_pass]])->count();
+       if($c==1)
+       {
+           if($req->npass == $req->cpass)
+           {
+            \DB::table('tblsysadmin')->where('sid',Session::get('sid'))->update(['pass'=>$req->npass]);
+           }
+           else{
+               session()->flash('alert-danger', 'Newpassword and confirm password not match..!');
+               return redirect()->back();
+           }
+       }
+       else
+       {
+           session()->flash('alert-danger', 'Invalid password..!');
+           return redirect()->back();
+           
+       }
+       session()->flash('alert-success', 'Password updated successfully..!');
+       return redirect(url('system'));
+    }
+    public function add_institute(Request $req)
+    {
+        $iname=$req->iname;
+        $pass=uniqid();
+        $to_email=trim($req->email);
+        $message="
+        sub : <b>confrimation for demo request</b>
+        <br><br>
+        Dear <b>".ucfirst($req->aname)."</b>,
+        <br><br>
+        Last ".date('d,F Y',strtotime($req->reqdate)).", you sent demo request for your instistute  <b>".ucfirst($req->iname)."</b>.<br>
+        we glad to inform you that the your demo request accepted.
+        <br><br>
+        <b>your login details as follow.</b>
+        <table border=1 style='padding:10px'> <tr style='background-color:#e6e6e6'><td style='padding:5px'> User Name </td><td style='padding:5px'> Password </td></tr>  <tr><td style='padding:5px'>".$to_email."</td> <td style='padding:5px'>".$pass."</td></tr>    </table>
+        <br>
+        Sincerely,
+        <br>
+        Evento Team.";
+        $data=array('name'=>"",'body'=>$message);
+        \Mail::send('email',$data,function($message) use ($iname, $to_email){
+            $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+            ->from("eventoitsol@gmail.com", $name = "Evento")
+            ->subject("Confirmation for demo request")->bcc($to_email);
+        });
+        
+        $clg_insrt=\DB::table('tblcolleges')->insert(['clgcode'=>$req->clgcode,'clgname'=>$iname,'address'=>$req->addrs,'city'=>$req->city,'status'=>'running','start_date'=>date('Y-m-d')]);
+        
+        $admin=new admin();
+        $admin->clgcode=$req->clgcode;
+        $admin->name=$req->aname;
+        $admin->email=$req->email;
+        $admin->mobile=$req->contact;
+        $admin->pass=$pass;
+        $admin->last_noti="0";
+        $admin->profilepic="professor.svg";
+        $admin->save();
+        \DB::table('tbldemoreq')->where('did',$req->did)->delete();
+        session()->flash("alert-success","College added successfully..!");
+        return response()->json(array('msg'=> "success"),200);
+    }
 
 }
