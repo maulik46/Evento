@@ -91,13 +91,14 @@ class system extends Controller
         $admin->mobile=$req->clg_mob;
         $admin->pass=$req->admin_pass;
         $admin->profilepic='child.svg';
-        $admin->date=date('Y-m-d');
 
         $tbl_clg_data=[
             'clgcode' => $req->clg_code, 
             'clgname' => $req->clg_name, 
             'address' => $req->clg_add, 
-            'city' => $req->clg_city
+            'city' => $req->clg_city,
+            'start_date'=>date('Y-m-d')
+
         ];
         $tbl_clg = \DB::table('tblcolleges')->insert($tbl_clg_data);
 
