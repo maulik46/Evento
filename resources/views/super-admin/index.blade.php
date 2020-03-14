@@ -21,19 +21,7 @@ co_ordinate::remain_result();
     }
 
     /* css for event co-ordinator list in index page */
-    .cod-option {
-        display: none !important;
-    }
-
-    .cod-card:hover {
-        border-radius: .3rem;
-        border-color: transparent !important;
-    }
-
-    .cod-card:hover .cod-option {
-        display: flex !important;
-    }
-
+   
     .cod-card:hover .cod-name {
         color: #35bbca !important;
     }
@@ -65,11 +53,14 @@ co_ordinate::remain_result();
         background-color: rgba(255, 92, 117, .15);
         color: var(--danger);
     }
-
+    .avatar-xxl{
+        height: 6rem;
+        width: 6rem;
+    }
     @media(max-width:576px) {
         .avatar-xxl {
-            height: 6rem;
-            width: 6rem;
+            height: 5rem;
+            width: 5rem;
         }
     }
 </style>
@@ -260,39 +251,39 @@ co_ordinate::remain_result();
         @foreach($cods as $c)
         <?php $count++;?>
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="card rounded-lg new-shadow-sm hover-me-sm">
+            <div class="card mb-2 rounded-lg new-shadow-sm hover-me-sm cod-card">
                 <div class="card-body p-1 p-sm-2">
-                    <div class="d-flex align-items-center justify-content-between text-lg-left text-left text-sm-center flex-wrap ">
+                    <div class="d-flex align-items-center justify-content-center text-lg-left text-left text-sm-center flex-wrap ">
                         <div class="col col-lg-4 col-md-12 col-sm-4 col-4">
                             <img src="{{asset('profile_pic/'.$c->pro_pic)}}" alt=""
                                 class="avatar-xxl rounded-circle new-shadow-sm bg-light"
                                 style="border:1px solid #f1f1f1" />
                         </div>
                         <div class="col col-lg-8 col-md-12 col-sm-8 col-8">
-                            <h5 class="mt-2 mb-0">{{ucfirst($c['cname'])}}</h5>
+                            <h5 class="mt-2 mb-0 cod-name">{{ucfirst($c['cname'])}}</h5>
                             <h6 class="text-muted font-weight-normal mt-2 mb-0">
-                                <i data-feather="mail" height="18px"></i>
+                                <i data-feather="mail" height="15px" class="icon-dual-danger"></i>
                                 <span class="font-weight-bold">{{$c['email']}}</span>
                             </h6>
                             <h6 class="text-muted font-weight-normal mt-2 mb-0">
-                                <i data-feather="phone" height="18px"></i>
+                                <i data-feather="phone" height="15px" class="icon-dual-success"></i>
                                 <span class="font-weight-bold">{{$c['mobile']}}</span>
                             </h6>
                             <div
                                 class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-sm-center ">
                                 <span
-                                    class="badge badge-info badge-pill px-3 mt-3 mr-3 new-shadow-sm">{{ucfirst($c['category'])}}</span>
+                                    class="badge badge-info badge-pill px-3 mt-2 mr-3 new-shadow-sm">{{ucfirst($c['category'])}}</span>
                                 <?php $tble = tblevent::where('cid', $c['cid'])->get()->toArray();
                                 $e = "";
                                 foreach ($tble as $te) {
                                     $e .= $te['ename'] . ",";
                                 }?>
-                                <a href="#" data-toggle="tooltip" title="Delete Co-ordinator"
+                                <a href="#" data-toggle="tooltip" title="Delete"
                                     onclick="return confirm('<?php echo $e ?>','<?php echo $c['cid'] ?>')"
-                                    class="btn text-danger p-1 btn-rounded mt-3 btn-delete-cod">
+                                    class="btn text-danger p-1 btn-rounded mt-2 btn-delete-cod">
                                     <i data-feather="trash-2" height="19px"></i>
                                 </a>
-                                <div class="text-danger font-weight-bold"></div>
+                                
                             </div>
                         </div>
                     </div>
