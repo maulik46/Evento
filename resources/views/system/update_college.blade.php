@@ -8,8 +8,9 @@
                 </span>
         </div> 
         <div class="px-1 px-sm-3" >
-            <form method="POST" action="{{url('action_update_college')}}/{{encrypt($clg_data['clgcode'])}}" class="mt-2 card shadow-none py-3 px-1 px-sm-2 rounded-lg" style="border:1px solid #e2e7f1;" onsubmit="return validForm()">
+            <form method="POST" action="{{url('action_update_college')}}" class="mt-2 card shadow-none py-3 px-1 px-sm-2 rounded-lg" style="border:1px solid #e2e7f1;" onsubmit="return validForm()">
             @csrf
+            <input type="hidden" name="clgcode" value="{{encrypt($clg_data['clgcode'])}}">
                 <div class="row mx-0">
                     <div class="form-group col-sm-6">
                         <label>Admin Name</label>
