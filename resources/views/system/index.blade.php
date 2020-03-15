@@ -61,6 +61,9 @@
             </div>
         </div>
     @endforeach
+    @if($c==0)
+        <h1>evento</h1>
+    @endif
     </div>
 </div>
 @endsection
