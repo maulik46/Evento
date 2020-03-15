@@ -61,7 +61,7 @@
             </div>
         </div>
     @endforeach
-    @if($c==0)
+    @if($count==0)
         <h1>evento</h1>
     @endif
     </div>
