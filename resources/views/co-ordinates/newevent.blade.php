@@ -76,10 +76,10 @@
                             <span class="text-danger font-weight-bold" id="validphoto"></span>
                         </div>
                         </div>
-                        <div class="mt-3 p-1" id="fc" ></div>
+                        <div class="p-1" id="fc" ></div>
                     </div>
                 </div>
-                <div class="card border-form my-5">
+                <div class="card border-form my-3">
                     <div class="card-body py-0 pb-1">
                         <div class="row">
                             <div class="col-xl-4 form-group mt-2">
@@ -143,14 +143,14 @@
                     </div>
                 </div>
 
-                <div class="card border-form my-5">
+                <div class="card border-form my-3">
                     <div class="card-body py-0 pb-1">
                         <div class="row">
                             <div class="col-md-4 form-group mt-2">
                                 <label class="col-form-label font-size-15">Event Type</label>
                                 <div class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
-                                    <select id="event-type" name="etype" class="form-control w-100 pt-1 nice-select">
+                                    <select id="event-type" name="etype" class="form-control w-100 py-0 nice-select">
                                         <option hidden value="">Select Type</option>
                                         <option value="solo">Solo</option>
                                         <option value="team">Team</option>
@@ -163,7 +163,7 @@
                                 <label class="col-form-label font-size-15">Gender</label>
                                 <div class="form-group has-icon d-flex align-items-center">
                                     <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                                    <select id="gen" onchange="return echeck()" name="efor" class="form-control w-100 pt-1 nice-select">
+                                    <select id="gen" onchange="return echeck()" name="efor" class="form-control w-100 py-0 nice-select">
                                         <option value="" hidden>Select Gender</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
@@ -253,25 +253,24 @@
                                     class="font-weight-light">(optional)</span></label>
 
                             <div class="form-group has-icon d-flex">
-                                <i data-feather="edit" class="form-control-icon ml-2" height="19px"
-                                    style="margin-top: 13px;" s></i>
-                                <textarea name="rules" class="form-control" rows="5" id="example-textarea"
+                                <i data-feather="edit" class="form-control-icon ml-2" height="19px" style="margin-top: 13px;"></i>
+                                <textarea name="rules" class="form-control" rows="2" id="example-textarea"
                                     placeholder="Enter any message or rule.."></textarea>
                             </div>
                             <span class="help-block">
-                                <span>Rules must be seprated by <b class="text-dark h5"> ;</b></span>
+                                <span>Rules must be seprated by &nbsp;<b class="text-dark h5"> ;</b></span>
                             </span>
                         </div>
 
                         <button type="submit"
-                            class="hover-me-sm m-2 btn btn-success px-3  rounded-sm new-shadow font-weight-bold font-size-15">
+                            class="hover-me-sm m-2 btn btn-success px-3  rounded-sm new-shadow font-weight-bold">
                             <span class="mr-1">Create Event</span>
                             <i data-feather="check-square" height="20px"></i>
                         </button>
                         <button type="reset"
-                            class="hover-me-sm m-2 btn btn-danger px-3  rounded-sm new-shadow font-weight-bold font-size-15">
+                            class="hover-me-sm m-2 btn btn-danger px-3  rounded-sm new-shadow font-weight-bold">
                             <span class="mr-1">Reset form</span>
-                            <i data-feather="x-circle" height="20px"></i>
+                            <i data-feather="rotate-ccw" height="20px"></i>
                         </button>
 
                     </div>
@@ -297,7 +296,7 @@
 <script src="{{asset('assets/libs/multicheckbox/multiselect.js')}}"></script>
 <script src="{{asset('assets/js/create-ev-js.js')}}"></script>
 <script>
-    $('#poster-upload').change(function(){
+    $('#poster-upload').change(function (){
                 if($('#poster-upload').val() !="")
                 {
                     // var i = $(this).prev('label').clone();
@@ -309,7 +308,7 @@
                 
                 // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
                 if (fi.files.length > 0) {
-                    $('#fc').css("border","1px solid #d2d8de");
+                    $('#fc').css({"border":"1px solid #d2d8de","margin-bottom":"10px","border-radius":"5px"});
                 document.getElementById('fc').innerHTML ='<div class="d-flex justify-content-center align-items-center mr-2" style="margin-top:-12px;"><span class="badge badge-dark px-3 py-1 badge-pill">Total Files: <b>' + fi.files.length + '</b></span></div>';
                 document.getElementById('fc').innerHTML = document.getElementById('fc').innerHTML + ' <div class="mt-2 col-xl-12 row" id="fl">';
                     for (var i = 0; i <= fi.files.length - 1; i++) {
@@ -324,7 +323,7 @@
                                 $('#validphoto').text("File must be less than 2 MB");
                                 sessionStorage.setItem('err',1);
                                 document.getElementById('fl').innerHTML =
-                            document.getElementById('fl').innerHTML + '<div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:orange;border-right:4px solid #fff;border-left:4px solid #fff;"> <span class="text-dark col-8">'+ fname +'</span><span class="badge badge-light px-3 badge-pill mr-2 col-4">' + (fsize/1024).toFixed(2) + 'KB</span></div>';
+                            document.getElementById('fl').innerHTML + '<div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:var(--danger);border-right:4px solid #fff;border-left:4px solid #fff;"> <span class="text-dark col-8">'+ fname +'</span><span class="badge badge-light px-3 badge-pill mr-2 col-4">' + (fsize/1024).toFixed(2) + 'KB</span></div>';
                             }  
                             else{
                                 $('#validphoto').text("");
@@ -338,7 +337,7 @@
                             $('#validphoto').text('File Extension must be jpg,jpeg,svg and png format...!'); 
                             sessionStorage.setItem('err',1);
                             document.getElementById('fl').innerHTML =
-                            document.getElementById('fl').innerHTML + '<div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:orange;border-right:4px solid #fff;border-left:4px solid #fff;"> <span class="text-dark col-8">'+ fname +'</span><span class="badge badge-light px-3 badge-pill mr-2 col-4">' + (fsize/1024).toFixed(2) + 'KB</span></div>';  
+                            document.getElementById('fl').innerHTML + '<div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:var(--danger);border-right:4px solid #fff;border-left:4px solid #fff;"> <span class="text-dark col-8">'+ fname +'</span><span class="badge badge-light px-3 badge-pill mr-2 col-4">' + (fsize/1024).toFixed(2) + 'KB</span></div>';  
                         }
                         }
                     
