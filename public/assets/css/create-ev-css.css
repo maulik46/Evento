@@ -12,9 +12,9 @@
         background-color: #f3f4f7 !important;
         padding: 10px 15px;
         border: 1px solid #f3f4f7;
-        font-size: 1.1em;
+        font-size: 1em;
         color: #333;
-        height: 50px;
+        height: 40px;
         cursor: text !important;
     }
 
@@ -123,12 +123,13 @@
     }
   
      .ms-options-wrap  button{
-        margin-top:-2px;
+        margin-top:-6px !important;
         font-size: 1em;
         color: #333 !important;
         margin-left:16px;
      }
    .ms-options-wrap > button:focus, .ms-options-wrap > button {
+        margin-top:0px;
         border: 1px solid #aaa0;
         background-color: #fff0;
     }
