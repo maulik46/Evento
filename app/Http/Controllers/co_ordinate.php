@@ -156,7 +156,7 @@ class co_ordinate extends Controller
     {
         $id=decrypt($id);
         $participate=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
-        $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
+        $einfo=tblevent::select('eid','ename','e_type','edate','time')->where('eid',$id)->first()->toarray();
         return view('co-ordinates/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
     }
     public function delete_event(Request $req)
@@ -210,7 +210,7 @@ class co_ordinate extends Controller
         {}
         else
         {
-            session()->flash('updatealert','Student are Already Participanted So somes Fields are Disable..!');
+            session()->flash('updatealert','Some fields are disable because some students has already participanted..!');
         }
        // print_r($tble);
         return view('co-ordinates/updateevent',['e_data'=>$tble,'tblpcount'=>$tblp]);
