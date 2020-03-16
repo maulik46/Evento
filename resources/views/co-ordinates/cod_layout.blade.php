@@ -98,7 +98,10 @@
                                 <i data-feather="key" class="icon-dual-info icon-xs mr-2"></i>
                                 <span>Change Password</span>
                             </a>
-
+                            <a href="{{url('/cindex/winner-list')}}" class="dropdown-item notify-item my-2">
+                                <i data-feather="key" class="icon-dual-info icon-xs mr-2"></i>
+                                <span>Winner list</span>
+                            </a>
                             <div class="dropdown-divider"></div>
 
                             <a href="{{url('/clogout')}}" class="dropdown-item notify-item">
