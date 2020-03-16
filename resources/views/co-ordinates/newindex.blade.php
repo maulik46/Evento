@@ -36,6 +36,9 @@
         .btn-p-candidates:hover{
             background-color:rgba(83,105,248,.15);
         }
+        .form-control:focus {
+        border-color: gray !important;
+    }
             
 </style>
 @endsection
@@ -68,11 +71,11 @@
         </div>
         <div class="col-md-5 col-sm-12">
             <div class="card new-shadow-sm p-1 px-3 overflow-auto my-scroll" style="height:340px;">
-            <div class="h4 d-flex align-items-center justify-content-center">
-                <i data-feather="calendar" class="icon-dual-dark"></i>
+            <div class="h5 d-flex align-items-center justify-content-center">
+                <i data-feather="calendar" height="18px" class="icon-dual-dark"></i>
                 <span class="ml-1">My Running Events</span>
             </div>   
-            <hr class="mt-0 mb-2">
+            <hr class="mt-1 mb-2">
             <?php $c = 0;$a=0;?>
             @foreach($events as $e)
             <?php $c++;
@@ -98,6 +101,12 @@
                         <?php 
                             $result=\DB::table('tblparticipant')->where([['eid',$e['eid']],['rank',1]])->count();
                         ?>
+                            <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="View Candidates">
+                                <i data-feather="users" height="18px" class="text-primary"></i>
+                            </a>
+                            <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="About">
+                                <i data-feather="info" height="18px" class="text-info"></i>
+                            </a>
                             @if($result == 0)
                             <a href="{{url('create_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="Announce Result">
                                 <i data-feather="award" height="18px" class="text-success"></i>
@@ -107,12 +116,6 @@
                                     <i data-feather="award" height="18px" class=" text-success"></i>
                             </a>
                             @endif
-                            <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="View Candidates">
-                                <i data-feather="users" height="18px" class="text-primary"></i>
-                            </a>
-                            <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="About">
-                                <i data-feather="info" height="18px" class="text-info"></i>
-                            </a>
                          </div>
                     </div>
                     <div style="margin-top:-5px;">
@@ -138,20 +141,25 @@
 <!-- charts over -->
 
     <div class="card mt-2 mb-0 new-shadow-sm">
-        <div class="card-body py-2">
-            <div class="h4 d-flex align-items-center">
+        <div class="py-2 navbar">
+            <div class="h4">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">All Events</span>
+            </div>
+            <div class="col-xl-3 col-md-6 col-12 mb-0 form-group has-icon d-flex align-items-center px-0">
+                <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
+                <input type="text" id="myInput" class="form-control" placeholder="Search Events" />
             </div>
         </div>
     </div> 
     <div class="card new-shadow-sm mt-2" >
         <div class="card-body">
-            <div class="table-responsive overflow-auto my-scroll" style="max-height: 350px;">
+            <div class="table-responsive overflow-auto my-scroll" style="max-height: 360px;">
             <table class="table table-hover table-nowrap mb-0" >
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Rating</th>
                             <th scope="col">Event</th>
                             <th scope="col">Participator</th>
                             <th scope="col">Start Date</th>
@@ -161,7 +169,7 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="all-events">
                         <?php $c=0 ?>
                          @foreach($events as $e)
                         <?php $c++;
@@ -170,8 +178,12 @@
                         ?>
                         <tr>
                             <td>#{{$c}}</td>
+                            <td>
+                                <i data-feather="star" class="icon-dual-warning" height="18px"></i>
+                                <span>4.5</span>
+                            </td>
                             <td>{{ucfirst($e['ename'])}} compition</td>
-                             <td>{{$p}}</td> <!--total Participator -->
+                            <td>{{$p}}</td> <!--total Participator -->
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
                             <td>{{date('d/m/Y', strtotime($e['enddate']))}}</td>
                             <td>{{ucfirst($co->cname)}}</td>
@@ -185,12 +197,15 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
+                                <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="View Candidates">
+                                    <i data-feather="users" height="18px" class="text-primary"></i>
+                                </a>
+                                <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded" data-toggle="tooltip" data-placement="top" title="About">
                                     <i data-feather="info" height="18px" class=" text-info"></i>
                                 </a>
                             <?php $r = \DB::table('tblparticipant')->select('senrl')->where([['eid', $e['eid']], ['rank', 1]])->count();?>
                             @if($r==1)
-                                <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Show Result">
+                                <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded" data-toggle="tooltip" data-placement="top" title="Show Result">
                                     <i data-feather="award" height="18px" class=" text-success"></i>
                                 </a>
                             @endif
@@ -244,8 +259,7 @@
                                         @endif
                                     </span>
                                     <div>
-                                    <a href="#" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-    aria-expanded="false" <?php if($tblapp!=0){ ?>class="dropdown-toggle disabled"<?php } else { ?>class="dropdown-toggle" <?php } ?>>
+                                    <a href="#" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false" <?php if($tblapp!=0){ ?>class="dropdown-toggle disabled"<?php } else { ?>class="dropdown-toggle" <?php } ?>>
 
                                             <i id="event-info" data-feather="more-vertical" class="text-dark"
                                                 height="20px"></i>
@@ -359,20 +373,22 @@
                                     <div class="card-body py-2">
                                         <div class="h4 d-flex align-items-center">
                                             <i data-feather="calendar" class="icon-dual-dark"></i>
-                                            <span class="ml-1">Past Events</span>
+                                            <span class="ml-1">Finished Events</span>
                                         </div>
                                     </div>
                                 </div> 
-                                <div class="card new-shadow-sm mt-2" style="max-height: 350px;">
+                                <div class="card new-shadow-sm mt-2" style="max-height: 360px;">
                                     <div class="card-body overflow-auto my-scroll">
                                         <div class="table-responsive overflow-auto my-scroll">
                                 <table class="table table-hover table-nowrap mb-0">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Rating</th>
                                     <th scope="col">Event</th>
-                                    <th scope="col">Total Participator</th>
-                                    <th scope="col">Date</th>
+                                    <th scope="col">Participator</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
                                     <th scope="col">Co-ordinator</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -384,17 +400,26 @@
                         ?>
                         <tr>
                             <td>#{{$c}}</td>
+                            <td>
+                                <i data-feather="star" class="icon-dual-warning" height="18px"></i>
+                                <span>4.5</span>
+                            </td>
                             <td>{{ucfirst($e['ename'])}} compition</td>
-                             <td>{{$p}}</td> <!--total Participator -->
+                            <td>{{$p}}</td> <!--total Participator -->
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
-                             <td>{{ucfirst(Session::get('cname'))}}</td>
+                            <td>{{date('d/m/Y', strtotime($e['enddate']))}}</td>
+                            <td>{{ucfirst(Session::get('cname'))}}</td>
                             <td  class="d-flex justify-content-start align-items-center pt-1 mb-0">
-                                <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Show Result">
-                                    <i data-feather="award" height="18px" class=" text-success"></i>
-                            </a>
-                                <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded mr-1" data-toggle="tooltip" data-placement="top" title="About">
+                                <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="View Candidates">
+                                    <i data-feather="users" height="18px" class="text-primary"></i>
+                                </a>
+                                <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded" data-toggle="tooltip" data-placement="top" title="About">
                                     <i data-feather="info" height="18px" class=" text-info"></i>
                                 </a>
+                                <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded" data-toggle="tooltip" data-placement="top" title="Show Result">
+                                    <i data-feather="award" height="18px" class=" text-success"></i>
+                                </a>
+                                
                                 
                             </td>
                         </tr>
@@ -565,5 +590,16 @@ async function deleteEvent(eid){
         );
         chart2.render();
 
+</script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $(".table-responsive #all-events tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+
+            });
+        });
+    });
 </script>
 @endsection
