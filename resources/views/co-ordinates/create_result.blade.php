@@ -75,7 +75,7 @@
             {{date('d/m/Y',strtotime($einfo['edate']))}}
             </span>
             <span class="font-weight-bold badge badge-soft-success px-3 badge-pill">
-            {{ucfirst($einfo['category'])}}
+            {{date('l',strtotime($einfo['edate']))}}
             </span>
             <span class="font-weight-bold badge badge-soft-warning px-3 badge-pill">
             {{ucfirst($einfo['e_type'])}}
