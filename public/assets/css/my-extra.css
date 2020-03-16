@@ -218,7 +218,10 @@ img{
        background: rgba(151, 112, 241, 0.22) !important;
        color: var(--indigo) !important;
    }
-
+   .badge-soft-pink{
+       background: rgba(232, 62, 140, 0.15) !important;
+       color: var(--pink) !important;
+   }
 /* super admin right side  btn endddd*/
 
 /* sweet alert confirm & cancel button & input field css */
