@@ -377,7 +377,7 @@
 
         if ($('#cno').val() == "") {
             $('#cno').parent().addClass('border border-danger');
-            $('#cno').parent().next().text("Please Select Content no");
+            $('#cno').parent().next().text("Please Enter Content no");
             f = 1;
         } 
         else if (!phoneno.test($('#cno').val())) {
