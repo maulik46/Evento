@@ -30,7 +30,7 @@ class system extends Controller
     {
         $filename="";
         $fname="";
-        print_r($req->file('attachment[]'));
+        
         if($file=$req->file('attachment'))
         {
             $req->validate([
@@ -52,20 +52,20 @@ class system extends Controller
         {
             $clgs.=$clg."-";
         }
-        echo $fname;
-        // $notice=new notice;
-        // $notice->topic=$req->title;
-        // $notice->message=$req->message;
-        // $notice->sender='system';
-        // $notice->sender_type='system';
-        // $notice->receiver='admin';
-        // $notice->ndate=date('Y-m-d');
-        // $notice->ntime=date('h:i A');//change
-        // $notice->clgcode=$clgs;
-        // $notice->attechment=$fname;
-        // $notice->save();
-        // session()->flash('success', 'Notice send successfully');
-        // return back();
+        $notice=new notice;
+        $notice->topic=$req->title;
+        $notice->message=$req->message;
+        $notice->sender='system';
+        $notice->sender_type='system';
+        $notice->receiver='admin';
+        $notice->ndate=date('Y-m-d');
+        $notice->ntime=date('h:i A');//change
+        $notice->clgcode=$clgs;
+        $notice->attechment=$fname;
+        $notice->save();
+        session()->flash('alert-success', 'Notice send successfully');
+        return redirect(url('/system'));
+
     }
     public function check_login(Request $req)
     {
@@ -79,7 +79,7 @@ class system extends Controller
             session()->put('syspropic',$user->s_propic);
             return redirect(url('system'));
         }
-        session()->flash('danger','Invalid email or password');
+        session()->flash('alert-danger','Invalid email or password');
         return back();
     }
     public function add_college(Request $req)
