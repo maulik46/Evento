@@ -14,7 +14,7 @@ use App\tblevent;
 */
 
 // ==========================================================================
-// Student dashboard routes start
+// starting page routes start
 // ==========================================================================
 
 route::get('/',function(){
@@ -34,6 +34,13 @@ route::get('/e_info/{eid}', function($eid){
     $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcolleges.clgname')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcolleges','tblcolleges.clgcode','tblcoordinaters.clgcode')->where('tblevents.eid',$eid)->first();
     return view('start/e_info',['einfo'=>$einfo]);
 });
+
+
+// ==========================================================================
+// Student dashboard routes start
+// ==========================================================================
+
+
 
 Route::group(['middleware' => 'SessionCheck'], function () {
     route::get('/index',function(){
@@ -282,6 +289,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         Route::post('/srank','co_ordinate@rank');    
     
         route::get('/delay_res/{eid}','s_admin@delay_res');
+
+        route::view('/event_reports','super-admin/event_reports');
    
     });
 
