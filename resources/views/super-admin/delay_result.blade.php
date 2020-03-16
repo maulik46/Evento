@@ -52,7 +52,7 @@
         box-shadow: 0 1px 6px 0 rgba(255, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .08);
         border-radius: .2rem;
     }
-    @media(max-width: 500px)
+    @media(max-width: 768px)
     {
         .small-sticky{
             margin:-24px 0px;
@@ -75,7 +75,7 @@
             {{date('d/m/Y',strtotime($einfo['edate']))}}
             </span>
             <span class="font-weight-bold badge badge-soft-success px-3 badge-pill">
-            {{ucfirst($einfo['category'])}}
+            {{date('l',strtotime($einfo['edate']))}}
             </span>
             <span class="font-weight-bold badge badge-soft-warning px-3 badge-pill">
             {{ucfirst($einfo['e_type'])}}
@@ -99,20 +99,20 @@
             <div class="row align-items-center" style="margin-bottom:-15px;">
                 <div class="col-md-4">
                     <span class="badge badge-success px-5 mb-1">Rank 1</span>
-                    <div id="r1" class="card bg-soft-success px-3 droppable-rank" style="border:2px dashed #333;">
+                    <div id="r1" class="card bg-soft-success px-3 p-1 droppable-rank" style="border:2px dashed #333;">
                         <img src="{{asset('assets/images/svg-icons/student-dash/winner/1.svg')}}" height="35px" alt="1">
                     </div>
                 </div>
 
                 <div class="col-md-4 small-sticky">
                     <span class="badge badge-primary px-4 mb-1">Rank 2</span>
-                    <div id="r2" class="card bg-soft-primary px-3 droppable-rank" style="border:2px dashed #333;">
+                    <div id="r2" class="card bg-soft-primary px-3 p-1 droppable-rank" style="border:2px dashed #333;">
                         <img src="{{asset('assets/images/svg-icons/student-dash/winner/2.svg')}}" height="35px" alt="2">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <span class="badge badge-warning px-3 mb-1">Rank 3</span>
-                    <div id="r3" class="card bg-soft-warning px-3 droppable-rank" style="border:2px dashed #333;">
+                    <div id="r3" class="card bg-soft-warning px-3 p-1 droppable-rank" style="border:2px dashed #333;">
                         <img src="{{asset('assets/images/svg-icons/student-dash/winner/3.svg')}}" height="35px" alt="3">
                     </div>
                 </div>

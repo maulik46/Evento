@@ -75,7 +75,7 @@ use \App\tblstudent;
             </div> -->
             <div class="table-responsive overflow-auto my-scroll">
                 <table id="my-datatable" class="table table-hover mb-0 ">
-                    <thead>
+                    <thead class="bg-soft-info text-dark">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Enrollment</th>

@@ -108,7 +108,7 @@
 
                             </div>
                         </div>
-                        <div class="mt-2 p-1" id="fc">
+                        <div class="p-1" id="fc">
                             <?php $att = explode(';',$e_data['banner']); 
                             $fcount=0;
                             ?>
@@ -144,7 +144,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card border-form my-5">
+                <div class="card border-form my-3">
                     <div class="card-body py-0 pb-1">
                         <div class="row">
                             <div class="col-xl-4 form-group mt-2">
@@ -216,7 +216,7 @@
                     </div>
                 </div>
                 @if($tblpcount>0)
-                <div class="card border-form my-5">
+                <div class="card border-form my-3">
                     <div class="card-body py-0 pb-1">
                         <div class="row">
                             <div class="col-xl-4 form-group mt-2">
@@ -225,7 +225,7 @@
                                     data-toggle="tooltip" data-placement="bottom"
                                     title="This field disable because some students are already participated.">
                                     <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
-                                    <select id="event-type" name="etype" class="form-control w-100 pt-1 nice-select">
+                                    <select id="event-type" name="etype" class="form-control w-100 py-0 nice-select">
                                         <option selected value="{{$e_data['e_type']}}">{{ucfirst($e_data['e_type'])}}
                                         </option>
                                     </select>
@@ -240,7 +240,7 @@
                                     title="This field disable because some students are already participated.">
                                     <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
                                     <select id="gen" onchange="return echeck()" name="efor"
-                                        class="form-control w-100 pt-1 nice-select">
+                                        class="form-control w-100 py-0 nice-select">
                                         <option selected value="{{$e_data['gallow']}}">{{ucfirst($e_data['gallow'])}}
                                         </option>
                                     </select>
@@ -253,7 +253,7 @@
                                     data-toggle="tooltip" data-placement="bottom"
                                     title="This field disable because some students are already participated.">
                                     <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                                    <select name="class" class="form-control active w-100  nice-select" id="efor">
+                                    <select name="class" class="form-control active w-100  nice-select pt-0" id="efor">
                                         <option selected value="{{$e_data['efor']}}">
                                             <?php 
                                         $ev="";
@@ -287,7 +287,7 @@
                             </div>
                             <div class="col-md-4 form-group mt-sm-5 mt-2" style="opacity: 0.5;" data-toggle="tooltip"
                                 data-placement="bottom"
-                                title=s"This field disable because some student are already participated.">
+                                title="This field disable because some student are already participated.">
                                 <div class="custom-control custom-switch mb-2">
                                     <input type="checkbox" name="alw_diff_class" class="custom-control-input"
                                         id="diff-class" value="yes"
@@ -326,7 +326,7 @@
                                         <div class="form-group has-icon d-flex align-items-center">
                                             <i data-feather="users" class="form-control-icon ml-2" height="19px"></i>
                                             <select id="event-type" name="etype"
-                                                class="form-control w-100 pt-1 nice-select">
+                                                class="form-control w-100 py-0 nice-select">
                                                 <option hidden value="">Select Type</option>
                                                 <option value="solo" <?php if($e_data['e_type']=="solo"){?> selected
                                                     <?php }?>>Solo</option>
@@ -343,7 +343,7 @@
                                             <i data-feather="user-check" class="form-control-icon ml-2"
                                                 height="19px"></i>
                                             <select id="gen" onchange="return echeck()" name="efor"
-                                                class="form-control w-100 pt-1 nice-select">
+                                                class="form-control w-100 py-0 nice-select">
                                                 <option value="" hidden>Select Gender</option>
                                                 <option value="male" <?php if($e_data['gallow']=="male"){?> selected
                                                     <?php }?>>Male</option>
@@ -365,7 +365,7 @@
                                         $efor=explode('-',$e_data['efor']);
                                         //echo $ev;
                                     ?>
-                                            <select multiple="multiple" name="class[]" class="form-control active w-100"
+                                            <select multiple="multiple" name="class[]" class="form-control active w-100 py-1"
                                                 id="efor">
                                                 @foreach($class as $cls)
 
@@ -458,7 +458,7 @@
                                     <div class="form-group has-icon d-flex">
                                         <i data-feather="edit" class="form-control-icon ml-2" height="19px"
                                             style="margin-top: 13px;"></i>
-                                        <textarea name="rules" class="form-control" rows="5" id="example-textarea"
+                                        <textarea name="rules" class="form-control" rows="2" id="example-textarea"
                                             placeholder="Enter any message or rule..">{{$e_data['rules']}}</textarea>
                                     </div>
                                     <span class="help-block">
@@ -467,14 +467,14 @@
                                 </div>
 
                                 <button type="submit"
-                                    class="hover-me-sm m-2 btn btn-success px-3  rounded-sm new-shadow font-weight-bold font-size-15">
+                                    class="hover-me-sm m-2 btn btn-success px-3  rounded-sm new-shadow font-weight-bold">
                                     <span class="mr-1">Update Event</span>
                                     <i data-feather="check-square" height="20px"></i>
                                 </button>
                                 <button type="reset"
-                                    class="hover-me-sm m-2 btn btn-danger px-3  rounded-sm new-shadow font-weight-bold font-size-15">
+                                    class="hover-me-sm m-2 btn btn-danger px-3  rounded-sm new-shadow font-weight-bold">
                                     <span class="mr-1">Reset form</span>
-                                    <i data-feather="x-circle" height="20px"></i>
+                                    <i data-feather="rotate-ccw" height="20px"></i>
                                 </button>
 
                             </div>

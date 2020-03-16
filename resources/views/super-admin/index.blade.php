@@ -20,7 +20,10 @@ co_ordinate::remain_result();
         right: 2% !important;
         width: 150px;
     }
-
+        .new-cod:hover {
+            background: var(--info);
+            color: #fff !important;
+        }
     /* css for event co-ordinator list in index page */
    
     .cod-card:hover .cod-name {
@@ -241,7 +244,7 @@ co_ordinate::remain_result();
         </div>
 
         <a href="{{url('new_cod')}}" class="text-success">
-            <div class="add-cod d-flex align-items-center badge badge-soft-info badge-pill pr-sm-3 py-2 mr-3">
+            <div class="new-cod d-flex align-items-center badge badge-soft-info badge-pill pr-sm-3 py-2 mr-3">
                 <i data-feather="plus-circle" height="18px"></i>
                 <span class="font-size-13 d-none d-sm-flex">Add Co-ordinator</span>
             </div>
@@ -307,11 +310,12 @@ co_ordinate::remain_result();
 
             @foreach($delay_res as $del_res)
             <div class="card bg-soft-danger p-2 new-shadow hover-me-sm mb-2">
-                <div>
+                <div class="navbar p-0">
                     <span class="h5 my-1">{{ucfirst($del_res->ename)}}</span>
+                    <span class="badge badge-primary">12/12/2020</span>
                 </div>
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="badge badge-soft-dark px-3 badge-pill">By {{ucfirst($del_res->cname)}}</span>
+                <div class="navbar p-0">
+                    <span class="badge badge-primary">By {{ucfirst($del_res->cname)}}</span>
                     <a href="{{url('delay_res')}}/{{encrypt($del_res->eid)}}"
                         class="badge badge-success badge-pill px-2 pl-3">
                         <span>Declare</span>
@@ -319,6 +323,7 @@ co_ordinate::remain_result();
                     </a>
                 </div>
             </div>
+            
             @endforeach
         </div>
         @endif

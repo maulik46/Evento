@@ -28,7 +28,7 @@
         @endforeach
         
         </span>
-        <h6 class="font-weight-normal text-dark text-center">
+        <h6 class="font-weight-bold text-muted text-center">
         {{ucfirst(Session::get('clgname'))}}
         </h6>
         <hr class="my-0">
