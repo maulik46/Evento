@@ -100,9 +100,6 @@
                 </div>
                 </div>
             </div>
-            <div>
-            
-            </div>
             <div id="filter-table" class="card-body text-muted mt-3 py-0 px-1">
                 <div class="table-responsive overflow-auto my-scroll">
                     <table class="table table-hover table-light new-shadow ">
@@ -249,10 +246,6 @@
             </div>
         @endforeach
          
-        </div>
-            
-        <div class="row mt-4">
-            
         </div>
         <!-- end row tag -->
         </div>
