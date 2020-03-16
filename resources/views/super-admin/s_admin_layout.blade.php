@@ -251,7 +251,12 @@
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-info badge-pill px-3 py-2 font-size-13 ">Check Logs</span> 
                                 </a>
-                                
+                                <a  href="{{url('event_reports')}}">
+                                    <div class="btn new-shadow-sm my-1 text-white" style="border-radius: 30px;padding: 5px;background:var(--pink);">
+                                        <i data-feather="calendar" height="20px"></i>
+                                    </div>
+                                    <span class="hover-me-sm badge badge-soft-pink badge-pill px-3 py-2 font-size-13">Event Reports</span> 
+                                </a>
                                 <a  href="{{url('student_records')}}">
                                     <div class="btn new-shadow-sm my-1 text-white" style="border-radius: 30px;padding: 5px;background:var(--orange);">
                                         <i data-feather="bar-chart-2" height="20px"></i>
