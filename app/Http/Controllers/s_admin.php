@@ -721,4 +721,10 @@ class s_admin extends Controller
         }     
         return back();
     }
+    public function event_reports()
+    {
+        $event_data=tblevent::join('tblcoordinaters','tblevents.cid','=','tblcoordinaters.cid')->get();
+        
+        return view('super-admin/event_reports',['event_data'=>$event_data]);
+    }
 }
