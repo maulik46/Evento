@@ -37,7 +37,7 @@
             background-color:rgba(83,105,248,.15);
         }
         .form-control:focus {
-        border-color: gray !important;
+        border-color: lightgray !important;
     }
             
 </style>
@@ -153,10 +153,10 @@
         </div>
     </div> 
     <div class="card new-shadow-sm mt-2" >
-        <div class="card-body">
+        <div class="card-body py-2 px-1 px-sm-2">
             <div class="table-responsive overflow-auto my-scroll" style="max-height: 360px;">
             <table class="table table-hover table-nowrap mb-0" >
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Rating</th>
@@ -336,8 +336,6 @@
 
                                     </div>
                                 </div>
-
-
                             </div>
                             <h4 class="mb-0 mt-3">Cricket</h4>
                             <span class="text-muted1">21/12/2019</span>
@@ -377,11 +375,11 @@
                                         </div>
                                     </div>
                                 </div> 
-                                <div class="card new-shadow-sm mt-2" style="max-height: 360px;">
-                                    <div class="card-body overflow-auto my-scroll">
-                                        <div class="table-responsive overflow-auto my-scroll">
+                                <div class="card new-shadow-sm mt-2">
+                                    <div class="card-body py-2 px-1 px-sm-2">
+                                    <div class="table-responsive overflow-auto my-scroll" style="max-height: 360px;">
                                 <table class="table table-hover table-nowrap mb-0">
-                            <thead>
+                            <thead class="bg-light">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Rating</th>
