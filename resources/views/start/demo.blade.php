@@ -19,8 +19,14 @@
         .btn{
             border-width:0.069rem;
         }
+        
         ::placeholder{
             color:#000!important;
+        }
+        @media(max-width:576px){
+            label{
+            margin-bottom:0px!important;
+        }
         }
     </style>
 </head>
@@ -393,14 +399,14 @@
                 <div class="text-center text-dark h6 px-2">Fill up these fields and send us. We'll contact you</div>
             <form class="p-2 px-2 px-sm-4">
                 <div class="row mx-0">
-                    <div class="form-group col-5 mb-0">
+                    <div class="form-group col-sm-5 my-0">
                         <label>Name</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
                             <input type="text"  class="form-control" placeholder="Enter Your Name" />
                         </div>
                     </div>
-                    <div class="form-group col-7 mb-0">
+                    <div class="form-group col-sm-7 my-0">
                         <label>Email</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
@@ -422,7 +428,7 @@
                         <label>Contact no</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" class="form-control" placeholder="Enter Your/Institute Contact">
+                            <input type="text" class="form-control" placeholder="Enter Your Contact">
                         </div>
                         <!--  -->
                     </div>
