@@ -7,9 +7,6 @@
 @section('title','View Candidates')
 
 @section('head-tag-links')
-    <!-- data table plugins -->
-    <link href="{{asset('assets/libs/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
-
     <style>
 
      .page-item.active .page-link {
@@ -27,36 +24,54 @@
 
 @section('my-content')
             <div class="container-fluid">
-                 <div class="card mt-5 new-shadow-sm">
+            <div class="mb-0 pt-2 card new-shadow-sm">
+                <a href="{{url('sindex')}}" class="text-right text-dark px-2">
+                    <i data-feather="x-circle" id="close-btn" height="20px"></i>
+                </a>
+                <h2 class="font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</h2>
+                <h6 class="font-weight-normal text-dark text-center">{{ucfirst(Session::get('clgname'))}}</h6>
+                <h6 class="font-weight-normal text-dark text-center">
+                    <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
+                    <span class="ml-1 font-weight-bold  badge badge-soft-dark px-3 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
+                    <span class="ml-1 font-weight-bold  badge badge-soft-dark px-3 badge-pill">{{ucfirst($einfo['e_type'])}} Event</span>
+                </h6>
+                <hr class="my-0">
+            </div>
+                 <div class="card new-shadow-sm">
                     <div class="card-body">
-                        <a href="{{url('sindex')}}" class="float-right text-dark">
-                            <i data-feather="x-circle" id="close-btn" height="20px"></i>
-                        </a>    
-                        <div class="mb-3 mt-4 justify-content-between d-flex align-items-center ">
+                           
+                        <div class="justify-content-between d-flex align-items-center ">
                             <div class="d-flex align-items-center">
-                                <img src="{{asset('/assets/images/svg-icons/co-ordinate/team.svg')}}" height="35px" alt="">
-                                <span class="h4 ml-2">Participated Candidates</span>
+                                <i data-feather="users" class="icon-dual-success"></i>
+                                @if($einfo['e_type']=="team")
+                                <span class="h5 ml-2">Participated Teams</span>
+                                @else
+                               <span class="h5 ml-2">Participated Candidates</span>
+                                @endif
                             </div>
-                            <div class="font-weight-bold mr-4 font-size-15">
+                            <div class="font-weight-bold mr-4 h6">
                             <?php $c=participant::where('eid',$einfo['eid'])->count()?>
                             @if($einfo['e_type']=="team")
-                                <span class="text-muted">Total Team:</span>
+                                <span class="text-dark">Total Team</span>
                             @else
-                                <span class="text-muted">Total Candidates:</span>
+                                <span class="text-dark">Total Candidates</span>
                             @endif
-                                <span class="text-dark font-size-18 ml-1">{{$c}}</span>
+                                <span class="text-dark h5 ml-1">{{$c}}</span>
                             </div>
 
                         </div>
+                        <hr class="my-1 mb-4">
                         @if($einfo['e_type']=="team")
                         @if($c>0)
+                        <?php $count = 0;?>
                         @foreach($participate as $p)
+                        <?php $count++;?>
                         <div class="table-responsive my-scroll">
                             <table class="table table-hover table-light rounded">
-                                <thead class="thead-light">
+                                <thead class="thead-light text-dark">
                                     <tr>
                                         <td colspan="4" class=" font-weight-bold text-dark p-3" style="background-color: #dde1fc;">
-                                            {{$p['tname']}}
+                                            Team {{$p['tname']}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -66,12 +81,12 @@
                                         <th scope="col">Division</th>
                                     </tr>
                                 </thead>
-                                <tbody class="team-leader-name">
+                                <tbody id="stud-data{{$count}}">
                                    <?php $enrl=explode("-",$p['senrl'])?>
                                    @foreach($enrl as $e)
                                    <?php 
                                    $sinfo=tblstudent::where('senrl',$e)->first();?>
-                                    <tr >
+                                    <tr class="text-dark">
                                         <th scope="row">
                                             {{$e}}
                                         </th>
@@ -96,15 +111,7 @@
                         @if($c>0)
                         <div class="table-responsive my-scroll">
                             <table   class="table table-hover table-light rounded">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <td colspan="4" class="rounded header-title  font-weight-bold text-dark p-3"
-                                            style="background-color: #dde1fc;">
-                                            {{ucfirst($einfo['ename'])}}
-                                            <br>
-                                            <span class="font-size-14">Date: {{date('d/m/Y', strtotime($einfo['edate']))}}</span>
-                                        </td>
-                                    </tr>
+                                <thead class="light-bg1 text-dark">
                                     <tr>
                                         <th scope="col">Enrollment</th>
                                         <th scope="col">Name</th>
@@ -112,7 +119,7 @@
                                         <th scope="col">Division</th>
                                     </tr>
                                 </thead>
-                                <tbody >
+                                <tbody class="text-dark">
                                     @foreach($participate as $p)
                                     <?php 
                                     $sinfo=tblstudent::select('senrl','sname','class','division')->where('senrl',$p['senrl'])->first();?>
@@ -140,20 +147,23 @@
                     </div>
 
                 </div>
-                <!-- <div class="position-fixed" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left"
+                <div class="position-fixed" style="bottom: 68px;right:17px;" data-toggle="tooltip" data-placement="left"
                     title="Print">
                     <a href="#">
                         <img src="{{asset('assets/images/svg-icons/co-ordinate/print.svg')}}" height="55px" class="hover-me-sm rounded-circle" alt="">
                     </a>
-                </div> -->
+                </div>
             </div>
 @endsection        
 
 @section('extra-scripts')
-     <script>
-     $(document).ready(function(){
-        $('.team-leader-name td:first').append('<span class="text-primary"> (Team-leader)</span>');
-       
+<script>
+    $(document).ready(function(){
+        <?php $count=0;?>
+        <?php foreach($participate as $p) { ?>
+            <?php $count++;?>
+            $('#stud-data<?=$count;?> tr:last').css("display","none");
+        <?php } ?>
     })
-     </script>
+</script>
 @endsection  
