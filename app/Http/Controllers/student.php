@@ -597,6 +597,9 @@ class student extends Controller
                                 ->whereIn('tblevents.e_type',$cat)
                                 ->where('tblparticipant.clgcode',Session::get('clgcode'))
                                 ->where('tblevents.ename','like',$ename)
+                                ->orderby('tblevents.enddate','desc')
+                                ->orderby('tblevents.ename')
+                                ->orderby('rank')
                                 ->get()->toArray(); 
                                 foreach ($st as $s) {
                                     if(date('Y',strtotime($s['enddate']))==$year || $year=="")
@@ -654,14 +657,15 @@ class student extends Controller
                                 }     
             $set="";
             
+                
+                if($team=="")
+                {
+                    $team="<tr><td>No Data Found...!</td></tr>";
+                }
                 if($c==6)
                 {
-                    $team="<tr><td>No Data Found....!</td></tr>";
+                    $team="";
                 }
-                // if($team=="")
-                // {
-                //     $team="<tr><td>No Data Found...!</td></tr>";
-                // }
             $data=$team;
         return response()->json(array('msg'=>$data),200);
     }
