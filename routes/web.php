@@ -299,9 +299,9 @@ Route::group(['middleware' => 'admin_session_check'], function () {
     
         route::get('/delay_res/{eid}','s_admin@delay_res');
 
-        route::view('/event_reports','super-admin/event_reports');
+        route::get('/event_reports','s_admin@event_reports');
     
-         Route::get('/admin/winner-list',function(){
+        Route::get('/admin/winner-list',function(){
                 $winners=\DB::table('tblparticipant')->select('eid')->where('rank','!=','p')->orderby('eid','desc')->groupby('eid')->get()->toarray();
                 $ddclass=DB::table('tblstudent')->select('class')->groupBy('class')->get()->toArray();
                 // print_r($winners);
