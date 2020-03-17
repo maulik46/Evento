@@ -32,6 +32,9 @@ use \App\tblstudent;
         width: 90px;
         display: inline-block;
     }
+    label{
+        font-weight:normal!important;
+    }
     @media (max-width: 767.98px){
     li.paginate_button.next, li.paginate_button.previous {
         display: inline-block;
@@ -54,7 +57,7 @@ use \App\tblstudent;
         </div>
     </div>
     @endif
-    <div class="container-fluid">
+    <div class="">
     <div class="mx-1 mx-sm-3">
         <div class="card new-shadow-sm">
             <!-- <a href="{{url('/sindex')}}" class="text-right text-dark p-2">
@@ -78,64 +81,51 @@ use \App\tblstudent;
                         <i data-feather="x-circle" height="20px"></i>
                     </a>
                 </div>
-                <div id="filter-box" class="mt-2 card position-relative w-100 mb-0" style="left:0px;z-index:9;display:none;border:1px solid #e9e9e9;">
+                <div id="filter-box" class="mt-2 card position-relative w-100 mb-0" style="left:0px;z-index:9;border:1px solid #e9e9e9;">
                     <div class="card-body p-2">
                     <div class="row justify-content-between mx-0">
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="form-group has-icon d-flex align-items-center px-0 mb-1">
                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
                                 <input type="text" name="title" id="title" class="form-control" placeholder="Enter Event Name" />
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="form-group has-icon d-flex align-items-center px-0 mb-1">
                                 <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" name="title" id="title" class="form-control" placeholder="Enter Co-ordinator Name" />
+                                <select name="" id="" class="form-control">
+                                    <option hidden>Select Co-ordinator</option>
+                                    <option value="">abc</option>
+                                    <option value="">xyz</option>
+                                    <option value="">IPL</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-4 col-12 d-flex justify-content-end">
-                            <div class="mx-sm-1 form-group has-icon d-flex align-items-center">
+                        <div class="col-lg-4 col-md-12 col-12 d-flex justify-content-start">
+                            <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
                                 <input name="" id="from" onchange="filter()" type="text" class="form-control basicDate" placeholder="From" />
                             </div>
-                            <div class="mx-sm-1 form-group has-icon d-flex align-items-center">
+                            <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
                                 <input name="" id="to" onchange="filter()" type="text" class="form-control basicDate" placeholder="To" />
                             </div>
                         </div>
                     </div>
                     <div class="row justify-content-between justify-content-sm-around mx-0">
-                        <div class="col-auto">
-                            <h6>Category</h6>
+                        
+                        <div class="col col-auto">
+                            <h6>Gender</h6>
                             <div class="custom-control custom-checkbox mb-2">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Sport</label>
+                                <label class="custom-control-label" for="customCheck1">Male</label>
                             </div>
                             <div class="custom-control custom-checkbox mb-2">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Cultural</label>
-                            </div>
-                            <div class="custom-control custom-checkbox mb-2">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">IT</label>
+                                <label class="custom-control-label" for="customCheck1">Female</label>
                             </div>
                         </div>
-                        <!-- <div class="col-auto">
-                            <h6>Division</h6>
-                            <div class="custom-control custom-checkbox mb-2">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">1</label>
-                            </div>
-                            <div class="custom-control custom-checkbox mb-2">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">2</label>
-                            </div>
-                            <div class="custom-control custom-checkbox mb-2">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">3</label>
-                            </div>
-                        </div> -->
-                        <div class="col-auto">
+                        <div class="col col-auto">
                             <h6>Event Type</h6>
                             <div class="custom-control custom-checkbox mb-2">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
@@ -144,6 +134,32 @@ use \App\tblstudent;
                             <div class="custom-control custom-checkbox mb-2">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                                 <label class="custom-control-label" for="customCheck1">Solo</label>
+                            </div>
+                        </div>
+                        <div class="col col-lg-6 col-md-6 col-6">
+                            <h6>Category</h6>
+                            <div class="row mx-0">
+                                <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Sport</label>
+                                </div>
+                                <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Cultural</label>
+                                </div>
+                                <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">IT</label>
+                                </div>
+                                <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">IT</label>
+                                </div>
+                                <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">IT</label>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -197,7 +213,7 @@ use \App\tblstudent;
                         </table>
                     </div>
                 </div> -->
-                <div class="table-responsive overflow-auto my-scroll">
+                <div class=" overflow-auto my-scroll">
                     <table class="table table-hover mb-0 ">
                         <thead>
                             <tr>
@@ -211,31 +227,35 @@ use \App\tblstudent;
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $count=0;?>
+                            @foreach($event_data as $ed)
+                            <?php $count++;?>
                             <tr class="text-dark">
-                                <td>1</td>
-                                <td>Rakhi Making</td>
-                                <td>12/02/2019</td>
-                                <td>Parth Patthar</td>
-                                <td>Solo Event</td>
-                                <td>Cultural</td>
-                                <td>
-                                <a href=""
-                                    class="btn p-1 btn-rounded mr-1 btn-p-about" data-toggle="tooltip"
+                                <td>{{$count}}</td>
+                                <td>{{ucfirst($ed['ename'])}}</td>
+                                <td>{{$ed['edate']}}</td>
+                                <td>{{ucfirst($ed['cname'])}}</td>
+                                <td>{{ucfirst($ed['e_type'])}} Event</td>
+                                <td>{{ucfirst($ed['category'])}}</td>
+                                <td class="d-flex">
+                                <a href="{{url('sview_result')}}/{{encrypt($ed['eid'])}}"
+                                    class="btn p-1 btn-rounded" data-toggle="tooltip"
                                     data-placement="top" title="Result">
                                     <i data-feather="award" height="18px" class=" text-success"></i>
                                 </a>
-                                <a href=""
-                                    class="btn p-1 btn-rounded mr-1 btn-p-about" data-toggle="tooltip"
+                                <a href="{{url('sevent_info')}}/{{encrypt($ed['eid'])}}"
+                                    class="btn p-1 btn-rounded" data-toggle="tooltip"
                                     data-placement="top" title="About">
                                     <i data-feather="info" height="18px" class=" text-info"></i>
                                 </a>
-                                <a href=""
-                                    class="btn p-1 btn-rounded mr-1 btn-p-about" data-toggle="tooltip"
+                                <a href="{{url('sview_candidates')}}/{{encrypt($ed['eid'])}}"
+                                    class="btn p-1 btn-rounded" data-toggle="tooltip"
                                     data-placement="top" title="Candidates">
                                     <i data-feather="users" height="18px" class=" text-primary"></i>
                                 </a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div> <!-- end table-responsive-->
@@ -246,7 +266,7 @@ use \App\tblstudent;
     </div>
 @endsection
 @section('extra-scripts')
-<script>
+<!-- <script>
 $(document).ready(function(){
     $('#filter-box,#close-filter').hide();
     $('.btn-filter').click(function(){
@@ -258,5 +278,5 @@ $(document).ready(function(){
         $('.btn-filter').show();
     })
 })
-</script>
+</script> -->
 @endsection
