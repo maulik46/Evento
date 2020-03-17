@@ -68,7 +68,7 @@
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
         <span class="h2 my-0 font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</span>
-        <h6 class="font-weight-normal text-dark text-center">{{ucfirst(Session::get('clgname'))}}
+        <h6 class="font-weight-bold text-muted text-center">{{ucfirst(Session::get('clgname'))}}
         </h6>
         <h6 class="text-dark text-center mb-3">
             <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">
@@ -78,7 +78,7 @@
             {{date('l',strtotime($einfo['edate']))}}
             </span>
             <span class="font-weight-bold badge badge-soft-warning px-3 badge-pill">
-            {{ucfirst($einfo['e_type'])}}
+            {{ucfirst($einfo['e_type'])}} Event
             </span>
         </h6>
         <hr class="my-0">
