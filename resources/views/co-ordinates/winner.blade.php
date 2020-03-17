@@ -1,6 +1,6 @@
 @extends('co-ordinates/cod_layout')
 
-@section('title','Winners')
+@section('title','Winner List')
 
 @section('head-tag-links')
 <style>
@@ -20,7 +20,7 @@
     <div class="card">
         <div class="card-body">
             <div class="navbar px-0">
-                <div class="mt-2 ml-2 h4">
+                <div class="mt-2 h4">
                     <img src="assets/images/svg-icons/student-dash/winner/ranking.svg" height="30px" alt="">
                     <span>Past Winners</span>
                 </div>
@@ -32,7 +32,8 @@
                     <i data-feather="x-circle" height="20px"></i>
                 </a>
             </div>
-            <div id="filter-box" class="card position-relative w-100 mb-0" style="left:0px;z-index:9;display:none;border:1px solid #e9e9e9;">
+            <hr class="my-0">
+            <div id="filter-box" class="card position-relative w-100 mb-0" style="left:0px;display:none;border:1px solid #e9e9e9;">
                 <div class="card-body p-2">
                 <div class="row justify-content-between">
                 <div class="col-md-5 col-12">
@@ -61,13 +62,27 @@
                     <div class="col-auto">
                         <h6>Class</h6>
                         <?php $c=0?>
+                        <div class="row mx-0">
                         @foreach($ddclass as $class)
                         <?php $c++?>
-                        <div class="custom-control custom-checkbox mb-2">
+                        <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                            <input type="checkbox" name="clas[]" onclick="filter()" value="{{$class->class}}" class="custom-control-input" id="clas{{$c}}">
+                            <label class="custom-control-label" for="clas{{$c}}">{{ucfirst($class->class)}}</label>
+                        </div>
+                        <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                            <input type="checkbox" name="clas[]" onclick="filter()" value="{{$class->class}}" class="custom-control-input" id="clas{{$c}}">
+                            <label class="custom-control-label" for="clas{{$c}}">{{ucfirst($class->class)}}</label>
+                        </div>
+                        <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                            <input type="checkbox" name="clas[]" onclick="filter()" value="{{$class->class}}" class="custom-control-input" id="clas{{$c}}">
+                            <label class="custom-control-label" for="clas{{$c}}">{{ucfirst($class->class)}}</label>
+                        </div>
+                        <div class="col-sm-4 custom-control custom-checkbox mb-2">
                             <input type="checkbox" name="clas[]" onclick="filter()" value="{{$class->class}}" class="custom-control-input" id="clas{{$c}}">
                             <label class="custom-control-label" for="clas{{$c}}">{{ucfirst($class->class)}}</label>
                         </div>
                         @endforeach
+                        </div>
                     </div>
                     <div class="col-auto">
                         <h6>Division</h6>
@@ -102,17 +117,14 @@
                 </div>
                 </div>
             </div>
-            <div>
-            
-            </div>
-            <div id="filter-table" class="card-body text-muted mt-3 py-0 px-1">
+            <div id="filter-table" class="card-body text-muted mt-1 py-0 px-1">
                 <div class="table-responsive overflow-auto my-scroll">
                     <table class="table table-hover table-light new-shadow " id="tbody">
                         
                     </table>
                 </div>
             </div>
-        <div class="row mt-2">
+        <div class="row mt-0">
         @foreach($winners as $winner)
             <?php 
                 $event=App\tblevent::select('eid','ename','e_type','enddate')->where('eid',$winner->eid)->first();
@@ -180,7 +192,7 @@
                                 </th>
                                 <td class="font-weight-bold">{{$r['tname']}}</td>
                                 <td class="text-center">
-                                    <a href="{{url('viewteam')}}/{{encrypt($r['pid'])}}" class="badge badge-success badge-pill px-3">
+                                    <a href="{{url('view_team')}}/{{encrypt($r['pid'])}}" class="badge badge-success badge-pill px-3">
                                         View
                                     </a>
                                 </td>
