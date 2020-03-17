@@ -29,7 +29,9 @@ co_ordinate::remain_result();
     .cod-card:hover .cod-name {
         color: #35bbca !important;
     }
-
+    .form-control:focus {
+        border-color: lightgray !important;
+    }
     .notification-list .noti-icon-badge {
         position: relative;
         top: -4px;
@@ -57,14 +59,26 @@ co_ordinate::remain_result();
         background-color: rgba(255, 92, 117, .15);
         color: var(--danger);
     }
-    .avatar-xxl{
-        height: 6rem;
-        width: 6rem;
+    .avatar-xl{
+        height: 5rem;
+        width: 5rem;
     }
-    @media(max-width:576px) {
-        .avatar-xxl {
-            height: 5rem;
-            width: 5rem;
+    .cod-list{
+        max-height:365px
+    }
+    @media(max-width:1200px){
+        .cod-list{
+            max-height:265px
+        }
+    }
+    @media(max-width:992px){
+        .cod-list{
+            max-height:440px
+        }
+    }
+    @media(max-width:728px){
+        .cod-list{
+            max-height:390px;
         }
     }
 </style>
@@ -143,7 +157,7 @@ co_ordinate::remain_result();
     </div>
     <!-- row -->
     <div class="row">
-        <div class="col-xl-6 col-md-12">
+        <div class="col-xl-7 col-md-12">
             <div class="card new-shadow-sm">
                 <div class="card-body px-0">
                     <h5 class="card-title mt-0 mb-0 header-title px-4">Revenue </h5>
@@ -152,36 +166,138 @@ co_ordinate::remain_result();
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div>
-        <div class="col-xl-6">
-            <div class="card new-shadow-sm">
-                <div class="card-body px-0">
-                    <h5 class="card-title mt-0 mb-0 header-title px-4">
-                        All Event Categories
-                    </h5>
+        <div class="col-xl-5">
+        <div class="card mb-0 new-shadow-sm" style="border-bottom:1px solid #d1d1d1;border-radius:.2rem .2rem 0px 0px">
+            <h5 class=" text-center mt-2">
+            <i data-feather="user-check" height="18px" class="icon-dual-dark"></i>
+            Event Co-ordinators
+            </h5>
+        </div>
+        <div class="card new-shadow-sm overflow-auto my-scroll cod-list">
+        <div class="card-body py-0">
+            <div class="row">
+                <?php $count = 0;?>
+                @foreach($cods as $c)
+                <?php $count++;?>
+                <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12">
+                    <div class="card bg-light pt-2 pt-xl-0 my-2 rounded new-shadow-sm hover-me-sm cod-card">
+                        <div class="card-body p-0">
+                            <div class="d-flex align-items-center justify-content-center text-lg-left text-left text-sm-center flex-wrap ">
+                                <div class="col col-lg-4 col-md-12 col-sm-4 col-4">
+                                    <img src="{{asset('profile_pic/'.$c->pro_pic)}}" alt=""
+                                        class="avatar-xl rounded-circle new-shadow-sm bg-light"
+                                        style="border:1px solid #f1f1f1" />
+                                </div>
+                                <div class="col col-lg-8 col-md-12 col-sm-8 col-8">
+                                    <h6 class="mb-0 cod-name">{{ucfirst($c['cname'])}}</h6>
+                                    <h6 class="text-muted font-weight-normal mt-1 mb-0">
+                                        <i data-feather="mail" height="15px" class="icon-dual-danger"></i>
+                                        <span class="font-weight-bold">{{$c['email']}}</span>
+                                    </h6>
+                                    <h6 class="text-muted font-weight-normal mt-1 mb-0">
+                                        <i data-feather="phone" height="15px" class="icon-dual-success"></i>
+                                        <span class="font-weight-bold">{{$c['mobile']}}</span>
+                                    </h6>
+                                    <div class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-sm-center mb-1">
+                                        <span class="badge badge-info badge-pill px-3 mt-0 mr-3 new-shadow-sm">{{ucfirst($c['category'])}}</span>
+                                        <?php $tble = tblevent::where('cid', $c['cid'])->get()->toArray();
+                                        $e = "";
+                                        foreach ($tble as $te) {
+                                            $e .= $te['ename'] . ",";
+                                        }?>
+                                        <a href="#" data-toggle="tooltip" title="Delete"
+                                            onclick="return confirm('<?php echo $e ?>','<?php echo $c['cid'] ?>')"
+                                            class="btn text-danger p-1 btn-rounded mt-0 btn-delete-cod">
+                                            <i data-feather="trash-2" height="19px"></i>
+                                        </a>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
+                @endforeach
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    <div class="card mt-2 mb-0 new-shadow-sm">
+        <div class="py-1 navbar">
+            <div class="h5">
+                <i data-feather="calendar" class="icon-dual-dark"></i>
+                <span class="ml-1">All Event Categories</span>
+            </div>
+            <div class="col-xl-3 col-md-6 col-12 mb-0 form-group d-flex align-items-center px-0">
+                <input type="text" class="form-control" placeholder="Add Category" />
+                <button class="btn btn-success rounded-sm ml-1 font-weight-bold d-flex">
+                <i data-feather="plus-circle" height="18px"></i>
+                <span>Add</span>
+                </button>
             </div>
         </div>
     </div>
-    <!-- products -->
+    <div class="card mt-2 new-shadow-sm">
+        <div class="card-body p-2">
+            <div class="row">
+                <div class="my-2 col col-auto">
+                    <div class="badge badge-pill badge-soft-primary pl-3 pr-2 font-size-14 new-shadow-sm hover-me-sm align-items-center d-flex">
+                    <span>Sport</span>
+                    <a href="#" class="ml-3 text-warning"><i data-feather="edit" height="16px"></i></a>
+                    <a href="#" class="text-danger"><i data-feather="delete" height="16px"></i></a>
+                    </div>
+                </div>
+                <div class="my-2 col col-auto">
+                    <div class="badge badge-pill badge-soft-primary pl-3 pr-2 font-size-14 new-shadow-sm hover-me-sm align-items-center d-flex">
+                    <span>IT</span>
+                    <a href="#" class="ml-3 text-warning"><i data-feather="edit" height="16px"></i></a>
+                    <a href="#" class="text-danger"><i data-feather="delete" height="16px"></i></a>
+                    </div>
+                </div>
+                <div class="my-2 col col-auto">
+                    <div class="badge badge-pill badge-soft-primary pl-3 pr-2 font-size-14 new-shadow-sm hover-me-sm align-items-center d-flex">
+                    <span>Cultural</span>
+                    <a href="#" class="ml-3 text-warning"><i data-feather="edit" height="16px"></i></a>
+                    <a href="#" class="text-danger"><i data-feather="delete" height="16px"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>                                    
     <div class="row">
         <div class="col-xl-12">
-            <div class="card new-shadow-sm">
-                <h5 class="card-title mt-4 px-4 mb-1 header-title">Events</h5>
-                <div class="card-body">
-                    <div class="table-responsive overflow-auto my-scroll" style="max-height: 300px;">
+            <div class="card mt-2 mb-0 new-shadow-sm">
+                <div class="py-1 navbar">
+                    <div class="h5">
+                        <i data-feather="calendar" class="icon-dual-dark"></i>
+                        <span class="ml-1">All Events</span>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-12 mb-0 form-group has-icon d-flex align-items-center px-0">
+                        <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
+                        <input type="text" id="myInput" class="form-control" placeholder="Search Events" />
+                    </div>
+                </div>
+            </div> 
+            <div class="card new-shadow-sm mt-2">
+                <div class="card-body py-2 px-1 px-sm-2">
+                    <div class="table-responsive overflow-auto my-scroll" style="max-height: 360px;">
                         <table class="table table-hover table-nowrap mb-0">
-                            <thead>
+                            <thead class="bg-light">
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Rating</th>
                                     <th scope="col">Event</th>
                                     <th scope="col">Participator</th>
-                                    <th scope="col">Date</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
                                     <th scope="col">Co-ordinator</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                            <tbody><?php $c = 0?>
+                            <tbody id="all-events"><?php $c = 0?>
                                 @foreach($events as $e)
                                 <?php $c++;
                                 $p = \DB::table('tblparticipant')->select('senrl')->where('eid', $e['eid'])->count();
@@ -189,10 +305,14 @@ co_ordinate::remain_result();
                                 ?>
                                 <tr>
                                     <td>#{{$c}}</td>
+                                    <td>
+                                        <i data-feather="star" class="icon-dual-warning" height="18px"></i>
+                                        <span>4.5</span>
+                                    </td>
                                     <td>{{ucfirst($e['ename'])}} compition</td>
-                                    <td>{{$p}}</td>
-                                    <!--total Participator -->
+                                    <td>{{$p}}</td><!--total Participator -->
                                     <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
+                                    <td>{{date('d/m/Y', strtotime($e['enddate']))}}</td>
                                     <td>{{ucfirst($co->cname)}}</td>
                                     <td>
                                         @if($e['edate'] <= date('Y-m-d') && $e['enddate']>= date('Y-m-d'))
@@ -204,20 +324,20 @@ co_ordinate::remain_result();
                                                 @endif
                                     </td>
                                     <td>
-                                        <a href="{{url('sevent_info')}}/{{encrypt($e['eid'])}}"
-                                            class="btn p-1 btn-rounded mr-1 btn-p-about" data-toggle="tooltip"
-                                            data-placement="top" title="About">
-                                            <i data-feather="info" height="18px" class=" text-info"></i>
-                                        </a>
                                         <a href="{{url('sview_candidates')}}/{{encrypt($e['eid'])}}"
-                                            class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;"
+                                            class="btn btn-p-candidates btn-rounded p-1" 
                                             data-toggle="tooltip" data-placement="top" title="View Candidates">
                                             <i data-feather="users" height="18px" class="text-primary"></i>
+                                        </a>
+                                        <a href="{{url('sevent_info')}}/{{encrypt($e['eid'])}}"
+                                            class="btn p-1 btn-rounded btn-p-about" data-toggle="tooltip"
+                                            data-placement="top" title="About">
+                                            <i data-feather="info" height="18px" class=" text-info"></i>
                                         </a>
                                         <?php $r = \DB::table('tblparticipant')->select('senrl')->where([['eid', $e['eid']], ['rank', 1]])->count();?>
                                         @if($r==1)
                                         <a href="{{url('sview_result')}}/{{encrypt($e['eid'])}}"
-                                            class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip"
+                                            class="btn btn-p-result p-1 btn-rounded" data-toggle="tooltip"
                                             data-placement="top" title="Show Result">
                                             <i data-feather="award" height="18px" class=" text-success"></i>
                                         </a>
@@ -234,72 +354,6 @@ co_ordinate::remain_result();
         </div> <!-- end col-->
     </div>
     <!-- end row -->
-
-    <!-- widgets -->
-    <div
-        class="bg-white d-flex justify-content-between align-items-center flex-wrap mt-2 mb-2 py-2 rounded new-shadow-sm">
-        <div class="h4 d-flex align-items-center ml-4">
-            <i data-feather="users"></i>
-            <span class="ml-1">Event Co-ordinators</span>
-        </div>
-
-        <a href="{{url('new_cod')}}" class="text-success">
-            <div class="new-cod d-flex align-items-center badge badge-soft-info badge-pill pr-sm-3 py-2 mr-3">
-                <i data-feather="plus-circle" height="18px"></i>
-                <span class="font-size-13 d-none d-sm-flex">Add Co-ordinator</span>
-            </div>
-        </a>
-    </div>
-
-    <div class="row">
-        <?php $count = 0;?>
-        @foreach($cods as $c)
-        <?php $count++;?>
-        <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="card mb-2 rounded-lg new-shadow-sm hover-me-sm cod-card">
-                <div class="card-body p-1 p-sm-2">
-                    <div class="d-flex align-items-center justify-content-center text-lg-left text-left text-sm-center flex-wrap ">
-                        <div class="col col-lg-4 col-md-12 col-sm-4 col-4">
-                            <img src="{{asset('profile_pic/'.$c->pro_pic)}}" alt=""
-                                class="avatar-xxl rounded-circle new-shadow-sm bg-light"
-                                style="border:1px solid #f1f1f1" />
-                        </div>
-                        <div class="col col-lg-8 col-md-12 col-sm-8 col-8">
-                            <h5 class="mt-2 mb-0 cod-name">{{ucfirst($c['cname'])}}</h5>
-                            <h6 class="text-muted font-weight-normal mt-2 mb-0">
-                                <i data-feather="mail" height="15px" class="icon-dual-danger"></i>
-                                <span class="font-weight-bold">{{$c['email']}}</span>
-                            </h6>
-                            <h6 class="text-muted font-weight-normal mt-2 mb-0">
-                                <i data-feather="phone" height="15px" class="icon-dual-success"></i>
-                                <span class="font-weight-bold">{{$c['mobile']}}</span>
-                            </h6>
-                            <div
-                                class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-sm-center ">
-                                <span
-                                    class="badge badge-info badge-pill px-3 mt-2 mr-3 new-shadow-sm">{{ucfirst($c['category'])}}</span>
-                                <?php $tble = tblevent::where('cid', $c['cid'])->get()->toArray();
-                                $e = "";
-                                foreach ($tble as $te) {
-                                    $e .= $te['ename'] . ",";
-                                }?>
-                                <a href="#" data-toggle="tooltip" title="Delete"
-                                    onclick="return confirm('<?php echo $e ?>','<?php echo $c['cid'] ?>')"
-                                    class="btn text-danger p-1 btn-rounded mt-2 btn-delete-cod">
-                                    <i data-feather="trash-2" height="19px"></i>
-                                </a>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        @endforeach
-    </div>
-    <!-- end row -->
-
     <div class="toast bg-white fade show border-0 new-shadow-2 rounded-lg position-fixed w-75"
         style="bottom:20px;left:10px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true"
         data-toggle="toast">
@@ -379,7 +433,7 @@ co_ordinate::remain_result();
         plotOptions: {
           bar: {
             horizontal: false,
-            columnWidth: '45%'
+            columnWidth: '10%'
           },
         },
         dataLabels: {
@@ -474,5 +528,16 @@ co_ordinate::remain_result();
 
 
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $(".table-responsive #all-events tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+
+            });
+        });
+    });
 </script>
 @endsection
