@@ -22,7 +22,7 @@
                         <span class="badge badge-soft-primary badge-pill px-3">
                         {{date('d/m/Y',strtotime($clg->start_date))}}
                         </span>
-                        <div class="badge badge-success px-3 badge-pill">{{$clg->status}}</div>
+                        <div class="badge badge-success px-3 badge-pill">{{ucfirst($clg->status)}}</div>
                     </div>
                     <h5 class="text-dark mt-0">{{ucfirst($clg->clgname)}}</h5>
                     
