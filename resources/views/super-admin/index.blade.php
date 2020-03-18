@@ -20,10 +20,13 @@ co_ordinate::remain_result();
         right: 2% !important;
         width: 150px;
     }
-        .new-cod:hover {
-            background: var(--info);
-            color: #fff !important;
-        }
+    .new-cod:hover {
+        background: var(--info);
+        color: #fff !important;
+    }
+    .table td, .table th {
+        vertical-align: middle;
+    }
     /* css for event co-ordinator list in index page */
    
     .cod-card:hover .cod-name {
@@ -226,17 +229,17 @@ co_ordinate::remain_result();
     </div>
     <div class="card mt-2 mb-0 new-shadow-sm">
         <div class="py-1 navbar">
-            <div class="h5">
+            <div class="h5 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">All Event Categories</span>
             </div>
-            <div class="col-xl-3 col-md-6 col-12 mb-0 form-group d-flex align-items-center px-0">
+            <form class="col-xl-3 col-md-6 col-12 mb-0 form-group d-flex align-items-center px-0">
                 <input type="text" class="form-control" placeholder="Add Category" />
                 <button class="btn btn-success rounded-sm ml-1 font-weight-bold d-flex pl-2 pr-3">
                 <i data-feather="plus-circle" height="18px"></i>
                 <span>Add</span>
                 </button>
-            </div>
+            </form>
         </div>
     </div>
     <div class="card mt-2 new-shadow-sm">
@@ -270,7 +273,7 @@ co_ordinate::remain_result();
         <div class="col-xl-12">
             <div class="card mt-2 mb-0 new-shadow-sm">
                 <div class="py-1 navbar">
-                    <div class="h5">
+                    <div class="h5 d-flex align-items-center">
                         <i data-feather="calendar" class="icon-dual-dark"></i>
                         <span class="ml-1">All Events</span>
                     </div>

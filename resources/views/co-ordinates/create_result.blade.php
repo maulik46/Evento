@@ -36,7 +36,7 @@
         box-shadow: 0 1px 6px 0 rgba(255, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .08);
         border-radius: .2rem;
     }
-    @media(max-width: 500px)
+    @media(max-width: 576px)
     {
         .small-sticky{
             margin:-24px 0px;

@@ -35,10 +35,9 @@
     </div>
     <div class="card new-shadow-sm" >
         <div class="card-body">
-            <div class="table-responsive">
+            <div class="table-responsive my-scroll">
                 <table class="table table-hover table-nowrap mb-0" >
                     <thead style="background-color:#1ce1ac40;color:#000;">
-                    
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Enrollment</th>

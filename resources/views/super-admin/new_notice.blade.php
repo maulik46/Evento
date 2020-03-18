@@ -116,9 +116,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-start align-items-center" style="margin-bottom: -25px;">
-                        <button type="submit" class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-4 font-size-15
-                                        font-weight-bold
-                                        ml-3" style="background-color: #35bbca;">
+                        <button type="submit" class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-3 font-size-15 font-weight-bold ml-3" style="background-color: #35bbca;">
                             <span>Send</span>
                             <i data-feather="send" height="20px"></i>
                         </button>

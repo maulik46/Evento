@@ -55,13 +55,13 @@
                             <a href="{{url('/cindex')}}" class="float-right text-dark">
                                 <i data-feather="x-circle" id="close-btn" height="20px"></i>
                             </a>
-                            <h3 class="my-4 text-center text-dark">
-                                <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="25px" alt="">
+                            <h4 class="my-2 mb-3 text-center text-dark">
+                                <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="20px" alt="">
                                 <span> Create new notice</span>
                                 
-                            </h3>
+                            </h4>
                             <div class="text-center font-weight-bold text-danger" id="error">{{$errors->first('attachment')}}</div>
-                            <form action="noticesend" method="post" onsubmit="return check()" enctype="multipart/form-data">
+                        <form action="noticesend" method="post" onsubmit="return check()" enctype="multipart/form-data">
                             @csrf
                                 <div class="row justify-content-center" style="margin-bottom: -10px;">
                                     <div class="form-group mt-2 col-lg-12">
@@ -84,7 +84,7 @@
                                 <div class="row justify-content-start align-items-center">
 
                                     <button type="submit"
-                                        class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-4 font-size-15
+                                        class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-3 font-size-15
                                         font-weight-bold
                                         ml-3" style="background-color: #35bbca;">
                                         <span>Send</span>
@@ -103,24 +103,12 @@
                                     
                                 </div>
                             <div class="mt-3 p-1" id="fc" >
-                                <!-- <div class="d-flex justify-content-center align-items-center smr-2" style="margin-top:-12px;">
-                                    <span class="badge badge-dark px-3 py-1 badge-pill">Total Files: 3</span>
-                                </div> -->
-
-                                    <!-- <div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:#25c2e340;border-right:4px solid #fff;border-left:4px solid #fff;">
-                                       <span class="text-dark ml-2">file1.txt</span>
-                                       <span class="badge badge-light px-3 badge-pill mr-2">12mb</span>
-                                    </div> 
-
-                                    <div class="alert font-weight-bold rounded-0 p-1 font-size-15 mb-1 d-flex justify-content-between align-items-center col-xl-6" style="background-color:#25c2e340;border-right:4px solid #fff;border-left:4px solid #fff;">
-                                       <span class="text-dark ml-2">file1.txt</span>
-                                       <span class="badge badge-light px-3 badge-pill mr-2">12mb</span>
-                                    </div> -->
-                                      </div>                             
-                                </div>
                                 
-                            </form>
-                        </div>
+                                </div>                             
+                            </div>
+                                
+                        </form>
+                    </div>
                     </div>
         </div>
 @endsection        

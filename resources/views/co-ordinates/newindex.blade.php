@@ -18,30 +18,30 @@
         right: 2% !important;
         width: 150px;
     }
-        .toast {
-            width: 400px !important;
-            max-width: none;
-        }
+    .toast {
+        width: 400px !important;
+        max-width: none;
+    }
+    
+    .new-event:hover {
+        background: #43d39e;
+        color: #fff !important;
+    }
+    .winner-list:hover{
+        background: var(--danger);
+        color: #fff !important;
 
-        .new-event:hover {
-            background: #43d39e;
-            color: #fff !important;
-        }
-        .winner-list:hover{
-            background: var(--danger);
-            color: #fff !important;
-
-        }
-        .btn-p-about:hover{
-            background-color:rgba(37,194,227,.15);
-        }
-        .btn-p-result:hover{
-            background-color:rgba(67,211,158,.15);
-        }
-        .btn-p-candidates:hover{
-            background-color:rgba(83,105,248,.15);
-        }
-        .form-control:focus {
+    }
+    .btn-p-about:hover{
+        background-color:rgba(37,194,227,.15);
+    }
+    .btn-p-result:hover{
+        background-color:rgba(67,211,158,.15);
+    }
+    .btn-p-candidates:hover{
+        background-color:rgba(83,105,248,.15);
+    }
+    .form-control:focus {
         border-color: lightgray !important;
     }
             
@@ -147,7 +147,7 @@
 
     <div class="card mt-2 mb-0 new-shadow-sm">
         <div class="py-2 navbar">
-            <div class="h4">
+            <div class="h5 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">All Events</span>
             </div>
@@ -226,7 +226,7 @@
 
     <div class="card mb-0  new-shadow-sm">
         <div class="card-body py-2 d-flex justify-content-between align-items-center">
-            <div class="h4 d-flex align-items-center">
+            <div class="h5 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">My Events</span>
             </div>
@@ -371,7 +371,7 @@
     @if($c==1)
     <div class="card mt-2 mb-0 new-shadow-sm">
         <div class="card-body py-2 d-flex justify-content-between align-items-center">
-            <div class="h4 d-flex align-items-center">
+            <div class="h5 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">Finished Events</span>
             </div>
@@ -415,7 +415,7 @@
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
                             <td>{{date('d/m/Y', strtotime($e['enddate']))}}</td>
                             <td>{{ucfirst(Session::get('cname'))}}</td>
-                            <td  class="d-flex justify-content-start align-items-center pt-1 mb-0">
+                            <td  class="d-flex justify-content-start align-items-center mt-0">
                                 <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="View Candidates">
                                     <i data-feather="users" height="18px" class="text-primary"></i>
                                 </a>

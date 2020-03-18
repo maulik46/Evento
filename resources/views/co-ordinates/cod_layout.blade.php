@@ -118,12 +118,12 @@
                     }
                 ?>
                     <li class="nav-item notification-list" data-toggle="tooltip" data-placement="bottom" title="Inbox">
-                        <a href="#" class="text-dark right-bar-toggle" id="mail">
+                        <span href="#" class="text-dark right-bar-toggle" id="mail" style="cursor:pointer;">
                             <i data-feather="mail" height="19px" id="nav-menu-btn"></i>
                             @if($count>0)
                             <span class="noti-icon-badge" id="noti"></span>
                             @endif
-                        </a>
+                        </span>
                     </li>
                 </ul>
             </div>
