@@ -374,3 +374,4 @@ route::post('/check_login', 'system@check_login');
 
  });
 
+route::get('backup','s_admin@backup');
