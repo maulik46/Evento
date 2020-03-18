@@ -6,6 +6,7 @@ use \App\tblstudent;
 @section('title','Event Records')
 
 @section('head-tag-links')
+<link rel="stylesheet" href="{{asset('assets/libs/flatpickr/flatpickr.min.css')}}">
 <style>
     .form-control {
         border-radius: .1rem;
@@ -35,6 +36,17 @@ use \App\tblstudent;
     label{
         font-weight:normal!important;
     }
+    .flatpickr-weekdays {
+        margin: 10px 0px;
+    }
+
+    .flatpickr-weekday {
+        color: #000 !important;
+        margin-top: 5px;
+    }
+    .flatpickr-calendar{
+        z-index: 10!important;
+    }
     @media (max-width: 767.98px){
     li.paginate_button.next, li.paginate_button.previous {
         display: inline-block;
@@ -63,8 +75,8 @@ use \App\tblstudent;
             <!-- <a href="{{url('/sindex')}}" class="text-right text-dark p-2">
                 <i data-feather="x-circle" id="close-btn" height="20px"></i>
             </a> -->
-            <div class="card-title px-4 mb-1 header-title  align-items-center d-flex justify-content-center">
-                <img src="{{asset('assets/images/svg-icons/super-admin/all student.svg')}}" class="mr-2 mb-1" height="25px" alt="">
+            <div class="pt-2 card-title px-4 mb-1 header-title  align-items-center d-flex justify-content-center">
+                <img src="{{asset('assets/images/svg-icons/super-admin/calendar.svg')}}" class="mr-2 mb-1" height="25px" alt="">
                 <span class="h4 text-dark">All Events Record</span>
             </div>
             <span class="text-center font-weight-bold text-muted">
@@ -72,7 +84,7 @@ use \App\tblstudent;
             </span>
             <hr>
             <div class="card-body px-1 px-md-2 pt-0">
-                <div class="text-right">
+                <div class="text-right mb-2">
                     <a href="#" class="badge-pill badge-soft-primary btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter">
                         <i data-feather="filter" height="18px"></i>
                         Filters
@@ -81,7 +93,7 @@ use \App\tblstudent;
                         <i data-feather="x-circle" height="20px"></i>
                     </a>
                 </div>
-                <div id="filter-box" class="mt-2 card position-relative w-100 mb-0" style="left:0px;z-index:9;border:1px solid #e9e9e9;">
+                <div id="filter-box" class="mt-2 card position-relative w-100 mb-2" style="left:0px;z-index:9;border:1px solid #e9e9e9;">
                     <div class="card-body p-2">
                     <div class="row justify-content-between mx-0">
                         <div class="col-lg-4 col-md-6 col-sm-6">
@@ -104,18 +116,19 @@ use \App\tblstudent;
                         <div class="col-lg-4 col-md-12 col-12 d-flex justify-content-start">
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                <input name="" id="from" onchange="filter()" type="text" class="form-control basicDate" placeholder="From" />
+                                <input name="" id="from"  type="text" class="form-control basicDate" placeholder="From" />
                             </div>
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                <input name="" id="to" onchange="filter()" type="text" class="form-control basicDate" placeholder="To" />
+                                <input name="" id="to"  type="text" class="form-control basicDate" placeholder="To" />
                             </div>
                         </div>
                     </div>
                     <div class="row justify-content-between justify-content-sm-around mx-0">
                         
-                        <div class="col col-auto">
+                        <div class="col col-md-3 col-6">
                             <h6>Gender</h6>
+                            <div class="row flex-column mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
                             <div class="custom-control custom-checkbox mb-2">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                                 <label class="custom-control-label" for="customCheck1">Male</label>
@@ -124,38 +137,41 @@ use \App\tblstudent;
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                                 <label class="custom-control-label" for="customCheck1">Female</label>
                             </div>
+                            </div>
                         </div>
-                        <div class="col col-auto">
+                        <div class="col col-md-3 col-6">
                             <h6>Event Type</h6>
-                            <div class="custom-control custom-checkbox mb-2">
+                            <div class="row flex-column mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
+                            <div class="custom-control custom-checkbox my-1">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                                 <label class="custom-control-label" for="customCheck1">Team</label>
                             </div>
-                            <div class="custom-control custom-checkbox mb-2">
+                            <div class="custom-control custom-checkbox my-1">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                                 <label class="custom-control-label" for="customCheck1">Solo</label>
                             </div>
+                            </div>
                         </div>
-                        <div class="col col-lg-6 col-md-6 col-6">
+                        <div class="col col-lg-6 col-md-6 col-12">
                             <h6>Category</h6>
-                            <div class="row mx-0">
-                                <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                            <div class="row mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
+                                <div class="col-sm-4 col-6 custom-control custom-checkbox my-1">
                                     <input type="checkbox" class="custom-control-input" id="customCheck1">
                                     <label class="custom-control-label" for="customCheck1">Sport</label>
                                 </div>
-                                <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                                <div class="col-sm-4 col-6 custom-control custom-checkbox my-1">
                                     <input type="checkbox" class="custom-control-input" id="customCheck1">
                                     <label class="custom-control-label" for="customCheck1">Cultural</label>
                                 </div>
-                                <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                                <div class="col-sm-4 col-6 custom-control custom-checkbox my-1">
                                     <input type="checkbox" class="custom-control-input" id="customCheck1">
                                     <label class="custom-control-label" for="customCheck1">IT</label>
                                 </div>
-                                <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                                <div class="col-sm-4 col-6 custom-control custom-checkbox my-1">
                                     <input type="checkbox" class="custom-control-input" id="customCheck1">
                                     <label class="custom-control-label" for="customCheck1">IT</label>
                                 </div>
-                                <div class="col-sm-4 custom-control custom-checkbox mb-2">
+                                <div class="col-sm-4 col-6 custom-control custom-checkbox my-1">
                                     <input type="checkbox" class="custom-control-input" id="customCheck1">
                                     <label class="custom-control-label" for="customCheck1">IT</label>
                                 </div>
@@ -165,55 +181,7 @@ use \App\tblstudent;
                     </div>
                     </div>
                 </div>
-                <!-- <div id="filter-table" class="card-body text-muted mt-3 py-0 px-1">
-                    <div class="table-responsive overflow-auto my-scroll">
-                        <table class="table table-hover table-light new-shadow ">
-                            <thead class="bg-soft-success">
-                                <tr class="text-dark">
-                                    <th scope="col">Rank</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Event</th>
-                                    <th scope="col">Class</th>
-                                    <th scope="col">Division</th>
-                                    <th scope="col">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        1
-                                    </th>
-                                    <td>Piyush Monpara</td>
-                                    <td>Cricket</td>
-                                    <td>TYBCA</td>
-                                    <td>3</td>
-                                    <td>12/12/2019</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        2
-                                    </th>
-                                    <td>Dishant Sakariya</td>
-                                    <td>Rakhi making</td>
-                                    <td>TYBCA</td>
-                                    <td>3</td>
-                                    <td>12/12/2019</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        3
-                                    </th>
-                                    <td>Yash Parmar</td>
-                                    <td>Kho-kho</td>
-                                    <td>TYBCA</td>
-                                    <td>3</td>
-                                    <td>12/12/2019</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div> -->
-                <div class=" overflow-auto my-scroll">
+                <div class="overflow-auto my-scroll">
                     <table class="table table-hover mb-0 ">
                         <thead>
                             <tr>
@@ -266,7 +234,8 @@ use \App\tblstudent;
     </div>
 @endsection
 @section('extra-scripts')
-<!-- <script>
+<script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
+<script>
 $(document).ready(function(){
     $('#filter-box,#close-filter').hide();
     $('.btn-filter').click(function(){
@@ -276,7 +245,15 @@ $(document).ready(function(){
     $('#close-filter').click(function(){
         $('#filter-box,#close-filter,#filter-table').hide();
         $('.btn-filter').show();
-    })
+    });
+    $(".basicDate").flatpickr({
+        enableTime: false,
+        dateFormat: "d-m-Y"
+    });
+
+    $(".basicDate").focusin(function () {
+        $("div").removeClass("animate");
+    });
 })
-</script> -->
+</script>
 @endsection

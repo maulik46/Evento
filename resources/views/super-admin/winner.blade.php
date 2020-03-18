@@ -21,7 +21,6 @@
         <div class="card-body">
             <div class="navbar px-0">
                 <div class="mt-2 h4">
-                    <img src="assets/images/svg-icons/student-dash/winner/ranking.svg" height="30px" alt="">
                     <span>Past Winners</span>
                 </div>
                 <a href="#" class=" badge-pill badge-soft-dark btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter">
@@ -59,45 +58,51 @@
                 </div>
                 </div>
                 <div class="row justify-content-between justify-content-sm-around">
-                    <div class="col-auto">
+                    <div class="col col-md-5">
                         <h6>Class</h6>
+                        <div class="row justify-content-start justify-content-lg-around mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
                         <?php $c=0?>
                         @foreach($ddclass as $class)
                         <?php $c++?>
-                        <div class="custom-control custom-checkbox mb-2">
+                        <div class="custom-control custom-checkbox m-1">
                             <input type="checkbox" name="clas[]" onclick="filter()" value="{{$class->class}}" class="custom-control-input" id="clas{{$c}}">
                             <label class="custom-control-label" for="clas{{$c}}">{{ucfirst($class->class)}}</label>
                         </div>
                         @endforeach
+                        </div>
                     </div>
-                    <div class="col-auto">
+                    <div class="col col-md-4">
                         <h6>Division</h6>
-                        <div class="custom-control custom-checkbox mb-2">
+                        <div class="row justify-content-start justify-content-sm-around mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
+                        <div class="custom-control custom-checkbox m-1">
                             <input type="checkbox" name="div[]" onclick="filter()" value="1" class="custom-control-input" id="div1">
                             <label class="custom-control-label" for="div1">1</label>
                         </div>
-                        <div class="custom-control custom-checkbox mb-2">
+                        <div class="custom-control custom-checkbox m-1">
                             <input type="checkbox" name="div[]" onclick="filter()" value="2" class="custom-control-input" id="div2">
                             <label class="custom-control-label" for="div2">2</label>
                         </div>
-                        <div class="custom-control custom-checkbox mb-2">
+                        <div class="custom-control custom-checkbox m-1">
                             <input type="checkbox" name="div[]" onclick="filter()" value="3" class="custom-control-input" id="div3">
                             <label class="custom-control-label" for="div3">3</label>
                         </div>
-                        <div class="custom-control custom-checkbox mb-2">
+                        <div class="custom-control custom-checkbox m-1">
                             <input type="checkbox" name="div[]" onclick="filter()" value="4" class="custom-control-input" id="div4">
                             <label class="custom-control-label" for="div4">4</label>
                         </div>
+                        </div>
                     </div>
-                    <div class="col-auto">
+                    <div class="col col-md-3">
                         <h6>Event type</h6>
-                        <div class="custom-control custom-checkbox mb-2">
+                        <div class="row justify-content-start justify-content-sm-around mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
+                        <div class="custom-control custom-checkbox m-1">
                             <input type="checkbox" name="cat[]" onclick="filter()" value="team" class="custom-control-input" id="cat1">
                             <label class="custom-control-label" for="cat1">Team</label>
                         </div>
-                        <div class="custom-control custom-checkbox mb-2">
+                        <div class="custom-control custom-checkbox m-1">
                             <input type="checkbox" name="cat[]" onclick="filter()"p value="solo" class="custom-control-input" id="cat2">
                             <label class="custom-control-label" for="cat2">Solo</label>
+                        </div>
                         </div>
                     </div>
                 </div>
