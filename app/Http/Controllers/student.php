@@ -675,6 +675,19 @@ class student extends Controller
         return view('notice',['notice'=>$notice]);
     }
 
-
+     public function rate(Request $req)
+    {
+        $eid=$req->eid;
+        $star=$req->star;
+        $exist=\DB::table('tblrates')->where([['eid',$eid],['enrl',Session::get('senrl')]])->count();
+        if($exist>0)
+        {
+            $rate=\DB::table('tblrates')->select('rate')->where([['eid',$eid],['enrl',Session::get('senrl')]])->update(['rate'=>$star]);
+        }
+        else{
+            $rate=\DB::table('tblrates')->insert(['rate'=>$star,'eid'=>$eid,'enrl'=>Session::get('senrl')]);
+        }
+        return response()->json(array('msg'=>'Thanks for review..'),200);
+    }
 
 }
