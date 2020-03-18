@@ -294,16 +294,22 @@
                                     <div class="navbar align-items-end p-0">
                                         <span class="h5">{{ucfirst($act['ename'])}}</span>
                                         <div class="" data-toggle="tooltip" title="Feedback">
+                                        <?php $star=\DB::table('tblrates')->select('rate')->where([['eid',$act['eid']],['enrl',Session::get('senrl')]])->first(); 
+                                            if($star)
+                                            {
+                                            $star=$star->rate;
+                                            }
+                                        ?>
                                             <div class="rating">
-                                            <input type="radio" name="rating-{{$count}}" id="rating-{{$count}}1">
+                                            <input type="radio" name="rating-{{$count}}" @if($star==5) checked @endif onclick="return rate('5',{{$act['eid']}})" id="rating-{{$count}}1">
                                             <label for="rating-{{$count}}1"></label>
-                                            <input type="radio" name="rating-{{$count}}" id="rating-{{$count}}2">
+                                            <input type="radio" name="rating-{{$count}}" @if($star==4) checked @endif onclick="return rate('4',{{$act['eid']}})" id="rating-{{$count}}2">
                                             <label for="rating-{{$count}}2"></label>
-                                            <input type="radio" name="rating-{{$count}}" id="rating-{{$count}}3">
+                                            <input type="radio" name="rating-{{$count}}" @if($star==3) checked @endif onclick="return rate('3',{{$act['eid']}})" id="rating-{{$count}}3">
                                             <label for="rating-{{$count}}3"></label>
-                                            <input type="radio" name="rating-{{$count}}" id="rating-{{$count}}4">
+                                            <input type="radio" name="rating-{{$count}}" @if($star==2) checked @endif onclick="return rate('2',{{$act['eid']}})" id="rating-{{$count}}4">
                                             <label for="rating-{{$count}}4"></label>
-                                            <input type="radio" name="rating-{{$count}}" id="rating-{{$count}}5">
+                                            <input type="radio" name="rating-{{$count}}" @if($star==1) checked @endif onclick="return rate('1',{{$act['eid']}})" id="rating-{{$count}}5">
                                             <label for="rating-{{$count}}5"></label>
                                             </div>
                                         </div>
@@ -351,6 +357,28 @@
 </script>
 <script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
 <script>
+function rate(star,eid)
+{
+   $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/rate',
+            data: {
+               star:star,
+               eid:eid,
+            },
+            success: function (data) {
+                alert(data.msg);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        })
+}
     $('#update').click(function () {
 
         var f = 0;
