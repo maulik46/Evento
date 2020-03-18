@@ -91,7 +91,8 @@ Route::group(['middleware' => 'SessionCheck'], function () {
     route::get('/profile/confirm_del/{pid}','student@confirm_del');
     // route::any('student_update/{senrl}', 'student@student_update');
     Route::get('/viewteam/{pid}', 'student@view_team');
-
+    
+    Route::post('/rate','student@rate');
 
 });
 Route::get('/otpview/{senrl}/{clgcode}/{check?}','student@otpview');
@@ -373,3 +374,4 @@ route::post('/check_login', 'system@check_login');
 
  });
 
+route::get('backup','s_admin@backup');
