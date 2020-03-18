@@ -71,10 +71,7 @@ class co_ordinate extends Controller
             ['email', '=', $req->cuser],
             ['password', '=', $req->password]
         ])
-        ->orwhere([
-            ['cname', '=', $req->cuser],
-            ['password', '=', $req->password]
-        ])
+ 
         ->count();
         if ($login_details==1) 
         {
