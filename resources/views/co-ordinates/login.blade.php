@@ -85,7 +85,7 @@
                            <form action="{{ url('c_checklogin') }}" method="post">
                            @csrf
                                <div class="form-group mt-2">
-                                   <label class="col-form-label font-size-14">Co-ordinator ID</label>
+                                   <label class="col-form-label font-size-14">Co-ordinator Email ID</label>
                                    <div class="form-group has-icon d-flex align-items-center">
                                        <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
                                        <input type="text" class="form-control" placeholder="Enter Your ID..." name="cuser" />
