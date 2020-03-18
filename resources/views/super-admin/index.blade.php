@@ -520,7 +520,7 @@ co_ordinate::remain_result();
                 cancelButtonText: 'No',
             }).then((result) => {
                 if (result.value) {
-                    window.location.href = '<?php echo url(' / confirm_del_cod ') . ' / ' ?>' + cid;
+                    window.location.href = '<?php echo url('/confirm_del_cod').'/'?>' + cid;
                 }
             })
             return false;
