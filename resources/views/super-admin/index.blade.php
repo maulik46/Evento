@@ -14,7 +14,11 @@ co_ordinate::remain_result();
         color: #43d39e !important;
         fill: #fff;
     }
+    .add-cat:hover{
+        background: var(--info);
+        color: #fff !important;
 
+    }
     .event-option.show {
         top: 25% !important;
         right: 2% !important;
@@ -69,6 +73,39 @@ co_ordinate::remain_result();
     .cod-list{
         max-height:365px
     }
+    .my-avatar input[type="checkbox"][class="myCheckbox"] {
+        display: none;
+        }
+
+        .my-avatar label {
+        border: 2px solid #f3efef;
+        display: flex;
+        position: relative;
+        cursor: pointer;
+        padding:2px;
+        border-radius:8px;
+        }
+
+        .my-avatar label img {
+        transition-duration: 0.2s;
+        transform-origin: 50% 50%;
+        }
+
+        :checked + label {
+        border-color: var(--info);
+        background-color: rgba(37,194,227,.15);
+        /* border-radius:8px; */
+        }
+
+        :checked + label:before {
+        content: "";
+        transform: scale(1);
+        }
+
+        :checked + label img {
+        transform: scale(0.95);
+        }
+        
     @media(max-width:1200px){
         .cod-list{
             max-height:265px
@@ -82,6 +119,11 @@ co_ordinate::remain_result();
     @media(max-width:728px){
         .cod-list{
             max-height:390px;
+        }
+    }
+    @media(max-width:568px){
+        .my-avatar img{
+            height:40px;
         }
     }
 </style>
@@ -233,13 +275,12 @@ co_ordinate::remain_result();
                 <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">All Event Categories</span>
             </div>
-            <form class="col-xl-3 col-md-6 col-12 mb-0 form-group d-flex align-items-center px-0">
-                <input type="text" class="form-control" placeholder="Add Category" />
-                <button class="btn btn-success rounded-sm ml-1 font-weight-bold d-flex pl-2 pr-3">
-                <i data-feather="plus-circle" height="18px"></i>
-                <span>Add</span>
-                </button>
-            </form>
+            <a href="{{url('/add_category')}}" class="text-success d-none d-sm-block ">
+                <div class="d-flex align-items-center badge badge-soft-info badge-pill pr-3 py-2 add-cat">
+                    <i data-feather="plus-circle" height="18px"></i>
+                    <span class="font-size-13">Add Category</span>
+                </div>
+            </a>
         </div>
     </div>
     <div class="card mt-2 new-shadow-sm">

@@ -310,6 +310,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
             });
     
         Route::post('/afilter','student@filter');
+
+        route::view('/add_category','super-admin/add_category');
    
     });
 
