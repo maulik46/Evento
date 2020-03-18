@@ -310,7 +310,6 @@
     $('.upl').click(function () {
         var i = $(this).prev('label').clone();
         var file = $('#file-upload')[0].files[0].name;
-        alert(file);
     })
 </script>
 <script>
