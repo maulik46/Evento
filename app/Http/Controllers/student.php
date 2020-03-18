@@ -500,10 +500,10 @@ class student extends Controller
         $count = DB::table('tblevents')
                 ->where('clgcode',Session::get('clgcode'))//session insert of clgcode
                 ->get()->count();
-        $team=DB::table('tblparticipant')->select('eid')->groupBy('eid')->get();
-        $ddename=DB::table('tblevents')->select('ename')->groupBy('ename')->get()->toArray();
-        $ddcategory=DB::table('tblevents')->select('category')->groupBy('category')->get()->toArray();
-        $ddclass=DB::table('tblstudent')->select('class')->groupBy('class')->get()->toArray();
+         $team=DB::table('tblparticipant')->select('eid')->groupBy('eid')->get();
+        $ddename=DB::table('tblevents')->select('ename')->where('clgcode',Session::get('clgcode'))->groupBy('ename')->get()->toArray();
+        $ddcategory=DB::table('tblevents')->select('category')->where('clgcode',Session::get('clgcode'))->groupBy('category')->get()->toArray();
+        $ddclass=DB::table('tblstudent')->select('class')->where('clgcode',Session::get('clgcode'))->groupBy('class')->get()->toArray();
         // print_r($ddename);
         // echo "<br>";
         // print_r($ddcategory);
