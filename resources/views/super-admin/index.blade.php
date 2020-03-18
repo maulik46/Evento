@@ -44,7 +44,14 @@ co_ordinate::remain_result();
         top: -4px;
         right: 12px;
     }
-
+    .event-cat{
+        border:2px solid #f3efef;
+    }
+    .event-cat:hover{
+        background-color:rgba(37,194,227,.2);
+        border-color:rgba(37,194,227,.19);
+        transition:0.2s ease;
+    }
     .btn-p-about:hover {
         background-color: rgba(37, 194, 227, .15);
     }
@@ -73,39 +80,7 @@ co_ordinate::remain_result();
     .cod-list{
         max-height:365px
     }
-    .my-avatar input[type="checkbox"][class="myCheckbox"] {
-        display: none;
-        }
-
-        .my-avatar label {
-        border: 2px solid #f3efef;
-        display: flex;
-        position: relative;
-        cursor: pointer;
-        padding:2px;
-        border-radius:8px;
-        }
-
-        .my-avatar label img {
-        transition-duration: 0.2s;
-        transform-origin: 50% 50%;
-        }
-
-        :checked + label {
-        border-color: var(--info);
-        background-color: rgba(37,194,227,.15);
-        /* border-radius:8px; */
-        }
-
-        :checked + label:before {
-        content: "";
-        transform: scale(1);
-        }
-
-        :checked + label img {
-        transform: scale(0.95);
-        }
-        
+      
     @media(max-width:1200px){
         .cod-list{
             max-height:265px
@@ -287,24 +262,24 @@ co_ordinate::remain_result();
         <div class="card-body p-2">
             <div class="row mx-0">
                 <div class="my-2 col col-auto px-1">
-                    <div class="badge badge-pill badge-primary pl-3 pr-2 font-size-14 new-shadow-sm hover-me-sm align-items-center d-flex">
-                    <span>Sport</span>
-                    <a href="#" class="ml-3 text-white"><i data-feather="edit" height="16px"></i></a>
-                    <a href="#" class="text-white"><i data-feather="delete" height="16px"></i></a>
+                    <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
+                    <span class="text-dark font-size-14 font-weight-bold">Sport</span>
+                    <a href="#" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
+                    <a href="#" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
                     </div>
                 </div>
                 <div class="my-2 col col-auto px-1">
-                    <div class="badge badge-pill badge-soft-primary pl-3 pr-2 font-size-14 new-shadow-sm hover-me-sm align-items-center d-flex">
-                    <span>IT</span>
-                    <a href="#" class="ml-3 text-warning"><i data-feather="edit" height="16px"></i></a>
-                    <a href="#" class="text-danger"><i data-feather="delete" height="16px"></i></a>
+                    <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
+                    <span class="text-dark font-size-14 font-weight-bold">Cultural</span>
+                    <a href="#" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
+                    <a href="#" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
                     </div>
                 </div>
                 <div class="my-2 col col-auto px-1">
-                    <div class="badge badge-pill badge-soft-primary pl-3 pr-2 font-size-14 new-shadow-sm hover-me-sm align-items-center d-flex">
-                    <span>Cultural</span>
-                    <a href="#" class="ml-3 text-warning"><i data-feather="edit" height="16px"></i></a>
-                    <a href="#" class="text-danger"><i data-feather="delete" height="16px"></i></a>
+                    <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
+                    <span class="text-dark font-size-14 font-weight-bold">IT</span>
+                    <a href="#" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
+                    <a href="#" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
                     </div>
                 </div>
             </div>
