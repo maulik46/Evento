@@ -16,7 +16,7 @@
         <span class="h3 my-0 font-weight-normal text-dark text-center">
         {{ucfirst($tc['tname'])}}
         </span>
-        <h6 class="font-weight-normal text-dark text-center">
+        <h6 class="font-weight-bold text-muted text-center">
            {{Session::get('clgname')}}
         </h6>
         <hr class="my-0">

@@ -277,7 +277,7 @@
                                 </a>
                                 <a  href="{{url('/admin/winner-list')}}">
                                     <div class="btn btn-success new-shadow-sm my-1" style="border-radius: 30px;padding: 5px;">
-                                        <i data-feather="file-text" height="20px"></i> 
+                                        <i data-feather="award" height="20px"></i> 
                                     </div>
                                     <span class="hover-me-sm badge badge-soft-success badge-pill px-3 py-2 font-size-13">Winner-list</span>
                                 </a>

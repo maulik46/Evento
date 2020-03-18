@@ -232,7 +232,7 @@ co_ordinate::remain_result();
             </div>
             <div class="col-xl-3 col-md-6 col-12 mb-0 form-group d-flex align-items-center px-0">
                 <input type="text" class="form-control" placeholder="Add Category" />
-                <button class="btn btn-success rounded-sm ml-1 font-weight-bold d-flex">
+                <button class="btn btn-success rounded-sm ml-1 font-weight-bold d-flex pl-2 pr-3">
                 <i data-feather="plus-circle" height="18px"></i>
                 <span>Add</span>
                 </button>
@@ -241,22 +241,22 @@ co_ordinate::remain_result();
     </div>
     <div class="card mt-2 new-shadow-sm">
         <div class="card-body p-2">
-            <div class="row">
-                <div class="my-2 col col-auto">
-                    <div class="badge badge-pill badge-soft-primary pl-3 pr-2 font-size-14 new-shadow-sm hover-me-sm align-items-center d-flex">
+            <div class="row mx-0">
+                <div class="my-2 col col-auto px-1">
+                    <div class="badge badge-pill badge-primary pl-3 pr-2 font-size-14 new-shadow-sm hover-me-sm align-items-center d-flex">
                     <span>Sport</span>
-                    <a href="#" class="ml-3 text-warning"><i data-feather="edit" height="16px"></i></a>
-                    <a href="#" class="text-danger"><i data-feather="delete" height="16px"></i></a>
+                    <a href="#" class="ml-3 text-white"><i data-feather="edit" height="16px"></i></a>
+                    <a href="#" class="text-white"><i data-feather="delete" height="16px"></i></a>
                     </div>
                 </div>
-                <div class="my-2 col col-auto">
+                <div class="my-2 col col-auto px-1">
                     <div class="badge badge-pill badge-soft-primary pl-3 pr-2 font-size-14 new-shadow-sm hover-me-sm align-items-center d-flex">
                     <span>IT</span>
                     <a href="#" class="ml-3 text-warning"><i data-feather="edit" height="16px"></i></a>
                     <a href="#" class="text-danger"><i data-feather="delete" height="16px"></i></a>
                     </div>
                 </div>
-                <div class="my-2 col col-auto">
+                <div class="my-2 col col-auto px-1">
                     <div class="badge badge-pill badge-soft-primary pl-3 pr-2 font-size-14 new-shadow-sm hover-me-sm align-items-center d-flex">
                     <span>Cultural</span>
                     <a href="#" class="ml-3 text-warning"><i data-feather="edit" height="16px"></i></a>
@@ -497,8 +497,7 @@ co_ordinate::remain_result();
         for (var i = 0; i < ename_array.length; i++) {
             if (ename_array[i]) {
 
-                ename_string += "<span class='m-1 badge badge-soft-primary px-3 font-size-13'>" + ename_array[i] +
-                    "</span>";
+                ename_string += "<span class='m-1 badge badge-soft-primary px-3 font-size-13'>" + ename_array[i] +"</span>";
             }
         }
         if (ename.length > 0) {

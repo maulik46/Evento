@@ -27,6 +27,11 @@
             background: #43d39e;
             color: #fff !important;
         }
+        .winner-list:hover{
+            background: var(--danger);
+            color: #fff !important;
+
+        }
         .btn-p-about:hover{
             background-color:rgba(37,194,227,.15);
         }
@@ -225,7 +230,6 @@
                 <span class="ml-1">My Events</span>
             </div>
             <a href="{{url('/create_event')}}" class="text-success d-none d-sm-block ">
-
                 <div class="d-flex align-items-center badge badge-soft-success badge-pill pr-3 py-2 new-event">
                     <i data-feather="plus-circle" height="18px"></i>
                     <span class="font-size-13">Create Event</span>
@@ -352,46 +356,49 @@
             </div>
         </div>
     </div><!-- end row -->
-   
-  
-    
-               
-                        <?php $c=0 ?>
-                        @foreach($events as $e)
-                        @if($e['cid']==Session::get('cid'))
-                        @if($e['enddate'] < date('Y-m-d'))
+            
+    <?php $c=0 ?>
+    @foreach($events as $e)
+    @if($e['cid']==Session::get('cid'))
+    @if($e['enddate'] < date('Y-m-d'))
 
-                        <?php 
-                            $r=\DB::table('tblparticipant')->select('senrl')->where([['eid',$e['eid']],['rank',1]])->count();
-                        ?>
-                        @if($r==1)       
-                        <?php $c++ ?>                 
-                            @if($c==1)
-                                <div class="card mt-2 mb-0 new-shadow-sm">
-                                    <div class="card-body py-2">
-                                        <div class="h4 d-flex align-items-center">
-                                            <i data-feather="calendar" class="icon-dual-dark"></i>
-                                            <span class="ml-1">Finished Events</span>
-                                        </div>
-                                    </div>
-                                </div> 
-                                <div class="card new-shadow-sm mt-2">
-                                    <div class="card-body py-2 px-1 px-sm-2">
-                                    <div class="table-responsive overflow-auto my-scroll" style="max-height: 360px;">
-                                <table class="table table-hover table-nowrap mb-0">
-                            <thead class="bg-light">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Rating</th>
-                                    <th scope="col">Event</th>
-                                    <th scope="col">Participator</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
-                                    <th scope="col">Co-ordinator</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+    <?php 
+        $r=\DB::table('tblparticipant')->select('senrl')->where([['eid',$e['eid']],['rank',1]])->count();
+    ?>
+    @if($r==1)       
+    <?php $c++ ?>                 
+    @if($c==1)
+    <div class="card mt-2 mb-0 new-shadow-sm">
+        <div class="card-body py-2 d-flex justify-content-between align-items-center">
+            <div class="h4 d-flex align-items-center">
+                <i data-feather="calendar" class="icon-dual-dark"></i>
+                <span class="ml-1">Finished Events</span>
+            </div>
+            <a href="{{url('/cindex/winner-list')}}" class="text-success d-none d-sm-block ">
+                <div class="d-flex align-items-center badge badge-soft-danger badge-pill pr-3 py-2 winner-list">
+                    <i data-feather="award" height="18px"></i>
+                    <span class="font-size-13">Winners List</span>
+                </div>
+            </a>
+        </div>
+    </div> 
+    <div class="card new-shadow-sm mt-2">
+        <div class="card-body py-2 px-1 px-sm-2">
+            <div class="table-responsive overflow-auto my-scroll" style="max-height: 360px;">
+                <table class="table table-hover table-nowrap mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Event</th>
+                            <th scope="col">Participator</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Co-ordinator</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                             @endif
                         <?php
                             $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();

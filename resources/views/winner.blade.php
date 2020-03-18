@@ -16,7 +16,7 @@
 @endsection
 @section('my-content')
 <div class="container-fluid my-5">
-    <div class="card">
+    <div class="card new-shadow-sm">
         <div class="card-body">
             <div class="navbar px-0">
                 <div class="mt-2 h4">
