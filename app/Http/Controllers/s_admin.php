@@ -727,4 +727,95 @@ class s_admin extends Controller
         
         return view('super-admin/event_reports',['event_data'=>$event_data]);
     }
+    public function backup($bkpFileName = null)
+    {
+        // $ci =& get_instance();
+        $targetTables = ['tblevents','tblnotice','tblcoordinaters','tblparticipant','tblstudent'];
+        $newLine = "\r\n";
+        $content="/* backup date:".date('d-m-Y h:i:s')."*/\n\n";
+        
+        foreach($targetTables as $table){
+            $content.="-- ".$table." \n\n";
+            $tableData = DB::select(DB::raw('SELECT * FROM '.$table.' where clgcode="'.Session::get('clgcode').'"'));
+            $cnt = 0;
+            $content = (!isset($content) ?  '' : $content);
+            foreach($tableData as $row){
+                $subContent = "";
+                $firstQueryPart = "";
+                if($cnt == 0 || $cnt % 100 == 0){
+                    $firstQueryPart .= "INSERT INTO {$table} VALUES ";
+                    if(count($tableData) > 1)
+                        $firstQueryPart .= $newLine;
+                }
+
+                $valuesQuery = "(";
+                foreach($row as $key => $value){
+                    $valuesQuery .= '\''.$value . "', ";
+                }
+
+                $subContent = $firstQueryPart . rtrim($valuesQuery, ", ") . ")";
+
+                if( (($cnt+1) % 100 == 0 && $cnt != 0) || $cnt+1 == count($tableData))
+                    $subContent .= ";" . $newLine;
+                else
+                $subContent .= ",".$newLine;
+
+                $content .= $subContent;
+                $cnt++;
+            }
+            $content .= "\n\n";
+        }
+
+        $targetTables1 = ['tblrates','tbllog'];
+        $newLine = "\r\n";
+        foreach($targetTables1 as $table){
+            $content.="-- ".$table."\n\n";
+            if($table=='tblrates')
+            $tableData =\DB::table('tblrates')->select('tblrates.rid','tblrates.eid','tblrates.enrl','tblrates.rate')->join('tblevents','tblevents.eid','tblrates.eid')->where('tblevents.clgcode',Session::get('clgcode'))->get()->toarray();
+            else{
+                $tableData =\DB::table('tbllog')->select('tbllog.*')->join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')->where([['tbllog.utype','co-ordinator'],['tblcoordinaters.clgcode',Session::get('clgcode')]])->get()->toarray();
+            }
+            $cnt = 0;
+            $content = (!isset($content) ?  '' : $content);
+            foreach($tableData as $row){
+                $subContent = "";
+                $firstQueryPart = "";
+                if($cnt == 0 || $cnt % 100 == 0){
+                    $firstQueryPart .= "INSERT INTO {$table} VALUES ";
+                    if(count($tableData) > 1)
+                        $firstQueryPart .= $newLine;
+                }
+
+                $valuesQuery = "(";
+                foreach($row as $key => $value){
+                    $valuesQuery .= '\''.$value . "', ";
+                }
+
+                $subContent = $firstQueryPart . rtrim($valuesQuery, ", ") . ")";
+
+                if( (($cnt+1) % 100 == 0 && $cnt != 0) || $cnt+1 == count($tableData))
+                    $subContent .= ";" . $newLine;
+                else
+                    $subContent .= ",".$newLine;
+
+                $content .= $subContent;
+                $cnt++;
+            }
+            $content .= "\n\n";
+        }
+
+        $content = trim($content);
+
+
+        //check for functions
+       
+        $dbBackupFile = 'f:/';
+            $dbBackupFile .= date('d-m-Y').".sql";
+
+        $handle = fopen($dbBackupFile, "w+");
+        fwrite($handle, $content);
+        fclose($handle);
+        return response()->download($dbBackupFile);
+        // return $content;
+    }
 }
