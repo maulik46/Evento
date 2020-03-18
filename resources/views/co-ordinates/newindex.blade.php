@@ -408,7 +408,7 @@
                             <td>#{{$c}}</td>
                             <td>
                                 <i data-feather="star" class="icon-dual-warning" height="18px"></i>
-                                <span>4.5</span>
+                                <span>{{round($rate,1)}}</span>
                             </td>
                             <td>{{ucfirst($e['ename'])}} compition</td>
                             <td>{{$p}}</td> <!--total Participator -->
