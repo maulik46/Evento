@@ -378,14 +378,7 @@ class co_ordinate extends Controller
             $topic="Update of Event ".$req_ename;
             
             if ($message!="") {
-                $tblp=participant::where('eid',$eid)->get()->count();
-                if ($tblp>0) {
-                    $receiver="admin-student";
-                }
-                else
-                {
-                    $receiver="admin";
-                }
+                $receiver="admin-student";
                 $notice=DB::table('tblnotice')->insert(
                     ['topic'=>$topic,'message'=>$message,'sender'=>'System','sender_type'=>'System','receiver'=>$receiver,'ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('clgcode')]
                 );
