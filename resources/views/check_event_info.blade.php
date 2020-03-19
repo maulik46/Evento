@@ -51,7 +51,7 @@
                                 @endif
                                 <p class="d-flex justify-content-between mx-5">
                                     <span class="font-weight-bold">Event Catagory</span>
-                                    <span>{{ucfirst($einfo['category'])}}</span>
+                                    <span>{{ucfirst($einfo['category_name'])}}</span>
                                 </p>
                                 <p class="d-flex justify-content-between mx-5">
                                     <span class="font-weight-bold">Event For</span>
