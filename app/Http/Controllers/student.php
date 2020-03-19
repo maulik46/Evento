@@ -38,9 +38,9 @@ class student extends Controller
         $id = decrypt($id);
         $einfo = tblevent::where('eid', $id)
         ->join('tblcoordinaters', 'tblevents.cid', '=', 'tblcoordinaters.cid')
+        ->join('tblcategory','tblcategory.category_id','tblevents.cate_id')
         ->first();
         return view("check_event_info", ['einfo' => $einfo]);
-
     }
     public function about_event($pid)
     {
@@ -67,7 +67,7 @@ class student extends Controller
     }
     public function getevents()
     {
-        $events=tblevent::where([['clgcode',Session::get('clgcode')],
+        $events=tblevent::join('tblcategory','tblcategory.category_id','tblevents.cate_id')->where([['tblevents.clgcode',Session::get('clgcode')],
         ['reg_end_date','>=',date('Y-m-d')],
         ['reg_start_date','<=',date('Y-m-d')]])
         ->where('efor','LIKE','%'.Session::get('class').'%')
@@ -265,11 +265,12 @@ class student extends Controller
     }
     public function explore($cat)//function for explore event
     {
-        $n=tblevent::where([['clgcode',Session::get('clgcode')],['category',$cat],['reg_end_date','>=',date('Y-m-d')]])->count();
+        $cat=decrypt($cat);
+        $n=tblevent::where([['clgcode',Session::get('clgcode')],['cate_id',$cat],['reg_end_date','>=',date('Y-m-d')]])->count();
         if($n>0)
         {
             $events=tblevent::where([['clgcode',Session::get('clgcode')],
-                                            ['category',$cat],
+                                            ['cate_id',$cat],
                                             ['reg_end_date','>=',date('Y-m-d')],
                                             ['reg_start_date','<=',date('Y-m-d')]])
                                             ->where(function($q){
