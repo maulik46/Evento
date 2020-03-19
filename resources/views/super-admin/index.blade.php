@@ -271,7 +271,7 @@ co_ordinate::remain_result();
                     <a href="#" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
                     </div>
                 </div>
-              @endforeach
+              @endforeach 
             </div>
         </div>
     </div>                                    
