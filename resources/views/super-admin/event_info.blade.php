@@ -49,7 +49,7 @@
                                 </p>
                                 <p class="d-flex justify-content-between mx-5">
                                     <span class="font-weight-bold text-right">Event time</span>
-                                    <span>{{date('h:i A',strtotime($einfo['etime']))}}</span>
+                                    <span>{{date('h:i A',strtotime($einfo['time']))}}</span>
                                 </p>
                                  <p class="d-flex justify-content-between mx-5">
                                     <span class="font-weight-bold">Registraion start date</span>
@@ -71,7 +71,7 @@
                                 @endif
                                 <p class="d-flex justify-content-between mx-5">
                                     <span class="font-weight-bold">Event Catagory</span>
-                                    <span>{{ucfirst($einfo['category'])}}</span>
+                                    <span>{{ucfirst($einfo['category_name'])}}</span>
                                 </p>
                                 <p class="d-flex justify-content-between mx-5">
                                     <span class="font-weight-bold">Event For</span>
