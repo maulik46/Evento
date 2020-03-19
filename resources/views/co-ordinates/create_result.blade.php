@@ -16,9 +16,25 @@
         height: 35px;
         cursor: text !important;
     }
+
     .form-control:focus {
         border: 1px solid #d1d1d190 !important;
     }
+    /* .custom-control-input.switch-1:checked~.custom-control-label::before {
+        color: #fff;
+        border-color: #1ae1ac;
+        background-color: #1ae1ac;
+    }
+    .custom-control-input.switch-2:checked~.custom-control-label::before {
+        color: #fff;
+        border-color: var(--info);
+        background-color: var(--info);
+    }
+    .custom-control-input.switch-3:checked~.custom-control-label::before {
+        color: #fff;
+        border-color: var(--warning);
+        background-color: var(--warning);
+    } */
     .sticky {
         position: fixed;
         top: 72px;
@@ -36,7 +52,7 @@
         box-shadow: 0 1px 6px 0 rgba(255, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .08);
         border-radius: .2rem;
     }
-    @media(max-width: 576px)
+    @media(max-width: 500px)
     {
         .small-sticky{
             margin:-24px 0px;
@@ -70,7 +86,7 @@
     <div class="card mb-0">
         <div class="card-body py-3 px-2">
             <div class="d-flex align-items-center ">
-                <i data-feather="award" class="icon-dual-success"></i>
+                <i data-feather="award" class="text-success"></i>
                 <h5>Create Result</h5>
             </div>
         </div>
@@ -83,20 +99,20 @@
             <div class="row align-items-center" style="margin-bottom:-15px;">
                 <div class="col-md-4">
                     <span class="badge badge-success px-5 mb-1">Rank 1</span>
-                    <div id="r1" class="card bg-soft-success px-3 p-1 droppable-rank" style="border:2px dashed #333;">
+                    <div id="r1" class="card bg-soft-success px-3 droppable-rank" style="border:2px dashed #333;">
                         <img src="{{asset('assets/images/svg-icons/student-dash/winner/1.svg')}}" height="35px" alt="1">
                     </div>
                 </div>
 
                 <div class="col-md-4 small-sticky">
                     <span class="badge badge-primary px-4 mb-1">Rank 2</span>
-                    <div id="r2" class="card bg-soft-primary px-3 p-1 droppable-rank" style="border:2px dashed #333;">
+                    <div id="r2" class="card bg-soft-primary px-3 droppable-rank" style="border:2px dashed #333;">
                         <img src="{{asset('assets/images/svg-icons/student-dash/winner/2.svg')}}" height="35px" alt="2">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <span class="badge badge-warning px-3 mb-1">Rank 3</span>
-                    <div id="r3" class="card bg-soft-warning px-3 p-1 droppable-rank" style="border:2px dashed #333;">
+                    <div id="r3" class="card bg-soft-warning px-3 droppable-rank" style="border:2px dashed #333;">
                         <img src="{{asset('assets/images/svg-icons/student-dash/winner/3.svg')}}" height="35px" alt="3">
                     </div>
                 </div>
@@ -198,7 +214,7 @@
         
         <div class="bg-white p-1 my-2 px-1 pb-1 new-shadow-sm stud-info rounded">
                 <div class="col-md-12 font-weight-bold text-dark d-flex justify-content-between align-items-center flex-wrap">
-                    <div class=" font-size-16 drag-me px-2 ml-1 rounded-sm bg-white hover-me-sm" style="cursor:move!important;min-width:150px!important;">
+                    <div class=" font-size-16 drag-me px-2 ml-1 rounded-sm bg-white hover-me-sm" style="cursor:pointer!important;min-width:150px!important;">
                        <span>{{ucfirst($sinfo['sname'])}}</span> 
                        <span id="pid" style="display:none;">{{$p['pid']}}</span>
                     </div>
