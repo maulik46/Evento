@@ -78,17 +78,17 @@ co_ordinate::remain_result();
         width: 5rem;
     }
     .cod-list{
-        max-height:365px
+        height:365px;
     }
       
     @media(max-width:1200px){
         .cod-list{
-            max-height:265px
+            max-height:265px;
         }
     }
     @media(max-width:992px){
         .cod-list{
-            max-height:440px
+            max-height:440px;
         }
     }
     @media(max-width:728px){
@@ -261,17 +261,27 @@ co_ordinate::remain_result();
     <div class="card mt-2 new-shadow-sm">
         <div class="card-body p-2">
             <div class="row mx-0">
-             <?php $cat=\DB::table('tblcategory')->select('category_name')->where([['clgcode',Session::get('clgcode')],['status','a']])->get();
-            ?>
-            @foreach($cat as $category)
                 <div class="my-2 col col-auto px-1">
                     <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
-                    <span class="text-dark font-size-14 font-weight-bold">{{$category->category_name}}</span>
+                    <span class="text-dark font-size-14 font-weight-bold">Sport</span>
                     <a href="#" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
                     <a href="#" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
                     </div>
                 </div>
-              @endforeach
+                <div class="my-2 col col-auto px-1">
+                    <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
+                    <span class="text-dark font-size-14 font-weight-bold">Cultural</span>
+                    <a href="#" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
+                    <a href="#" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
+                    </div>
+                </div>
+                <div class="my-2 col col-auto px-1">
+                    <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
+                    <span class="text-dark font-size-14 font-weight-bold">IT</span>
+                    <a href="#" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
+                    <a href="#" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>                                    
@@ -474,7 +484,7 @@ co_ordinate::remain_result();
         },
         labels: [<?php echo $ename_string; ?>],
         responsive: [{
-          breakpoint: 480,
+          breakpoint: 576,
           options: {
             chart: {
               width: 260

@@ -27,8 +27,8 @@
                     <div class="card-body py-0">
                             <div class="d-flex justify-content-between align-items-center flex-wrap">
                                 <div style="margin-top:-10px;">
-                                    <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
-                                    <span class="badge badge-soft-info px-3 py-1 badge-pill">{{date('h:i A',strtotime($nt->ntime))}}</span>
+                                    <span class="badge badge-primary px-2 py-1">{{date('d/m/Y',strtotime($nt->ndate))}}</span>
+                                    <span class="badge badge-info px-2 py-1">{{date('h:i A',strtotime($nt->ntime))}}</span>
                                 </div>
                                 <div class="d-flex align-items-end flex-column flex-wrap">
                                     <h6>{{ucfirst($nt->sender)}}</h6>
@@ -37,7 +37,7 @@
                                     
                             </div>
                             <div>
-                                <h5 style="margin-top:-12px;">{{ucfirst($nt->topic)}}</h5>
+                                <h5 class="my-0">{{ucfirst($nt->topic)}}</h5>
                                 <div class="card-text mb-2"> 
                                        {!! ucfirst($nt->message) !!}
                                        
@@ -48,7 +48,7 @@
                                         $a=0;
                                         ?>
                                            
-                                        <div class="card-action my-2">
+                                        <div class="card-action">
                                             @foreach($att as $attachment)
                                             <?php $a++;?>
                                             @if($a<$c)

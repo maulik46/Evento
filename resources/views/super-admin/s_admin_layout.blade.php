@@ -175,39 +175,38 @@
             <div class="card new-shadow-sm my-2 hover-me-sm"
                 style="border-left: 3px solid #ff5c75;border-radius:0px 10px 10px 0px;">
             @else
-            <div class="card new-shadow-sm my-2 hover-me-sm" style="border-left: 3px solid #1AE1AC;border-radius:0px 10px 10px 0px;">
+            <div class="card new-shadow-sm my-2" style="border-left: 3px solid #1AE1AC;border-radius:0px 10px 10px 0px;">
             @endif
-            <div class="card-body py-0 px-2">
-                <div class="d-flex justify-content-between align-items-center flex-wrap" style="margin:-10px 0px;">
-                    <span class="badge badge-soft-primary px-3 py-1 badge-pill">{{date('d/m/Y',strtotime($nt->ndate))}}
+            <div class="card-body py-2 px-2">
+                <div class="d-flex justify-content-between align-items-center flex-wrap" >
+                    <span class="badge badge-primary px-2 py-1">{{date('d/m/Y',strtotime($nt->ndate))}}
                     </span>
-                    <div class="d-flex align-items-end flex-column flex-wrap">
-                        <h6>{{ucfirst($nt->sender)}}</h6>
-                        <span class="badge badge-warning text-white badge-pill" style="padding: 0.3em 0.6rem">{{ucfirst($nt->sender_type)}}</span>
+                    <div class="badge badge-warning text-white badge-pill px-3">
+                        <span>{{ucfirst($nt->sender)}}</span>
                     </div>    
                 </div>
-                        <div>
-                            <h5 class="mt-0">{{ucfirst($nt->topic)}}</h5>
-                            <div class="card-text mb-2 rounded p-2" style="border:1px solid #d3d3d369;">
-                                {!! ucfirst($nt->message) !!}
-                            </div>
-                               @if($nt->attechment)
-                                    <?php $att = explode(';',$nt->attechment);
-                                        $c=count($att);
-                                        $a=0;
-                                    ?>
-
-                                    <div class="card-action my-2">
-                                    @foreach($att as $attachment)
-                                        <?php $a++;?>
-                                        @if($a<$c)  
-                                            <a href="{{asset('attachment')}}/{{$attachment}}" class="btn badge badge-info badge-pill new-shadow-sm font-weight-bold py-2 px-3 mr-2" download="{{substr($attachment, 10)}}">{{substr($attachment, 10)}}</a> 
-                                        @endif
-                                    @endforeach
-                                    </div>
-
-                                @endif
+                    <div>
+                        <h5 class="mt-1 mb-0 ml-1">{{ucfirst($nt->topic)}}</h5>
+                        <div class="rounded mb-1">
+                            <span class="notice-msg">{!! ucfirst($nt->message) !!}</span>
                         </div>
+                            @if($nt->attechment)
+                                <?php $att = explode(';',$nt->attechment);
+                                    $c=count($att);
+                                    $a=0;
+                                ?>
+
+                                <div class="card-action">
+                                @foreach($att as $attachment)
+                                    <?php $a++;?>
+                                    @if($a<$c)  
+                                        <a href="{{asset('attachment')}}/{{$attachment}}" class="btn badge badge-soft-info badge-pill font-weight-bold py-2 px-3 m-1 hover-me-sm" download="{{substr($attachment, 10)}}">{{substr($attachment, 10)}}</a> 
+                                    @endif
+                                @endforeach
+                                </div>
+
+                            @endif
+                    </div>
             </div>
             </div>
             @endforeach
@@ -241,7 +240,7 @@
                                     <div class="btn btn-danger new-shadow-sm my-1" style="border-radius: 30px;padding: 5px;">
                                         <i data-feather="check-square" height="20px"></i>
                                     </div>
-                                    <span class="hover-me-sm badge badge-soft-danger badge-pill px-3 py-2 font-size-13 ">Approve Events</span> 
+                                    <span class="hover-me-sm badge badge-soft-danger badge-pill px-3 py-2 font-size-13 ">Delete Events</span> 
                                 </a>
                                 <a  href="{{url('add_student')}}">
                                     <div class="btn btn-primary new-shadow-sm my-1" style="border-radius: 30px;padding: 5px;">
@@ -336,6 +335,7 @@
         $('.rightbar-overlay').click(function () {
             window.location.reload();
         });
+        $('.notice-msg').find('p').css({'margin-bottom':'0px','padding':'4px'});
     </script>
 
     <script>

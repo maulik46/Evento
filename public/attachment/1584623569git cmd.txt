@@ -1,0 +1,17 @@
+1. in your project path
+	git init
+2. add project to git
+	git add .
+check status(optional)
+	git status
+
+3. commit  your code
+	git  commit -m "give name or comment about your commit"
+
+4. copy the https/SSH link from your account and paste it after this command
+	git remote add origin  your-link
+
+5. push the code
+	git push -u origin master 
+	
+	

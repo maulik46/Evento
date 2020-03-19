@@ -1,0 +1,120 @@
+1.student
+2.co-ordinator
+3.super-admin
+4.system-admin
+
+-----------------1.student--------------------
+->before login
+
+	-view college list and select their college
+	-view event and its information of selected college
+	-redirect to the student dashboard when click on participate-now button
+
+->at login(authentication process)
+
+	-student select there college and enter enrollment number
+	-student will get authentication code in their registered email address
+	-after entering valid code student will enter in student dashboard
+
+->after login
+
+	-view upcoming event's poster
+	-view events and its information 
+	-participate in particuler event
+		->solo event
+		->team event
+			-student who enters team members will be team-leader of that team
+			-enter team name
+			-enter team members
+	-view profile page
+		->view information
+		->update email/mobile no./address 
+		->view participated event list
+
+			-list of recently participated event
+			-view event details
+			-cancel participation
+			-if event is team event then only team-leader has rights to cancel participation
+			 of whole team
+
+		->view activity 
+			-list of events(finished) in which he/she participated with result
+			-can give feedback of events(finished)
+	-winner list page
+		->can view past winners
+		->filter the records by class/divison/date
+	-notice page
+		->view notice given by co-ordinator/Admin
+		->download attachment
+		->get notice of updated event
+		->get notice/Email of deleted event
+
+
+-----------------2.co-ordinator--------------------
+
+->at login
+	-enter valid email-id and password
+	-forgot password option
+		->get otp on registered email-id
+		->create new password after entering valid otp
+
+
+->after login
+	->home page
+		-chart of total participation in upcoming events
+		-list of running event(today's event) of co-ordinator
+			-view event details and list participated student/team
+			-create result
+				->drag and drop the student/team in 1st/2nd/3rd rank box
+		- view declared result
+		- list of all events created by all co-ordinator in institute/college
+		- create event
+		- delete event(need approvel from admin)
+		- update event
+			->if some students has participated
+		 	(some fields cannot update such as event-type(solo/team),gender,class,team-size)
+			->can fully update if no One has participated 
+	->create notice for students
+	->view profile and update details
+		-view log activity
+	->change password
+	->view notice of admin	
+
+
+-----------------3.super admin--------------------	
+
+-> at login
+	(same as co-ordinator)
+->after login
+	->home page
+		-list of all events with their co-ordinator
+		-view event/participation list/result
+		-list of created co-ordinator with details
+		-update co-ordinator
+		-delete co-ordinator
+			(cannot delete if some events are running or upcoming of that co-ordinator )
+	->approve event
+		-delete event by approving
+	->add student	
+		-individual or through excel sheet
+	->add new co-ordinator
+	->check log activity of particuler co-ordinator date wise
+	->view student's record rank wise, class wise,division wise. view total participation of particuler student
+	->send notice to co-ordinators or students or both with attachement
+	->update and delete student
+
+	->delcare delay result(not declared by co-ordinator)
+	
+-----------------4.system admin--------------------
+
+->after valid login
+	-view list of college with details
+	-update college details
+	-delete college (get otp on registered email)
+	-add new college
+	-get request of particuler institute or college
+		(institute or college can send request by filling given form on demopage)
+	-accept or reject request
+	-send notice to selected college admin
+	-update profile
+	-change password		

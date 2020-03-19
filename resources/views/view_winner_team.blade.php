@@ -47,7 +47,7 @@
                             $a++; 
                         ?> 
                         <tr>
-                            <td>{{$a}}</td>
+                            <th>{{$a}}</th>
                             <td>{{$sinfo['senrl']}}</td>
                             <td>{{ucfirst($sinfo['sname'])}}</td>
                             <td>{{strtoupper($sinfo['class'])}}</td>
@@ -62,4 +62,10 @@
     </div>
 </div>
 @endsection
-
+@section('extra-scripts')
+<script>
+$(document).ready(function(){
+    $('tbody tr:first td:first').next().css("font-weight","bold");
+})
+</script>
+@endsection
