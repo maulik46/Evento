@@ -261,6 +261,8 @@ co_ordinate::remain_result();
     <div class="card mt-2 new-shadow-sm">
         <div class="card-body p-2">
             <div class="row mx-0">
+            <?php $cat=\DB::table('tblcategory')->select('category_name')->where([['clgcode',Session::get('clgcode')],['status','a']])->get();
+            ?>
                 @foreach($cat as $category)
                 <div class="my-2 col col-auto px-1">
                     <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
