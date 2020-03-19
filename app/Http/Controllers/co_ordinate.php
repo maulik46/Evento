@@ -71,7 +71,6 @@ class co_ordinate extends Controller
             ['email', '=', $req->cuser],
             ['password', '=', $req->password]
         ])
- 
         ->count();
         if ($login_details==1) 
         {
@@ -83,7 +82,7 @@ class co_ordinate extends Controller
             session()->put('clgname',$clgname->clgname);
             session()->put('cname',$clg->cname);
             session()->put('email',$clg->email);
-            session()->put('cat',$clg->category);
+            session()->put('cat',$clg->cate_id);
             session()->put('mobile',$clg->mobile);
             session()->put('profilepic',$clg->pro_pic);
             $log=new log();
@@ -478,7 +477,7 @@ class co_ordinate extends Controller
         }
         $tblevent=new tblevent;
         $tblevent->ename=$req->ename;
-        $tblevent->category=Session::get('cat');
+        $tblevent->cate_id=Session::get('cat');
         $tblevent->edate=$edate;
         $tblevent->enddate=$enddate;
         $tblevent->time=$req->etime;        
@@ -524,7 +523,7 @@ class co_ordinate extends Controller
      }
      public function event_info($id)
      {      $id=decrypt($id);
-            $einfo=tblevent::where('eid',$id)->first();
+            $einfo=tblevent::join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where('eid',$id)->first();
             return view("co-ordinates/event_info",['einfo'=>$einfo]);
      }
     //  public function event_result($id)
@@ -618,7 +617,7 @@ class co_ordinate extends Controller
         $candidates=participant::select('pid','senrl','tname')->where('eid',$id)->get()->toarray();
         // $team_candidates=participant::select('pid', 'senrl', 'tname')->where('pid', $id)->get()->toarray();
 
-        $einfo=tblevent::select('eid','ename','e_type','edate','category')->where('eid',$id)->first()->toarray();
+        $einfo=tblevent::select('eid','ename','e_type','edate','tblcategory.category_name')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where('eid',$id)->first()->toarray();
         $parameter_array=[
             'candidates'=>$candidates,
             // 'team_candidates'=>$team_candidates,

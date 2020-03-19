@@ -71,7 +71,7 @@ class s_admin extends Controller
     {
         $events=tblevent::where([['clgcode',Session::get('clgcode')]
             ])->orderby('edate','desc')->get()->toarray();
-        $cod=tblcoordinaters::where('clgcode',Session::get('clgcode'))->get();
+        $cod=tblcoordinaters::join('tblcategory','tblcategory.category_id','tblcoordinaters.cate_id')->where('tblcoordinaters.clgcode',Session::get('clgcode'))->get();
         $tblp=participant::select('tblparticipant.eid',DB::raw('COUNT(tblparticipant.eid) AS count_par'))
         ->join('tblevents','tblevents.eid','=','tblparticipant.eid')
         ->where('tblparticipant.clgcode',session::get('clgcode'))
@@ -557,7 +557,7 @@ class s_admin extends Controller
             $avatar=$filename;
         }
         $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('clgcode'),'cname'=>strtolower($req->cname),'email'=>$req->email,'mobile'=>$req->cno,
-        'password'=>$req->pass,'category'=>strtolower($req->category),'pro_pic'=>$avatar] );
+        'password'=>$req->pass,'cate_id'=>strtolower($req->category),'pro_pic'=>$avatar] );
         if($tblc)
         {
             //echo "new co create";
@@ -620,7 +620,7 @@ class s_admin extends Controller
     }
    public function event_info($id)
      {      $eid=decrypt($id);
-        $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcolleges.clgname')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcolleges','tblcolleges.clgcode','tblcoordinaters.clgcode')->where('tblevents.eid',$eid)->first();
+        $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$eid],['tblevents.clgcode',Session::get('clgcode')]])->first();
             return view("super-admin/event_info",['einfo'=>$einfo]);
      }
      public function view_result($eid)
@@ -668,7 +668,7 @@ class s_admin extends Controller
         $candidates=participant::select('pid','senrl','tname')->where('eid',$eid)->get()->toarray();
         // $team_candidates=participant::select('pid', 'senrl', 'tname')->where('pid', $id)->get()->toarray();
 
-        $einfo=tblevent::select('eid','ename','e_type','edate','category')->where('eid',$eid)->first();
+        $einfo=tblevent::select('eid','ename','e_type','edate','tblcategory.category_name')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where('eid',$eid)->first()->toarray();
         // $parameter_array=[
         //     'candidates'=>$candidates,
         //     // 'team_candidates'=>$team_candidates,
@@ -817,5 +817,25 @@ class s_admin extends Controller
         fclose($handle);
         return response()->download($dbBackupFile);
         // return $content;
+    }
+    public function addcat(Request $req)
+    {
+        $cat=$req->catname;
+        if($cat=="")
+        {
+            session()->flash('error', 'Please Enter category name..! ');
+            return redirect(url('sindex'));
+        }
+        $c=\DB::table('tblcategory')->where('category_name',$cat)->count();
+        if($c>0)
+        {
+            session()->flash('error', 'This category already exist..! ');
+        }
+        else{
+            $cid=time();
+            $insrt=\DB::table('tblcategory')->insert(['category_id'=>$cid,'category_name'=>$cat,'clgcode'=>Session::get('clgcode'),'status'=>'i']);
+            session()->flash('success', 'Category added successfully..');
+        }
+        return redirect(url('sindex'));
     }
 }

@@ -177,14 +177,7 @@
 
                         <div class="col-xl-12 col-md-6 media my-1 px-2 py-2 new-shadow-sm bg-light hover-me-sm event-name">
                             <div class="media-body">
-                                <span class="text-muted badge badge-pill  
-                                                @if ($e['category'] == 'cultural')badge-soft-primary 
-                                                @endif 
-                                                @if ($e['category'] == 'it')badge-soft-warning 
-                                                @endif
-                                                @if ($e['category'] == 'sports')badge-soft-success 
-                                                @endif 
-                                                px-3">{{ucfirst($e['category'])}}
+                                <span class="text-muted badge badge-pill badge-soft-primary px-3">{{ucfirst($e['category_name'])}}
                                 </span>
                                 <span class="text-muted badge badge-pill badge-soft-dark px-3">
                                     {{date('d/m/Y',strtotime($e['edate']))}}
@@ -233,13 +226,15 @@
 
     <!-- row start -->
     <div class="row mt-4" id="event-box">
+    <?php $category=\DB::table('tblcategory')->where('clgcode',Session::get('clgcode'))->get(); ?>
+    @foreach($category as $cat)
         <div class="col-lg-4 col-xl-4 ">
             <div class="card new-shadow hover-me-sm">
                 <div class="card-body p-0">
                     <div class="media px-3 py-5">
                         <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">#sport</span>
-                            <h3 class="mb-0"><a href="{{ url('explore') }}/sports">Sport Events</a></h3>
+                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">#{{strtoupper($cat->category_name)}}</span>
+                            <h3 class="mb-0"><a href="{{ url('explore') }}/sports">{{ucfirst($cat->category_name)}} Events</a></h3>
                         </div>
                         <div class="align-self-center mr-2 p-3 rounded-circle bg-color">
                             <img src="assets/images/svg-icons/student-dash/sport.svg" class="img-fluid" height="50px"
@@ -247,56 +242,14 @@
                         </div>
                     </div>
                     <div class="border-top" style="border-color: #e9e9e9!important;">
-                        <a href="{{ url('explore') }}/sports"
+                        <a href="{{url('explore')}}/{{encrypt($cat->category_id)}}"
                             class="text-center btn btn-light btn-block rounded-0 text-dark font-weight-bold">Explore
                             Event</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-xl-4">
-            <div class="card new-shadow hover-me-sm">
-                <div class="card-body p-0">
-                    <div class="media px-3 py-5">
-                        <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">#culture</span>
-                            <h3 class="mb-0"><a href="{{ url('explore') }}/cultural">Cultural Events</a></h3>
-                        </div>
-                        <div class="align-self-center mr-2 p-3 rounded-circle bg-color">
-                            <img src="assets/images/svg-icons/student-dash/cultural.svg" class="img-fluid" height="50px"
-                                width="50px" alt="">
-                        </div>
-                    </div>
-                    <div class="border-top" style="border-color: #e9e9e9!important;">
-                        <a href="{{ url('explore') }}/cultural"
-                            class="text-center btn btn-light btn-block rounded-0 text-dark font-weight-bold">Explore
-                            Event</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4 col-xl-4">
-            <div class="card new-shadow hover-me-sm">
-                <div class="card-body p-0">
-                    <div class="media px-3 py-5 ">
-                        <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">#IT</span>
-                            <h3 class="mb-0"><a href="{{ url('explore') }}/it">IT Events</a></h3>
-                        </div>
-                        <div class="align-self-center mr-2 p-3 rounded-circle bg-color">
-                            <img src="assets/images/svg-icons/student-dash/IT.svg" class="img-fluid" height="50px"
-                                width="50px" alt="">
-                        </div>
-                    </div>
-                    <div class="border-top" style="border-color: #e9e9e9!important;">
-                        <a href="{{ url('explore') }}/it"
-                            class="text-center btn btn-light btn-block rounded-0 text-dark font-weight-bold">Explore
-                            Event</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    @endforeach
     </div><!-- end row -->
 
 </div> <!-- end begining div -->
