@@ -219,7 +219,7 @@ co_ordinate::remain_result();
                                         <span class="font-weight-bold">{{$c['mobile']}}</span>
                                     </h6>
                                     <div class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-sm-center mb-1">
-                                        <span class="badge badge-info badge-pill px-3 mt-1 mr-3 new-shadow-sm">{{ucfirst($c['category'])}}</span>
+                                        <span class="badge badge-info badge-pill px-3 mt-0 mr-3 new-shadow-sm">{{ucfirst($c['category_name'])}}</span>
                                         <?php $tble = tblevent::where('cid', $c['cid'])->get()->toArray();
                                         $e = "";
                                         foreach ($tble as $te) {
