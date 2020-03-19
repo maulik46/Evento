@@ -15,7 +15,7 @@ class co_ordinate extends Controller
 {
     public static function remain_result()
     {
-        $evnt=tblevent::select('eid','cid','ename','enddate')->where([['clgcode',Session::get('clgcode')],['enddate','<',date("Y-m-d")]])->get();
+        $evnt=tblevent::select('eid','cid','ename','enddate')->where([['clgcode',Session::get('cclgcode')],['enddate','<',date("Y-m-d")]])->get();
         foreach($evnt as $e){
             $rr=participant::where([['eid',$e['eid']],['rank',1]])->count();
             if($rr==0)
@@ -57,7 +57,7 @@ class co_ordinate extends Controller
         $notice->receiver=$receiver;
         $notice->ndate=date('Y-m-d');
         $notice->ntime=date('h:i A');//change
-        $notice->clgcode=Session::get('clgcode');
+        $notice->clgcode=Session::get('cclgcode');
         $notice->attechment=$fname;
         $notice->save();
    }
@@ -78,13 +78,13 @@ class co_ordinate extends Controller
             ->orwhere([['password', $req->password],['email',$req->cuser]])->first();
             $clgname=DB::table('tblcolleges')->select('clgname')->where('clgcode',$clg->clgcode)->first();
             session()->put('cid', $clg->cid);
-            session()->put('clgcode', $clg->clgcode);
-            session()->put('clgname',$clgname->clgname);
+            session()->put('cclgcode', $clg->clgcode);
+            session()->put('cclgname',$clgname->clgname);
             session()->put('cname',$clg->cname);
-            session()->put('email',$clg->email);
+            session()->put('cemail',$clg->email);
             session()->put('cat',$clg->cate_id);
-            session()->put('mobile',$clg->mobile);
-            session()->put('profilepic',$clg->pro_pic);
+            session()->put('cmobile',$clg->mobile);
+            session()->put('cprofilepic',$clg->pro_pic);
             $log=new log();
             $log->uid=Session::get('cid');
             $log->action_on="login";
@@ -129,14 +129,14 @@ class co_ordinate extends Controller
             $date_string.="'".$date_v."'".",";
             $today_date=$date_v;
         }
-        $tble=tblevent::where('clgcode',session::get('clgcode'))->where('cid',session::get('cid'))->get()->toArray();
+        $tble=tblevent::where('clgcode',Session::get('cclgcode'))->where('cid',session::get('cid'))->get()->toArray();
         $tblp=participant::select('tblparticipant.eid',DB::raw('COUNT(tblparticipant.eid) AS count_par'))
         ->join('tblevents','tblevents.eid','=','tblparticipant.eid')
-        ->where('tblparticipant.clgcode',session::get('clgcode'))
+        ->where('tblparticipant.clgcode',Session::get('cclgcode'))
         ->where('tblevents.cid',session::get('cid'))
         ->where([['tblevents.enddate','>=',date('Y-m-d')]])
         ->groupBy('tblparticipant.eid')->get()->toarray();
-        $events=tblevent::where([['clgcode',Session::get('clgcode')]
+        $events=tblevent::where([['clgcode',Session::get('cclgcode')]
         ])->orderby('enddate','desc')->get()->toarray();//change
         $ename_string="";
         $part_count="";
@@ -170,7 +170,7 @@ class co_ordinate extends Controller
             //     $topic=ucfirst($tblename['ename'])." Event has been Cancelled..!";
             //     $message=$reason;
             //     $notice=DB::table('tblnotice')->insert(
-            //     ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('clgcode')]
+            //     ['topic'=>$topic,'message'=>$message,'sender'=>session::get('cname'),'receiver'=>'student-admin','ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('cclgcode')]
             // );
             //     if(isset($notice))
             //     {
@@ -380,14 +380,14 @@ class co_ordinate extends Controller
             if ($message!="") {
                 $receiver="admin-student";
                 $notice=DB::table('tblnotice')->insert(
-                    ['topic'=>$topic,'message'=>$message,'sender'=>'System','sender_type'=>'System','receiver'=>$receiver,'ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('clgcode')]
+                    ['topic'=>$topic,'message'=>$message,'sender'=>'System','sender_type'=>'System','receiver'=>$receiver,'ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('cclgcode')]
                 );
             }
-            $message.="<br>---<br> With Regards,<br> ".Session::get('cname')." (co-ordinate)<br>".Session::get('clgname');
+            $message.="<br>---<br> With Regards,<br> ".Session::get('cname')." (co-ordinate)<br>".Session::get('cclgname');
             if($update_event)
             {
                 $ename=tblevent::select('ename')->where('eid',$eid)->get()->first();
-                $tbladmin=DB::table('tbladmin')->where('clgcode',Session::get('clgcode'))->get()->toArray();
+                $tbladmin=DB::table('tbladmin')->where('clgcode',Session::get('cclgcode'))->get()->toArray();
                 foreach($tbladmin as $admin)
                 {
                     $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
@@ -476,7 +476,7 @@ class co_ordinate extends Controller
         $tblevent->time=$req->etime;        
         $tblevent->reg_start_date=$sdate;
         $tblevent->reg_end_date=$ldate;
-        $tblevent->clgcode=Session::get('clgcode');
+        $tblevent->clgcode=Session::get('cclgcode');
         $tblevent->gallow=$req->efor;
         $tblevent->efor=$class;
         $tblevent->e_type=$req->etype;
@@ -504,7 +504,7 @@ class co_ordinate extends Controller
     public function err(Request $req){
         $ename = $req->ename;
         $gen=$req->gen;
-        $events=tblevent::where([['clgcode',Session::get('clgcode')],['ename',$ename],['gallow',$gen]
+        $events=tblevent::where([['clgcode',Session::get('cclgcode')],['ename',$ename],['gallow',$gen]
         ])->count();
             return response()->json(array('msg'=> $events),200);
      }

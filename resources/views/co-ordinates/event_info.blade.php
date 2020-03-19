@@ -32,7 +32,7 @@
                         <div class="card-body px-2">
                             <div class="text-center">
                               <h2 class="font-weight-light"> {{ucfirst($einfo['ename'])}}</h2>
-                             <span>{{ucfirst(Session::get('clgname'))}}</span>
+                             <span>{{ucfirst(Session::get('cclgname'))}}</span>
                              <p class="my-2">
                                  <span class="font-weight-bold">{{ucfirst(Session::get('cname'))}}</span>(Co-ordinator)
                             </p>

@@ -316,7 +316,7 @@
                             </div>
                         </div>
                         @else
-                        <?php  $class=App\tblstudent::select('class')->where('clgcode',Session::get('clgcode'))->groupby('class')->orderby('class')->get(); ?>
+                        <?php  $class=App\tblstudent::select('class')->where('clgcode',Session::get('cclgcode'))->groupby('class')->orderby('class')->get(); ?>
                         <div class="card border-form my-3">
                             <div class="card-body py-0 pb-1">
                                 <div class="row">

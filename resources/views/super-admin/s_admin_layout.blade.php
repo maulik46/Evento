@@ -110,19 +110,16 @@
                             </a>
                         </div>
                         <?php
-                            $notice = \DB::table('tblnotice')->where([['receiver','LIKE', '%admin%'], ['clgcode','LIKE','%'.Session::get('clgcode').'%']])->orderby('nid', 'desc')->get()->toarray();
+                            $notice = \DB::table('tblnotice')->where([['receiver','LIKE', '%admin%'], ['clgcode','LIKE','%'.Session::get('aclgcode').'%']])->orderby('nid', 'desc')->get()->toarray();
                             $lastnoti = App\admin::select('last_noti')->where('aid', Session::get('aid'))->first();
                             if ($lastnoti) {
-                                $count = \DB::table('tblnotice')->select('nid')->where([['nid', '>', $lastnoti->last_noti], ['receiver', 'LIKE', '%admin%'], ['clgcode', 'LIKE', '%' . Session::get('clgcode') . '%']])->count();
+                                $count = \DB::table('tblnotice')->select('nid')->where([['nid', '>', $lastnoti->last_noti], ['receiver', 'LIKE', '%admin%'], ['clgcode', 'LIKE', '%' . Session::get('aclgcode') . '%']])->count();
 
                             } else {
                                 $count = 0;
                             }
 
-
-
-
-                            
+ 
                         ?>
                     <li class="nav-item notification-list" data-toggle="tooxltip" data-placement="bottom" title="Inbox">
                         <span  class="text-dark right-bar-toggle" id="mail">
@@ -188,14 +185,13 @@
                     <div>
                         <h5 class="mt-1 mb-0 ml-1">{{ucfirst($nt->topic)}}</h5>
                         <div class="rounded mb-1">
-                            <span class="notice-msg">{!! ucfirst($nt->message) !!}</span>
+                            <div class="notice-msg ml-1">{!! ucfirst($nt->message) !!}</div>
                         </div>
                             @if($nt->attechment)
                                 <?php $att = explode(';',$nt->attechment);
                                     $c=count($att);
                                     $a=0;
                                 ?>
-
                                 <div class="card-action">
                                 @foreach($att as $attachment)
                                     <?php $a++;?>
@@ -204,7 +200,6 @@
                                     @endif
                                 @endforeach
                                 </div>
-
                             @endif
                     </div>
             </div>
@@ -335,7 +330,7 @@
         $('.rightbar-overlay').click(function () {
             window.location.reload();
         });
-        $('.notice-msg').find('p').css({'margin-bottom':'0px','padding':'4px'});
+        $('.notice-msg').find('p').css({'margin-bottom':'0px'});
     </script>
 
     <script>

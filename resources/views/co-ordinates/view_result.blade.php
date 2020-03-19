@@ -12,7 +12,7 @@ use \App\Http\Controllers\co_ordinate;
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
         <h2 class="font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</h2>
-        <h6 class="font-weight-bold text-muted text-center">{{ucfirst(Session::get('clgname'))}}</h6>
+        <h6 class="font-weight-bold text-muted text-center">{{ucfirst(Session::get('cclgname'))}}</h6>
         <h6 class="font-weight-normal text-dark text-center">
             <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
             <span class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>

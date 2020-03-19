@@ -129,7 +129,7 @@ co_ordinate::remain_result();
                 <h5 class="card-title header-title border-bottom p-3 mb-0">Overview</h5>
                 <div class="card-body p-0">
                     <!-- stat 1 -->
-                    <?php $tot_event = \DB::table('tblevents')->where('clgcode', Session::get('clgcode'))->count();
+                    <?php $tot_event = \DB::table('tblevents')->where('clgcode', Session::get('aclgcode'))->count();
                     ?>
                     <div class="media px-3 py-4 border-right border-bottom">
                         <div class="media-body">
@@ -152,7 +152,7 @@ co_ordinate::remain_result();
                         </div>
                         <i data-feather="users" class="align-self-center icon-dual-info icon-lg"></i>
                     </div>
-                    <?php $tot_co = \DB::table('tblcoordinaters')->where('clgcode', Session::get('clgcode'))->count(); ?>
+                    <?php $tot_co = \DB::table('tblcoordinaters')->where('clgcode', Session::get('aclgcode'))->count(); ?>
                     <!-- stat 3 -->
                     <div class=" media px-3 py-4 ">
                         <div class="media-body">
@@ -261,7 +261,7 @@ co_ordinate::remain_result();
     <div class="card mt-2 new-shadow-sm">
         <div class="card-body p-2">
             <div class="row mx-0">
-            <?php $cat=\DB::table('tblcategory')->select('category_name')->where([['clgcode',Session::get('clgcode')],['status','a']])->get();
+            <?php $cat=\DB::table('tblcategory')->select('category_name')->where([['clgcode',Session::get('aclgcode')],['status','a']])->get();
             ?>
                 @foreach($cat as $category)
                 <div class="my-2 col col-auto px-1">
@@ -368,7 +368,7 @@ co_ordinate::remain_result();
     <div class="toast bg-white fade show border-0 new-shadow-2 rounded-lg position-fixed w-75"
         style="bottom:20px;left:10px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true"
         data-toggle="toast">
-        <?php $delay_res = \DB::table('tblresult_delay')->join('tblevents', 'tblevents.eid', 'tblresult_delay.eid')->join('tblcoordinaters', 'tblcoordinaters.cid', 'tblresult_delay.cid')->join('tblparticipant', 'tblparticipant.eid', 'tblevents.eid')->where('tblcoordinaters.clgcode', Session::get('clgcode'))->get()->toarray();?>
+        <?php $delay_res = \DB::table('tblresult_delay')->join('tblevents', 'tblevents.eid', 'tblresult_delay.eid')->join('tblcoordinaters', 'tblcoordinaters.cid', 'tblresult_delay.cid')->join('tblparticipant', 'tblparticipant.eid', 'tblevents.eid')->where('tblcoordinaters.clgcode', Session::get('aclgcode'))->get()->toarray();?>
         @if($delay_res)
         <div class="toast-body text-dark alert mb-1">
             <h5 class="text-center mt-0">Delay Result List</h5>

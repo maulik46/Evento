@@ -30,12 +30,12 @@ class s_admin extends Controller
             $admin=admin::where([['pass', $req->password],['email',$req->auser]])->first();
            $clgname=\DB::table('tblcolleges')->select('clgname')->where('clgcode',$admin['clgcode'])->first();
             session()->put('aid', $admin['aid']);
-            session()->put('clgcode', $admin['clgcode']);
-            session()->put('clgname',$clgname->clgname);
+            session()->put('aclgcode', $admin['clgcode']);
+            session()->put('aclgname',$clgname->clgname);
             session()->put('aname',$admin['name']);
-            session()->put('email',$admin['email']);  
+            session()->put('aemail',$admin['email']);  
             session()->put('adminprofile',$admin['profilepic']);  
-            session()->put('mobile',$admin['mobile']);
+            session()->put('amobile',$admin['mobile']);
             $log=new log;
             $log->uid=Session::get('aid');
             $log->action_on="login";
@@ -69,12 +69,12 @@ class s_admin extends Controller
     }
     public function sindex()
     {
-        $events=tblevent::where([['clgcode',Session::get('clgcode')]
+        $events=tblevent::where([['clgcode',Session::get('aclgcode')]
             ])->orderby('edate','desc')->get()->toarray();
-        $cod=tblcoordinaters::join('tblcategory','tblcategory.category_id','tblcoordinaters.cate_id')->where('tblcoordinaters.clgcode',Session::get('clgcode'))->get();
+        $cod=tblcoordinaters::join('tblcategory','tblcategory.category_id','tblcoordinaters.cate_id')->where('tblcoordinaters.clgcode',Session::get('aclgcode'))->get();
         $tblp=participant::select('tblparticipant.eid',DB::raw('COUNT(tblparticipant.eid) AS count_par'))
         ->join('tblevents','tblevents.eid','=','tblparticipant.eid')
-        ->where('tblparticipant.clgcode',session::get('clgcode'))
+        ->where('tblparticipant.clgcode',Session::get('aclgcode'))
         ->where([['tblevents.enddate','>=',date('Y-m-d')]])
         ->groupBy('tblparticipant.eid')->get()->toarray();
         
@@ -86,8 +86,8 @@ class s_admin extends Controller
             $ename_string.="'".$ename['ename']."'".",";
             $part_count.=$p['count_par'].",";
         }
-        $class=tblstudent::select('class')->where('clgcode',Session::get('clgcode'))->groupBy('class')->get()->toArray();
-        $div=tblstudent::select('division')->where('clgcode',Session::get('clgcode'))->groupBy('division')->get()->toArray();
+        $class=tblstudent::select('class')->where('clgcode',Session::get('aclgcode'))->groupBy('class')->get()->toArray();
+        $div=tblstudent::select('division')->where('clgcode',Session::get('aclgcode'))->groupBy('division')->get()->toArray();
         // print_r($class);
         // print_r($div);
         // $stud=tblstudent::join('tblparticipant', function($join) {
@@ -177,7 +177,7 @@ class s_admin extends Controller
     public function approval()
     {
         $apl=tblevent::join('tblapproval','tblapproval.eid','=','tblevents.eid')
-        ->join('tblcoordinaters','tblcoordinaters.cid','=','tblapproval.cid')->where('tblevents.clgcode',Session::get('clgcode'))->get()->toarray();
+        ->join('tblcoordinaters','tblcoordinaters.cid','=','tblapproval.cid')->where('tblevents.clgcode',Session::get('aclgcode'))->get()->toarray();
         return view('super-admin/approval',['delevnt'=>$apl]);
     }
     public function con_del($eid,$y)
@@ -319,7 +319,7 @@ class s_admin extends Controller
         $stud->senrl=$req->enrl;
         $stud->sname=$req->name;
         $stud->rno=$req->rno;
-        $stud->clgcode=Session::get('clgcode');
+        $stud->clgcode=Session::get('aclgcode');
         $stud->dob=date('Y-m-d',strtotime($req->dob));
         $stud->class=$req->clas;
         $stud->division=$req->div;
@@ -341,9 +341,9 @@ class s_admin extends Controller
     }
     public function view_students()
     {
-        // Session::get('clgname')
+        // Session::get('aclgname')
         
-        $stud = tblstudent::where('clgcode',Session::get('clgcode'))->get();
+        $stud = tblstudent::where('clgcode',Session::get('aclgcode'))->get();
         // return $stud;
         // exit;
         $alldata = ['stud' => $stud];
@@ -410,7 +410,7 @@ class s_admin extends Controller
             $sdate=strtotime($sdate);
         }
         $logs=log::join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')
-        ->where([['tblcoordinaters.clgcode',Session::get('clgcode')],
+        ->where([['tblcoordinaters.clgcode',Session::get('aclgcode')],
         ['tbllog.utype','co-ordinator'],
         ['tblcoordinaters.cid','LIKE',$cid],
         ['tbllog.time','>=',$sdate],['tbllog.time','<=',$ldate]])->orderby('time','desc')->paginate(10);
@@ -556,7 +556,7 @@ class s_admin extends Controller
             $file->move($destinationPath, $filename);
             $avatar=$filename;
         }
-        $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('clgcode'),'cname'=>strtolower($req->cname),'email'=>$req->email,'mobile'=>$req->cno,
+        $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('aclgcode'),'cname'=>strtolower($req->cname),'email'=>$req->email,'mobile'=>$req->cno,
         'password'=>$req->pass,'cate_id'=>strtolower($req->category),'pro_pic'=>$avatar] );
         if($tblc)
         {
@@ -587,9 +587,9 @@ class s_admin extends Controller
     public function err(Request $req){
         $email = $req->email;
         $cno=$req->cno;
-        $email_check=tblcoordinaters::where([['clgcode',Session::get('clgcode')],['email',$email]
+        $email_check=tblcoordinaters::where([['clgcode',Session::get('aclgcode')],['email',$email]
         ])->count();
-        $cno_check=tblcoordinaters::where([['clgcode',Session::get('clgcode')],['mobile',$cno]
+        $cno_check=tblcoordinaters::where([['clgcode',Session::get('aclgcode')],['mobile',$cno]
         ])->count();
             return response()->json(array('email'=> $email_check,'phoneno'=> $cno_check),200);
      }
@@ -620,7 +620,7 @@ class s_admin extends Controller
     }
    public function event_info($id)
      {      $eid=decrypt($id);
-        $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$eid],['tblevents.clgcode',Session::get('clgcode')]])->first();
+        $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$eid],['tblevents.clgcode',Session::get('aclgcode')]])->first();
             return view("super-admin/event_info",['einfo'=>$einfo]);
      }
      public function view_result($eid)
@@ -736,7 +736,7 @@ class s_admin extends Controller
         
         foreach($targetTables as $table){
             $content.="-- ".$table." \n\n";
-            $tableData = DB::select(DB::raw('SELECT * FROM '.$table.' where clgcode="'.Session::get('clgcode').'"'));
+            $tableData = DB::select(DB::raw('SELECT * FROM '.$table.' where clgcode="'.Session::get('aclgcode').'"'));
             $cnt = 0;
             $content = (!isset($content) ?  '' : $content);
             foreach($tableData as $row){
@@ -771,9 +771,9 @@ class s_admin extends Controller
         foreach($targetTables1 as $table){
             $content.="-- ".$table."\n\n";
             if($table=='tblrates')
-            $tableData =\DB::table('tblrates')->select('tblrates.rid','tblrates.eid','tblrates.enrl','tblrates.rate')->join('tblevents','tblevents.eid','tblrates.eid')->where('tblevents.clgcode',Session::get('clgcode'))->get()->toarray();
+            $tableData =\DB::table('tblrates')->select('tblrates.rid','tblrates.eid','tblrates.enrl','tblrates.rate')->join('tblevents','tblevents.eid','tblrates.eid')->where('tblevents.clgcode',Session::get('aclgcode'))->get()->toarray();
             else{
-                $tableData =\DB::table('tbllog')->select('tbllog.*')->join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')->where([['tbllog.utype','co-ordinator'],['tblcoordinaters.clgcode',Session::get('clgcode')]])->get()->toarray();
+                $tableData =\DB::table('tbllog')->select('tbllog.*')->join('tblcoordinaters','tblcoordinaters.cid','tbllog.uid')->where([['tbllog.utype','co-ordinator'],['tblcoordinaters.clgcode',Session::get('aclgcode')]])->get()->toarray();
             }
             $cnt = 0;
             $content = (!isset($content) ?  '' : $content);
@@ -833,7 +833,7 @@ class s_admin extends Controller
         }
         else{
             $cid=time();
-            $insrt=\DB::table('tblcategory')->insert(['category_id'=>$cid,'category_name'=>$cat,'clgcode'=>Session::get('clgcode'),'status'=>'i']);
+            $insrt=\DB::table('tblcategory')->insert(['category_id'=>$cid,'category_name'=>$cat,'clgcode'=>Session::get('aclgcode'),'status'=>'i']);
             session()->flash('success', 'Category added successfully..');
         }
         return redirect(url('sindex'));

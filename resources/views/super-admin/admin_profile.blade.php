@@ -177,16 +177,16 @@
                 {{ucfirst(Session::get('aname'))}}
             </div>
             <div class="font-size-14 text-muted font-weight-bold cod-clg"> 
-                {{ucfirst(Session::get('clgname'))}}
+                {{ucfirst(Session::get('aclgname'))}}
             </div>
             <div class="mt-1">
                 <span class="badge badge-soft-dark px-2" style="padding:0.1rem 0px;">
                     <i data-feather="mail" height="18px"></i>
-                    {{Session::get('email')}}
+                    {{Session::get('aemail')}}
                 </span>
                 <span class="badge badge-soft-dark px-2" style="padding:0.1rem 0px;">
                     <i data-feather="phone" height="18px"></i>
-                    {{Session::get('mobile')}}
+                    {{Session::get('amobile')}}
                 </span>
             </div>
         </div>
@@ -271,14 +271,14 @@
                         <label class="col-form-label font-size-14">Email</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" class="form-control" id="aemail" name="aemail" value="{{Session::get('email')}}" />
+                                <input type="text" class="form-control" id="aemail" name="aemail" value="{{Session::get('aemail')}}" />
                                 
                         </div>
                         <div class="text-danger font-weight-bold" id="email-err"></div>
                         <label class="col-form-label font-size-14">Mobile No</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" id="mobile" class="form-control" name="mobile" value="{{Session::get('mobile')}}" />
+                                <input type="text" id="mobile" class="form-control" name="mobile" value="{{Session::get('amobile')}}" />
                            
                         </div>
                         <div id="mobile-err" class="text-danger font-weight-bold"></div>

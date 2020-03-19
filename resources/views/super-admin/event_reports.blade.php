@@ -80,7 +80,7 @@ use \App\tblstudent;
                 <span class="h4 text-dark">All Events Record</span>
             </div>
             <span class="text-center font-weight-bold text-muted">
-                {{ucfirst(Session::get('clgname'))}}
+                {{ucfirst(Session::get('aclgname'))}}
             </span>
             <hr>
             <div class="card-body px-1 px-md-2 pt-0">

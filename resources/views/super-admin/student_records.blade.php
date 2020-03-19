@@ -65,7 +65,7 @@ use \App\tblstudent;
             <span class="h4 text-dark">All Students Record</span>
         </div>
         <span class="text-center font-weight-bold text-muted">
-            {{ucfirst(Session::get('clgname'))}}
+            {{ucfirst(Session::get('aclgname'))}}
         </span>
         <hr>
         <div class="card-body px-1 px-md-2 pt-0">
@@ -93,7 +93,7 @@ use \App\tblstudent;
                     <tbody>
                         
                         <?php 
-                        $stud = tblstudent::where('clgcode',Session::get('clgcode'))->get();
+                        $stud = tblstudent::where('clgcode',Session::get('aclgcode'))->get();
                         ?>
                         <?php $no = 0;?>
                         @foreach($stud as $s)

@@ -20,7 +20,7 @@ use App\tblstudent;
 
         </span>
         <h6 class="font-weight-bold text-muted text-center">
-        {{ucfirst(Session::get('clgname'))}}
+        {{ucfirst(Session::get('aclgname'))}}
         </h6>
         <hr class="my-0">
     </div>
