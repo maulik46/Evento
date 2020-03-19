@@ -111,8 +111,18 @@
                         </div>
                         <?php
                             $notice = \DB::table('tblnotice')->where([['receiver','LIKE', '%admin%'], ['clgcode','LIKE','%'.Session::get('clgcode').'%']])->orderby('nid', 'desc')->get()->toarray();
-                            $lastevent = App\admin::select('last_noti')->where('aid', Session::get('aid'))->first();
-                            $count = \DB::table('tblnotice')->select('nid')->where([['nid', '>', $lastevent->last_noti], ['receiver','LIKE', '%admin%'],['clgcode','LIKE','%'.Session::get('clgcode').'%']])->count();
+                            $lastnoti = App\admin::select('last_noti')->where('aid', Session::get('aid'))->first();
+                            if ($lastnoti) {
+                                $count = \DB::table('tblnotice')->select('nid')->where([['nid', '>', $lastnoti->last_noti], ['receiver', 'LIKE', '%admin%'], ['clgcode', 'LIKE', '%' . Session::get('clgcode') . '%']])->count();
+
+                            } else {
+                                $count = 0;
+                            }
+
+
+
+
+                            
                         ?>
                     <li class="nav-item notification-list" data-toggle="tooxltip" data-placement="bottom" title="Inbox">
                         <span  class="text-dark right-bar-toggle" id="mail">
@@ -173,7 +183,7 @@
                     </span>
                     <div class="d-flex align-items-end flex-column flex-wrap">
                         <h6>{{ucfirst($nt->sender)}}</h6>
-                        <span class="badge badge-warning text-white badge-pill" style="padding: 0.3em 0.6rem">Admin</span>
+                        <span class="badge badge-warning text-white badge-pill" style="padding: 0.3em 0.6rem">{{ucfirst($nt->sender_type)}}</span>
                     </div>    
                 </div>
                         <div>

@@ -219,7 +219,7 @@ co_ordinate::remain_result();
                                         <span class="font-weight-bold">{{$c['mobile']}}</span>
                                     </h6>
                                     <div class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-sm-center mb-1">
-                                        <span class="badge badge-info badge-pill px-3 mt-0 mr-3 new-shadow-sm">{{ucfirst($c['category'])}}</span>
+                                        <span class="badge badge-info badge-pill px-3 mt-1 mr-3 new-shadow-sm">{{ucfirst($c['category'])}}</span>
                                         <?php $tble = tblevent::where('cid', $c['cid'])->get()->toArray();
                                         $e = "";
                                         foreach ($tble as $te) {
@@ -228,7 +228,7 @@ co_ordinate::remain_result();
                                         <a href="#" data-toggle="tooltip" title="Delete"
                                             onclick="return confirm('<?php echo $e ?>','<?php echo $c['cid'] ?>')"
                                             class="btn text-danger p-1 btn-rounded mt-0 btn-delete-cod">
-                                            <i data-feather="trash-2" height="19px"></i>
+                                            <i data-feather="trash-2" height="17px"></i>
                                         </a>
                                         
                                     </div>
@@ -487,7 +487,7 @@ co_ordinate::remain_result();
           breakpoint: 480,
           options: {
             chart: {
-              width: 200
+              width: 260
             },
             legend: {
               position: 'bottom'
