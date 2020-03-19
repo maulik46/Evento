@@ -261,27 +261,15 @@ co_ordinate::remain_result();
     <div class="card mt-2 new-shadow-sm">
         <div class="card-body p-2">
             <div class="row mx-0">
+                @foreach($cat as $category)
                 <div class="my-2 col col-auto px-1">
                     <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
-                    <span class="text-dark font-size-14 font-weight-bold">Sport</span>
+                    <span class="text-dark font-size-14 font-weight-bold">{{$category->category_name}}</span>
                     <a href="#" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
                     <a href="#" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
                     </div>
                 </div>
-                <div class="my-2 col col-auto px-1">
-                    <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
-                    <span class="text-dark font-size-14 font-weight-bold">Cultural</span>
-                    <a href="#" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
-                    <a href="#" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
-                    </div>
-                </div>
-                <div class="my-2 col col-auto px-1">
-                    <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
-                    <span class="text-dark font-size-14 font-weight-bold">IT</span>
-                    <a href="#" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
-                    <a href="#" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
-                    </div>
-                </div>
+              @endforeach 
               
             </div>
         </div>
