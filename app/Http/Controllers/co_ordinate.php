@@ -380,7 +380,7 @@ class co_ordinate extends Controller
             if ($message!="") {
                 $receiver="admin-student";
                 $notice=DB::table('tblnotice')->insert(
-                    ['topic'=>$topic,'message'=>$message,'sender'=>'System','sender_type'=>'System','receiver'=>$receiver,'ndate'=>date('Y-m-d'),'ntime'=>now(),'clgcode'=>Session::get('cclgcode')]
+                    ['topic'=>$topic,'message'=>$message,'sender'=>'System','sender_type'=>'System','receiver'=>$receiver,'ndate'=>date('Y-m-d'),'ntime'=>date('h:i A'),'clgcode'=>Session::get('cclgcode')]
                 );
             }
             $message.="<br>---<br> With Regards,<br> ".Session::get('cname')." (co-ordinate)<br>".Session::get('cclgname');
