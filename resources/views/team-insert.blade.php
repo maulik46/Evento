@@ -10,11 +10,9 @@
         border: 1px solid #f3f4f7;
         font-size: 16px;
         color: #333 !important;
-        height: 50px;
-        letter-spacing: 3px;
-        
+        height: 45px;
+        letter-spacing: 3px;   
     }
-
     ::placeholder {
         letter-spacing: 0px;
     }
@@ -54,7 +52,7 @@
                     </p>
                     <hr>
                     <div class="p-2 font-size-15">
-                        <ol>
+                        <ol class="text-muted font-weight-bold">
                             @if($einfo['gallow']=="both")
 
                             <li>Both Boys and Girls candidates are allowed.</li>

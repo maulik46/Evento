@@ -15,8 +15,8 @@ use \App\Http\Controllers\co_ordinate;
         <h6 class="font-weight-bold text-muted text-center">{{ucfirst(Session::get('cclgname'))}}</h6>
         <h6 class="font-weight-normal text-dark text-center">
             <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
-            <span class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
-            <span class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">{{ucfirst($einfo['e_type'])}} Event</span>
+            <span class="ml-1 font-weight-bold  badge badge-soft-dark px-3 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
+            <span class="ml-1 font-weight-bold  badge badge-soft-dark px-3 badge-pill">{{ucfirst($einfo['e_type'])}} Event</span>
         </h6>
         <hr class=" my-1">
     </div>

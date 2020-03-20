@@ -92,7 +92,7 @@
     @endif
     <!-- start div -->
     <div class="row mt-5">
-        <div class="col-lg-5">
+        <div class="col-lg-6">
             <div class="card new-shadow-sm">
                 <div class="card-body px-2 px-sm-3">
                     <div class="text-center mt-3">
@@ -155,8 +155,7 @@
                             </table>
                         </div>
                         <div class="card-body pt-0" style="display:none" id="update-form">
-                            <form action="{{url('student_update_action')}}/{{encrypt(Session::get('senrl'))}}"
-                                method="POST">
+                            <form action="{{url('student_update_action')}}/{{encrypt(Session::get('senrl'))}}" method="POST">
                                 @csrf
                                 <label class="col-form-label font-size-14">Email</label>
                                 <div class="form-group has-icon d-flex align-items-center">
@@ -180,7 +179,7 @@
                                 </div>
                                 <div id="address-er" class="text-danger font-weight-bold"></div>
                                 <button type="submit" id="update"
-                                    class="mt-2 btn  rounded-sm hover-me-sm px-2 font-weight-bold new-shadow-sm btn-sm py-2 font-size-13 text-white"
+                                    class="mt-3 btn  rounded-sm hover-me-sm px-2 font-weight-bold new-shadow-sm btn-sm py-2 font-size-13 text-white"
                                     style="background-color: var(--red);">
                                     <i data-feather="check-square" height="18px"></i>
                                     Update Details
@@ -191,7 +190,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-7">
+        <div class="col-lg-6">
             <div class="card new-shadow-sm">
                 <div class="card-body px-2 px-sm-3">
                     <ul class="nav nav-pills navtab-bg nav-justified" id="pills-tab" role="tablist">
@@ -213,7 +212,7 @@
                     <div class="tab-content" id="pills-tabContent">
                         <!-- messages -->
                         <div class="tab-pane fade show active overflow-auto my-scroll" id="pills-participated"
-                            role="tabpanel" aria-labelledby="pills-participated-tab" style="height: 60vh;">
+                            role="tabpanel" aria-labelledby="pills-participated-tab" style="height: 66.5vh;">
                             <!-- 1st event -->
                             <?php $a=0;?>
                             @foreach($activity as $act)
@@ -230,7 +229,7 @@
                                         @else
                                         <span class="badge badge-soft-success badge-pill px-3 ">Solo Event</span>
                                         @endif
-                                        <span class="badge badge-soft-primary badge-pill px-3 ">{{date('d/m/Y', strtotime($act['edate']))}}</span>
+                                        <span class="badge badge-primary badge-pill px-2 ">{{date('d/m/Y', strtotime($act['edate']))}}</span>
                                         </div>
                                         <div>
                                             <a href="{{url('about_event')}}/{{encrypt($act['pid'])}}" data-toggle="tooltip" data-placement="bottom" title="About Event" class="mr-1">
@@ -249,7 +248,7 @@
                                         </div>
                                     </div>
                                     <div class="card-text py-1">
-                                        <span class="font-size-20 font-weight-bold text-dark">{{ucfirst($act['ename'])}}</span>
+                                        <span class="font-size-16 font-weight-bold text-dark">{{ucfirst($act['ename'])}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -258,14 +257,14 @@
                             @if($a==0)
                             <div class="font-size-14 font-weight-bold d-flex align-items-center justify-content-center font-size-16"
                                 style="height: 60vh;">
-                                <span>You have not participated in any activities!!</span>
+                                <span>You have not participated in any event!</span>
                             </div>
                             @endif
                         </div>
 
                         <div class="tab-pane fade show" id="pills-activity" role="tabpanel"
                             aria-labelledby="pills-activity-tab">
-                            <div class="left-timeline bg-white overflow-auto my-scroll" style="height: 60vh;">
+                            <div class="left-timeline bg-white overflow-auto my-scroll" style="height: 66.5vh;">
                                 <?php $a=0;$count=0;?>
                                 @foreach($activity as $act)
                                 @if($act['edate'] < date('Y-m-d')) 
@@ -319,7 +318,7 @@
                             @endforeach
                             @if($a==0)
                             <div class="font-size-14 font-weight-bold d-flex align-items-center justify-content-center font-size-16"
-                                style="height:30vh;">
+                                style="height:60vh;">
 
                                 <span>You have no Activities!!</span>
                             </div>

@@ -16,7 +16,7 @@
     }
 
     .user-img {
-        background: url('../profile_pic/<?php echo Session::get("profilepic")?>');
+        background: url('../profile_pic/<?php echo Session::get("cprofilepic")?>');
         background-size: cover;
         background-color:white;
         background-repeat: no-repeat;

@@ -23,9 +23,7 @@
       
         <span class="h3 my-0 font-weight-normal text-dark text-center">
         Team
-        @foreach($team_candidates as $tc)
-            {{ ucfirst($tc['tname']) }}    
-        @endforeach
+            {{ ucfirst($tc['tname']) }}
         
         </span>
         <h6 class="font-weight-bold text-muted text-center">

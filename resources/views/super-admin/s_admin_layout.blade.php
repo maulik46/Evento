@@ -169,23 +169,34 @@
             }
             ?>
             @if($c<=$count) 
-            <div class="card new-shadow-sm my-2 hover-me-sm"
+            <div class="card new-shadow-sm my-2"
                 style="border-left: 3px solid #ff5c75;border-radius:0px 10px 10px 0px;">
             @else
             <div class="card new-shadow-sm my-2" style="border-left: 3px solid #1AE1AC;border-radius:0px 10px 10px 0px;">
             @endif
-            <div class="card-body py-2 px-2">
-                <div class="d-flex justify-content-between align-items-center flex-wrap" >
-                    <span class="badge badge-primary px-2 py-1">{{date('d/m/Y',strtotime($nt->ndate))}}
-                    </span>
+            <div class="card-body py-1 px-2">
+                <div class="navbar px-1">
+                    <div>
+                        <span class="badge badge-primary px-2 py-1">{{date('d/m/Y',strtotime($nt->ndate))}}
+                        </span>
+                        <span class="badge badge-soft-primary px-2 py-1">{{date('h:i A',strtotime($nt->ntime))}}
+                        </span>
+                    </div>
+                    @if($nt->sender=='System' || $nt->sender=='system')
+                    <div class="badge badge-success text-white badge-pill px-3">
+                        <span>{{ucfirst($nt->sender)}}</span>
+                    </div>
+                    @else
                     <div class="badge badge-warning text-white badge-pill px-3">
                         <span>{{ucfirst($nt->sender)}}</span>
-                    </div>    
+                    </div>
+                    @endif
+                    
                 </div>
                     <div>
-                        <h5 class="mt-1 mb-0 ml-1">{{ucfirst($nt->topic)}}</h5>
-                        <div class="rounded mb-1">
-                            <div class="notice-msg ml-1">{!! ucfirst($nt->message) !!}</div>
+                        <h5 class="mt-1 mb-0">{{ucfirst($nt->topic)}}</h5>
+                        <div class="rounded mb-1 ml-3">
+                            <div class="notice-msg">{!! ucfirst($nt->message) !!}</div>
                         </div>
                             @if($nt->attechment)
                                 <?php $att = explode(';',$nt->attechment);
@@ -196,7 +207,9 @@
                                 @foreach($att as $attachment)
                                     <?php $a++;?>
                                     @if($a<$c)  
-                                        <a href="{{asset('attachment')}}/{{$attachment}}" class="btn badge badge-soft-info badge-pill font-weight-bold py-2 px-3 m-1 hover-me-sm" download="{{substr($attachment, 10)}}">{{substr($attachment, 10)}}</a> 
+                                        <a href="{{asset('attachment')}}/{{$attachment}}" class="btn badge badge-soft-info badge-pill font-weight-bold py-1 pl-2 pr-3 m-1 hover-me-sm" download="{{substr($attachment, 10)}}">
+                                        <i data-feather="download" height="16px"></i>
+                                        {{substr($attachment, 10)}}</a> 
                                     @endif
                                 @endforeach
                                 </div>

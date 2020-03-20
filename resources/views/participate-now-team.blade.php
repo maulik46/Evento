@@ -19,25 +19,21 @@
                                         <div class="col-12">
                                             <h2 class="d-flex justify-content-center align-items-center font-weight-normal text-center text-dark my-3"> 
                                                 <img src="{{asset('assets/images/svg-icons/student-dash/flag.svg')}}" height="30px" alt="">
-                                                <span class="ml-2">{{ucfirst($einfo->ename)}} Competition</span>
+                                                <span class="ml-2">{{ucfirst($einfo->ename)}}</span>
                                             </h2>
-                                            <p class="text-center">{{ucfirst(Session::get('clgname'))}}</p>
-                                            
-                                            <div class="mt-4 text-muted col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-sm-12">
-                                                <p class="d-flex justify-content-between my-2">
-                                                    <span class="font-weight-bold">Date</span>
-                                                    <span class="mr-2">{{date('d/m/Y', strtotime($einfo->edate))}}</span>
-                                                </p>
-                                                <p class="d-flex justify-content-between my-2">
-                                                    <span class="font-weight-bold">Time</span>
-                                                    <span class="mr-2">{{date('h:i A', strtotime($einfo->time))}}</span>
-                                                </p>
-                                                <p class="d-flex justify-content-between my-2">
-                                                    <span class="font-weight-bold">Venue</span>
-                                                    <span class="mr-2">{{$einfo->place}}</span>
-                                                </p>
+                                            <p class="text-center font-weight-bold text-muted">{{ucfirst(Session::get('clgname'))}}</p>
+                                            <div class="d-flex align-items-center justify-content-center flex-wrap">
+                                                <span class="badge badge-pill badge-soft-dark px-3 mx-1">
+                                                {{date('d/m/Y', strtotime($einfo->edate))}}
+                                                </span>
+                                                <span class="badge badge-pill badge-soft-dark px-3 mx-1">
+                                                {{date('h:i A', strtotime($einfo->time))}}
+                                                </span>
+                                                <span class="badge badge-pill badge-soft-dark px-3 mx-1">
+                                                {{date('l', strtotime($einfo->time))}}
+                                                </span>
                                             </div>
-
+                                            
                                             <div class="mt-3 pt-2">
                                                 <hr>
                                                 <h4 class="mb-3 font-size-17 ml-2 d-flex align-items-center">
@@ -68,7 +64,7 @@
                                                                 <tr class="text-dark">
                                                                     <th scope="row">{{$i}}</th>
                                                                     <td>{{$e}}</td>
-                                                                    <td>{{ucfirst($st->sname)}}</td>
+                                                                    <td class="font-weight-bold">{{ucfirst($st->sname)}}</td>
                                                                     <td>{{$st->mobile}}</td>
                                                                     <td>{{$st->division}}</td>
                                                                     <td>{{ucfirst($st->class)}}</td>
@@ -127,7 +123,7 @@
                                         <br>
                                         <a href="{{url('/team-insert')}}/{{encrypt($einfo->eid)}}'" class="my-3 px-3 font-weight-bold btn btn-info new-shadow-sm rounded-sm hover-me-sm">
                                             <span>Back</span>
-                                            <i data-feather="arrow-left-circle"></i>
+                                            <i data-feather="arrow-left-circle" height="20px"></i>
                                         </a>
                                     
                                     </div>

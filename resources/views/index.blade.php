@@ -163,15 +163,14 @@
             <div class="card shadow-none">
                 <div class="card-body pt-2 p-0">
                     <!-- <h6 class="font-size-24 mb-0 pb-1 text-center d-xl-none d-flex">Events</h6> -->
-                    <div class="form-group has-icon d-flex align-items-center col-xl-12 col-sm-8 col-12 px-0">
+                    <div class="form-group has-icon d-flex align-items-center col-xl-12 col-sm-8 col-12 px-0 mb-1">
                         <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
                         <input type="text" id="myInput" class="form-control" placeholder="Search Events" />
                     </div>
                     <div class="row mx-0" id="event-list">
                         <?php $a=0?>
                         @foreach($events as $e)
-                        <?php $c=\DB::table('tblparticipant')->where([['senrl','LIKE','%'.Session::get('senrl').'%'],['eid',$e['eid']]])->count();
-                                    ?>
+                        <?php $c=\DB::table('tblparticipant')->where([['senrl','LIKE','%'.Session::get('senrl').'%'],['eid',$e['eid']]])->count();?>
                         @if($c==0)
                         <?php $a=1;?>
 

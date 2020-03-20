@@ -24,24 +24,21 @@
                                     <div class="col-12">
                                         <h2 class="d-flex justify-content-center align-items-center font-weight-normal text-center text-dark my-3"> 
                                             <img src="{{asset('assets/images/svg-icons/student-dash/flag.svg')}}" height="30px" alt="">
-                                            <span class="ml-2">{{ucfirst($einfo->ename)}} Competition</span>
+                                            <span class="ml-2">{{ucfirst($einfo->ename)}} </span>
                                         </h2>
                                         <p class="text-center">{{ucfirst(Session::get('clgname'))}}</p>
                                         
-                                        <div class="mt-4 text-dark col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-sm-12">
-                                            <p class="d-flex justify-content-between my-2">
-                                                <span class="font-weight-bold">Date</span>
-                                                <span class="mr-2">{{date('d/m/Y', strtotime($einfo->edate))}}</span>
-                                            </p>
-                                            <p class="d-flex justify-content-between my-2">
-                                                <span class="font-weight-bold">Time</span>
-                                                <span class="mr-2">{{date('h:i A',strtotime($einfo['etime']))}}</span>
-                                            </p>
-                                            <p class="d-flex justify-content-between my-2">
-                                                <span class="font-weight-bold">Venue</span>
-                                                <span class="mr-2">{{$einfo->place}}</span>
-                                            </p>
-                                        </div>
+                                            <div class="d-flex align-items-center justify-content-center flex-wrap">
+                                                <span class="badge badge-pill badge-soft-dark px-3 mx-1">
+                                                {{date('d/m/Y', strtotime($einfo->edate))}}
+                                                </span>
+                                                <span class="badge badge-pill badge-soft-dark px-3 mx-1">
+                                                {{date('h:i A', strtotime($einfo->time))}}
+                                                </span>
+                                                <span class="badge badge-pill badge-soft-dark px-3 mx-1">
+                                                {{date('l', strtotime($einfo->time))}}
+                                                </span>
+                                            </div>
 
                                         <div class="mt-3 pt-2">
                                             <hr>
@@ -117,7 +114,7 @@
                                     <br>
                                     <a href="{{url('/index')}}" class="my-3 px-4 font-weight-bold btn btn-info new-shadow rounded-sm hover-me-sm">
                                         <span>Back</span>
-                                        <i data-feather="arrow-left-circle"></i>
+                                        <i data-feather="arrow-left-circle" height="20px"></i>
                                     </a>
                                 </div>
                             </div>

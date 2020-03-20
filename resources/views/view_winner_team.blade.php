@@ -14,7 +14,7 @@
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
         <span class="h3 my-0 font-weight-normal text-dark text-center">
-        {{ucfirst($tc['tname'])}}
+        Team {{ucfirst($tc['tname'])}}
         </span>
         <h6 class="font-weight-bold text-muted text-center">
            {{Session::get('clgname')}}

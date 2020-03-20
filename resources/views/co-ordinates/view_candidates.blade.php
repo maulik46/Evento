@@ -33,13 +33,13 @@
                 <h6 class="font-weight-normal text-dark text-center">{{ucfirst(Session::get('cclgname'))}}</h6>
                 <h6 class="font-weight-normal text-dark text-center">
                     <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
-                    <span class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
-                    <span class="ml-1 font-weight-bold  badge badge-soft-dark px-4 badge-pill">{{ucfirst($einfo['e_type'])}} Event</span>
+                    <span class="ml-1 font-weight-bold  badge badge-soft-dark px-3 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
+                    <span class="ml-1 font-weight-bold  badge badge-soft-dark px-3 badge-pill">{{ucfirst($einfo['e_type'])}} Event</span>
                 </h6>
                 <hr class="my-0">
             </div>
                  <div class="card new-shadow-sm">
-                    <div class="card-body">
+                    <div class="card-body py-2">
                         <div class="justify-content-between d-flex align-items-center ">
                             <div class="d-flex align-items-center">
                                 <i data-feather="users" class="icon-dual-success"></i>
@@ -102,8 +102,10 @@
                         </div>
                         @endforeach
                         @else
-                        <hr>
-                        <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p>
+                        <div class="text-center">
+                                <!-- <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p> -->
+                                <img src="{{asset('assets/images/no result.png')}}" class="img-fluid" height="500px" width="500px" alt="">
+                            </div>
                         @endif
                           
 
@@ -140,8 +142,11 @@
 
                         </div>
                         @else
-                            <hr>
-                            <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p>
+                            <div class="text-center">
+                                <!-- <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p> -->
+                                <img src="{{asset('assets/images/no result.png')}}" class="img-fluid" height="500px" width="500px" alt="">
+                            </div>
+                            
                         @endif
                         @endif
                         

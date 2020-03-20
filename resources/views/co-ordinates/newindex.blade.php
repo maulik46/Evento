@@ -70,12 +70,12 @@
 
     <div class="row justify-content-between align-items-center">
         <div class="col-md-7 col-sm-12">
-            <div class="card pr-4 py-2 new-shadow-sm">
-                <div id="chart-2" class="apex-charts"></div>
+            <div class="card pr-4 py-2 new-shadow-sm ">
+                <div id="chart-2" style="width: auto;height:320px;" class="d-flex align-items-center justify-content-center"></div>
             </div>
         </div>
         <div class="col-md-5 col-sm-12">
-            <div class="card new-shadow-sm p-1 px-3 overflow-auto my-scroll" style="height:340px;">
+            <div class="card new-shadow-sm p-1 px-2 overflow-auto my-scroll" style="height:340px;">
             <div class="h5 d-flex align-items-center justify-content-center">
                 <i data-feather="calendar" height="18px" class="icon-dual-dark"></i>
                 <span class="ml-1">My Running Events</span>
@@ -89,15 +89,15 @@
             @if($e['cid']==Session::get('cid'))
             @if($e['edate'] <= date('Y-m-d') && $e['enddate'] >= date('Y-m-d'))
              <?php $a=1;?>
-                <div class="card bg-light new-shadow-sm mb-2 my-1 px-2 rounded-0 hover-me-sm">
-                    <div class="d-flex justify-content-between align-items-center px-1">
+                <div class="card bg-light new-shadow-sm mb-2 py-1 px-2 rounded-0 hover-me-sm">
+                    <div class="d-flex justify-content-between align-items-center">
                         <div>
                         @if($e['e_type']=='team')
                             <span class="badge badge-soft-warning px-3 badge-pill">Team</span>
                         @else
                             <span class="badge badge-soft-info px-3 badge-pill">Solo</span>
                         @endif    
-                            <span class="badge badge-soft-dark px-3 badge-pill">
+                            <span class="badge badge-primary px-2 badge-pill">
                             {{date('d/m/Y', strtotime($e['edate']))}}
                             </span>
                        
@@ -106,34 +106,35 @@
                         <?php 
                             $result=\DB::table('tblparticipant')->where([['eid',$e['eid']],['rank',1]])->count();
                         ?>
-                            <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="View Candidates">
+                            <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="View Candidates">
                                 <i data-feather="users" height="18px" class="text-primary"></i>
                             </a>
                             <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="About">
                                 <i data-feather="info" height="18px" class="text-info"></i>
                             </a>
                             @if($result == 0)
-                            <a href="{{url('create_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result btn-rounded p-1" style="margin-right:-2px;" data-toggle="tooltip" data-placement="top" title="Announce Result">
+                            <a href="{{url('create_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="Announce Result">
                                 <i data-feather="award" height="18px" class="text-success"></i>
                             </a>
                             @else
-                            <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded ml-1" data-toggle="tooltip" data-placement="top" title="Show Result">
+                            <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded" data-toggle="tooltip" data-placement="top" title="Show Result">
                                     <i data-feather="award" height="18px" class=" text-success"></i>
                             </a>
                             @endif
                          </div>
                     </div>
-                    <div style="margin-top:-5px;">
-                        <h5>{{ucfirst($e['ename'])}} competition</h5>
-                        </div>
+                    <div>
+                        <span class="font-weight-bold font-size-14 text-dark">{{ucfirst($e['ename'])}}</span>
+                    </div>
                     
                 </div>
                @endif
                @endif
                @endforeach 
                @if($a==0)
-                    <div class="font-size-15 font-weight-bold text-dark d-flex align-items-center justify-content-center" style="height:200px;">
-                            No running events available..!
+                    <div class="d-flex align-items-center justify-content-center flex-column" style="height:200px;">
+                            <div class="text-danger font-size-18 font-weight-bold">OOPS!!</div>
+                            <div class="font-size-14 text-dark">You don't have any Running Events..!</div>
                     </div>
                 @endif
             </div>
@@ -146,15 +147,22 @@
 <!-- charts over -->
 
     <div class="card mt-2 mb-0 new-shadow-sm">
-        <div class="py-2 navbar">
-            <div class="h5 d-flex align-items-center">
-                <i data-feather="calendar" class="icon-dual-dark"></i>
-                <span class="ml-1">All Events</span>
-            </div>
-            <div class="col-xl-3 col-md-6 col-12 mb-0 form-group has-icon d-flex align-items-center px-0">
+        <div class="h5 d-flex align-items-center ml-3">
+            <i data-feather="calendar" class="icon-dual-dark"></i>
+            <span class="ml-1">All Events</span>
+        </div>
+        <div class="py-2 navbar flex-nowrap">
+            
+            <div class="col-xl-3 col-md-6 col-sm-8 col-10 mb-0 form-group has-icon d-flex align-items-center px-0">
                 <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
                 <input type="text" id="myInput" class="form-control" placeholder="Search Events" />
             </div>
+            <a href="{{url('/cindex/winner-list')}}" class="text-success">
+                <div class="d-flex align-items-center badge badge-soft-danger badge-pill pr-2 pr-sm-3 py-2 winner-list">
+                    <i data-feather="award" height="18px"></i>
+                    <span class="font-size-13 d-none d-sm-block">Winners List</span>
+                </div>
+            </a>
         </div>
     </div> 
     <div class="card new-shadow-sm mt-2" >
@@ -224,21 +232,20 @@
         </div> <!-- end card-body-->
     </div> <!-- end card-->
 
-    <div class="card mb-0  new-shadow-sm">
-        <div class="card-body py-2 d-flex justify-content-between align-items-center">
+    <div class="card mt-2 mb-0 new-shadow-sm">
+        <div class="py-2 navbar flex-nowrap">
             <div class="h5 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">My Events</span>
             </div>
-            <a href="{{url('/create_event')}}" class="text-success d-none d-sm-block ">
-                <div class="d-flex align-items-center badge badge-soft-success badge-pill pr-3 py-2 new-event">
+            <a href="{{url('/create_event')}}" class="text-success">
+                <div class="d-flex align-items-center badge badge-soft-success badge-pill pr-2 pr-sm-3 py-2 new-event">
                     <i data-feather="plus-circle" height="18px"></i>
-                    <span class="font-size-13">Create Event</span>
+                    <span class="font-size-13 d-none d-sm-block">Create Event</span>
                 </div>
             </a>
         </div>
-    </div>
-
+    </div> 
     <div class="row" id="event-list">
         @foreach($events as $e)
         @if($e['cid']==Session::get('cid'))
@@ -370,17 +377,12 @@
     <?php $c++ ?>                 
     @if($c==1)
     <div class="card mt-2 mb-0 new-shadow-sm">
-        <div class="card-body py-2 d-flex justify-content-between align-items-center">
+        <div class="card-body py-2">
             <div class="h5 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">Finished Events</span>
             </div>
-            <a href="{{url('/cindex/winner-list')}}" class="text-success d-none d-sm-block ">
-                <div class="d-flex align-items-center badge badge-soft-danger badge-pill pr-3 py-2 winner-list">
-                    <i data-feather="award" height="18px"></i>
-                    <span class="font-size-13">Winners List</span>
-                </div>
-            </a>
+            
         </div>
     </div> 
     <div class="card new-shadow-sm mt-2">
@@ -566,15 +568,17 @@ async function deleteEvent(eid){
  var pie = {
           series: [<?php echo $part_count; ?>],
           chart: {
-          height: 350,
-          type: 'donut',
+            type: 'donut',
+            width:'100%',
+            height:300
+          
         },
         labels: [<?php echo $ename_string; ?>],
         responsive: [{
-          breakpoint: 576,
+          breakpoint: 1200,
           options: {
             chart: {
-              width: 260
+              width: 250
             },
             legend: {
               position: 'bottom'
