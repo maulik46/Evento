@@ -79,7 +79,7 @@ class system extends Controller
             session()->put('syspropic',$user->s_propic);
             return redirect(url('system'));
         }
-        session()->flash('alert-danger','Invalid email or password');
+        session()->flash('danger','Invalid email or password');
         return back();
     }
     public function add_college(Request $req)
@@ -97,7 +97,8 @@ class system extends Controller
             'clgname' => $req->clg_name, 
             'address' => $req->clg_add, 
             'city' => $req->clg_city,
-            'start_date'=>date('Y-m-d')
+            'start_date'=>date('Y-m-d'),
+            'status'=>'running'
 
         ];
         $tbl_clg = \DB::table('tblcolleges')->insert($tbl_clg_data);
