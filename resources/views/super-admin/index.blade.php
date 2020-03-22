@@ -28,10 +28,8 @@ co_ordinate::remain_result();
         background: var(--info);
         color: #fff !important;
     }
-    .winner-list:hover{
-        background: var(--danger);
-        color: #fff !important;
-
+    .table td, .table th {
+        vertical-align: middle;
     }
     /* css for event co-ordinator list in index page */
    
@@ -108,16 +106,23 @@ co_ordinate::remain_result();
 @section('my-content')
 
 <div class="container-fluid">
+    @if(Session::has('success') || Session::has('error'))
     @if(Session::has('success'))
     <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75"
         style="top:80px;right:30px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true"
         data-toggle="toast">
+    @else
+    <div class="toast bg-danger fade show border-0 new-shadow rounded position-fixed w-75"
+        style="top:80px;right:30px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true"
+        data-toggle="toast">
+    @endif
         <div class="toast-body text-white alert mb-1">
             <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
                 <i data-feather="x-circle" id="close-btn" height="18px"></i>
             </a>
             <div class="mt-2 font-weight-bold font-size-14">
                 {{Session::get('success')}}
+                {{Session::get('error')}}
             </div>
 
         </div>
@@ -172,7 +177,7 @@ co_ordinate::remain_result();
 
                     <h5 class="card-title mb-0 header-title">Participation by class</h5>
 
-                    <div id="chart-1"  class="apex-charts"></div>
+                    <div id="chart-1" class="apex-charts"></div>
                 </div>
             </div>
         </div>
@@ -184,7 +189,7 @@ co_ordinate::remain_result();
                 <div class="card-body px-0">
                     <h5 class="card-title mt-0 mb-0 header-title px-4">Revenue </h5>
                     <!-- <div id="sales-by-category-chart" class="apex-charts mb-0 mt-3" dir="ltr"></div> -->
-                    <div id="chart-2" style="width: auto;height:330px;" class="apex-charts mb-0 mt-3"></div>
+                    <div id="chart-2" class="apex-charts mb-0 mt-3"></div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div>
@@ -263,14 +268,15 @@ co_ordinate::remain_result();
     <div class="card mt-2 new-shadow-sm">
         <div class="card-body p-2">
             <div class="row mx-0">
-            <?php $cat=\DB::table('tblcategory')->select('category_name')->where([['clgcode',Session::get('aclgcode')],['status','a']])->get();
+            <?php $cat=\DB::table('tblcategory')->select('category_name','category_id')->where([['clgcode',Session::get('aclgcode')],['status','a']])->get();
             ?>
                 @foreach($cat as $category)
+                <?php $ev=App\tblevent::where([['cate_id',$category->category_id],['enddate','>',date('Y-m-d')]])->count() ?>
                 <div class="my-2 col col-auto px-1">
                     <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
                     <span class="text-dark font-size-14 font-weight-bold">{{$category->category_name}}</span>
                     <a href="#" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
-                    <a href="#" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
+                    <a href="#" onclick="delcat({{$category->category_id}},{{$ev}})" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
                     </div>
                 </div>
               @endforeach 
@@ -280,7 +286,7 @@ co_ordinate::remain_result();
     </div>                                    
     <div class="row">
         <div class="col-xl-12">
-            <!-- <div class="card mt-2 mb-0 new-shadow-sm">
+            <div class="card mt-2 mb-0 new-shadow-sm">
                 <div class="py-1 navbar">
                     <div class="h5 d-flex align-items-center">
                         <i data-feather="calendar" class="icon-dual-dark"></i>
@@ -291,26 +297,7 @@ co_ordinate::remain_result();
                         <input type="text" id="myInput" class="form-control" placeholder="Search Events" />
                     </div>
                 </div>
-            </div> -->
-            <div class="card mt-2 mb-0 new-shadow-sm">
-                <div class="h5 d-flex align-items-center ml-3">
-                    <i data-feather="calendar" class="icon-dual-dark"></i>
-                    <span class="ml-1">All Events</span>
-                </div>
-                <div class="py-2 navbar flex-nowrap">
-                    
-                    <div class="col-xl-3 col-md-6 col-sm-8 col-10 mb-0 form-group has-icon d-flex align-items-center px-0">
-                        <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
-                        <input type="text" id="myInput" class="form-control" placeholder="Search Events" />
-                    </div>
-                    <a href="{{url('/admin/winner-list')}}" class="text-success">
-                        <div class="d-flex align-items-center badge badge-soft-danger badge-pill pr-2 pr-sm-3 py-2 winner-list">
-                            <i data-feather="award" height="18px"></i>
-                            <span class="font-size-13 d-none d-sm-block">Winners List</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            </div> 
             <div class="card new-shadow-sm mt-2">
                 <div class="card-body py-2 px-1 px-sm-2">
                     <div class="table-responsive overflow-auto my-scroll" style="max-height: 360px;">
@@ -425,6 +412,12 @@ co_ordinate::remain_result();
 <script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
 <script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
 <script>
+function delcat(cid,events)
+{
+    alert(cid+"  "+events);
+}
+</script>
+<script>
         var area = {
           series: [
         <?php
@@ -491,16 +484,15 @@ co_ordinate::remain_result();
  var pie = {
           series: [<?php echo $part_count; ?>],
           chart: {
-            type: 'donut',
-            width:'100%',
-            height:330
+          height: 350,
+          type: 'donut',
         },
         labels: [<?php echo $ename_string; ?>],
         responsive: [{
           breakpoint: 576,
           options: {
             chart: {
-              width: 250
+              width: 260
             },
             legend: {
               position: 'bottom'
