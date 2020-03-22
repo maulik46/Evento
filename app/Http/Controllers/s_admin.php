@@ -821,9 +821,10 @@ class s_admin extends Controller
     public function addcat(Request $req)
     {
         $cat=$req->catname;
-        if($cat=="")
+        $catpic=$req->avatar;
+        if($cat=="" || $catpic=="")
         {
-            session()->flash('error', 'Please Enter category name..! ');
+            session()->flash('error', 'Please Enter category name or select image..!');
             return redirect(url('sindex'));
         }
         $c=\DB::table('tblcategory')->where('category_name',$cat)->count();
@@ -833,8 +834,17 @@ class s_admin extends Controller
         }
         else{
             $cid=time();
-            $insrt=\DB::table('tblcategory')->insert(['category_id'=>$cid,'category_name'=>$cat,'clgcode'=>Session::get('aclgcode'),'status'=>'i']);
+            $insrt=\DB::table('tblcategory')->insert(['category_id'=>$cid,'cat_pic'=>$catpic,'category_name'=>$cat,'clgcode'=>Session::get('aclgcode'),'status'=>'a']);
             session()->flash('success', 'Category added successfully..');
+        }
+        return redirect(url('sindex'));
+    }
+    public function delcat($cid)
+    {
+        $del=\DB::table('tblcategory')->where('category_id',$cid)->delete();
+        if($del)
+        {
+            session()->flash('success', 'Category Deleted successfully..');
         }
         return redirect(url('sindex'));
     }
