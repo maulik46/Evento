@@ -21,7 +21,7 @@ class ImportStudent implements ToModel,WithValidation,WithHeadingRow
             
             'senrl'     =>@$row['enrollment_no'],
             'sname'     =>@$row['name'],
-            'clgcode'   =>@Session::get('clgcode'),
+            'clgcode'   =>@Session::get('aclgcode'),
             'dob'       =>\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(@$row['birth_date'])->format('Y-m-d'),
             'class'     =>@$row['class'],
             'rno'       =>@$row['rollno'],
