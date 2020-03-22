@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 use App\notice;
 use session;
 use App\admin;
-
+use App\log;
+use App\tblcoordinaters;
+use App\participant;
+use App\tblstudent;
+use App\tblevent;
 use Illuminate\Http\Request;
 date_default_timezone_set("Asia/Kolkata"); 
 class system extends Controller
@@ -84,13 +88,35 @@ class system extends Controller
     }
     public function add_college(Request $req)
     {
+        $pass=$req->admin_pass;
+        $iname=$req->clg_name;
+        $to_email=trim($req->admin_email);
+        $message="
+        sub : <b>confrimation for subcription</b>
+        <br><br>
+        Dear <b>".ucfirst($req->admin_name)."</b>,
+        <br><br>
+            Hello ".ucfirst($req->admin_name).",we glad to infrom you that we start subscription for your institute ".$iname." .
+        <br><br>
+        <b>your login details as follow.</b>
+        <table border=1 style='padding:10px'> <tr style='background-color:#e6e6e6'><td style='padding:5px'> User Name </td><td style='padding:5px'> Password </td></tr>  <tr><td style='padding:5px'>".$to_email."</td> <td style='padding:5px'>".$pass."</td></tr>    </table>
+        <br>
+        Sincerely,
+        <br>
+        Evento Team.";
+        $data=array('name'=>"",'body'=>$message);
+        \Mail::send('email',$data,function($message) use ($iname, $to_email){
+            $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+            ->from("eventoitsol@gmail.com", $name = "Evento")
+            ->subject("Confirmation for demo request")->bcc($to_email);
+        });
         $admin=new admin;
         $admin->clgcode=$req->clg_code;
         $admin->name=$req->admin_name;
         $admin->email=$req->admin_email;
         $admin->mobile=$req->clg_mob;
         $admin->pass=$req->admin_pass;
-        $admin->profilepic='child.svg';
+        $admin->profilepic='professor.svg';
 
         $tbl_clg_data=[
             'clgcode' => $req->clg_code, 
@@ -102,7 +128,7 @@ class system extends Controller
 
         ];
         $tbl_clg = \DB::table('tblcolleges')->insert($tbl_clg_data);
-
+        
         $admin->save();
         return redirect(url('/system')); 
     }
@@ -241,5 +267,31 @@ class system extends Controller
         session()->flash("alert-success","College added successfully..!");
         return response()->json(array('msg'=> "success"),200);
     }
-
+    public function change_status(Request $req)
+    {
+        \DB::table('tblcolleges')->where('clgcode',$req->clgcode)->update(['status'=>$req->status]);
+        if($req->status == "running")
+            $msg="<div class='badge badge-success px-3 badge-pill'>Running</div>";
+        else
+            $msg="<div class='badge badge-danger px-3 badge-pill'>Inactive</div>";
+        return response()->json(array('msg'=>$msg),200);
+    }
+    public function delclg(Request $req)
+    {
+        $clgcode=$req->clgcode;
+        \DB::table('tblcolleges')->where('clgcode',$req->clgcode)->delete();
+        \DB::table('tblapproval')->join('tblevents','tblapproval.eid','tblevents.eid')->where('clgcode',$clgcode)->delete();
+        \DB::table('tblcategory')->where('clgcode',$clgcode)->delete();
+        log::join('tblcoordinaters','tbllog.uid','tblcoordinaters.cid')->where([['utype','co-ordinator'],['clgcode',$clgcode]])->delete();
+        log::join('tbladmin','tbllog.uid','tbladmin.aid')->where('utype','admin')->delete();
+        admin::where('clgcode',$clgcode)->delete();
+        notice::where('clgcode','like','%'.$clgcode.'%')->delete();
+        participant::where('clgcode',$clgcode)->delete();
+        \DB::table('tblrates')->join('tblevents','tblrates.eid','tblevents.eid')->where('clgcode',$clgcode)->delete();
+        \DB::table('tblresult_delay')->join('tblevents','tblresult_delay.eid','tblevents.eid')->where('clgcode',$clgcode)->delete();
+        tblstudent::where('clgcode',$clgcode)->delete();
+        tblcoordinaters::where('clgcode',$clgcode)->delete();
+        tblevent::where('clgcode',$clgcode);
+        return redirect(url('system'));
+    }
 }
