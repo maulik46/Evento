@@ -371,8 +371,10 @@ route::post('/check_login', 'system@check_login');
 
     route::post('/action_update_college','system@action_update_college');
     route::any('/update_college/{clgcode}', 'system@update_college');
+    
+    route::post('/change_status','system@change_status');
 
-
+    route::get('/delclg/{clgcode}','system@delclg');         
 
  });
 
