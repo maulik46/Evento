@@ -22,7 +22,11 @@
                         <span class="badge badge-soft-primary badge-pill px-3">
                         {{date('d/m/Y',strtotime($clg->start_date))}}
                         </span>
-                        <div class="badge badge-success px-3 badge-pill">{{ucfirst($clg->status)}}</div>
+                        @if($clg->status=="running")
+                            <div id="stat{{$clg->clgcode}}"><div class="badge badge-success px-3 badge-pill">{{ucfirst($clg->status)}}</div></div>
+                        @else
+                            <div id="stat{{$clg->clgcode}}"><div class="badge badge-danger px-3 badge-pill">{{ucfirst($clg->status)}}</div></div>
+                        @endif
                     </div>
                     <h5 class="text-dark mt-0">{{ucfirst($clg->clgname)}}</h5>
                     
@@ -47,12 +51,16 @@
                             <a href="{{url('update_college')}}/{{encrypt($clg->clgcode)}}">
                                 <i data-feather="edit" class="text-warning" height="19px"></i>
                             </a>
-                            <a href="" class="mx-2">
+                            <a href="#" onclick="return del('{{$clg->clgcode}}')" class="mx-2">
                                 <i data-feather="trash-2" class="text-danger" height="19px"></i>
                             </a>
                             <div class="custom-control custom-switch mt-1">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch{{$count}}">
-                                <label class="custom-control-label" for="customSwitch{{$count}}"></label>
+                            @if($clg->status=="running")
+                                <input type="checkbox" class="custom-control-input" checked onclick="return change_status(this.id)" id="{{$clg->clgcode}}">
+                            @else
+                            <input type="checkbox" class="custom-control-input" onclick="return change_status(this.id)" id="{{$clg->clgcode}}">
+                            @endif
+                                <label class="custom-control-label" for="{{$clg->clgcode}}"></label>
                             </div>
                         </div>
                     </div>
@@ -68,6 +76,7 @@
 </div>
 @endsection
 @section('extra-scripts')
+<script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $("#myInput").on("keyup", function () {
@@ -78,5 +87,49 @@
             });
         });
     });
+function change_status(id)
+{
+    if($('#'+id).prop('checked') == true)
+    {
+        var status="running";
+    }
+    else{
+        var status="inactive";
+    }
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/change_status',
+            data: {
+               clgcode:id,
+               status:status,
+            },
+            success: function (data) {
+                $('#stat'+id).html(data.msg);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        })
+}
+function del(clgcode)
+{
+Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to Delete this college Records..!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete'
+            }).then((result) => {
+            if (result.value) {
+                window.location.href = 'delclg/'+clgcode;
+            }})
+}
 </script>
 @endsection
