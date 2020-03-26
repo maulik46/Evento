@@ -208,9 +208,10 @@ class student extends Controller
     }
     public function checklogin(Request $req)//check student data for login other wise return error
     {
-        $login_details = tblstudent::where([
-            ['clgcode', '=', $req->clgcode],
-            ['senrl', '=', $req->senrl]
+        $login_details = tblstudent::join('tblcolleges','tblcolleges.clgcode','tblstudent.clgcode')->where([
+            ['tblcolleges.clgcode', '=', $req->clgcode],
+            ['senrl', '=', $req->senrl],
+            ['status','a']
         ])->count();
         if ($login_details==1) 
         {
@@ -549,6 +550,17 @@ class student extends Controller
         $year=$req->year;
         $sname=$req->sname;
         $ename=$req->ename;
+        if(Session::has('clgcode'))
+        {
+            $clgcode=Session::get('clgcode');
+        }
+        else if(Session::has('cclgcode'))
+        {
+            $clgcode=Session::get('cclgcode');
+        }
+        else{
+            $clgcode=Session::get('aclgcode');
+        }
         $c=0;
         $team="";
         if(!$cat)
@@ -564,7 +576,7 @@ class student extends Controller
         if(!$class)
         {
             $c++;
-            $clas=\DB::table('tblstudent')->select('class')->where('clgcode',Session::get('clgcode'))->groupBy('class')->get()->toArray();
+            $clas=\DB::table('tblstudent')->select('class')->where('clgcode',$clgcode)->groupBy('class')->get()->toArray();
             $class=array();
             foreach($clas as $cls)
             {
@@ -594,9 +606,11 @@ class student extends Controller
         }
         $a=0;
          $st=participant::join('tblevents', 'tblparticipant.eid', '=', 'tblevents.eid')
+                                ->join('tblcategory','tblcategory.category_id','tblevents.cate_id')
                                 ->where('tblparticipant.rank', '!=', 'p')
                                 ->whereIn('tblevents.e_type',$cat)
-                                ->where('tblparticipant.clgcode',Session::get('clgcode'))
+                                ->where('tblparticipant.clgcode',$clgcode)
+                                
                                 ->where('tblevents.ename','like',$ename)
                                 ->orderby('tblevents.enddate','desc')
                                 ->orderby('tblevents.ename')
@@ -610,7 +624,7 @@ class student extends Controller
                                             $tbls=tblstudent::where('senrl', $sen)
                                             ->where('sname','like',$sname)
                                             ->whereIn('class',$class)
-                                            ->where('clgcode',Session::get('clgcode'))
+                                            ->where('clgcode',$clgcode)
                                             ->whereIn('division',$div)
                                                 ->get()->toArray();
                                                 
@@ -645,7 +659,7 @@ class student extends Controller
                                                     {
                                                         $team.= "<tr><td><img src=".asset('assets/images/svg-icons/student-dash/winner/3.svg')." height='22px' alt='3'></td>";
                                                     }
-                                                    $team.= "<td> ".ucfirst($t['sname'])."</td><td>".ucfirst($t['class'])."</td><td>".$t['division']."</td><td>".$t['rno']."</td><td>".ucfirst($s['ename'])."</td><td>".ucfirst($s['category'])."</td><td>".date('d/m/Y',strtotime($s['enddate']))."</td></tr>";
+                                                    $team.= "<td> ".ucfirst($t['sname'])."</td><td>".ucfirst($t['class'])."</td><td>".$t['division']."</td><td>".$t['rno']."</td><td>".ucfirst($s['ename'])."</td><td>".ucfirst($s['category_name'])."</td><td>".date('d/m/Y',strtotime($s['enddate']))."</td></tr>";
                                                     
                                             }
                                             if($a>0)
