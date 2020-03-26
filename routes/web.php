@@ -152,7 +152,7 @@ Route::group(['middleware' => 'co_session_check'], function () {
         Route::get('/view_candidates/{eid}','co_ordinate@view_can');
       
         Route::get('/create_event',function(){
-            $class=App\tblstudent::select('class')->where('clgcode',Session::get('clgcode'))->groupby('class')->orderby('class')->get();
+            $class=App\tblstudent::select('class')->where('clgcode',Session::get('cclgcode'))->groupby('class')->orderby('class')->get();
             return view('co-ordinates/newevent',['class'=>$class]);    
         });  
 
@@ -312,7 +312,19 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         Route::post('/afilter','student@filter');
 
         route::view('/add_category','super-admin/add_category');
+
+        route::post('/addcat','s_admin@addcat');
+
+        route::get('delcat/{cate_id}','s_admin@delcat');
    
+        route::get('updatecat/{cate_id}',function($cid){
+            $cat=\DB::table('tblcategory')->where('category_id',$cid)->first();
+            return view('super-admin/updatecategory',['cat'=>$cat]);
+        });
+
+        route::post('updatecat','s_admin@updatecat');
+
+        route::post('event_filter','s_admin@event_filter');
     });
 
 // xoxoxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
