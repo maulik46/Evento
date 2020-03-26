@@ -6,6 +6,7 @@ use \App\tblstudent;
 @section('title','Event Records')
 
 @section('head-tag-links')
+<link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 <link rel="stylesheet" href="{{asset('assets/libs/flatpickr/flatpickr.min.css')}}">
 <style>
     .form-control {
@@ -99,28 +100,29 @@ use \App\tblstudent;
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="form-group has-icon d-flex align-items-center px-0 mb-1">
                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                <input type="text" name="title" id="title" class="form-control" placeholder="Enter Event Name" />
+                                <input type="text" onkeyup="event_filter()" name="ename" id="ename" class="form-control" placeholder="Enter Event Name" />
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="form-group has-icon d-flex align-items-center px-0 mb-1">
                                 <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
-                                <select name="" id="" class="form-control">
-                                    <option hidden>Select Co-ordinator</option>
-                                    <option value="">abc</option>
-                                    <option value="">xyz</option>
-                                    <option value="">IPL</option>
+                                <select name="cod" onchange="event_filter()" id="cod" class="form-control">
+                                <?php $cod=\DB::table('tblcoordinaters')->where('clgcode',Session::get('aclgcode'))->get()?>
+                                    <option hidden value="">Select Co-ordinator</option>
+                                    @foreach($cod as $c)
+                                        <option value="{{$c->cid}}">{{ucfirst($c->cname)}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-12 col-12 d-flex justify-content-start">
                             <div class="form-group has-icon d-flex align-items-center">
                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                <input name="" id="from"  type="text" class="form-control basicDate" placeholder="From" />
+                                <input name="from" id="from" onchange="event_filter()" type="text" class="form-control basicDate" placeholder="From" />
                             </div>
                             <div class="form-group has-icon d-flex align-items-center">
-                                <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
-                                <input name="" id="to"  type="text" class="form-control basicDate" placeholder="To" />
+                                <i data-feather="calendar"  class="form-control-icon ml-2" height="19px"></i>
+                                <input name="to" id="to" onchange="event_filter()" type="text" class="form-control basicDate" placeholder="To" />
                             </div>
                         </div>
                     </div>
@@ -130,12 +132,12 @@ use \App\tblstudent;
                             <h6>Gender</h6>
                             <div class="row flex-column mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
                             <div class="custom-control custom-checkbox mb-2">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Male</label>
+                                <input type="checkbox" onclick="event_filter()" name="gen[]" value="male" class="custom-control-input" id="male">
+                                <label class="custom-control-label" for="male">Male</label>
                             </div>
                             <div class="custom-control custom-checkbox mb-2">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Female</label>
+                                <input type="checkbox" onclick="event_filter()" name="gen[]" value="female" class="custom-control-input" id="female">
+                                <label class="custom-control-label" for="female">Female</label>
                             </div>
                             </div>
                         </div>
@@ -143,39 +145,25 @@ use \App\tblstudent;
                             <h6>Event Type</h6>
                             <div class="row flex-column mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
                             <div class="custom-control custom-checkbox my-1">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Team</label>
+                                <input type="checkbox" onclick="event_filter()" name="etype[]" class="custom-control-input" value="team" id="team">
+                                <label class="custom-control-label" for="team">Team</label>
                             </div>
                             <div class="custom-control custom-checkbox my-1">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Solo</label>
+                                <input type="checkbox" onclick="event_filter()" name="etype[]" class="custom-control-input" value="solo" id="solo">
+                                <label class="custom-control-label" for="solo">Solo</label>
                             </div>
                             </div>
                         </div>
                         <div class="col col-lg-6 col-md-6 col-12">
                             <h6>Category</h6>
+                            <?php $cate=\DB::table('tblcategory')->where('clgcode',Session::get('aclgcode'))->get()?>
                             <div class="row mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
+                            @foreach($cate as $cat)
                                 <div class="col-sm-4 col-6 custom-control custom-checkbox my-1">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1">Sport</label>
+                                    <input type="checkbox" onclick="event_filter()" name="cat[]" class="custom-control-input" value="{{$cat->category_id}}" id="{{$cat->category_id}}">
+                                    <label class="custom-control-label" for="{{$cat->category_id}}">{{$cat->category_name}}</label>
                                 </div>
-                                <div class="col-sm-4 col-6 custom-control custom-checkbox my-1">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1">Cultural</label>
-                                </div>
-                                <div class="col-sm-4 col-6 custom-control custom-checkbox my-1">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1">IT</label>
-                                </div>
-                                <div class="col-sm-4 col-6 custom-control custom-checkbox my-1">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1">IT</label>
-                                </div>
-                                <div class="col-sm-4 col-6 custom-control custom-checkbox my-1">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1">IT</label>
-                                </div>
-                                
+                            @endforeach
                             </div>
                         </div>
                     </div>
@@ -194,23 +182,19 @@ use \App\tblstudent;
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             <?php $count=0;?>
                             @foreach($event_data as $ed)
                             <?php $count++;?>
                             <tr class="text-dark">
                                 <td>{{$count}}</td>
                                 <td>{{ucfirst($ed['ename'])}}</td>
-                                <td>{{$ed['edate']}}</td>
+                                <td>{{date('d-m-Y',strtotime($ed['edate']))}}</td>
                                 <td>{{ucfirst($ed['cname'])}}</td>
                                 <td>{{ucfirst($ed['e_type'])}} Event</td>
-                                <td>{{ucfirst($ed['category'])}}</td>
+                                <td>{{ucfirst($ed['category_name'])}}</td>
                                 <td class="d-flex">
-                                <a href="{{url('sview_result')}}/{{encrypt($ed['eid'])}}"
-                                    class="btn p-1 btn-rounded" data-toggle="tooltip"
-                                    data-placement="top" title="Result">
-                                    <i data-feather="award" height="18px" class=" text-success"></i>
-                                </a>
+                                
                                 <a href="{{url('sevent_info')}}/{{encrypt($ed['eid'])}}"
                                     class="btn p-1 btn-rounded" data-toggle="tooltip"
                                     data-placement="top" title="About">
@@ -221,6 +205,14 @@ use \App\tblstudent;
                                     data-placement="top" title="Candidates">
                                     <i data-feather="users" height="18px" class=" text-primary"></i>
                                 </a>
+                                <?php $r = \DB::table('tblparticipant')->select('senrl')->where([['eid', $ed['eid']], ['rank', 1]])->count();?>
+                                @if($r==1)
+                                <a href="{{url('sview_result')}}/{{encrypt($ed['eid'])}}"
+                                    class="btn btn-p-result p-1 btn-rounded" data-toggle="tooltip"
+                                    data-placement="top" title="Show Result">
+                                    <i data-feather="award" height="18px" class=" text-success"></i>
+                                </a>
+                                @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -237,7 +229,7 @@ use \App\tblstudent;
 <script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
 <script>
 $(document).ready(function(){
-    $('#filter-box,#close-filter').hide();
+    // $('#filter-box,#close-filter').hide();
     $('.btn-filter').click(function(){
         $('#filter-box,#close-filter').show();
         $('.btn-filter').hide();
@@ -255,5 +247,55 @@ $(document).ready(function(){
         $("div").removeClass("animate");
     });
 })
+function event_filter()
+{
+    var ename=$('#ename').val();
+    var cod=$('#cod').val();
+    var from=$('#from').val();
+    var to=$('#to').val();
+    var gen=new Array();
+    var etype=new Array();
+    var cat=new Array();
+    $("input[name='gen[]']").each( function () {
+        if($(this).prop('checked') == true){
+            gen.push($(this).val());
+            }
+   });
+   $("input[name='etype[]']").each( function () {
+        if($(this).prop('checked') == true){
+            etype.push($(this).val());
+            }
+   });
+   $("input[name='cat[]']").each( function () {
+        if($(this).prop('checked') == true){
+            cat.push($(this).val());
+            }
+   });
+   $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/event_filter',
+            data: {
+               cod:cod,
+               from:from,
+               to:to,
+               gen:gen,
+               etype:etype,
+               cat:cat,
+               ename:ename,
+            },
+            success: function (data) {
+                $('#tbody').html(data.msg);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        })
+}
 </script>
+
 @endsection
