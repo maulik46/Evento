@@ -227,7 +227,7 @@ co_ordinate::remain_result();
                                     </h6>
                                     <div class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-sm-center mb-1">
                                         <span class="badge badge-info badge-pill px-3 mt-0 mr-3 new-shadow-sm">{{ucfirst($c['category_name'])}}</span>
-                                        <?php $tble = tblevent::where('cid', $c['cid'])->get()->toArray();
+                                        <?php $tble = tblevent::where([['cid', $c['cid']],['enddate','>',date('Y-m-d')]])->get()->toArray();
                                         $e = "";
                                         foreach ($tble as $te) {
                                             $e .= $te['ename'] . ",";
@@ -271,12 +271,16 @@ co_ordinate::remain_result();
             <?php $cat=\DB::table('tblcategory')->select('category_name','category_id')->where([['clgcode',Session::get('aclgcode')],['status','a']])->get();
             ?>
                 @foreach($cat as $category)
-                <?php $ev=App\tblevent::where([['cate_id',$category->category_id],['enddate','>',date('Y-m-d')]])->count() ?>
+                <?php $ev=App\tblevent::where([['cate_id',$category->category_id],['enddate','>',date('Y-m-d')]])->get();
+                $e = "";
+                foreach ($ev as $te) {
+                    $e .= ucfirst($te['ename']) . ",";
+                }?>
                 <div class="my-2 col col-auto px-1">
                     <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
                     <span class="text-dark font-size-14 font-weight-bold">{{$category->category_name}}</span>
-                    <a href="#" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
-                    <a href="#" onclick="delcat({{$category->category_id}},{{$ev}})" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
+                    <a href="{{url('updatecat')}}/{{$category->category_id}}" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
+                    <a href="#" onclick="delcat({{$category->category_id}},'{{ $e }}')" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
                     </div>
                 </div>
               @endforeach 
@@ -412,9 +416,42 @@ co_ordinate::remain_result();
 <script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
 <script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
 <script>
-function delcat(cid,events)
+function delcat(cid,ename)
 {
-    alert(cid+"  "+events);
+    var cid = cid;
+        var ename_string = "";
+        var ename_array = ename.split(',');
+        for (var i = 0; i < ename_array.length; i++) {
+            if (ename_array[i]) {
+
+                ename_string += "<span class='m-1 badge badge-soft-primary px-3 font-size-13'>" + ename_array[i] +"</span>";
+            }
+        }
+        if (ename.length > 0) {
+            Swal.fire({
+                title: "<h4 class='my-0'>You Can't delete this Event category!</h4>",
+                html: "<h6 class='text-danger'>Following events are running or upcoming</h6>" +
+                    "<div class='d-flex align-items-center flex-wrap'>" + ename_string + "</div></br>",
+                icon: 'warning'
+            })
+            return false;
+        } else {
+            Swal.fire({
+                title: "<h5>Are you sure want to delete this Event category !</h5>",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "Yes,Delete it",
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = '<?php echo url('/delcat').'/'?>' + cid;
+                }
+            })
+            return false;
+        }
+
 }
 </script>
 <script>
