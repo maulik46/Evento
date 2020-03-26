@@ -105,11 +105,11 @@ class system extends Controller
         <br>
         Evento Team.";
         $data=array('name'=>"",'body'=>$message);
-        \Mail::send('email',$data,function($message) use ($iname, $to_email){
-            $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
-            ->from("eventoitsol@gmail.com", $name = "Evento")
-            ->subject("Confirmation for demo request")->bcc($to_email);
-        });
+        // \Mail::send('email',$data,function($message) use ($iname, $to_email){
+        //     $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+        //     ->from("eventoitsol@gmail.com", $name = "Evento")
+        //     ->subject("Confirmation for demo request")->bcc($to_email);
+        // });
         $admin=new admin;
         $admin->clgcode=$req->clg_code;
         $admin->name=$req->admin_name;
@@ -124,7 +124,7 @@ class system extends Controller
             'address' => $req->clg_add, 
             'city' => $req->clg_city,
             'start_date'=>date('Y-m-d'),
-            'status'=>'running'
+            'status'=>'a'
 
         ];
         $tbl_clg = \DB::table('tblcolleges')->insert($tbl_clg_data);
@@ -252,7 +252,7 @@ class system extends Controller
             ->subject("Confirmation for demo request")->bcc($to_email);
         });
         
-        $clg_insrt=\DB::table('tblcolleges')->insert(['clgcode'=>$req->clgcode,'clgname'=>$iname,'address'=>$req->addrs,'city'=>$req->city,'status'=>'running','start_date'=>date('Y-m-d')]);
+        $clg_insrt=\DB::table('tblcolleges')->insert(['clgcode'=>$req->clgcode,'clgname'=>$iname,'address'=>$req->addrs,'city'=>$req->city,'status'=>'a','start_date'=>date('Y-m-d')]);
         
         $admin=new admin();
         $admin->clgcode=$req->clgcode;
@@ -270,10 +270,16 @@ class system extends Controller
     public function change_status(Request $req)
     {
         \DB::table('tblcolleges')->where('clgcode',$req->clgcode)->update(['status'=>$req->status]);
-        if($req->status == "running")
-            $msg="<div class='badge badge-success px-3 badge-pill'>Running</div>";
+        if($req->status == "a")
+        {
+            $updco=\DB::table('tblcoordinaters')->where('clgcode',$req->clgcode)->update(['status'=>'a']);
+            $msg="<div class='badge badge-success px-3 badge-pill'>Active</div>";
+        }
         else
+        {
+            $updco=\DB::table('tblcoordinaters')->where('clgcode',$req->clgcode)->update(['status'=>'i']);
             $msg="<div class='badge badge-danger px-3 badge-pill'>Inactive</div>";
+        }
         return response()->json(array('msg'=>$msg),200);
     }
     public function delclg(Request $req)
@@ -291,7 +297,7 @@ class system extends Controller
         \DB::table('tblresult_delay')->join('tblevents','tblresult_delay.eid','tblevents.eid')->where('clgcode',$clgcode)->delete();
         tblstudent::where('clgcode',$clgcode)->delete();
         tblcoordinaters::where('clgcode',$clgcode)->delete();
-        tblevent::where('clgcode',$clgcode);
+        tblevent::where('clgcode',$clgcode)->delete();
         return redirect(url('system'));
     }
 }
