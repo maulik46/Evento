@@ -229,7 +229,7 @@ use \App\tblstudent;
 <script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
 <script>
 $(document).ready(function(){
-    // $('#filter-box,#close-filter').hide();
+    $('#filter-box,#close-filter').hide();
     $('.btn-filter').click(function(){
         $('#filter-box,#close-filter').show();
         $('.btn-filter').hide();
