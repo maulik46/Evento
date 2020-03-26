@@ -53,7 +53,8 @@
     <div class="container">
     
     <div class="row justify-content-center mx-0">
-        <form class="col-lg-6 col-md-8 bg-white new-shadow-sm rounded px-2 py-3">
+        <form action="{{url('addcat')}}" method="post" class="col-lg-6 col-md-8 bg-white new-shadow-sm rounded px-2 py-3">
+        @csrf
             <a href="{{url('/sindex')}}" class="d-flex justify-content-end text-dark">
                 <i data-feather="x-circle" id="close-btn" height="18px"></i>
             </a>
@@ -65,96 +66,96 @@
             <hr class="mt-1">
             <div class="col-12 px-3 form-group has-icon d-flex align-items-center">
                 <i data-feather="edit-3" class="form-control-icon ml-2" height="19px"></i>
-                <input type="text" class="form-control" placeholder="Enter Catagory Name ex. Sport, IT, Cultural.." />
+                <input type="text" name="catname" class="form-control" placeholder="Enter Catagory Name ex. Sport, IT, Cultural.." />
             </div>
             <div class="text-center font-size-13 font-weight-bold pb-3">Select image realted to Event Category</div>
             <div class="col-12 row justify-content-between justify-content-md-start mx-0">
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox1" value="child (1).svg"/>
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox1" value="check.svg"/>
                     <label for="myCheckbox1">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/check.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox2" value="child.svg"  />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox2" value="camera.svg"  />
                     <label for="myCheckbox2">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/camera.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox3" value="girl.svg"  />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox3" value="cricket.svg"  />
                     <label for="myCheckbox3">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/cricket.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox4" value="professor.svg"/>
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox4" value="drama.svg"/>
                     <label for="myCheckbox4">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/drama.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox5" value="teacher.svg" />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox5" value="guitar.svg" />
                     <label for="myCheckbox5">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/guitar.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox6" value="woman.svg" />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox6" value="india.svg" />
                     <label for="myCheckbox6">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/india.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox7" value="woman.svg" />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox7" value="website.svg" />
                     <label for="myCheckbox7">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/website.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox8" value="woman.svg" />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox8" value="unknown.svg" />
                     <label for="myCheckbox8">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/unknown.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox9" value="woman.svg" />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox9" value="quiz.svg" />
                     <label for="myCheckbox9">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/quiz.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox10" value="woman.svg" />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox10" value="pen.svg" />
                     <label for="myCheckbox10">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/pen.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox11" value="woman.svg" />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox11" value="project-management.svg" />
                     <label for="myCheckbox11">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/project-management.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox12" value="woman.svg" />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox12" value="makeup.svg" />
                     <label for="myCheckbox12">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/makeup.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox13" value="woman.svg" />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox13" value="festival.svg" />
                     <label for="myCheckbox13">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/festival.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox14" value="woman.svg" />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox14" value="collaboration.svg" />
                     <label for="myCheckbox14">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/collaboration.svg')}}" height="45px" />
                     </label>
                 </div>
                 <div class="cat-photo col col-auto">
-                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox15" value="woman.svg" />
+                    <input type="radio" name="avatar" class="myCheckbox" id="myCheckbox15" value="coffee-cup.svg" />
                     <label for="myCheckbox15">
                     <img src="{{asset('assets/images/svg-icons/super-admin/event_cat/coffee-cup.svg')}}" height="45px" />
                     </label>
