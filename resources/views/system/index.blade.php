@@ -22,10 +22,10 @@
                         <span class="badge badge-soft-primary badge-pill px-3">
                         {{date('d/m/Y',strtotime($clg->start_date))}}
                         </span>
-                        @if($clg->status=="running")
-                            <div id="stat{{$clg->clgcode}}"><div class="badge badge-success px-3 badge-pill">{{ucfirst($clg->status)}}</div></div>
+                        @if($clg->status=="a")
+                            <div id="stat{{$clg->clgcode}}"><div class="badge badge-success px-3 badge-pill">Active</div></div>
                         @else
-                            <div id="stat{{$clg->clgcode}}"><div class="badge badge-danger px-3 badge-pill">{{ucfirst($clg->status)}}</div></div>
+                            <div id="stat{{$clg->clgcode}}"><div class="badge badge-danger px-3 badge-pill">Inactive</div></div>
                         @endif
                     </div>
                     <h5 class="text-dark mt-0">{{ucfirst($clg->clgname)}}</h5>
@@ -55,7 +55,7 @@
                                 <i data-feather="trash-2" class="text-danger" height="19px"></i>
                             </a>
                             <div class="custom-control custom-switch mt-1">
-                            @if($clg->status=="running")
+                            @if($clg->status=="a")
                                 <input type="checkbox" class="custom-control-input" checked onclick="return change_status(this.id)" id="{{$clg->clgcode}}">
                             @else
                             <input type="checkbox" class="custom-control-input" onclick="return change_status(this.id)" id="{{$clg->clgcode}}">
@@ -91,10 +91,10 @@ function change_status(id)
 {
     if($('#'+id).prop('checked') == true)
     {
-        var status="running";
+        var status="a";
     }
     else{
-        var status="inactive";
+        var status="i";
     }
     $.ajaxSetup({
             headers: {
