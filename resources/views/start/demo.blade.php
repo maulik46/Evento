@@ -23,6 +23,9 @@
         ::placeholder{
             color:#000!important;
         }
+        label{
+            color:var(--dark);
+        }
         @media(max-width:576px){
             label{
             margin-bottom:0px!important;
@@ -38,7 +41,7 @@
         <div class="container-fluid px-0 px-md-5">
             <!-- logo -->
             <a href="#" class="ml-2 navbar-brand mr-lg-5 font-size-24 font-weight-bold text-dark">
-                <img src="{{asset('assets/images/logo.png')}}" alt="" class="logo-dark mr-1" height="24" /> Evento
+                <img src="{{asset('assets/images/logo.png')}}" alt="" class="logo-dark" height="24" /> Evento
             </a>
             <ul class="text-right nav font-weight-bold  font-size-16 d-flex align-items-center">
                 <div class="nav d-md-flex d-none mr-md-3 my-nav">
@@ -110,22 +113,18 @@
                 <div class="col text-center">
                     <div class="py-5">
                         <h1 class="mb-4 text-white">
-                            Manage your School/College events with Evento
+                            Manage your events with Evento
                         </h1>
 
-                        <p class="mb-4 font-size-16 text-center">
+                        <p class="mb-4 font-size-16 text-center font-weight-bold">
                             Evento is a fully featured event management system for <br> your school/college to design and manage various catagories of events
                         </p>
 
                         <p class="pt-4">
-                            <button  class="new-shaodw-sm hover-me-sm btn font-weight-bold badge-pill btn-danger px-3 font-size-15 m-2 demo-btn">
-                                Check Demo
+                            <button  class="new-shaodw-sm hover-me-sm btn font-weight-bold badge-pill btn-danger px-4 font-size-15 m-2 demo-btn">
+                                Get Started
                                 <i data-feather="arrow-right-circle" class="ml-1 align-middle" height="20px"></i>
                             </button>
-                            <!-- <button class="new-shaodw-sm hover-me-sm btn font-weight-bold badge-pill bg-white text-blue px-3 font-size-15 m-2">
-                                Student Corner
-                                <i data-feather="arrow-right-circle" class="ml-1 align-middle" height="20px"></i>
-                            </button> -->
                         </p>
                     </div>
                 </div>
@@ -181,7 +180,7 @@
                     <div class="pt-3">
                         <h4 class="faq-question text-body font-size-17">
                             <i data-feather="box" class="icon-dual-primary "></i>
-                           Saperate dashboard for Student,Co-ordinator & Admin
+                           Separate dashboard for Student,Co-ordinator & Admin
                         </h4>
                         <p class="faq-answer mb-4 pb-1 text-muted font-size-15">
                             Student,Co-ordinator & Admin gets their saperate minimal designed dashboard
@@ -271,8 +270,8 @@
                         <h4 class="card-title">Why Evento?</h4>
                         <h6 class="card-subtitle mb-2 text-muted">Is this new way to manage events? </h6>
                         <p class="card-text py-2">
-                            In School College there is no proper way or method to create an event. One univarsal method is to create event by pen-paper and anounce on notice board!.<br><br>
-                            Is this good method? maybe not. It takes manpower and lots of time to manage work but <b>Evento</b> reduce all of this things
+                            In School/College there is no proper way or method to create an event. Sometimes it is complicated to manage all these events.<br><br>
+                            It takes manpower and lots of time to manage work but <b>Evento</b> reduce all of these things
                         </p>
                     </div>
                 </div>
@@ -306,10 +305,10 @@
         </div> <!-- end container-->
             <div class="text-center font-size-18 text-dark my-5 font-weight-bold">
                Want Evento In Your Institute?<br>
-               Get a demo from here <br>
+               Get started from here <br>
                <button
-                   class="mt-4 new-shaodw-sm hover-me-sm btn font-weight-bold badge-pill btn-danger px-3 font-size-15 m-2 demo-btn">
-                   Check Demo
+                   class="mt-4 new-shaodw-sm hover-me-sm btn font-weight-bold badge-pill btn-danger px-4 font-size-15 m-2 demo-btn">
+                   Get Started
                    <i data-feather="arrow-right-circle" class="ml-1 align-middle" height="20px"></i>
                </button>
 
@@ -329,12 +328,12 @@
             <div class="row mx-0  align-items-start justify-content-center">
                 <div class="col-md-5 my-3 text-center text-md-left">
                     <a href="#" class="navbar-brand font-size-22 font-weight-bold text-dark">
-                        <img src="{{asset('assets/images/logo.png')}}" alt="" class="logo-dark mr-2" height="40" /> 
+                        <img src="{{asset('assets/images/logo.png')}}" alt="" class="logo-dark" height="36" /> 
                         <span class="h1 text-dark">Evento</span>
                     </a>
                     <p class="font-size-15 text-dark mt-3">
                         Evento makes it easier to Create and manage <br> events with
-                         great functionality and it save lots <br> of manpower and time. 
+                         great functionality and user interface. 
                     </p>
                 </div>
 
@@ -342,16 +341,16 @@
                     <div class="h5">Contact us</div>
                     <br>
                     <h6>
-                        <i data-feather="mail" class="mr-2" height="20px"></i>
-                        <span>evento-co@gmail.com</span>
+                        <i data-feather="mail" class="mr-2 icon-dual-danger" height="20px"></i>
+                        <span class="text-dark">eventoitsol@gmail.com</span>
                     </h6>
                     <h6>
-                        <i data-feather="phone" class="mr-2" height="20px"></i>
-                        <span>852-014-7963</span>
+                        <i data-feather="phone" class="mr-2 icon-dual-dark" height="20px"></i>
+                        <span class="text-dark">852-014-7963</span>
                     </h6>
                     <h6>
-                        <i data-feather="map" class="mr-2" height="20px"></i>
-                        <span>Identify info-tech, Surat</span>
+                        <i data-feather="map-pin" class="mr-2 icon-dual-primary" height="20px"></i>
+                        <span class="text-dark">Identify info-tech, Surat</span>
                     </h6>
                 </div>
                 <div class="col-md-3 my-3 text-center text-md-left">
@@ -379,7 +378,7 @@
     <div class="row">
         <div class="col-lg-12 ">
             <div class="card mb-0 p-1">
-                <p class="text-center mb-0 font-weight-bold">
+                <p class="text-dark text-center mb-0 font-weight-bold">
                     Made with <i data-feather="heart" height="15px" class="icon-dual-danger"></i>
                 </p>
             </div>
@@ -392,9 +391,9 @@
             <div id="demo-form" class="position-fixed col-lg-8 col-md-10 col-sm-10 col-11 card rounded-lg new-shadow-2 rounded-lg px-0">
                 
                 <div class="text-right py-1">
-                    <span style="cursor: pointer;" class="text-dark mr-3" id="close-btn">
+                    <a href="javascript:location.reload()" class="text-dark mr-3" id="close-btn">
                         <i data-feather="x-circle" height="18px"></i>
-                    </span>
+                    </a>
                 </div>
                 <div class="text-center text-dark h6 px-2">Fill up these fields and send us. We'll contact you</div>
             <form class="p-2 px-2 px-sm-4">
