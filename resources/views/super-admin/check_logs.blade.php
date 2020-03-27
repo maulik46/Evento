@@ -106,6 +106,7 @@
         </div>
 
     </div>
+  
     <div id="loglist">
     <?php $a=0;?>
     @foreach($logs as $log)
@@ -127,8 +128,10 @@
                             <span class="badge badge-dark px-3 rounded-0  my-1" style="margin-right:-5px;">Action</span>
                             <span class="badge badge-soft-dark px-3 rounded-0">{{ucfirst($log['action_type'])}}</span>
                         </div>
+                        
                     </div>
                 </div>
+                
                 <div class="card-text">
                     <span class="text-muted more">{!!$log['descr']!!}</span>
                     <div class="float-right">

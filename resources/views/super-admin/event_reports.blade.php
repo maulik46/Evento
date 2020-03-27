@@ -204,7 +204,7 @@ use \App\tblstudent;
                                 <td>{{$ed['edate']}}</td>
                                 <td>{{ucfirst($ed['cname'])}}</td>
                                 <td>{{ucfirst($ed['e_type'])}} Event</td>
-                                <td>{{ucfirst($ed['category'])}}</td>
+                                <td>{{ucfirst($ed['category_name'])}}</td>
                                 <td class="d-flex">
                                 <a href="{{url('sview_result')}}/{{encrypt($ed['eid'])}}"
                                     class="btn p-1 btn-rounded" data-toggle="tooltip"

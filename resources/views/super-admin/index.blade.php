@@ -252,10 +252,10 @@ co_ordinate::remain_result();
                 <i data-feather="calendar" class="icon-dual-dark"></i>
                 <span class="ml-1">All Event Categories</span>
             </div>
-            <a href="{{url('/add_category')}}" class="text-success d-none d-sm-block ">
-                <div class="d-flex align-items-center badge badge-soft-info badge-pill pr-3 py-2 add-cat">
+            <a href="{{url('/add_category')}}" class="text-success  ">
+                <div class="d-flex align-items-center badge badge-soft-info badge-pill pr-2 pr-sm-3 py-2 add-cat">
                     <i data-feather="plus-circle" height="18px"></i>
-                    <span class="font-size-13">Add Category</span>
+                    <span class="font-size-13 d-none d-sm-block">Add Category</span>
                 </div>
             </a>
         </div>
@@ -280,18 +280,7 @@ co_ordinate::remain_result();
     </div>                                    
     <div class="row">
         <div class="col-xl-12">
-            <!-- <div class="card mt-2 mb-0 new-shadow-sm">
-                <div class="py-1 navbar">
-                    <div class="h5 d-flex align-items-center">
-                        <i data-feather="calendar" class="icon-dual-dark"></i>
-                        <span class="ml-1">All Events</span>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-12 mb-0 form-group has-icon d-flex align-items-center px-0">
-                        <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
-                        <input type="text" id="myInput" class="form-control" placeholder="Search Events" />
-                    </div>
-                </div>
-            </div> -->
+            
             <div class="card mt-2 mb-0 new-shadow-sm">
                 <div class="h5 d-flex align-items-center ml-3">
                     <i data-feather="calendar" class="icon-dual-dark"></i>
