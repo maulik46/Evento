@@ -20,9 +20,10 @@ class s_admin extends Controller
 {
     public function checklogin(Request $req)
     {
-        $login_details = admin::where([
+        $login_details = admin::join('tblcolleges','tblcolleges.clgcode','tbladmin.clgcode')->where([
             ['email', '=', $req->auser],
-            ['pass', '=', $req->password]
+            ['pass', '=', $req->password],
+            ['status','a']
         ])
         ->count();
         if ($login_details==1) 
@@ -71,7 +72,7 @@ class s_admin extends Controller
     {
         $events=tblevent::where([['clgcode',Session::get('aclgcode')]
             ])->orderby('edate','desc')->get()->toarray();
-        $cod=tblcoordinaters::join('tblcategory','tblcategory.category_id','tblcoordinaters.cate_id')->where('tblcoordinaters.clgcode',Session::get('aclgcode'))->get();
+        $cod=tblcoordinaters::join('tblcategory','tblcategory.category_id','tblcoordinaters.cate_id')->where('tblcoordinaters.clgcode',Session::get('aclgcode'))->where('tblcoordinaters.status','a')->get();
         $tblp=participant::select('tblparticipant.eid',DB::raw('COUNT(tblparticipant.eid) AS count_par'))
         ->join('tblevents','tblevents.eid','=','tblparticipant.eid')
         ->where('tblparticipant.clgcode',Session::get('aclgcode'))
@@ -556,7 +557,7 @@ class s_admin extends Controller
             $file->move($destinationPath, $filename);
             $avatar=$filename;
         }
-        $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('aclgcode'),'cname'=>strtolower($req->cname),'email'=>$req->email,'mobile'=>$req->cno,
+        $tblc=tblcoordinaters::insert(['clgcode'=>Session::get('aclgcode'),'cname'=>strtolower($req->cname),'email'=>$req->email,'mobile'=>$req->cno,'status'=>'a',
         'password'=>$req->pass,'cate_id'=>strtolower($req->category),'pro_pic'=>$avatar] );
         if($tblc)
         {
@@ -587,9 +588,9 @@ class s_admin extends Controller
     public function err(Request $req){
         $email = $req->email;
         $cno=$req->cno;
-        $email_check=tblcoordinaters::where([['clgcode',Session::get('aclgcode')],['email',$email]
+        $email_check=tblcoordinaters::where([['clgcode',Session::get('aclgcode')],['email',$email],['status','a']
         ])->count();
-        $cno_check=tblcoordinaters::where([['clgcode',Session::get('aclgcode')],['mobile',$cno]
+        $cno_check=tblcoordinaters::where([['clgcode',Session::get('aclgcode')],['mobile',$cno],['status','a']
         ])->count();
             return response()->json(array('email'=> $email_check,'phoneno'=> $cno_check),200);
      }
@@ -708,24 +709,121 @@ class s_admin extends Controller
     }
     public function cod_del($cid)
     {
-        $tblc=tblcoordinaters::where('cid',$cid)->delete();
-        if ($tblc) {
-            $tble=tblevent::select('eid')->where('cid', $cid)->get();
-            //print_r($tble);
-            tblevent::select('eid')->where('cid', $cid)->delete();
-            foreach($tble as $e)
-            {
-                $tblp=participant::where('eid',$e['eid'])->delete();
-            }
+        $co=tblevent::where('cid',$cid)->count();
+        if($co>0)
+        {
+            $updco=\DB::table('tblcoordinaters')->where('cid',$cid)->update(['status'=>'i']);
             session()->flash('success', 'Co-ordinater deleted successfully');
-        }     
+        }
+        else{
+            $tblc=tblcoordinaters::where('cid',$cid)->delete();
+            if ($tblc) {
+                $tble=tblevent::select('eid')->where('cid', $cid)->get();
+                //print_r($tble);
+                tblevent::select('eid')->where('cid', $cid)->delete();
+                foreach($tble as $e)
+                {
+                    $tblp=participant::where('eid',$e['eid'])->delete();
+                }
+                session()->flash('success', 'Co-ordinater deleted successfully');
+            }    
+        } 
         return back();
     }
     public function event_reports()
     {
-        $event_data=tblevent::join('tblcoordinaters','tblevents.cid','=','tblcoordinaters.cid')->join('tblcategory','tblcategory.category_id','=','tblevents.cate_id')->get();
+        $event_data=tblevent::join('tblcoordinaters','tblevents.cid','=','tblcoordinaters.cid')->join('tblcategory','tblcategory.category_id','tblcoordinaters.cate_id')->get();
         
         return view('super-admin/event_reports',['event_data'=>$event_data]);
+    }
+    public function event_filter(Request $req)
+    {
+        $cod=$req->cod;
+        $from=$req->from;
+        $to=$req->to;
+        $gen=$req->gen;
+        $etype=$req->etype;
+        $cat=$req->cat;
+        $ename=$req->ename;
+        
+        if(!$gen){
+            $gen=['female','male'];
+        }
+        if(!$cat)
+        {
+            $cate=\DB::table('tblcategory')->where('clgcode',Session::get('aclgcode'))->get();
+            $cat=array();
+            foreach($cate as $ca)
+            {
+            array_push($cat,$ca->category_id);
+            }
+        }
+        if(!$etype)
+        {
+            $etype=['solo','team'];
+        }
+        if(!$to)
+        {
+            $to=date('Y-m-d',time());
+        }
+        else{
+            $to=date('Y-m-d',strtotime($to));
+        }
+        if($from=="")
+        {
+            $from=0;
+        }
+        else{
+            $from=strtotime($from);
+        }
+        $rec=tblevent::join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')
+        ->join('tblcategory','tblcategory.category_id','tblcoordinaters.cate_id')
+        ->where('tblevents.ename','like','%'.$ename.'%')
+        ->where('tblcoordinaters.cid','like','%'.$cod.'%')
+        ->whereIn('tblcategory.category_id',$cat)
+        ->whereIn('tblevents.gallow',$gen)
+        ->whereIn('tblevents.e_type',$etype)
+        ->where('tblevents.clgcode',Session::get('aclgcode'))
+        ->where('edate','>=',date('Y-m-d',$from))
+        ->where('edate','<=',$to)
+        ->get();
+        $msg="";
+        $a=0;
+        foreach($rec as $ed)
+        {
+            $a++;
+            $msg.='<tr class="text-dark">
+                <td>'.$a.'</td>
+                <td>'.ucfirst($ed["ename"]).'</td>
+                <td>'.date('d-m-Y',strtotime($ed["edate"])).'</td>
+                <td>'.ucfirst($ed["cname"]).'</td>
+                <td>'.ucfirst($ed["e_type"]).' Event</td>
+                <td>'.ucfirst($ed["category_name"]).'</td>
+                <td class="d-flex">
+                <a href='.url("sevent_info").'/'.encrypt($ed["eid"]).'
+                    class="btn p-1 btn-rounded" data-toggle="tooltip"
+                    data-placement="top" title="About">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info  text-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                </a>
+                <a href='.url("sview_candidates").'/'.encrypt($ed["eid"]).'
+                    class="btn p-1 btn-rounded" data-toggle="tooltip"
+                    data-placement="top" title="Candidates">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users  text-primary"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </a>';
+                $r = \DB::table('tblparticipant')->select('senrl')->where([['eid', $ed['eid']], ['rank', 1]])->count();
+                if($r==1)
+                {
+                $msg.='
+                <a href='.url("sview_result").'/'.encrypt($ed["eid"]).'
+                    class="btn btn-p-result p-1 btn-rounded" data-toggle="tooltip"
+                    data-placement="top" title="Show Result">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award  text-success"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                </a>';
+                }
+                $msg.='</td>
+            </tr>';
+        }
+        return response()->json(array('msg'=>$msg),200);
     }
     public function backup($bkpFileName = null)
     {
@@ -821,9 +919,10 @@ class s_admin extends Controller
     public function addcat(Request $req)
     {
         $cat=$req->catname;
-        if($cat=="")
+        $catpic=$req->avatar;
+        if($cat=="" || $catpic=="")
         {
-            session()->flash('error', 'Please Enter category name..! ');
+            session()->flash('error', 'Please Enter category name or select image..!');
             return redirect(url('sindex'));
         }
         $c=\DB::table('tblcategory')->where('category_name',$cat)->count();
@@ -833,8 +932,52 @@ class s_admin extends Controller
         }
         else{
             $cid=time();
-            $insrt=\DB::table('tblcategory')->insert(['category_id'=>$cid,'category_name'=>$cat,'clgcode'=>Session::get('aclgcode'),'status'=>'i']);
+            $insrt=\DB::table('tblcategory')->insert(['category_id'=>$cid,'cat_pic'=>$catpic,'category_name'=>$cat,'clgcode'=>Session::get('aclgcode'),'status'=>'a']);
             session()->flash('success', 'Category added successfully..');
+        }
+        return redirect(url('sindex'));
+    }
+    public function delcat($cid)
+    {
+        $c=tblevent::where('cate_id',$cid)->count();
+        if($c>0)
+        {
+            $upd=\DB::table('tblcategory')->where('category_id',$cid)->update(['status'=>'i']);
+            if($upd)
+            {
+                $updco=\DB::table('tblcoordinaters')->where('cate_id',$cid)->update(['status'=>'i']);
+                session()->flash('success', 'Category Deleted successfully..');
+            }
+        }
+        else{
+            $del=\DB::table('tblcategory')->where('category_id',$cid)->delete();
+            if($del)
+            {
+                $updco=\DB::table('tblcoordinaters')->where('cate_id',$cid)->delete();
+                session()->flash('success', 'Category Deleted successfully..');
+            }
+        }
+        return redirect(url('sindex'));
+    }
+    public function updatecat(Request $req)
+    {
+        $cat=$req->catname;
+        $cid=$req->cid;
+        if($cat=="")
+        {
+            session()->flash('error', 'Category name is not allowed empty..! ');
+            return back();
+        }
+        $c=\DB::table('tblcategory')->where([['category_name',$cat],['category_id','!=',$cid]])->count();
+        if($c>0)
+        {
+            session()->flash('error', 'This category already exist..! ');
+            return back();
+        }
+        $up_cat=\DB::table('tblcategory')->where('category_id',$cid)->update(['category_name'=>$cat,'cat_pic'=>$req->avatar]);
+        if($up_cat)
+        {
+            session()->flash('success', 'Category updated successfully.');
         }
         return redirect(url('sindex'));
     }

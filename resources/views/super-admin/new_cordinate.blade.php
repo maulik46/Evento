@@ -214,11 +214,12 @@
                                         <label class="col-form-label font-size-14">Event Catagory</label>
                                         <div class="form-group has-icon d-flex align-items-center">
                                            <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
+                                           <?php $cat=\DB::table('tblcategory')->where('clgcode',Session::get('aclgcode'))->get()?>
                                                <select class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;" id="cocategory" name="category" >
                                                    <option value="">Event Catagory</option>
-                                                   <option value="Sport">Sport</option>
-                                                   <option value="Cultural">Cultural</option>
-                                                   <option value="IT">IT</option>
+                                                   @foreach($cat as $c)
+                                                   <option value="{{$c->category_id}}">{{$c->category_name}}</option>
+                                                   @endforeach
                                                </select>
                                         </div>
                                         <span class="text-danger font-weight-bold"></span>

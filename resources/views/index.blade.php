@@ -236,7 +236,7 @@
                             <h3 class="mb-0"><a href="{{ url('explore') }}/sports">{{ucfirst($cat->category_name)}} Events</a></h3>
                         </div>
                         <div class="align-self-center mr-2 p-3 rounded-circle bg-color">
-                            <img src="assets/images/svg-icons/student-dash/sport.svg" class="img-fluid" height="50px"
+                            <img src="{{asset('assets/images/svg-icons/super-admin/event_cat')}}/{{$cat->cat_pic}}" class="img-fluid" height="50px"
                                 width="50px" alt="">
                         </div>
                     </div>

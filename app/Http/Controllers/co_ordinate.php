@@ -69,7 +69,8 @@ class co_ordinate extends Controller
     {
         $login_details = DB::table('tblcoordinaters')->where([
             ['email', '=', $req->cuser],
-            ['password', '=', $req->password]
+            ['password', '=', $req->password],
+            ['status','a']
         ])
         ->count();
         if ($login_details==1) 

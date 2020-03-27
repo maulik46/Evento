@@ -135,21 +135,11 @@
             $('#clg_email_err').text('');
         }
 
-
-
-
-        var regex = /^[A-Za-z\s]+$/;
-
         if($('#clg_name').val()=="")
         {
             $('#clg_name_err').text('Please Enter Institute/College Name');
             $('#clg_name').addClass('border border-danger');
             f=1;
-        }
-        else if(!regex.test($('#clg_name').val())){
-            $('#clg_name_err').text("Please Enter Institute/College Name");
-            $('#clg_name').addClass('border border-danger');
-            f = 1;
         }
         else{
             $('#clg_name_err').text('');
