@@ -61,7 +61,7 @@ use \App\tblstudent;
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
         <div class="card-title px-4 mb-1 header-title  align-items-center d-flex justify-content-center">
-            <img src="{{asset('assets/images/svg-icons/super-admin/all student.svg')}}" class="mr-2 mb-1" height="25px" alt="">
+            <img  src="{{asset('assets/images/svg-icons/super-admin/all student.svg')}}" class=" mr-2 mb-1" height="25px" alt="">
             <span class="h4 text-dark">All Students Record</span>
         </div>
         <span class="text-center font-weight-bold text-muted">
@@ -87,7 +87,8 @@ use \App\tblstudent;
                             <th scope="col">Rank 1</th>
                             <th scope="col">Rank 2</th>
                             <th scope="col">Rank 3</th>
-                            <th scope="col">Total Participation</th>
+                            <th scope="col" data-toggle="tooltip" title="Total Participation" data-placement="top">Total</th>
+                            <th scope="col" class="text-danger">View</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -107,7 +108,7 @@ use \App\tblstudent;
                             <td>{{$no}}</td>
                             <td>{{$s['senrl']}}</td>
                             <td>{{$s['rno']}}</td>
-                            <td>{{ucfirst($s['sname'])}}</td>
+                            <td class="font-weight-bold">{{ucfirst($s['sname'])}}</td>
                             <td>{{ucfirst($s['class'])}}</td>
                             <td>{{$s['division']}}</td>
                             <td>{{ucfirst($s['gender'])}}</td>
@@ -115,6 +116,11 @@ use \App\tblstudent;
                             <td>{{$r2}}</td>
                             <td>{{$r3}}</td>
                             <td>{{$tp}}</td>
+                            <td>
+                                <a href="{{url('single_record')}}/{{encrypt($s['senrl'])}}">
+                                    <i data-feather="eye" height="18px"></i>
+                                </a>
+                            </td>
                         </tr>
                         @endforeach
 

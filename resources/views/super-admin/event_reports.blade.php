@@ -171,8 +171,8 @@ use \App\tblstudent;
                 </div>
                 <div class="overflow-auto my-scroll">
                     <table class="table table-hover mb-0 ">
-                        <thead>
-                            <tr>
+                        <thead class="light-bg2">
+                            <tr class="text-dark">
                                 <th scope="col">#</th>
                                 <th>Event Name</th>
                                 <th>Date</th>
@@ -188,7 +188,7 @@ use \App\tblstudent;
                             <?php $count++;?>
                             <tr class="text-dark">
                                 <td>{{$count}}</td>
-                                <td>{{ucfirst($ed['ename'])}}</td>
+                                <td class="font-weight-bold">{{ucfirst($ed['ename'])}}</td>
                                 <td>{{date('d-m-Y',strtotime($ed['edate']))}}</td>
                                 <td>{{ucfirst($ed['cname'])}}</td>
                                 <td>{{ucfirst($ed['e_type'])}} Event</td>

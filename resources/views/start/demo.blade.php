@@ -117,7 +117,7 @@
                         </h1>
 
                         <p class="mb-4 font-size-16 text-center font-weight-bold">
-                            Evento is a fully featured event management system for <br> your school/college to design and manage various catagories of events
+                            Evento is a fully featured event management system for <br> your Institute to design and manage various kinds of event.
                         </p>
 
                         <p class="pt-4">

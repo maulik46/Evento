@@ -134,8 +134,8 @@
                     <i data-feather="linkedin" class="text-blue" height="20px"></i>
                 </a>
             </div>
-            <a href="{{url('getdemo')}}" class=" mx-2 mx-sm-3 badge badge-pill badge-primary hover-me-sm px-3">
-                Get a demo
+            <a href="{{url('getdemo')}}" class=" mx-2 mx-sm-3 badge badge-pill badge-primary px-3">
+                Get Started
             </a>
             
             

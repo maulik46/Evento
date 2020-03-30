@@ -28,6 +28,11 @@ co_ordinate::remain_result();
         background: var(--info);
         color: #fff !important;
     }
+    .winner-list:hover{
+        background: var(--danger);
+        color: #fff !important;
+
+    }
     .table td, .table th {
         vertical-align: middle;
     }
