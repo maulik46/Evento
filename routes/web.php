@@ -325,6 +325,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::post('updatecat','s_admin@updatecat');
 
         route::post('event_filter','s_admin@event_filter');
+
+        route::any('single_record/{senrl}','s_admin@single_stud_rec');
     });
 
 // xoxoxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
