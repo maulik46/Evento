@@ -794,7 +794,7 @@ class s_admin extends Controller
             $a++;
             $msg.='<tr class="text-dark">
                 <td>'.$a.'</td>
-                <td>'.ucfirst($ed["ename"]).'</td>
+                <td class="font-weight-bold">'.ucfirst($ed["ename"]).'</td>
                 <td>'.date('d-m-Y',strtotime($ed["edate"])).'</td>
                 <td>'.ucfirst($ed["cname"]).'</td>
                 <td>'.ucfirst($ed["e_type"]).' Event</td>
@@ -980,5 +980,21 @@ class s_admin extends Controller
             session()->flash('success', 'Category updated successfully.');
         }
         return redirect(url('sindex'));
+    }
+
+    public function single_stud_rec($senrl)
+    {
+        $senrl=decrypt($senrl);
+        $stud=tblstudent::where('senrl',$senrl)->first();
+        $category_name_list=\DB::select(\DB::raw("select count(senrl) as total_participation,category_name FROM tblparticipant,tblcategory,tblevents where tblparticipant.eid=tblevents.eid and tblcategory.category_id=tblevents.cate_id and senrl like '%$senrl%' group by category_name "));
+        
+        $category = \DB::select(\DB::raw("select count(senrl) as total_participation,category_name,rank,edate,ename FROM tblparticipant,tblcategory,tblevents where tblparticipant.eid=tblevents.eid and tblcategory.category_id=tblevents.cate_id and senrl like '%$senrl%' group by category_name,rank,edate,ename "));
+
+        $alldata=[
+            'stud'=>$stud,
+            'c_list'=>$category_name_list,
+            'category'=>$category
+        ];
+        return view('super-admin/single_stud_rec',$alldata);
     }
 }
