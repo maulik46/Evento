@@ -70,7 +70,9 @@ img {
 .light-bg2 {
     background-color: #ffe2e6;
 }
-
+.darkblue {
+    color: #213844 !important;
+}
 #close-btn:hover {
     color: #ff5c75 !important;
 }
@@ -83,7 +85,14 @@ img {
     padding: 8px;
 }
 
-
+.no-result-img{
+    background-image: url('../images/no_result2.png');
+    background-size:300px;
+    background-repeat:no-repeat;
+    background-position: top;
+    height:188px;
+    width:auto;
+}
 
 /* hover effect */
 

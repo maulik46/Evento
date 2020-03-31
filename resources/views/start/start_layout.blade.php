@@ -35,6 +35,23 @@
             display: flex;
             left:5px!important;
         }
+        .login-btn{
+            color: var(--danger);
+        }
+        @media(max-width:567px)
+        {
+            nav{
+                background-color:#fff!important;
+                box-shadow: 0 3px 6px -5px #777;
+            }
+            a.login-btn{
+                background-color:var(--success)!important;
+                color:#fff!important;
+            }
+            a.login-btn:hover{
+                color:#ffffffc9!important;
+            }
+        }
     </style>
     @section('head-tag-links')
     
@@ -44,14 +61,14 @@
 <body class="body-scroll">
 
     <main>
-        <nav class="row justify-content-between align-items-center position-fixed" style="z-index: 999;width: 100%;top:0px;left:0px;">
-            <a href="#" class="mt-1 mt-sm-3 mx-4 mx-sm-5 navbar-brand  font-size-24 font-weight-bold text-dark">
-                <img src="{{asset('assets/images/logo.png')}}" alt="" class="logo-dark mr-1" height="24" /> <span
+        <nav class="row justify-content-between align-items-center position-fixed" style="z-index: 999;width: 103%;top:0px;left:0px;">
+            <a href="#" class="mt-1 mt-sm-3 mx-4 mx-sm-4 navbar-brand  font-size-24 font-weight-bold text-dark">
+                <img src="{{asset('assets/images/logo.png')}}" alt="" class="logo-dark" height="24" /> <span
                     class="text-dark">Evento</span>
             </a>
             <div class="btn-group">
                 <a href="#"
-                    class="bg-white btn badge-pill py-1 text-danger font-weight-bold font-size-15 mt-1 mt-sm-3 mx-2 mx-sm-4 dropdown-toggle pl-3 pr-2 new-shadow-sm"
+                    class="login-btn bg-white btn badge-pill py-1 font-weight-bold font-size-15 mt-1 mt-sm-3 mx-2 mx-sm-5 dropdown-toggle pl-3 pr-2 new-shadow-sm"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Log in
                     <i data-feather="chevron-down" height="18px"></i>

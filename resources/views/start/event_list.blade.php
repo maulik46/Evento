@@ -9,11 +9,11 @@
 @section('my-content') 
         <div>
             <div class="card new-shadow-2">
-                <h5 class="text-center mb-4 mt-2 p-2">
+                <h5 class="text-center mt-2 p-2 text-dark">
                 <?php $clg=\DB::table('tblcolleges')->select('clgname')->where('clgcode',$clgcode)->first()?>
                    {{ucfirst($clg->clgname)}}
                 </h5>
-                <div class="card-body p-2">
+                <div class="card-body px-2">
                     <h4 class="ml-2">Recent Events</h4>
                     <hr class="mt-1">
                     <div class="row owl-carousel owl-theme mx-0">
@@ -53,8 +53,14 @@
                             </div>
                         @endif
                     @endforeach
-                      
+                    
                     </div>
+                    @if($a==0)
+                    <div class="text-center mx-auto">
+                        <div class="no-result-img"></div>
+                        <h6 class="darkblue mt-0">No recent events available..!</h6>
+                    </div>
+                    @endif
                 </div>
             </div>
             <div class="card new-shadow-2">
@@ -66,13 +72,13 @@
                                 placeholder="Search Events..">
                         </div>
                     </div>
-                    <h4 class="ml-2">Other Events</h4>
+                    <h4>Other Events</h4>
                     <hr>
                     <div class="row mx-0 justify-content-between" id="other-events">
                     <?php $a=0?>
                     @foreach($events as $event)
                     <?php $a++?>
-                        @if($a > 4)   
+                        @if($a > 3)   
                         <div class="col-lg-6 col-12">
                             <div class=" px-0 card bg-light new-shadow-sm  rounded-sm text-dark hover-me-sm event-card">
                                 <div class="d-flex justify-content-between align-items-center px-3" style="background-color: #60ffd475!important">
@@ -105,7 +111,10 @@
                         @endif
                     @endforeach
                     @if($a <= 4)
-                        <div class="text-center">No other events available </div>
+                        <div class="text-center mx-auto">
+                            <div class="no-result-img"></div>
+                            <h6 class="darkblue mt-0">No other events available..!</h6>
+                        </div>
                     @endif
                     </div>
                 </div>

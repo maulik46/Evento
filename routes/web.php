@@ -31,7 +31,7 @@ route::post('/event_list', function(Request $req){
 route::view('/getdemo','start/demo');
 route::get('/e_info/{eid}', function($eid){
     $eid=decrypt($eid);
-    $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcolleges.clgname')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcolleges','tblcolleges.clgcode','tblcoordinaters.clgcode')->where('tblevents.eid',$eid)->first();
+    $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcolleges.clgname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcolleges','tblcolleges.clgcode','tblcoordinaters.clgcode')->join('tblcategory','tblcategory.category_id','=','tblevents.cate_id')->where('tblevents.eid',$eid)->first();
     return view('start/e_info',['einfo'=>$einfo]);
 });
 

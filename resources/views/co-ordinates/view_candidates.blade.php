@@ -104,7 +104,7 @@
                         @else
                         <div class="text-center">
                                 <!-- <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p> -->
-                                <img src="{{asset('assets/images/no result.png')}}" class="img-fluid" height="500px" width="500px" alt="">
+                                <img src="{{asset('assets/images/no result.png')}}" class="img-fluid" height="500px" width="500px" alt="No result found.!">
                             </div>
                         @endif
                           
