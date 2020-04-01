@@ -33,7 +33,7 @@
         border: 1px solid #f3f4f7;
         font-size: 1.1em;
         color:#333!important;
-        height: 50px;
+        height: 45px;
         }
 
 
@@ -49,6 +49,7 @@
             border-radius: 2px;
             box-shadow:none; 
             border: 1px solid #d1d1d1;
+            
         }
         .nice-select .option.selected.focus {
             background-color: #f3f4f7;
@@ -96,8 +97,8 @@
         <div class=" vh-100 d-flex justify-content-center align-items-center">
             <div class="container col-xl-5 col-lg-6 col-md-8 ">
                         <div class="card shadow rounded-lg">
-                            <div class="card-body">
-                                    <div class="pb-4 pt-2 px-3">
+                            <div class="card-body pt-0">
+                                    <div class=" py-2 px-3">
                                         <a href="#" class="d-flex justify-content-center align-items-center">
                                                 <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
                                                 <h2 class="ml-1">Evento</h3>
@@ -107,10 +108,10 @@
                                         <form action="{{ url('checklogin') }}" class="authentication-form" method="post">
                                         @csrf
                                             <div class="form-group">
-                                            <label class="col-form-label font-size-15">Select College</label>
+                                            <label class="col-form-label font-size-15 text-dark">Select College</label>
                                             <div class="form-group has-icon d-flex align-items-center">
                                                 <img src="{{asset('assets/images/svg-icons/student-dash/clg1.svg')}}" class="form-control-icon ml-2" height="20px" alt="">
-                                                <select class="form-control w-100 py-1" name="clgcode" style="cursor:pointer!important;">
+                                                <select class="form-control w-100 py-0" name="clgcode" style="cursor:pointer!important;">
                                                     <option data-display="Select College" value="">Select College</option>
                                                     @foreach($clg as $c)
                                                     <option value="{{$c->clgcode}}">
@@ -125,7 +126,7 @@
                                             <h6>{{$message}}</h6>
                                             @enderror
                                             <div class="form-group" style="margin-top:30px;">
-                                                <label class="form-control-label">Enrollment number</label>
+                                                <label class="form-control-label text-dark">Enrollment number</label>
 
                                                 <div class="s-group has-icon d-flex align-items-center">
                                                     <img src="assets/images/svg-icons/student-dash/id.svg" class="ml-2 form-control-icon" height="20px" alt="">
@@ -143,7 +144,7 @@
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input" name="remainder" value="1" id="checkbox-signin"
                                                         checked>
-                                                    <label class="custom-control-label" for="checkbox-signin">Remember me</label>
+                                                    <label class="custom-control-label text-dark" for="checkbox-signin">Remember me</label>
                                                 </div>
                                             </div>
 

@@ -132,9 +132,11 @@
                @endif
                @endforeach 
                @if($a==0)
-                    <div class="d-flex align-items-center justify-content-center flex-column" style="height:200px;">
-                            <div class="text-danger font-size-18 font-weight-bold">OOPS!!</div>
-                            <div class="font-size-14 text-dark">You don't have any Running Events..!</div>
+                    <div class="d-flex justify-content-center flex-column" style="height:200px;">
+                        <div class="no-result-img" style="height:160px;background-size:250px;">
+                        
+                        </div>
+                        <h6 class="mt-0 text-center darkblue">You have no running events..!</h6>
                     </div>
                 @endif
             </div>
@@ -196,7 +198,7 @@
                                 <i data-feather="star" class="icon-dual-warning" height="18px"></i>
                                 <span>{{round($rate,1)}}</span>
                             </td>
-                            <td>{{ucfirst($e['ename'])}} compition</td>
+                            <th>{{ucfirst($e['ename'])}}</th>
                             <td>{{$p}}</td> <!--total Participator -->
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
                             <td>{{date('d/m/Y', strtotime($e['enddate']))}}</td>
@@ -380,7 +382,7 @@
         <div class="card-body py-2">
             <div class="h5 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
-                <span class="ml-1">Finished Events</span>
+                <span class="ml-1">My Finished Events</span>
             </div>
             
         </div>
@@ -412,7 +414,7 @@
                                 <i data-feather="star" class="icon-dual-warning" height="18px"></i>
                                 <span>{{round($rate,1)}}</span>
                             </td>
-                            <td>{{ucfirst($e['ename'])}} compition</td>
+                            <th>{{ucfirst($e['ename'])}} </th>
                             <td>{{$p}}</td> <!--total Participator -->
                             <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
                             <td>{{date('d/m/Y', strtotime($e['enddate']))}}</td>

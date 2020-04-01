@@ -21,11 +21,6 @@
         form h6{
             color:#f8435f;
         }
-        .custom-control-input:checked~.custom-control-label::before {
-        color: #fff;
-        border-color: #1bb1dc;
-        background-color: #1bb1dc;
-        }
         .form-control{
         border-radius: .15rem;
         background-color: #f3f4f7!important;
@@ -33,32 +28,11 @@
         border: 1px solid #f3f4f7;
         font-size: 1.1em;
         color:#333!important;
-        height: 50px;
+        height: 45px;
         }
-
-
         .form-control:focus{
         border: 1px solid #d1d1d1!important;
         background-color: #f3f4f7!important;
-        }
-        .custom-select{
-            background: none;
-        }
-        .nice-select .list{
-            width:100%;
-            border-radius: 2px;
-            box-shadow:none; 
-            border: 1px solid #d1d1d1;
-        }
-        .nice-select .option.selected.focus {
-            background-color: #f3f4f7;
-        }
-        .nice-select:after {
-        border-bottom: 3px solid #999;
-        border-right: 3px solid #999;
-        height: 8px;
-        right: 15px;
-        width: 8px;
         }
 
     </style>
@@ -99,13 +73,15 @@
     <div class=" vh-100 d-flex justify-content-center align-items-center" style="position:relative;z-index:9999;">
         <div class="container col-xl-5 col-lg-6 col-md-8 ">
                     <div class="card shadow rounded-lg">
-                        <div class="card-body">
-                                <div class="pb-4 pt-2 px-3">
+                        <div class="card-body pt-0">
+                                <div class="py-2 px-3">
                                     <a href="#" class="d-flex justify-content-center align-items-center">
                                             <img src="{{asset('assets/images/logo.png')}}" alt="" height="24" />
                                             <h2 class="ml-1">Evento</h3>
                                     </a>
-                                    <p class="font-size-12 text-muted font-weight-bold text-center mt-2 mb-4">
+                                    <p class="font-size-12 text-dark font-weight-bold text-center mb-4">
+                                      <span class="font-weight-light">Check your email for an OTP</span>
+                                      <br>
                                       <?php 
                                       function partially_email($email)
                                       {
@@ -123,16 +99,17 @@
                                     <form action="{{url('/otp_check')}}/{{$senrl}}/{{$clgcode}}/{{$check}}" class="authentication-form" method="post">
                                     @csrf
                                         <div class="form-group" style="margin-top:30px;">
-                                            <label class="form-control-label">Enter OTP</label>
+                                            <label class="form-control-label text-dark">Enter OTP</label>
 
                                             <div class="s-group has-icon d-flex align-items-center">
-                                                <img src="{{asset('assets/images/svg-icons/student-dash/id.svg')}}" class="ml-2 form-control-icon" height="20px" alt="">
+                                                <i data-feather="key" class="ml-2 form-control-icon" height="19px"></i>
+                                                <!-- <img src="{{asset('assets/images/svg-icons/student-dash/id.svg')}}" class="ml-2 form-control-icon" height="20px" alt=""> -->
 
                                                 <input type="text" class="form-control" id="otp" placeholder="Enter OTP Number" onblur="this.value=this.value.toUpperCase()" name="otp">
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <span>Didn't get a security code? We can <a  href="{{url('/resend_otp')}}/{{$senrl}}/{{$clgcode}}/{{$check}}" class="font-weight-bold" style="color:#1582b3;">resend it</a>
+                                            <span class="text-dark">Didn't get a security code? We can <a  href="{{url('/resend_otp')}}/{{$senrl}}/{{$clgcode}}/{{$check}}" class="font-weight-bold" style="color:#1582b3;">resend it</a>
                                             </span>
                                             <span style="color:#1582b3;" class="font-weight-bold counter" id="demo" >
                                                 

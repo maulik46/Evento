@@ -30,7 +30,10 @@
                     <i data-feather="x-circle" id="close-btn" height="20px"></i>
                 </a>
                 <h2 class="font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</h2>
-                <h6 class="font-weight-normal text-dark text-center">{{ucfirst(Session::get('cclgname'))}}</h6>
+                <h6 class="font-weight-bold text-dark text-center mt-1">{{ucfirst(Session::get('cclgname'))}}</h6>
+                <p class="text-center my-0">
+                    <span class="font-weight-bold text-dark">{{ucfirst(Session::get('cname'))}}</span> (Co-ordinator)
+                </p>
                 <h6 class="font-weight-normal text-dark text-center">
                     <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
                     <span class="ml-1 font-weight-bold  badge badge-soft-dark px-3 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
@@ -39,7 +42,7 @@
                 <hr class="my-0">
             </div>
                  <div class="card new-shadow-sm">
-                    <div class="card-body py-2">
+                    <div class="card-body py-2 px-1 px-sm-3">
                         <div class="justify-content-between d-flex align-items-center ">
                             <div class="d-flex align-items-center">
                                 <i data-feather="users" class="icon-dual-success"></i>
@@ -69,7 +72,7 @@
                             <table class="table table-hover table-light rounded">
                                 <thead class="thead-light">
                                     <tr>
-                                        <td colspan="4" class=" font-weight-bold text-dark p-3" style="background-color: #dde1fc;">
+                                        <td colspan="4" class=" font-weight-bold p-3" style="background-color: #dde1fc;color:var(--danger)!important;">
                                             Team {{$p['tname']}}
                                         </td>
                                     </tr>
@@ -162,14 +165,14 @@
             </div>
 @endsection 
 @section('extra-scripts')
-<script>
+<!-- <script>
 $(document).ready(function(){
     <?php $count=0;?>
-    <?php foreach($participate as $p) { ?>
-        <?php $count++;?>
-        $('#stud-data<?=$count;?> tr:last').css("display","none");
-    <?php } ?>
+     <?php foreach($participate as $p) { ?>
+         <?php $count++;?>
+         $('#stud-data<?=$count;?> tr:last').css("display","none");
+     <?php } ?>
 })
-</script>
+</script> -->
 @endsection       
 

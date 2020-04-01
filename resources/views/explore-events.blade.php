@@ -29,8 +29,10 @@
         </div>
     </div>
     @if(isset($massege))
-    <div class="p-4 w-100 d-flex align-items-center justify-content-center font-size-18" style="min-height: 50vh;">
-        No new events are available!!
+    <div class="bg-white p-4 w-100 font-size-18 new-shadow-sm" style="min-height: 53vh;">
+        <div class="no-result-img">
+        </div>
+        <h6 class="mt-0 text-center darkblue">No events available!!</h6>
     </div>
     @endif
     @if(isset($events))
@@ -123,8 +125,10 @@
 
         @endforeach
         @if($a==0)
-        <div class="p-4 w-100 d-flex align-items-center justify-content-center font-size-18" style="min-height: 50vh;">
-            No new events available!!
+        <div class="bg-white p-4 w-100 font-size-18 new-shadow-sm" style="min-height: 53vh;">
+            <div class="no-result-img">
+            </div>
+            <h6 class="mt-0 text-center darkblue">No events available!!</h6>
         </div>
         @endif
         @endif

@@ -35,8 +35,12 @@
             display: flex;
             left:5px!important;
         }
-        .login-btn{
+        a.login-btn{
             color: var(--danger);
+        }
+        a.login-btn:hover{
+            color: #ec3b56
+;
         }
         @media(max-width:567px)
         {

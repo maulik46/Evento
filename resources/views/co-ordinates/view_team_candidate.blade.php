@@ -22,11 +22,9 @@
         @endforeach
       
         <span class="h3 my-0 font-weight-normal text-dark text-center">
-        Team
-            {{ ucfirst($tc['tname']) }}
-        
+        Team {{ ucfirst($tc['tname']) }}
         </span>
-        <h6 class="font-weight-bold text-muted text-center">
+        <h6 class="font-weight-bold text-dark text-center">
         {{ucfirst(Session::get('cclgname'))}}
         </h6>
         <hr class="my-0">
@@ -53,7 +51,7 @@
                         <tr>
                             <th scope="row">{{$c}}</th>
                             <td>{{$e}}</td>
-                            <td>{{ucfirst($sinfo['sname'])}}</td>
+                            <th>{{ucfirst($sinfo['sname'])}}</th>
                             <td>{{ucfirst($sinfo['class'])}}</td>
                             <td>{{ucfirst($sinfo['division'])}}</td>
                         </tr> 
@@ -70,8 +68,8 @@
 @section('extra-scripts')
 <script>
 $(document).ready(function(){
-    $('tbody tr:first td:first').next().css("font-weight","bold");
-    $('tbody tr:last').css("display","none");
+    // $('tbody tr:first td:first').next().css("font-weight","bold");
+    // $('tbody tr:last').css("display","none");
 })
 </script>
 @endsection

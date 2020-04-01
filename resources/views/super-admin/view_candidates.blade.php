@@ -159,11 +159,11 @@
 @section('extra-scripts')
 <script>
     $(document).ready(function(){
-        <?php $count=0;?>
-        <?php foreach($participate as $p) { ?>
-            <?php $count++;?>
-            $('#stud-data<?=$count;?> tr:last').css("display","none");
-        <?php } ?>
+        // <?php $count=0;?>
+        // <?php foreach($participate as $p) { ?>
+        //     <?php $count++;?>
+        //     $('#stud-data<?=$count;?> tr:last').css("display","none");
+        // <?php } ?>
     })
 </script>
 @endsection  

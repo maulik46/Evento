@@ -345,7 +345,7 @@ co_ordinate::remain_result();
                                         <i data-feather="star" class="icon-dual-warning" height="18px"></i>
                                         <span>{{round($rate,1)}}</span>
                                     </td>
-                                    <td>{{ucfirst($e['ename'])}} compition</td>
+                                    <th>{{ucfirst($e['ename'])}} </th>
                                     <td>{{$p}}</td><!--total Participator -->
                                     <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
                                     <td>{{date('d/m/Y', strtotime($e['enddate']))}}</td>

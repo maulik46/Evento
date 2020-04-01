@@ -7,6 +7,7 @@
     .table th {
         padding: .50rem !important;
         vertical-align: middle !important;
+        color:#000!important;
     }
     .form-control:focus {
         background-color: #fff !important;
@@ -22,7 +23,7 @@
                 <div class="mt-2 h4">
                     <span>Past Winners</span>
                 </div>
-                <a href="#" class=" badge-pill badge-soft-dark btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter">
+                <a href="#" class=" badge-pill badge-soft-dark btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter hover-me-sm">
                     <i data-feather="filter" height="18px"></i>
                     Filters
                 </a>

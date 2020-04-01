@@ -102,7 +102,7 @@
                         <img src="{{asset('assets/images/avatars/woman.svg')}}" alt="User Profile" class="avatar-xl" />
                         @endif
                         <h5 class="mt-2 mb-0">{{ucfirst(Session::get('sname'))}}</h5>
-                        <h6 class="text-muted font-weight-normal mt-2 mb-0">
+                        <h6 class="text-muted font-weight-bold mt-2 mb-0">
                             {{ucfirst(Session::get('clgname'))}}
                         </h6>
                     </div>
@@ -255,9 +255,10 @@
                             @endif
                             @endforeach
                             @if($a==0)
-                            <div class="font-size-14 font-weight-bold d-flex align-items-center justify-content-center font-size-16"
-                                style="height: 60vh;">
-                                <span>You have not participated in any event!</span>
+                            <div style="height: 60vh;" class="d-flex flex-column justify-content-center">
+                                <div class="no-result-img">
+                                </div>
+                                <h6 class="mt-0 mb-5 text-center darkblue">You have not participated in any event!</h6>
                             </div>
                             @endif
                         </div>
@@ -317,10 +318,11 @@
                             @endif
                             @endforeach
                             @if($a==0)
-                            <div class="font-size-14 font-weight-bold d-flex align-items-center justify-content-center font-size-16"
-                                style="height:60vh;">
-
-                                <span>You have no Activities!!</span>
+                            <div style="height: 60vh;" class="d-flex flex-column justify-content-center">
+                                <div class="no-result-img">
+                                </div>
+                                <h6 class="mt-0 mb-5 text-center darkblue">You have no activities!!</h6>                
+                                
                             </div>
                             @endif
                         </div> <!-- end activity div -->

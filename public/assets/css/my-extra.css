@@ -238,6 +238,7 @@ img {
 .table td,
 .table th {
     vertical-align: middle;
+    color:#000!important;
 }
 
 .badge-soft-orange {
