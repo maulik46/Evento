@@ -19,10 +19,10 @@ class ValidCheck
             'clgcode' => 'required',
             'senrl' => 'required | max:15 | min:6 '
         ],[
-            'clgcode.required' => '* Please Select Your college Name',
-            'senrl.required' => '* Please Enter your Enrollment Number',
-            'senrl.max' => '* Enter Proper Enrollment Number',
-            'senrl.min' => '* Enter Proper Enrollment Number'
+            'clgcode.required' => 'Please select your college Name',
+            'senrl.required' => 'Please enter your Enrollment Number',
+            'senrl.max' => 'Please enter valid Enrollment Number',
+            'senrl.min' => 'Please enter valid Enrollment Number'
         ]);
         return $next($request);
     }

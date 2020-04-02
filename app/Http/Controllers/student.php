@@ -285,7 +285,7 @@ class student extends Controller
     }
     public function participate($eid)//function run when click on participate
     {
-        $einfo=tblevent::where('eid',decrypt($eid))->first();
+    $einfo=tblevent::join('tblcoordinaters','tblevents.cid','=','tblcoordinaters.cid')->where('eid',decrypt($eid))->first();
 
         return view('participate-now',['einfo'=>$einfo]);
     }
@@ -317,7 +317,10 @@ class student extends Controller
      }
     public function team_ins($eid)//insert team
     {
-        $einfo=tblevent::where('eid',decrypt($eid))->first();
+        $eid=decrypt($eid);
+        $einfo = tblevent::where('eid', $eid)
+        ->join('tblcoordinaters', 'tblevents.cid', '=', 'tblcoordinaters.cid')
+        ->first();
         return view('team-insert',['einfo'=>$einfo]);
     }
    public function teamvalidation(Request $req)

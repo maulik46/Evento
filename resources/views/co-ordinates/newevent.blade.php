@@ -364,12 +364,7 @@
 //             $('#validphoto').text('File Extension must be jpg,jpeg,svg and png format...!');    
 //         }
 // });
-         function sell(id)
-        {
-	        $("#"+id).parent().toggleClass("bg-info");
-        
-        };
-
+      
 
 
 </script>

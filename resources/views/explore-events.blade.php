@@ -1,7 +1,14 @@
 @extends('stud_layout')
 @section('title','Explore Events')
+@section('head-tag-links')
+<style>
+    .event-info:hover {
+        color: var(--info) !important;
+    }
+</style>
+@endsection
 @section('my-content')
-<div class="container">
+<div class="">
     <div id="carouselExampleSlidesOnly" class="carousel slide card my-4 p-1 light-bg1 new-shadow"
         data-ride="carousel">
         <div class="carousel-inner card-body">
@@ -46,22 +53,13 @@
         <div class="col-xl-6 col-lg-6 col-md-12">
             <div class="card new-shadow hover-me-sm">
                 <div class="card-body p-0">
-                    <div class="media px-4 py-2 ">
-                        <div class="media-body">
-                            <div class="d-flex align-items-center justify-content-between">
+                    <div class="media">
+                        <div class="media-body px-3">
+                            <div class="mx-0 row justify-content-between align-items-center">
                                 <h4>
-                                    @if($e['e_type']=='team')
-                                    <a href="{{url('/team-insert')}}/{{encrypt($e['eid'])}}">
-                                            {{ucfirst($e['ename'])}}
-                                    </a>
-                                    @else
-                                    <a href="{{url('/participate-now')}}/{{encrypt($e['eid'])}}">
-                                        {{ucfirst($e['ename'])}}
-                                    </a>
-                                    @endif
+                                  {{ucfirst($e['ename'])}}
                                 </h4>
                                 <div>
-                                    
                                     @if($e['e_type']=='team')
                                     <span class="font-size-13 badge badge-pill badge-soft-warning px-3">
                                         Team Event
@@ -71,30 +69,25 @@
                                         Solo Event
                                     </span>
                                     @endif
+                                    <a href="{{url('check_event_info')}}/{{encrypt($e['eid'])}}" class="event-info" data-toggle="tooltip" title="Event Information">
+                                        <i data-feather="info" height="18px"></i>
+                                    </a>
                                 </div>
                                 
                             </div>
                             <hr class="mt-0 mb-1">
-                            <div class="text-muted">
-                                <p class="d-flex justify-content-between my-2">
+                            <div class="text-dark">
+                                <p class="mx-0 row justify-content-between my-2">
                                     <span class="font-weight-bold">Date</span>
                                     <span class="mr-2">{{date('d/m/Y',strtotime($e['edate']))}}</span>
                                 </p>
-                                <p class="d-flex justify-content-between my-2">
+                                <p class="mx-0 row justify-content-between my-2">
                                     <span class="font-weight-bold">Time</span>
-                                    <span class="mr-2">{{$e['time']}}</span>
+                                    <span class="mr-2">{{date('h:i A',strtotime($e['enddate']))}}</span>
                                 </p>
-                                <p class="d-flex justify-content-between my-2">
+                                <p class="mx-0 row justify-content-between my-2">
                                     <span class="font-weight-bold">Registration Last-Date</span>
                                     <span class="mr-2">{{date('d/m/Y',strtotime($e['reg_end_date']))}}</span>
-                                </p>
-                                <p class="d-flex justify-content-between my-2">
-                                    <span class="font-weight-bold">Gender Allow</span>
-                                    <span class="mr-2">{{ucfirst($e['gallow'])}}</span>
-                                </p>
-                                <p class="d-flex justify-content-between my-2">
-                                    <span class="font-weight-bold">Venue</span>
-                                    <span class="mr-2">{{$e['place']}}</span>
                                 </p>
                             </div>
                         </div>
@@ -103,7 +96,7 @@
                         @if($e['e_type']=='team')
 
                         <a href="{{url('/team-insert')}}/{{encrypt($e['eid'])}}"
-                            class="text-center btn btn-light btn-block rounded-0 text-dark font-weight-bold ">
+                            class="text-center btn btn-sm btn-light btn-block rounded-0 text-dark font-weight-bold font-size-13">
                             Participate Now
                             <i data-feather="arrow-right-circle" height="18px"></i>
                         </a>

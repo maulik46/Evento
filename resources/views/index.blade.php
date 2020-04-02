@@ -39,9 +39,9 @@
 
     .form-control {
         border-radius: .15rem;
-        background-color: #f3f4f7 !important;
+        background-color: #fff !important;
         padding: 10px 15px;
-        border: 1px solid #f3f4f7 !important;
+        border: 1px solid #eaeaea !important;
         font-size: 1em;
         color: #333 !important;
         height: 40px;
@@ -163,7 +163,7 @@
             <div class="card shadow-none">
                 <div class="card-body pt-2 p-0">
                     <!-- <h6 class="font-size-24 mb-0 pb-1 text-center d-xl-none d-flex">Events</h6> -->
-                    <div class="form-group has-icon d-flex align-items-center col-xl-12 col-md-6 col-12 px-0 mb-1">
+                    <div class="form-group has-icon d-flex align-items-center col-xl-12 col-md-6 col-12 px-0 mb-1 new-shadow-sm">
                         <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
                         <input type="text" id="myInput" class="form-control" placeholder="Search Events" />
                     </div>
@@ -184,8 +184,6 @@
                                 <div class="ml-1 mt-2 header-title text-dark">
                                     {{ucfirst($e['ename'])}}
                                 </div>
-
-
                             </div>
                             <a href="{{url('check_event_info')}}/{{encrypt($e['eid'])}}" data-toggle="tooltip"
                                 data-placement="bottom" title="Details" class="mr-1">
@@ -234,7 +232,7 @@
                     <div class="media px-3 py-5">
                         <div class="media-body">
                             <span class="text-muted text-uppercase font-size-12 font-weight-bold">#{{strtoupper($cat->category_name)}}</span>
-                            <h3 class="mb-0"><a href="{{ url('explore') }}/sports">{{ucfirst($cat->category_name)}} Events</a></h3>
+                            <h3 class="mb-0">{{ucfirst($cat->category_name)}} Events</h3>
                         </div>
                         <div class="align-self-center mr-2 p-3 rounded-circle bg-color">
                             <img src="{{asset('assets/images/svg-icons/super-admin/event_cat')}}/{{$cat->cat_pic}}" class="img-fluid" height="50px"
@@ -243,8 +241,7 @@
                     </div>
                     <div class="border-top" style="border-color: #e9e9e9!important;">
                         <a href="{{url('explore')}}/{{encrypt($cat->category_id)}}"
-                            class="text-center btn btn-light btn-block rounded-0 text-dark font-weight-bold">Explore
-                            Event</a>
+                            class="text-center btn btn-light btn-block rounded-0 text-dark font-weight-bold">Explore Events</a>
                     </div>
                 </div>
             </div>
