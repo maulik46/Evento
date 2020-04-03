@@ -5,35 +5,30 @@
     .event-info:hover {
         color: var(--info) !important;
     }
+    .libq_box{
+        background-color: transparent !important;
+        border-radius:0px!important;
+        padding:unset;
+        margin:unset;
+        width:unset;
+        font-family: 'Comic Sans MS'!important;
+        color: var(--dark)!important;
+        font-size:1.48em!important;
+    }
 </style>
 @endsection
 @section('my-content')
-<div class="">
-    <div id="carouselExampleSlidesOnly" class="carousel slide card my-4 p-1 light-bg1 new-shadow"
-        data-ride="carousel">
-        <div class="carousel-inner card-body">
-            <h5 class="card-title font-size-16">#quotes</h5>
-            <div class="carousel-item active">
-                <p class="card-text text-dark font-weight-bold font-size-22 lead"
-                    style="font-family: comfortaa,open sans!important;">“I always felt that my greatest
-                    asset was not my physical ability, it was my mental ability”
-                </p>
-                <span>– Bruce Jenner</span>
-            </div>
-            <div class="carousel-item">
-                <p class="card-text text-dark font-weight-bold font-size-22 lead"
-                    style="font-family: comfortaa,open sans!important;">“A trophy carries dust. Memories last forever.”
-                </p>
-                <span>– Mary Lou Retton</span>
-            </div>
-            <div class="carousel-item">
-                <p class="card-text text-dark font-weight-bold font-size-22 lead"
-                    style="font-family: comfortaa,open sans!important;">“Make sure your worst enemy doesn’t live between
-                    your own two ears.”
-                </p>
-                <span>– Laird Hamilton</span>
-            </div>
+<div class="mt-3">
+    <div class="card new-shadow-sm">
+    <div class="card-body pt-1 px-2">
+        <h6 class="text-right my-0 text-success">#QuotesOfTheDay</h6>
+        <div class="d-flex align-items-center">
+        <img src="{{asset('assets/images/svg-icons/student-dash/left-quote3.svg')}}" height="50px" alt="">
+        <div class="libq_box ml-2">
+            <script src="https://www.coolnsmart.com/qotd/qotd.txt" type="text/javascript"></script>
         </div>
+        </div>
+    </div>
     </div>
     @if(isset($massege))
     <div class="bg-white p-4 w-100 font-size-18 new-shadow-sm" style="min-height: 53vh;">

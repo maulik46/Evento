@@ -3,10 +3,7 @@
     co_ordinate::remain_result();
 ?>
 @extends('stud_layout')
-
 @section('title','Home')
-
-
 @section('head-tag-links')
 <!-- ======== head tag links ======== -->
 <style>
@@ -28,7 +25,26 @@
         color: #000;
         box-shadow: none;
     }
-
+    .single_carousel{
+        height: 300px; 
+        width: 100%;
+        background-color: #ffe2e6;
+        background-image:url('../assets/images/right_side.png');
+        background-size:contain;
+        background-repeat:no-repeat;
+        background-position:right;
+        
+    }
+    .libq_box{
+        background-color: transparent !important;
+        border-radius:0px!important;
+        padding:0px!important;
+        margin:0px!important;
+        width:100%!important;
+        font-family: 'Comic Sans MS'!important;
+        color: var(--dark)!important;
+        font-size:1.48em!important;
+    }
     .event-link:hover {
         color: var(--success) !important;
     }
@@ -130,34 +146,26 @@
 
                 @endforeach
             </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only text-primary">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             @else
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            </ol>
-            <div class="carousel-inner new-shadow rounded" role="listbox">
-                <div class="carousel-item active">
-                    <div style="height: 300px; width: 100%;background-color: #d9e4f5;background-image:url('../assets/images/cod_bg.png')"
-                        class="d-flex align-items-center justify-content-end flex-column">
-                        <h1 class="text-dark font-size-24 mb-5 font-weight-light">{{Session::get('clgname')}}</h1>
+                <div class="single_carousel d-flex align-items-start justify-content-center flex-column new-shadow flex-wrap">
+                    <div class="col-10 d-flex align-items-start justify-content-center flex-column">
+                    <img src="{{asset('assets/images/svg-icons/student-dash/left-quote3.svg')}}" height="50px" alt="">
+                    <!-- <script type="text/javascript" src="https://libquotes.com/widget/qotd.js?st=1"></script> -->
+                    <div class="libq_box">
+                        <script src="https://www.coolnsmart.com/qotd/qotd.txt" type="text/javascript"></script>
+                    </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div style="height: 300px; width: 100%;background-color: #d9e4f5;background-image:url('../assets/images/super_admin_bg.png')"
-                        class="d-flex align-items-center justify-content-end flex-column">
-                        <h1 class="text-dark font-size-24 mb-5 font-weight-light">Evento IT Solution</h1>
-                    </div>
-                </div>
-            </div>
             @endif
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only text-primary">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            
         </div> <!-- carousal end -->
         <div class="col-xl-4 rounded overflow-auto my-scroll bg-white mt-4 new-shadow" style="height: 300px;">
             <div class="card shadow-none">
@@ -262,6 +270,12 @@
 
             });
         });
+        $('.libq_box').find('b').css('display','none');
+        $('.libq_box').find('br').remove();
+        $('.libq_box').find('div a').css({'font-size':'0.7em','color':'var(--dark)','font-weight':'bold'});
+        $('.libq_box').find('div a').prepend('- ');
+
+        $('.quote').find('b').remove();
     });
 </script>
 @endsection
