@@ -136,10 +136,12 @@
                 @foreach($att as $b)
                 @if($b)
                 <div class="carousel-item <?php if($active==1) { ?>  active <?php $active=0;  } ?> ">
+                <a href="../banner/{{$b}}" target="_blank">
                     <div style="height: 300px; width: 100%;background-color: #d9e4f5;background-image:url('../banner/{{$b}}');background-repeat:no-repeat;background-position:center;background-size:cover;')" class="d-flex align-items-center justify-content-end flex-column">
 
                         <h1 class="bg-soft-dark w-100 text-center text-white font-size-24 mb-5 font-weight-bold">{{ucfirst($e['ename'])}}</h1>
                     </div>
+                  </a>
                 </div>
                 @endif
                 @endforeach
