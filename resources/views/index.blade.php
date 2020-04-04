@@ -220,10 +220,9 @@
                         @endforeach
                     </div>
                     @if($a==0)
-                    <div class="no-result-img" style="height:160px;background-size:250px;">
-                        
+                    <div class="no-result-img" style="height:135px;background-size:220px;"> 
                     </div>
-                    <h6 class="mt-0 text-center darkblue">No new events available!!</h6>
+                    <h6 class="mt-1 font-size-12 text-center darkblue">No new events available!!</h6>
                     @endif
                 </div>
             </div>

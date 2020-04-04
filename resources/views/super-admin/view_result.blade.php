@@ -12,8 +12,13 @@
         <a href="{{url('sindex')}}" class="text-right text-dark px-2">
             <i data-feather="x-circle" id="close-btn" height="20px"></i>
         </a>
-        <h2 class="font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</h2>
-        <h6 class="font-weight-normal text-dark text-center">{{ucfirst(Session::get('aclgname'))}}</h6>
+        <div class="text-center">
+            <h2 class="font-weight-light"> {{ucfirst($einfo['ename'])}}</h2>
+            <span class="font-weight-bold text-dark">{{ucfirst(Session::get('cclgname'))}}</span>
+            <p class="my-2">
+                <span class="font-weight-bold text-dark">{{ucfirst(Session::get('cname'))}}</span> (Co-ordinator)
+            </p>
+        </div>
         <h6 class="font-weight-normal text-dark text-center">
             <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
             <span class="ml-1 font-weight-bold  badge badge-soft-dark px-3 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
@@ -25,7 +30,7 @@
     </div>
     <div class="mt-0">
         <div class="card mb-0 rounded-sm">
-            <div class="card-body py-2  d-flex justify-content-between align-items-center">
+            <div class="card-body py-2 px-1 px-sm-3  d-flex justify-content-between align-items-center">
                 <div class="h5 d-flex align-items-center">
                     <i data-feather="award" class="icon-dual-success"></i>
                     <span class="ml-1">Top 3 Winner Candidate</span>
@@ -44,7 +49,7 @@
         </div>
 
         <div class="card new-shadow-sm" style="max-height: 350px;">
-            <div class="card-body overflow-auto my-scroll">
+            <div class="card-body py-2 px-1 px-sm-3 overflow-auto my-scroll">
                 <div class="table-responsive overflow-auto my-scroll">
                     <table class="table table-hover table-nowrap mb-0">
                         <thead style="background-color:#1ce1ac40;color:#000;">
@@ -79,7 +84,7 @@
                                 $sinfo = co_ordinate::studinfo($r1->senrl);
                                 ?>
                                 <td>{{$r1->senrl}}</td>
-                                <td>{{ucfirst($sinfo['sname'])}}</td>
+                                <th>{{ucfirst($sinfo['sname'])}}</th>
                                 <td>{{ucfirst($sinfo['class'])}}</td>
                                 <td>{{$sinfo['division']}}</td>
                                 @endif
@@ -88,7 +93,7 @@
                                 $t1 = \DB::table('tblparticipant')->select('tname','pid')->where([['eid', $einfo['eid']], ['rank', 1]])->first();
 
                                 ?>
-                                <td colspan="3">{{$t1->tname}}</td>
+                                <th colspan="3">{{$t1->tname}}</th>
                                 <td class="text-center">
                                     <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3">View Team</a>
                                 </td>
@@ -109,7 +114,7 @@
                                 $sinfo = co_ordinate::studinfo($r2->senrl);
                                 ?>
                                 <td>{{$r2->senrl}}</td>
-                                <td>{{ucfirst($sinfo['sname'])}}</td>
+                                <th>{{ucfirst($sinfo['sname'])}}</th>
                                 <td>{{ucfirst($sinfo['class'])}}</td>
                                 <td>{{$sinfo['division']}}</td>
                                 @endif
@@ -118,7 +123,7 @@
                                 $t2 = \DB::table('tblparticipant')->select('tname')->where([['eid', $einfo['eid']], ['rank', 2]])->first();
 
                                 ?>
-                                <td colspan="3">{{$t2->tname}}</td>
+                                <th colspan="3">{{$t2->tname}}</th>
                                 <td class="text-center">
                                     <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3">View Team</a>
                                 </td>
@@ -140,7 +145,7 @@
                                 $sinfo = co_ordinate::studinfo($r3->senrl);
                                 ?>
                                 <td>{{$r3->senrl}}</td>
-                                <td>{{ucfirst($sinfo['sname'])}}</td>
+                                <th>{{ucfirst($sinfo['sname'])}}</th>
                                 <td>{{ucfirst($sinfo['class'])}}</td>
                                 <td>{{$sinfo['division']}}</td>
                                 @endif
@@ -149,7 +154,7 @@
                                 $t3 = \DB::table('tblparticipant')->select('tname')->where([['eid', $einfo['eid']], ['rank', 3]])->first();
 
                                 ?>
-                                <td colspan="3">{{$t3->tname}}</td>
+                                <th colspan="3">{{$t3->tname}}</th>
                                 <td class="text-center">
                                     <a href="{{url('sview_team')}}/{{encrypt($t1->pid)}}" class="badge badge-pill badge-soft-primary px-3">View Team</a>
                                 </td>
@@ -182,7 +187,7 @@
 $parti = co_ordinate::participant($einfo['eid']);
 ?>
     <div class="card new-shadow-sm" style="max-height: 350px;">
-        <div class="card-body overflow-auto my-scroll">
+        <div class="card-body overflow-auto my-scroll py-2 px-1 px-sm-3">
             <div class="table-responsive overflow-auto my-scroll">
                 <table class="table table-hover table-nowrap mb-0">
                     <thead style="background-color:#25c2e340;color:#000;">
@@ -196,20 +201,20 @@ $parti = co_ordinate::participant($einfo['eid']);
                         <th scope="col">Division</th>
                         @endif
                         @if($einfo['e_type']=='team')
-                        <th scope="col">Team Name</th>
-                        <th></th>
-                        <th></th>
+                        <th colspan="3" scope="col">Team Name</th>
                         <th scope="col" class="text-center">View Team Candidates</th>
                         @endif
                     </tr>
                     </thead>
                     <tbody class="text-dark">
                         @if($einfo['e_type']=='solo')
+                        <?php $cnt=1;?>
                         @foreach($parti as $participant)
                         <?php $sinfo = co_ordinate::studinfo($participant['senrl']);?>
                         <tr>
+                            <th>{{$cnt++}}</th>
                             <td>{{$participant['senrl']}}</td>
-                            <td>{{ucfirst($sinfo['sname'])}}</td>
+                            <th>{{ucfirst($sinfo['sname'])}}</th>
                             <td>{{ucfirst($sinfo['class'])}}</td>
                             <td>{{$sinfo['division']}}</td>
 
@@ -221,7 +226,7 @@ $parti = co_ordinate::participant($einfo['eid']);
                         @foreach($parti as $participant)
                         <tr>
                             <td>{{$c++}}</td>
-                            <td colspan="3">{{$participant['tname']}}</td>
+                            <th colspan="3">{{$participant['tname']}}</th>
                             <td class="text-center">
                                 <a href="{{url('sview_team')}}/{{encrypt($participant['pid'])}}" class="badge badge-pill badge-soft-primary px-3">View Team</a>
                             </td>

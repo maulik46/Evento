@@ -7,6 +7,7 @@
 <style>
     .pattern-bg {
         background-image: url('../assets/images/pattern/p2.jpg');
+        background-color:#ace5ff;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -166,10 +167,7 @@
 @endif
 <div class="container-fluid">
     <div class="card pattern-bg mb-0 d-flex align-items-end justify-content-start">
-        <a href="#profile-section" class="btn bg-white py-0 text-dark btn-sm badge-pill font-weight-bold m-1 m-sm-2 d-flex align-items-center hover-me-sm" id="update-profile" style="cursor:pointer;">
-            <i data-feather="edit" height="15px"></i>
-            <span>Update Profile</span>
-        </a>
+        
     </div>
     <div id="profile-section" class="card mb-0 py-3 py-sm-4  bg-white new-shadow-sm cod-detail">
         <div class="text-right px-0 px-sm-3">
@@ -204,13 +202,13 @@
 
     <div  class="row" style="margin-top:-160px!important;">
         <div class="col">
-            <div class="text-center card p-1 new-shadow-sm">
+            <div class="text-center card p-1 new-shadow-sm mb-2">
                 <h4 class="ml-3">
                     <i data-feather="activity" class="icon-dual"></i>
                     My Activity
                 </h4>
             </div>
-            <div class="left-timeline pl-1 pl-sm-3 my-scroll overflow-auto bg-light rounded-lg pt-2 new-shadow-sm" style="max-height:700px;">
+            <div class="left-timeline pl-1 pl-sm-3 my-scroll overflow-auto bg-light rounded-lg pt-2 new-shadow-sm" style="max-height:400px;">
                 <ul class="list-unstyled events">
                 <?php
                     $activity=log::where([['uid',Session::get('aid')],['utype','admin']])->whereNotIn('action_on', ['login','logout'])->orderBy('time','desc')->get();
@@ -248,14 +246,12 @@
                 </ul>            
             </div>
         </div>
-        <div class="col-lg-5 mt-4 mt-lg-0" style="display:none;" id="update-form">
+        <div class="col-lg-5 mt-4 mt-lg-0" id="update-form">
             <div class="card new-shadow-sm">
-                <span class="text-right p-1 px-2" id="close-form">
-                    <i data-feather="x-circle" id="close-btn" height="18px" class="text-dark" style="cursor:pointer;"></i>
-                </span>
+                
                 <div class="card-body">
-                    <h4 class="text-center mt-0 mb-2">
-                        <i data-feather="edit"></i>
+                    <h4 class="text-center mt-0 mb-3">
+                        <i data-feather="edit" height="22px"></i>
                         Update Details
                     </h4>
                     <form method="post" onsubmit="return valid()" action="{{url('admin_profile/updateprofile')}}">
@@ -370,16 +366,11 @@ function valid()
     }
 }
     $(document).ready(function(){
-        $('#update-form').hide();
+        
         $('.user-img').hover(function () {
             $('#upload-photo').fadeToggle(250);
         });
-        $('#update-profile').click(function(){
-             $('#update-form').fadeIn(200);
-        });
-        $('#close-form').click(function(){
-             $('#update-form').fadeOut(200);
-        });
+        
 
     });
     $('#upload-photo').click(function () {

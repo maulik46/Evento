@@ -7,6 +7,9 @@
 <link href="{{asset('assets/libs/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" type="text/css" />
 
     <style>
+        label{
+            color:var(--dark);
+        }
         .nice-select:after {
             border-bottom: 3px solid #999;
             border-right: 3px solid #999;
@@ -30,7 +33,7 @@
             border: 1px solid #f3f4f7 !important;
             font-size: 1.1em;
             color: #333 !important;
-            height: 50px;
+            height: 45px;
         }
 
         /* box-shadow: 0 0 2px black; */
@@ -118,7 +121,7 @@
                                 @csrf
                                     <div class="col-md-12 mt-2  px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">Co-ordinator Name</label>
-                                        <div class="form-group has-icon d-flex align-items-center">
+                                        <div class="mb-1 form-group has-icon d-flex align-items-center">
                                            <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
                                             <input type="text" class="form-control" placeholder="Enter Co-ordinator Name" id="cname" name="cname" />
                                         </div>
@@ -192,7 +195,7 @@
                                     <div class="col-sm-12 col-md-6 px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">
                                         Email</label>
-                                        <div class="form-group has-icon d-flex align-items-center">
+                                        <div class="mb-1 form-group has-icon d-flex align-items-center">
                                            <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
                                             <input type="text" class="form-control"  placeholder="Enter Co-ordinator's Email" id="email" name="email" onkeyup="return ccheck()" />
                                         </div>
@@ -200,7 +203,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-6 px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">Contact No.</label>
-                                        <div class="form-group has-icon d-flex align-items-center">
+                                        <div class="mb-1 form-group has-icon d-flex align-items-center">
                                            <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
                                             <input type="text" class="form-control" placeholder="Enter Co-ordinator's Contact no" id="cno" name="cno" onkeyup="return ccheck()"/>
                                         </div>
@@ -212,7 +215,7 @@
                                 <div class="form-group mt-2 row mx-0 mx-sm-0 ">
                                     <div class="col-sm-6 px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">Event Catagory</label>
-                                        <div class="form-group has-icon d-flex align-items-center">
+                                        <div class="mb-1 form-group has-icon d-flex align-items-center">
                                            <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
                                            <?php $cat=\DB::table('tblcategory')->where('clgcode',Session::get('aclgcode'))->get()?>
                                                <select class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;" id="cocategory" name="category" >
@@ -226,7 +229,7 @@
                                     </div>
                                     <div class="col-sm-6 px-sm-2 px-0">
                                         <label class="col-form-label font-size-14">Password</label>
-                                        <div class="form-group has-icon d-flex align-items-center">
+                                        <div class="mb-1 form-group has-icon d-flex align-items-center">
                                            <i data-feather="key" class="form-control-icon ml-2" height="19px"></i>
                                             <input type="text" class="form-control" style="letter-spacing: 5px;"
                                                 value="<?php echo uniqid() ?>" readonly name="pass" />
@@ -234,11 +237,11 @@
                                     </div>
                                    
                                 </div>
-                                <div class="mt-0 ml-1 row justify-content-start align-items-center">
+                                <div class="mt-0 mx-0 row justify-content-start align-items-center">
                                     &nbsp;
                                     <button type="submit"
                                         class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-3 font-size-15
-                                        font-weight-bold ml-2" style="background-color: #35bbca;">
+                                        font-weight-bold" style="background-color: #35bbca;">
                                         <span>Create</span>
                                         <i data-feather="check-square" height="20px"></i>
                                     </button>

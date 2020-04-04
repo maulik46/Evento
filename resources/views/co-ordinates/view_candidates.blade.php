@@ -77,14 +77,15 @@
                         
                         <?php $count++;?>
                         <div class="table-responsive my-scroll ">
-                            <table class="table table-light rounded">
+                            <table class="table table-hover table-light rounded">
                                 <thead class="thead-light">
                                     <tr>
-                                        <td colspan="5" class=" font-weight-bold p-3" style="background-color: #dde1fc;">
+                                        <td colspan="6" class=" font-weight-bold p-3" style="background-color: #dde1fc;">
                                             Team <span class="badge badge-pill badge-primary px-3">{{$p['tname']}}</span>
                                         </td>
                                     </tr>
                                     <tr class="text-dark">
+                                        <th>No.</th>
                                         <th scope="col">Enrollment</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
@@ -94,11 +95,14 @@
                                 </thead>
                                 <tbody id="stud-data{{$count}}">
                                    <?php $enrl=explode("-",$p['senrl'])?>
+                                   <?php $cnt=0;?>
                                    @foreach($enrl as $e)
                                    @if($e)
                                    <?php 
+                                   $cnt++;
                                    $sinfo=tblstudent::where('senrl',$e)->first();?>
                                     <tr class="text-dark">
+                                        <th>{{$cnt}}</th>
                                         <th scope="row">
                                             {{$e}}
                                         </th>
@@ -117,10 +121,8 @@
                         
                         @endforeach
                         @else
-                        <div class="text-center">
-                                <!-- <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p> -->
-                                <img src="{{asset('assets/images/no result.png')}}" class="img-fluid" height="500px" width="500px" alt="No result found.!">
-                            </div>
+                        <div class="no-result-img"></div>
+                            <h6 class="text-center darkblue mt-1">No student has participated yet..!</h6>
                         @endif
                           
 
@@ -128,9 +130,10 @@
                         @if($c>0)
                         <div class="table-responsive my-scroll ">
                             
-                            <table  class="table table-light rounded">
+                            <table  class="table table-hover table-light rounded">
                                 <thead class="light-bg1">
                                     <tr class="text-dark">
+                                        <th>No.</th>
                                         <th scope="col">Enrollment</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
@@ -139,11 +142,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php $cnt=0;?>
                                     @foreach($participate as $p)
                                     @if($p)
                                     <?php 
+                                    $cnt++;
                                     $sinfo=tblstudent::select('senrl','sname','email','class','division')->where('senrl',$p['senrl'])->first();?>
                                     <tr class="text-dark">
+                                        <th>{{$cnt}}</th>
                                         <th scope="row">
                                             {{$sinfo['senrl']}}
                                         </th>

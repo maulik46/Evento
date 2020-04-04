@@ -39,7 +39,7 @@
     @endif
     @if(isset($events))
     <?php $a=0 ?>
-    <div class="row justify-content-xl-start justify-content-md-center justify-content-center mt-4" id="event-box">
+    <div class="row justify-content-xl-start justify-content-md-center justify-content-center mt-4 mx-0" id="event-box">
         @foreach($events as $e)
         <?php $c=\DB::table('tblparticipant')->where([['senrl','LIKE','%'.Session::get('senrl').'%'],['eid',$e['eid']]])->count();
                             ?>

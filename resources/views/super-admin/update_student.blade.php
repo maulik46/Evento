@@ -6,6 +6,9 @@
 <link href="{{asset('assets/libs/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="{{asset('assets/libs/flatpickr/flatpickr.min.css')}}">
 <style>
+    .form-group{
+        margin-bottom:0.25rem!important;
+    }
     .nice-select:after {
         border-bottom: 3px solid #999;
         border-right: 3px solid #999;
@@ -45,7 +48,7 @@
         border: 1px solid #f3f4f7 !important;
         font-size: 1.1em;
         color: #333 !important;
-        height: 50px;
+        height: 45px;
     }
 
     .form-control:focus {
@@ -93,7 +96,7 @@
                         <i data-feather="x-circle" id="close-btn" height="18px"></i>
                     </a>
                     <h4 class="my-3 text-dark d-flex align-items-center justify-content-center">
-                        <img src="{{asset('assets/images/svg-icons/super-admin/edit-stud.svg')}}" class="ml-2 form-control-icon" height="27px" alt="">
+                        <i data-feather="edit"></i>
                         <span class="ml-2">Update student</span>
                     </h4>
                     <form action="{{url('/action_update_stud')}}/{{encrypt($stud_data['senrl'])}}" method="POST"  onsubmit="return valid()">
@@ -204,11 +207,10 @@
                         </div>
                         <span class="text-danger font-weight-bold"></span>
                     </div>
-                    <div class="mt-0 ml-1 row justify-content-start align-items-center">
+                    <div class="mt-3 mx-0 row justify-content-start align-items-center">
                         &nbsp;
-                        <button type="submit" class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-3 font-size-15
-                                        font-weight-bold ml-2" style="background-color: #35bbca;">
-                            <span>Update Student</span>
+                        <button type="submit" class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-3 font-size-15 font-weight-bold ml-2 d-flex align-items-center" style="background-color: #35bbca;">
+                            <span class="mr-1">Update</span>
                             <i data-feather="check-square" height="20px"></i>
                         </button>
                     </div>

@@ -21,7 +21,7 @@
             <div class="d-flex justify-content-center">
                 <div class="container-fluid col-lg-6 col-md-9 col-sm-10">
                   <div class="card new-shadow-2 rounded">
-                        <a href="{{url('sindex')}}" class="text-right text-dark p-2">
+                        <a href="javascript:window.history.go(-1)" class="text-right text-dark p-2">
                             <i data-feather="x-circle" id="close-btn" height="20px"></i>
                         </a>
                         <div class="position-absolute print-btn bg-success new-shaow-sm" style="padding:0.5rem 0.3rem;top: 15%;left:100%;width:0px;border-radius:0px 5px 5px 0px;" data-toggle="tooltip" data-placement="left" title="Print">
@@ -32,9 +32,9 @@
                         <div class="card-body px-2">
                             <div class="text-center">
                               <h2 class="font-weight-light"> {{ucfirst($einfo['ename'])}}</h2>
-                             <span>{{ucfirst(Session::get('aclgname'))}}</span>
+                             <span class="font-weight-bold text-dark">{{ucfirst(Session::get('aclgname'))}}</span>
                              <p class="my-2">
-                                 <span class="font-weight-bold">{{$einfo['cname']}}</span>(Co-ordinator)
+                                 <span class="font-weight-bold">{{ucfirst($einfo['cname'])}}</span>(Co-ordinator)
                             </p>
                             </div>
                             <hr>

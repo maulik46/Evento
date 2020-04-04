@@ -1,3 +1,4 @@
+
 <?php date_default_timezone_set("Asia/Kolkata"); ?>
 @extends('super-admin/s_admin_layout')
 
@@ -44,10 +45,10 @@
         border: 1px solid #f3f4f7 !important;
         font-size: 1.1em;
         color: #333 !important;
-        height: 50px;
+        height: 45px;
     }
     .morecontent span {
-    display: none;
+        display: none;
     }
     .morelink {
         display: block;
@@ -128,7 +129,6 @@
                             <span class="badge badge-dark px-3 rounded-0  my-1" style="margin-right:-5px;">Action</span>
                             <span class="badge badge-soft-dark px-3 rounded-0">{{ucfirst($log['action_type'])}}</span>
                         </div>
-                        
                     </div>
                 </div>
                 
@@ -144,7 +144,10 @@
         </div>
     @endforeach
     @if($a==0)
-    <div class="text-center mt-5 font-weight-bold">No logs available!!</div>
+    <div class="card mt-2 new-shadow-sm" style="height:50vh;">
+        <div class="no-result-img mt-2"></div>
+        <h6 class="text-center darkblue mt-1">No logs available..! </h6>
+    </div>
     @endif
         <div class="mt-3">
         {{$logs->links()}}

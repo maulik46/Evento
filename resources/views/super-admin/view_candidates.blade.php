@@ -19,6 +19,9 @@
      background-color: #fff;
      border: 1px solid #e2e7f1;
      }
+     table{
+         border-bottom:1px solid #edeaea;
+     }
     </style>
 @endsection
 
@@ -29,7 +32,10 @@
                     <i data-feather="x-circle" id="close-btn" height="20px"></i>
                 </a>
                 <h2 class="font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</h2>
-                <h6 class="font-weight-normal text-dark text-center">{{ucfirst(Session::get('aclgname'))}}</h6>
+                <h6 class="font-weight-bold text-dark text-center mt-1">{{ucfirst(Session::get('cclgname'))}}</h6>
+                <p class="text-center my-0">
+                    <span class="font-weight-bold text-dark">{{ucfirst(Session::get('cname'))}}</span> (Co-ordinator)
+                </p>
                 <h6 class="font-weight-normal text-dark text-center">
                     <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
                     <span class="ml-1 font-weight-bold  badge badge-soft-dark px-3 badge-pill">{{date('l',strtotime($einfo['edate']))}}</span>
@@ -38,11 +44,11 @@
                 <hr class="my-0">
             </div>
                  <div class="card new-shadow-sm">
-                    <div class="card-body">
+                    <div class="card-body pt-2 pb-4 px-1 px-sm-3">
                            
                         <div class="justify-content-between d-flex align-items-center ">
                             <div class="d-flex align-items-center">
-                                <i data-feather="users" class="icon-dual-success"></i>
+                                <i data-feather="users" class="icon-dual"></i>
                                 @if($einfo['e_type']=="team")
                                 <span class="h5 ml-2">Participated Teams</span>
                                 @else
@@ -60,7 +66,11 @@
                             </div>
 
                         </div>
-                        <hr class="my-1 mb-4">
+                        <hr class="my-1">
+                        <a href="" class="btn btn-sm pr-3 pl-2 rounded btn-success font-weight-bold mt-1 mb-3 new-shadow-sm hover-me-sm">
+                            <i data-feather="printer" height="19px"></i>
+                            Print
+                        </a>
                         @if($einfo['e_type']=="team")
                         @if($c>0)
                         <?php $count = 0;?>
@@ -70,30 +80,39 @@
                             <table class="table table-hover table-light rounded">
                                 <thead class="thead-light text-dark">
                                     <tr>
-                                        <td colspan="4" class=" font-weight-bold text-dark p-3" style="background-color: #dde1fc;">
-                                            Team {{$p['tname']}}
+                                        <td colspan="6" class=" font-weight-bold p-3" style="background-color: #dde1fc;">
+                                            Team <span class="badge badge-pill badge-primary px-3">{{$p['tname']}}</span>
                                         </td>
                                     </tr>
                                     <tr>
+                                        <th>No.</th>
                                         <th scope="col">Enrollment</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
                                         <th scope="col">Class</th>
                                         <th scope="col">Division</th>
                                     </tr>
                                 </thead>
                                 <tbody id="stud-data{{$count}}">
-                                   <?php $enrl=explode("-",$p['senrl'])?>
+                                   <?php $enrl=explode("-",$p['senrl']);
+                                   $cnt=0;
+                                   ?>
                                    @foreach($enrl as $e)
+                                   @if($e)
                                    <?php 
+                                   $cnt++;
                                    $sinfo=tblstudent::where('senrl',$e)->first();?>
                                     <tr class="text-dark">
+                                        <th>{{$cnt}}</th>
                                         <th scope="row">
                                             {{$e}}
                                         </th>
                                         <td>{{ucfirst($sinfo['sname'])}}</td>
+                                        <td>{{ucfirst($sinfo['email'])}}</td>
                                         <td>{{ucfirst($sinfo['class'])}}</td>
                                         <td>{{ucfirst($sinfo['division'])}}</td>
                                     </tr>
+                                    @endif
                                     @endforeach
                                    
                                 </tbody>
@@ -102,8 +121,9 @@
                         </div>
                         @endforeach
                         @else
-                        <hr>
-                        <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p>
+                        <div class="no-result-img"></div>
+                            <h6 class="text-center darkblue mt-1">No student has participated yet..!</h6>
+                        
                         @endif
                           
 
@@ -113,25 +133,32 @@
                             <table   class="table table-hover table-light rounded">
                                 <thead class="light-bg1 text-dark">
                                     <tr>
+                                        <th>No.</th>
                                         <th scope="col">Enrollment</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
                                         <th scope="col">Class</th>
                                         <th scope="col">Division</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-dark">
+                                    <?php $cnt=0;?>
                                     @foreach($participate as $p)
+                                    @if($p)
                                     <?php 
-                                    $sinfo=tblstudent::select('senrl','sname','class','division')->where('senrl',$p['senrl'])->first();?>
+                                    $cnt++;
+                                    $sinfo=tblstudent::select('senrl','sname','email','class','division')->where('senrl',$p['senrl'])->first();?>
                                     <tr>
+                                        <th>{{$cnt}}</th>
                                         <th scope="row">
                                             {{$sinfo['senrl']}}
                                         </th>
                                         <td>{{ucfirst($sinfo['sname'])}}</td>
+                                        <td>{{ucfirst($sinfo['email'])}}</td>
                                         <td>{{ucfirst($sinfo['class'])}}</td>
                                         <td>{{ucfirst($sinfo['division'])}}</td>
                                     </tr>
-                                   
+                                    @endif
                                    @endforeach
                                    
                                 </tbody>
@@ -139,20 +166,16 @@
 
                         </div>
                         @else
-                            <hr>
-                            <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p>
+                            <div class="no-result-img"></div>
+                            <h6 class="text-center darkblue mt-1">No student has participated yet..!</h6>
+                        
                         @endif
                         @endif
                         
                     </div>
 
                 </div>
-                <div class="position-fixed" style="bottom: 68px;right:17px;" data-toggle="tooltip" data-placement="left"
-                    title="Print">
-                    <a href="#">
-                        <img src="{{asset('assets/images/svg-icons/co-ordinate/print.svg')}}" height="55px" class="hover-me-sm rounded-circle" alt="">
-                    </a>
-                </div>
+                
             </div>
 @endsection        
 

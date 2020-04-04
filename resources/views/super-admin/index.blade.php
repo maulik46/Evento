@@ -10,6 +10,22 @@ co_ordinate::remain_result();
 
 @section('head-tag-links')
 <style>
+    .no-chart-img{
+        background-image:url('../assets/images/no-chart3.svg');
+        background-size:270px 300px;
+    }
+    .no-chart-img-2{
+        background-image:url('../assets/images/no_chart2.svg');
+        background-size:230px 300px;
+    }
+   
+    .no-chart-img,
+    .no-chart-img-2{
+        
+        background-repeat:no-repeat;
+        background-position: center;
+        width:auto;
+    }
     #event-info:hover {
         color: #43d39e !important;
         fill: #fff;
@@ -135,8 +151,8 @@ co_ordinate::remain_result();
     @endif
 
     <!-- stats + charts -->
-    <div class="row mx-0">
-        <div class="col-md-4 px-0">
+    <div class="row">
+        <div class="col-xl-4">
             <div class="card new-shadow-sm">
                 <h5 class="card-title header-title border-bottom p-3 mb-0">Overview</h5>
                 <div class="card-body p-0">
@@ -177,34 +193,44 @@ co_ordinate::remain_result();
             </div>
         </div>
         <div class="col-xl-8 col-md-12">
+            @if($part_count=="")
+            <div style="width: 100%;height:348px;background:linear-gradient(to right,#25c2e33b,#39ee9b40);" class="card d-flex align-items-end  justify-content-end  new-shadow-sm">
+                <div style="width: 100%;height:348px;" class="no-chart-img-2"></div>
+                <!-- this div contain img which visible when chart has no data  -->
+                <h5 class="text-center w-100 m-0 p-2" style="font-family:Comic Sans MS!important;background-color:#ffffff80">There is no participation data..!</h5>
+
+            </div>
+            @else
             <div class="card new-shadow-sm">
                 <div class="card-body pb-0">
-
                     <h5 class="card-title mb-0 header-title">Participation by class</h5>
-
-                   @if($part_count=="")
-                    <div style="width: auto;height:320px;" class="d-flex align-items-center justify-content-center"><h1>no data found</h1></div>
-                    @else
                     <div id="chart-1" class="apex-charts"></div>
-                    @endif
                 </div>
             </div>
+            @endif
         </div>
     </div>
     <!-- row -->
     <div class="row">
         <div class="col-xl-7 col-md-12">
+            @if($part_count=="")     
+            <div style="width: 100%;height:405px;background:linear-gradient(to right,#25c2e338,#e83e8c4f);" class="card d-flex align-items-end  justify-content-end  new-shadow-sm">
+                <div style="width: 100%;height:348px;" class="no-chart-img"></div>
+                <!-- this div contain img which visible when chart has no data  -->
+                <h5 class="text-center w-100 m-0 p-2" style="font-family:Comic Sans MS!important;background-color:#ffffff80">There is no participation data..!</h5>
+
+            </div>
+            @else
             <div class="card new-shadow-sm">
                 <div class="card-body px-0">
                     <h5 class="card-title mt-0 mb-0 header-title px-4">Revenue </h5>
                     <!-- <div id="sales-by-category-chart" class="apex-charts mb-0 mt-3" dir="ltr"></div> -->
-                    @if($part_count=="")
-                    <div style="width: auto;height:320px;" class="d-flex align-items-center justify-content-center"><h1>no data found</h1></div>
-                    @else
+                    
                     <div id="chart-2" class="apex-charts mb-0 mt-3"></div>
-                    @endif
+                   
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
+            @endif
         </div>
         <div class="col-xl-5">
         <div class="card mb-0 new-shadow-sm" style="border-bottom:1px solid #d1d1d1;border-radius:.2rem .2rem 0px 0px">
@@ -362,7 +388,7 @@ co_ordinate::remain_result();
                                 $rate=\DB::table('tblrates')->where('eid',$e['eid'])->avg('rate');
                                 ?>
                                 <tr>
-                                    <td>#{{$c}}</td>
+                                    <td>{{$c}}</td>
                                     <td>
                                         <i data-feather="star" class="icon-dual-warning" height="18px"></i>
                                         <span>{{round($rate,1)}}</span>
@@ -490,7 +516,7 @@ function delcat(cid,ename)
 }
 </script>
 <script>
-        var area = {
+var area = {
           series: [
         <?php
                 foreach ($div as $t)

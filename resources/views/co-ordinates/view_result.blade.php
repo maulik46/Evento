@@ -187,20 +187,20 @@ $parti = co_ordinate::participant($einfo['eid']);
                             <th scope="col">Division</th>
                             @endif
                             @if($einfo['e_type']=='team')
-                            <th scope="col">Team Name</th>
-                            <th></th>
-                            <th></th>
+                            <th scope="col" colspan="3">Team Name</th>
                             <th scope="col" class="text-center">View Team Candidates</th>
                             @endif
                         </tr>
                     </thead>
                     <tbody class="text-dark">
                         @if($einfo['e_type']=='solo')
+                        <?php $c=1?>
                         @foreach($parti as $participant)
                         <?php $sinfo = co_ordinate::studinfo($participant['senrl']);?>
                         <tr>
+                            <td>{{$c++}}</td>
                             <td>{{$participant['senrl']}}</td>
-                            <td>{{ucfirst($sinfo['sname'])}}</td>
+                            <th>{{ucfirst($sinfo['sname'])}}</th>
                             <td>{{ucfirst($sinfo['class'])}}</td>
                             <td>{{$sinfo['division']}}</td>
 
@@ -212,7 +212,7 @@ $parti = co_ordinate::participant($einfo['eid']);
                         @foreach($parti as $participant)
                         <tr>
                             <td>{{$c++}}</td>
-                            <td colspan="3">{{$participant['tname']}}</td>
+                            <th colspan="3">{{$participant['tname']}}</th>
                             <td class="text-center">
                                 <a href="{{url('sview_team')}}/{{encrypt($participant['pid'])}}" class="badge badge-pill badge-soft-primary px-3">View Team</a>
                             </td>

@@ -7,7 +7,8 @@
 @section('head-tag-links')
 <style>
     .pattern-bg {
-        background-image: url('../assets/images/pattern/p3.jpg');
+        background-image: url('../assets/images/pattern/p1.jpg');
+        background-color: #b5e8ce;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;

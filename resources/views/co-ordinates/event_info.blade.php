@@ -21,7 +21,7 @@
     <div class="d-flex justify-content-center">
         <div class="container-fluid col-lg-6 col-md-9 col-sm-10">
             <div class="card new-shadow-2 rounded">
-                <a href="{{url('cindex')}}" class="text-right text-dark p-2">
+                <a href="javascript:window.history.go(-1)" class="text-right text-dark p-2">
                     <i data-feather="x-circle" id="close-btn" height="20px"></i>
                 </a>
                 <div class="position-absolute print-btn bg-success new-shaow-sm" style="padding:0.5rem 0.3rem;top: 15%;left:100%;width:0px;border-radius:0px 5px 5px 0px;" data-toggle="tooltip" data-placement="left" title="Print">

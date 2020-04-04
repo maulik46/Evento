@@ -45,14 +45,17 @@
         border: 1px solid #f3f4f7 !important;
         font-size: 1.1em;
         color: #333 !important;
-        height: 50px;
+        height: 45px;
     }
 
     .form-control:focus {
         border: 1px solid #d1d1d1 !important;
         background-color: #f3f4f7 !important;
     }
-
+    label{
+        color: var(--dark)!important;
+    }
+    
     .has-icon .form-control-icon {
         z-index: 1;
     }
@@ -113,7 +116,7 @@
                         <div class="col-md-7 mt-2">
                             <label class="col-form-label font-size-14">
                                 Student Name</label>
-                            <div class="form-group has-icon d-flex align-items-center">
+                            <div class="mb-1 form-group has-icon d-flex align-items-center">
                                <img src="{{asset('assets/images/svg-icons/super-admin/student.svg')}}" class="ml-2 form-control-icon" height="20px" alt="">
                                 <input type="text" name="name" id="sname" class="form-control" placeholder="Enter Student Name" />
                             </div>
@@ -122,7 +125,7 @@
                         <div class="col-md-5 mt-2">
                             <label class="col-form-label font-size-14">
                                 Enrollment Number</label>
-                            <div class="form-group has-icon d-flex align-items-center">
+                            <div class="mb-1 form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/student-dash/id.svg')}}"
                                     class="ml-2 form-control-icon" height="20px" alt="">
                                 <input type="text" id="enrl" onkeyup="checkenrl()" name="enrl" class="form-control" placeholder="Enter Enrollment Number" />
@@ -134,7 +137,7 @@
                         <div class="col-sm-12 col-md-4">
                             <label class="col-form-label font-size-14">
                                 Roll no.</label>
-                            <div class="form-group has-icon d-flex align-items-center">
+                            <div class="mb-1 form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/super-admin/rollno.svg')}}" class="ml-2 form-control-icon" height="20px" alt="">
                                 <input type="number" name="rno"  id="rno" onkeyup="checkrno()"  class="form-control" placeholder="Enter Student's Roll no" />
                             </div>
@@ -142,7 +145,7 @@
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label class="col-form-label font-size-14">Class</label>
-                            <div class="form-group has-icon d-flex align-items-center">
+                            <div class="mb-1 form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/super-admin/class.svg')}}"
                                     class="ml-2 form-control-icon" height="20px" alt="">
                                 <input type="text" id="clas" name="clas" onkeyup="checkrno()" class="form-control" placeholder="Enter Student's Class" />
@@ -151,7 +154,7 @@
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <label class="col-form-label font-size-14">Division</label>
-                            <div class="form-group has-icon d-flex align-items-center">
+                            <div class="mb-1 form-group has-icon d-flex align-items-center">
                                 <img src="{{asset('assets/images/svg-icons/super-admin/split.svg')}}"
                                     class="ml-2 form-control-icon" height="20px" alt="">
                                 <input type="number" id="div" name="div" class="form-control" placeholder="Enter Student's Divisions" />
@@ -164,7 +167,7 @@
                         <div class="col-sm-12 col-md-6">
                             <label class="col-form-label font-size-14">
                                 Email</label>
-                            <div class="form-group has-icon d-flex align-items-center">
+                            <div class="mb-1 form-group has-icon d-flex align-items-center">
                                 <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
                                 <input type="email" name="email" onkeyup="checkemail()"  id="email" class="form-control" placeholder="Enter Student's Email" />
                             </div>
@@ -172,7 +175,7 @@
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label class="col-form-label font-size-14">Contact No.</label>
-                            <div class="form-group has-icon d-flex align-items-center">
+                            <div class="mb-1 form-group has-icon d-flex align-items-center">
                                 <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
                                 <input type="text" name="mobile" onkeyup="checkmobile()"  id="mobile" class="form-control" placeholder="Enter Student's Contact no" />
                             </div>
@@ -185,7 +188,7 @@
                         <div class="col-sm-6">
                             <label class="col-form-label font-size-14">
                                 Select Gender</label>
-                            <div class="form-group has-icon d-flex align-items-center">
+                            <div class="mb-1 form-group has-icon d-flex align-items-center">
                                 <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
                                 <select name="gen" id="gen" class="w-100 py-1 form-control  select-me" style="cursor:pointer!important;">
                                     <option value="">Select Gender</option>
@@ -197,7 +200,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label class="col-form-label font-size-14">Date Of Birth</label>
-                            <div class="form-group has-icon d-flex align-items-center">
+                            <div class="mb-1 form-group has-icon d-flex align-items-center">
                                 <i data-feather="calendar" class="form-control-icon ml-2" height="19px"></i>
                                 <input type="date" name="dob" id="dob" class="form-control basicDate" placeholder="Date Of Birth" data-input />
                             </div>
@@ -208,17 +211,16 @@
                     <div class="col-sm-12">
                         <label class="col-form-label font-size-14">
                             Address</label>
-                        <div class="form-group has-icon d-flex align-items-center">
+                        <div class="mb-1 form-group has-icon d-flex align-items-center">
                             <i data-feather="map" class="form-control-icon ml-2" height="19px"></i>
                             <input type="text" name="add" id="add" class="form-control" placeholder="Enter Student's Address" />
                         </div>
                         <span class="text-danger font-weight-bold"></span>
                     </div>
-                    <div class="mt-0 ml-1 row justify-content-start align-items-center">
+                    <div class="mt-3 mx-0 row justify-content-start align-items-center">
                         &nbsp;
-                        <button type="submit" class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-3 font-size-15
-                                        font-weight-bold ml-2" style="background-color: #35bbca;">
-                            <span>Add Student</span>
+                        <button type="submit" class="hover-me-sm btn btn-info new-shadow-sm rounded-sm px-3 font-size-15 font-weight-bold ml-2 d-flex align-items-center" style="background-color: #35bbca;">
+                            <span class="mr-1">Add Student</span>
                             <i data-feather="plus-square" height="20px"></i>
                         </button>
                     </div>

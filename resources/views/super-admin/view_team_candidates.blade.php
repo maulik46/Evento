@@ -42,15 +42,17 @@ use App\tblstudent;
                     <?php $c = 0;?>
                     <?php $enrl = explode("-", $tc['senrl'])?>
                     @foreach($enrl as $e)
+                    @if($e)
                     <?php $c++;
                         $sinfo = tblstudent::where('senrl', $e)->first();?>
                         <tr>
                             <th scope="row">{{$c}}</th>
                             <td>{{$e}}</td>
-                            <td>{{ucfirst($sinfo['sname'])}}</td>
+                            <th>{{ucfirst($sinfo['sname'])}}</th>
                             <td>{{ucfirst($sinfo['class'])}}</td>
                             <td>{{ucfirst($sinfo['division'])}}</td>
                         </tr>
+                    @endif
                     @endforeach
                     </tbody>
                 </table>

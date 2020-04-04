@@ -32,7 +32,7 @@
         border: 1px solid #f3f4f7 !important;
         font-size: 1.1em;
         color: #333 !important;
-        height: 50px;
+        height: 45px;
     }
 
     /* box-shadow: 0 0 2px black; */
@@ -132,7 +132,7 @@
                         </div>
 
                     </div>
-                    <div class="mt-4 p-1 rounded-lg" id="fc">
+                    <div class="mt-2 p-1 rounded-lg" id="fc">
 
                     </div>
             </div>

@@ -8,6 +8,13 @@
 
 @section('head-tag-links')
 <style>
+    .no-chart-img{
+        background-image:url('../assets/images/no_chart.svg');
+        background-size:280px 300px;
+        background-repeat:no-repeat;
+        background-position: top;
+        width:auto;
+    }
     #event-info:hover {
         color: #43d39e !important;
         fill: #fff;
@@ -70,13 +77,18 @@
 
     <div class="row justify-content-between align-items-center">
         <div class="col-md-7 col-sm-12">
-            <div class="card pr-4 py-2 new-shadow-sm ">
-               @if($part_count=="")
-                <div style="width: auto;height:320px;" class="d-flex align-items-center justify-content-center"><h1>no data found</h1></div>
-                @else
-                <div id="chart-2" style="width: auto;height:320px;" class="d-flex align-items-center justify-content-center"></div>
-                @endif
+            @if($part_count=="")
+            <div style="width: 100%;height:340px;background:linear-gradient(to right,#25c2e338,#e83e8c4f);" class="card d-flex align-items-end  justify-content-end  new-shadow-sm">
+                <div style="width: 100%;height:350px;" class="no-chart-img"></div>
+                <!-- this div contain img which visible when chart has no data  -->
+                <h5 class="text-center w-100 m-0 p-2" style="font-family:Comic Sans MS!important;background-color:#ffffff80">There is no participation data..!</h5>
+
             </div>
+            @else
+            <div class="card pr-4 py-2 new-shadow-sm ">
+                <div id="chart" style="width: auto;height:320px;" class="d-flex align-items-center justify-content-center"></div>
+            </div>
+            @endif
         </div>
         <div class="col-md-5 col-sm-12">
             <div class="card new-shadow-sm p-1 px-2 overflow-auto my-scroll" style="height:340px;">
@@ -523,54 +535,7 @@ async function deleteEvent(eid){
 }
 </script>
 <script>
-    var area = {
-          series: [
-        <?php
-                foreach ($tble as $t)
-                 {
-                 ?>
-                
-                {
-	            name:'<?php echo $t['ename']; ?>',
-                data: [
-                    <?php
-                    $date_str="";
-                    $today_dat=date("d-m-Y");
-                    for($i=0;$i<5;$i++)
-                        {
-                            $date_v=date("Y-m-d", strtotime("-1 day", strtotime($today_dat)));
-                            $line=App\participant::where('reg_date',$date_v)->where('eid',$t['eid'])->count();
-                            $date_str.=$line.",";
-                            $today_dat=$date_v;
-                        }
-                        echo $date_str;
-                	?>
-					]
-                },
-                <?php
-                }
-                ?>
-        ],
-          chart: {
-          height: 350,
-          type: 'bar'
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'smooth'
-        },
-        xaxis: {
-          categories:[<?php echo $date_string; ?>]
-        },
-        tooltip: {
-          x: {
-            format: 'dd/MM/yy'
-          },
-        },
-        };
-
+   
  var pie = {
           series: [<?php echo $part_count; ?>],
           chart: {
@@ -581,30 +546,20 @@ async function deleteEvent(eid){
         },
         labels: [<?php echo $ename_string; ?>],
         responsive: [{
-          breakpoint: 1200,
-          options: {
-            chart: {
-              width: 250
-            },
-            legend: {
-              position: 'bottom'
+            breakpoint: 1200,
+            options: {
+                chart: {
+                    width: 250
+                },
+                legend: {
+                    position: 'bottom'
+                }
             }
-          }
         }]
         };
 
-        // var chart1 = new ApexCharts(
-        //     document.querySelector("#chart-1"), 
-        //     area
-            
-        // );
-        // chart1.render();
-
-        var chart2 = new ApexCharts( 
-            document.querySelector("#chart-2"),
-            pie
-        );
-        chart2.render();
+        var chart = new ApexCharts(document.querySelector("#chart"),pie);
+        chart.render();
 
 </script>
 <script>
