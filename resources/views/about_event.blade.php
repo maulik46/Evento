@@ -13,7 +13,7 @@
                             <br>
                             <div class="text-center mt-4">
                               <h2 class="font-weight-light">{{ucfirst($list_event_d['ename'])}} Compitition</h2>
-                             <span>{{ucfirst($list_event_d['clgname'])}}</span>
+                             <span class="font-weight-bold ">{{ucfirst($list_event_d['clgname'])}}</span>
                              <p class="my-2">
                                  <span class="font-weight-bold">{{ucfirst($list_event_d['cname'])}} </span>(Co-ordinator)
                             </p>
@@ -50,11 +50,11 @@
                             </div>  
                             @if($list_event_d['e_type']=='team')  
                             <div class="mt-3">
-                                <div class="table-responsive">
+                                <div class="table-responsive overflow-auto my-scroll">
                                     <table class="table table-hover table-light new-shadow-sm rounded-sm">
                                         <thead class="thead-light">
                                             <tr>
-                                                <td colspan="5" class="rounded-sm  font-weight-bold text-dark p-3"
+                                                <td colspan="6" class="rounded-sm  font-weight-bold text-dark p-3"
                                                     style="background-color: #dde1fc;">
                                                     <span>Team</span>
                                                     <span class="mt-1 badge badge-primary px-3 badge-pill">
@@ -68,6 +68,7 @@
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Class</th>
                                                 <th scope="col">Division</th>
+                                                <th scope="col">Roll No</th>
                                             </tr>
                                         </thead>
                                         <tbody class="team-leader">
@@ -86,9 +87,10 @@
                                                     {{$c}}
                                                 </th>
                                                 <td>{{$stud['senrl']}}</td>
-                                                <td>{{ucfirst($stud['sname'])}}</td>
-                                                <td>{{$stud['class']}}</td>
+                                                <th>{{ucfirst($stud['sname'])}}</th>
+                                                <td>{{ucfirst($stud['class'])}}</td>
                                                 <td>{{$stud['division']}}</td>
+                                                <td>{{$stud['rno']}}</td>
                                             </tr>
                                             <?php
                                             $c++;

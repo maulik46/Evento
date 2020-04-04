@@ -491,7 +491,7 @@ class s_admin extends Controller
                  $data=Session::get('otps');
              }
              else{
-                 $data="Invalid Email Id..";
+                 $data="Invalid Email Id";
              }
             
              echo json_encode($data);
@@ -792,6 +792,7 @@ class s_admin extends Controller
         foreach($rec as $ed)
         {
             $a++;
+            if($ed['edate'] <= date('Y-m-d')){
             $msg.='<tr class="text-dark">
                 <td>'.$a.'</td>
                 <td class="font-weight-bold">'.ucfirst($ed["ename"]).'</td>
@@ -822,6 +823,7 @@ class s_admin extends Controller
                 }
                 $msg.='</td>
             </tr>';
+            }
         }
         return response()->json(array('msg'=>$msg),200);
     }

@@ -638,10 +638,10 @@ class student extends Controller
                                                     $team.='<thead class="light-bg2">
                                                     <tr class="text-dark">
                                                         <th scope="col">Rank</th>
+                                                        <th scope="col">Roll no</th>
                                                         <th scope="col">Name</th>
                                                         <th scope="col">Class</th>
                                                         <th scope="col">Division</th>
-                                                        <th scope="col">Roll no</th>
                                                         <th scope="col">Event</th>
                                                         <th scope="col">Category</th>
                                                         <th scope="col">Date</th>
@@ -662,7 +662,7 @@ class student extends Controller
                                                     {
                                                         $team.= "<tr><td><img src=".asset('assets/images/svg-icons/student-dash/winner/3.svg')." height='22px' alt='3'></td>";
                                                     }
-                                                    $team.= "<td> ".ucfirst($t['sname'])."</td><td>".ucfirst($t['class'])."</td><td>".$t['division']."</td><td>".$t['rno']."</td><td>".ucfirst($s['ename'])."</td><td>".ucfirst($s['category_name'])."</td><td>".date('d/m/Y',strtotime($s['enddate']))."</td></tr>";
+                                                    $team.= "<td> ".ucfirst($t['rno'])."</td><th>".ucfirst($t['sname'])."</th><td>".$t['class']."</td><td>".$t['division']."</td><td>".ucfirst($s['ename'])."</td><td>".ucfirst($s['category_name'])."</td><td>".date('d/m/Y',strtotime($s['enddate']))."</td></tr>";
                                                     
                                             }
                                             if($a>0)
@@ -678,7 +678,7 @@ class student extends Controller
                 
                 if($team=="")
                 {
-                    $team="<tr><td>No Data Found...!</td></tr>";
+                    $team="<tr><td colspan='8' class='font-weight-bold text-center text-muted'>No Data Found...!</td></tr>";
                 }
                 if($c==6)
                 {

@@ -12,7 +12,7 @@
         border: 1px solid #f3f4f7!important;
         font-size: 1.1em;
         color:#333!important;
-        height: 50px;
+        height: 45px;
         cursor: text!important;
         }
         /* box-shadow: 0 0 2px black; */
@@ -56,7 +56,7 @@
                                 <i data-feather="x-circle" id="close-btn" height="20px"></i>
                             </a>
                             <h4 class="my-2 mb-3 text-center text-dark">
-                                <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="20px" alt="">
+                                <img src="{{asset('assets/images/svg-icons/co-ordinate/writing.svg')}}" height="22px" alt="">
                                 <span> Create new notice</span>
                                 
                             </h4>
@@ -102,7 +102,7 @@
                                     </div>
                                     
                                 </div>
-                            <div class="mt-3 p-1" id="fc" >
+                            <div class="p-1" id="fc" >
                                 
                                 </div>                             
                             </div>

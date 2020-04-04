@@ -33,7 +33,7 @@
             border: 1px solid #f3f4f7 !important;
             font-size: 1.1em;
             color: #333 !important;
-            height: 50px;
+            height: 45px;
             cursor: text !important;
         }
 
@@ -85,7 +85,7 @@
                                 @csrf
                                 <p id="error" class="text-center text-danger font-weight-bold">{{Session::get('error')}}</p>
                                 <div class="form-group mt-2">
-                                    <label class="col-form-label font-size-14">Admin email</label>
+                                    <label class="col-form-label font-size-14">Email</label>
                                     <div class="form-group has-icon d-flex align-items-center">
                                         <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
                                         <input type="text" name="auser" id="uid" class="form-control" placeholder="Enter Your Email" />

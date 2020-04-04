@@ -144,11 +144,14 @@
 
          <!-- inbox Right Sidebar -->
          <div class="right-bar bg-light overflow-auto my-scroll">
-             <div class="rightbar-title" style="border-bottom: 1px solid #d3d3d36b;">
-                 <a href="#" class="right-bar-toggle float-right text-dark" id="close-btn" onclick="window.location.reload()">
-                     <i data-feather="x-circle" height="20px"></i>
-                 </a>
-                 <h4 class="m-0">Inbox</h4>
+            <div class="rightbar-title navbar py-2" style="border-bottom: 1px solid #d3d3d36b;">
+                <div class="navbar p-0 m-0">
+                    <i data-feather="mail" class="icon-dual-danger" height="22px"></i>
+                    <span class="h4 mt-2 ml-1">Inbox</span>
+                </div>
+                <a href="#" class="right-bar-toggle text-dark" id="close-btn" onclick="window.location.reload()">
+                    <i data-feather="x-circle" height="20px"></i>
+                </a>
              </div>
 
              <div class="my-scroll px-2">
@@ -216,7 +219,12 @@
             </div>            
             </div>
             @endforeach
-                
+            @if($c==0)
+            <div class="d-flex align-items-center justify-content-center flex-column" style="height:70vh;">
+                <img src="{{asset('assets/images/empty.svg')}}" height="40px" alt="">
+                <h6>You have no notice..!</h6>
+            </div>
+            @endif
             </div>
          </div>
          <!-- inbox Right-bar -->
@@ -228,14 +236,16 @@
     <!--  right side buttons div  -->
             <div class="position-fixed plus-btn" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left"
                 title="Create Event">
-                <a href="{{url('/create_event')}}" class="btn badge-pill bg-success text-white p-3 hover-me-sm new-shadow-sm">
-                    <i data-feather="edit" height="24px"></i>
+                <a href="{{url('/create_event')}}" class="btn bg-danger  hover-me-sm new-shadow-sm" style="border-radius:100%;padding:12px 12px 8px 13px;">
+                    <!-- <i data-feather="edit" height="24px"></i> -->
+                    <img src="{{asset('assets/images/svg-icons/co-ordinate/add.svg')}}" height="30px" alt="Create Event">
                 </a>
             </div>
             <div class="position-fixed plus-btn" style="bottom: 74px;right:12px;" data-toggle="tooltip" data-placement="left"
                 title="Create Notice">
-                <a href="{{url('/cnotice')}}" class="btn badge-pill bg-info text-white p-3 hover-me-sm new-shadow-sm">
-                    <i data-feather="file-text" height="24px"></i>
+                <a href="{{url('/cnotice')}}" class="btn bg-info hover-me-sm new-shadow-sm" style="border-radius:100%;">
+                    <!-- <i data-feather="file-text" height="24px"></i> -->
+                    <img src="{{asset('assets/images/svg-icons/co-ordinate/notice.svg')}}" height="33px" alt="Send Notice">
                 </a>
             </div>
     <!-- end right side buttons div -->

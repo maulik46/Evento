@@ -17,7 +17,7 @@
         Team {{ucfirst($tc['tname'])}}
         </span>
         <h6 class="font-weight-bold text-muted text-center">
-           {{Session::get('clgname')}}
+           {{ucfirst(Session::get('clgname'))}}
         </h6>
         <hr class="my-0">
     </div>

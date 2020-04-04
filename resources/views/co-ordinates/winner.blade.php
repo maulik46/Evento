@@ -21,10 +21,11 @@
         <div class="card-body">
             <div class="navbar px-0">
                 <div class="mt-2 h4">
+                    <img src="{{asset('assets/images/svg-icons/student-dash/winner/ranking.svg')}}" height="33px" alt="">
                     <span>Past Winners</span>
                 </div>
-                <a href="#" class=" badge-pill badge-soft-dark btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter">
-                    <i data-feather="filter" height="18px"></i>
+                <a href="#" class=" badge-pill badge-soft-dark btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter hover-me-sm">
+                    <i data-feather="sliders" height="18px"></i>
                     Filters
                 </a>
                 <a href="#" class="text-dark" id="close-btn" style="display:none">
@@ -126,17 +127,17 @@
                     <div class="p-2"  >
                         <span class="h5">{{ucfirst($event->ename)}}</span>
                         @if($event->e_type=="solo")
-                        <span class="badge badge-pill badge-info px-3">{{ucfirst($event->e_type)}}</span>
+                        <span class="badge badge-info px-2">{{ucfirst($event->e_type)}}</span>
                         @else
-                        <span class="badge badge-pill badge-warning px-3">{{ucfirst($event->e_type)}}</span>
+                        <span class="badge badge-warning px-2">{{ucfirst($event->e_type)}}</span>
                         @endif
                     </div>
                     <div class="mr-2">
-                        <span class="badge badge-primary">{{date('d/m/Y',strtotime($event->enddate))}}</span>
+                        <span class="badge badge-primary px-2">{{date('d/m/Y',strtotime($event->enddate))}}</span>
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-hover table-light text-dark">
+                    <table class="table table-hover table-light text-dark overflow-auto">
                         <thead class="thead-light">
                             <tr>
                             @if($event->e_type=="solo")

@@ -711,7 +711,7 @@ class co_ordinate extends Controller
                  $data=Session::get('otps');
              }
              else{
-                 $data="Invalid Email Id..";
+                 $data="Invalid Email Id";
              }
             
              echo json_encode($data);
@@ -788,7 +788,7 @@ class co_ordinate extends Controller
             ],
         [
             'photo-upload.max'=>"The file size should be less then 2 Mb",
-            'photo-upload.mimes'=>"Only image or svg allowed"
+            'photo-upload.mimes'=>"Please check your image type..!"
         ]);
         $file=$req->file('photo-upload');
         $destinationPath=public_path('profile_pic/');

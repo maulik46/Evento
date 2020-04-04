@@ -51,6 +51,7 @@
         transform: translateY(-2px);
         box-shadow: 0 1px 6px 0 rgba(255, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .08);
         border-radius: .2rem;
+        cursor:move!important;
     }
     @media(max-width: 500px)
     {
@@ -396,7 +397,7 @@ function rankcheck() {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'confirm'
+            confirmButtonText: 'Confirm'
             }).then((result) => {
             if (result.value) {
                     $.ajaxSetup({
@@ -435,7 +436,7 @@ function rankcheck() {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'confirm'
+            confirmButtonText: 'Confirm'
             }).then((result) => {
             if (result.value) {
                     $.ajaxSetup({
@@ -472,7 +473,7 @@ function rankcheck() {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'confirm'
+            confirmButtonText: 'Confirm'
             }).then((result) => {
             if (result.value) {
                     $.ajaxSetup({

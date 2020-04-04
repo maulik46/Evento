@@ -20,6 +20,9 @@
      background-color: #fff;
      border: 1px solid #e2e7f1;
      }
+     table{
+         border-bottom:1px solid #edeaea;
+     }
     </style>
 @endsection
 
@@ -42,10 +45,10 @@
                 <hr class="my-0">
             </div>
                  <div class="card new-shadow-sm">
-                    <div class="card-body py-2 px-1 px-sm-3">
+                    <div class="card-body pt-2 pb-4 px-1 px-sm-3">
                         <div class="justify-content-between d-flex align-items-center ">
                             <div class="d-flex align-items-center">
-                                <i data-feather="users" class="icon-dual-success"></i>
+                                <i data-feather="users" class="icon-dual"></i>
                                 @if($einfo['e_type']=="team")
                                 <span class="h5 ml-2">Participated Teams</span>
                                 @else
@@ -62,23 +65,29 @@
                                 <span class="text-dark h5 ml-1">{{$c}}</span>
                             </div>
                         </div>
-                        <hr class="my-1 mb-4">
+                        <hr class="my-1">
+                        <a href="" class="btn btn-sm pr-3 pl-2 rounded btn-success font-weight-bold mt-1 mb-3 new-shadow-sm hover-me-sm">
+                            <i data-feather="printer" height="19px"></i>
+                            Print
+                        </a>
                         @if($einfo['e_type']=="team")
                         @if($c>0)
                         <?php $count=0;?>
                         @foreach($participate as $p)
+                        
                         <?php $count++;?>
-                        <div class="table-responsive my-scroll">
-                            <table class="table table-hover table-light rounded">
+                        <div class="table-responsive my-scroll ">
+                            <table class="table table-light rounded">
                                 <thead class="thead-light">
                                     <tr>
-                                        <td colspan="4" class=" font-weight-bold p-3" style="background-color: #dde1fc;color:var(--danger)!important;">
-                                            Team {{$p['tname']}}
+                                        <td colspan="5" class=" font-weight-bold p-3" style="background-color: #dde1fc;">
+                                            Team <span class="badge badge-pill badge-primary px-3">{{$p['tname']}}</span>
                                         </td>
                                     </tr>
                                     <tr class="text-dark">
                                         <th scope="col">Enrollment</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
                                         <th scope="col">Class</th>
                                         <th scope="col">Division</th>
                                     </tr>
@@ -86,6 +95,7 @@
                                 <tbody id="stud-data{{$count}}">
                                    <?php $enrl=explode("-",$p['senrl'])?>
                                    @foreach($enrl as $e)
+                                   @if($e)
                                    <?php 
                                    $sinfo=tblstudent::where('senrl',$e)->first();?>
                                     <tr class="text-dark">
@@ -93,16 +103,18 @@
                                             {{$e}}
                                         </th>
                                         <td>{{ucfirst($sinfo['sname'])}}</td>
+                                        <td>{{ucfirst($sinfo['email'])}}</td>
                                         <td>{{ucfirst($sinfo['class'])}}</td>
                                         <td>{{ucfirst($sinfo['division'])}}</td>
                                     </tr>
-                                    
+                                    @endif
                                     @endforeach
                                    
                                 </tbody>
                             </table>
 
                         </div>
+                        
                         @endforeach
                         @else
                         <div class="text-center">
@@ -114,30 +126,33 @@
 
                         @elseif($einfo['e_type']=="solo")
                         @if($c>0)
-                        <div class="table-responsive my-scroll">
+                        <div class="table-responsive my-scroll ">
                             
-                            <table  class="table table-hover table-light rounded">
+                            <table  class="table table-light rounded">
                                 <thead class="light-bg1">
                                     <tr class="text-dark">
                                         <th scope="col">Enrollment</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
                                         <th scope="col">Class</th>
                                         <th scope="col">Division</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($participate as $p)
+                                    @if($p)
                                     <?php 
-                                    $sinfo=tblstudent::select('senrl','sname','class','division')->where('senrl',$p['senrl'])->first();?>
+                                    $sinfo=tblstudent::select('senrl','sname','email','class','division')->where('senrl',$p['senrl'])->first();?>
                                     <tr class="text-dark">
                                         <th scope="row">
                                             {{$sinfo['senrl']}}
                                         </th>
                                         <td>{{ucfirst($sinfo['sname'])}}</td>
+                                        <td>{{ucfirst($sinfo['email'])}}</td>
                                         <td>{{ucfirst($sinfo['class'])}}</td>
                                         <td>{{ucfirst($sinfo['division'])}}</td>
                                     </tr>
-                                   
+                                   @endif
                                    @endforeach
                                    
                                 </tbody>
@@ -145,22 +160,13 @@
 
                         </div>
                         @else
-                            <div class="text-center">
-                                <!-- <p class="font-size-18 text-center font-weight-bold">Nobody has participated yet!!!</p> -->
-                                <img src="{{asset('assets/images/no result.png')}}" class="img-fluid" height="500px" width="500px" alt="">
-                            </div>
-                            
+                            <div class="no-result-img"></div>
+                            <h6 class="text-center darkblue mt-1">No student has participated yet..!</h6>
                         @endif
                         @endif
                         
                     </div>
 
-                </div>
-                <div class="position-fixed" style="bottom: 134px;right:15px;" data-toggle="tooltip" data-placement="left"
-                    title="Print">
-                    <a href="#">
-                        <img src="{{asset('assets/images/svg-icons/co-ordinate/print.svg')}}" height="55px" class="hover-me-sm rounded-circle" alt="">
-                    </a>
                 </div>
             </div>
 @endsection 

@@ -263,13 +263,13 @@
                         </div>
 
                         <button type="submit"
-                            class="hover-me-sm m-2 btn btn-success px-3  rounded-sm new-shadow font-weight-bold">
+                            class="hover-me-sm m-2 btn btn-success px-3  rounded new-shadow font-weight-bold">
                             <span class="mr-1">Create Event</span>
                             <i data-feather="check-square" height="20px"></i>
                         </button>
                         <button type="reset"
-                            class="hover-me-sm m-2 btn btn-danger px-3  rounded-sm new-shadow font-weight-bold">
-                            <span class="mr-1">Reset form</span>
+                            class="hover-me-sm m-2 btn btn-danger px-3  rounded new-shadow font-weight-bold">
+                            <span class="mr-1">Clear</span>
                             <i data-feather="rotate-ccw" height="20px"></i>
                         </button>
 

@@ -100,10 +100,10 @@
                     @endif
 
                         <div class="media-body mx-auto mt-3 font-weight-bold text-center">
-                            <a href="#" class="pro-user-name text-dark user-link font-size-16">
+                            <span href="#" class="pro-user-name text-dark user-link font-size-14">
                                 {{ucfirst(Session::get('sname'))}}
-                            </a>
-                            <div class="text-muted mt-1 text-center pro-user-name">Student</div>
+                            </span>
+                            <div class="text-muted mt-1 text-center pro-user-name font-size-13">Student</div>
                         </div>
                     </div>
 

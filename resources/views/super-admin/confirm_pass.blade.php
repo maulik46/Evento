@@ -30,7 +30,7 @@
             border: 1px solid #f3f4f7 !important;
             font-size: 1.1em;
             color: #333 !important;
-            height: 50px;
+            height: 45px;
             cursor: text !important;
         }
         #see-pass:hover,
@@ -59,22 +59,21 @@
         </div>
         <div class="content-page">
             <div class="content d-flex justify-content-center">
-                <div class="container-fluid pt-3 col-xl-4 col-lg-5 col-md-8 col-sm-10">
+                <div class="container-fluid pt-5 col-xl-4 col-lg-5 col-md-8 col-sm-10">
                     <div class="card mt-5 shadow rounded-lg px-1">
                        <div class="card-body px-xl-4">
-                           <h4 class="my-4 text-center text-dark d-flex flex-column">
-                              <img src="{{asset('assets/images/svg-icons/super-admin/man1.svg')}}" alt="user" height="45px">
-                               <span>Log-in</span>
-                               <span class="font-size-12 text-muted">for Admin</span>
-                           </h4>
+                           <div class="d-flex justify-content-center align-items-center flex-wrap">
+                                <img src="{{asset('assets/images/svg-icons/co-ordinate/change_pass.svg')}}" height="22px" alt="">
+                                <h4 class="text-dark ml-1">Change Password</h4>
+                           </div>
                            <form action="{{url('a_change_pass')}}/{{encrypt($email)}}"  onsubmit="return valid()" method="post">
                            @csrf
                            
-                           <div class="form-group mt-2">
+                           <div class="form-group mt-4">
                                    <label class="col-form-label font-size-14">New Password</label>
                                    
                                    <div class="form-group has-icon d-flex align-items-center" >
-                                       <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
+                                       <i data-feather="unlock" class="form-control-icon ml-2" height="19px"></i>
                                        <input type="password" class="form-control"
                                            placeholder="Enter New Password..."  name="password" style="padding-right: 2.375rem;" id="my-password">
                                         <div class="position-relative" style="right:40px;bottom: 10px;">
@@ -92,7 +91,7 @@
                                <div class="form-group mt-2">
                                    <label class="col-form-label font-size-14">Confirm Password</label>
                                    <div class="form-group has-icon d-flex align-items-center" >
-                                       <i data-feather="user-check" class="form-control-icon ml-2" height="19px"></i>
+                                       <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
                                        <input type="password" class="form-control"
                                            placeholder="Enter Confirm Password..."  name="cpassword" style="padding-right: 2.375rem;" id="my-password2">
                                         <div class="position-relative" style="right:40px;bottom: 10px;">
@@ -107,9 +106,9 @@
                                    <span class="text-danger font-weight-bold"></span>
                                </div>
                                 
-                               <button type="submit" class="hover-me-sm btn btn-info rounded-sm new-shadow font-weight-bold px-4 mt-1 mb-3">
-                                    <span class="font-size-14">Log-in</span>
-                                    <i data-feather="log-in" height="20px"></i>
+                               <button type="submit" class="hover-me-sm btn btn-info rounded-sm new-shadow font-weight-bold px-3 my-1">
+                                    <span class="font-size-14">Change</span>
+                                    <i data-feather="rotate-ccw" height="20px"></i>
                                </button>
                            </form>
                        </div>

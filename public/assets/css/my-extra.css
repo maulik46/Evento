@@ -37,9 +37,7 @@ img {
    background: #dde1fc;
    border-radius: 8px;
 } */
-.left-side-menu .user-profile .user-link:hover {
-    color: #5369f8 !important;
-}
+
 
 #event-box .card .card-body {
     font-family: Comfortaa, Roboto, 'Open Sans', sans-serif !important;

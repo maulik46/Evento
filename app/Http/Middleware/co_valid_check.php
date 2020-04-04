@@ -20,8 +20,8 @@ class co_valid_check
             'cuser' => 'required',
             'password' => 'required'
         ],[
-            'cuser.required' => '* Please Enter your ID',
-            'password.required' => '* Please Enter your Password'
+            'cuser.required' => 'Please Enter Your Email',
+            'password.required' => 'Please Enter Your Password'
         ]);
         return $next($request);
     }

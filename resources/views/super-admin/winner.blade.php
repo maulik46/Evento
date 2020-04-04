@@ -24,7 +24,7 @@
                     <span>Past Winners</span>
                 </div>
                 <a href="#" class=" badge-pill badge-soft-dark btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter">
-                    <i data-feather="filter" height="18px"></i>
+                    <i data-feather="sliders" height="18px"></i>
                     Filters
                 </a>
                 <a href="#" class="text-dark" id="close-btn" style="display:none">

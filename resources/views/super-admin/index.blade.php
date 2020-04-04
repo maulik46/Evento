@@ -53,7 +53,7 @@ co_ordinate::remain_result();
         border:2px solid #f3efef;
     }
     .event-cat:hover{
-        background-color:rgba(37,194,227,.2);
+        background-color:#98edff4a;
         border-color:rgba(37,194,227,.19);
         transition:0.2s ease;
     }
@@ -201,7 +201,7 @@ co_ordinate::remain_result();
         <div class="col-xl-5">
         <div class="card mb-0 new-shadow-sm" style="border-bottom:1px solid #d1d1d1;border-radius:.2rem .2rem 0px 0px">
             <h5 class=" text-center mt-2">
-            <i data-feather="user-check" height="18px" class="icon-dual-dark"></i>
+            <i data-feather="user-check" height="20px" class="icon-dual-dark"></i>
             Event Co-ordinators
             </h5>
         </div>
@@ -251,7 +251,21 @@ co_ordinate::remain_result();
                     </div>
                 </div>
                 @endforeach
+                
             </div>
+            @if($count == 0)
+            <div class="d-flex justify-content-center flex-column " style="height:320px;">
+                <div class="no-result-img" style="height:160px;background-size:250px;">
+                </div>
+                <h6 class="mt-0 text-center darkblue">You have no Co-ordinator in system..! </h6>
+                <div class="mt-2 d-flex align-items-center justify-content-center">
+                    <a href="{{url('new_cod')}}" class="rounded btn btn-sm btn-success font-weight-bold new-shadow-sm pr-3 pl-2">
+                    <i data-feather="user-plus" height="15px"></i>
+                    Create New
+                    </a>
+                </div>
+            </div>
+            @endif
         </div>
         </div>
         </div>
@@ -282,10 +296,10 @@ co_ordinate::remain_result();
                     $e .= ucfirst($te['ename']) . ",";
                 }?>
                 <div class="my-2 col col-auto px-1">
-                    <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat hover-me-sm">
+                    <div class="d-flex align-items-center btn btn-sm badge-pill pl-3 pr-2 py-2 event-cat">
                     <span class="text-dark font-size-14 font-weight-bold">{{$category->category_name}}</span>
                     <a href="{{url('updatecat')}}/{{$category->category_id}}" class="text-warning ml-3"><i data-feather="edit" height="16px"></i></a>
-                    <a href="#" onclick="delcat({{$category->category_id}},'{{ $e }}')" class="text-danger"><i data-feather="x-circle" height="16px"></i></a>
+                    <a href="#" onclick="delcat({{$category->category_id}},'{{ $e }}')" class="text-danger"><i data-feather="delete" height="16px"></i></a>
                     </div>
                 </div>
               @endforeach 

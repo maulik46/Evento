@@ -18,13 +18,14 @@
 @section('my-content')
 <div class="container-fluid my-5">
     <div class="card new-shadow-sm">
-        <div class="card-body">
-            <div class="navbar px-0">
+        <div class="card-body px-1 px-sm-3">
+            <div class="navbar px-2">
                 <div class="mt-2 h4">
+                    <img src="{{asset('assets/images/svg-icons/student-dash/winner/ranking.svg')}}" height="33px" alt="">
                     <span>Past Winners</span>
                 </div>
                 <a href="#" class=" badge-pill badge-soft-dark btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter hover-me-sm">
-                    <i data-feather="filter" height="18px"></i>
+                    <i data-feather="sliders" height="18px"></i>
                     Filters
                 </a>
                 <a href="#" class="text-dark" id="close-btn" style="display:none">

@@ -87,10 +87,10 @@ use \App\tblstudent;
             <div class="card-body px-1 px-md-2 pt-0">
                 <div class="text-right mb-2">
                     <a href="#" class="badge-pill badge-soft-primary btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter">
-                        <i data-feather="filter" height="18px"></i>
+                        <i data-feather="sliders" height="18px"></i>
                         Filters
                     </a>
-                    <a href="#" class="text-dark" id="close-filter" style="display:none">
+                    <a href="javascript:window.location.reload()" class="text-dark" id="close-filter" style="display:none">
                         <i data-feather="x-circle" height="20px"></i>
                     </a>
                 </div>
@@ -185,6 +185,7 @@ use \App\tblstudent;
                         <tbody id="tbody">
                             <?php $count=0;?>
                             @foreach($event_data as $ed)
+                            @if($ed['edate'] < date('Y-m-d'))
                             <?php $count++;?>
                             <tr class="text-dark">
                                 <td>{{$count}}</td>
@@ -215,6 +216,7 @@ use \App\tblstudent;
                                 @endif
                                 </td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>
