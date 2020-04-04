@@ -71,7 +71,11 @@
     <div class="row justify-content-between align-items-center">
         <div class="col-md-7 col-sm-12">
             <div class="card pr-4 py-2 new-shadow-sm ">
+               @if($part_count=="")
+                <div style="width: auto;height:320px;" class="d-flex align-items-center justify-content-center"><h1>no data found</h1></div>
+                @else
                 <div id="chart-2" style="width: auto;height:320px;" class="d-flex align-items-center justify-content-center"></div>
+                @endif
             </div>
         </div>
         <div class="col-md-5 col-sm-12">
