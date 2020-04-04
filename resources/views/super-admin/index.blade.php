@@ -182,7 +182,11 @@ co_ordinate::remain_result();
 
                     <h5 class="card-title mb-0 header-title">Participation by class</h5>
 
+                   @if($part_count=="")
+                    <div style="width: auto;height:320px;" class="d-flex align-items-center justify-content-center"><h1>no data found</h1></div>
+                    @else
                     <div id="chart-1" class="apex-charts"></div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -194,7 +198,11 @@ co_ordinate::remain_result();
                 <div class="card-body px-0">
                     <h5 class="card-title mt-0 mb-0 header-title px-4">Revenue </h5>
                     <!-- <div id="sales-by-category-chart" class="apex-charts mb-0 mt-3" dir="ltr"></div> -->
+                    @if($part_count=="")
+                    <div style="width: auto;height:320px;" class="d-flex align-items-center justify-content-center"><h1>no data found</h1></div>
+                    @else
                     <div id="chart-2" class="apex-charts mb-0 mt-3"></div>
+                    @endif
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div>
