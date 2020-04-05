@@ -35,7 +35,28 @@
 </head>
 
 <body class="pb-0 body-scroll">
+@if(Session::has('success') || Session::has('error'))
+    @if(Session::has('success'))
+    <div class="toast bg-success fade show border-0 new-shadow rounded position-fixed w-75"
+        style="top:80px;right:30px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true"
+        data-toggle="toast">
+    @else
+    <div class="toast bg-danger fade show border-0 new-shadow rounded position-fixed w-75"
+        style="top:80px;right:30px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true"
+        data-toggle="toast">
+    @endif
+        <div class="toast-body text-white alert mb-1">
+            <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                <i data-feather="x-circle" id="close-btn" height="18px"></i>
+            </a>
+            <div class="mt-2 font-weight-bold font-size-14">
+                {{Session::get('success')}}
+                {{Session::get('error')}}
+            </div>
 
+        </div>
+    </div>
+    @endif
     <!-- NAVBAR START -->
     <nav class="navbar navbar-expand-lg sticky-top px-1 new-shadow-sm" style="z-index: 9999;" id="nav-menu">
         <div class="container-fluid px-0 px-md-5">
@@ -396,21 +417,24 @@
                     </a>
                 </div>
                 <div class="text-center text-dark h6 px-2">Fill up these fields and send us. We'll contact you</div>
-            <form class="p-2 px-2 px-sm-4">
+            <form action="{{url('demo_req')}}" onsubmit="return valid()" method="post" class="p-2 px-2 px-sm-4">
+            @csrf
                 <div class="row mx-0">
                     <div class="form-group col-sm-5 my-0">
-                        <label>Name</label>
+                        <label>Admin Name</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text"  class="form-control" placeholder="Enter Your Name" />
+                            <input type="text" id="aname" name="aname" class="form-control" placeholder="Enter Admin name..." />
                         </div>
+                        <span class="text-danger font-weight-bold"></span>
                     </div>
                     <div class="form-group col-sm-7 my-0">
                         <label>Email</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="email" class="form-control" placeholder="Enter Your/Institute Email">
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Your Email">
                         </div>
+                        <span class="text-danger font-weight-bold"></span>
                         <!--  -->
                     </div>
                 </div>
@@ -418,8 +442,9 @@
                     <label>Institute Name</label>
                     <div class="form-group has-icon d-flex align-items-center">
                         <img src="{{asset('assets/images/clg1.svg')}}" height="20px" class="form-control-icon ml-2" alt="">
-                        <input type="text" class="form-control" placeholder="Enter Your Institute Name">
+                        <input type="text" id="iname" name="iname" class="form-control" placeholder="Enter Your Institute Name">
                     </div>
+                    <span class="text-danger font-weight-bold"></span>
                     <!--  -->
                 </div>
                 <div class="row mx-0">
@@ -427,16 +452,18 @@
                         <label>Contact no</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" class="form-control" placeholder="Enter Your Contact">
+                            <input type="text" id="mobile" name="contact" class="form-control" placeholder="Enter Your Contact no">
                         </div>
+                        <span class="text-danger font-weight-bold"></span>
                         <!--  -->
                     </div>
                     <div class="form-group col-6 mb-0">
                         <label>City</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="map" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" class="form-control" placeholder="Enter Your City">
+                            <input type="text" id="city" name="city" class="form-control" placeholder="Enter Your City">
                         </div>
+                        <span class="text-danger font-weight-bold"></span>
                         <!--  -->
                     </div>
                 </div>
@@ -444,17 +471,18 @@
                     <label>Address</label>
                     <div class="form-group has-icon d-flex align-items-center">
                         <i data-feather="home" class="form-control-icon ml-2" height="19px"></i>
-                        <input type="text" class="form-control" placeholder="Enter Your Institute Address">
+                        <input type="text" id="addr" name="addr" class="form-control" placeholder="Enter Your Institute Address">
                     </div>
+                    <span class="text-danger font-weight-bold"></span>
                     <!--  -->
                 </div>
                 <div class="row form-group col-12 mx-0 mb-0">
                     <label>Message</label>
                     <div class="form-group has-icon d-flex align-items-start w-100">
                     <i data-feather="message-square" class="form-control-icon ml-2" style="margin-top: 10px;" height="19px"></i>
-                    <textarea style="resize:none;" class="form-control" placeholder="Enter your message"></textarea>
+                    <input type="text" id="msg" name="msg" class="form-control" placeholder="Enter Your Message" />
                     </div>
-                    
+                    <span class="text-danger font-weight-bold"></span>
                 </div>
                 <div class="my-2 ml-3 navbar p-0">
                     <div>
@@ -530,6 +558,80 @@
             })
         });
     </script>
+<script>
+function valid()
+{
+    var f=0;
+        var regex = /^[A-Za-z\s]+$/;
+        $('*').removeClass('border border-danger');
+        if(!regex.test($('#aname').val())){
+            $('#aname').parent().next().html("Please enter valid Admin name.");
+            $('#aname').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#aname').parent().next().html("");
+        }
+
+        regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if(!regex.test($('#email').val()))
+        {
+            $('#email').parent().next().html("Please enter valid email Address.");
+            $('#email').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#email').parent().next().html("");
+        }
+
+        if($('#iname').val()=="")
+        {
+            $('#iname').parent().next().html("Please enter Instistution name.");
+            $('#iname').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#iname').parent().next().html("");
+        }
+
+        regex = /^\d*(?:\.\d{1,2})?$/;
+        var mo= $('#mobile').val();
+        if(!(regex.test($('#mobile').val()) && mo.length == 10))
+        {
+            $('#mobile').parent().next().html("Please enter valid contact no.");
+            $('#mobile').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#mobile').parent().next().html("");
+        }
+
+        if($('#city').val()=="")
+        {
+            $('#city').parent().next().html("Please enter City name.");
+            $('#city').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#city').parent().next().html("");
+        }
+        if($('#addr').val()=="")
+        {
+            $('#addr').parent().next().html("Please enter address of instistute.");
+            $('#addr').parent().addClass('border border-danger');
+            f = 1;
+        }
+        else{
+            $('#addr').parent().next().html("");
+        }
+
+    if(f==1)
+    {
+        return false;
+    }
+
+}
+</script>
 </body>
 
 </html>
