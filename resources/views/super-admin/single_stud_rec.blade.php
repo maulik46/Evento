@@ -87,13 +87,14 @@
                         <th>Event Category</th>
                         <th class="text-center">Total Participation</th>
                     </tr>
-                    <?php $a=0;?>
+                    <?php $a=0;$tot=0;?>
                     @foreach($c_list as $c)
                     <?php $a++?>
                     <tr>
                         <th>{{$a}}</th>
                         <td>{{$c->category_name}}</td>
                         <td class="text-center">{{$c->total_participation}}</td>
+                       <?php  $tot=$tot+$c->total_participation ?>
                     </tr>
                     @endforeach
                     <?php
@@ -102,7 +103,7 @@
                     ?>
                     <tr class="bg-light">
                         <th colspan="2">Total</th>
-                        <th class="text-center">{{$count}}</th>
+                        <th class="text-center">{{$tot}}</th>
                     </tr>
                 </table>
                 </div>
@@ -160,15 +161,23 @@
                         <th>Date</th>
                         <th class="text-center">Event Details</th>
                     </tr>
+                    <?php $events=\DB::table('tblevents')->join('tblparticipant','tblparticipant.eid','tblevents.eid')->where('tblparticipant.senrl','like','%'.$stud['senrl'].'%')->where('cate_id',$c->category_id)->get();
+                    $c=1;?>
+                    @foreach($events as $evnt)
                     <tr>
-                        <th>{{$a}}</th>
-                        <th>{{ucfirst($c->ename)}}</th>
-                        <th>{{$c->rank}}</th>
-                        <td>{{$c->edate}}</td>
+                        <th>{{$c++}}</th>
+                        <th>{{ucfirst($evnt->ename)}}</th>
+                        @if($evnt->rank == 'p')
+                        <th>-</th>
+                        @else
+                        <th>{{$evnt->rank}}</th>
+                        @endif
+                        <td>{{date('d-m-Y',strtotime($evnt->edate))}}</td>
                         <td class="text-center">
-                            <a href="#"><i data-feather="info" class="text-dark event-info" height="18px"></i></a>
+                            <a href="{{url('sevent_info')}}/{{encrypt($evnt->eid)}}"><i data-feather="info" class="text-dark event-info" height="18px"></i></a>
                         </td>
                     </tr>
+                    @endforeach
                 </table>
                 </div>
             </div>
