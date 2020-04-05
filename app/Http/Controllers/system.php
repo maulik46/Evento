@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\notice;
-use session;
+use Session;
 use App\admin;
 use App\log;
 use App\tblcoordinaters;
@@ -81,6 +81,7 @@ class system extends Controller
             session()->put('sysemail',$user->s_email);
             session()->put('sysmobile',$user->s_mobile);
             session()->put('syspropic',$user->s_propic);
+            session()->put('sid',$user->sid);
             return redirect(url('system'));
         }
         session()->flash('danger','Invalid email or password');
