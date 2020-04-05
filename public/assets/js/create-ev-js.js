@@ -72,10 +72,15 @@
         if ($(this).prop("checked") == true) {
             $('#diff-div').prop("checked", true);
             // $('#diff-div').prop("disabled", true);
-        } else {
-            $('#diff-div').prop("checked", false);
-            // $('#diff-div').prop("disabled", false);
+        } 
+});
+$('#diff-div').click(function () {
+    if ($(this).prop("checked") == false) {
+        if($('#diff-class').prop("checked") == true)
+        {
+            $('#diff-class').prop("checked", false);
         }
+    } 
 });
 // end toggle btn script---
 
@@ -226,18 +231,14 @@ function getMessage() {
             $('#efor').parent().next().text("");
         }
 
-        if($('#max-team').val()=="")
-        {
-            $('#max-team').parent().addClass('border border-danger');
-            $('#max-team').parent().next().text("Please enter maximum team");
-            f = 1;
-        }
-
-        if($('#max-team').val()<=1)
+        if($('#max-team').val()<=1 && $('#max-team').val()!="")
         {
             $('#max-team').parent().addClass('border border-danger');
             $('#max-team').parent().next().text("Maximum limit should be more than one");
             f = 1;
+        }
+        else{
+            $('#max-team').parent().next().text("");
         }
 
         if ($('#loc').val() == "") {
