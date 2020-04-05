@@ -107,14 +107,27 @@
                         
                     </div>
                    
-                    <div class="position-fixed" style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left" title="Print">
-                        <a href="#" >
+                    <div id="printer" class="position-fixed"  style="bottom: 10px;right:12px;" data-toggle="tooltip" data-placement="left" title="">
+                        <a href="#"  onclick="printme()">
                             <img src="{{asset('assets/images/svg-icons/co-ordinate/print.svg')}}" class="hover-me-sm rounded-circle" height="55px" alt="">
                         </a>
                     </div>
                 </div>
             </div>
 @endsection
-
+@section('extra-scripts')
+<script>
+function printme()
+    {
+        $('#printer').hide();
+        $('#menu-btn').hide();
+        $('#close-btn').hide();
+        window.print();
+        $('#close-btn').show();
+        $('#menu-btn').show();
+        $('#printer').show();
+    }
+</script>
+@endsection    
 
 
