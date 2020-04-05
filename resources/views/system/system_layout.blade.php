@@ -38,6 +38,20 @@
                </div>
            </div>
     @endif
+    @if($errors->first('photo-upload'))
+        
+        <div class="toast bg-danger fade show border-0 new-shadow rounded position-fixed w-75" style="top:80px;right:30px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+            <div class="toast-body text-white alert mb-1">
+                <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
+                    <i data-feather="x-circle" height="18px" ></i>
+                </a>
+                <div class="mt-2 font-weight-bold font-size-14">
+                {{$errors->first('photo-upload')}}
+                </div> 
+                
+            </div>
+        </div>
+@endif
     @endforeach
     <div id="wrapper">
             <nav class="navbar position-fixed w-100 shadow-none" style="z-index:99!important;">
@@ -230,20 +244,20 @@
     <script src="{{asset('assets/js/vendor.min.js')}}"></script>
     <script src="{{asset('assets/libs/moment/moment.min.js')}}"></script>
     <script src="{{asset('assets/js/app.min.js')}}"></script>
-    @section('extra-scripts')
-<script>
+    <script>
 function valid()
 {
     var f=0;
-    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if($('#sname').val()=="")
+    var regex = /^[A-Za-z\s]+$/;
+    if(!regex.test($('#sname').val()))
     {
-        $('#name-err').text("Please enter name");
+        $('#name-err').text("Please valid enter name");
         f=1;
     }
     else{
         $('#name-err').text("");
     }
+    regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
    if(!regex.test($('#semail').val()))
     {
         
@@ -293,6 +307,8 @@ function check()
     }
 }
 </script>
+    @section('extra-scripts')
+
     @show
 </body>
 </html>
