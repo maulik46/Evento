@@ -20,9 +20,6 @@
 @section('my-content')
 <div class="container-fluid">
     <div class="card mb-0 new-shadow-sm">
-        <a href="{{url('sindex')}}" class="text-dark text-right p-2" id="close-btn">
-            <i data-feather="x-circle" height="20px"></i>
-        </a>
         <div class="text-dark d-flex align-items-center justify-content-center p-1">
             <i data-feather="calendar"></i>
             <span class="h4 text-dark ml-2">Request Of Delete Event</span>
@@ -73,8 +70,9 @@
     </div>
     @endforeach
     @if($a==0)
-    <div class="mt-2 py-5 card text-center new-shadow-sm">
-        <div class="font-weight-bold font-size-16">No events are available to delete!!</div>
+    <div class="mt-2 card text-center new-shadow-sm d-flex justify-content-center flex-column flex-wrap" style="height:70vh;">
+        <div class="no-result-img"></div>
+        <div class="h6 mt-1 darkblue mb-3">No events are available to delete!!</div>
     </div>
     @endif
 </div>

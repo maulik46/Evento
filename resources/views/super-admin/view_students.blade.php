@@ -74,7 +74,7 @@
                 <table id="my-datatable" class="table table-hover mb-0 ">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col"></th>
                             <th scope="col">Enrollment</th>
                             <th scope="col">Roll No</th>
                             <th scope="col">Name</th>
@@ -96,8 +96,8 @@
                             <td>{{$no}}</td>
                             <td>{{$s['senrl']}}</td>
                             <td>{{$s['rno']}}</td>
-                            <td>{{ucfirst($s['sname'])}}</td>
-                            <td>{{$s['dob']}}</td>
+                            <th>{{ucfirst($s['sname'])}}</th>
+                            <td>{{date('d/m/Y',strtotime($s['dob']))}}</td>
                             <td>{{ucfirst($s['class'])}}</td>
                             <td>{{$s['division']}}</td>
                             <td>{{$s['email']}}</td>
