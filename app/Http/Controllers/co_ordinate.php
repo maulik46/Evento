@@ -185,7 +185,7 @@ class co_ordinate extends Controller
                 $message=$reason;
                 
                 $tblap=DB::table('tblapproval')->insert(
-                        ['eid'=>$eid,'reason'=>$message,'status'=>1,'cid'=>session::get('cid')]
+                        ['eid'=>$eid,'reason'=>$message,'cid'=>session::get('cid')]
                     );
                 if(isset($tblap))
                 {
