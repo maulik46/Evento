@@ -184,7 +184,7 @@
             @endforeach
         </div>
     </div>
-    <div class="position-fixed" style="bottom: 68px;right:17px;" data-toggle="tooltip" data-placement="left" title="Print">
+    <div class="position-fixed" id="printer" onclick="printme()" style="bottom: 68px;right:17px;" data-toggle="tooltip" data-placement="left" title="Print">
         <a href="#">
             <img src="{{asset('assets/images/svg-icons/co-ordinate/print.svg')}}" height="55px" class="hover-me-sm rounded-circle" alt="">
         </a>
@@ -194,7 +194,16 @@
 @section('extra-scripts')
 
 <script>
-
+function printme()
+    {
+        $('#printer').hide();
+        $('#menu-btn').hide();
+        $('#close-btn').hide();
+        window.print();
+        $('#close-btn').show();
+        $('#menu-btn').show();
+        $('#printer').show();
+    }
 
 </script>
 
