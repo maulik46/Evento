@@ -178,6 +178,7 @@ class s_admin extends Controller
     public function approval()
     {
         $apl=tblevent::join('tblapproval','tblapproval.eid','=','tblevents.eid')
+        ->join('tblcategory','tblcategory.category_id','tblevents.cate_id')
         ->join('tblcoordinaters','tblcoordinaters.cid','=','tblapproval.cid')->where('tblevents.clgcode',Session::get('aclgcode'))->get()->toarray();
         return view('super-admin/approval',['delevnt'=>$apl]);
     }
