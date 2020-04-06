@@ -49,7 +49,7 @@
                         <span>Event Co-ordinator</span>  {{ucfirst($del['cname'])}}
                     </div>
                     <div>
-                        <span>Event-Type</span>  {{ucfirst($del['category'])}}
+                        <span>Event-Type</span>  {{ucfirst($del['category_name'])}}
                     </div>
                     <div>
                         <span>Reason</span> {{ucfirst($del['reason'])}}

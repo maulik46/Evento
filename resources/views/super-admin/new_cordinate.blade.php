@@ -321,11 +321,19 @@
         var check = 0;
         var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         var phoneno = /^\d{10}$/;
+        var regex = /^[A-Za-z\s]+$/;
+        $('*').removeClass('border border-danger');
         if ($('#cname').val() == "") {
             $('#cname').parent().addClass('border border-danger');
             $('#cname').parent().next().text("Please enter Co-ordinator Name");
             f = 1;
         } 
+        else if(!regex.test($('#cname').val()))
+        {
+            $('#cname').parent().addClass('border border-danger');
+            $('#cname').parent().next().text("Please enter valid Co-ordinator Name");
+            f = 1;
+        }
         else {
             $('#cname').parent().next().text("");
         }
@@ -399,7 +407,7 @@
 
         if ($('#cocategory').val() == "") {
             $('#cocategory').parent().addClass('border border-danger');
-            $('#cocategory').parent().next().text("Please select gender");
+            $('#cocategory').parent().next().text("Please select event category");
             f = 1;
         } 
         else {

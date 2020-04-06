@@ -178,6 +178,7 @@ class s_admin extends Controller
     public function approval()
     {
         $apl=tblevent::join('tblapproval','tblapproval.eid','=','tblevents.eid')
+        ->join('tblcategory','tblcategory.category_id','tblevents.cate_id')
         ->join('tblcoordinaters','tblcoordinaters.cid','=','tblapproval.cid')->where('tblevents.clgcode',Session::get('aclgcode'))->get()->toarray();
         return view('super-admin/approval',['delevnt'=>$apl]);
     }
@@ -984,13 +985,13 @@ class s_admin extends Controller
         return redirect(url('sindex'));
     }
 
-    public function single_stud_rec($senrl)
+   public function single_stud_rec($senrl)
     {
         $senrl=decrypt($senrl);
         $stud=tblstudent::where('senrl',$senrl)->first();
         $category_name_list=\DB::select(\DB::raw("select count(senrl) as total_participation,category_name FROM tblparticipant,tblcategory,tblevents where tblparticipant.eid=tblevents.eid and tblcategory.category_id=tblevents.cate_id and senrl like '%$senrl%' group by category_name "));
         
-        $category = \DB::select(\DB::raw("select count(senrl) as total_participation,category_name,rank,edate,ename FROM tblparticipant,tblcategory,tblevents where tblparticipant.eid=tblevents.eid and tblcategory.category_id=tblevents.cate_id and senrl like '%$senrl%' group by category_name,rank,edate,ename "));
+        $category =  \DB::table('tblcategory')->where('clgcode',Session::get('aclgcode'))->get();
 
         $alldata=[
             'stud'=>$stud,

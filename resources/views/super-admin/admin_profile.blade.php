@@ -319,17 +319,17 @@
 function valid()
 {
     var f=0;
-    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if($('#aname').val()=="")
+    var regex = /^[A-Za-z\s]+$/;
+     if(!regex.test($('#aname').val()))
     {
-        $('#aname-err').text("Please enter name");
+        $('#aname-err').text("Please enter valid name");
         f=1;
     }
     else{
         $('#aname-err').text("");
     }
 
-
+    regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if($('#aemail').val()=="")
     {
         $('#email-err').text("Please enter email");

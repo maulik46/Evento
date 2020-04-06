@@ -177,10 +177,15 @@
             $('#clg_mob_err').text("");
         }
 
-
+        regex = /^[A-Za-z\s]+$/;
         if($('#city_name').val()=="")
         {
             $('#city_name_err').text('Please Enter City Name');
+            $('#city_name').addClass('border border-danger');
+            f=1;
+        }
+        else if(!regex.test($('#city_name').val())){
+            $('#city_name_err').text('Please Enter valid City Name');
             $('#city_name').addClass('border border-danger');
             f=1;
         }

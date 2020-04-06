@@ -29,7 +29,7 @@
 @section('my-content')
             <div class="container-fluid">
             <div class="mb-0 pt-2 card new-shadow-sm">
-                <a href="{{url('cindex')}}" class="text-right text-dark px-2">
+                <a href="javascript:window.history.back()" class="text-right text-dark px-2">
                     <i data-feather="x-circle" id="close-btn" height="20px"></i>
                 </a>
                 <h2 class="font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</h2>
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <hr class="my-1">
-                        <a href="" class="btn btn-sm pr-3 pl-2 rounded btn-success font-weight-bold mt-1 mb-3 new-shadow-sm hover-me-sm">
+                        <a href="#" id="printer" onclick="printme()"  class="btn btn-sm pr-3 pl-2 rounded btn-success font-weight-bold mt-1 mb-3 new-shadow-sm hover-me-sm">
                             <i data-feather="printer" height="19px"></i>
                             Print
                         </a>
@@ -186,5 +186,17 @@ $(document).ready(function(){
      <?php } ?>
 })
 </script> -->
+<script>
+function printme()
+    {
+        $('#printer').hide();
+        $('#menu-btn').hide();
+        $('#close-btn').hide();
+        window.print();
+        $('#close-btn').show();
+        $('#menu-btn').show();
+        $('#printer').show();
+    }
+</script>
 @endsection       
 

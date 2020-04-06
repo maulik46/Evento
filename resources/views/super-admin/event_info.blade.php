@@ -24,8 +24,8 @@
                         <a href="javascript:window.history.go(-1)" class="text-right text-dark p-2">
                             <i data-feather="x-circle" id="close-btn" height="20px"></i>
                         </a>
-                        <div class="position-absolute print-btn bg-success new-shaow-sm" style="padding:0.5rem 0.3rem;top: 15%;left:100%;width:0px;border-radius:0px 5px 5px 0px;" data-toggle="tooltip" data-placement="left" title="Print">
-                            <a href="#" class="printer">
+                        <div onclick="window.print()" class="position-absolute print-btn bg-success new-shaow-sm" style="padding:0.5rem 0.3rem;top: 15%;left:100%;width:0px;border-radius:0px 5px 5px 0px;" data-toggle="tooltip" data-placement="left" >
+                            <a href="#"  class="printer">
                                 <i data-feather="printer" class="text-white"></i>
                             </a>
                         </div>
@@ -91,5 +91,4 @@
                 </div>
             </div>
 @endsection
-
 

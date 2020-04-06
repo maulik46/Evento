@@ -321,16 +321,19 @@
 <script>
 function valid()
 {
-    var f=0;
-    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if($('#cname').val()=="")
+    
+     var f=0;
+    var regex = /^[A-Za-z\s]+$/;
+     if(!regex.test($('#cname').val()))
     {
-        $('#cname-err').text("Please enter name");
+        $('#cname-err').text("Please enter valid name");
         f=1;
     }
     else{
         $('#cname-err').text("");
     }
+
+    regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if($('#cemail').val()=="")
     {
         $('#email-err').text("Please enter email");
@@ -345,7 +348,6 @@ function valid()
     else{
         $('#email-err').text("");
     }
-
     regex = /^\d*(?:\.\d{1,2})?$/; 
     var mo= $('#mobile').val();
     if($('#mobile').val()=="")
