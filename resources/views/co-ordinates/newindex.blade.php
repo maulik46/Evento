@@ -420,7 +420,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                            @endif
+    @endif
                         <?php
                             $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
                         ?>
@@ -449,10 +449,10 @@
                                 
                             </td>
                         </tr>
-                        @endif
-                        @endif
-                        @endif
-                        @endforeach
+    @endif
+    @endif
+    @endif
+    @endforeach
                     </tbody>
                 </table>
             </div> 

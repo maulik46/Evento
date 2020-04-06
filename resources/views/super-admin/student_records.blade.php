@@ -108,7 +108,7 @@ use \App\tblstudent;
                             <td>{{$no}}</td>
                             <td>{{$s['senrl']}}</td>
                             <td>{{$s['rno']}}</td>
-                            <td class="font-weight-bold">{{ucfirst($s['sname'])}}</td>
+                            <th>{{ucfirst($s['sname'])}}</th>
                             <td>{{ucfirst($s['class'])}}</td>
                             <td>{{$s['division']}}</td>
                             <td>{{ucfirst($s['gender'])}}</td>

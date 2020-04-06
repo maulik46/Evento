@@ -25,7 +25,7 @@ use App\tblstudent;
         <hr class="my-0">
     </div>
     <div class="card new-shadow-sm" >
-        <div class="card-body">
+        <div class="card-body px-1 px-sm-2">
             <div class="table-responsive my-scroll">
                 <table class="table table-hover table-nowrap mb-0" >
                     <thead style="background-color:#1ce1ac40;color:#000;">
@@ -62,11 +62,4 @@ use App\tblstudent;
 </div>
 @endsection
 
-@section('extra-scripts')
-<script>
-$(document).ready(function(){
-    $('tbody tr:first td:first').next().css("font-weight","bold");
-    $('tbody tr:last').css("display","none");
-})
-</script>
-@endsection
+

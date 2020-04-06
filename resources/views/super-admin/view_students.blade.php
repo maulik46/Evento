@@ -72,7 +72,7 @@
             </div> -->
             <div class="table-responsive overflow-auto my-scroll">
                 <table id="my-datatable" class="table table-hover mb-0 ">
-                    <thead>
+                    <thead class="light-bg2">
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Enrollment</th>
@@ -104,7 +104,7 @@
                             <td>{{$s['mobile']}}</td>
                             <td>{{ucfirst($s['gender'])}}</td>
                             <td>{{$s['address']}}</td>
-                            <td >
+                            <td>
                                 <a href="{{url('update_stud')}}/{{encrypt($s['senrl'])}}" class="btn text-warning p-0">
                                 <i data-feather="edit" height="19px"></i>
                                 </a>
@@ -130,17 +130,18 @@
 <!-- Datatables init -->
 <!-- <script src="{{asset('assets/js/pages/datatables.init.js')}}"></script> -->
 <script>
+$(document).ready(function(){
 $("#my-datatable").DataTable({
     "language": {
       "emptyTable": "No data available in table"
-    },
+    }
     
     // "lengthMenu": [ 3, 25, 50, 75, 100 ]
 });
-$('#my-datatable_info').parent().remove();
-$('#my-datatable_paginate .pagination').css({"justify-content":"flex-start","margin":"5px"});
+    $('#my-datatable_info').parent().remove();
+    $('#my-datatable_paginate .pagination').css({"justify-content":"flex-start","margin":"5px"});
+});
 </script>
-<script src="{{asset('assets/js/sweetalert2.min.js')}}"></script>
 <script>
 function confirm(enrl){
      Swal.fire({

@@ -79,8 +79,9 @@
                 </div>
                 </div>
             </div>
+
             <div class="card new-shadow-sm mb-3">
-                <div class="card-body p-2 overflow-auto my-scroll">
+                <div class="card-body p-2  overflow-auto my-scroll">
                 <table class="table text-dark mb-1">
                     <tr class="light-bg1">
                         <th>#</th>
@@ -109,41 +110,6 @@
                 </div>
             </div>
 
-            
-            <!-- <div class="card new-shadow-sm mb-3">
-                <div class="card-body p-2 overflow-auto my-scroll">
-                <table class="table text-dark mb-1">
-                    <tr class="bg-light" >
-                        <th class="text-danger p-1" colspan="5">1. &nbsp;Sport Events</th>
-                    </tr>
-                    <tr class="light-bg1">
-                        <th>#</th>
-                        <th>Competition name</th>
-                        <th>Rank</th>
-                        <th>Date</th>
-                        <th class="text-center">Event Details</th>
-                    </tr>
-                    <tr>
-                        <th>1</th>
-                        <th>Rakhi Making </th>
-                        <th>1</th>
-                        <td>12/12/2019</td>
-                        <td class="text-center">
-                            <a href="#"><i data-feather="info" class="text-dark event-info" height="18px"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>2</th>
-                        <th>PHP Quiz</th>
-                        <th>3</th>
-                        <td>12/12/2019</td>
-                        <td class="text-center">
-                            <a href="#"><i data-feather="info" class="text-dark event-info" height="18px"></i></a>
-                        </td>
-                    </tr>
-                </table>
-                </div>
-            </div> -->
             <?php $a=0;?>
             @foreach($category as $c)
             <?php $a++;?>
@@ -166,7 +132,7 @@
                     @foreach($events as $evnt)
                     <tr>
                         <th>{{$c++}}</th>
-                        <th>{{ucfirst($evnt->ename)}}</th>
+                        <td>{{ucfirst($evnt->ename)}}</td>
                         @if($evnt->rank == 'p')
                         <th>-</th>
                         @else
@@ -181,6 +147,7 @@
                 </table>
                 </div>
             </div>
+           
             @endforeach
         </div>
     </div>

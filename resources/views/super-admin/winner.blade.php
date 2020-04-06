@@ -18,9 +18,10 @@
 @section('my-content')
 <div class="container-fluid my-5">
     <div class="card new-shadow-sm">
-        <div class="card-body">
+        <div class="card-body px-1 px-sm-2">
             <div class="navbar px-0">
                 <div class="mt-2 h4">
+                    <img src="{{asset('assets/images/svg-icons/student-dash/winner/ranking.svg')}}" height="33px" alt="">
                     <span>Past Winners</span>
                 </div>
                 <a href="#" class=" badge-pill badge-soft-dark btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter hover-me-sm">
@@ -33,7 +34,7 @@
             </div>
             <hr class="my-0">
             <div id="filter-box" class="card position-relative w-100 mb-0" style="left:0px;display:none;border:1px solid #e9e9e9;">
-                <div class="card-body p-2">
+                <div class="card-body px-1 px-sm-2">
                 <div class="row justify-content-between">
                 <div class="col-md-5 col-12">
                     <div class="form-group has-icon d-flex align-items-center px-0 mb-1">
@@ -126,13 +127,13 @@
                     <div class="p-2"  >
                         <span class="h5">{{ucfirst($event->ename)}}</span>
                         @if($event->e_type=="solo")
-                        <span class="badge badge-pill badge-info px-3">{{ucfirst($event->e_type)}}</span>
+                        <span class="badge badge-info px-2">{{ucfirst($event->e_type)}}</span>
                         @else
-                        <span class="badge badge-pill badge-warning px-3">{{ucfirst($event->e_type)}}</span>
+                        <span class="badge badge-warning px-2">{{ucfirst($event->e_type)}}</span>
                         @endif
                     </div>
                     <div class="mr-2">
-                        <span class="badge badge-primary">{{date('d/m/Y',strtotime($event->enddate))}}</span>
+                        <span class="badge badge-primary px-2">{{date('d/m/Y',strtotime($event->enddate))}}</span>
                     </div>
                 </div>
                 <div class="table-responsive">

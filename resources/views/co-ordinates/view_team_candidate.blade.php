@@ -67,11 +67,3 @@
 </div>
 @endsection
 
-@section('extra-scripts')
-<script>
-$(document).ready(function(){
-    // $('tbody tr:first td:first').next().css("font-weight","bold");
-    // $('tbody tr:last').css("display","none");
-})
-</script>
-@endsection

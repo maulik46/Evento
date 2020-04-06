@@ -18,7 +18,7 @@
 @section('my-content')
 <div class="container-fluid my-5">
     <div class="card new-shadow-sm">
-        <div class="card-body">
+        <div class="card-body px-1 px-sm-2">
             <div class="navbar px-0">
                 <div class="mt-2 h4">
                     <img src="{{asset('assets/images/svg-icons/student-dash/winner/ranking.svg')}}" height="33px" alt="">
@@ -95,7 +95,7 @@
                     </div>
                     <div class="col col-md-3">
                         <h6>Event type</h6>
-                        <div class="row flex-column justify-content-start justify-content-sm-around mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
+                        <div class="row justify-content-start justify-content-sm-around mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
                         <div class="custom-control custom-checkbox m-1">
                             <input type="checkbox" name="cat[]" onclick="filter()" value="team" class="custom-control-input" id="cat1">
                             <label class="custom-control-label" for="cat1">Team</label>

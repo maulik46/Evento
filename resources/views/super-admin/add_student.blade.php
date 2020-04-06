@@ -89,7 +89,7 @@
 @endif
 @if($message = Session::get('success'))
     <div class="bg-success fade show border-0 new-shadow rounded-0 position-fixed w-100" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="z-index:99;top:73px;left:0px">
-        <div class="text-white alert mb-0 py-0">
+        <div class="text-white alert mb-0 py-3">
             <a href="#" class=" text-white float-right" data-dismiss="alert" aria-label="Close">
                 <i data-feather="x-circle"  height="20px" ></i>
             </a>

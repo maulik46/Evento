@@ -34,7 +34,7 @@
             </div>
             <hr class="my-0">
             <div id="filter-box" class="card position-relative w-100 mb-0" style="left:0px;display:none;border:1px solid #e9e9e9;">
-                <div class="card-body p-2">
+                <div class="card-body px-1 px-sm-2">
                 <div class="row justify-content-between">
                 <div class="col-md-5 col-12">
                     <div class="form-group has-icon d-flex align-items-center px-0 mb-1">
@@ -96,7 +96,7 @@
                     </div>
                     <div class="col col-md-3">
                         <h6>Event type</h6>
-                        <div class="row flex-column justify-content-start justify-content-sm-around mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
+                        <div class="row justify-content-start justify-content-sm-around mx-0 p-2 rounded-lg" style="border:1px solid #edebeb;">
                         <div class="custom-control custom-checkbox m-1">
                             <input type="checkbox" name="cat[]" onclick="filter()" value="team" class="custom-control-input" id="cat1">
                             <label class="custom-control-label" for="cat1">Team</label>
