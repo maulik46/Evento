@@ -101,7 +101,10 @@
                                 <i data-feather="key" class="icon-dual-info icon-xs mr-2"></i>
                                 <span>Change Password</span>
                             </a>
-
+                            <a href="{{url('backup')}}" class="dropdown-item notify-item my-2">
+                                <i data-feather="book" class="icon-dual-info icon-xs mr-2"></i>
+                                <span>Back up</span>
+                            </a>
                             <div class="dropdown-divider"></div>
 
                             <a href="{{url('alogout')}}" class="dropdown-item notify-item">
