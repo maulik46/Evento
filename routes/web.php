@@ -327,6 +327,8 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::post('event_filter','s_admin@event_filter');
 
         route::any('single_record/{senrl}','s_admin@single_stud_rec');
+    
+        route::get('backup','s_admin@backup');
     });
 
 // xoxoxxxxxxxxxxxxx super-admin dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
@@ -392,4 +394,4 @@ route::post('/check_login', 'system@check_login');
 
  });
 
-route::get('backup','s_admin@backup');
+
