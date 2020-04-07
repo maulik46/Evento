@@ -223,7 +223,7 @@ co_ordinate::remain_result();
             @else
             <div class="card new-shadow-sm">
                 <div class="card-body px-0">
-                    <h5 class="card-title mt-0 mb-0 header-title px-4">Revenue </h5>
+                    <h5 class="card-title mt-0 mb-0 header-title px-4">Participation rate in event</h5>
                     <!-- <div id="sales-by-category-chart" class="apex-charts mb-0 mt-3" dir="ltr"></div> -->
                     
                     <div id="chart-2" class="apex-charts mb-0 mt-3"></div>
@@ -556,7 +556,7 @@ var area = {
         plotOptions: {
           bar: {
             horizontal: false,
-            columnWidth: '10%'
+            columnWidth: '30%'
           },
         },
         dataLabels: {

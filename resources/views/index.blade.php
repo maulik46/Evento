@@ -139,7 +139,7 @@
                 <a href="../banner/{{$b}}" target="_blank">
                     <div style="height: 300px; width: 100%;background-color: #d9e4f5;background-image:url('../banner/{{$b}}');background-repeat:no-repeat;background-position:center;background-size:cover;')" class="d-flex align-items-center justify-content-end flex-column">
 
-                        <h1 class="bg-soft-dark w-100 text-center text-white font-size-24 mb-5 font-weight-bold">{{ucfirst($e['ename'])}}</h1>
+                        <h1 class="w-100 text-center text-white font-size-24 mb-5 font-weight-bold" style="background-color:rgba(0,0,0,0.5);">{{ucfirst($e['ename'])}}</h1>
                     </div>
                   </a>
                 </div>

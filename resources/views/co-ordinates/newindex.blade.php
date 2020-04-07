@@ -333,54 +333,7 @@
         @endif
         @endforeach
         
-        <div class="col-md-6 col-xl-4 col-sm-6">
-            <div class="card new-shadow-sm mt-2 mb-3" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom"
-                title="This Event is Currently disabled. You need approval from Administrator to delete it.">
-                <div class="card-body p-0">
-                    <div class="media p-3">
-                        <div class="media-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="text-muted badge rounded-pill badge-soft-warning  px-3">Team
-                                </span>
-                                <div>
-                                    <a href="#" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                                        aria-expanded="false" class="dropdown-toggle disabled">
-
-                                        <i id="event-info" data-feather="more-vertical" class="text-dark"
-                                            height="20px"></i>
-
-                                    </a>
-                                    <div class="dropdown-menu event-option profile-dropdown-items dropdown-menu-right ">
-                                        <a href="{{url('/event_info')}}" class="dropdown-item">
-                                            <i data-feather="info" class="icon-dual-info icon-xs mr-2"></i>
-                                            <span>About Event</span>
-                                        </a>
-                                        <a href="{{url('/event_info')}}" class="dropdown-item my-1">
-                                            <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
-                                            <span>Update Event</span>
-                                        </a>
-                                        <a href="#">
-                                            <i data-feather="trash-2" class="icon-dual-danger icon-xs mr-2"></i>
-                                            <span class="text-danger">Delete Event</span>
-                                        </a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 class="mb-0 mt-3">Cricket</h4>
-                            <span class="text-muted1">21/12/2019</span>
-                        </div>
-                    </div>
-                    <div class="bg-light">
-                        <a href="{{url('/view_candidates')}}"
-                            class="text-center btn btn-light btn-block rounded-0 text-dark d-flex align-items-center justify-content-center disabled">
-                            <i data-feather="eye" height="18px"></i>
-                            <span>View Candidates</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div><!-- end row -->
             
     <?php $c=0 ?>

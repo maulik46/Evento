@@ -210,7 +210,7 @@
     @foreach($candidates as $p)
         <?php $enrl=explode("-",$p['senrl'])?>
         @foreach($enrl as $e)
-            <?php $sinfo = tblstudent::select('senrl', 'sname', 'class', 'division')->where('senrl', $p['senrl'])->first(); ?>
+            <?php $sinfo = tblstudent::select('senrl', 'sname', 'class', 'division','gender')->where('senrl', $p['senrl'])->first(); ?>
         
         <div class="bg-white p-1 my-2 px-1 pb-1 new-shadow-sm stud-info rounded">
                 <div class="col-md-12 font-weight-bold text-dark d-flex justify-content-between align-items-center flex-wrap">
