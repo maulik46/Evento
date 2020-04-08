@@ -545,7 +545,7 @@ class student extends Controller
             echo json_encode($data);
         }
     }
-    public function filter(Request $req)
+     public function filter(Request $req)
     {
         $class=$req->clas;
         $div=$req->div;
@@ -553,17 +553,7 @@ class student extends Controller
         $year=$req->year;
         $sname=$req->sname;
         $ename=$req->ename;
-        if(Session::has('clgcode'))
-        {
-            $clgcode=Session::get('clgcode');
-        }
-        else if(Session::has('cclgcode'))
-        {
-            $clgcode=Session::get('cclgcode');
-        }
-        else{
-            $clgcode=Session::get('aclgcode');
-        }
+        $clgcode=$req->clgcode;
         $c=0;
         $team="";
         if(!$cat)
