@@ -562,7 +562,7 @@
 function valid()
 {
     var f=0;
-        var regex = /^[A-Za-z\s]+$/;
+        var regex = /^[A-Za-z\.\s]+$/;
         $('*').removeClass('border border-danger');
         if(!regex.test($('#aname').val())){
             $('#aname').parent().next().html("Please enter valid Admin name.");
