@@ -101,7 +101,7 @@
 <script>
     function validForm(){
         var f=0;
-        var regex = /^[A-Za-z\s]+$/;
+        var regex = /^[A-Za-z\.\s]+$/;
         $('*').removeClass('border border-danger');
         if($('#admin_name').val()=="")
         {
