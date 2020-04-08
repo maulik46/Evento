@@ -249,6 +249,7 @@ function filter()
     var div = new Array();
     var cat = new Array();
     var year=$('#year').val();
+    var clgcode='<?php echo Session::get('aclgcode') ?>';
     $("input[name='clas[]']").each( function () {
         if($(this).prop('checked') == true){
             clas.push($(this).val());
@@ -279,6 +280,7 @@ function filter()
                year:year,
                sname:sname,
                ename:ename,
+               clgcode:clgcode
             },
             success: function (data) {
                 $('#tbody').html(data.msg);
