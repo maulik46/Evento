@@ -323,7 +323,7 @@ function valid()
 {
     
      var f=0;
-    var regex = /^[A-Za-z\s]+$/;
+    var regex = /^[A-Za-z\.\s]+$/;
      if(!regex.test($('#cname').val()))
     {
         $('#cname-err').text("Please enter valid name");
