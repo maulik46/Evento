@@ -10,7 +10,7 @@
                    </div> -->
                 <div>
                    <?php $c=0;?>
-                   @foreach($notice as $nt)
+                @foreach($notice as $nt)
                    <?php 
                         $c++;
                         if($c==1)
@@ -70,14 +70,19 @@
                             </div>
                     </div>
                     </div>
-                    @endforeach
-                       
-                   </div>
+                @endforeach
+                @if($c==0)
+                <div class="d-flex align-items-center justify-content-center flex-column bg-white rounded new-shadow-sm" style="height:70vh;">
+                    <img src="{{asset('assets/images/empty.svg')}}" height="40px" alt="">
+                    <h6>You have no notice available..!</h6>
+                </div>
+                @endif    
+                </div>
                 </div>
             @endsection
-            @section('extra-scripts')
-            <script>
-            $('.notice-msg').find('p').css({'margin-bottom':'0px'});
-            </script>
-            @endsection
+@section('extra-scripts')
+<script>
+$('.notice-msg').find('p').css({'margin-bottom':'0px'});
+</script>
+@endsection
 

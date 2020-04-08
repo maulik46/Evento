@@ -225,7 +225,7 @@
             @if($c==0)
             <div class="d-flex align-items-center justify-content-center flex-column" style="height:70vh;">
                 <img src="{{asset('assets/images/empty.svg')}}" height="40px" alt="">
-                <h6>You have no notice..!</h6>
+                <h6>You have no notice available..!</h6>
             </div>
             @endif    
             </div>

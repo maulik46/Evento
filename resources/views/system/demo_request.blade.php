@@ -5,8 +5,7 @@
 <div class="container-fluid mt-2">
     <div class="text-center py-2 rounded card shadow-none mb-0">
         <span class="h4">
-        <i class="uil uil-envelope-edit h4 mr-1"></i>
-            Demo Request
+            Subscription Request
         </span>
     </div>
     <div class="mt-2 rounded-lg p-3 px-1 px-sm-2" style="border:1px solid #e2e7f1;">
@@ -34,7 +33,10 @@
         </div>
     @endforeach
     @if($c==0)
-        <h1>Evento</h1>
+        <div class="d-flex align-items-center justify-content-center flex-column bg-white rounded" style="height:70vh;">
+            <img src="{{asset('assets/images/empty.svg')}}" height="40px" alt="">
+            <h6>You have no notice available..!</h6>
+        </div>
     @endif
     </div>
 </div>

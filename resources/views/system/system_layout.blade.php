@@ -96,19 +96,19 @@
                                 </li>
                                 <li class="my-2">
                                     <a href="{{url('/s_add_college')}}">
-                                        <i class="text-dark uil uil-graduation-hat h5"></i>
+                                        <i class="text-dark uil uil-plus-circle h6"></i>
                                         <span class="font-weight-bold font-size-14">Add College</span>
                                     </a>
                                 </li>
                                 <li class="my-2">
                                     <a href="{{url('/s_demo_request')}}">
                                         <i class="text-dark uil uil-envelope-add h6"></i>
-                                        <span class="font-weight-bold font-size-14">Demo Requests</span>
+                                        <span class="font-weight-bold font-size-13">Subscription Requests</span>
                                     </a>
                                 </li>
                                 <li class="my-2">
                                     <a href="{{url('/s_send_notice')}}">
-                                        <i class="text-dark uil uil-envelope h6"></i>
+                                        <i class="text-dark uil uil-envelope-edit h6"></i>
                                         <span class="font-weight-bold font-size-14">Create Notice</span>
                                     </a>
                                 </li>

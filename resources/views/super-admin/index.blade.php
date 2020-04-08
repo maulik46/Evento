@@ -321,10 +321,12 @@ co_ordinate::remain_result();
     <div class="card mt-2 new-shadow-sm">
         <div class="card-body p-2">
             <div class="row mx-0">
-            <?php $cat=\DB::table('tblcategory')->select('category_name','category_id')->where([['clgcode',Session::get('aclgcode')],['status','a']])->get();
+            <?php 
+            $a=0;
+            $cat=\DB::table('tblcategory')->select('category_name','category_id')->where([['clgcode',Session::get('aclgcode')],['status','a']])->get();
             ?>
                 @foreach($cat as $category)
-                <?php $ev=App\tblevent::where([['cate_id',$category->category_id],['enddate','>',date('Y-m-d')]])->get();
+                <?php $a=1;$ev=App\tblevent::where([['cate_id',$category->category_id],['enddate','>',date('Y-m-d')]])->get();
                 $e = "";
                 foreach ($ev as $te) {
                     $e .= ucfirst($te['ename']) . ",";
@@ -339,6 +341,13 @@ co_ordinate::remain_result();
               @endforeach 
               
             </div>
+            @if($a==0)
+            <div class="py-4">
+            <h6 class="text-center" style="color:#000;">
+            <i data-feather="info" class="text-dark icon-dual" height="20px"></i>
+            You haven't created any category..!</h6>
+            </div>
+            @endif
         </div>
     </div>                                    
     <div class="row">
@@ -429,9 +438,16 @@ co_ordinate::remain_result();
                                     </td>
                                 </tr>
                                 @endforeach
-
+                                
                             </tbody>
                         </table>
+                        @if($c==0)
+                        <div class="py-5">
+                            <h6 class="text-center"  style="color:#000">
+                            <i data-feather="info" class="text-dark icon-dual" height="20px"></i>
+                            No events available in system..!</h6>
+                        </div>
+                        @endif
                     </div> <!-- end table-responsive-->
                 </div> <!-- end card-body-->
             </div> <!-- end card-->

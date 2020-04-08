@@ -156,13 +156,9 @@
                     </div>
                 @endif
             </div>
-        </div>    
-            
-                <!-- <canvas id="canvas"></canvas> -->
-                
+        </div>         
     </div>
 
-<!-- charts over -->
 
     <div class="card mt-2 mb-0 new-shadow-sm">
         <div class="h5 d-flex align-items-center ml-3">
@@ -244,8 +240,16 @@
                             </td>
                         </tr>
                         @endforeach
+                        
                     </tbody>
                 </table>
+                @if($c==0)
+                <div class="py-5">
+                    <h6 class="text-center" style="color:#000">
+                    <i data-feather="info" class="text-dark icon-dual" height="20px"></i>
+                    No events available in system..!</h6>
+                    </div>
+                @endif
             </div> <!-- end table-responsive-->
         </div> <!-- end card-body-->
     </div> <!-- end card-->
@@ -265,7 +269,9 @@
         </div>
     </div> 
     <div class="row" id="event-list">
+        <?php $cnt=0;?>
         @foreach($events as $e)
+        <?php $c=1;?>
         @if($e['cid']==Session::get('cid'))
         @if($e['edate']>date('Y-m-d'))
         <div class="col-md-6 col-xl-4 col-sm-6">
@@ -329,13 +335,19 @@
                 </div>
             </div>
         </div>
+        </div>
         @endif
         @endif
         @endforeach
         
         
     </div><!-- end row -->
-            
+    @if($cnt==0)
+    <div class="card mt-2 py-5 new-shadow-sm">
+        <h6 class="text-center p-2" style="color:#000;">You haven't created any events..!</h>
+    </div>
+    @endif    
+
     <?php $c=0 ?>
     @foreach($events as $e)
     @if($e['cid']==Session::get('cid'))

@@ -16,7 +16,7 @@
 </style>
 @endsection
 @section('my-content')
-<div class="container-fluid my-5">
+<div class="container-fluid px-0 my-5">
     <div class="card new-shadow-sm">
         <div class="card-body px-1 px-sm-3">
             <div class="navbar px-2">
@@ -121,9 +121,11 @@
                 </div>
             </div>
         <div class="row mt-2">
+        <?php $cnt=0;?>
         @foreach($winners as $winner)
             <?php 
                 $event=App\tblevent::select('eid','ename','e_type','enddate')->where('eid',$winner->eid)->first();
+                $cnt=1;
             ?>
             <div class="col-lg-6 col-md-12 my-2">
             <div class="card mb-0 rounded-0  new-shadow-sm">
@@ -195,34 +197,20 @@
                             </tr>
                         @endif
                         @endforeach
-                            <!-- <tr>
-                                <th scope="row">
-                                    <img src="assets/images/svg-icons/student-dash/winner/2.svg" height="22px" alt="2">
-                                </th>
-                                <td>Dishant Sakariya</td>
-                                <td>TYBCA</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <img src="assets/images/svg-icons/student-dash/winner/3.svg" height="22px" alt="3">
-                                </th>
-                                <td>Yash Parmar</td>
-                                <td>TYBCA</td>
-                                <td>3</td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div>
             </div>
             </div>
         @endforeach
-         
+        
         </div>
-            
-        <div class="row mt-4">
-            
+        @if($cnt==0)
+        <div class="text-center" style="height:50vh;">
+            <div class="no-result-img"></div>
+            <h6 class="dark-blue mt-1">No winner students data found..!</h6>
         </div>
+        @endif
         <!-- end row tag -->
         </div>
     </div>

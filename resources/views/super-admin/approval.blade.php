@@ -72,7 +72,7 @@
     @if($a==0)
     <div class="mt-2 card text-center new-shadow-sm d-flex justify-content-center flex-column flex-wrap" style="height:70vh;">
         <div class="no-result-img"></div>
-        <div class="h6 mt-1 darkblue mb-3">No events are available to delete!!</div>
+        <div class="h6 mt-1 darkblue mb-3">No event delete request is available!!</div>
     </div>
     @endif
 </div>
