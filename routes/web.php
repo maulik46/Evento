@@ -188,7 +188,7 @@ Route::group(['middleware' => 'co_session_check'], function () {
             return view('co-ordinates/winner',['winners'=>$winners,'ddclass'=>$ddclass]);
         });
     
-        Route::post('/afilter','student@filter');
+        Route::post('/cfilter','student@filter');
 });
 
 // xxxxxxxxxxxxxxx co_ordinator dashboard routes finished xxxxxxxxxxxxxxxxxxxxxxxxx
