@@ -438,8 +438,8 @@ co_ordinate::remain_result();
         </div> <!-- end col-->
     </div>
     <!-- end row -->
-    <div class="toast bg-white fade show border-0 new-shadow-2 rounded-lg position-fixed w-75"
-        style="bottom:20px;left:10px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true"
+    <div class="toast bg-white fade show border-0 new-shadow-2 rounded-lg position-fixed w-75 overflow-auto my-scroll"
+        style="max-height:414px;bottom:20px;left:10px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true"
         data-toggle="toast">
         <?php $delay_res = \DB::table('tblresult_delay')->join('tblevents', 'tblevents.eid', 'tblresult_delay.eid')->join('tblcoordinaters', 'tblcoordinaters.cid', 'tblresult_delay.cid')->join('tblparticipant', 'tblparticipant.eid', 'tblevents.eid')->where('tblcoordinaters.clgcode', Session::get('aclgcode'))->get()->toarray();?>
         @if($delay_res)
