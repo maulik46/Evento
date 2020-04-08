@@ -928,7 +928,7 @@ class s_admin extends Controller
             session()->flash('error', 'Please Enter category name or select image..!');
             return redirect(url('sindex'));
         }
-        $c=\DB::table('tblcategory')->where('category_name',$cat)->count();
+        $c=\DB::table('tblcategory')->where([['category_name',$cat],['clgcode',Session::get('aclgcode')]])->count();
         if($c>0)
         {
             session()->flash('error', 'This category already exist..! ');
