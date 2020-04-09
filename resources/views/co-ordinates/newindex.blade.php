@@ -269,40 +269,33 @@
         </div>
     </div> 
     <div class="row" id="event-list">
-        <?php $cnt=0;?>
-        @foreach($events as $e)
-        <?php $c=1;?>
-        @if($e['cid']==Session::get('cid'))
-        @if($e['edate']>date('Y-m-d'))
+    <?php $cnt=0;?>
+    @foreach($events as $e)
+    <?php $cnt=1;?>
+    @if($e['cid']==Session::get('cid'))
+    @if($e['edate']>date('Y-m-d'))
         <div class="col-md-6 col-xl-4 col-sm-6">
             <?php $tblapp=DB::table('tblapproval')->where('eid',$e['eid'])->get()->count(); ?>
             @if($tblapp!=0)
-        <div class="card new-shadow-sm hover-me-sm mb-3 mt-2" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom" title="This Event is Currently disabled. You need approval from Administrator to delete it.">
-            
+            <div class="card new-shadow-sm hover-me-sm mb-3 mt-2" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom" title="This Event is Currently disabled. You need approval from Administrator to delete it.">
             @else
             <div class="card new-shadow-sm hover-me-sm mb-3 mt-2">
             @endif
-                <div class="card-body p-0">
-                    <div class="media p-3">
-                        <div class="media-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                @if($e['e_type']=='team')
-                                <span
-                                    class="text-muted badge rounded-pill badge-soft-warning  px-3">{{ucfirst($e['e_type'])}}
+                    <div class="card-body p-0">
+                        <div class="media p-3">
+                            <div class="media-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    @if($e['e_type']=='team')
+                                    <span class="text-muted badge rounded-pill badge-soft-warning  px-3">{{ucfirst($e['e_type'])}}</span>
                                     @else
-                                    <span
-                                        class="text-muted badge rounded-pill badge-soft-success  px-3">{{ucfirst($e['e_type'])}}
-                                        @endif
+                                    <span class="text-muted badge rounded-pill badge-soft-success  px-3">{{ucfirst($e['e_type'])}}
                                     </span>
+                                    @endif
                                     <div>
-                                    <a href="#" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false" <?php if($tblapp!=0){ ?>class="dropdown-toggle disabled"<?php } else { ?>class="dropdown-toggle" <?php } ?>>
-
-                                            <i id="event-info" data-feather="more-vertical" class="text-dark"
-                                                height="20px"></i>
-
+                                        <a href="#" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false" <?php if($tblapp!=0){ ?>class="dropdown-toggle disabled"<?php } else { ?>class="dropdown-toggle" <?php } ?>>
+                                            <i id="event-info" data-feather="more-vertical" class="text-dark" height="20px"></i>
                                         </a>
-                                        <div
-                                            class="dropdown-menu event-option profile-dropdown-items dropdown-menu-right" style="z-index:10;">
+                                        <div class="dropdown-menu event-option profile-dropdown-items dropdown-menu-right" style="z-index:10;">
                                             <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="dropdown-item">
                                                 <i data-feather="info" class="icon-dual-info icon-xs mr-2"></i>
                                                 <span>About Event</span>
@@ -311,36 +304,31 @@
                                                 <i data-feather="edit-3" class="icon-dual-warning icon-xs mr-2"></i>
                                                 <span>Update Event</span>
                                             </a>
-                                            <!-- <a href="{{url('delete_event')}}/{{encrypt($e['eid'])}}" class="dropdown-item"> -->
-                                             <a href="#" class="dropdown-item" onclick="deleteEvent({{$e['eid']}})">
+                                            <a href="#" class="dropdown-item" onclick="deleteEvent({{$e['eid']}})">
                                                 <i data-feather="trash-2" class="icon-dual-danger icon-xs mr-2"></i>
                                                 <span class="text-danger">Delete Event</span>
                                             </a>
-
                                         </div>
-        
+            
                                     </div>
+                                </div>
+                                <h4 class="mb-0 mt-3">{{ucfirst($e['ename'])}}</h4>
+                                <span class="text-muted1">{{date('d/m/Y', strtotime($e['edate']))}}</span>
                             </div>
-                            <h4 class="mb-0 mt-3">{{ucfirst($e['ename'])}}</h4>
-                            <span class="text-muted1">{{date('d/m/Y', strtotime($e['edate']))}}</span>
+                        </div>
+                        <div class="bg-light">
+                            <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}"
+                                class="text-center btn btn-light btn-block rounded-0 text-dark d-flex align-items-center justify-content-center view-candidate" <?php if($tblapp){ ?>onclick="return false;"<?php }  ?>>
+                                <i data-feather="eye" height="18px"></i>
+                                <span>View Candidates</span>
+                            </a>
                         </div>
                     </div>
-                    <div class="bg-light">
-                    <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}"
-                            class="text-center btn btn-light btn-block rounded-0 text-dark d-flex align-items-center justify-content-center view-candidate" <?php if($tblapp){ ?>onclick="return false;"<?php }  ?>>
-                            <i data-feather="eye" height="18px"></i>
-                            <span>View Candidates</span>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
-        </div>
-        @endif
-        @endif
-        @endforeach
-        
-        
+    @endif
+    @endif
+    @endforeach
     </div><!-- end row -->
     @if($cnt==0)
     <div class="card mt-2 py-5 new-shadow-sm">

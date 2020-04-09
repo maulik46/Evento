@@ -23,7 +23,67 @@
             </div>
         </div>
     </div>
+    <div class="row" id="ins-list">
+    <?php $count=0; ?>
+    @foreach($clgs as $clg)
+    <?php $count++; ?>
+        <div class="col-lg-6 college">
+            <div class="card new-shadow-2 bg-light">
+                <div class="card-body py-1">
+                    <div class="navbar px-0 pb-2">
+                        <span class="badge badge-soft-primary badge-pill px-3">
+                        {{date('d/m/Y',strtotime($clg->start_date))}}
+                        </span>
+                        @if($clg->status=="a")
+                            <div id="stat{{$clg->clgcode}}"><div class="badge badge-success px-3 badge-pill">Active</div></div>
+                        @else
+                            <div id="stat{{$clg->clgcode}}"><div class="badge badge-danger px-3 badge-pill">Inactive</div></div>
+                        @endif
+                    </div>
+                    <h5 class="text-dark mt-0">{{ucfirst($clg->clgname)}}</h5>
+                    
+                    <span class="text-muted">
+                    <i class="uil uil-map-marker text-danger font-weight-bold"></i>
+                    {{ucfirst($clg->address)}}
+                    </span>
 
+                    <div class="navbar px-0 pb-0">
+                        <div class="d-flex">
+                            <a href="javascript: void(0);">
+                                <img src="{{asset('profile_pic/admin_pro_pic/')}}/{{$clg->profilepic}}" alt="" class="avatar-sm m-1 rounded-circle">
+                            </a>
+                            <h6 class="ml-2">
+                                {{ucfirst($clg->name)}} 
+                                <span class="badge badge-info px-2">Admin</span>
+                                <div>
+                                <span class="font-size-12 text-muted">{{$clg->email}}</span>
+                                </div>
+                            </h6>
+                        </div>
+                        <div class="navbar px-0">
+                            <a href="{{url('update_college')}}/{{encrypt($clg->clgcode)}}">
+                                <i data-feather="edit" class="text-warning" height="19px"></i>
+                            </a>
+                            <a href="#" onclick="return del('{{$clg->clgcode}}')" class="mx-2">
+                                <i data-feather="trash-2" class="text-danger" height="19px"></i>
+                            </a>
+                            <div class="custom-control custom-switch mt-1">
+                            @if($clg->status=="a")
+                                <input type="checkbox" class="custom-control-input" checked onclick="return change_status(this.id)" id="{{$clg->clgcode}}">
+                            @else
+                            <input type="checkbox" class="custom-control-input" onclick="return change_status(this.id)" id="{{$clg->clgcode}}">
+                            @endif
+                                <label class="custom-control-label" for="{{$clg->clgcode}}"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    @endforeach
+    </div>
+    @if($count==0)
     <div class="rounded p-3 px-1 px-sm-2" style="border:1px solid #e2e7f1;">
         <div class="d-flex justify-content-center flex-column bg-white rounded" style="height:60vh;">
             <!-- <img src="{{asset('assets/images/nodata_system.jpg')}}" height="300px" alt="Your institute list is empty..!" > -->
@@ -31,6 +91,7 @@
             <h6 class="text-center text-muted">Your institute list is empty..!</h6>
         </div>
     </div>
+    @endif
 </div>
 @endsection
 @section('extra-scripts')
