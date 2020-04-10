@@ -144,6 +144,9 @@
                         </td>
                     </tr>
                     @endforeach
+                    @if($c==1)
+                    <tr><td colspan='5' class='font-weight-bold text-center text-muted'>No Participation in this type of event...!</td></tr>
+                    @endif
                 </table>
                 </div>
             </div>
