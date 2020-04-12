@@ -292,19 +292,32 @@ class student extends Controller
   public function confirm($eid,$maxteam)//function used fron confirm participation
     {
         $team_avl=\DB::table('tblparticipant')->where('eid',decrypt($eid))->count();
-        if(decrypt($maxteam) > $team_avl)
+        if(decrypt($maxteam)>0)
         {
-        $participant=new participant;
-        $participant->eid=decrypt($eid);
-        $participant->senrl=Session::get('senrl');
-        $participant->clgcode=Session::get('clgcode');
-        $participant->rank="p";
-        $participant->reg_date=date("Y:m:d");
-        $participant->save();
-        session()->flash('alert-success', 'You have successfully participated..!');
+            if(decrypt($maxteam) > $team_avl)
+            {
+                $participant=new participant;
+                $participant->eid=decrypt($eid);
+                $participant->senrl=Session::get('senrl');
+                $participant->clgcode=Session::get('clgcode');
+                $participant->rank="p";
+                $participant->reg_date=date("Y:m:d");
+                $participant->save();
+                session()->flash('alert-success', 'You have successfully participated..!');
+            }
+            else{
+                session()->flash('alert-danger', 'Maximum team already participated..!');
+            }
         }
         else{
-            session()->flash('alert-danger', 'Maximum team already participated..!');
+            $participant=new participant;
+            $participant->eid=decrypt($eid);
+            $participant->senrl=Session::get('senrl');
+            $participant->clgcode=Session::get('clgcode');
+            $participant->rank="p";
+            $participant->reg_date=date("Y:m:d");
+            $participant->save();
+            session()->flash('alert-success', 'You have successfully participated..!');
         }
     	return redirect()->to('/index');
     }
@@ -358,7 +371,7 @@ class student extends Controller
                         $st=tblstudent::where([['clgcode',Session::get('clgcode')],['senrl',$enr],['class',Session::get('class')],['division',Session::get('div')]])->first();
                         if(!$st)
                         {
-                            $msg="This player not from ".Session::get('class') ." class or invalid Enrollment  or not from Division ". Session::get('div'). " or invalid Enrollment" ;
+                            $msg="This player not from ".Session::get('class') ." class or invalid Enrollment  or not from Division ". Session::get('div') ;
                             return response()->json(array('msg'=> $msg),200);
                         }
                         // $efor=tblevent::where([['clgcode',Session::get('clgcode')],['eid',$eid],['efor','LIKE','%'.$st['class'].'%']])->count();
@@ -427,23 +440,38 @@ class student extends Controller
         $eid=decrypt($eid);
         $maxteam=tblevent::select('maxteam')->where('eid',$eid)->first();
         $team_avl=\DB::table('tblparticipant')->where('eid',$eid)->count();
-        if($maxteam['maxteam'] > $team_avl)
+        if($maxteam['maxteam'])
         {
-            $participant=new participant;
-            $participant->eid=$eid;
-            $participant->senrl=decrypt($enrl);
-            $participant->tname=strtoupper($tname);
-            $participant->clgcode=Session::get('clgcode');
-            $participant->rank="p";
-            $participant->reg_date=date("Y:m:d");
-            $participant->save();
-            session()->flash('alert-success', 'You have successfully participated..!');
+            if($maxteam['maxteam'] > $team_avl)
+            {
+                $participant=new participant;
+                $participant->eid=$eid;
+                $participant->senrl=decrypt($enrl);
+                $participant->tname=strtoupper($tname);
+                $participant->clgcode=Session::get('clgcode');
+                $participant->rank="p";
+                $participant->reg_date=date("Y:m:d");
+                $participant->save();
+                session()->flash('alert-success', 'You have successfully participated..!');
+                
+            }
+            else{
+                session()->flash('alert-danger', 'Maximum team already participated..!');
+           }
         }
         else{
-             session()->flash('alert-danger', 'Maximum team already participated..!');
+            $participant=new participant;
+                $participant->eid=$eid;
+                $participant->senrl=decrypt($enrl);
+                $participant->tname=strtoupper($tname);
+                $participant->clgcode=Session::get('clgcode');
+                $participant->rank="p";
+                $participant->reg_date=date("Y:m:d");
+                $participant->save();
+                session()->flash('alert-success', 'You have successfully participated..!');
+                
         }
-        
-             return redirect()->to('/index');
+        return redirect()->to('/index');
     }
     public function activity()
     {
