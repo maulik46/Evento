@@ -331,8 +331,14 @@
     @endforeach
     </div><!-- end row -->
     @if($cnt==0)
-    <div class="card mt-2 py-5 new-shadow-sm">
+    <!-- <div class="card mt-2 py-5 new-shadow-sm">
         <h6 class="text-center p-2" style="color:#000;">You haven't created any events..!</h>
+    </div> -->
+    <div class="card mb-3 mt-2 d-flex justify-content-center align-items-center flex-column" style="height:154px;border:2px dashed rgba(52,58,64,.2);">
+        <a href="#" class="btn badge-pill btn-soft-dark p-2">
+            <i data-feather="plus-circle" class=""></i>
+        </a>
+        <h6>Create New Event</h6>  
     </div>
     @endif    
 

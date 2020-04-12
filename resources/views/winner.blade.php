@@ -22,7 +22,7 @@
             <div class="navbar px-2">
                 <div class="mt-2 h4">
                     <img src="{{asset('assets/images/svg-icons/student-dash/winner/ranking.svg')}}" height="33px" alt="">
-                    <span>Past Winners</span>
+                    <span>Winner Students</span>
                 </div>
                 <a href="#" class=" badge-pill badge-soft-dark btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter hover-me-sm">
                     <i data-feather="sliders" height="18px"></i>
@@ -208,7 +208,7 @@
         @if($cnt==0)
         <div class="text-center" style="height:50vh;">
             <div class="no-result-img"></div>
-            <h6 class="dark-blue mt-1">No winner students data found..!</h6>
+            <h6 class="dark-blue mt-1">No data found..!</h6>
         </div>
         @endif
         <!-- end row tag -->

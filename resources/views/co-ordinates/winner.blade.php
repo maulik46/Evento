@@ -22,7 +22,7 @@
             <div class="navbar px-0">
                 <div class="mt-2 h4">
                     <img src="{{asset('assets/images/svg-icons/student-dash/winner/ranking.svg')}}" height="33px" alt="">
-                    <span>Past Winners</span>
+                    <span>Winner Students</span>
                 </div>
                 <a href="#" class=" badge-pill badge-soft-dark btn-sm pr-3 pl-2 font-weight-bold new-shadow-sm btn-filter hover-me-sm">
                     <i data-feather="sliders" height="18px"></i>
@@ -117,9 +117,11 @@
                 </div>
             </div>
         <div class="row mt-0">
+        <?php $cnt=0;?>
         @foreach($winners as $winner)
             <?php 
                 $event=App\tblevent::select('eid','ename','e_type','enddate')->where('eid',$winner->eid)->first();
+                $cnt=1;
             ?>
             <div class="col-lg-6 col-md-12 my-2">
             <div class="card mb-0 rounded-0  new-shadow-sm">
@@ -191,22 +193,6 @@
                             </tr>
                         @endif
                         @endforeach
-                            <!-- <tr>
-                                <th scope="row">
-                                    <img src="assets/images/svg-icons/student-dash/winner/2.svg" height="22px" alt="2">
-                                </th>
-                                <td>Dishant Sakariya</td>
-                                <td>TYBCA</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <img src="assets/images/svg-icons/student-dash/winner/3.svg" height="22px" alt="3">
-                                </th>
-                                <td>Yash Parmar</td>
-                                <td>TYBCA</td>
-                                <td>3</td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -216,9 +202,12 @@
          
         </div>
             
-        <div class="row mt-4">
-            
+        @if($cnt==0)
+        <div class="text-center" style="height:50vh;">
+            <div class="no-result-img"></div>
+            <h6 class="dark-blue mt-1">No data found..!</h6>
         </div>
+        @endif
         <!-- end row tag -->
         </div>
     </div>

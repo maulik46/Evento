@@ -288,16 +288,15 @@ co_ordinate::remain_result();
                 
             </div>
             @if($count == 0)
-            <div class="d-flex justify-content-center flex-column " style="height:320px;">
-                <div class="no-result-img" style="height:160px;background-size:250px;">
-                </div>
-                <h6 class="mt-0 text-center darkblue">You have no Co-ordinator in system..! </h6>
-                <div class="mt-2 d-flex align-items-center justify-content-center">
-                    <a href="{{url('new_cod')}}" class="rounded btn btn-sm btn-success font-weight-bold new-shadow-sm pr-3 pl-2">
-                    <i data-feather="user-plus" height="15px"></i>
-                    Create New
+            <div class="pt-3">
+            <div class="d-flex justify-content-center flex-column rounded" style="height:320px;border:2px dashed rgba(52,58,64,.2);">
+                <div class="mt-2 d-flex align-items-center justify-content-center flex-column">
+                    <a href="{{url('new_cod')}}" class="btn badge-pill btn-soft-dark p-2">
+                        <i data-feather="plus-circle" class=""></i>
                     </a>
+                    <h6>Add New Co-ordinator</h6>  
                 </div>
+            </div>
             </div>
             @endif
         </div>
