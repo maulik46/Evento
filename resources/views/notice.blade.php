@@ -74,7 +74,7 @@
                 @if($c==0)
                 <div class="d-flex align-items-center justify-content-center flex-column bg-white rounded new-shadow-sm" style="height:70vh;">
                     <img src="{{asset('assets/images/empty.svg')}}" height="40px" alt="">
-                    <h6>You have no notice available..!</h6>
+                    <h6>Inbox is empty..!</h6>
                 </div>
                 @endif    
                 </div>

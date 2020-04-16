@@ -26,10 +26,13 @@
         label{
             color:var(--dark);
         }
-        @media(max-width:576px){
-            label{
-            margin-bottom:0px!important;
+        form .form-group{
+            margin-bottom:5px!important;
         }
+        @media(max-width:576px){
+                label{
+                margin-bottom:0px!important;
+            }
         }
     </style>
 </head>
@@ -408,27 +411,30 @@
     <!-- END FOOTER -->
     <!-- form start -->
     <div>
-        <div class="px-2 d-flex align-items-center justify-content-center">
-            <div id="demo-form" class="position-fixed col-lg-8 col-md-10 col-sm-10 col-11 card rounded-lg new-shadow-2 rounded-lg px-0">
-                
-                <div class="text-right py-1">
-                    <a href="javascript:location.reload()" class="text-dark mr-3" id="close-btn">
+        <div class="d-flex align-items-center justify-content-center">
+            <div id="demo-form" class="py-sm-2 position-fixed col-lg-8 col-md-10 col-sm-10 col-11 card rounded-lg new-shadow-2 rounded-lg px-0 ">
+                <div class="navbar pt-2 pb-0 flex-nowrap">
+                    <div class="h6 ml-sm-3 ml-1 text-muted" >
+                    <i data-feather="info" height="16px" class="icon-dual-info mb-1"></i>
+                    Fill up these fields and send us. We'll contact you
+                    </div>
+                    <a href="javascript:location.reload()" class="text-dark mr-sm-3 mr-1" id="close-btn">
                         <i data-feather="x-circle" height="18px"></i>
                     </a>
                 </div>
-                <div class="text-center text-dark h6 px-2">Fill up these fields and send us. We'll contact you</div>
-            <form action="{{url('demo_req')}}" onsubmit="return valid()" method="post" class="p-2 px-2 px-sm-4">
+                
+            <form action="{{url('demo_req')}}" onsubmit="return valid()" method="post" class="py-2 px-1 px-sm-4">
             @csrf
                 <div class="row mx-0">
-                    <div class="form-group col-sm-5 my-0">
+                    <div class=" col-sm-5 my-0">
                         <label>Admin Name</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" id="aname" name="aname" class="form-control" placeholder="Enter Admin name..." />
+                            <input type="text" id="aname" name="aname" class="form-control" placeholder="Enter Admin name" />
                         </div>
                         <span class="text-danger font-weight-bold"></span>
                     </div>
-                    <div class="form-group col-sm-7 my-0">
+                    <div class=" col-sm-7 my-0">
                         <label>Email</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
@@ -452,7 +458,7 @@
                         <label>Contact no</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" id="mobile" name="contact" class="form-control" placeholder="Enter Your Contact no">
+                            <input type="text" id="mobile" name="contact" class="form-control" placeholder="Enter Contact no">
                         </div>
                         <span class="text-danger font-weight-bold"></span>
                         <!--  -->
@@ -485,17 +491,17 @@
                     <span class="text-danger font-weight-bold"></span>
                 </div>
                 <div class="my-2 ml-3 navbar p-0">
-                    <div>
-                        <button type="submit"  class="hover-me-sm btn btn-success new-shadow-sm font-weight-bold px-3 rounded-sm mr-1">
+                    <div class="action-button">
+                        <button type="submit"  class="hover-me-sm btn btn-sm btn-success new-shadow-sm font-weight-bold px-3 rounded-sm mr-1">
                             <span class="font-size-15">Send</span>
                             <i data-feather="send" class="mb-1" height="18px"></i>
                         </button>
-                        <button type="reset"  class="hover-me-sm btn btn-danger new-shadow-sm font-weight-bold px-3 rounded-sm ml-1">
+                        <button type="reset"  class="hover-me-sm btn btn-sm btn-danger new-shadow-sm font-weight-bold px-3 rounded-sm ml-1">
                             <span class="font-size-15">Clear</span>
                             <i data-feather="rotate-ccw" class="mb-1" height="18px"></i>
                         </button>
                     </div>
-                    <div class="ml-4 d-none d-sm-block">
+                    <div class="mr-3 d-none d-sm-block">
                         <img src="{{asset('assets/images/logo.png')}}" height="24px"  alt="Evento">
                         <span class="h3">Evento</span>
                     </div>
@@ -543,7 +549,9 @@
 
             });
             $('#overlay-bg').click(function(){
-                 $('#left-menu,#overlay-bg').hide();
+                
+                $('#left-menu,#overlay-bg').hide();
+                 
             })
         });
         $(document).ready(function () {
@@ -555,6 +563,7 @@
             });
             $('#close-btn,#overlay-bg-2').click(function(){
                 $('#demo-form,#overlay-bg-2').fadeOut(150);
+                location.reload();
             })
         });
     </script>
@@ -598,7 +607,7 @@ function valid()
         var mo= $('#mobile').val();
         if(!(regex.test($('#mobile').val()) && mo.length == 10))
         {
-            $('#mobile').parent().next().html("Please enter valid contact no.");
+            $('#mobile').parent().next().html("Please enter valid contact");
             $('#mobile').parent().addClass('border border-danger');
             f = 1;
         }
