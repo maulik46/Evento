@@ -395,4 +395,5 @@ route::post('/check_login', 'system@check_login');
  });
 
 
-route::view('error','error');
+route::view('error','error/error');
+route::view('404','error/404');
