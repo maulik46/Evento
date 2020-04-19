@@ -438,7 +438,7 @@
                         <label>Email</label>
                         <div class="form-group has-icon d-flex align-items-center">
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Your Email">
+                            <input type="text" id="email" name="email" class="form-control" placeholder="Enter Your Email">
                         </div>
                         <span class="text-danger font-weight-bold"></span>
                         <!--  -->

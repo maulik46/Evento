@@ -33,7 +33,7 @@
         }
         .bg-image{
             background-image: url('../assets/images/500page.gif');
-            background-size:400px;
+            background-size:450px;
             background-repeat:no-repeat;
             background-position: center;
             height:230px;

@@ -748,7 +748,11 @@ class s_admin extends Controller
         $ename=$req->ename;
         
         if(!$gen){
-            $gen=['female','male'];
+            $gen=['female','male','both'];
+        }
+        if(sizeof($gen)==2)
+        {
+            $gen=['female','male','both'];
         }
         if(!$cat)
         {
@@ -765,14 +769,14 @@ class s_admin extends Controller
         }
         if(!$to)
         {
-            $to=date('Y-m-d',time());
+            $to='2030-01-01';
         }
         else{
             $to=date('Y-m-d',strtotime($to));
         }
         if($from=="")
         {
-            $from=0;
+            $from='2019-01-01';
         }
         else{
             $from=strtotime($from);
@@ -785,15 +789,16 @@ class s_admin extends Controller
         ->whereIn('tblevents.gallow',$gen)
         ->whereIn('tblevents.e_type',$etype)
         ->where('tblevents.clgcode',Session::get('aclgcode'))
-        ->where('edate','>=',date('Y-m-d',$from))
+        ->where('edate','>=',$from)
         ->where('edate','<=',$to)
         ->get();
         $msg="";
         $a=0;
         foreach($rec as $ed)
         {
-            $a++;
-            if($ed['edate'] <= date('Y-m-d')){
+            
+            
+                $a++;
             $msg.='<tr class="text-dark">
                 <td>'.$a.'</td>
                 <td class="font-weight-bold">'.ucfirst($ed["ename"]).'</td>
@@ -824,8 +829,9 @@ class s_admin extends Controller
                 }
                 $msg.='</td>
             </tr>';
-            }
+            
         }
+        // $msg=$to;
         return response()->json(array('msg'=>$msg),200);
     }
     public function backup($bkpFileName = null)

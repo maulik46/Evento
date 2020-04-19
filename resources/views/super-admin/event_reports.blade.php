@@ -109,6 +109,7 @@ use \App\tblstudent;
                                 <select name="cod" onchange="event_filter()" id="cod" class="form-control">
                                 <?php $cod=\DB::table('tblcoordinaters')->where('clgcode',Session::get('aclgcode'))->get()?>
                                     <option hidden value="">Select Co-ordinator</option>
+                                    <option value="">All</option>
                                     @foreach($cod as $c)
                                         <option value="{{$c->cid}}">{{ucfirst($c->cname)}}</option>
                                     @endforeach
@@ -185,7 +186,6 @@ use \App\tblstudent;
                         <tbody id="tbody">
                             <?php $count=0;?>
                             @foreach($event_data as $ed)
-                            @if($ed['edate'] < date('Y-m-d'))
                             <?php $count++;?>
                             <tr class="text-dark">
                                 <td>{{$count}}</td>
@@ -216,7 +216,6 @@ use \App\tblstudent;
                                 @endif
                                 </td>
                             </tr>
-                            @endif
                             @endforeach
                         </tbody>
                     </table>
