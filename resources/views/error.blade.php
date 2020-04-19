@@ -50,5 +50,4 @@
         <div class="bg-image"></div>
     </div>
 </body>
-
 </html>
