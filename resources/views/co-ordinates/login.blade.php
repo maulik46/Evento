@@ -82,23 +82,21 @@
                                <span>Log-in</span>
                                <span class="font-size-12 text-muted">for Co-ordinator</span>
                            </h4>
-                           <form action="{{ url('c_checklogin') }}" method="post">
+                           <form action="{{ url('c_checklogin') }}" onsubmit="return check()" method="post">
                            @csrf
+                           <p id="error" class="text-center text-danger font-weight-bold">{{Session::get('error')}}</p>
                                <div class="form-group mt-2">
                                    <label class="col-form-label font-size-14">Email</label>
                                    <div class="form-group has-icon d-flex align-items-center">
                                        <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                                       <input type="text" class="form-control" placeholder="Enter Your ID..." name="cuser" />
+                                       <input type="text" id="uid" class="form-control" placeholder="Enter Your ID..." name="cuser" />
                                    </div>
                                </div>
-                                @error('cuser')
-                                    <h6>{{$message}}</h6>
-                                @enderror
                                <div class="form-group mt-2">
                                    <label class="col-form-label font-size-14">Password</label>
                                    <div class="form-group has-icon d-flex align-items-center" >
                                        <i data-feather="lock" class="form-control-icon ml-2" height="19px"></i>
-                                       <input type="password" class="form-control"
+                                       <input type="password" id="my-password" class="form-control"
                                            placeholder="Enter Your Password..."  name="password" style="padding-right: 2.375rem;" id="my-password">
                                         <div class="position-relative" style="right:40px;bottom: 10px;">
                                         <a href="#">
@@ -110,12 +108,6 @@
                                         </div>
                                    </div>
                                </div>
-                                @error('password')
-                                    <h6>{{$message}}</h6>
-                                @enderror
-                                @if(Session::get('error'))
-                                        <h6>Invalid Co-ordinates ID or Password</h6>
-                                @endif
                                 <div class="d-flex justify-content-between align-items-start">
                                 <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-3 mt-1 mb-3">
                                         <span class="font-size-14">Log-in</span>
@@ -153,6 +145,19 @@
             $('#see-pass').show();
         });
     })
+    function check()
+    {
+        if($('#uid').val()=="")
+        {
+            $('#error').html("Plese Enter your ID or Email...");
+            return false;
+        }
+        if($('#my-password').val()=="")
+        {
+            $('#error').html("Plese Enter your password...");
+            return false;
+        }
+    }
     </script>
     
 </body>

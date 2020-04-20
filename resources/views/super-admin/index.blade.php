@@ -468,7 +468,7 @@ co_ordinate::remain_result();
             <div class="card bg-soft-danger p-2 new-shadow hover-me-sm mb-2">
                 <div class="navbar p-0">
                     <span class="h5 my-1">{{ucfirst($del_res->ename)}}</span>
-                    <span class="badge badge-primary">12/12/2020</span>
+                    <span class="badge badge-primary">{{date('d-m-Y',strtotime($del_res->enddate))}}</span>
                 </div>
                 <div class="navbar p-0">
                     <span class="badge badge-primary">By {{ucfirst($del_res->cname)}}</span>

@@ -81,7 +81,20 @@
                                     <span class="font-weight-bold">Event For</span>
                                     <span>{{ucfirst($einfo['gallow'])}}</span>
                                 </p>
-                                
+                                <p class="d-flex justify-content-between">
+                                    <span class="font-weight-bold">Allowed class</span>
+                                    <?php 
+                                    $class=explode('-',$einfo['efor']);
+                                    $alw="";
+                                        foreach($class as $cl)
+                                        {
+                                            if ($cl) {
+                                                    $alw.=$cl.",";
+                                            }
+                                        }
+                                    ?>
+                                    <span>{{$alw}}</span>
+                                </p>
                                 <p class="d-flex justify-content-between">
                                     <span class="font-weight-bold">Event Location</span>
                                     <span>{{ucfirst($einfo['place'])}}</span>

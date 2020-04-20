@@ -91,7 +91,17 @@
                             <li>Students from different Division are not allowed.</li>
 
                             @endif
-
+                            <?php 
+                            $class=explode('-',$einfo['efor']);
+                            $alw="";
+                                foreach($class as $cl)
+                                {
+                                    if ($cl) {
+                                            $alw.=$cl.",";
+                                    }
+                                }
+                            ?>
+                            <li>Student from class <?=$alw?> Allowed</li>
                         </ol>
                     </div>
 
