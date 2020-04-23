@@ -37,8 +37,21 @@
                             <input type="text" name="title" id="title" class="form-control"placeholder="Enter Notice Title..." />
                         </div>
                     </div>
-                    <div class="ml-2 mt-2">
-                                        <!-- file upload button -->
+                    
+                </div>
+                    <div class="form-group">
+                        <label class="col-form-label font-size-14">Notice Content</label>
+                        <div class="form-group w-100">
+                            <textarea id="message" name="message" class="bg-light summernote"></textarea>
+                        </div>
+                    </div>
+                <div class="d-flex align-items-center">
+                    <button type="submit" class="mt-2 btn  rounded-sm hover-me-sm px-3 font-weight-bold new-shadow-sm btn-sm py-2 font-size-13 text-white" style="background-color: var(--success);">
+                        Send
+                        <i data-feather="send" height="18px"></i>
+                    </button>
+                    <div class="ml-2 mt-3">
+                        <!-- file upload button -->
                         <label for="file-upload" class="custom-file-upload rounded-sm"
                             data-toggle="tooltip" data-placement="right" title="Attachment">
                             <i data-feather="paperclip"></i>
@@ -48,17 +61,6 @@
                         <!-- file upload end -->
                     </div>
                 </div>
-                    <div class="form-group">
-                        <label class="col-form-label font-size-14">Notice Content</label>
-                        <div class="form-group w-100">
-                            <textarea id="message" name="message" class="bg-light summernote"></textarea>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="mt-2 btn  rounded-sm hover-me-sm px-3 font-weight-bold new-shadow-sm btn-sm py-2 font-size-13 text-white" style="background-color: var(--success);">
-                        Send
-                        <i data-feather="send" height="18px"></i>
-                    </button>
                 </form>
                 <div class="mt-3 p-1" id="fc" >
                 </div>
