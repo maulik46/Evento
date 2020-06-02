@@ -283,7 +283,7 @@ class student extends Controller
         }
         return view('explore-events')->with('massege','No Events available');
     }
-    public function participate($eid)//function run when click on participate
+    public function participate($eid)//for solo event when click on participate now
     {
     $einfo=tblevent::join('tblcoordinaters','tblevents.cid','=','tblcoordinaters.cid')->where('eid',decrypt($eid))->first();
 
@@ -291,8 +291,8 @@ class student extends Controller
     }
   public function confirm($eid,$maxteam)//function used fron confirm participation
     {
-        $team_avl=\DB::table('tblparticipant')->where('eid',decrypt($eid))->count();
-        if(decrypt($maxteam)>0)
+        $team_avl=\DB::table('tblparticipant')->where('eid',decrypt($eid))->count();//team is available or not
+        if(decrypt($maxteam)>0) 
         {
             if(decrypt($maxteam) > $team_avl)
             {
@@ -309,7 +309,7 @@ class student extends Controller
                 session()->flash('alert-danger', 'Maximum team already participated..!');
             }
         }
-        else{
+        else{ 
             $participant=new participant;
             $participant->eid=decrypt($eid);
             $participant->senrl=Session::get('senrl');
@@ -321,14 +321,14 @@ class student extends Controller
         }
     	return redirect()->to('/index');
     }
-     public function tnamecheck(Request $req){
+     public function tnamecheck(Request $req){ // in team insert page
         $tname = strtoupper($req->tname);
         $eid = $req->eid;
         $tcount=participant::where([['eid',$eid],['tname',$tname]
         ])->count();
             return response()->json(array('msg'=> $tcount),200);
      }
-    public function team_ins($eid)//insert team
+    public function team_ins($eid)//event information for insert team page
     {
         $eid=decrypt($eid);
         $einfo = tblevent::where('eid', $eid)
@@ -336,7 +336,7 @@ class student extends Controller
         ->first();
         return view('team-insert',['einfo'=>$einfo]);
     }
-   public function teamvalidation(Request $req)
+   public function teamvalidation(Request $req) // team validation checks in team insert page
     {
         $enr=$req->enrl;
         $eid=$req->eid;
@@ -430,7 +430,7 @@ class student extends Controller
         return response()->json(array('msg'=> $msg),200);
     }   
     
-    public function team_confirm(Request $req)
+    public function team_confirm(Request $req)// after team insertion it will goes to confirm participation page for team
     {
         return view('participate-now-team',['req'=>$req]);
 

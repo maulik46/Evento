@@ -86,8 +86,8 @@
                 </div>
                 <div class="my-2 mx-2">
                     <button type="submit" id="add_clg"  class="hover-me-sm btn btn-success new-shadow-sm font-weight-bold px-3 rounded-sm mr-1">
-                        <span class="font-size-15">Send</span>
-                        <i data-feather="send" class="mb-1" height="18px"></i>
+                        <span class="font-size-15">Add</span>
+                        <i data-feather="plus-circle" class="mb-1" height="18px"></i>
                     </button>
                     <button type="reset"  class="hover-me-sm btn btn-danger new-shadow-sm font-weight-bold px-3 rounded-sm ml-1">
                         <span class="font-size-15">Clear</span>

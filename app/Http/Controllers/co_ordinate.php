@@ -16,6 +16,7 @@ class co_ordinate extends Controller
     public static function remain_result()
     {
         $evnt=tblevent::select('eid','cid','ename','enddate')->where([['clgcode',Session::get('cclgcode')],['enddate','<',date("Y-m-d")]])->get();
+
         foreach($evnt as $e){
             $rr=participant::where([['eid',$e['eid']],['rank',1]])->count();
             if($rr==0)
@@ -152,8 +153,9 @@ class co_ordinate extends Controller
     public function view_can($id)
     {
         $id=decrypt($id);
-        $participate=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
-        $einfo=tblevent::select('eid','ename','e_type','edate','time')->where('eid',$id)->first()->toarray();
+        $participate=participant::select('senrl','tname','reg_date')->where('eid',$id)->get()->toarray();
+        $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$id],['tblevents.clgcode',Session::get('aclgcode')]])->first();
+        
         return view('co-ordinates/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
     }
     public function delete_event(Request $req)
@@ -517,7 +519,7 @@ class co_ordinate extends Controller
      }
      public function event_info($id)
      {      $id=decrypt($id);
-            $einfo=tblevent::join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where('eid',$id)->first();
+            $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$id],['tblevents.clgcode',Session::get('aclgcode')]])->first();
             return view("co-ordinates/event_info",['einfo'=>$einfo]);
      }
     //  public function event_result($id)
@@ -673,8 +675,9 @@ class co_ordinate extends Controller
     }
     public function view_result($eid)
     {
-        $participant=participant::where([['eid',decrypt($eid)],['rank','p']])->count();
-        $event=tblevent::select('eid','ename','edate','e_type')->where('eid',decrypt($eid))->first();
+        $eid=decrypt($eid);
+        $participant=participant::where([['eid',$eid],['rank','p']])->count();
+        $event=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$eid],['tblevents.clgcode',Session::get('aclgcode')]])->first();
        
         return view('co-ordinates/view_result',['participant'=>$participant],['einfo'=>$event]);
     }

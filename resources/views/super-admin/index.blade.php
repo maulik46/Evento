@@ -10,6 +10,17 @@ co_ordinate::remain_result();
 
 @section('head-tag-links')
 <style>
+    #delay-result-list{
+        bottom:7px;
+        left:10px;
+        z-index: 999;
+        display:none;
+    }
+    .notification-list2 .noti-icon-badge2 {
+        position: relative;
+        top: -14px!important;
+        right: 12px;
+    }
     .no-chart-img{
         background-image:url('../assets/images/no-chart3.svg');
         background-size:270px 300px;
@@ -453,22 +464,36 @@ co_ordinate::remain_result();
         </div> <!-- end col-->
     </div>
     <!-- end row -->
-    <div class="toast bg-white fade show border-0 new-shadow-2 rounded-lg position-fixed w-75 overflow-auto my-scroll"
-        style="max-height:414px;bottom:20px;left:10px;z-index:99;" role="alert" aria-live="assertive" aria-atomic="true"
-        data-toggle="toast">
-        <?php $delay_res = \DB::table('tblresult_delay')
+
+    <?php $delay_res = \DB::table('tblresult_delay')
         ->join('tblevents', 'tblevents.eid', 'tblresult_delay.eid')
         ->join('tblcoordinaters', 'tblcoordinaters.cid', 'tblresult_delay.cid')
-        ->where([['tblcoordinaters.clgcode', Session::get('aclgcode')]])->get()->toarray();?>
-        @if($delay_res)
-        <div class="toast-body text-dark alert mb-1">
-            <h5 class="text-center mt-0">Delay Result List</h5>
+        ->where([['tblcoordinaters.clgcode', Session::get('aclgcode')]])->get()->toarray();
 
+    ?>
+    @if($delay_res)
+    <div class="notification-list notification-list2 position-fixed" style="bottom: 10px;left:15px;">
+        <span id="delay-result-btn" class="text-white btn new-shadow " data-toggle="tooltip" data-placement="left" title="Delay Result List" style="border-radius: 30px;padding: 15px;cursor:pointer;background-color: var(--orange);z-index:999;">
+                <i data-feather="clock"></i>
+        </span>
+        <div class="noti-icon-badge noti-icon-badge2 position-relative"></div>
+    </div>    
+    <div class="toast bg-white  show border-0 new-shadow-2 rounded-lg position-fixed w-75 " id="delay-result-list">
+        <div class="navbar px-2 py-0">
+            <h5 class="text-left mb-1 ml-1">Delay Result List</h5>
+            <span style="cursor:pointer" id="delay-result-close">
+                <i data-feather="x-circle" height="20px" class="text-dark" id="close-btn"></i>
+            </a>
+        </div>
+    
+        <div class="toast-body pt-0 p-2 text-dark alert  overflow-auto my-scroll mb-0" style="max-height:400px;">
             @foreach($delay_res as $del_res)
-            <div class="card bg-soft-danger p-2 new-shadow hover-me-sm mb-2">
+            <div class="card bg-soft-danger pb-1 p-2 new-shadow hover-me-sm mb-2">
                 <div class="navbar p-0">
                     <span class="h5 my-1">{{ucfirst($del_res->ename)}}</span>
-                    <span class="badge badge-primary">12/12/2020</span>
+                    <span class="badge badge-primary" data-toggle="tooltip" data-title="Event End Date" data-placement="top">
+                   {{date('d/m/Y', strtotime($del_res->enddate))}}
+                    </span>
                 </div>
                 <div class="navbar p-0">
                     <span class="badge badge-primary">By {{ucfirst($del_res->cname)}}</span>
@@ -479,13 +504,11 @@ co_ordinate::remain_result();
                     </a>
                 </div>
             </div>
-            
             @endforeach
         </div>
-        @endif
     </div>
     <!-- </div>     -->
-
+    @endif
 </div> <!-- end container fluid-->
 
 
@@ -678,6 +701,15 @@ var area = {
 
             });
         });
+
+        $('#delay-result-btn').click(function(){
+            $('#delay-result-list').fadeIn(200);
+            $('#menu-overlay').show();
+        });
+        $('#delay-result-close,#menu-overlay').click(function(){
+            $('#delay-result-list').fadeOut(200);
+            $('#menu-overlay').hide();
+        })
     });
 </script>
 @endsection

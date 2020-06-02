@@ -117,8 +117,8 @@
                                </div>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <button type="submit" class="hover-me-sm btn btn-success rounded-sm new-shadow font-weight-bold px-3 mt-1 mb-3" id="submitotp">
-                                            <span class="font-size-14">Confirm</span>
-                                            <i data-feather="check-square" height="20px"></i>
+                                        <span class="font-size-14">Confirm</span>
+                                        <i data-feather="check-square" height="20px"></i>
                                     </button>
                                     <div class="loader ml-2 mb-3" id="loader" style="display: none;">
                                     </div>
@@ -143,44 +143,44 @@
     function timers()
     {
         if(sessionStorage.getItem("c")==1)
-                                {
-                                    
-                                    var countdown = 2 * 60 * 1000;
-                                    var timerId = setInterval(function(){
-                                    countdown -= 1000;
-                                    var min = Math.floor(countdown / (60 * 1000));
-                                    //var sec = Math.floor(countdown - (min * 60 * 1000));  // wrong
-                                    var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);  //correct
-                                    if (countdown <= 0) {
-                                        $("#demo").html("EXPIRED");
-                                        var otplabel=sessionStorage.getItem("otps");
-                                        $.ajaxSetup({
-                                                headers: {
-                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                            }
-                                        });
-                                        $.ajax({
-                                            url:'/ctimers',
-                                            method:'POST',
-                                            dataType:'json',
-                                            data:{'otpcode':otplabel},
-                                            success:function(data2)
-                                            {
-                                               // console.log(data2)
-                                                sessionStorage.setItem("otps",data2);
-                                            }                                       
-                                        })
-                                        clearInterval(timerId);                                        
-                                    } else {
-                                        $("#demo").html(min + " : " + sec + " Min ");
-                                    }
-                                    }, 1000);
-                                    sessionStorage.setItem("c",0);
-                                }
+        {
+            
+            var countdown = 2 * 60 * 1000;
+            var timerId = setInterval(function(){
+            countdown -= 1000;
+            var min = Math.floor(countdown / (60 * 1000));
+            //var sec = Math.floor(countdown - (min * 60 * 1000));  // wrong
+            var sec = Math.floor((countdown - (min * 60 * 1000)) / 1000);  //correct
+            if (countdown <= 0) {
+                $("#demo").html("EXPIRED");
+                var otplabel=sessionStorage.getItem("otps");
+                $.ajaxSetup({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url:'/ctimers',
+                    method:'POST',
+                    dataType:'json',
+                    data:{'otpcode':otplabel},
+                    success:function(data2)
+                    {
+                        // console.log(data2)
+                        sessionStorage.setItem("otps",data2);
+                    }                                       
+                })
+                clearInterval(timerId);                                        
+            } else {
+                $("#demo").html(min + " : " + sec + " Min ");
+            }
+            }, 1000);
+            sessionStorage.setItem("c",0);
+        }
     }
     </script>
     <script>
-        $("#resend").click(function(){
+        $("#resend").click(function(){ // to resend otp
             var cuser=$('#cuser').val();
             
             $.ajaxSetup({
@@ -208,11 +208,13 @@
             
         });
         </script>
+
+
         <script>
-       $(document).ready(function(){
+    $(document).ready(function(){
         $('#loader').hide();
         sessionStorage.setItem("c",1);
-        $( "#submitotp" ).click(function() {
+        $( "#submitotp" ).click(function() { // to submit otp
             $('#loader').show();
             var cuser=$('#cuser').val();
             var otp=$('#otp').val();
@@ -222,7 +224,7 @@
                 }
             });
             $.ajax({
-                    url:'/csend_otp',
+                    url:'/csend_otp', //send otp url
                     method:'POST',
                     dataType:'json',
                     data:{'cuser':cuser},
@@ -240,7 +242,7 @@
                                 $('#cuser-label').html();
                             }
                             //console.log(data)
-                            document.getElementById("myform").action = "{{url('/confirm_pass')}}";
+                            document.getElementById("myform").action = "{{url('/confirm_pass')}}";  // to redirect to create new password
                             {{session()->put('email_check',1)}}
                             if(data!="Invalid Email Id")
                             {
@@ -261,7 +263,7 @@
                     
         });
        })
-        function valid()
+        function valid() //to check valid otp
         {
             // alert(sessionStorage.getItem('otps'));
             var cuser=$('#cuser').val();

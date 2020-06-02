@@ -58,7 +58,8 @@ return [
             'prefix_indexes' => true,
             // 'dump_command_path' =>'F:\php_project\mysql\bin',
             'dump' => [
-                'dump_binary_path' => 'F:\php_project\mysql\bin', // only the path, so without `mysqldump` or `pg_dump`
+                'dump_binary_path' => 'F:\xampp\mysql\bin', 
+            //only the path, so without `mysqldump` or `pg_dump`
                 'use_single_transaction',
                 'timeout' => 60 * 5, // 5 minute timeout
              ],

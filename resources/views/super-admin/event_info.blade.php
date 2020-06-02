@@ -37,6 +37,7 @@
                             <div class="text-center">
                               <h2 class="font-weight-light"> {{ucfirst($einfo['ename'])}}</h2>
                             <span class="font-weight-bold text-dark">{{ucfirst(Session::get('aclgname'))}}</span>
+                          
                             <p class="my-2">
                                 <span class="font-weight-bold text-dark">{{ucfirst($einfo['cname'])}}</span> (Co-ordinator)
                             </p>

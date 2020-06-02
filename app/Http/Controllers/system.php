@@ -87,7 +87,7 @@ class system extends Controller
         session()->flash('danger','Invalid email or password');
         return back();
     }
-    public function add_college(Request $req)
+    public function add_college(Request $req)// add individual clg
     {
         $pass=$req->admin_pass;
         $iname=$req->clg_name;
@@ -227,7 +227,7 @@ class system extends Controller
        session()->flash('alert-success', 'Password updated successfully..!');
        return redirect(url('system'));
     }
-    public function add_institute(Request $req)
+    public function add_institute(Request $req) // add institute after accepting request
     {
         $iname=$req->iname;
         $pass=uniqid();

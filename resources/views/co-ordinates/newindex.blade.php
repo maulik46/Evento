@@ -269,18 +269,15 @@
         </div>
     </div> 
     <div class="row" id="event-list">
-    <?php $cnt=0;?>
-    @foreach($events as $e)
-    <?php $cnt=1;?>
-    @if($e['cid']==Session::get('cid'))
-    @if($e['edate']>date('Y-m-d'))
-        <div class="col-md-6 col-xl-4 col-sm-6">
-            <?php $tblapp=DB::table('tblapproval')->where('eid',$e['eid'])->get()->count(); ?>
-            @if($tblapp!=0)
-            <div class="card new-shadow-sm hover-me-sm mb-3 mt-2" style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom" title="This Event is Currently disabled. You need approval from Administrator to delete it.">
-            @else
-            <div class="card new-shadow-sm hover-me-sm mb-3 mt-2">
-            @endif
+        <?php $cnt=0;?>
+        @foreach($events as $e)
+        
+        @if($e['cid']==Session::get('cid'))
+        @if($e['edate']>date('Y-m-d'))
+        <?php $cnt++;?>
+            <div class="col-md-6 col-xl-4 col-sm-6">
+                <?php $tblapp=DB::table('tblapproval')->where('eid',$e['eid'])->get()->count(); ?>
+                <div class="card new-shadow-sm hover-me-sm mb-3 mt-2" @if($tblapp !=0 ) style="opacity: 0.5;" data-toggle="tooltip" data-placement="bottom" title="This Event is Currently disabled. You need approval from Administrator to delete it." @endif>
                     <div class="card-body p-0">
                         <div class="media p-3">
                             <div class="media-body">
@@ -324,23 +321,24 @@
                             </a>
                         </div>
                     </div>
+                </div>
             </div>
-        </div>
-    @endif
-    @endif
-    @endforeach
+        @endif
+        @endif
+        @endforeach
     </div><!-- end row -->
+    
     @if($cnt==0)
-    <!-- <div class="card mt-2 py-5 new-shadow-sm">
-        <h6 class="text-center p-2" style="color:#000;">You haven't created any events..!</h>
-    </div> -->
     <div class="card mb-3 mt-2 d-flex justify-content-center align-items-center flex-column" style="height:154px;border:2px dashed rgba(52,58,64,.2);">
-        <a href="#" class="btn badge-pill btn-soft-dark p-2">
+        <a href="{{url('/create_event')}}" class="btn badge-pill btn-soft-dark p-2">
             <i data-feather="plus-circle" class=""></i>
         </a>
         <h6>Create New Event</h6>  
     </div>
     @endif    
+
+
+
 
     <?php $c=0 ?>
     @foreach($events as $e)
@@ -362,6 +360,7 @@
             
         </div>
     </div> 
+    
     <div class="card new-shadow-sm mt-2">
         <div class="card-body py-2 px-1 px-sm-2">
             <div class="table-responsive overflow-auto my-scroll" style="max-height: 360px;">
@@ -378,48 +377,45 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                <tbody>
     @endif
-                        <?php
-                            $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
-                        ?>
-                        <tr>
-                            <td>#{{$c}}</td>
-                            <td>
-                                <i data-feather="star" class="icon-dual-warning" height="18px"></i>
-                                <span>{{round($rate,1)}}</span>
-                            </td>
-                            <th>{{ucfirst($e['ename'])}} </th>
-                            <td>{{$p}}</td> <!--total Participator -->
-                            <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
-                            <td>{{date('d/m/Y', strtotime($e['enddate']))}}</td>
-                            <td>{{ucfirst(Session::get('cname'))}}</td>
-                            <td  class="d-flex justify-content-start align-items-center mt-0">
-                                <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="View Candidates">
-                                    <i data-feather="users" height="18px" class="text-primary"></i>
-                                </a>
-                                <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded" data-toggle="tooltip" data-placement="top" title="About">
-                                    <i data-feather="info" height="18px" class=" text-info"></i>
-                                </a>
-                                <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded" data-toggle="tooltip" data-placement="top" title="Show Result">
-                                    <i data-feather="award" height="18px" class=" text-success"></i>
-                                </a>
-                                
-                                
-                            </td>
-                        </tr>
-    @endif
+                    <?php
+                        $p=\DB::table('tblparticipant')->select('senrl')->where('eid',$e['eid'])->count();
+                    ?>
+                    <tr>
+                        <td>#{{$c}}</td>
+                        <td>
+                            <i data-feather="star" class="icon-dual-warning" height="18px"></i>
+                            <span>{{round($rate,1)}}</span>
+                        </td>
+                        <th>{{ucfirst($e['ename'])}} </th>
+                        <td>{{$p}}</td> <!--total Participator -->
+                        <td>{{date('d/m/Y', strtotime($e['edate']))}}</td>
+                        <td>{{date('d/m/Y', strtotime($e['enddate']))}}</td>
+                        <td>{{ucfirst(Session::get('cname'))}}</td>
+                        <td  class="d-flex justify-content-start align-items-center mt-0">
+                            <a href="{{url('view_candidates')}}/{{encrypt($e['eid'])}}" class="btn btn-p-candidates btn-rounded p-1" data-toggle="tooltip" data-placement="top" title="View Candidates">
+                                <i data-feather="users" height="18px" class="text-primary"></i>
+                            </a>
+                            <a href="{{url('event_info')}}/{{encrypt($e['eid'])}}" class="btn btn-p-about p-1 btn-rounded" data-toggle="tooltip" data-placement="top" title="About">
+                                <i data-feather="info" height="18px" class=" text-info"></i>
+                            </a>
+                            <a href="{{url('view_result')}}/{{encrypt($e['eid'])}}" class="btn btn-p-result p-1 btn-rounded" data-toggle="tooltip" data-placement="top" title="Show Result">
+                                <i data-feather="award" height="18px" class=" text-success"></i>
+                            </a>
+                        </td>
+                    </tr>
+                     @endif
     @endif
     @endif
     @endforeach
-                    </tbody>
+                </tbody>
                 </table>
             </div> 
             <!-- end table-responsive -->
-           
         </div> <!-- end card-body-->
     </div>
-
+   
 
 
     <!-- 

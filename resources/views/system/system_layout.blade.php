@@ -104,6 +104,7 @@
                                     <a href="{{url('/s_demo_request')}}">
                                         <i class="text-dark uil uil-envelope-add h6"></i>
                                         <span class="font-weight-bold font-size-13">Subscription Requests</span>
+                                        <!-- <span class="font-weight-bold font-size-14">Demo Requests</span> -->
                                     </a>
                                 </li>
                                 <li class="my-2">

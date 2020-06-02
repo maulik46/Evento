@@ -621,21 +621,22 @@ class s_admin extends Controller
         return back();
     }
    public function event_info($id)
-     {      $eid=decrypt($id);
+     {  $eid=decrypt($id);
         $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$eid],['tblevents.clgcode',Session::get('aclgcode')]])->first();
             return view("super-admin/event_info",['einfo'=>$einfo]);
      }
      public function view_result($eid)
-     {
-         $participant=participant::where([['eid',decrypt($eid)],['rank','p']])->count();
-         $event=tblevent::select('eid','e_type','ename','edate','enddate')->where('eid',decrypt($eid))->first();
-         return view('super-admin/view_result',['participant'=>$participant],['einfo'=>$event]);
+     {  $eid=decrypt($eid);
+        $participant=participant::where([['eid',$eid],['rank','p']])->count();
+        $event=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$eid],['tblevents.clgcode',Session::get('aclgcode')]])->first();
+
+        return view('super-admin/view_result',['participant'=>$participant],['einfo'=>$event]);
      }
      public function view_can($id)
     {
         $id=decrypt($id);
-        $participate=participant::select('senrl','tname')->where('eid',$id)->get()->toarray();
-        $einfo=tblevent::select('eid','ename','e_type','edate')->where('eid',$id)->first()->toarray();
+        $participate=participant::select('senrl','tname','reg_date')->where('eid',$id)->get()->toarray();
+        $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$id],['tblevents.clgcode',Session::get('aclgcode')]])->first();
         return view('super-admin/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
     }
     public function view_team($id)

@@ -39,8 +39,7 @@
             color: var(--danger);
         }
         a.login-btn:hover{
-            color: #ec3b56
-;
+            color: #ec3b56;
         }
         @media(max-width:567px)
         {
@@ -66,7 +65,7 @@
 
     <main>
         <nav class="row justify-content-between align-items-center position-fixed" style="z-index: 999;width: 103%;top:0px;left:0px;">
-            <a href="#" class="mt-1 mt-sm-3 mx-4 mx-sm-4 navbar-brand  font-size-24 font-weight-bold text-dark">
+            <a href="{{url('/')}}" class="mt-1 mt-sm-3 mx-4 mx-sm-4 navbar-brand  font-size-24 font-weight-bold text-dark">
                 <img src="{{asset('assets/images/logo.png')}}" alt="" class="logo-dark" height="24" /> <span
                     class="text-dark">Evento</span>
             </a>

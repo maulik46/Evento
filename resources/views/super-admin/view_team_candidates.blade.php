@@ -19,7 +19,7 @@ use App\tblstudent;
             {{ ucfirst($tc['tname']) }}
 
         </span>
-        <h6 class="font-weight-bold text-muted text-center">
+        <h6 class="font-weight-bold text-dark text-center">
         {{ucfirst(Session::get('aclgname'))}}
         </h6>
         <hr class="my-0">

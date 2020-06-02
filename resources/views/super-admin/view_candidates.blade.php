@@ -8,7 +8,9 @@
 
 @section('head-tag-links')
     <style>
-
+    .form-control:focus {
+        border-color: lightgray !important;
+    }
      .page-item.active .page-link {
      color: #fff;
      background-color: #43d39e;
@@ -34,7 +36,7 @@
                 <h2 class="font-weight-normal text-dark text-center">{{ucfirst($einfo['ename'])}}</h2>
                 <h6 class="font-weight-bold text-dark text-center mt-1">{{ucfirst(Session::get('cclgname'))}}</h6>
                 <p class="text-center my-0">
-                    <span class="font-weight-bold text-dark">{{ucfirst(Session::get('cname'))}}</span> (Co-ordinator)
+                    <span class="font-weight-bold text-dark">{{ucfirst($einfo['cname'])}}</span> (Co-ordinator)
                 </p>
                 <h6 class="font-weight-normal text-dark text-center">
                     <span class="font-weight-bold badge badge-soft-dark px-3 badge-pill">{{date('d/m/Y',strtotime($einfo['edate']))}}</span>
@@ -67,10 +69,18 @@
 
                         </div>
                         <hr class="my-1">
-                        <a href="#" id="printer" onclick="printme()" class="btn btn-sm pr-3 pl-2 rounded btn-success font-weight-bold mt-1 mb-3 new-shadow-sm hover-me-sm">
+                    <div class="navbar px-0">
+                        <a href="#" id="printer" onclick="printme()"  class="btn btn-sm pr-3 pl-2 rounded btn-success font-weight-bold mt-1 mb-3 new-shadow-sm hover-me-sm">
                             <i data-feather="printer" height="19px"></i>
                             Print
                         </a>
+                        @if($einfo['e_type']=="solo")
+                            <div class="col-xl-3 col-md-6 col-sm-8 col-12 mb-0 form-group has-icon d-flex align-items-center px-0">
+                                <i data-feather="search" class="form-control-icon ml-2" height="19px"></i>
+                                <input type="text" id="myInput" class="form-control" placeholder="Search Student.." />
+                            </div>
+                        @endif
+                    </div>
                         @if($einfo['e_type']=="team")
                         @if($c>0)
                         <?php $count = 0;?>
@@ -80,12 +90,13 @@
                             <table class="table table-hover table-light rounded">
                                 <thead class="thead-light text-dark">
                                     <tr>
-                                        <td colspan="6" class=" font-weight-bold p-3" style="background-color: #dde1fc;">
+                                        <td colspan="7" class=" font-weight-bold p-3" style="background-color: #dde1fc;">
                                             Team <span class="badge badge-pill badge-primary px-3">{{$p['tname']}}</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>No.</th>
+                                        <th scope="col">Registraion Date</th>
                                         <th scope="col">Enrollment</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
@@ -104,6 +115,7 @@
                                    $sinfo=tblstudent::where('senrl',$e)->first();?>
                                     <tr class="text-dark">
                                         <th>{{$cnt}}</th>
+                                        <td>{{date('d/m/Y',strtotime($p['reg_date']))}}</td>
                                         <th scope="row">
                                             {{$e}}
                                         </th>
@@ -130,10 +142,11 @@
                         @elseif($einfo['e_type']=="solo")
                         @if($c>0)
                         <div class="table-responsive my-scroll">
-                            <table   class="table table-hover table-light rounded">
+                            <table  class="table table-hover table-light rounded">
                                 <thead class="light-bg1 text-dark">
                                     <tr>
                                         <th>No.</th>
+                                        <th scope="col">Registraion Date</th>
                                         <th scope="col">Enrollment</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
@@ -150,6 +163,7 @@
                                     $sinfo=tblstudent::select('senrl','sname','email','class','division')->where('senrl',$p['senrl'])->first();?>
                                     <tr>
                                         <th>{{$cnt}}</th>
+                                        <td>{{date('d/m/Y',strtotime($p['reg_date']))}}</td>
                                         <th scope="row">
                                             {{$sinfo['senrl']}}
                                         </th>
@@ -181,13 +195,15 @@
 
 @section('extra-scripts')
 <script>
-    $(document).ready(function(){
-        // <?php $count=0;?>
-        // <?php foreach($participate as $p) { ?>
-        //     <?php $count++;?>
-        //     $('#stud-data<?=$count;?> tr:last').css("display","none");
-        // <?php } ?>
-    })
+ $(document).ready(function(){
+    $("#myInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("tbody tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+
+        });
+    });
+})
 </script>
 <script>
     function printme()

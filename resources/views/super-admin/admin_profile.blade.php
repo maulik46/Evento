@@ -16,9 +16,9 @@
     }
 
     .user-img {
-        background: url('../profile_pic/admin_pro_pic/<?php echo Session::get("adminprofile")?>');
+        background-image: url('../profile_pic/admin_pro_pic/<?php echo Session::get("adminprofile")?>');
+        background-color:#6adff7;
         background-size: cover;
-        background-color:white;
         background-repeat: no-repeat;
         background-position: center;
         width: 180px;
@@ -204,7 +204,7 @@
         <div class="col">
             <div class="text-center card p-1 new-shadow-sm mb-2">
                 <h4 class="ml-3">
-                    <i data-feather="activity" class="icon-dual"></i>
+                    <i data-feather="bar-chart-2" class="icon-dual"></i>
                     My Activity
                 </h4>
             </div>
@@ -229,7 +229,7 @@
                                 <div class="media-body mt-2">
                                     <div class="card d-inline-block new-shadow-sm">
                                         <div class="card-body p-3">
-                                            <h5 class="mt-0">{{$act['action_on']}}</h5>
+                                            <h5 class="mt-0">{{ucfirst($act['action_on'])}}</h5>
                                             <span class="text-muted">{!! $act['descr'] !!}</span>
                                         </div>
                                     </div>
@@ -243,7 +243,12 @@
                     <li class="event-list last-child"></li>
                     <!-- i said don't touch me :( -->
                 @endif
-                </ul>            
+                </ul>  
+                @if($a==0)    
+                    <div style="height:49vh;" class="d-flex align-items-center justify-content-center flex-column">
+                        <h6><i data-feather="info" height="18px" class="text-info"></i> No activity Found</h6>
+                    </div>
+                @endif          
             </div>
         </div>
         <div class="col-lg-5 mt-4 mt-lg-0" id="update-form">

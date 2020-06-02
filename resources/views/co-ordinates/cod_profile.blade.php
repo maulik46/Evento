@@ -19,7 +19,7 @@
     .user-img {
         background: url('../profile_pic/<?php echo Session::get("cprofilepic")?>');
         background-size: cover;
-        background-color:white;
+        background-color:#aaf9ad;
         background-repeat: no-repeat;
         background-position: center;
         width: 180px;
@@ -248,6 +248,11 @@
                     <!-- i said don't touch me :( -->
                 @endif
             </ul>
+            @if($a==0)    
+                <div style="height:45vh;" class="d-flex align-items-center justify-content-center flex-column">
+                    <h6><i data-feather="info" height="18px" class="text-info"></i> No activity Found</h6>
+                </div>
+            @endif 
             </div>
         </div>
         <div class="col-lg-5 mt-4 mt-lg-0" id="update-form">

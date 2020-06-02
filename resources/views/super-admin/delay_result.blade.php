@@ -51,6 +51,7 @@
         transform: translateY(-2px);
         box-shadow: 0 1px 6px 0 rgba(255, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .08);
         border-radius: .2rem;
+        cursor:move!important;
     }
     @media(max-width: 768px)
     {
@@ -214,7 +215,7 @@
         
         <div class="bg-white p-1 my-2 px-1 pb-1 new-shadow-sm stud-info rounded">
                 <div class="col-md-12 font-weight-bold text-dark d-flex justify-content-between align-items-center flex-wrap">
-                    <div class=" font-size-16 drag-me px-2 ml-1 rounded-sm bg-white hover-me-sm" style="cursor:move!important;min-width:150px!important;">
+                    <div class=" font-size-16 drag-me px-2 ml-1 rounded-sm bg-white hover-me-sm" style="min-width:150px!important;">
                        <span>{{ucfirst($sinfo['sname'])}}</span> 
                        <span id="pid" style="display:none;">{{$p['pid']}}</span>
                     </div>
