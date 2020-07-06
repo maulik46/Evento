@@ -70,7 +70,7 @@ Route::group(['middleware' => 'SessionCheck'], function () {
     Route::get('/confirm-reg/{eid}/{maxteam}','student@confirm');
 
      Route::get('/winner-list',function(){
-        $winners=\DB::table('tblparticipant')->select('eid')->where('rank','!=','p')->orderby('eid','desc')->groupby('eid')->get()->toarray();
+        $winners=\DB::table('tblparticipant')->select('eid')->where([['rank','!=','p'],['clgcode',Session::get('clgcode')]])->orderby('eid','desc')->groupby('eid')->get()->toarray();
         $ddclass=DB::table('tblstudent')->select('class')->groupBy('class')->get()->toArray();
         // print_r($winners);
         return view('/winner',['winners'=>$winners,'ddclass'=>$ddclass]);
@@ -182,7 +182,7 @@ Route::group(['middleware' => 'co_session_check'], function () {
         route::post('/update_propic','co_ordinate@update_propic');
 
         Route::get('/cindex/winner-list',function(){
-            $winners=\DB::table('tblparticipant')->select('eid')->where('rank','!=','p')->orderby('eid','desc')->groupby('eid')->get()->toarray();
+            $winners=\DB::table('tblparticipant')->select('eid')->where([['rank','!=','p'],['clgcode',Session::get('cclgcode')]])->orderby('eid','desc')->groupby('eid')->get()->toarray();
             $ddclass=DB::table('tblstudent')->select('class')->groupBy('class')->get()->toArray();
             // print_r($winners);
             return view('co-ordinates/winner',['winners'=>$winners,'ddclass'=>$ddclass]);
@@ -303,7 +303,7 @@ Route::group(['middleware' => 'admin_session_check'], function () {
         route::get('/event_reports','s_admin@event_reports');
     
         Route::get('/admin/winner-list',function(){
-                $winners=\DB::table('tblparticipant')->select('eid')->where('rank','!=','p')->orderby('eid','desc')->groupby('eid')->get()->toarray();
+                $winners=\DB::table('tblparticipant')->select('eid')->where([['rank','!=','p'],['clgcode',Session::get('aclgcode')]])->orderby('eid','desc')->groupby('eid')->get()->toarray();
                 $ddclass=DB::table('tblstudent')->select('class')->groupBy('class')->get()->toArray();
                 // print_r($winners);
                 return view('super-admin/winner',['winners'=>$winners,'ddclass'=>$ddclass]);
