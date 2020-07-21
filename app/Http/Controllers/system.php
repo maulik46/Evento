@@ -106,11 +106,11 @@ class system extends Controller
         <br>
         Evento Team.";
         $data=array('name'=>"",'body'=>$message);
-        // \Mail::send('email',$data,function($message) use ($iname, $to_email){
-        //     $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
-        //     ->from("eventoitsol@gmail.com", $name = "Evento")
-        //     ->subject("Confirmation for demo request")->bcc($to_email);
-        // });
+        \Mail::send('email',$data,function($message) use ($iname, $to_email){
+            $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
+            ->from("eventoitsol@gmail.com", $name = "Evento")
+            ->subject("Confirmation for demo request")->bcc($to_email);
+        });
         $admin=new admin;
         $admin->clgcode=$req->clg_code;
         $admin->name=$req->admin_name;
