@@ -409,7 +409,7 @@ class co_ordinate extends Controller
                                 $tbls=tblstudent::select('sname', 'email')->where('senrl', $enrl)->get()->first();
                                 //echo $tbls['sname'],$tbls['email'];
                                 $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
-                                //$this->mail($tbls['sname'], trim($tbls['email']), $data);
+                                $this->mail($tbls['sname'], trim($tbls['email']), $data);
                             }
                         }
                 }
