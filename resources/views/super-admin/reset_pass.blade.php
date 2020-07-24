@@ -109,9 +109,9 @@
                                    <span>Didn't get a security code? We can <a  href="#" class="font-weight-bold" style="color:#1582b3;" id="resend">resend it</a>
                                     </span><br>
                                     <span style="color:#1582b3;" class="font-weight-bold counter" id="demo" ></span>
-                                    <span id="otp-label">
+                                    <!-- <span id="otp-label">
                                     {{Session::get('otps')}}
-                                    </span> 
+                                    </span> -->
                                     
                                </div>
                                 <div class="d-flex align-items-center">
