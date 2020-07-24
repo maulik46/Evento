@@ -395,7 +395,7 @@ class co_ordinate extends Controller
                 {
                     $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
                    
-                    //$this->mail($admin->name,$admin->email,$data);
+                    $this->mail($admin->name,$admin->email,$data);
                 }
                 $tblp=participant::select('senrl')->where('eid',$eid)->get()->toArray();
                 
