@@ -486,7 +486,7 @@ class s_admin extends Controller
              $tbla=admin::where('email', $cuser)->get()->first();
              if ($tbla) {
                  if (Session::get('email_check')==1) {
-                    //  $this->otp_mail($tbla['name'], $tbla['email'], $data);
+                     $this->otp_mail($tbla['name'], $tbla['email'], $data);
                      session()->put('email_check',0);
                  }
                  $data=Session::get('otps');
