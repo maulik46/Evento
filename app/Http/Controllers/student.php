@@ -132,7 +132,7 @@ class student extends Controller
     public function otp_check(Request $req,$senrl,$clgcode,$check)
     {
         $senrl=decrypt($senrl);
-        $check=decrypt($check);
+        $setcookie=decrypt($check);
         $clgcode=decrypt($clgcode);
 
         $check=$this->validate($req,[
@@ -146,7 +146,7 @@ class student extends Controller
          {
             $otp=$req->otp;
                 if (session::get('otps')==$otp) {
-                    if ($check==1) {
+                    if ($setcookie==1) {
                         cookie()->queue('clgcode', $clgcode);
                         cookie()->queue('senrl', $senrl);
                     }                 
