@@ -147,8 +147,8 @@ class student extends Controller
             $otp=$req->otp;
                 if (session::get('otps')==$otp) {
                     if ($setcookie==1) {
-                        cookie()->queue('clgcode', $clgcode);
-                        cookie()->queue('senrl', $senrl);
+                        cookie()->queue('clgcode', $clgcode,4000);
+                        cookie()->queue('senrl', $senrl,4000);
                     }                 
                     session()->put('senrl',$senrl);
                     session()->put('clgcode', $clgcode);
