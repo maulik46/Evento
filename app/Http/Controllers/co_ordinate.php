@@ -519,7 +519,7 @@ class co_ordinate extends Controller
      }
      public function event_info($id)
      {      $id=decrypt($id);
-            $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$id],['tblevents.clgcode',Session::get('aclgcode')]])->first();
+            $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$id],['tblevents.clgcode',Session::get('cclgcode')]])->first();
             return view("co-ordinates/event_info",['einfo'=>$einfo]);
      }
     //  public function event_result($id)
@@ -677,7 +677,7 @@ class co_ordinate extends Controller
     {
         $eid=decrypt($eid);
         $participant=participant::where([['eid',$eid],['rank','p']])->count();
-        $event=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$eid],['tblevents.clgcode',Session::get('aclgcode')]])->first();
+        $event=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$eid],['tblevents.clgcode',Session::get('cclgcode')]])->first();
        
         return view('co-ordinates/view_result',['participant'=>$participant],['einfo'=>$event]);
     }
