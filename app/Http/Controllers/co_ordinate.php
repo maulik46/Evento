@@ -48,7 +48,7 @@ class co_ordinate extends Controller
         $sinfo=tblstudent::where('senrl',$enrl)->first();
         return $sinfo;
    }
-   public function notice($topic,$sender,$s_type,$receiver,$message,$fname)
+   public function notice($topic,$sender,$s_type,$receiver,$message,$fname,$clgcode)
    {
         $notice=new notice;
         $notice->topic=$topic;
@@ -58,7 +58,7 @@ class co_ordinate extends Controller
         $notice->receiver=$receiver;
         $notice->ndate=date('Y-m-d');
         $notice->ntime=date('h:i A');//change
-        $notice->clgcode=Session::get('cclgcode');
+        $notice->clgcode=$clgcode;
         $notice->attechment=$fname;
         $notice->save();
    }
