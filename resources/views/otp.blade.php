@@ -117,7 +117,7 @@
                                         </div>
                                         <?php 
                                         $otp=Session::get('otps');
-                                        echo $otp;
+                                        // echo $otp;
                                         ?>
                                         @error('otp')
                                         <h6>{{$message}}</h6>

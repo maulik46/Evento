@@ -110,9 +110,9 @@
                                     </span>
                                     <br>
                                     <span style="color:#1582b3;" class="font-weight-bold counter" id="demo" ></span>
-                                    <span id="otp-label">
+                                    <!-- <span id="otp-label">
                                     {{Session::get('otps')}}
-                                    </span> 
+                                    </span>  -->
                                     
                                </div>
                                 <div class="d-flex align-items-center justify-content-between">

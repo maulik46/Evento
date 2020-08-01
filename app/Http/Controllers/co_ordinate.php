@@ -48,7 +48,7 @@ class co_ordinate extends Controller
         $sinfo=tblstudent::where('senrl',$enrl)->first();
         return $sinfo;
    }
-   public function notice($topic,$sender,$s_type,$receiver,$message,$fname)
+   public function notice($topic,$sender,$s_type,$receiver,$message,$fname,$clgcode)
    {
         $notice=new notice;
         $notice->topic=$topic;
@@ -58,7 +58,7 @@ class co_ordinate extends Controller
         $notice->receiver=$receiver;
         $notice->ndate=date('Y-m-d');
         $notice->ntime=date('h:i A');//change
-        $notice->clgcode=Session::get('cclgcode');
+        $notice->clgcode=$clgcode;
         $notice->attechment=$fname;
         $notice->save();
    }
@@ -154,7 +154,7 @@ class co_ordinate extends Controller
     {
         $id=decrypt($id);
         $participate=participant::select('senrl','tname','reg_date')->where('eid',$id)->get()->toarray();
-        $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$id],['tblevents.clgcode',Session::get('aclgcode')]])->first();
+        $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$id],['tblevents.clgcode',Session::get('cclgcode')]])->first();
         
         return view('co-ordinates/view_candidates',['participate'=>$participate],['einfo'=>$einfo]);
     }
@@ -395,7 +395,7 @@ class co_ordinate extends Controller
                 {
                     $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
                    
-                    //$this->mail($admin->name,$admin->email,$data);
+                    $this->mail($admin->name,$admin->email,$data);
                 }
                 $tblp=participant::select('senrl')->where('eid',$eid)->get()->toArray();
                 
@@ -409,7 +409,7 @@ class co_ordinate extends Controller
                                 $tbls=tblstudent::select('sname', 'email')->where('senrl', $enrl)->get()->first();
                                 //echo $tbls['sname'],$tbls['email'];
                                 $data=array('name'=>'Update On '.$ename['ename'].' Event','body'=>"<h3>".$message."</h3>");
-                                //$this->mail($tbls['sname'], trim($tbls['email']), $data);
+                                $this->mail($tbls['sname'], trim($tbls['email']), $data);
                             }
                         }
                 }
@@ -519,7 +519,7 @@ class co_ordinate extends Controller
      }
      public function event_info($id)
      {      $id=decrypt($id);
-            $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$id],['tblevents.clgcode',Session::get('aclgcode')]])->first();
+            $einfo=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$id],['tblevents.clgcode',Session::get('cclgcode')]])->first();
             return view("co-ordinates/event_info",['einfo'=>$einfo]);
      }
     //  public function event_result($id)
@@ -677,7 +677,7 @@ class co_ordinate extends Controller
     {
         $eid=decrypt($eid);
         $participant=participant::where([['eid',$eid],['rank','p']])->count();
-        $event=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$eid],['tblevents.clgcode',Session::get('aclgcode')]])->first();
+        $event=tblevent::select('tblevents.*','tblcoordinaters.cname','tblcategory.category_name')->join('tblcoordinaters','tblcoordinaters.cid','tblevents.cid')->join('tblcategory','tblevents.cate_id','tblcategory.category_id')->where([['tblevents.eid',$eid],['tblevents.clgcode',Session::get('cclgcode')]])->first();
        
         return view('co-ordinates/view_result',['participant'=>$participant],['einfo'=>$event]);
     }

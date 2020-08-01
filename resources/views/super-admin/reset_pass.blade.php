@@ -109,12 +109,12 @@
                                    <span>Didn't get a security code? We can <a  href="#" class="font-weight-bold" style="color:#1582b3;" id="resend">resend it</a>
                                     </span><br>
                                     <span style="color:#1582b3;" class="font-weight-bold counter" id="demo" ></span>
-                                    <span id="otp-label">
+                                    <!-- <span id="otp-label">
                                     {{Session::get('otps')}}
-                                    </span> 
+                                    </span> -->
                                     
                                </div>
-                                <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center justify-content-between">
                                     <button type="submit" class="hover-me-sm btn btn-info rounded-sm new-shadow font-weight-bold px-3 mt-1 mb-3" id="submitotp">
                                             <span class="font-size-14">Confirm</span>
                                             <i data-feather="check-square" height="20px"></i>

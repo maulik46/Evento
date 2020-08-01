@@ -124,7 +124,7 @@ class s_admin extends Controller
                $fname.=$filename.";";
            }
        }
-        $cod=app('App\Http\Controllers\co_ordinate')->notice($topic,Session::get('aname'),'Admin',$receiver,$message,$fname);
+        $cod=app('App\Http\Controllers\co_ordinate')->notice($topic,Session::get('aname'),'Admin',$receiver,$message,$fname,Session::get('aclgcode'));
         session()->flash('success', 'Notice send successfully');
        $log=new log;
        $log->uid=Session::get('aid');
@@ -191,9 +191,8 @@ class s_admin extends Controller
             $msg_info=tblevent::join('tblapproval','tblapproval.eid','tblevents.eid')->where('tblevents.eid',$e_id)->first();
             $message="Event Name    <b>:".ucfirst($msg_info['ename'])."</b><br>Reason       <b>:".ucfirst($msg_info['reason'])."</b>";
             
-            
-            $notice=app('App\Http\Controllers\co_ordinate')->notice('Event Canceled','System','System','student-coordinator',$message,"");
-            
+          
+            $notice=app('App\Http\Controllers\co_ordinate')->notice('Event Canceled','System','System','student-coordinator',$message,"",Session::get('aclgcode'));
             $tblp=participant::select('senrl')->where('eid',$e_id)->get()->toArray();
                 
                 foreach($tblp as $p)
@@ -486,7 +485,7 @@ class s_admin extends Controller
              $tbla=admin::where('email', $cuser)->get()->first();
              if ($tbla) {
                  if (Session::get('email_check')==1) {
-                    //  $this->otp_mail($tbla['name'], $tbla['email'], $data);
+                     $this->otp_mail($tbla['name'], $tbla['email'], $data);
                      session()->put('email_check',0);
                  }
                  $data=Session::get('otps');
