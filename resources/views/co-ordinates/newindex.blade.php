@@ -162,7 +162,8 @@
 
 $cat=DB::table('tblcategory')
 ->join('tblcoordinaters','tblcoordinaters.cate_id','tblcategory.category_id')
-->where('cid',Session::get('cid'))
+->where('tblcoordinaters.cid',Session::get('cid'))
+->where('tblcategory.clgcode',Session::get('cclgcode'))
 ->select('tblcategory.category_name')
 ->first();
 
