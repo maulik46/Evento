@@ -114,7 +114,7 @@
             
             </div>
             <div id="filter-table" class="card-body text-muted mt-1 py-0 px-1">
-                <div class="table-responsive overflow-auto my-scroll">
+                <div class="table-responsive overflow-auto my-scroll" style="max-height:350px;">
                     <table class="table table-hover table-light new-shadow" id="tbody">
                        
                     </table>

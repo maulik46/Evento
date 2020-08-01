@@ -32,7 +32,7 @@
                     <i data-feather="x-circle" height="20px"></i>
                 </a>
             </div>
-            <hr class="my-0">
+            <!-- <hr class="my-0"> -->
             <div id="filter-box" class="card position-relative w-100 mb-0" style="left:0px;display:none;border:1px solid #e9e9e9;">
                 <div class="card-body p-2">
                 <div class="row justify-content-between">
@@ -109,14 +109,14 @@
                 </div>
                 </div>
             </div>
-            <div id="filter-table" class="card-body text-muted mt-1 py-0 px-1">
-                <div class="table-responsive overflow-auto my-scroll">
+            <div id="filter-table" class="card-body text-muted mt-1 py-0 px-1" >
+                <div class="table-responsive overflow-auto my-scroll" style="max-height:350px;">
                     <table class="table table-hover table-light new-shadow " id="tbody">
                         
                     </table>
                 </div>
             </div>
-        <div class="row mt-0">
+        <div class="row mx-0" style="border-top:1px solid #e2e2e2!important;">
         <?php $cnt=0;?>
         @foreach($winners as $winner)
             <?php 

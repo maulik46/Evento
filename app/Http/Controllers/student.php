@@ -188,10 +188,10 @@ class student extends Controller
         session()->put('clgname',$clg->clgname);
         $to_name=Session::get('sname');
         $to_email=Session::get('email');
-        $data=array('name'=>'OTP :'.$rand_num,'body'=>Session::get('clgname'));
+        $data=array('name'=>$rand_num,'body'=>Session::get('clgname'));
             \Mail::send('email',$data,function($message) use ($to_name,$to_email){
                 $message->to($to_email)->replyTo('eventoitsol@gmail.com',$name=null)->from('eventoitsol@gmail.com', $name = 'Evento')
-                ->subject('Log Authentication');
+                ->subject('Evento Log-in Authentication');
             });
         return redirect(url('otpview/'.encrypt($senrl).'/'.encrypt($clgcode).'/'.encrypt($check)));
     }
@@ -228,10 +228,10 @@ class student extends Controller
             session()->put('clgname',$clg->clgname);
             $to_name=Session::get('sname');
             $to_email=Session::get('email');
-            $data=array('name'=>'OTP :'.$rand_num,'body'=>Session::get('clgname'));
+            $data=array('name'=>$rand_num,'body'=>ucfirst(Session::get('clgname')));
             \Mail::send('email',$data,function($message) use ($to_name,$to_email){
                 $message->to($to_email)->replyTo('eventoitsol@gmail.com',$name=null)->from('eventoitsol@gmail.com', $name = 'Evento')
-                ->subject('Log Authentication');
+                ->subject('Evento Log-in Authentication');
             });
             //echo "email send";
            $remainder = $req->get('remainder') ?? 0;

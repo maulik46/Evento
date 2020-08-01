@@ -54,6 +54,11 @@
             <div class="form-group has-icon d-flex align-items-center">
                 <i class="uil uil-tag-alt form-control-icon ml-2"></i>
                 <input type="text" id="clgcode" class="form-control" placeholder="Enter Institute Code" required>
+                @error('clgcode')
+                <div>
+                    <span class="text-danger font-weight-bold">{{$message}}</span>
+                </div>
+                @enderror
                 <input type="hidden" id="did" value="{{$d_req->did}}">
             </div>
         </div>

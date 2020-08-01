@@ -205,7 +205,7 @@ class s_admin extends Controller
                             if ($enrl) {
                                 
                                 $tbls=tblstudent::select('sname', 'email')->where('senrl', $enrl)->get()->first();
-                                $data=array('name'=>'Cancel Event','edate'=>$msg_info['edate'],'ename'=>$msg_info['ename'],'reason'=>$msg_info['reason'],'reciever'=>$tbls['sname']);
+                                $data=array('name'=>'Cancellation of an Event','edate'=>$msg_info['edate'],'ename'=>$msg_info['ename'],'reason'=>$msg_info['reason'],'reciever'=>$tbls['sname']);
                                 $this->mail($tbls['sname'], trim($tbls['email']), $data);
                             }
                         }

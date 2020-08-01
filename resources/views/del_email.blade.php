@@ -1,13 +1,12 @@
-<h1><strong>{{ $name  }}</strong></h1>
-<pre>
+<h3><strong>{{ $name  }}</strong></h3>
+<div style="font-size:15px;">
 Dear <b>{{ucfirst($reciever)}}</b>,
-I'm really sorry to inform you that <b>{{ucfirst($ename)}}</b>, which was scheduled on <b>{{date('d-m-Y',strtotime($edate))}}</b>, has been cancelled due to <b>{{ucfirst($reason)}}</b>. Please accept my apologies with regards to this unfortunate matter.
-
-I regret any inconvenience this may cause you, even though I've tried my best to inform everyone as soon as possible.
-
-I appreciate your understanding.
-
-Best Regards,
-{{Session::get('aname')}}
+<br>
+We are really sorry to inform you that <b>{{ucfirst($ename)}}</b>, which was scheduled on <b>{{date('d-m-Y',strtotime($edate))}}</b>, has been cancelled due to <b>{{ucfirst($reason)}}</b>. Please accept our sincere apologies.
+<br>
+We accept your interest in this event but unfortunately event is cancelled.We appreciate your understanding but do not worry.You can contact us for upcoming events in future any day.So, Stay connected.
+<br>
+Best Regards,<br>
+{{Session::get('aname')}}<br>
 {{Session::get('clgname')}}
-</pre>
+</div>

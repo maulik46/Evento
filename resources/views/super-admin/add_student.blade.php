@@ -78,7 +78,7 @@
                 <i data-feather="x-circle"  height="20px" ></i>
             </a>
             <div >
-            <ol class="mt-2 font-weight-bold font-size-16 d-flex align-items-center justify-content-center">
+            <ol class="mt-2 font-weight-bold font-size-16 d-flex align-items-center justify-content-center flex-column">
                 @foreach ($errors->all() as $error)
                     <li class="text-left">{{ $error }}</li>
                 @endforeach

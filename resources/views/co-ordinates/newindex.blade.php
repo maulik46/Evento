@@ -158,12 +158,20 @@
             </div>
         </div>         
     </div>
+<?php 
 
+$cat=DB::table('tblcategory')
+->join('tblcoordinaters','tblcoordinaters.cate_id','tblcategory.category_id')
+->where('cid',Session::get('cid'))
+->select('tblcategory.category_name')
+->first();
+
+?>
 
     <div class="card mt-2 mb-0 new-shadow-sm">
         <div class="h5 d-flex align-items-center ml-3">
             <i data-feather="calendar" class="icon-dual-dark"></i>
-            <span class="ml-1">All Events</span>
+            <span class="ml-1">All Events <span class="text-success">({{ucfirst($cat->category_name)}})</span></span>
         </div>
         <div class="py-2 navbar flex-nowrap">
             
@@ -258,7 +266,8 @@
         <div class="py-2 navbar flex-nowrap">
             <div class="h5 d-flex align-items-center">
                 <i data-feather="calendar" class="icon-dual-dark"></i>
-                <span class="ml-1">My Events</span>
+               
+                <span class="ml-1">My Events <span class="text-success">({{ucfirst($cat->category_name)}})</span></span>
             </div>
             <a href="{{url('/create_event')}}" class="text-success">
                 <div class="d-flex align-items-center badge badge-soft-success badge-pill pr-2 pr-sm-3 py-2 new-event">

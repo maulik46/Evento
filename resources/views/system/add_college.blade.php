@@ -15,7 +15,7 @@
                         <label>Admin Name</label>
                         <div class="form-group mb-1 has-icon d-flex align-items-center">
                             <i data-feather="user" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" name="admin_name"  class="form-control" placeholder="Enter Admin Name..." id="admin_name" />
+                            <input type="text" name="admin_name"  class="form-control" placeholder="Enter Admin Name..." id="admin_name" value="{{old('admin_name')}}" />
                         </div>
                         <span class="text-danger font-weight-bold" id="admin_name_err"></span>
                     </div>
@@ -23,7 +23,7 @@
                         <label>Email</label>
                         <div class="form-group mb-1 has-icon d-flex align-items-center">
                             <i data-feather="mail" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" name="admin_email" class="form-control" placeholder="Enter Email" id="clg_email">
+                            <input type="text" name="admin_email" class="form-control" placeholder="Enter Email" id="clg_email" value="{{old('admin_email')}}">
                         </div>
                         <span class="text-danger font-weight-bold" id="clg_email_err"></span>
                     </div>
@@ -33,7 +33,7 @@
                     <label>Institute Name</label>
                         <div class="form-group mb-1 has-icon d-flex align-items-center">
                             <img src="{{asset('assets/images/clg1.svg')}}" height="20px" class="form-control-icon ml-2" alt="">
-                            <input type="text" name="clg_name" class="form-control" placeholder="Enter Institute Name" id="clg_name">
+                            <input type="text" name="clg_name" class="form-control" placeholder="Enter Institute Name" id="clg_name" value="{{old('clg_name')}}">
                         </div>
                         <span class="text-danger font-weight-bold" id="clg_name_err"></span>
                     </div>
@@ -41,9 +41,12 @@
                     <label>Institute Code</label>
                         <div class="form-group mb-1 has-icon d-flex align-items-center">
                             <i class="uil uil-tag-alt form-control-icon ml-2"></i>
-                            <input type="text" name="clg_code" class="form-control" placeholder="Enter Institute Code" id="clg_code">
+                            <input type="text" name="clgcode" class="form-control" placeholder="Enter Institute Code" id="clg_code" value="{{old('clgcode')}}">
                         </div>
                         <span class="text-danger font-weight-bold" id="clg_code_err"></span>
+                        @error('clgcode')
+                        <span class="text-danger font-weight-bold">{{$message}}</span>
+                        @enderror
                     </div>
                 </div>
                 
@@ -52,7 +55,7 @@
                         <label>Contact no</label>
                         <div class="form-group mb-1 has-icon d-flex align-items-center">
                             <i data-feather="phone" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" name="clg_mob" class="form-control" placeholder="Enter Institute Contact" id="clg_mob">
+                            <input type="text" name="clg_mob" class="form-control" placeholder="Enter Institute Contact" id="clg_mob" value="{{old('clg_mob')}}">
                         </div>
                         <span class="text-danger font-weight-bold" id="clg_mob_err"></span>
                         <!--  -->
@@ -61,7 +64,7 @@
                         <label>City</label>
                         <div class="form-group mb-1 has-icon d-flex align-items-center">
                             <i data-feather="map" class="form-control-icon ml-2" height="19px"></i>
-                            <input type="text" name="clg_city" class="form-control" placeholder="Enter Institute City" id="city_name" >
+                            <input type="text" name="clg_city" class="form-control" placeholder="Enter Institute City" id="city_name" value="{{old('clg_city')}}">
                         </div>
                         <span class="text-danger font-weight-bold" id="city_name_err"></span>
                         <!--  -->
@@ -79,7 +82,7 @@
                     <label>Institute Address</label>
                     <div class="form-group mb-1 has-icon d-flex align-items-center">
                         <img src="{{asset('assets/images/svg-icons/address.svg')}}" height="20px" class="form-control-icon ml-2" alt="">
-                        <input type="text" name="clg_add" class="form-control" placeholder="Enter Institute Address" id="clg_add">
+                        <input type="text" name="clg_add" class="form-control" placeholder="Enter Institute Address" id="clg_add" value="{{old('clg_add')}}">
                     </div>
                     <span class="text-danger font-weight-bold" id="clg_add_err"></span>
                     <!--  -->

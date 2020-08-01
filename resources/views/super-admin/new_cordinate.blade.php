@@ -22,6 +22,8 @@
             border-radius: 2px;
             box-shadow:none; 
             border: 1px solid #d1d1d1;
+            height:140px;
+            overflow:auto;
         }
         .nice-select .option.selected.focus {
             background-color: #f3f4f7;
@@ -420,6 +422,7 @@
 $(document).ready(function() {
         // this is for select tag
         $('.select-me').niceSelect();
+        $('.nice-select .list').addClass('my-scroll');
         // end here
 });
 </script>

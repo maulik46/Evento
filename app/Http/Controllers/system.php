@@ -15,7 +15,7 @@ class system extends Controller
 {
     public function index()
     {
-        $clgs=\DB::table('tblcolleges')->join('tbladmin','tblcolleges.clgcode','tbladmin.clgcode')->get();
+        $clgs=\DB::table('tblcolleges')->join('tbladmin','tblcolleges.clgcode','tbladmin.clgcode')->orderBy('tbladmin.aid','desc')->get();
         // print_r($clgs);
         return view('system/index',['clgs'=>$clgs]);
     }
@@ -89,30 +89,50 @@ class system extends Controller
     }
     public function add_college(Request $req)// add individual clg
     {
+
+         $req->validate(
+            [
+             'admin_name'=>'required',
+             'admin_email'=>'required',
+             'clg_name'=>'required',
+             'clgcode'=>'required|unique:tblcolleges,clgcode',
+             'clg_mob'=>'required',
+             'clg_city'=>'required',
+             'admin_pass'=>'required',
+             'clg_add'=>'required'
+            ],
+            [
+                'clgcode.unique'=>'Institute code must be unique..!'
+            ]
+        );
+
         $pass=$req->admin_pass;
         $iname=$req->clg_name;
         $to_email=trim($req->admin_email);
         $message="
-        sub : <b>confrimation for subcription</b>
+        <div style='font-size:15px;'>
+        Subject : <b>Confrimation Regarding Your Evento Subcription</b>
         <br><br>
         Dear <b>".ucfirst($req->admin_name)."</b>,
         <br><br>
-            Hello ".ucfirst($req->admin_name).",we glad to infrom you that we start subscription for your institute ".$iname." .
-        <br><br>
-        <b>your login details as follow.</b>
-        <table border=1 style='padding:10px'> <tr style='background-color:#e6e6e6'><td style='padding:5px'> User Name </td><td style='padding:5px'> Password </td></tr>  <tr><td style='padding:5px'>".$to_email."</td> <td style='padding:5px'>".$pass."</td></tr>    </table>
+            We are glad to infrom you that on your request we have started your evento subscription for your institute <b>".$iname."</b> 
+        <br>
+        <b>Your login details are as follow.</b></br>
+        <table border=1 style='padding:10px'> <tr style='background-color:#e2e2e2'><td style='padding:5px'> User Name </td><td style='padding:5px'> Password </td></tr>  <tr><td style='padding:5px'>".$to_email."</td> <td style='padding:5px'>".$pass."</td></tr>    </table>
+        <br>
+        <b>For more information and query you can mail us on <span style='color:#29ba84'>eventoitsol@gmail.com</span></b>
         <br>
         Sincerely,
         <br>
-        Evento Team.";
+        Evento Team.</div>";
         $data=array('name'=>"",'body'=>$message);
         \Mail::send('email',$data,function($message) use ($iname, $to_email){
             $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
             ->from("eventoitsol@gmail.com", $name = "Evento")
-            ->subject("Confirmation for demo request")->bcc($to_email);
+            ->subject("Confirmation for Evento Subcription")->bcc($to_email);
         });
         $admin=new admin;
-        $admin->clgcode=$req->clg_code;
+        $admin->clgcode=$req->clgcode;
         $admin->name=$req->admin_name;
         $admin->email=$req->admin_email;
         $admin->mobile=$req->clg_mob;
@@ -120,7 +140,7 @@ class system extends Controller
         $admin->profilepic='professor.svg';
 
         $tbl_clg_data=[
-            'clgcode' => $req->clg_code, 
+            'clgcode' => $req->clgcode, 
             'clgname' => $req->clg_name, 
             'address' => $req->clg_add, 
             'city' => $req->clg_city,
@@ -229,19 +249,25 @@ class system extends Controller
     }
     public function add_institute(Request $req) // add institute after accepting request
     {
+        $req->validate(
+            [
+            'clgcode'=>'required|unique:tblcolleges,clgcode'
+            ]
+        );
         $iname=$req->iname;
         $pass=uniqid();
         $to_email=trim($req->email);
         $message="
-        sub : <b>confrimation for demo request</b>
+        Subject : <b>Confrimation Regarding Your Evento Subcription</b>
         <br><br>
         Dear <b>".ucfirst($req->aname)."</b>,
         <br><br>
-        Last ".date('d,F Y',strtotime($req->reqdate)).", you sent demo request for your instistute  <b>".ucfirst($req->iname)."</b>.<br>
-        we glad to inform you that the your demo request accepted.
-        <br><br>
-        <b>your login details as follow.</b>
-        <table border=1 style='padding:10px'> <tr style='background-color:#e6e6e6'><td style='padding:5px'> User Name </td><td style='padding:5px'> Password </td></tr>  <tr><td style='padding:5px'>".$to_email."</td> <td style='padding:5px'>".$pass."</td></tr>    </table>
+            We are glad to infrom you that on your request we have started your evento subscription for your institute <b>".$iname."</b> 
+        <br>
+        <b>Your login details are as follow.</b></br>
+        <table border=1 style='padding:10px'> <tr style='background-color:#e2e2e2'><td style='padding:5px'> User Name </td><td style='padding:5px'> Password </td></tr>  <tr><td style='padding:5px'>".$to_email."</td> <td style='padding:5px'>".$pass."</td></tr>    </table>
+        <br>
+        <b>For more information and query you can mail us on <span style='color:#29ba84'>eventoitsol@gmail.com</span></b>
         <br>
         Sincerely,
         <br>
