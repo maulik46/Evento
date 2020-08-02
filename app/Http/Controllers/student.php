@@ -228,7 +228,8 @@ class student extends Controller
             session()->put('clgname',$clg->clgname);
             $to_name=Session::get('sname');
             $to_email=Session::get('email');
-            $data=array('name'=>$rand_num,'body'=>ucfirst(Session::get('clgname')));
+            $message="<strong><u>".$rand_num."</u></strong> is your OTP for Login in Evento. <u>Please do not share this OTP to anyone.</u><div style='margin-top:5px;'>From,</div>".ucfirst(Session::get('clgname'));
+            $data=array('name'=>"",'body'=>$message);
             \Mail::send('email',$data,function($message) use ($to_name,$to_email){
                 $message->to($to_email)->replyTo('eventoitsol@gmail.com',$name=null)->from('eventoitsol@gmail.com', $name = 'Evento')
                 ->subject('Evento Log-in Authentication');
