@@ -258,6 +258,7 @@ class system extends Controller
         $pass=uniqid();
         $to_email=trim($req->email);
         $message="
+        <div style='font-size:15px;'>
         Subject : <b>Confrimation Regarding Your Evento Subcription</b>
         <br><br>
         Dear <b>".ucfirst($req->aname)."</b>,
@@ -271,7 +272,7 @@ class system extends Controller
         <br>
         Sincerely,
         <br>
-        Evento Team.";
+        Evento Team.</div>";
         $data=array('name'=>"",'body'=>$message);
         \Mail::send('email',$data,function($message) use ($iname, $to_email){
             $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)

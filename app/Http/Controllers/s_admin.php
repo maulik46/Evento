@@ -564,7 +564,10 @@ class s_admin extends Controller
             //echo "new co create";
             $to_name=strtoupper($req->cname);
             $to_email=$req->email;
-            $message=" <table border=1 style='padding:10px'> <tr style='background-color:#e6e6e6'><td style='padding:5px'> User Name </td><td style='padding:5px'> Password </td></tr>  <tr><td style='padding:5px'>".$req->email."</td> <td style='padding:5px'>".$req->pass."</td></tr>    </table> ";
+            $message=" 
+            <h4>Welcome to Evento</h4>
+            <p style='margin-bottom:10px;'>Your Evento Co-ordinator Login is following</p>
+            <table border=1 style='padding:10px'> <tr style='background-color:#e6e6e6'><td style='padding:5px'> User Name </td><td style='padding:5px'> Password </td></tr>  <tr><td style='padding:5px'>".$req->email."</td> <td style='padding:5px'>".$req->pass."</td></tr>    </table> ";
             $data=array('name'=>'Welcome to Evento ','body'=>$message);
             \Mail::send('email',$data,function($message) use ($to_name, $to_email){
                 $message->to($to_email)->replyTo("eventoitsol@gmail.com",$name=null)
